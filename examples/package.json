@@ -1,0 +1,17 @@
+{
+  "name": "@flexprice/sdk-examples",
+  "version": "1.0.0",
+  "description": "Examples for using the FlexPrice JavaScript SDK",
+  "main": "example.js",
+  "scripts": {
+    "start": "node example.js"
+  },
+  "dependencies": {
+    "@flexprice/sdk": "latest",
+    "dotenv": "^16.0.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "private": true
+} 
