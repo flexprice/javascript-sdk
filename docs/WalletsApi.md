@@ -1,4 +1,4 @@
-# FlexpriceClient.WalletsApi
+# FlexpriceSdk.WalletsApi
 
 All URIs are relative to */v1*
 
@@ -26,15 +26,15 @@ Get all wallets for a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Customer ID
 apiInstance.customersIdWalletsGet(id, (error, data, response) => {
   if (error) {
@@ -77,15 +77,15 @@ Get real-time balance of a wallet
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
 apiInstance.walletsIdBalanceRealTimeGet(id, (error, data, response) => {
   if (error) {
@@ -128,15 +128,15 @@ Get a wallet by its ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
 apiInstance.walletsIdGet(id, (error, data, response) => {
   if (error) {
@@ -179,11 +179,11 @@ Update a wallet&#39;s details including auto top-up configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
-let request = new FlexpriceClient.DtoUpdateWalletRequest(); // DtoUpdateWalletRequest | Update wallet request
+let request = new FlexpriceSdk.DtoUpdateWalletRequest(); // DtoUpdateWalletRequest | Update wallet request
 apiInstance.walletsIdPut(id, request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -226,9 +226,9 @@ Terminates a wallet by closing it and debiting remaining balance
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
 apiInstance.walletsIdTerminatePost(id, (error, data, response) => {
   if (error) {
@@ -271,17 +271,17 @@ Add credits to a wallet
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
-let request = new FlexpriceClient.DtoTopUpWalletRequest(); // DtoTopUpWalletRequest | Top up request
+let request = new FlexpriceSdk.DtoTopUpWalletRequest(); // DtoTopUpWalletRequest | Top up request
 apiInstance.walletsIdTopUpPost(id, request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -324,15 +324,15 @@ Get transactions for a wallet with pagination
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
+let apiInstance = new FlexpriceSdk.WalletsApi();
 let id = "id_example"; // String | Wallet ID
 let opts = {
   'creditsAvailableGt': 3.4, // Number | 
@@ -411,16 +411,16 @@ Create a new wallet for a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.WalletsApi();
-let request = new FlexpriceClient.DtoCreateWalletRequest(); // DtoCreateWalletRequest | Create wallet request
+let apiInstance = new FlexpriceSdk.WalletsApi();
+let request = new FlexpriceSdk.DtoCreateWalletRequest(); // DtoCreateWalletRequest | Create wallet request
 apiInstance.walletsPost(request, (error, data, response) => {
   if (error) {
     console.error(error);

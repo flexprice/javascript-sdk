@@ -1,4 +1,4 @@
-# FlexpriceClient.SubscriptionSubscriptionPause
+# FlexpriceSdk.SubscriptionSubscriptionPause
 
 ## Properties
 

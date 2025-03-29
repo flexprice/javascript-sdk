@@ -1,4 +1,4 @@
-# FlexpriceClient.PriceTransformQuantity
+# FlexpriceSdk.PriceTransformQuantity
 
 ## Properties
 

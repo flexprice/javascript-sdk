@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateCustomerRequest
+# FlexpriceSdk.DtoCreateCustomerRequest
 
 ## Properties
 

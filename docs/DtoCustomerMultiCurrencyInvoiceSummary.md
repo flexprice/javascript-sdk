@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCustomerMultiCurrencyInvoiceSummary
+# FlexpriceSdk.DtoCustomerMultiCurrencyInvoiceSummary
 
 ## Properties
 

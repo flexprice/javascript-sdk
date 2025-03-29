@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdatePaymentStatusRequest
+# FlexpriceSdk.DtoUpdatePaymentStatusRequest
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateAPIKeyResponse
+# FlexpriceSdk.DtoCreateAPIKeyResponse
 
 ## Properties
 

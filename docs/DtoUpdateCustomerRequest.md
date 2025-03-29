@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdateCustomerRequest
+# FlexpriceSdk.DtoUpdateCustomerRequest
 
 ## Properties
 

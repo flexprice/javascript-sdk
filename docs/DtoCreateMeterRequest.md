@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateMeterRequest
+# FlexpriceSdk.DtoCreateMeterRequest
 
 ## Properties
 

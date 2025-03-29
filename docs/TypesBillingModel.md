@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesBillingModel
+# FlexpriceSdk.TypesBillingModel
 
 ## Enum
 

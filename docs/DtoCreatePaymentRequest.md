@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreatePaymentRequest
+# FlexpriceSdk.DtoCreatePaymentRequest
 
 ## Properties
 

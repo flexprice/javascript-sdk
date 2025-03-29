@@ -1,4 +1,4 @@
-# FlexpriceClient.SubscriptionSubscriptionLineItem
+# FlexpriceSdk.SubscriptionSubscriptionLineItem
 
 ## Properties
 

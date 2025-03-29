@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoGetPreviewInvoiceRequest
+# FlexpriceSdk.DtoGetPreviewInvoiceRequest
 
 ## Properties
 

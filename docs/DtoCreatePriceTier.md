@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreatePriceTier
+# FlexpriceSdk.DtoCreatePriceTier
 
 ## Properties
 

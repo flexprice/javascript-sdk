@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoBillingPeriodInfo
+# FlexpriceSdk.DtoBillingPeriodInfo
 
 ## Properties
 

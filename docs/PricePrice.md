@@ -1,4 +1,4 @@
-# FlexpriceClient.PricePrice
+# FlexpriceSdk.PricePrice
 
 ## Properties
 

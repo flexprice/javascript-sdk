@@ -1,4 +1,4 @@
-# FlexpriceClient.MeterFilter
+# FlexpriceSdk.MeterFilter
 
 ## Properties
 

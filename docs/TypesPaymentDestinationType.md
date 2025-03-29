@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesPaymentDestinationType
+# FlexpriceSdk.TypesPaymentDestinationType
 
 ## Enum
 

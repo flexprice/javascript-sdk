@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCustomerInvoiceSummary
+# FlexpriceSdk.DtoCustomerInvoiceSummary
 
 ## Properties
 

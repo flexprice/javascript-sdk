@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoListEnvironmentsResponse
+# FlexpriceSdk.DtoListEnvironmentsResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesAggregationType
+# FlexpriceSdk.TypesAggregationType
 
 ## Enum
 

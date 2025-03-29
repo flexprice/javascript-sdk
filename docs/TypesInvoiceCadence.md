@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesInvoiceCadence
+# FlexpriceSdk.TypesInvoiceCadence
 
 ## Enum
 

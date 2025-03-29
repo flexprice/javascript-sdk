@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesWalletConfigPriceType
+# FlexpriceSdk.TypesWalletConfigPriceType
 
 ## Enum
 

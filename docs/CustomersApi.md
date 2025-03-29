@@ -1,4 +1,4 @@
-# FlexpriceClient.CustomersApi
+# FlexpriceSdk.CustomersApi
 
 All URIs are relative to */v1*
 
@@ -26,15 +26,15 @@ Get customers
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let opts = {
   'customerIds': ["null"], // [String] | 
   'email': "email_example", // String | 
@@ -99,15 +99,15 @@ Delete a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let id = "id_example"; // String | Customer ID
 apiInstance.customersIdDelete(id, (error, data, response) => {
   if (error) {
@@ -150,15 +150,15 @@ Get customer entitlements
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let id = "id_example"; // String | Customer ID
 let opts = {
   'featureIds': ["null"], // [String] | 
@@ -207,15 +207,15 @@ Get a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let id = "id_example"; // String | Customer ID
 apiInstance.customersIdGet(id, (error, data, response) => {
   if (error) {
@@ -258,17 +258,17 @@ Update a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let id = "id_example"; // String | Customer ID
-let customer = new FlexpriceClient.DtoUpdateCustomerRequest(); // DtoUpdateCustomerRequest | Customer
+let customer = new FlexpriceSdk.DtoUpdateCustomerRequest(); // DtoUpdateCustomerRequest | Customer
 apiInstance.customersIdPut(id, customer, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -311,15 +311,15 @@ Get customer usage summary
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let id = "id_example"; // String | Customer ID
 let opts = {
   'featureIds': ["null"], // [String] | 
@@ -368,15 +368,15 @@ Get a customer by lookup key (external_id)
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
+let apiInstance = new FlexpriceSdk.CustomersApi();
 let lookupKey = "lookupKey_example"; // String | Customer Lookup Key (external_id)
 apiInstance.customersLookupLookupKeyGet(lookupKey, (error, data, response) => {
   if (error) {
@@ -419,16 +419,16 @@ Create a customer
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.CustomersApi();
-let customer = new FlexpriceClient.DtoCreateCustomerRequest(); // DtoCreateCustomerRequest | Customer
+let apiInstance = new FlexpriceSdk.CustomersApi();
+let customer = new FlexpriceSdk.DtoCreateCustomerRequest(); // DtoCreateCustomerRequest | Customer
 apiInstance.customersPost(customer, (error, data, response) => {
   if (error) {
     console.error(error);

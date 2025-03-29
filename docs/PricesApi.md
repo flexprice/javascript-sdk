@@ -1,4 +1,4 @@
-# FlexpriceClient.PricesApi
+# FlexpriceSdk.PricesApi
 
 All URIs are relative to */v1*
 
@@ -23,15 +23,15 @@ Get prices with the specified filter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PricesApi();
+let apiInstance = new FlexpriceSdk.PricesApi();
 let opts = {
   'endTime': "endTime_example", // String | 
   'expand': "expand_example", // String | 
@@ -94,15 +94,15 @@ Delete a price
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PricesApi();
+let apiInstance = new FlexpriceSdk.PricesApi();
 let id = "id_example"; // String | Price ID
 apiInstance.pricesIdDelete(id, (error, data, response) => {
   if (error) {
@@ -145,15 +145,15 @@ Get a price by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PricesApi();
+let apiInstance = new FlexpriceSdk.PricesApi();
 let id = "id_example"; // String | Price ID
 apiInstance.pricesIdGet(id, (error, data, response) => {
   if (error) {
@@ -196,17 +196,17 @@ Update a price with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PricesApi();
+let apiInstance = new FlexpriceSdk.PricesApi();
 let id = "id_example"; // String | Price ID
-let price = new FlexpriceClient.DtoUpdatePriceRequest(); // DtoUpdatePriceRequest | Price configuration
+let price = new FlexpriceSdk.DtoUpdatePriceRequest(); // DtoUpdatePriceRequest | Price configuration
 apiInstance.pricesIdPut(id, price, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -249,16 +249,16 @@ Create a new price with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PricesApi();
-let price = new FlexpriceClient.DtoCreatePriceRequest(); // DtoCreatePriceRequest | Price configuration
+let apiInstance = new FlexpriceSdk.PricesApi();
+let price = new FlexpriceSdk.DtoCreatePriceRequest(); // DtoCreatePriceRequest | Price configuration
 apiInstance.pricesPost(price, (error, data, response) => {
   if (error) {
     console.error(error);

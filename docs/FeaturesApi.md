@@ -1,4 +1,4 @@
-# FlexpriceClient.FeaturesApi
+# FlexpriceSdk.FeaturesApi
 
 All URIs are relative to */v1*
 
@@ -23,15 +23,15 @@ List features with optional filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.FeaturesApi();
+let apiInstance = new FlexpriceSdk.FeaturesApi();
 let opts = {
   'endTime': "endTime_example", // String | 
   'expand': "expand_example", // String | 
@@ -96,15 +96,15 @@ Delete a feature by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.FeaturesApi();
+let apiInstance = new FlexpriceSdk.FeaturesApi();
 let id = "id_example"; // String | Feature ID
 apiInstance.featuresIdDelete(id, (error, data, response) => {
   if (error) {
@@ -147,15 +147,15 @@ Get a feature by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.FeaturesApi();
+let apiInstance = new FlexpriceSdk.FeaturesApi();
 let id = "id_example"; // String | Feature ID
 apiInstance.featuresIdGet(id, (error, data, response) => {
   if (error) {
@@ -198,17 +198,17 @@ Update a feature by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.FeaturesApi();
+let apiInstance = new FlexpriceSdk.FeaturesApi();
 let id = "id_example"; // String | Feature ID
-let feature = new FlexpriceClient.DtoUpdateFeatureRequest(); // DtoUpdateFeatureRequest | Feature update data
+let feature = new FlexpriceSdk.DtoUpdateFeatureRequest(); // DtoUpdateFeatureRequest | Feature update data
 apiInstance.featuresIdPut(id, feature, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -251,16 +251,16 @@ Create a new feature
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.FeaturesApi();
-let feature = new FlexpriceClient.DtoCreateFeatureRequest(); // DtoCreateFeatureRequest | Feature to create
+let apiInstance = new FlexpriceSdk.FeaturesApi();
+let feature = new FlexpriceSdk.DtoCreateFeatureRequest(); // DtoCreateFeatureRequest | Feature to create
 apiInstance.featuresPost(feature, (error, data, response) => {
   if (error) {
     console.error(error);

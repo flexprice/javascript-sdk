@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoAggregatedFeature
+# FlexpriceSdk.DtoAggregatedFeature
 
 ## Properties
 

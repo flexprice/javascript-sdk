@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesSubscriptionStatus
+# FlexpriceSdk.TypesSubscriptionStatus
 
 ## Enum
 

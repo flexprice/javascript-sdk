@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateSubscriptionRequest
+# FlexpriceSdk.DtoCreateSubscriptionRequest
 
 ## Properties
 

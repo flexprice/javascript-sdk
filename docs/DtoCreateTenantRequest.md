@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateTenantRequest
+# FlexpriceSdk.DtoCreateTenantRequest
 
 ## Properties
 

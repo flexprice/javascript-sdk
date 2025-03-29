@@ -1,4 +1,4 @@
-# FlexpriceClient.SubscriptionsApi
+# FlexpriceSdk.SubscriptionsApi
 
 All URIs are relative to */v1*
 
@@ -26,15 +26,15 @@ Get subscriptions with optional filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let opts = {
   'activeAt': "activeAt_example", // String | ActiveAt filters subscriptions that are active at the given time
   'billingCadence': ["null"], // [String] | BillingCadence filters by billing cadence
@@ -109,15 +109,15 @@ Cancel a subscription
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let id = "id_example"; // String | Subscription ID
 let opts = {
   'cancelAtPeriodEnd': true // Boolean | Cancel at period end
@@ -164,15 +164,15 @@ Get a subscription by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let id = "id_example"; // String | Subscription ID
 apiInstance.subscriptionsIdGet(id, (error, data, response) => {
   if (error) {
@@ -215,11 +215,11 @@ Pause a subscription with the specified parameters
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let id = "id_example"; // String | Subscription ID
-let request = new FlexpriceClient.DtoPauseSubscriptionRequest(); // DtoPauseSubscriptionRequest | Pause subscription request
+let request = new FlexpriceSdk.DtoPauseSubscriptionRequest(); // DtoPauseSubscriptionRequest | Pause subscription request
 apiInstance.subscriptionsIdPausePost(id, request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -262,9 +262,9 @@ List all pauses for a subscription
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let id = "id_example"; // String | Subscription ID
 apiInstance.subscriptionsIdPausesGet(id, (error, data, response) => {
   if (error) {
@@ -307,11 +307,11 @@ Resume a paused subscription with the specified parameters
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
 let id = "id_example"; // String | Subscription ID
-let request = new FlexpriceClient.DtoResumeSubscriptionRequest(); // DtoResumeSubscriptionRequest | Resume subscription request
+let request = new FlexpriceSdk.DtoResumeSubscriptionRequest(); // DtoResumeSubscriptionRequest | Resume subscription request
 apiInstance.subscriptionsIdResumePost(id, request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -354,16 +354,16 @@ Create a new subscription
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
-let subscription = new FlexpriceClient.DtoCreateSubscriptionRequest(); // DtoCreateSubscriptionRequest | Subscription Request
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
+let subscription = new FlexpriceSdk.DtoCreateSubscriptionRequest(); // DtoCreateSubscriptionRequest | Subscription Request
 apiInstance.subscriptionsPost(subscription, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -405,16 +405,16 @@ Get usage for a subscription
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.SubscriptionsApi();
-let request = new FlexpriceClient.DtoGetUsageBySubscriptionRequest(); // DtoGetUsageBySubscriptionRequest | Usage request
+let apiInstance = new FlexpriceSdk.SubscriptionsApi();
+let request = new FlexpriceSdk.DtoGetUsageBySubscriptionRequest(); // DtoGetUsageBySubscriptionRequest | Usage request
 apiInstance.subscriptionsUsagePost(request, (error, data, response) => {
   if (error) {
     console.error(error);

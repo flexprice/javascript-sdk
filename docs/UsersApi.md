@@ -1,4 +1,4 @@
-# FlexpriceClient.UsersApi
+# FlexpriceSdk.UsersApi
 
 All URIs are relative to */v1*
 
@@ -19,15 +19,15 @@ Get the current user&#39;s information
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.UsersApi();
+let apiInstance = new FlexpriceSdk.UsersApi();
 apiInstance.usersMeGet((error, data, response) => {
   if (error) {
     console.error(error);

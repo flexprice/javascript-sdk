@@ -1,4 +1,4 @@
-# FlexpriceClient.SecretsApi
+# FlexpriceSdk.SecretsApi
 
 All URIs are relative to */v1*
 
@@ -21,9 +21,9 @@ Get a paginated list of API keys
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SecretsApi();
+let apiInstance = new FlexpriceSdk.SecretsApi();
 let opts = {
   'limit': 56, // Number | Limit
   'offset': 56, // Number | Offset
@@ -72,9 +72,9 @@ Delete an API key by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SecretsApi();
+let apiInstance = new FlexpriceSdk.SecretsApi();
 let id = "id_example"; // String | API key ID
 apiInstance.secretsApiKeysIdDelete(id, (error, data, response) => {
   if (error) {
@@ -117,10 +117,10 @@ Create a new API key with the specified type and permissions
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.SecretsApi();
-let request = new FlexpriceClient.DtoCreateAPIKeyRequest(); // DtoCreateAPIKeyRequest | API key creation request
+let apiInstance = new FlexpriceSdk.SecretsApi();
+let request = new FlexpriceSdk.DtoCreateAPIKeyRequest(); // DtoCreateAPIKeyRequest | API key creation request
 apiInstance.secretsApiKeysPost(request, (error, data, response) => {
   if (error) {
     console.error(error);

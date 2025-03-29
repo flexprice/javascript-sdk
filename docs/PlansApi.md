@@ -1,4 +1,4 @@
-# FlexpriceClient.PlansApi
+# FlexpriceSdk.PlansApi
 
 All URIs are relative to */v1*
 
@@ -23,15 +23,15 @@ Get plans with optional filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PlansApi();
+let apiInstance = new FlexpriceSdk.PlansApi();
 let opts = {
   'endTime': "endTime_example", // String | 
   'expand': "expand_example", // String | 
@@ -92,15 +92,15 @@ Delete a plan by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PlansApi();
+let apiInstance = new FlexpriceSdk.PlansApi();
 let id = "id_example"; // String | Plan ID
 apiInstance.plansIdDelete(id, (error, data, response) => {
   if (error) {
@@ -143,15 +143,15 @@ Get a plan by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PlansApi();
+let apiInstance = new FlexpriceSdk.PlansApi();
 let id = "id_example"; // String | Plan ID
 apiInstance.plansIdGet(id, (error, data, response) => {
   if (error) {
@@ -194,17 +194,17 @@ Update a plan by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PlansApi();
+let apiInstance = new FlexpriceSdk.PlansApi();
 let id = "id_example"; // String | Plan ID
-let plan = new FlexpriceClient.DtoUpdatePlanRequest(); // DtoUpdatePlanRequest | Plan update
+let plan = new FlexpriceSdk.DtoUpdatePlanRequest(); // DtoUpdatePlanRequest | Plan update
 apiInstance.plansIdPut(id, plan, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -247,16 +247,16 @@ Create a new plan with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PlansApi();
-let plan = new FlexpriceClient.DtoCreatePlanRequest(); // DtoCreatePlanRequest | Plan configuration
+let apiInstance = new FlexpriceSdk.PlansApi();
+let plan = new FlexpriceSdk.DtoCreatePlanRequest(); // DtoCreatePlanRequest | Plan configuration
 apiInstance.plansPost(plan, (error, data, response) => {
   if (error) {
     console.error(error);

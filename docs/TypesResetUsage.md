@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesResetUsage
+# FlexpriceSdk.TypesResetUsage
 
 ## Enum
 

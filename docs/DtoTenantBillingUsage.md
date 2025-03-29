@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoTenantBillingUsage
+# FlexpriceSdk.DtoTenantBillingUsage
 
 ## Properties
 

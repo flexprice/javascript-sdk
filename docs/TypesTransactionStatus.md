@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesTransactionStatus
+# FlexpriceSdk.TypesTransactionStatus
 
 ## Enum
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateTaskRequest
+# FlexpriceSdk.DtoCreateTaskRequest
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoListSubscriptionPausesResponse
+# FlexpriceSdk.DtoListSubscriptionPausesResponse
 
 ## Properties
 

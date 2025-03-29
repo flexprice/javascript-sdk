@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoListSecretsResponse
+# FlexpriceSdk.DtoListSecretsResponse
 
 ## Properties
 

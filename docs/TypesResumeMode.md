@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesResumeMode
+# FlexpriceSdk.TypesResumeMode
 
 ## Enum
 

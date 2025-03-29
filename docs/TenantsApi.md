@@ -1,4 +1,4 @@
-# FlexpriceClient.TenantsApi
+# FlexpriceSdk.TenantsApi
 
 All URIs are relative to */v1*
 
@@ -22,15 +22,15 @@ Get the subscription and usage details for the current tenant
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.TenantsApi();
+let apiInstance = new FlexpriceSdk.TenantsApi();
 apiInstance.tenantBillingGet((error, data, response) => {
   if (error) {
     console.error(error);
@@ -69,15 +69,15 @@ Get tenant by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.TenantsApi();
+let apiInstance = new FlexpriceSdk.TenantsApi();
 let id = "id_example"; // String | Tenant ID
 apiInstance.tenantsIdGet(id, (error, data, response) => {
   if (error) {
@@ -120,16 +120,16 @@ Create a new tenant
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.TenantsApi();
-let request = new FlexpriceClient.DtoCreateTenantRequest(); // DtoCreateTenantRequest | Create tenant request
+let apiInstance = new FlexpriceSdk.TenantsApi();
+let request = new FlexpriceSdk.DtoCreateTenantRequest(); // DtoCreateTenantRequest | Create tenant request
 apiInstance.tenantsPost(request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -171,16 +171,16 @@ Update a tenant&#39;s details including name and billing information
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.TenantsApi();
-let request = new FlexpriceClient.DtoUpdateTenantRequest(); // DtoUpdateTenantRequest | Update tenant request
+let apiInstance = new FlexpriceSdk.TenantsApi();
+let request = new FlexpriceSdk.DtoUpdateTenantRequest(); // DtoUpdateTenantRequest | Update tenant request
 apiInstance.tenantsUpdatePut(request, (error, data, response) => {
   if (error) {
     console.error(error);

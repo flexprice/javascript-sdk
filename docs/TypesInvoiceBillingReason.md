@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesInvoiceBillingReason
+# FlexpriceSdk.TypesInvoiceBillingReason
 
 ## Enum
 

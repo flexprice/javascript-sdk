@@ -1,4 +1,4 @@
-# FlexpriceClient.EntitlementsApi
+# FlexpriceSdk.EntitlementsApi
 
 All URIs are relative to */v1*
 
@@ -24,15 +24,15 @@ Get entitlements with the specified filter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
 let opts = {
   'endTime': "endTime_example", // String | 
   'expand': "expand_example", // String | 
@@ -99,15 +99,15 @@ Delete an entitlement
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
 let id = "id_example"; // String | Entitlement ID
 apiInstance.entitlementsIdDelete(id, (error, data, response) => {
   if (error) {
@@ -150,15 +150,15 @@ Get an entitlement by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
 let id = "id_example"; // String | Entitlement ID
 apiInstance.entitlementsIdGet(id, (error, data, response) => {
   if (error) {
@@ -201,17 +201,17 @@ Update an entitlement with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
 let id = "id_example"; // String | Entitlement ID
-let entitlement = new FlexpriceClient.DtoUpdateEntitlementRequest(); // DtoUpdateEntitlementRequest | Entitlement configuration
+let entitlement = new FlexpriceSdk.DtoUpdateEntitlementRequest(); // DtoUpdateEntitlementRequest | Entitlement configuration
 apiInstance.entitlementsIdPut(id, entitlement, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -254,16 +254,16 @@ Create a new entitlement with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
-let entitlement = new FlexpriceClient.DtoCreateEntitlementRequest(); // DtoCreateEntitlementRequest | Entitlement configuration
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
+let entitlement = new FlexpriceSdk.DtoCreateEntitlementRequest(); // DtoCreateEntitlementRequest | Entitlement configuration
 apiInstance.entitlementsPost(entitlement, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -305,15 +305,15 @@ Get all entitlements for a plan
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EntitlementsApi();
+let apiInstance = new FlexpriceSdk.EntitlementsApi();
 let id = "id_example"; // String | Plan ID
 apiInstance.plansIdEntitlementsGet(id, (error, data, response) => {
   if (error) {

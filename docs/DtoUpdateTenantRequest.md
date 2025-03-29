@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdateTenantRequest
+# FlexpriceSdk.DtoUpdateTenantRequest
 
 ## Properties
 

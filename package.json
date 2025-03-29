@@ -1,8 +1,16 @@
 {
-  "name": "flexprice-client",
-  "version": "0.1.2",
-  "description": "FlexPrice API Service",
-  "license": "Unlicense",
+  "name": "@flexprice/sdk",
+  "version": "1.0.1",
+  "description": "Official JavaScript SDK of Flexprice",
+  "license": "Apache 2.0",
+  "homepage": "https://flexprice.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flexprice/javascript-sdk.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",

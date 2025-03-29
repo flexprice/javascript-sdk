@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoResumeSubscriptionRequest
+# FlexpriceSdk.DtoResumeSubscriptionRequest
 
 ## Properties
 

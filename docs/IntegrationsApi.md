@@ -1,4 +1,4 @@
-# FlexpriceClient.IntegrationsApi
+# FlexpriceSdk.IntegrationsApi
 
 All URIs are relative to */v1*
 
@@ -22,9 +22,9 @@ Delete integration credentials
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.IntegrationsApi();
+let apiInstance = new FlexpriceSdk.IntegrationsApi();
 let id = "id_example"; // String | Integration ID
 apiInstance.secretsIntegrationsIdDelete(id, (error, data, response) => {
   if (error) {
@@ -67,9 +67,9 @@ Get a list of unique providers which have a valid linked integration secret
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.IntegrationsApi();
+let apiInstance = new FlexpriceSdk.IntegrationsApi();
 apiInstance.secretsIntegrationsLinkedGet((error, data, response) => {
   if (error) {
     console.error(error);
@@ -108,9 +108,9 @@ Get details of a specific integration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.IntegrationsApi();
+let apiInstance = new FlexpriceSdk.IntegrationsApi();
 let provider = "provider_example"; // String | Integration provider
 apiInstance.secretsIntegrationsProviderGet(provider, (error, data, response) => {
   if (error) {
@@ -153,11 +153,11 @@ Create or update integration credentials
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.IntegrationsApi();
+let apiInstance = new FlexpriceSdk.IntegrationsApi();
 let provider = "provider_example"; // String | Integration provider
-let request = new FlexpriceClient.DtoCreateIntegrationRequest(); // DtoCreateIntegrationRequest | Integration creation request
+let request = new FlexpriceSdk.DtoCreateIntegrationRequest(); // DtoCreateIntegrationRequest | Integration creation request
 apiInstance.secretsIntegrationsProviderPost(provider, request, (error, data, response) => {
   if (error) {
     console.error(error);

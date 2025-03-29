@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoFeatureUsageSummary
+# FlexpriceSdk.DtoFeatureUsageSummary
 
 ## Properties
 

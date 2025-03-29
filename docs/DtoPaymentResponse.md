@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoPaymentResponse
+# FlexpriceSdk.DtoPaymentResponse
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesAutoTopupTrigger
+# FlexpriceSdk.TypesAutoTopupTrigger
 
 ## Enum
 

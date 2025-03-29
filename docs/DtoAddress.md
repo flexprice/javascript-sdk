@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoAddress
+# FlexpriceSdk.DtoAddress
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesWalletConfig
+# FlexpriceSdk.TypesWalletConfig
 
 ## Properties
 

@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoAggregatedEntitlement
+# FlexpriceSdk.DtoAggregatedEntitlement
 
 ## Properties
 

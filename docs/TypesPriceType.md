@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesPriceType
+# FlexpriceSdk.TypesPriceType
 
 ## Enum
 

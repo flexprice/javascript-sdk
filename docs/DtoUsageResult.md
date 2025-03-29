@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUsageResult
+# FlexpriceSdk.DtoUsageResult
 
 ## Properties
 

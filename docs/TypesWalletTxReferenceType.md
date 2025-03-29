@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesWalletTxReferenceType
+# FlexpriceSdk.TypesWalletTxReferenceType
 
 ## Enum
 

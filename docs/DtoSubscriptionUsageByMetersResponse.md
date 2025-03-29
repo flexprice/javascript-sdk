@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoSubscriptionUsageByMetersResponse
+# FlexpriceSdk.DtoSubscriptionUsageByMetersResponse
 
 ## Properties
 

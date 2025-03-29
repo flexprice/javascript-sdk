@@ -1,4 +1,4 @@
-# FlexpriceClient.EnvironmentsApi
+# FlexpriceSdk.EnvironmentsApi
 
 All URIs are relative to */v1*
 
@@ -22,15 +22,15 @@ Get environments
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EnvironmentsApi();
+let apiInstance = new FlexpriceSdk.EnvironmentsApi();
 let opts = {
   'expand': "expand_example", // String | 
   'limit': 56, // Number | 
@@ -85,15 +85,15 @@ Get an environment
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EnvironmentsApi();
+let apiInstance = new FlexpriceSdk.EnvironmentsApi();
 let id = "id_example"; // String | Environment ID
 apiInstance.environmentsIdGet(id, (error, data, response) => {
   if (error) {
@@ -136,17 +136,17 @@ Update an environment
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EnvironmentsApi();
+let apiInstance = new FlexpriceSdk.EnvironmentsApi();
 let id = "id_example"; // String | Environment ID
-let environment = new FlexpriceClient.DtoUpdateEnvironmentRequest(); // DtoUpdateEnvironmentRequest | Environment
+let environment = new FlexpriceSdk.DtoUpdateEnvironmentRequest(); // DtoUpdateEnvironmentRequest | Environment
 apiInstance.environmentsIdPut(id, environment, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -189,16 +189,16 @@ Create an environment
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EnvironmentsApi();
-let environment = new FlexpriceClient.DtoCreateEnvironmentRequest(); // DtoCreateEnvironmentRequest | Environment
+let apiInstance = new FlexpriceSdk.EnvironmentsApi();
+let environment = new FlexpriceSdk.DtoCreateEnvironmentRequest(); // DtoCreateEnvironmentRequest | Environment
 apiInstance.environmentsPost(environment, (error, data, response) => {
   if (error) {
     console.error(error);

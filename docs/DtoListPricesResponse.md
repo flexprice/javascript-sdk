@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoListPricesResponse
+# FlexpriceSdk.DtoListPricesResponse
 
 ## Properties
 

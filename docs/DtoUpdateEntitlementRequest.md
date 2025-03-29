@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdateEntitlementRequest
+# FlexpriceSdk.DtoUpdateEntitlementRequest
 
 ## Properties
 

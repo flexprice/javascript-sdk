@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesWindowSize
+# FlexpriceSdk.TypesWindowSize
 
 ## Enum
 

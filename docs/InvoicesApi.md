@@ -1,4 +1,4 @@
-# FlexpriceClient.InvoicesApi
+# FlexpriceSdk.InvoicesApi
 
 All URIs are relative to */v1*
 
@@ -28,15 +28,15 @@ Get a customer invoice summary
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Customer ID
 apiInstance.customersIdInvoicesSummaryGet(id, (error, data, response) => {
   if (error) {
@@ -79,9 +79,9 @@ List invoices with optional filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let opts = {
   'amountDueGt': 3.4, // Number | 
   'amountRemainingGt': 3.4, // Number | 
@@ -154,9 +154,9 @@ Finalize a draft invoice
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
 apiInstance.invoicesIdFinalizePost(id, (error, data, response) => {
   if (error) {
@@ -199,9 +199,9 @@ Get detailed information about an invoice
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
 apiInstance.invoicesIdGet(id, (error, data, response) => {
   if (error) {
@@ -244,9 +244,9 @@ Attempt to pay an invoice using customer&#39;s available wallets
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
 apiInstance.invoicesIdPaymentAttemptPost(id, (error, data, response) => {
   if (error) {
@@ -289,17 +289,17 @@ Update the payment status of an invoice
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
-let request = new FlexpriceClient.DtoUpdatePaymentStatusRequest(); // DtoUpdatePaymentStatusRequest | Payment Status Update Request
+let request = new FlexpriceSdk.DtoUpdatePaymentStatusRequest(); // DtoUpdatePaymentStatusRequest | Payment Status Update Request
 apiInstance.invoicesIdPaymentPut(id, request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -342,9 +342,9 @@ Retrieve the PDF document for a specific invoice by its ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
 apiInstance.invoicesIdPdfGet(id, (error, data, response) => {
   if (error) {
@@ -387,9 +387,9 @@ Void an invoice that hasn&#39;t been paid
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
+let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
 apiInstance.invoicesIdVoidPost(id, (error, data, response) => {
   if (error) {
@@ -432,10 +432,10 @@ Create a new invoice with the provided details
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
-let invoice = new FlexpriceClient.DtoCreateInvoiceRequest(); // DtoCreateInvoiceRequest | Invoice details
+let apiInstance = new FlexpriceSdk.InvoicesApi();
+let invoice = new FlexpriceSdk.DtoCreateInvoiceRequest(); // DtoCreateInvoiceRequest | Invoice details
 apiInstance.invoicesPost(invoice, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -477,10 +477,10 @@ Get a preview invoice
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.InvoicesApi();
-let request = new FlexpriceClient.DtoGetPreviewInvoiceRequest(); // DtoGetPreviewInvoiceRequest | Preview Invoice Request
+let apiInstance = new FlexpriceSdk.InvoicesApi();
+let request = new FlexpriceSdk.DtoGetPreviewInvoiceRequest(); // DtoGetPreviewInvoiceRequest | Preview Invoice Request
 apiInstance.invoicesPreviewPost(request, (error, data, response) => {
   if (error) {
     console.error(error);

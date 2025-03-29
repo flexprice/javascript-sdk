@@ -182,9 +182,9 @@ import WalletsApi from './api/WalletsApi';
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
 * <pre>
-* var FlexpriceClient = require('index'); // See note below*.
-* var xxxSvc = new FlexpriceClient.XxxApi(); // Allocate the API class we're going to use.
-* var yyyModel = new FlexpriceClient.Yyy(); // Construct a model instance.
+* var FlexpriceSdk = require('index'); // See note below*.
+* var xxxSvc = new FlexpriceSdk.XxxApi(); // Allocate the API class we're going to use.
+* var yyyModel = new FlexpriceSdk.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.
@@ -196,8 +196,8 @@ import WalletsApi from './api/WalletsApi';
 * <p>
 * A non-AMD browser application (discouraged) might do something like this:
 * <pre>
-* var xxxSvc = new FlexpriceClient.XxxApi(); // Allocate the API class we're going to use.
-* var yyy = new FlexpriceClient.Yyy(); // Construct a model instance.
+* var xxxSvc = new FlexpriceSdk.XxxApi(); // Allocate the API class we're going to use.
+* var yyy = new FlexpriceSdk.Yyy(); // Construct a model instance.
 * yyyModel.someProperty = 'someValue';
 * ...
 * var zzz = xxxSvc.doSomething(yyyModel); // Invoke the service.

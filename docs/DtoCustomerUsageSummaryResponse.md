@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCustomerUsageSummaryResponse
+# FlexpriceSdk.DtoCustomerUsageSummaryResponse
 
 ## Properties
 

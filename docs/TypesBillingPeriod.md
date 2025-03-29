@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesBillingPeriod
+# FlexpriceSdk.TypesBillingPeriod
 
 ## Enum
 

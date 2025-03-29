@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoSignUpRequest
+# FlexpriceSdk.DtoSignUpRequest
 
 ## Properties
 

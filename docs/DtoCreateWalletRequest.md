@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateWalletRequest
+# FlexpriceSdk.DtoCreateWalletRequest
 
 ## Properties
 

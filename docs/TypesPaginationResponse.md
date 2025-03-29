@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesPaginationResponse
+# FlexpriceSdk.TypesPaginationResponse
 
 ## Properties
 

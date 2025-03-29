@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreatePlanEntitlementRequest
+# FlexpriceSdk.DtoCreatePlanEntitlementRequest
 
 ## Properties
 

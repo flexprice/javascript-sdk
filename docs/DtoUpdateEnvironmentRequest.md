@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdateEnvironmentRequest
+# FlexpriceSdk.DtoUpdateEnvironmentRequest
 
 ## Properties
 

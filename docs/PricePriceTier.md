@@ -1,4 +1,4 @@
-# FlexpriceClient.PricePriceTier
+# FlexpriceSdk.PricePriceTier
 
 ## Properties
 

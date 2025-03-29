@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesInvoiceType
+# FlexpriceSdk.TypesInvoiceType
 
 ## Enum
 

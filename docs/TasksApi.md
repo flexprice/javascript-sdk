@@ -1,4 +1,4 @@
-# FlexpriceClient.TasksApi
+# FlexpriceSdk.TasksApi
 
 All URIs are relative to */v1*
 
@@ -23,9 +23,9 @@ List tasks with optional filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.TasksApi();
+let apiInstance = new FlexpriceSdk.TasksApi();
 let opts = {
   'createdBy': "createdBy_example", // String | 
   'endTime': "endTime_example", // String | 
@@ -92,9 +92,9 @@ Get detailed information about a task
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.TasksApi();
+let apiInstance = new FlexpriceSdk.TasksApi();
 let id = "id_example"; // String | Task ID
 apiInstance.tasksIdGet(id, (error, data, response) => {
   if (error) {
@@ -137,9 +137,9 @@ Start processing a task
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.TasksApi();
+let apiInstance = new FlexpriceSdk.TasksApi();
 let id = "id_example"; // String | Task ID
 apiInstance.tasksIdProcessPost(id, (error, data, response) => {
   if (error) {
@@ -182,11 +182,11 @@ Update the status of a task
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.TasksApi();
+let apiInstance = new FlexpriceSdk.TasksApi();
 let id = "id_example"; // String | Task ID
-let status = new FlexpriceClient.DtoUpdateTaskStatusRequest(); // DtoUpdateTaskStatusRequest | New status
+let status = new FlexpriceSdk.DtoUpdateTaskStatusRequest(); // DtoUpdateTaskStatusRequest | New status
 apiInstance.tasksIdStatusPut(id, status, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -229,10 +229,10 @@ Create a new import/export task
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.TasksApi();
-let task = new FlexpriceClient.DtoCreateTaskRequest(); // DtoCreateTaskRequest | Task details
+let apiInstance = new FlexpriceSdk.TasksApi();
+let task = new FlexpriceSdk.DtoCreateTaskRequest(); // DtoCreateTaskRequest | Task details
 apiInstance.tasksPost(task, (error, data, response) => {
   if (error) {
     console.error(error);

@@ -1,4 +1,4 @@
-# FlexpriceClient.AuthApi
+# FlexpriceSdk.AuthApi
 
 All URIs are relative to */v1*
 
@@ -20,10 +20,10 @@ Login a user
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.AuthApi();
-let login = new FlexpriceClient.DtoLoginRequest(); // DtoLoginRequest | Login request
+let apiInstance = new FlexpriceSdk.AuthApi();
+let login = new FlexpriceSdk.DtoLoginRequest(); // DtoLoginRequest | Login request
 apiInstance.authLoginPost(login, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -65,10 +65,10 @@ Sign up a new user
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
+import FlexpriceSdk from '@flexprice/sdk';
 
-let apiInstance = new FlexpriceClient.AuthApi();
-let signup = new FlexpriceClient.DtoSignUpRequest(); // DtoSignUpRequest | Sign up request
+let apiInstance = new FlexpriceSdk.AuthApi();
+let signup = new FlexpriceSdk.DtoSignUpRequest(); // DtoSignUpRequest | Sign up request
 apiInstance.authSignupPost(signup, (error, data, response) => {
   if (error) {
     console.error(error);

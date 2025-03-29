@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesTaskType
+# FlexpriceSdk.TypesTaskType
 
 ## Enum
 

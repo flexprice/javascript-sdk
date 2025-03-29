@@ -1,4 +1,4 @@
-# FlexpriceClient.PaymentsApi
+# FlexpriceSdk.PaymentsApi
 
 All URIs are relative to */v1*
 
@@ -24,15 +24,15 @@ List payments with the specified filter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
+let apiInstance = new FlexpriceSdk.PaymentsApi();
 let opts = {
   'currency': "currency_example", // String | 
   'destinationId': "destinationId_example", // String | 
@@ -105,15 +105,15 @@ Delete a payment
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
+let apiInstance = new FlexpriceSdk.PaymentsApi();
 let id = "id_example"; // String | Payment ID
 apiInstance.paymentsIdDelete(id, (error, data, response) => {
   if (error) {
@@ -156,15 +156,15 @@ Get a payment by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
+let apiInstance = new FlexpriceSdk.PaymentsApi();
 let id = "id_example"; // String | Payment ID
 apiInstance.paymentsIdGet(id, (error, data, response) => {
   if (error) {
@@ -207,15 +207,15 @@ Process a payment
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
+let apiInstance = new FlexpriceSdk.PaymentsApi();
 let id = "id_example"; // String | Payment ID
 apiInstance.paymentsIdProcessPost(id, (error, data, response) => {
   if (error) {
@@ -258,17 +258,17 @@ Update a payment with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
+let apiInstance = new FlexpriceSdk.PaymentsApi();
 let id = "id_example"; // String | Payment ID
-let payment = new FlexpriceClient.DtoUpdatePaymentRequest(); // DtoUpdatePaymentRequest | Payment configuration
+let payment = new FlexpriceSdk.DtoUpdatePaymentRequest(); // DtoUpdatePaymentRequest | Payment configuration
 apiInstance.paymentsIdPut(id, payment, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -311,16 +311,16 @@ Create a new payment with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.PaymentsApi();
-let payment = new FlexpriceClient.DtoCreatePaymentRequest(); // DtoCreatePaymentRequest | Payment configuration
+let apiInstance = new FlexpriceSdk.PaymentsApi();
+let payment = new FlexpriceSdk.DtoCreatePaymentRequest(); // DtoCreatePaymentRequest | Payment configuration
 apiInstance.paymentsPost(payment, (error, data, response) => {
   if (error) {
     console.error(error);

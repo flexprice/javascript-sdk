@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoGetUsageByMeterRequest
+# FlexpriceSdk.DtoGetUsageByMeterRequest
 
 ## Properties
 

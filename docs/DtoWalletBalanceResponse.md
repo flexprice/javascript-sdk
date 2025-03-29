@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoWalletBalanceResponse
+# FlexpriceSdk.DtoWalletBalanceResponse
 
 ## Properties
 

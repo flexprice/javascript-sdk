@@ -1,4 +1,4 @@
-# FlexpriceClient.ErrorsErrorDetail
+# FlexpriceSdk.ErrorsErrorDetail
 
 ## Properties
 

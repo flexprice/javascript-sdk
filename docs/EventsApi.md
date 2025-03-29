@@ -1,4 +1,4 @@
-# FlexpriceClient.EventsApi
+# FlexpriceSdk.EventsApi
 
 All URIs are relative to */v1*
 
@@ -23,16 +23,16 @@ Ingest bulk events into the system
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EventsApi();
-let event = new FlexpriceClient.DtoBulkIngestEventRequest(); // DtoBulkIngestEventRequest | Event data
+let apiInstance = new FlexpriceSdk.EventsApi();
+let event = new FlexpriceSdk.DtoBulkIngestEventRequest(); // DtoBulkIngestEventRequest | Event data
 apiInstance.eventsBulkPost(event, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -74,15 +74,15 @@ Retrieve raw events with pagination and filtering
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EventsApi();
+let apiInstance = new FlexpriceSdk.EventsApi();
 let opts = {
   'externalCustomerId': "externalCustomerId_example", // String | External Customer ID
   'eventName': "eventName_example", // String | Event Name
@@ -139,16 +139,16 @@ Ingest a new event into the system
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EventsApi();
-let event = new FlexpriceClient.DtoIngestEventRequest(); // DtoIngestEventRequest | Event data
+let apiInstance = new FlexpriceSdk.EventsApi();
+let event = new FlexpriceSdk.DtoIngestEventRequest(); // DtoIngestEventRequest | Event data
 apiInstance.eventsPost(event, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -190,16 +190,16 @@ Retrieve aggregated usage statistics using meter configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EventsApi();
-let request = new FlexpriceClient.DtoGetUsageByMeterRequest(); // DtoGetUsageByMeterRequest | Request body
+let apiInstance = new FlexpriceSdk.EventsApi();
+let request = new FlexpriceSdk.DtoGetUsageByMeterRequest(); // DtoGetUsageByMeterRequest | Request body
 apiInstance.eventsUsageMeterPost(request, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -241,16 +241,16 @@ Retrieve aggregated usage statistics for events
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.EventsApi();
-let request = new FlexpriceClient.DtoGetUsageRequest(); // DtoGetUsageRequest | Request body
+let apiInstance = new FlexpriceSdk.EventsApi();
+let request = new FlexpriceSdk.DtoGetUsageRequest(); // DtoGetUsageRequest | Request body
 apiInstance.eventsUsagePost(request, (error, data, response) => {
   if (error) {
     console.error(error);

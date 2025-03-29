@@ -1,4 +1,4 @@
-# FlexpriceClient.MeterAggregation
+# FlexpriceSdk.MeterAggregation
 
 ## Properties
 

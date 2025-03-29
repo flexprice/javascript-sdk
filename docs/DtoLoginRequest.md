@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoLoginRequest
+# FlexpriceSdk.DtoLoginRequest
 
 ## Properties
 

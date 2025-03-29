@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoCreateIntegrationRequest
+# FlexpriceSdk.DtoCreateIntegrationRequest
 
 ## Properties
 

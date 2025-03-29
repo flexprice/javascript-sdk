@@ -1,4 +1,4 @@
-# FlexpriceClient.TypesSecretProvider
+# FlexpriceSdk.TypesSecretProvider
 
 ## Enum
 

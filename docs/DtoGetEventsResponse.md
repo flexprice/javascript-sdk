@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoGetEventsResponse
+# FlexpriceSdk.DtoGetEventsResponse
 
 ## Properties
 

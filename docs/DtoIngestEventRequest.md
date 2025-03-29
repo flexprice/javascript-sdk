@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoIngestEventRequest
+# FlexpriceSdk.DtoIngestEventRequest
 
 ## Properties
 

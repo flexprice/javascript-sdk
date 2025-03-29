@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoLinkedIntegrationsResponse
+# FlexpriceSdk.DtoLinkedIntegrationsResponse
 
 ## Properties
 

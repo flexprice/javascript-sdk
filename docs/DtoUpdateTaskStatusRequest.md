@@ -1,4 +1,4 @@
-# FlexpriceClient.DtoUpdateTaskStatusRequest
+# FlexpriceSdk.DtoUpdateTaskStatusRequest
 
 ## Properties
 

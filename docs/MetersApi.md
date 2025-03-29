@@ -1,4 +1,4 @@
-# FlexpriceClient.MetersApi
+# FlexpriceSdk.MetersApi
 
 All URIs are relative to */v1*
 
@@ -24,15 +24,15 @@ Get all meters
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
+let apiInstance = new FlexpriceSdk.MetersApi();
 let opts = {
   'endTime': "endTime_example", // String | 
   'eventName': "eventName_example", // String | 
@@ -95,15 +95,15 @@ Delete an existing meter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
+let apiInstance = new FlexpriceSdk.MetersApi();
 let id = "id_example"; // String | Meter ID
 apiInstance.metersIdDelete(id, (error, data, response) => {
   if (error) {
@@ -146,15 +146,15 @@ Disable an existing meter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
+let apiInstance = new FlexpriceSdk.MetersApi();
 let id = "id_example"; // String | Meter ID
 apiInstance.metersIdDisablePost(id, (error, data, response) => {
   if (error) {
@@ -197,15 +197,15 @@ Get a specific meter by ID
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
+let apiInstance = new FlexpriceSdk.MetersApi();
 let id = "id_example"; // String | Meter ID
 apiInstance.metersIdGet(id, (error, data, response) => {
   if (error) {
@@ -248,17 +248,17 @@ Update an existing meter
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
+let apiInstance = new FlexpriceSdk.MetersApi();
 let id = "id_example"; // String | Meter ID
-let meter = new FlexpriceClient.DtoUpdateMeterRequest(); // DtoUpdateMeterRequest | Meter configuration
+let meter = new FlexpriceSdk.DtoUpdateMeterRequest(); // DtoUpdateMeterRequest | Meter configuration
 apiInstance.metersIdPut(id, meter, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -301,16 +301,16 @@ Create a new meter with the specified configuration
 ### Example
 
 ```javascript
-import FlexpriceClient from 'flexprice-client';
-let defaultClient = FlexpriceClient.ApiClient.instance;
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new FlexpriceClient.MetersApi();
-let meter = new FlexpriceClient.DtoCreateMeterRequest(); // DtoCreateMeterRequest | Meter configuration
+let apiInstance = new FlexpriceSdk.MetersApi();
+let meter = new FlexpriceSdk.DtoCreateMeterRequest(); // DtoCreateMeterRequest | Meter configuration
 apiInstance.metersPost(meter, (error, data, response) => {
   if (error) {
     console.error(error);
