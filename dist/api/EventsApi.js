@@ -13,6 +13,7 @@
 
 import ApiClient from "../ApiClient";
 import DtoBulkIngestEventRequest from '../model/DtoBulkIngestEventRequest';
+import DtoGetEventsRequest from '../model/DtoGetEventsRequest';
 import DtoGetEventsResponse from '../model/DtoGetEventsResponse';
 import DtoGetUsageByMeterRequest from '../model/DtoGetUsageByMeterRequest';
 import DtoGetUsageRequest from '../model/DtoGetUsageRequest';
@@ -72,50 +73,6 @@ export default class EventsApi {
   }
 
   /**
-   * Callback function to receive the result of the eventsGet operation.
-   * @callback module:api/EventsApi~eventsGetCallback
-   * @param {String} error Error message, if any.
-   * @param {module:model/DtoGetEventsResponse} data The data returned by the service call.
-   * @param {String} response The complete HTTP response.
-   */
-
-  /**
-   * Get raw events
-   * Retrieve raw events with pagination and filtering
-   * @param {Object} opts Optional parameters
-   * @param {String} [externalCustomerId] External Customer ID
-   * @param {String} [eventName] Event Name
-   * @param {String} [startTime] Start Time (RFC3339)
-   * @param {String} [endTime] End Time (RFC3339)
-   * @param {String} [iterFirstKey] Iter First Key (unix_timestamp_nanoseconds::event_id)
-   * @param {String} [iterLastKey] Iter Last Key (unix_timestamp_nanoseconds::event_id)
-   * @param {Number} [pageSize] Page Size (1-50)
-   * @param {module:api/EventsApi~eventsGetCallback} callback The callback function, accepting three arguments: error, data, response
-   * data is of type: {@link module:model/DtoGetEventsResponse}
-   */
-  eventsGet(opts, callback) {
-    opts = opts || {};
-    let postBody = null;
-    let pathParams = {};
-    let queryParams = {
-      'external_customer_id': opts['externalCustomerId'],
-      'event_name': opts['eventName'],
-      'start_time': opts['startTime'],
-      'end_time': opts['endTime'],
-      'iter_first_key': opts['iterFirstKey'],
-      'iter_last_key': opts['iterLastKey'],
-      'page_size': opts['pageSize']
-    };
-    let headerParams = {};
-    let formParams = {};
-    let authNames = ['ApiKeyAuth'];
-    let contentTypes = [];
-    let accepts = ['application/json'];
-    let returnType = DtoGetEventsResponse;
-    return this.apiClient.callApi('/events', 'GET', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
-  }
-
-  /**
    * Callback function to receive the result of the eventsPost operation.
    * @callback module:api/EventsApi~eventsPostCallback
    * @param {String} error Error message, if any.
@@ -147,6 +104,38 @@ export default class EventsApi {
       'String': 'String'
     };
     return this.apiClient.callApi('/events', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
+  }
+
+  /**
+   * Callback function to receive the result of the eventsQueryPost operation.
+   * @callback module:api/EventsApi~eventsQueryPostCallback
+   * @param {String} error Error message, if any.
+   * @param {module:model/DtoGetEventsResponse} data The data returned by the service call.
+   * @param {String} response The complete HTTP response.
+   */
+
+  /**
+   * List raw events
+   * Retrieve raw events with pagination and filtering
+   * @param {module:model/DtoGetEventsRequest} request Request body
+   * @param {module:api/EventsApi~eventsQueryPostCallback} callback The callback function, accepting three arguments: error, data, response
+   * data is of type: {@link module:model/DtoGetEventsResponse}
+   */
+  eventsQueryPost(request, callback) {
+    let postBody = request;
+    // verify the required parameter 'request' is set
+    if (request === undefined || request === null) {
+      throw new Error("Missing the required parameter 'request' when calling eventsQueryPost");
+    }
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+    let authNames = ['ApiKeyAuth'];
+    let contentTypes = [];
+    let accepts = ['application/json'];
+    let returnType = DtoGetEventsResponse;
+    return this.apiClient.callApi('/events/query', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
   }
 
   /**

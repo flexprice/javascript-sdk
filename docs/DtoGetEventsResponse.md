@@ -8,5 +8,7 @@ Name | Type | Description | Notes
 **hasMore** | **Boolean** |  | [optional] 
 **iterFirstKey** | **String** |  | [optional] 
 **iterLastKey** | **String** |  | [optional] 
+**offset** | **Number** |  | [optional] 
+**totalCount** | **Number** |  | [optional] 
 
 

@@ -49,6 +49,7 @@ import DtoEnvironmentResponse from './model/DtoEnvironmentResponse';
 import DtoEvent from './model/DtoEvent';
 import DtoFeatureResponse from './model/DtoFeatureResponse';
 import DtoFeatureUsageSummary from './model/DtoFeatureUsageSummary';
+import DtoGetEventsRequest from './model/DtoGetEventsRequest';
 import DtoGetEventsResponse from './model/DtoGetEventsResponse';
 import DtoGetPreviewInvoiceRequest from './model/DtoGetPreviewInvoiceRequest';
 import DtoGetUsageByMeterRequest from './model/DtoGetUsageByMeterRequest';
@@ -398,6 +399,11 @@ DtoFeatureResponse,
  * @property {module:model/DtoFeatureUsageSummary}
  */
 DtoFeatureUsageSummary,
+/**
+ * The DtoGetEventsRequest model constructor.
+ * @property {module:model/DtoGetEventsRequest}
+ */
+DtoGetEventsRequest,
 /**
  * The DtoGetEventsResponse model constructor.
  * @property {module:model/DtoGetEventsResponse}

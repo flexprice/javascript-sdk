@@ -23,12 +23,11 @@ class DtoCreateInvoiceLineItemRequest {
      * Constructs a new <code>DtoCreateInvoiceLineItemRequest</code>.
      * @alias module:model/DtoCreateInvoiceLineItemRequest
      * @param amount {Number} 
-     * @param priceId {String} 
      * @param quantity {Number} 
      */
-    constructor(amount, priceId, quantity) { 
+    constructor(amount, quantity) { 
         
-        DtoCreateInvoiceLineItemRequest.initialize(this, amount, priceId, quantity);
+        DtoCreateInvoiceLineItemRequest.initialize(this, amount, quantity);
     }
 
     /**
@@ -36,9 +35,8 @@ class DtoCreateInvoiceLineItemRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, amount, priceId, quantity) { 
+    static initialize(obj, amount, quantity) { 
         obj['amount'] = amount;
-        obj['price_id'] = priceId;
         obj['quantity'] = quantity;
     }
 
@@ -148,7 +146,7 @@ class DtoCreateInvoiceLineItemRequest {
 
 }
 
-DtoCreateInvoiceLineItemRequest.RequiredProperties = ["amount", "price_id", "quantity"];
+DtoCreateInvoiceLineItemRequest.RequiredProperties = ["amount", "quantity"];
 
 /**
  * @member {Number} amount

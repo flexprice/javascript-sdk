@@ -60,6 +60,12 @@ class DtoGetEventsResponse {
             if (data.hasOwnProperty('iter_last_key')) {
                 obj['iter_last_key'] = ApiClient.convertToType(data['iter_last_key'], 'String');
             }
+            if (data.hasOwnProperty('offset')) {
+                obj['offset'] = ApiClient.convertToType(data['offset'], 'Number');
+            }
+            if (data.hasOwnProperty('total_count')) {
+                obj['total_count'] = ApiClient.convertToType(data['total_count'], 'Number');
+            }
         }
         return obj;
     }
@@ -116,6 +122,16 @@ DtoGetEventsResponse.prototype['iter_first_key'] = undefined;
  * @member {String} iter_last_key
  */
 DtoGetEventsResponse.prototype['iter_last_key'] = undefined;
+
+/**
+ * @member {Number} offset
+ */
+DtoGetEventsResponse.prototype['offset'] = undefined;
+
+/**
+ * @member {Number} total_count
+ */
+DtoGetEventsResponse.prototype['total_count'] = undefined;
 
 
 

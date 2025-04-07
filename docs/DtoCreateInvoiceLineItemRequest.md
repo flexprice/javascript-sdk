@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **periodStart** | **String** |  | [optional] 
 **planDisplayName** | **String** |  | [optional] 
 **planId** | **String** |  | [optional] 
-**priceId** | **String** |  | 
+**priceId** | **String** |  | [optional] 
 **priceType** | **String** |  | [optional] 
 **quantity** | **Number** |  | 
 

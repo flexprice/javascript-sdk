@@ -5,8 +5,8 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**eventsBulkPost**](EventsApi.md#eventsBulkPost) | **POST** /events/bulk | Bulk Ingest events
-[**eventsGet**](EventsApi.md#eventsGet) | **GET** /events | Get raw events
 [**eventsPost**](EventsApi.md#eventsPost) | **POST** /events | Ingest event
+[**eventsQueryPost**](EventsApi.md#eventsQueryPost) | **POST** /events/query | List raw events
 [**eventsUsageMeterPost**](EventsApi.md#eventsUsageMeterPost) | **POST** /events/usage/meter | Get usage by meter
 [**eventsUsagePost**](EventsApi.md#eventsUsagePost) | **POST** /events/usage | Get usage statistics
 
@@ -63,71 +63,6 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## eventsGet
-
-> DtoGetEventsResponse eventsGet(opts)
-
-Get raw events
-
-Retrieve raw events with pagination and filtering
-
-### Example
-
-```javascript
-import FlexpriceSdk from '@flexprice/sdk';
-let defaultClient = FlexpriceSdk.ApiClient.instance;
-// Configure API key authorization: ApiKeyAuth
-let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
-ApiKeyAuth.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ApiKeyAuth.apiKeyPrefix = 'Token';
-
-let apiInstance = new FlexpriceSdk.EventsApi();
-let opts = {
-  'externalCustomerId': "externalCustomerId_example", // String | External Customer ID
-  'eventName': "eventName_example", // String | Event Name
-  'startTime': "startTime_example", // String | Start Time (RFC3339)
-  'endTime': "endTime_example", // String | End Time (RFC3339)
-  'iterFirstKey': "iterFirstKey_example", // String | Iter First Key (unix_timestamp_nanoseconds::event_id)
-  'iterLastKey': "iterLastKey_example", // String | Iter Last Key (unix_timestamp_nanoseconds::event_id)
-  'pageSize': 56 // Number | Page Size (1-50)
-};
-apiInstance.eventsGet(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **externalCustomerId** | **String**| External Customer ID | [optional] 
- **eventName** | **String**| Event Name | [optional] 
- **startTime** | **String**| Start Time (RFC3339) | [optional] 
- **endTime** | **String**| End Time (RFC3339) | [optional] 
- **iterFirstKey** | **String**| Iter First Key (unix_timestamp_nanoseconds::event_id) | [optional] 
- **iterLastKey** | **String**| Iter Last Key (unix_timestamp_nanoseconds::event_id) | [optional] 
- **pageSize** | **Number**| Page Size (1-50) | [optional] 
-
-### Return type
-
-[**DtoGetEventsResponse**](DtoGetEventsResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-
 ## eventsPost
 
 > {String: String} eventsPost(event)
@@ -176,6 +111,57 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## eventsQueryPost
+
+> DtoGetEventsResponse eventsQueryPost(request)
+
+List raw events
+
+Retrieve raw events with pagination and filtering
+
+### Example
+
+```javascript
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FlexpriceSdk.EventsApi();
+let request = new FlexpriceSdk.DtoGetEventsRequest(); // DtoGetEventsRequest | Request body
+apiInstance.eventsQueryPost(request, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**DtoGetEventsRequest**](DtoGetEventsRequest.md)| Request body | 
+
+### Return type
+
+[**DtoGetEventsResponse**](DtoGetEventsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 
