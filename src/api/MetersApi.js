@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import DtoCreateMeterRequest from '../model/DtoCreateMeterRequest';
+import DtoListMetersResponse from '../model/DtoListMetersResponse';
 import DtoMeterResponse from '../model/DtoMeterResponse';
 import DtoUpdateMeterRequest from '../model/DtoUpdateMeterRequest';
 import ErrorsErrorResponse from '../model/ErrorsErrorResponse';
@@ -41,7 +42,7 @@ export default class MetersApi {
      * Callback function to receive the result of the metersGet operation.
      * @callback module:api/MetersApi~metersGetCallback
      * @param {String} error Error message, if any.
-     * @param {Array.<module:model/DtoMeterResponse>} data The data returned by the service call.
+     * @param {module:model/DtoListMetersResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -60,7 +61,7 @@ export default class MetersApi {
      * @param {String} [startTime] 
      * @param {module:model/String} [status] 
      * @param {module:api/MetersApi~metersGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/DtoMeterResponse>}
+     * data is of type: {@link module:model/DtoListMetersResponse}
      */
     metersGet(opts, callback) {
       opts = opts || {};
@@ -88,7 +89,7 @@ export default class MetersApi {
       let authNames = ['ApiKeyAuth'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = [DtoMeterResponse];
+      let returnType = DtoListMetersResponse;
       return this.apiClient.callApi(
         '/meters', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,

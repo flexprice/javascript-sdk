@@ -67,6 +67,7 @@ import DtoListEntitlementsResponse from './model/DtoListEntitlementsResponse';
 import DtoListEnvironmentsResponse from './model/DtoListEnvironmentsResponse';
 import DtoListFeaturesResponse from './model/DtoListFeaturesResponse';
 import DtoListInvoicesResponse from './model/DtoListInvoicesResponse';
+import DtoListMetersResponse from './model/DtoListMetersResponse';
 import DtoListPaymentsResponse from './model/DtoListPaymentsResponse';
 import DtoListPlansResponse from './model/DtoListPlansResponse';
 import DtoListPricesResponse from './model/DtoListPricesResponse';
@@ -540,6 +541,12 @@ export {
      * @property {module:model/DtoListInvoicesResponse}
      */
     DtoListInvoicesResponse,
+
+    /**
+     * The DtoListMetersResponse model constructor.
+     * @property {module:model/DtoListMetersResponse}
+     */
+    DtoListMetersResponse,
 
     /**
      * The DtoListPaymentsResponse model constructor.

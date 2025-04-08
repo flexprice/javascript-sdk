@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **countTotal** | **Boolean** |  | [optional] 
 **endTime** | **String** |  | [optional] 
 **eventId** | **String** |  | [optional] 
-**eventName** | **String** |  | 
+**eventName** | **String** |  | [optional] 
 **externalCustomerId** | **String** |  | [optional] 
 **iterFirstKey** | **String** |  | [optional] 
 **iterLastKey** | **String** |  | [optional] 

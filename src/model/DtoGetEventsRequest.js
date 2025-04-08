@@ -22,11 +22,10 @@ class DtoGetEventsRequest {
     /**
      * Constructs a new <code>DtoGetEventsRequest</code>.
      * @alias module:model/DtoGetEventsRequest
-     * @param eventName {String} 
      */
-    constructor(eventName) { 
+    constructor() { 
         
-        DtoGetEventsRequest.initialize(this, eventName);
+        DtoGetEventsRequest.initialize(this);
     }
 
     /**
@@ -34,8 +33,7 @@ class DtoGetEventsRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, eventName) { 
-        obj['event_name'] = eventName;
+    static initialize(obj) { 
     }
 
     /**
@@ -92,12 +90,6 @@ class DtoGetEventsRequest {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>DtoGetEventsRequest</code>.
      */
     static validateJSON(data) {
-        // check to make sure all required properties are present in the JSON string
-        for (const property of DtoGetEventsRequest.RequiredProperties) {
-            if (!data.hasOwnProperty(property)) {
-                throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
-            }
-        }
         // ensure the json data is a string
         if (data['end_time'] && !(typeof data['end_time'] === 'string' || data['end_time'] instanceof String)) {
             throw new Error("Expected the field `end_time` to be a primitive type in the JSON string but got " + data['end_time']);
@@ -133,7 +125,7 @@ class DtoGetEventsRequest {
 
 }
 
-DtoGetEventsRequest.RequiredProperties = ["event_name"];
+
 
 /**
  * @member {Boolean} count_total

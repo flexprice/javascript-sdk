@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## metersGet
 
-> [DtoMeterResponse] metersGet(opts)
+> DtoListMetersResponse metersGet(opts)
 
 List meters
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[DtoMeterResponse]**](DtoMeterResponse.md)
+[**DtoListMetersResponse**](DtoListMetersResponse.md)
 
 ### Authorization
 
