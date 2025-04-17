@@ -47,9 +47,6 @@ class DtoGetEventsRequest {
         if (data) {
             obj = obj || new DtoGetEventsRequest();
 
-            if (data.hasOwnProperty('count_total')) {
-                obj['count_total'] = ApiClient.convertToType(data['count_total'], 'Boolean');
-            }
             if (data.hasOwnProperty('end_time')) {
                 obj['end_time'] = ApiClient.convertToType(data['end_time'], 'String');
             }
@@ -76,6 +73,9 @@ class DtoGetEventsRequest {
             }
             if (data.hasOwnProperty('property_filters')) {
                 obj['property_filters'] = ApiClient.convertToType(data['property_filters'], {'String': ['String']});
+            }
+            if (data.hasOwnProperty('source')) {
+                obj['source'] = ApiClient.convertToType(data['source'], 'String');
             }
             if (data.hasOwnProperty('start_time')) {
                 obj['start_time'] = ApiClient.convertToType(data['start_time'], 'String');
@@ -115,6 +115,10 @@ class DtoGetEventsRequest {
             throw new Error("Expected the field `iter_last_key` to be a primitive type in the JSON string but got " + data['iter_last_key']);
         }
         // ensure the json data is a string
+        if (data['source'] && !(typeof data['source'] === 'string' || data['source'] instanceof String)) {
+            throw new Error("Expected the field `source` to be a primitive type in the JSON string but got " + data['source']);
+        }
+        // ensure the json data is a string
         if (data['start_time'] && !(typeof data['start_time'] === 'string' || data['start_time'] instanceof String)) {
             throw new Error("Expected the field `start_time` to be a primitive type in the JSON string but got " + data['start_time']);
         }
@@ -128,56 +132,67 @@ class DtoGetEventsRequest {
 
 
 /**
- * @member {Boolean} count_total
- */
-DtoGetEventsRequest.prototype['count_total'] = undefined;
-
-/**
+ * End time of the events to be fetched in ISO 8601 format Defaults to now if not provided
  * @member {String} end_time
  */
 DtoGetEventsRequest.prototype['end_time'] = undefined;
 
 /**
+ * Event ID is the idempotency key for the event
  * @member {String} event_id
  */
 DtoGetEventsRequest.prototype['event_id'] = undefined;
 
 /**
+ * Event name / Unique identifier for the event in your system
  * @member {String} event_name
  */
 DtoGetEventsRequest.prototype['event_name'] = undefined;
 
 /**
+ * Customer ID in your system that was sent with the event
  * @member {String} external_customer_id
  */
 DtoGetEventsRequest.prototype['external_customer_id'] = undefined;
 
 /**
+ * First key to iterate over the events
  * @member {String} iter_first_key
  */
 DtoGetEventsRequest.prototype['iter_first_key'] = undefined;
 
 /**
+ * Last key to iterate over the events
  * @member {String} iter_last_key
  */
 DtoGetEventsRequest.prototype['iter_last_key'] = undefined;
 
 /**
+ * Offset to fetch the events and is set to 0 by default
  * @member {Number} offset
  */
 DtoGetEventsRequest.prototype['offset'] = undefined;
 
 /**
+ * Page size to fetch the events and is set to 50 by default
  * @member {Number} page_size
  */
 DtoGetEventsRequest.prototype['page_size'] = undefined;
 
 /**
+ * Property filters to filter the events by the keys in `properties` field of the event
  * @member {Object.<String, Array.<String>>} property_filters
  */
 DtoGetEventsRequest.prototype['property_filters'] = undefined;
 
 /**
+ * Source to filter the events by the source
+ * @member {String} source
+ */
+DtoGetEventsRequest.prototype['source'] = undefined;
+
+/**
+ * Start time of the events to be fetched in ISO 8601 format Defaults to last 7 days from now if not provided
  * @member {String} start_time
  */
 DtoGetEventsRequest.prototype['start_time'] = undefined;

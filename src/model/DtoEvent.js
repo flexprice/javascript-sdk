@@ -50,6 +50,9 @@ class DtoEvent {
             if (data.hasOwnProperty('customer_id')) {
                 obj['customer_id'] = ApiClient.convertToType(data['customer_id'], 'String');
             }
+            if (data.hasOwnProperty('environment_id')) {
+                obj['environment_id'] = ApiClient.convertToType(data['environment_id'], 'String');
+            }
             if (data.hasOwnProperty('event_name')) {
                 obj['event_name'] = ApiClient.convertToType(data['event_name'], 'String');
             }
@@ -81,6 +84,10 @@ class DtoEvent {
         // ensure the json data is a string
         if (data['customer_id'] && !(typeof data['customer_id'] === 'string' || data['customer_id'] instanceof String)) {
             throw new Error("Expected the field `customer_id` to be a primitive type in the JSON string but got " + data['customer_id']);
+        }
+        // ensure the json data is a string
+        if (data['environment_id'] && !(typeof data['environment_id'] === 'string' || data['environment_id'] instanceof String)) {
+            throw new Error("Expected the field `environment_id` to be a primitive type in the JSON string but got " + data['environment_id']);
         }
         // ensure the json data is a string
         if (data['event_name'] && !(typeof data['event_name'] === 'string' || data['event_name'] instanceof String)) {
@@ -115,6 +122,11 @@ class DtoEvent {
  * @member {String} customer_id
  */
 DtoEvent.prototype['customer_id'] = undefined;
+
+/**
+ * @member {String} environment_id
+ */
+DtoEvent.prototype['environment_id'] = undefined;
 
 /**
  * @member {String} event_name

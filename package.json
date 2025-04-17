@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "0.1.8",
+  "version": "0.1.0-20250417-586f7274",
   "description": "Official JavaScript SDK of Flexprice",
   "license": "Apache 2.0",
   "homepage": "https://flexprice.io",

@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import DtoCreateMeterRequest from './DtoCreateMeterRequest';
 import TypesFeatureType from './TypesFeatureType';
 
 /**
@@ -61,6 +62,9 @@ class DtoCreateFeatureRequest {
             if (data.hasOwnProperty('metadata')) {
                 obj['metadata'] = ApiClient.convertToType(data['metadata'], {'String': 'String'});
             }
+            if (data.hasOwnProperty('meter')) {
+                obj['meter'] = DtoCreateMeterRequest.constructFromObject(data['meter']);
+            }
             if (data.hasOwnProperty('meter_id')) {
                 obj['meter_id'] = ApiClient.convertToType(data['meter_id'], 'String');
             }
@@ -99,6 +103,10 @@ class DtoCreateFeatureRequest {
         // ensure the json data is a string
         if (data['lookup_key'] && !(typeof data['lookup_key'] === 'string' || data['lookup_key'] instanceof String)) {
             throw new Error("Expected the field `lookup_key` to be a primitive type in the JSON string but got " + data['lookup_key']);
+        }
+        // validate the optional field `meter`
+        if (data['meter']) { // data not null
+          DtoCreateMeterRequest.validateJSON(data['meter']);
         }
         // ensure the json data is a string
         if (data['meter_id'] && !(typeof data['meter_id'] === 'string' || data['meter_id'] instanceof String)) {
@@ -139,6 +147,11 @@ DtoCreateFeatureRequest.prototype['lookup_key'] = undefined;
  * @member {Object.<String, String>} metadata
  */
 DtoCreateFeatureRequest.prototype['metadata'] = undefined;
+
+/**
+ * @member {module:model/DtoCreateMeterRequest} meter
+ */
+DtoCreateFeatureRequest.prototype['meter'] = undefined;
 
 /**
  * @member {String} meter_id

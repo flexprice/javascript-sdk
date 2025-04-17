@@ -66,7 +66,6 @@ import DtoListEntitlementsResponse from './model/DtoListEntitlementsResponse';
 import DtoListEnvironmentsResponse from './model/DtoListEnvironmentsResponse';
 import DtoListFeaturesResponse from './model/DtoListFeaturesResponse';
 import DtoListInvoicesResponse from './model/DtoListInvoicesResponse';
-import DtoListMetersResponse from './model/DtoListMetersResponse';
 import DtoListPaymentsResponse from './model/DtoListPaymentsResponse';
 import DtoListPlansResponse from './model/DtoListPlansResponse';
 import DtoListPricesResponse from './model/DtoListPricesResponse';
@@ -97,7 +96,6 @@ import DtoUpdateCustomerRequest from './model/DtoUpdateCustomerRequest';
 import DtoUpdateEntitlementRequest from './model/DtoUpdateEntitlementRequest';
 import DtoUpdateEnvironmentRequest from './model/DtoUpdateEnvironmentRequest';
 import DtoUpdateFeatureRequest from './model/DtoUpdateFeatureRequest';
-import DtoUpdateMeterRequest from './model/DtoUpdateMeterRequest';
 import DtoUpdatePaymentRequest from './model/DtoUpdatePaymentRequest';
 import DtoUpdatePaymentStatusRequest from './model/DtoUpdatePaymentStatusRequest';
 import DtoUpdatePlanEntitlementRequest from './model/DtoUpdatePlanEntitlementRequest';
@@ -167,7 +165,6 @@ import EventsApi from './api/EventsApi';
 import FeaturesApi from './api/FeaturesApi';
 import IntegrationsApi from './api/IntegrationsApi';
 import InvoicesApi from './api/InvoicesApi';
-import MetersApi from './api/MetersApi';
 import PaymentsApi from './api/PaymentsApi';
 import PlansApi from './api/PlansApi';
 import PricesApi from './api/PricesApi';
@@ -486,11 +483,6 @@ DtoListFeaturesResponse,
  */
 DtoListInvoicesResponse,
 /**
- * The DtoListMetersResponse model constructor.
- * @property {module:model/DtoListMetersResponse}
- */
-DtoListMetersResponse,
-/**
  * The DtoListPaymentsResponse model constructor.
  * @property {module:model/DtoListPaymentsResponse}
  */
@@ -640,11 +632,6 @@ DtoUpdateEnvironmentRequest,
  * @property {module:model/DtoUpdateFeatureRequest}
  */
 DtoUpdateFeatureRequest,
-/**
- * The DtoUpdateMeterRequest model constructor.
- * @property {module:model/DtoUpdateMeterRequest}
- */
-DtoUpdateMeterRequest,
 /**
  * The DtoUpdatePaymentRequest model constructor.
  * @property {module:model/DtoUpdatePaymentRequest}
@@ -990,11 +977,6 @@ IntegrationsApi,
 * @property {module:api/InvoicesApi}
 */
 InvoicesApi,
-/**
-* The MetersApi service constructor.
-* @property {module:api/MetersApi}
-*/
-MetersApi,
 /**
 * The PaymentsApi service constructor.
 * @property {module:api/PaymentsApi}

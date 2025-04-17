@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **customerId** | **String** |  | [optional] 
+**environmentId** | **String** |  | [optional] 
 **eventName** | **String** |  | [optional] 
 **externalCustomerId** | **String** |  | [optional] 
 **id** | **String** |  | [optional] 
