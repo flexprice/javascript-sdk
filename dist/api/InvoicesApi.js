@@ -88,7 +88,6 @@ export default class InvoicesApi {
    * @param {String} [customerId] 
    * @param {String} [endTime] 
    * @param {String} [expand] 
-   * @param {Array.<String>} [invoiceIds] 
    * @param {Array.<module:model/String>} [invoiceStatus] 
    * @param {module:model/String} [invoiceType] 
    * @param {Number} [limit] 
@@ -112,7 +111,6 @@ export default class InvoicesApi {
       'customer_id': opts['customerId'],
       'end_time': opts['endTime'],
       'expand': opts['expand'],
-      'invoice_ids': this.apiClient.buildCollectionParam(opts['invoiceIds'], 'csv'),
       'invoice_status': this.apiClient.buildCollectionParam(opts['invoiceStatus'], 'csv'),
       'invoice_type': opts['invoiceType'],
       'limit': opts['limit'],
@@ -290,13 +288,10 @@ export default class InvoicesApi {
    * Get PDF for an invoice
    * Retrieve the PDF document for a specific invoice by its ID
    * @param {String} id Invoice ID
-   * @param {Object} opts Optional parameters
-   * @param {Boolean} [url] Return presigned URL from s3 instead of PDF
    * @param {module:api/InvoicesApi~invoicesIdPdfGetCallback} callback The callback function, accepting three arguments: error, data, response
    * data is of type: {@link File}
    */
-  invoicesIdPdfGet(id, opts, callback) {
-    opts = opts || {};
+  invoicesIdPdfGet(id, callback) {
     let postBody = null;
     // verify the required parameter 'id' is set
     if (id === undefined || id === null) {
@@ -305,9 +300,7 @@ export default class InvoicesApi {
     let pathParams = {
       'id': id
     };
-    let queryParams = {
-      'url': opts['url']
-    };
+    let queryParams = {};
     let headerParams = {};
     let formParams = {};
     let authNames = [];

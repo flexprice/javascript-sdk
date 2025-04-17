@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **dueDate** | **String** |  | [optional] 
 **environmentId** | **String** |  | [optional] 
 **idempotencyKey** | **String** |  | [optional] 
-**invoiceNumber** | **String** |  | [optional] 
 **invoiceStatus** | [**TypesInvoiceStatus**](TypesInvoiceStatus.md) |  | [optional] 
 **invoiceType** | [**TypesInvoiceType**](TypesInvoiceType.md) |  | [optional] 
 **lineItems** | [**[DtoCreateInvoiceLineItemRequest]**](DtoCreateInvoiceLineItemRequest.md) |  | [optional] 

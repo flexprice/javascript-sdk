@@ -88,7 +88,6 @@ let opts = {
   'customerId': "customerId_example", // String | 
   'endTime': "endTime_example", // String | 
   'expand': "expand_example", // String | 
-  'invoiceIds': ["null"], // [String] | 
   'invoiceStatus': ["null"], // [String] | 
   'invoiceType': "invoiceType_example", // String | 
   'limit': 56, // Number | 
@@ -119,7 +118,6 @@ Name | Type | Description  | Notes
  **customerId** | **String**|  | [optional] 
  **endTime** | **String**|  | [optional] 
  **expand** | **String**|  | [optional] 
- **invoiceIds** | [**[String]**](String.md)|  | [optional] 
  **invoiceStatus** | [**[String]**](String.md)|  | [optional] 
  **invoiceType** | **String**|  | [optional] 
  **limit** | **Number**|  | [optional] 
@@ -335,7 +333,7 @@ Name | Type | Description  | Notes
 
 ## invoicesIdPdfGet
 
-> File invoicesIdPdfGet(id, opts)
+> File invoicesIdPdfGet(id)
 
 Get PDF for an invoice
 
@@ -348,10 +346,7 @@ import FlexpriceSdk from '@flexprice/sdk';
 
 let apiInstance = new FlexpriceSdk.InvoicesApi();
 let id = "id_example"; // String | Invoice ID
-let opts = {
-  'url': true // Boolean | Return presigned URL from s3 instead of PDF
-};
-apiInstance.invoicesIdPdfGet(id, opts, (error, data, response) => {
+apiInstance.invoicesIdPdfGet(id, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -366,7 +361,6 @@ apiInstance.invoicesIdPdfGet(id, opts, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Invoice ID | 
- **url** | **Boolean**| Return presigned URL from s3 instead of PDF | [optional] 
 
 ### Return type
 

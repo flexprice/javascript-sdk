@@ -81,9 +81,6 @@ class DtoPaymentResponse {
       if (data.hasOwnProperty('idempotency_key')) {
         obj['idempotency_key'] = ApiClient.convertToType(data['idempotency_key'], 'String');
       }
-      if (data.hasOwnProperty('invoice_number')) {
-        obj['invoice_number'] = ApiClient.convertToType(data['invoice_number'], 'String');
-      }
       if (data.hasOwnProperty('metadata')) {
         obj['metadata'] = ApiClient.convertToType(data['metadata'], {
           'String': 'String'
@@ -171,10 +168,6 @@ class DtoPaymentResponse {
       throw new Error("Expected the field `idempotency_key` to be a primitive type in the JSON string but got " + data['idempotency_key']);
     }
     // ensure the json data is a string
-    if (data['invoice_number'] && !(typeof data['invoice_number'] === 'string' || data['invoice_number'] instanceof String)) {
-      throw new Error("Expected the field `invoice_number` to be a primitive type in the JSON string but got " + data['invoice_number']);
-    }
-    // ensure the json data is a string
     if (data['payment_method_id'] && !(typeof data['payment_method_id'] === 'string' || data['payment_method_id'] instanceof String)) {
       throw new Error("Expected the field `payment_method_id` to be a primitive type in the JSON string but got " + data['payment_method_id']);
     }
@@ -256,11 +249,6 @@ DtoPaymentResponse.prototype['id'] = undefined;
  * @member {String} idempotency_key
  */
 DtoPaymentResponse.prototype['idempotency_key'] = undefined;
-
-/**
- * @member {String} invoice_number
- */
-DtoPaymentResponse.prototype['invoice_number'] = undefined;
 
 /**
  * @member {Object.<String, String>} metadata

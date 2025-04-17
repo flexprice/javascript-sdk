@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **description** | **String** | Description of the price | [optional] 
 **displayAmount** | **String** | DisplayAmount is the formatted amount with currency symbol For USD: $12.50 | [optional] 
 **environmentId** | **String** | EnvironmentID is the environment identifier for the price | [optional] 
+**filterValues** | **{String: [String]}** |  | [optional] 
 **id** | **String** | ID uuid identifier for the price | [optional] 
 **invoiceCadence** | [**TypesInvoiceCadence**](TypesInvoiceCadence.md) |  | [optional] 
 **lookupKey** | **String** | LookupKey used for looking up the price in the database | [optional] 
