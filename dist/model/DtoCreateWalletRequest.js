@@ -76,6 +76,12 @@ class DtoCreateWalletRequest {
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
       }
+      if (data.hasOwnProperty('initial_credits_to_load')) {
+        obj['initial_credits_to_load'] = ApiClient.convertToType(data['initial_credits_to_load'], 'Number');
+      }
+      if (data.hasOwnProperty('initial_credits_to_load_expiry_date')) {
+        obj['initial_credits_to_load_expiry_date'] = ApiClient.convertToType(data['initial_credits_to_load_expiry_date'], 'Number');
+      }
       if (data.hasOwnProperty('metadata')) {
         obj['metadata'] = ApiClient.convertToType(data['metadata'], {
           'String': 'String'
@@ -150,6 +156,7 @@ DtoCreateWalletRequest.prototype['auto_topup_trigger'] = undefined;
 DtoCreateWalletRequest.prototype['config'] = undefined;
 
 /**
+ * amount in the currency =  number of credits * conversion_rate ex if conversion_rate is 1, then 1 USD = 1 credit ex if conversion_rate is 2, then 1 USD = 0.5 credits ex if conversion_rate is 0.5, then 1 USD = 2 credits
  * @member {Number} conversion_rate
  */
 DtoCreateWalletRequest.prototype['conversion_rate'] = undefined;
@@ -168,6 +175,18 @@ DtoCreateWalletRequest.prototype['customer_id'] = undefined;
  * @member {String} description
  */
 DtoCreateWalletRequest.prototype['description'] = undefined;
+
+/**
+ * initial_credits_to_load is the number of credits to load to the wallet if not provided, the wallet will be created with 0 balance NOTE: this is not the amount in the currency, but the number of credits
+ * @member {Number} initial_credits_to_load
+ */
+DtoCreateWalletRequest.prototype['initial_credits_to_load'] = undefined;
+
+/**
+ * initial_credits_to_load_expiry_date YYYYMMDD format in UTC timezone (optional to set nil means no expiry) for ex 20250101 means the credits will expire on 2025-01-01 00:00:00 UTC hence they will be available for use until 2024-12-31 23:59:59 UTC
+ * @member {Number} initial_credits_to_load_expiry_date
+ */
+DtoCreateWalletRequest.prototype['initial_credits_to_load_expiry_date'] = undefined;
 
 /**
  * @member {Object.<String, String>} metadata

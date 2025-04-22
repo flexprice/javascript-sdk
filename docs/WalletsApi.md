@@ -5,6 +5,7 @@ All URIs are relative to */v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**customersIdWalletsGet**](WalletsApi.md#customersIdWalletsGet) | **GET** /customers/{id}/wallets | Get wallets by customer ID
+[**customersWalletsGet**](WalletsApi.md#customersWalletsGet) | **GET** /customers/wallets | Get Customer Wallets
 [**walletsIdBalanceRealTimeGet**](WalletsApi.md#walletsIdBalanceRealTimeGet) | **GET** /wallets/{id}/balance/real-time | Get wallet balance
 [**walletsIdGet**](WalletsApi.md#walletsIdGet) | **GET** /wallets/{id} | Get wallet by ID
 [**walletsIdPut**](WalletsApi.md#walletsIdPut) | **PUT** /wallets/{id} | Update a wallet
@@ -51,6 +52,63 @@ apiInstance.customersIdWalletsGet(id, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Customer ID | 
+
+### Return type
+
+[**[DtoWalletResponse]**](DtoWalletResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## customersWalletsGet
+
+> [DtoWalletResponse] customersWalletsGet(opts)
+
+Get Customer Wallets
+
+Get all wallets for a customer by lookup key or id
+
+### Example
+
+```javascript
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FlexpriceSdk.WalletsApi();
+let opts = {
+  'id': "id_example", // String | 
+  'includeRealTimeBalance': false, // Boolean | 
+  'lookupKey': "lookupKey_example" // String | 
+};
+apiInstance.customersWalletsGet(opts, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | [optional] 
+ **includeRealTimeBalance** | **Boolean**|  | [optional] [default to false]
+ **lookupKey** | **String**|  | [optional] 
 
 ### Return type
 

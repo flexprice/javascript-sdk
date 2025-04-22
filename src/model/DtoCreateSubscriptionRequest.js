@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import TypesBillingCadence from './TypesBillingCadence';
+import TypesBillingCycle from './TypesBillingCycle';
 import TypesBillingPeriod from './TypesBillingPeriod';
 
 /**
@@ -65,6 +66,9 @@ class DtoCreateSubscriptionRequest {
 
             if (data.hasOwnProperty('billing_cadence')) {
                 obj['billing_cadence'] = TypesBillingCadence.constructFromObject(data['billing_cadence']);
+            }
+            if (data.hasOwnProperty('billing_cycle')) {
+                obj['billing_cycle'] = TypesBillingCycle.constructFromObject(data['billing_cycle']);
             }
             if (data.hasOwnProperty('billing_period')) {
                 obj['billing_period'] = TypesBillingPeriod.constructFromObject(data['billing_period']);
@@ -160,6 +164,11 @@ DtoCreateSubscriptionRequest.RequiredProperties = ["billing_cadence", "billing_p
  * @member {module:model/TypesBillingCadence} billing_cadence
  */
 DtoCreateSubscriptionRequest.prototype['billing_cadence'] = undefined;
+
+/**
+ * @member {module:model/TypesBillingCycle} billing_cycle
+ */
+DtoCreateSubscriptionRequest.prototype['billing_cycle'] = undefined;
 
 /**
  * @member {module:model/TypesBillingPeriod} billing_period

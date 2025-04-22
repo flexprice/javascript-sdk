@@ -48,6 +48,9 @@ class DtoUpdateTenantRequest {
       if (data.hasOwnProperty('billing_details')) {
         obj['billing_details'] = DtoTenantBillingDetails.constructFromObject(data['billing_details']);
       }
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String');
+      }
     }
     return obj;
   }
@@ -63,6 +66,10 @@ class DtoUpdateTenantRequest {
       // data not null
       DtoTenantBillingDetails.validateJSON(data['billing_details']);
     }
+    // ensure the json data is a string
+    if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+      throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+    }
     return true;
   }
 }
@@ -71,4 +78,9 @@ class DtoUpdateTenantRequest {
  * @member {module:model/DtoTenantBillingDetails} billing_details
  */
 DtoUpdateTenantRequest.prototype['billing_details'] = undefined;
+
+/**
+ * @member {String} name
+ */
+DtoUpdateTenantRequest.prototype['name'] = undefined;
 export default DtoUpdateTenantRequest;

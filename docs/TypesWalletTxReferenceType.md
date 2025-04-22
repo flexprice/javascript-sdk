@@ -3,8 +3,6 @@
 ## Enum
 
 
-* `WalletTxReferenceTypeInvoice` (value: `"INVOICE"`)
-
 * `WalletTxReferenceTypePayment` (value: `"PAYMENT"`)
 
 * `WalletTxReferenceTypeExternal` (value: `"EXTERNAL"`)

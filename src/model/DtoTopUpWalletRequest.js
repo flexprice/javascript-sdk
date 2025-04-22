@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import TypesTransactionReason from './TypesTransactionReason';
 
 /**
  * The DtoTopUpWalletRequest model module.
@@ -22,11 +23,12 @@ class DtoTopUpWalletRequest {
     /**
      * Constructs a new <code>DtoTopUpWalletRequest</code>.
      * @alias module:model/DtoTopUpWalletRequest
-     * @param amount {Number} amount is the number of credits to add to the wallet
+     * @param idempotencyKey {String} idempotency_key is a unique key for the transaction
+     * @param transactionReason {module:model/TypesTransactionReason} 
      */
-    constructor(amount) { 
+    constructor(idempotencyKey, transactionReason) { 
         
-        DtoTopUpWalletRequest.initialize(this, amount);
+        DtoTopUpWalletRequest.initialize(this, idempotencyKey, transactionReason);
     }
 
     /**
@@ -34,8 +36,9 @@ class DtoTopUpWalletRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, amount) { 
-        obj['amount'] = amount;
+    static initialize(obj, idempotencyKey, transactionReason) { 
+        obj['idempotency_key'] = idempotencyKey;
+        obj['transaction_reason'] = transactionReason;
     }
 
     /**
@@ -52,26 +55,23 @@ class DtoTopUpWalletRequest {
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
+            if (data.hasOwnProperty('credits_to_add')) {
+                obj['credits_to_add'] = ApiClient.convertToType(data['credits_to_add'], 'Number');
+            }
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('expiry_date')) {
-                obj['expiry_date'] = ApiClient.convertToType(data['expiry_date'], 'Number');
+            if (data.hasOwnProperty('expiry_date_utc')) {
+                obj['expiry_date_utc'] = ApiClient.convertToType(data['expiry_date_utc'], 'String');
             }
-            if (data.hasOwnProperty('generate_invoice')) {
-                obj['generate_invoice'] = ApiClient.convertToType(data['generate_invoice'], 'Boolean');
+            if (data.hasOwnProperty('idempotency_key')) {
+                obj['idempotency_key'] = ApiClient.convertToType(data['idempotency_key'], 'String');
             }
             if (data.hasOwnProperty('metadata')) {
                 obj['metadata'] = ApiClient.convertToType(data['metadata'], {'String': 'String'});
             }
-            if (data.hasOwnProperty('purchased_credits')) {
-                obj['purchased_credits'] = ApiClient.convertToType(data['purchased_credits'], 'Boolean');
-            }
-            if (data.hasOwnProperty('reference_id')) {
-                obj['reference_id'] = ApiClient.convertToType(data['reference_id'], 'String');
-            }
-            if (data.hasOwnProperty('reference_type')) {
-                obj['reference_type'] = ApiClient.convertToType(data['reference_type'], 'String');
+            if (data.hasOwnProperty('transaction_reason')) {
+                obj['transaction_reason'] = TypesTransactionReason.constructFromObject(data['transaction_reason']);
             }
         }
         return obj;
@@ -94,12 +94,12 @@ class DtoTopUpWalletRequest {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
         // ensure the json data is a string
-        if (data['reference_id'] && !(typeof data['reference_id'] === 'string' || data['reference_id'] instanceof String)) {
-            throw new Error("Expected the field `reference_id` to be a primitive type in the JSON string but got " + data['reference_id']);
+        if (data['expiry_date_utc'] && !(typeof data['expiry_date_utc'] === 'string' || data['expiry_date_utc'] instanceof String)) {
+            throw new Error("Expected the field `expiry_date_utc` to be a primitive type in the JSON string but got " + data['expiry_date_utc']);
         }
         // ensure the json data is a string
-        if (data['reference_type'] && !(typeof data['reference_type'] === 'string' || data['reference_type'] instanceof String)) {
-            throw new Error("Expected the field `reference_type` to be a primitive type in the JSON string but got " + data['reference_type']);
+        if (data['idempotency_key'] && !(typeof data['idempotency_key'] === 'string' || data['idempotency_key'] instanceof String)) {
+            throw new Error("Expected the field `idempotency_key` to be a primitive type in the JSON string but got " + data['idempotency_key']);
         }
 
         return true;
@@ -108,13 +108,19 @@ class DtoTopUpWalletRequest {
 
 }
 
-DtoTopUpWalletRequest.RequiredProperties = ["amount"];
+DtoTopUpWalletRequest.RequiredProperties = ["idempotency_key", "transaction_reason"];
 
 /**
- * amount is the number of credits to add to the wallet
+ * amount is the amount in the currency of the wallet to be added NOTE: this is not the number of credits to add, but the amount in the currency amount = credits_to_add * conversion_rate if both amount and credits_to_add are provided, amount will be ignored ex if the wallet has a conversion_rate of 2 then adding an amount of 10 USD in the wallet wil add 5 credits in the wallet
  * @member {Number} amount
  */
 DtoTopUpWalletRequest.prototype['amount'] = undefined;
+
+/**
+ * credits_to_add is the number of credits to add to the wallet
+ * @member {Number} credits_to_add
+ */
+DtoTopUpWalletRequest.prototype['credits_to_add'] = undefined;
 
 /**
  * description to add any specific details about the transaction
@@ -123,16 +129,16 @@ DtoTopUpWalletRequest.prototype['amount'] = undefined;
 DtoTopUpWalletRequest.prototype['description'] = undefined;
 
 /**
- * expiry_date YYYYMMDD format in UTC timezone (optional to set nil means no expiry) for ex 20250101 means the credits will expire on 2025-01-01 00:00:00 UTC hence they will be available for use until 2024-12-31 23:59:59 UTC
- * @member {Number} expiry_date
+ * expiry_date_utc is the expiry date in UTC timezone ex 2025-01-01 00:00:00 UTC
+ * @member {String} expiry_date_utc
  */
-DtoTopUpWalletRequest.prototype['expiry_date'] = undefined;
+DtoTopUpWalletRequest.prototype['expiry_date_utc'] = undefined;
 
 /**
- * generate_invoice when true, an invoice will be generated for the transaction
- * @member {Boolean} generate_invoice
+ * idempotency_key is a unique key for the transaction
+ * @member {String} idempotency_key
  */
-DtoTopUpWalletRequest.prototype['generate_invoice'] = undefined;
+DtoTopUpWalletRequest.prototype['idempotency_key'] = undefined;
 
 /**
  * @member {Object.<String, String>} metadata
@@ -140,22 +146,9 @@ DtoTopUpWalletRequest.prototype['generate_invoice'] = undefined;
 DtoTopUpWalletRequest.prototype['metadata'] = undefined;
 
 /**
- * purchased_credits when true, the credits are added as purchased credits
- * @member {Boolean} purchased_credits
+ * @member {module:model/TypesTransactionReason} transaction_reason
  */
-DtoTopUpWalletRequest.prototype['purchased_credits'] = undefined;
-
-/**
- * reference_id is the ID of the reference ex payment ID, invoice ID, request ID
- * @member {String} reference_id
- */
-DtoTopUpWalletRequest.prototype['reference_id'] = undefined;
-
-/**
- * reference_type is the type of the reference ex payment, invoice, request
- * @member {String} reference_type
- */
-DtoTopUpWalletRequest.prototype['reference_type'] = undefined;
+DtoTopUpWalletRequest.prototype['transaction_reason'] = undefined;
 
 
 

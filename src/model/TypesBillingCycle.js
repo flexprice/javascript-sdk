@@ -13,38 +13,31 @@
 
 import ApiClient from '../ApiClient';
 /**
-* Enum class TypesWalletTxReferenceType.
+* Enum class TypesBillingCycle.
 * @enum {}
 * @readonly
 */
-export default class TypesWalletTxReferenceType {
+export default class TypesBillingCycle {
     
         /**
-         * value: "PAYMENT"
+         * value: "anniversary"
          * @const
          */
-        "WalletTxReferenceTypePayment" = "PAYMENT";
+        "BillingCycleAnniversary" = "anniversary";
 
     
         /**
-         * value: "EXTERNAL"
+         * value: "calendar"
          * @const
          */
-        "WalletTxReferenceTypeExternal" = "EXTERNAL";
-
-    
-        /**
-         * value: "REQUEST"
-         * @const
-         */
-        "WalletTxReferenceTypeRequest" = "REQUEST";
+        "BillingCycleCalendar" = "calendar";
 
     
 
     /**
-    * Returns a <code>TypesWalletTxReferenceType</code> enum value from a Javascript object name.
+    * Returns a <code>TypesBillingCycle</code> enum value from a Javascript object name.
     * @param {Object} data The plain JavaScript object containing the name of the enum value.
-    * @return {module:model/TypesWalletTxReferenceType} The enum <code>TypesWalletTxReferenceType</code> value.
+    * @return {module:model/TypesBillingCycle} The enum <code>TypesBillingCycle</code> value.
     */
     static constructFromObject(object) {
         return object;

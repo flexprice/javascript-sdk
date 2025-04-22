@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **failedAt** | **String** |  | [optional] 
 **id** | **String** |  | [optional] 
 **idempotencyKey** | **String** |  | [optional] 
+**invoiceNumber** | **String** |  | [optional] 
 **metadata** | **{String: String}** |  | [optional] 
 **paymentMethodId** | **String** |  | [optional] 
 **paymentMethodType** | [**TypesPaymentMethodType**](TypesPaymentMethodType.md) |  | [optional] 

@@ -87,11 +87,6 @@ class DtoPriceResponse {
       if (data.hasOwnProperty('environment_id')) {
         obj['environment_id'] = ApiClient.convertToType(data['environment_id'], 'String');
       }
-      if (data.hasOwnProperty('filter_values')) {
-        obj['filter_values'] = ApiClient.convertToType(data['filter_values'], {
-          'String': ['String']
-        });
-      }
       if (data.hasOwnProperty('id')) {
         obj['id'] = ApiClient.convertToType(data['id'], 'String');
       }
@@ -290,11 +285,6 @@ DtoPriceResponse.prototype['display_amount'] = undefined;
  * @member {String} environment_id
  */
 DtoPriceResponse.prototype['environment_id'] = undefined;
-
-/**
- * @member {Object.<String, Array.<String>>} filter_values
- */
-DtoPriceResponse.prototype['filter_values'] = undefined;
 
 /**
  * ID uuid identifier for the price

@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import MeterFilter from './MeterFilter';
 
 /**
  * The DtoUpdateFeatureRequest model module.
@@ -47,6 +48,9 @@ class DtoUpdateFeatureRequest {
       if (data.hasOwnProperty('description')) {
         obj['description'] = ApiClient.convertToType(data['description'], 'String');
       }
+      if (data.hasOwnProperty('filters')) {
+        obj['filters'] = ApiClient.convertToType(data['filters'], [MeterFilter]);
+      }
       if (data.hasOwnProperty('metadata')) {
         obj['metadata'] = ApiClient.convertToType(data['metadata'], {
           'String': 'String'
@@ -75,6 +79,18 @@ class DtoUpdateFeatureRequest {
     if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
       throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
     }
+    if (data['filters']) {
+      // data not null
+      // ensure the json data is an array
+      if (!Array.isArray(data['filters'])) {
+        throw new Error("Expected the field `filters` to be an array in the JSON data but got " + data['filters']);
+      }
+      // validate the optional field `filters` (array)
+      for (const item of data['filters']) {
+        MeterFilter.validateJSON(item);
+      }
+      ;
+    }
     // ensure the json data is a string
     if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
       throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
@@ -95,6 +111,11 @@ class DtoUpdateFeatureRequest {
  * @member {String} description
  */
 DtoUpdateFeatureRequest.prototype['description'] = undefined;
+
+/**
+ * @member {Array.<module:model/MeterFilter>} filters
+ */
+DtoUpdateFeatureRequest.prototype['filters'] = undefined;
 
 /**
  * @member {Object.<String, String>} metadata

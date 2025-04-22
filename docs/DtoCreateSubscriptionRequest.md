@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **billingCadence** | [**TypesBillingCadence**](TypesBillingCadence.md) |  | 
+**billingCycle** | [**TypesBillingCycle**](TypesBillingCycle.md) |  | [optional] 
 **billingPeriod** | [**TypesBillingPeriod**](TypesBillingPeriod.md) |  | 
 **billingPeriodCount** | **Number** |  | 
 **currency** | **String** |  | 

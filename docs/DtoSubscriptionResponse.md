@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **activePauseId** | **String** | ActivePauseID references the current active pause configuration This will be null if no pause is active or scheduled | [optional] 
 **billingAnchor** | **String** | BillingAnchor is the reference point that aligns future billing cycle dates. It sets the day of week for week intervals, the day of month for month and year intervals, and the month of year for year intervals. The timestamp is in UTC format. | [optional] 
 **billingCadence** | [**TypesBillingCadence**](TypesBillingCadence.md) |  | [optional] 
+**billingCycle** | [**TypesBillingCycle**](TypesBillingCycle.md) |  | [optional] 
 **billingPeriod** | [**TypesBillingPeriod**](TypesBillingPeriod.md) |  | [optional] 
 **billingPeriodCount** | **Number** | BillingPeriodCount is the total number units of the billing period. | [optional] 
 **cancelAt** | **String** | CancelAt is the date the subscription will be canceled | [optional] 

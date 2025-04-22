@@ -61,7 +61,6 @@ export default class SubscriptionsApi {
      * @param {String} [customerId] CustomerID filters by customer ID
      * @param {String} [endTime] 
      * @param {String} [expand] 
-     * @param {Boolean} [includeCanceled] IncludeCanceled includes canceled subscriptions if true
      * @param {Number} [limit] 
      * @param {Number} [offset] 
      * @param {module:model/String} [order] 
@@ -87,7 +86,6 @@ export default class SubscriptionsApi {
         'customer_id': opts['customerId'],
         'end_time': opts['endTime'],
         'expand': opts['expand'],
-        'include_canceled': opts['includeCanceled'],
         'limit': opts['limit'],
         'offset': opts['offset'],
         'order': opts['order'],

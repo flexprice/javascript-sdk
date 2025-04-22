@@ -86,6 +86,9 @@ class DtoCreateInvoiceRequest {
       if (data.hasOwnProperty('idempotency_key')) {
         obj['idempotency_key'] = ApiClient.convertToType(data['idempotency_key'], 'String');
       }
+      if (data.hasOwnProperty('invoice_number')) {
+        obj['invoice_number'] = ApiClient.convertToType(data['invoice_number'], 'String');
+      }
       if (data.hasOwnProperty('invoice_status')) {
         obj['invoice_status'] = TypesInvoiceStatus.constructFromObject(data['invoice_status']);
       }
@@ -155,6 +158,10 @@ class DtoCreateInvoiceRequest {
     // ensure the json data is a string
     if (data['idempotency_key'] && !(typeof data['idempotency_key'] === 'string' || data['idempotency_key'] instanceof String)) {
       throw new Error("Expected the field `idempotency_key` to be a primitive type in the JSON string but got " + data['idempotency_key']);
+    }
+    // ensure the json data is a string
+    if (data['invoice_number'] && !(typeof data['invoice_number'] === 'string' || data['invoice_number'] instanceof String)) {
+      throw new Error("Expected the field `invoice_number` to be a primitive type in the JSON string but got " + data['invoice_number']);
     }
     if (data['line_items']) {
       // data not null
@@ -234,6 +241,11 @@ DtoCreateInvoiceRequest.prototype['environment_id'] = undefined;
  * @member {String} idempotency_key
  */
 DtoCreateInvoiceRequest.prototype['idempotency_key'] = undefined;
+
+/**
+ * @member {String} invoice_number
+ */
+DtoCreateInvoiceRequest.prototype['invoice_number'] = undefined;
 
 /**
  * @member {module:model/TypesInvoiceStatus} invoice_status

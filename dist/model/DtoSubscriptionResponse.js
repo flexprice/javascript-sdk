@@ -17,6 +17,7 @@ import DtoPlanResponse from './DtoPlanResponse';
 import SubscriptionSubscriptionLineItem from './SubscriptionSubscriptionLineItem';
 import SubscriptionSubscriptionPause from './SubscriptionSubscriptionPause';
 import TypesBillingCadence from './TypesBillingCadence';
+import TypesBillingCycle from './TypesBillingCycle';
 import TypesBillingPeriod from './TypesBillingPeriod';
 import TypesPauseStatus from './TypesPauseStatus';
 import TypesStatus from './TypesStatus';
@@ -61,6 +62,9 @@ class DtoSubscriptionResponse {
       }
       if (data.hasOwnProperty('billing_cadence')) {
         obj['billing_cadence'] = TypesBillingCadence.constructFromObject(data['billing_cadence']);
+      }
+      if (data.hasOwnProperty('billing_cycle')) {
+        obj['billing_cycle'] = TypesBillingCycle.constructFromObject(data['billing_cycle']);
       }
       if (data.hasOwnProperty('billing_period')) {
         obj['billing_period'] = TypesBillingPeriod.constructFromObject(data['billing_period']);
@@ -305,6 +309,11 @@ DtoSubscriptionResponse.prototype['billing_anchor'] = undefined;
  * @member {module:model/TypesBillingCadence} billing_cadence
  */
 DtoSubscriptionResponse.prototype['billing_cadence'] = undefined;
+
+/**
+ * @member {module:model/TypesBillingCycle} billing_cycle
+ */
+DtoSubscriptionResponse.prototype['billing_cycle'] = undefined;
 
 /**
  * @member {module:model/TypesBillingPeriod} billing_period

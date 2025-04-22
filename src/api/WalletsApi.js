@@ -84,6 +84,51 @@ export default class WalletsApi {
     }
 
     /**
+     * Callback function to receive the result of the customersWalletsGet operation.
+     * @callback module:api/WalletsApi~customersWalletsGetCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/DtoWalletResponse>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get Customer Wallets
+     * Get all wallets for a customer by lookup key or id
+     * @param {Object} opts Optional parameters
+     * @param {String} [id] 
+     * @param {Boolean} [includeRealTimeBalance = false)] 
+     * @param {String} [lookupKey] 
+     * @param {module:api/WalletsApi~customersWalletsGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/DtoWalletResponse>}
+     */
+    customersWalletsGet(opts, callback) {
+      opts = opts || {};
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'id': opts['id'],
+        'include_real_time_balance': opts['includeRealTimeBalance'],
+        'lookup_key': opts['lookupKey']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['ApiKeyAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [DtoWalletResponse];
+      return this.apiClient.callApi(
+        '/customers/wallets', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the walletsIdBalanceRealTimeGet operation.
      * @callback module:api/WalletsApi~walletsIdBalanceRealTimeGetCallback
      * @param {String} error Error message, if any.
