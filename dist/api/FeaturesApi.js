@@ -17,6 +17,7 @@ import DtoFeatureResponse from '../model/DtoFeatureResponse';
 import DtoListFeaturesResponse from '../model/DtoListFeaturesResponse';
 import DtoUpdateFeatureRequest from '../model/DtoUpdateFeatureRequest';
 import ErrorsErrorResponse from '../model/ErrorsErrorResponse';
+import TypesFeatureFilter from '../model/TypesFeatureFilter';
 
 /**
 * Features service.
@@ -53,9 +54,9 @@ export default class FeaturesApi {
    * @param {Number} [limit] 
    * @param {String} [lookupKey] 
    * @param {Array.<String>} [meterIds] 
+   * @param {String} [nameContains] 
    * @param {Number} [offset] 
    * @param {module:model/String} [order] 
-   * @param {String} [sort] 
    * @param {String} [startTime] 
    * @param {module:model/String} [status] 
    * @param {module:api/FeaturesApi~featuresGetCallback} callback The callback function, accepting three arguments: error, data, response
@@ -72,9 +73,9 @@ export default class FeaturesApi {
       'limit': opts['limit'],
       'lookup_key': opts['lookupKey'],
       'meter_ids': this.apiClient.buildCollectionParam(opts['meterIds'], 'csv'),
+      'name_contains': opts['nameContains'],
       'offset': opts['offset'],
       'order': opts['order'],
-      'sort': opts['sort'],
       'start_time': opts['startTime'],
       'status': opts['status']
     };
@@ -226,5 +227,37 @@ export default class FeaturesApi {
     let accepts = ['application/json'];
     let returnType = DtoFeatureResponse;
     return this.apiClient.callApi('/features', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
+  }
+
+  /**
+   * Callback function to receive the result of the featuresSearchPost operation.
+   * @callback module:api/FeaturesApi~featuresSearchPostCallback
+   * @param {String} error Error message, if any.
+   * @param {module:model/DtoListFeaturesResponse} data The data returned by the service call.
+   * @param {String} response The complete HTTP response.
+   */
+
+  /**
+   * List features by filter
+   * List features by filter
+   * @param {module:model/TypesFeatureFilter} filter Filter
+   * @param {module:api/FeaturesApi~featuresSearchPostCallback} callback The callback function, accepting three arguments: error, data, response
+   * data is of type: {@link module:model/DtoListFeaturesResponse}
+   */
+  featuresSearchPost(filter, callback) {
+    let postBody = filter;
+    // verify the required parameter 'filter' is set
+    if (filter === undefined || filter === null) {
+      throw new Error("Missing the required parameter 'filter' when calling featuresSearchPost");
+    }
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+    let authNames = ['ApiKeyAuth'];
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
+    let returnType = DtoListFeaturesResponse;
+    return this.apiClient.callApi('/features/search', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
   }
 }

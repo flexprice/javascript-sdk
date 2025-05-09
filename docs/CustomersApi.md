@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**customersIdUsageGet**](CustomersApi.md#customersIdUsageGet) | **GET** /customers/{id}/usage | Get customer usage summary
 [**customersLookupLookupKeyGet**](CustomersApi.md#customersLookupLookupKeyGet) | **GET** /customers/lookup/{lookup_key} | Get a customer by lookup key
 [**customersPost**](CustomersApi.md#customersPost) | **POST** /customers | Create a customer
+[**customersSearchPost**](CustomersApi.md#customersSearchPost) | **POST** /customers/search | List customers by filter
 
 
 
@@ -44,7 +45,6 @@ let opts = {
   'limit': 56, // Number | 
   'offset': 56, // Number | 
   'order': "order_example", // String | 
-  'sort': "sort_example", // String | 
   'startTime': "startTime_example", // String | 
   'status': "status_example" // String | 
 };
@@ -70,7 +70,6 @@ Name | Type | Description  | Notes
  **limit** | **Number**|  | [optional] 
  **offset** | **Number**|  | [optional] 
  **order** | **String**|  | [optional] 
- **sort** | **String**|  | [optional] 
  **startTime** | **String**|  | [optional] 
  **status** | **String**|  | [optional] 
 
@@ -448,6 +447,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DtoCustomerResponse**](DtoCustomerResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## customersSearchPost
+
+> DtoListCustomersResponse customersSearchPost(filter)
+
+List customers by filter
+
+List customers by filter
+
+### Example
+
+```javascript
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FlexpriceSdk.CustomersApi();
+let filter = new FlexpriceSdk.TypesCustomerFilter(); // TypesCustomerFilter | Filter
+apiInstance.customersSearchPost(filter, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | [**TypesCustomerFilter**](TypesCustomerFilter.md)| Filter | 
+
+### Return type
+
+[**DtoListCustomersResponse**](DtoListCustomersResponse.md)
 
 ### Authorization
 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**featuresIdGet**](FeaturesApi.md#featuresIdGet) | **GET** /features/{id} | Get a feature by ID
 [**featuresIdPut**](FeaturesApi.md#featuresIdPut) | **PUT** /features/{id} | Update a feature
 [**featuresPost**](FeaturesApi.md#featuresPost) | **POST** /features | Create a new feature
+[**featuresSearchPost**](FeaturesApi.md#featuresSearchPost) | **POST** /features/search | List features by filter
 
 
 
@@ -39,9 +40,9 @@ let opts = {
   'limit': 56, // Number | 
   'lookupKey': "lookupKey_example", // String | 
   'meterIds': ["null"], // [String] | 
+  'nameContains': "nameContains_example", // String | 
   'offset': 56, // Number | 
   'order': "order_example", // String | 
-  'sort': "sort_example", // String | 
   'startTime': "startTime_example", // String | 
   'status': "status_example" // String | 
 };
@@ -65,9 +66,9 @@ Name | Type | Description  | Notes
  **limit** | **Number**|  | [optional] 
  **lookupKey** | **String**|  | [optional] 
  **meterIds** | [**[String]**](String.md)|  | [optional] 
+ **nameContains** | **String**|  | [optional] 
  **offset** | **Number**|  | [optional] 
  **order** | **String**|  | [optional] 
- **sort** | **String**|  | [optional] 
  **startTime** | **String**|  | [optional] 
  **status** | **String**|  | [optional] 
 
@@ -280,6 +281,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DtoFeatureResponse**](DtoFeatureResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## featuresSearchPost
+
+> DtoListFeaturesResponse featuresSearchPost(filter)
+
+List features by filter
+
+List features by filter
+
+### Example
+
+```javascript
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FlexpriceSdk.FeaturesApi();
+let filter = new FlexpriceSdk.TypesFeatureFilter(); // TypesFeatureFilter | Filter
+apiInstance.featuresSearchPost(filter, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | [**TypesFeatureFilter**](TypesFeatureFilter.md)| Filter | 
+
+### Return type
+
+[**DtoListFeaturesResponse**](DtoListFeaturesResponse.md)
 
 ### Authorization
 

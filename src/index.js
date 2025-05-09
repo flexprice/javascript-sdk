@@ -53,6 +53,8 @@ import DtoFeatureUsageSummary from './model/DtoFeatureUsageSummary';
 import DtoGetEventsRequest from './model/DtoGetEventsRequest';
 import DtoGetEventsResponse from './model/DtoGetEventsResponse';
 import DtoGetPreviewInvoiceRequest from './model/DtoGetPreviewInvoiceRequest';
+import DtoGetUsageAnalyticsRequest from './model/DtoGetUsageAnalyticsRequest';
+import DtoGetUsageAnalyticsResponse from './model/DtoGetUsageAnalyticsResponse';
 import DtoGetUsageByMeterRequest from './model/DtoGetUsageByMeterRequest';
 import DtoGetUsageBySubscriptionRequest from './model/DtoGetUsageBySubscriptionRequest';
 import DtoGetUsageBySubscriptionResponse from './model/DtoGetUsageBySubscriptionResponse';
@@ -106,6 +108,8 @@ import DtoUpdatePriceRequest from './model/DtoUpdatePriceRequest';
 import DtoUpdateTaskStatusRequest from './model/DtoUpdateTaskStatusRequest';
 import DtoUpdateTenantRequest from './model/DtoUpdateTenantRequest';
 import DtoUpdateWalletRequest from './model/DtoUpdateWalletRequest';
+import DtoUsageAnalyticItem from './model/DtoUsageAnalyticItem';
+import DtoUsageAnalyticPoint from './model/DtoUsageAnalyticPoint';
 import DtoUsageResult from './model/DtoUsageResult';
 import DtoUserResponse from './model/DtoUserResponse';
 import DtoWalletBalanceResponse from './model/DtoWalletBalanceResponse';
@@ -113,6 +117,7 @@ import DtoWalletResponse from './model/DtoWalletResponse';
 import DtoWalletTransactionResponse from './model/DtoWalletTransactionResponse';
 import ErrorsErrorDetail from './model/ErrorsErrorDetail';
 import ErrorsErrorResponse from './model/ErrorsErrorResponse';
+import GithubComFlexpriceFlexpriceInternalTypesValue from './model/GithubComFlexpriceFlexpriceInternalTypesValue';
 import MeterAggregation from './model/MeterAggregation';
 import MeterFilter from './model/MeterFilter';
 import PriceJSONBTransformQuantity from './model/PriceJSONBTransformQuantity';
@@ -128,9 +133,14 @@ import TypesBillingCycle from './model/TypesBillingCycle';
 import TypesBillingModel from './model/TypesBillingModel';
 import TypesBillingPeriod from './model/TypesBillingPeriod';
 import TypesBillingTier from './model/TypesBillingTier';
+import TypesCustomerFilter from './model/TypesCustomerFilter';
+import TypesDataType from './model/TypesDataType';
 import TypesEntityType from './model/TypesEntityType';
+import TypesFeatureFilter from './model/TypesFeatureFilter';
 import TypesFeatureType from './model/TypesFeatureType';
 import TypesFileType from './model/TypesFileType';
+import TypesFilterCondition from './model/TypesFilterCondition';
+import TypesFilterOperatorType from './model/TypesFilterOperatorType';
 import TypesInvoiceBillingReason from './model/TypesInvoiceBillingReason';
 import TypesInvoiceCadence from './model/TypesInvoiceCadence';
 import TypesInvoiceStatus from './model/TypesInvoiceStatus';
@@ -146,6 +156,8 @@ import TypesResetUsage from './model/TypesResetUsage';
 import TypesResumeMode from './model/TypesResumeMode';
 import TypesSecretProvider from './model/TypesSecretProvider';
 import TypesSecretType from './model/TypesSecretType';
+import TypesSortCondition from './model/TypesSortCondition';
+import TypesSortDirection from './model/TypesSortDirection';
 import TypesStatus from './model/TypesStatus';
 import TypesSubscriptionStatus from './model/TypesSubscriptionStatus';
 import TypesTaskStatus from './model/TypesTaskStatus';
@@ -455,6 +467,18 @@ export {
      * @property {module:model/DtoGetPreviewInvoiceRequest}
      */
     DtoGetPreviewInvoiceRequest,
+
+    /**
+     * The DtoGetUsageAnalyticsRequest model constructor.
+     * @property {module:model/DtoGetUsageAnalyticsRequest}
+     */
+    DtoGetUsageAnalyticsRequest,
+
+    /**
+     * The DtoGetUsageAnalyticsResponse model constructor.
+     * @property {module:model/DtoGetUsageAnalyticsResponse}
+     */
+    DtoGetUsageAnalyticsResponse,
 
     /**
      * The DtoGetUsageByMeterRequest model constructor.
@@ -775,6 +799,18 @@ export {
     DtoUpdateWalletRequest,
 
     /**
+     * The DtoUsageAnalyticItem model constructor.
+     * @property {module:model/DtoUsageAnalyticItem}
+     */
+    DtoUsageAnalyticItem,
+
+    /**
+     * The DtoUsageAnalyticPoint model constructor.
+     * @property {module:model/DtoUsageAnalyticPoint}
+     */
+    DtoUsageAnalyticPoint,
+
+    /**
      * The DtoUsageResult model constructor.
      * @property {module:model/DtoUsageResult}
      */
@@ -815,6 +851,12 @@ export {
      * @property {module:model/ErrorsErrorResponse}
      */
     ErrorsErrorResponse,
+
+    /**
+     * The GithubComFlexpriceFlexpriceInternalTypesValue model constructor.
+     * @property {module:model/GithubComFlexpriceFlexpriceInternalTypesValue}
+     */
+    GithubComFlexpriceFlexpriceInternalTypesValue,
 
     /**
      * The MeterAggregation model constructor.
@@ -907,10 +949,28 @@ export {
     TypesBillingTier,
 
     /**
+     * The TypesCustomerFilter model constructor.
+     * @property {module:model/TypesCustomerFilter}
+     */
+    TypesCustomerFilter,
+
+    /**
+     * The TypesDataType model constructor.
+     * @property {module:model/TypesDataType}
+     */
+    TypesDataType,
+
+    /**
      * The TypesEntityType model constructor.
      * @property {module:model/TypesEntityType}
      */
     TypesEntityType,
+
+    /**
+     * The TypesFeatureFilter model constructor.
+     * @property {module:model/TypesFeatureFilter}
+     */
+    TypesFeatureFilter,
 
     /**
      * The TypesFeatureType model constructor.
@@ -923,6 +983,18 @@ export {
      * @property {module:model/TypesFileType}
      */
     TypesFileType,
+
+    /**
+     * The TypesFilterCondition model constructor.
+     * @property {module:model/TypesFilterCondition}
+     */
+    TypesFilterCondition,
+
+    /**
+     * The TypesFilterOperatorType model constructor.
+     * @property {module:model/TypesFilterOperatorType}
+     */
+    TypesFilterOperatorType,
 
     /**
      * The TypesInvoiceBillingReason model constructor.
@@ -1013,6 +1085,18 @@ export {
      * @property {module:model/TypesSecretType}
      */
     TypesSecretType,
+
+    /**
+     * The TypesSortCondition model constructor.
+     * @property {module:model/TypesSortCondition}
+     */
+    TypesSortCondition,
+
+    /**
+     * The TypesSortDirection model constructor.
+     * @property {module:model/TypesSortDirection}
+     */
+    TypesSortDirection,
 
     /**
      * The TypesStatus model constructor.

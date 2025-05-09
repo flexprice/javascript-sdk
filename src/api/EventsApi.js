@@ -16,6 +16,8 @@ import ApiClient from "../ApiClient";
 import DtoBulkIngestEventRequest from '../model/DtoBulkIngestEventRequest';
 import DtoGetEventsRequest from '../model/DtoGetEventsRequest';
 import DtoGetEventsResponse from '../model/DtoGetEventsResponse';
+import DtoGetUsageAnalyticsRequest from '../model/DtoGetUsageAnalyticsRequest';
+import DtoGetUsageAnalyticsResponse from '../model/DtoGetUsageAnalyticsResponse';
 import DtoGetUsageByMeterRequest from '../model/DtoGetUsageByMeterRequest';
 import DtoGetUsageRequest from '../model/DtoGetUsageRequest';
 import DtoGetUsageResponse from '../model/DtoGetUsageResponse';
@@ -40,6 +42,48 @@ export default class EventsApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+
+    /**
+     * Callback function to receive the result of the eventsAnalyticsPost operation.
+     * @callback module:api/EventsApi~eventsAnalyticsPostCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/DtoGetUsageAnalyticsResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get usage analytics
+     * Retrieve comprehensive usage analytics with filtering, grouping, and time-series data
+     * @param {module:model/DtoGetUsageAnalyticsRequest} request Request body
+     * @param {module:api/EventsApi~eventsAnalyticsPostCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/DtoGetUsageAnalyticsResponse}
+     */
+    eventsAnalyticsPost(request, callback) {
+      let postBody = request;
+      // verify the required parameter 'request' is set
+      if (request === undefined || request === null) {
+        throw new Error("Missing the required parameter 'request' when calling eventsAnalyticsPost");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['ApiKeyAuth'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = DtoGetUsageAnalyticsResponse;
+      return this.apiClient.callApi(
+        '/events/analytics', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
 
     /**
      * Callback function to receive the result of the eventsBulkPost operation.

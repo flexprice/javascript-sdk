@@ -4,12 +4,64 @@ All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**eventsAnalyticsPost**](EventsApi.md#eventsAnalyticsPost) | **POST** /events/analytics | Get usage analytics
 [**eventsBulkPost**](EventsApi.md#eventsBulkPost) | **POST** /events/bulk | Bulk Ingest events
 [**eventsPost**](EventsApi.md#eventsPost) | **POST** /events | Ingest event
 [**eventsQueryPost**](EventsApi.md#eventsQueryPost) | **POST** /events/query | List raw events
 [**eventsUsageMeterPost**](EventsApi.md#eventsUsageMeterPost) | **POST** /events/usage/meter | Get usage by meter
 [**eventsUsagePost**](EventsApi.md#eventsUsagePost) | **POST** /events/usage | Get usage statistics
 
+
+
+## eventsAnalyticsPost
+
+> DtoGetUsageAnalyticsResponse eventsAnalyticsPost(request)
+
+Get usage analytics
+
+Retrieve comprehensive usage analytics with filtering, grouping, and time-series data
+
+### Example
+
+```javascript
+import FlexpriceSdk from '@flexprice/sdk';
+let defaultClient = FlexpriceSdk.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+let apiInstance = new FlexpriceSdk.EventsApi();
+let request = new FlexpriceSdk.DtoGetUsageAnalyticsRequest(); // DtoGetUsageAnalyticsRequest | Request body
+apiInstance.eventsAnalyticsPost(request, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**DtoGetUsageAnalyticsRequest**](DtoGetUsageAnalyticsRequest.md)| Request body | 
+
+### Return type
+
+[**DtoGetUsageAnalyticsResponse**](DtoGetUsageAnalyticsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## eventsBulkPost

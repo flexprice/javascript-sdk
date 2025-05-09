@@ -19,6 +19,7 @@ import DtoCustomerUsageSummaryResponse from '../model/DtoCustomerUsageSummaryRes
 import DtoListCustomersResponse from '../model/DtoListCustomersResponse';
 import DtoUpdateCustomerRequest from '../model/DtoUpdateCustomerRequest';
 import ErrorsErrorResponse from '../model/ErrorsErrorResponse';
+import TypesCustomerFilter from '../model/TypesCustomerFilter';
 
 /**
 * Customers service.
@@ -57,7 +58,6 @@ export default class CustomersApi {
    * @param {Number} [limit] 
    * @param {Number} [offset] 
    * @param {module:model/String} [order] 
-   * @param {String} [sort] 
    * @param {String} [startTime] 
    * @param {module:model/String} [status] 
    * @param {module:api/CustomersApi~customersGetCallback} callback The callback function, accepting three arguments: error, data, response
@@ -76,7 +76,6 @@ export default class CustomersApi {
       'limit': opts['limit'],
       'offset': opts['offset'],
       'order': opts['order'],
-      'sort': opts['sort'],
       'start_time': opts['startTime'],
       'status': opts['status']
     };
@@ -341,5 +340,37 @@ export default class CustomersApi {
     let accepts = ['application/json'];
     let returnType = DtoCustomerResponse;
     return this.apiClient.callApi('/customers', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
+  }
+
+  /**
+   * Callback function to receive the result of the customersSearchPost operation.
+   * @callback module:api/CustomersApi~customersSearchPostCallback
+   * @param {String} error Error message, if any.
+   * @param {module:model/DtoListCustomersResponse} data The data returned by the service call.
+   * @param {String} response The complete HTTP response.
+   */
+
+  /**
+   * List customers by filter
+   * List customers by filter
+   * @param {module:model/TypesCustomerFilter} filter Filter
+   * @param {module:api/CustomersApi~customersSearchPostCallback} callback The callback function, accepting three arguments: error, data, response
+   * data is of type: {@link module:model/DtoListCustomersResponse}
+   */
+  customersSearchPost(filter, callback) {
+    let postBody = filter;
+    // verify the required parameter 'filter' is set
+    if (filter === undefined || filter === null) {
+      throw new Error("Missing the required parameter 'filter' when calling customersSearchPost");
+    }
+    let pathParams = {};
+    let queryParams = {};
+    let headerParams = {};
+    let formParams = {};
+    let authNames = ['ApiKeyAuth'];
+    let contentTypes = ['application/json'];
+    let accepts = ['application/json'];
+    let returnType = DtoListCustomersResponse;
+    return this.apiClient.callApi('/customers/search', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
   }
 }
