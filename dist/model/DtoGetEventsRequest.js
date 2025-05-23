@@ -65,6 +65,9 @@ class DtoGetEventsRequest {
       if (data.hasOwnProperty('offset')) {
         obj['offset'] = ApiClient.convertToType(data['offset'], 'Number');
       }
+      if (data.hasOwnProperty('order')) {
+        obj['order'] = ApiClient.convertToType(data['order'], 'String');
+      }
       if (data.hasOwnProperty('page_size')) {
         obj['page_size'] = ApiClient.convertToType(data['page_size'], 'Number');
       }
@@ -72,6 +75,9 @@ class DtoGetEventsRequest {
         obj['property_filters'] = ApiClient.convertToType(data['property_filters'], {
           'String': ['String']
         });
+      }
+      if (data.hasOwnProperty('sort')) {
+        obj['sort'] = ApiClient.convertToType(data['sort'], 'String');
       }
       if (data.hasOwnProperty('source')) {
         obj['source'] = ApiClient.convertToType(data['source'], 'String');
@@ -112,6 +118,14 @@ class DtoGetEventsRequest {
     // ensure the json data is a string
     if (data['iter_last_key'] && !(typeof data['iter_last_key'] === 'string' || data['iter_last_key'] instanceof String)) {
       throw new Error("Expected the field `iter_last_key` to be a primitive type in the JSON string but got " + data['iter_last_key']);
+    }
+    // ensure the json data is a string
+    if (data['order'] && !(typeof data['order'] === 'string' || data['order'] instanceof String)) {
+      throw new Error("Expected the field `order` to be a primitive type in the JSON string but got " + data['order']);
+    }
+    // ensure the json data is a string
+    if (data['sort'] && !(typeof data['sort'] === 'string' || data['sort'] instanceof String)) {
+      throw new Error("Expected the field `sort` to be a primitive type in the JSON string but got " + data['sort']);
     }
     // ensure the json data is a string
     if (data['source'] && !(typeof data['source'] === 'string' || data['source'] instanceof String)) {
@@ -168,6 +182,12 @@ DtoGetEventsRequest.prototype['iter_last_key'] = undefined;
 DtoGetEventsRequest.prototype['offset'] = undefined;
 
 /**
+ * Order by condition. Allowed values (case sensitive): asc, desc (default: desc)
+ * @member {String} order
+ */
+DtoGetEventsRequest.prototype['order'] = undefined;
+
+/**
  * Page size to fetch the events and is set to 50 by default
  * @member {Number} page_size
  */
@@ -178,6 +198,12 @@ DtoGetEventsRequest.prototype['page_size'] = undefined;
  * @member {Object.<String, Array.<String>>} property_filters
  */
 DtoGetEventsRequest.prototype['property_filters'] = undefined;
+
+/**
+ * Sort by the field. Allowed values (case sensitive): timestamp, event_name (default: timestamp)
+ * @member {String} sort
+ */
+DtoGetEventsRequest.prototype['sort'] = undefined;
 
 /**
  * Source to filter the events by the source

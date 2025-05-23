@@ -11,8 +11,10 @@ Name | Type | Description | Notes
 **iterFirstKey** | **String** | First key to iterate over the events | [optional] 
 **iterLastKey** | **String** | Last key to iterate over the events | [optional] 
 **offset** | **Number** | Offset to fetch the events and is set to 0 by default | [optional] 
+**order** | **String** | Order by condition. Allowed values (case sensitive): asc, desc (default: desc) | [optional] 
 **pageSize** | **Number** | Page size to fetch the events and is set to 50 by default | [optional] 
 **propertyFilters** | **{String: [String]}** | Property filters to filter the events by the keys in &#x60;properties&#x60; field of the event | [optional] 
+**sort** | **String** | Sort by the field. Allowed values (case sensitive): timestamp, event_name (default: timestamp) | [optional] 
 **source** | **String** | Source to filter the events by the source | [optional] 
 **startTime** | **String** | Start time of the events to be fetched in ISO 8601 format Defaults to last 7 days from now if not provided | [optional] 
 

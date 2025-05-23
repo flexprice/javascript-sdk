@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import TypesWindowSize from './TypesWindowSize';
 
 /**
  * The DtoGetUsageAnalyticsRequest model module.
@@ -66,7 +67,7 @@ class DtoGetUsageAnalyticsRequest {
         obj['start_time'] = ApiClient.convertToType(data['start_time'], 'String');
       }
       if (data.hasOwnProperty('window_size')) {
-        obj['window_size'] = ApiClient.convertToType(data['window_size'], 'String');
+        obj['window_size'] = TypesWindowSize.constructFromObject(data['window_size']);
       }
     }
     return obj;
@@ -108,10 +109,6 @@ class DtoGetUsageAnalyticsRequest {
     if (data['start_time'] && !(typeof data['start_time'] === 'string' || data['start_time'] instanceof String)) {
       throw new Error("Expected the field `start_time` to be a primitive type in the JSON string but got " + data['start_time']);
     }
-    // ensure the json data is a string
-    if (data['window_size'] && !(typeof data['window_size'] === 'string' || data['window_size'] instanceof String)) {
-      throw new Error("Expected the field `window_size` to be a primitive type in the JSON string but got " + data['window_size']);
-    }
     return true;
   }
 }
@@ -149,8 +146,7 @@ DtoGetUsageAnalyticsRequest.prototype['sources'] = undefined;
 DtoGetUsageAnalyticsRequest.prototype['start_time'] = undefined;
 
 /**
- * e.g., \"MINUTE\", \"HOUR\", \"DAY\"
- * @member {String} window_size
+ * @member {module:model/TypesWindowSize} window_size
  */
 DtoGetUsageAnalyticsRequest.prototype['window_size'] = undefined;
 export default DtoGetUsageAnalyticsRequest;

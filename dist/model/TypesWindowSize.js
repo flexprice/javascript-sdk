@@ -25,16 +25,52 @@ export default class TypesWindowSize {
   "WindowSizeMinute" = "MINUTE";
 
   /**
+   * value: "15MIN"
+   * @const
+   */
+  "WindowSize15Min" = "15MIN";
+
+  /**
+   * value: "30MIN"
+   * @const
+   */
+  "WindowSize30Min" = "30MIN";
+
+  /**
    * value: "HOUR"
    * @const
    */
   "WindowSizeHour" = "HOUR";
 
   /**
+   * value: "3HOUR"
+   * @const
+   */
+  "WindowSize3Hour" = "3HOUR";
+
+  /**
+   * value: "6HOUR"
+   * @const
+   */
+  "WindowSize6Hour" = "6HOUR";
+
+  /**
+   * value: "12HOUR"
+   * @const
+   */
+  "WindowSize12Hour" = "12HOUR";
+
+  /**
    * value: "DAY"
    * @const
    */
   "WindowSizeDay" = "DAY";
+
+  /**
+   * value: "WEEK"
+   * @const
+   */
+  "WindowSizeWeek" = "WEEK";
 
   /**
   * Returns a <code>TypesWindowSize</code> enum value from a Javascript object name.
