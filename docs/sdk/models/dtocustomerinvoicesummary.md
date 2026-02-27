@@ -1,0 +1,24 @@
+# DtoCustomerInvoiceSummary
+
+## Example Usage
+
+```typescript
+import { DtoCustomerInvoiceSummary } from "@flexprice/sdk/sdk/models";
+
+let value: DtoCustomerInvoiceSummary = {};
+```
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `currency`                                                                                 | *string*                                                                                   | :heavy_minus_sign:                                                                         | currency is the three-letter ISO currency code for this summary                            |
+| `customerId`                                                                               | *string*                                                                                   | :heavy_minus_sign:                                                                         | customer_id is the unique identifier of the customer                                       |
+| `overdueInvoiceCount`                                                                      | *number*                                                                                   | :heavy_minus_sign:                                                                         | overdue_invoice_count is the number of overdue invoices for this customer in this currency |
+| `totalInvoiceCount`                                                                        | *number*                                                                                   | :heavy_minus_sign:                                                                         | total_invoice_count is the total number of invoices for this customer in this currency     |
+| `totalOverdueAmount`                                                                       | *string*                                                                                   | :heavy_minus_sign:                                                                         | total_overdue_amount is the total amount of overdue invoices in this currency              |
+| `totalRevenueAmount`                                                                       | *string*                                                                                   | :heavy_minus_sign:                                                                         | total_revenue_amount is the total revenue generated from this customer in this currency    |
+| `totalUnpaidAmount`                                                                        | *string*                                                                                   | :heavy_minus_sign:                                                                         | total_unpaid_amount is the total amount of unpaid invoices in this currency                |
+| `unpaidFixedCharges`                                                                       | *string*                                                                                   | :heavy_minus_sign:                                                                         | unpaid_fixed_charges is the total amount of unpaid fixed charges in this currency          |
+| `unpaidInvoiceCount`                                                                       | *number*                                                                                   | :heavy_minus_sign:                                                                         | unpaid_invoice_count is the number of unpaid invoices for this customer in this currency   |
+| `unpaidUsageCharges`                                                                       | *string*                                                                                   | :heavy_minus_sign:                                                                         | unpaid_usage_charges is the total amount of unpaid usage-based charges in this currency    |

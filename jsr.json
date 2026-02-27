@@ -1,0 +1,25 @@
+
+
+{
+  "name": "@flexprice/sdk",
+  "version": "2.0.0",
+  "exports": {
+    ".": "./src/index.ts",    
+    "./sdk/models": "./src/sdk/models/index.ts",
+    "./lib/config": "./src/lib/config.ts",
+    "./lib/http": "./src/lib/http.ts",
+    "./lib/retries": "./src/lib/retries.ts",
+    "./lib/sdks": "./src/lib/sdks.ts",
+    "./types": "./src/types/index.ts"
+  },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "RUNTIMES.md",
+      "USAGE.md",
+      "jsr.json",
+      "src/**/*.ts"
+    ]
+  }
+}

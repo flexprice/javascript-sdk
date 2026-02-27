@@ -1,0 +1,21 @@
+# DtoResumeSubscriptionRequest
+
+Request object for resuming a paused subscription
+
+## Example Usage
+
+```typescript
+import { DtoResumeSubscriptionRequest } from "@flexprice/sdk/sdk/models";
+
+let value: DtoResumeSubscriptionRequest = {
+  resumeMode: "auto",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                            | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dryRun`                                                                                                                                                                                         | *boolean*                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                               | Whether to perform a dry run<br/>@Description If true, validates the request and shows impact without actually resuming the subscription<br/>@Example false                                      |
+| `metadata`                                                                                                                                                                                       | Record<string, *string*>                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                               | Additional metadata as key-value pairs<br/>@Description Optional metadata for storing additional information about the resume operation<br/>@Example {"resumed_by": "admin", "reason": "issue_resolved"} |
+| `resumeMode`                                                                                                                                                                                     | [models.ResumeMode](../../sdk/models/resumemode.md)                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |
