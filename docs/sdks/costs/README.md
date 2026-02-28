@@ -45,7 +45,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsCreateCostsheet } from "@flexprice/sdk/funcs/costsCreateCostsheet.js";
+import { costsCreateCostsheet } from "@flexprice/sdk/funcs/costs-create-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -73,20 +73,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoCreateCostsheetRequest](../../sdk/models/dtocreatecostsheetrequest.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.DtoCreateCostsheetRequest](../../sdk/models/dto-create-costsheet-request.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.CreateCostsheetResponse](../../sdk/models/createcostsheetresponse.md)\>**
+**Promise\<[models.DtoCreateCostsheetResponse](../../sdk/models/dto-create-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 409                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## getActiveCostsheet
 
@@ -118,7 +120,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsGetActiveCostsheet } from "@flexprice/sdk/funcs/costsGetActiveCostsheet.js";
+import { costsGetActiveCostsheet } from "@flexprice/sdk/funcs/costs-get-active-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -150,13 +152,15 @@ run();
 
 ### Response
 
-**Promise\<[models.GetActiveCostsheetResponse](../../sdk/models/getactivecostsheetresponse.md)\>**
+**Promise\<[models.DtoCostsheetResponse](../../sdk/models/dto-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 404                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## getDetailedCostAnalytics
 
@@ -188,7 +192,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsGetDetailedCostAnalytics } from "@flexprice/sdk/funcs/costsGetDetailedCostAnalytics.js";
+import { costsGetDetailedCostAnalytics } from "@flexprice/sdk/funcs/costs-get-detailed-cost-analytics.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -214,20 +218,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetCostAnalyticsRequest](../../sdk/models/dtogetcostanalyticsrequest.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.DtoGetCostAnalyticsRequest](../../sdk/models/dto-get-cost-analytics-request.md)                                                                                        | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.GetDetailedCostAnalyticsResponse](../../sdk/models/getdetailedcostanalyticsresponse.md)\>**
+**Promise\<[models.DtoGetDetailedCostAnalyticsResponse](../../sdk/models/dto-get-detailed-cost-analytics-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## getDetailedCostAnalyticsV2
 
@@ -259,7 +265,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsGetDetailedCostAnalyticsV2 } from "@flexprice/sdk/funcs/costsGetDetailedCostAnalyticsV2.js";
+import { costsGetDetailedCostAnalyticsV2 } from "@flexprice/sdk/funcs/costs-get-detailed-cost-analytics-v2.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -285,20 +291,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetCostAnalyticsRequest](../../sdk/models/dtogetcostanalyticsrequest.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.DtoGetCostAnalyticsRequest](../../sdk/models/dto-get-cost-analytics-request.md)                                                                                        | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.GetDetailedCostAnalyticsV2Response](../../sdk/models/getdetailedcostanalyticsv2response.md)\>**
+**Promise\<[models.DtoGetDetailedCostAnalyticsResponse](../../sdk/models/dto-get-detailed-cost-analytics-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## queryCostsheet
 
@@ -330,7 +338,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsQueryCostsheet } from "@flexprice/sdk/funcs/costsQueryCostsheet.js";
+import { costsQueryCostsheet } from "@flexprice/sdk/funcs/costs-query-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -356,20 +364,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.CostsheetFilter](../../sdk/models/costsheetfilter.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.CostsheetFilter](../../sdk/models/costsheet-filter.md)                                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.QueryCostsheetResponse](../../sdk/models/querycostsheetresponse.md)\>**
+**Promise\<[models.DtoListCostsheetResponse](../../sdk/models/dto-list-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## getCostsheet
 
@@ -387,9 +397,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.costs.getCostsheet({
-    id: "<id>",
-  });
+  const result = await flexprice.costs.getCostsheet("<id>");
 
   console.log(result);
 }
@@ -403,7 +411,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsGetCostsheet } from "@flexprice/sdk/funcs/costsGetCostsheet.js";
+import { costsGetCostsheet } from "@flexprice/sdk/funcs/costs-get-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -413,9 +421,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await costsGetCostsheet(flexprice, {
-    id: "<id>",
-  });
+  const res = await costsGetCostsheet(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -431,20 +437,23 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.GetCostsheetRequest](../../sdk/models/getcostsheetrequest.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Costsheet ID                                                                                                                                                                   |
+| `expand`                                                                                                                                                                       | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Comma-separated list of fields to expand (e.g., 'prices')                                                                                                                      |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.GetCostsheetResponse](../../sdk/models/getcostsheetresponse.md)\>**
+**Promise\<[models.DtoGetCostsheetResponse](../../sdk/models/dto-get-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## updateCostsheet
 
@@ -462,10 +471,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.costs.updateCostsheet({
-    id: "<id>",
-    dtoUpdateCostsheetRequest: {},
-  });
+  const result = await flexprice.costs.updateCostsheet("<id>", {});
 
   console.log(result);
 }
@@ -479,7 +485,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsUpdateCostsheet } from "@flexprice/sdk/funcs/costsUpdateCostsheet.js";
+import { costsUpdateCostsheet } from "@flexprice/sdk/funcs/costs-update-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -489,10 +495,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await costsUpdateCostsheet(flexprice, {
-    id: "<id>",
-    dtoUpdateCostsheetRequest: {},
-  });
+  const res = await costsUpdateCostsheet(flexprice, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -508,20 +511,23 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.UpdateCostsheetRequest](../../sdk/models/updatecostsheetrequest.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Costsheet ID                                                                                                                                                                   |
+| `body`                                                                                                                                                                         | [models.DtoUpdateCostsheetRequest](../../sdk/models/dto-update-costsheet-request.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | Costsheet configuration                                                                                                                                                        |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.UpdateCostsheetResponse](../../sdk/models/updatecostsheetresponse.md)\>**
+**Promise\<[models.DtoUpdateCostsheetResponse](../../sdk/models/dto-update-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404, 409                    | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## deleteCostsheet
 
@@ -539,9 +545,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.costs.deleteCostsheet({
-    id: "<id>",
-  });
+  const result = await flexprice.costs.deleteCostsheet("<id>");
 
   console.log(result);
 }
@@ -555,7 +559,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsDeleteCostsheet } from "@flexprice/sdk/funcs/costsDeleteCostsheet.js";
+import { costsDeleteCostsheet } from "@flexprice/sdk/funcs/costs-delete-costsheet.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -565,9 +569,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await costsDeleteCostsheet(flexprice, {
-    id: "<id>",
-  });
+  const res = await costsDeleteCostsheet(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -583,17 +585,19 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DeleteCostsheetRequest](../../sdk/models/deletecostsheetrequest.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Costsheet ID                                                                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DeleteCostsheetResponse](../../sdk/models/deletecostsheetresponse.md)\>**
+**Promise\<[models.DtoDeleteCostsheetResponse](../../sdk/models/dto-delete-costsheet-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |

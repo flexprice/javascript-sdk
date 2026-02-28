@@ -42,7 +42,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { entityIntegrationMappingsCreateEntityIntegrationMapping } from "@flexprice/sdk/funcs/entityIntegrationMappingsCreateEntityIntegrationMapping.js";
+import { entityIntegrationMappingsCreateEntityIntegrationMapping } from "@flexprice/sdk/funcs/entity-integration-mappings-create-entity-integration-mapping.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -73,20 +73,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoCreateEntityIntegrationMappingRequest](../../sdk/models/dtocreateentityintegrationmappingrequest.md)                                                                | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.DtoCreateEntityIntegrationMappingRequest](../../sdk/models/dto-create-entity-integration-mapping-request.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.CreateEntityIntegrationMappingResponse](../../sdk/models/createentityintegrationmappingresponse.md)\>**
+**Promise\<[models.DtoEntityIntegrationMappingResponse](../../sdk/models/dto-entity-integration-mapping-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 401, 409                    | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## deleteEntityIntegrationMapping
 
@@ -104,11 +106,9 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.entityIntegrationMappings.deleteEntityIntegrationMapping({
-    id: "<id>",
-  });
+  await flexprice.entityIntegrationMappings.deleteEntityIntegrationMapping("<id>");
 
-  console.log(result);
+
 }
 
 run();
@@ -120,7 +120,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { entityIntegrationMappingsDeleteEntityIntegrationMapping } from "@flexprice/sdk/funcs/entityIntegrationMappingsDeleteEntityIntegrationMapping.js";
+import { entityIntegrationMappingsDeleteEntityIntegrationMapping } from "@flexprice/sdk/funcs/entity-integration-mappings-delete-entity-integration-mapping.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -130,12 +130,10 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await entityIntegrationMappingsDeleteEntityIntegrationMapping(flexprice, {
-    id: "<id>",
-  });
+  const res = await entityIntegrationMappingsDeleteEntityIntegrationMapping(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("entityIntegrationMappingsDeleteEntityIntegrationMapping failed:", res.error);
   }
@@ -148,17 +146,19 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DeleteEntityIntegrationMappingRequest](../../sdk/models/deleteentityintegrationmappingrequest.md)                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Entity integration mapping ID                                                                                                                                                  |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.ErrorsErrorResponse](../../sdk/models/errorserrorresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 401, 404                    | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |

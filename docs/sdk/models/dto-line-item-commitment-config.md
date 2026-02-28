@@ -1,0 +1,21 @@
+# DtoLineItemCommitmentConfig
+
+## Example Usage
+
+```typescript
+import { DtoLineItemCommitmentConfig } from "@flexprice/sdk/sdk/models";
+
+let value: DtoLineItemCommitmentConfig = {};
+```
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `commitmentAmount`                                                                                               | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | CommitmentAmount is the minimum amount committed for this line item                                              |
+| `commitmentDuration`                                                                                             | [models.BillingPeriod](../../sdk/models/billing-period.md)                                                       | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `commitmentQuantity`                                                                                             | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | CommitmentQuantity is the minimum quantity committed for this line item                                          |
+| `commitmentType`                                                                                                 | [models.CommitmentType](../../sdk/models/commitment-type.md)                                                     | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `enableTrueUp`                                                                                                   | *boolean*                                                                                                        | :heavy_minus_sign:                                                                                               | EnableTrueUp determines if true-up fee should be applied when usage is below commitment                          |
+| `isWindowCommitment`                                                                                             | *boolean*                                                                                                        | :heavy_minus_sign:                                                                                               | IsWindowCommitment determines if commitment is applied per window (e.g., per day) rather than per billing period |
+| `overageFactor`                                                                                                  | *number*                                                                                                         | :heavy_minus_sign:                                                                                               | OverageFactor is a multiplier applied to usage beyond the commitment                                             |

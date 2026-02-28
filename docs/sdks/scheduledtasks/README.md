@@ -42,7 +42,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksListScheduledTasks } from "@flexprice/sdk/funcs/scheduledTasksListScheduledTasks.js";
+import { scheduledTasksListScheduledTasks } from "@flexprice/sdk/funcs/scheduled-tasks-list-scheduled-tasks.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -68,20 +68,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.ListScheduledTasksRequest](../../sdk/models/listscheduledtasksrequest.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.ListScheduledTasksRequest](../../sdk/models/list-scheduled-tasks-request.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.ListScheduledTasksResponse](../../sdk/models/listscheduledtasksresponse.md)\>**
+**Promise\<[models.DtoListScheduledTasksResponse](../../sdk/models/dto-list-scheduled-tasks-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## createScheduledTask
 
@@ -118,7 +120,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksCreateScheduledTask } from "@flexprice/sdk/funcs/scheduledTasksCreateScheduledTask.js";
+import { scheduledTasksCreateScheduledTask } from "@flexprice/sdk/funcs/scheduled-tasks-create-scheduled-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -149,20 +151,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoCreateScheduledTaskRequest](../../sdk/models/dtocreatescheduledtaskrequest.md)                                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.DtoCreateScheduledTaskRequest](../../sdk/models/dto-create-scheduled-task-request.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.CreateScheduledTaskResponse](../../sdk/models/createscheduledtaskresponse.md)\>**
+**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## scheduleUpdateBillingPeriod
 
@@ -194,7 +198,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksScheduleUpdateBillingPeriod } from "@flexprice/sdk/funcs/scheduledTasksScheduleUpdateBillingPeriod.js";
+import { scheduledTasksScheduleUpdateBillingPeriod } from "@flexprice/sdk/funcs/scheduled-tasks-schedule-update-billing-period.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -220,20 +224,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.ScheduleUpdateBillingPeriodRequest](../../sdk/models/scheduleupdatebillingperiodrequest.md)                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.ScheduleUpdateBillingPeriodRequest](../../sdk/models/schedule-update-billing-period-request.md)                                                                        | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.ScheduleUpdateBillingPeriodResponse](../../sdk/models/scheduleupdatebillingperiodresponse.md)\>**
+**Promise\<[models.ScheduleUpdateBillingPeriodResponse](../../sdk/models/schedule-update-billing-period-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## getScheduledTask
 
@@ -251,9 +257,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.scheduledTasks.getScheduledTask({
-    id: "<id>",
-  });
+  const result = await flexprice.scheduledTasks.getScheduledTask("<id>");
 
   console.log(result);
 }
@@ -267,7 +271,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksGetScheduledTask } from "@flexprice/sdk/funcs/scheduledTasksGetScheduledTask.js";
+import { scheduledTasksGetScheduledTask } from "@flexprice/sdk/funcs/scheduled-tasks-get-scheduled-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -277,9 +281,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await scheduledTasksGetScheduledTask(flexprice, {
-    id: "<id>",
-  });
+  const res = await scheduledTasksGetScheduledTask(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -295,20 +297,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.GetScheduledTaskRequest](../../sdk/models/getscheduledtaskrequest.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.GetScheduledTaskResponse](../../sdk/models/getscheduledtaskresponse.md)\>**
+**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## updateScheduledTask
 
@@ -326,11 +330,8 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.scheduledTasks.updateScheduledTask({
-    id: "<id>",
-    dtoUpdateScheduledTaskRequest: {
-      enabled: false,
-    },
+  const result = await flexprice.scheduledTasks.updateScheduledTask("<id>", {
+    enabled: false,
   });
 
   console.log(result);
@@ -345,7 +346,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksUpdateScheduledTask } from "@flexprice/sdk/funcs/scheduledTasksUpdateScheduledTask.js";
+import { scheduledTasksUpdateScheduledTask } from "@flexprice/sdk/funcs/scheduled-tasks-update-scheduled-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -355,11 +356,8 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await scheduledTasksUpdateScheduledTask(flexprice, {
-    id: "<id>",
-    dtoUpdateScheduledTaskRequest: {
-      enabled: false,
-    },
+  const res = await scheduledTasksUpdateScheduledTask(flexprice, "<id>", {
+    enabled: false,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -376,20 +374,23 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.UpdateScheduledTaskRequest](../../sdk/models/updatescheduledtaskrequest.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
+| `body`                                                                                                                                                                         | [models.DtoUpdateScheduledTaskRequest](../../sdk/models/dto-update-scheduled-task-request.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | Update request (enabled: true/false to pause/resume)                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.UpdateScheduledTaskResponse](../../sdk/models/updatescheduledtaskresponse.md)\>**
+**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## deleteScheduledTask
 
@@ -407,11 +408,9 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.scheduledTasks.deleteScheduledTask({
-    id: "<id>",
-  });
+  await flexprice.scheduledTasks.deleteScheduledTask("<id>");
 
-  console.log(result);
+
 }
 
 run();
@@ -423,7 +422,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksDeleteScheduledTask } from "@flexprice/sdk/funcs/scheduledTasksDeleteScheduledTask.js";
+import { scheduledTasksDeleteScheduledTask } from "@flexprice/sdk/funcs/scheduled-tasks-delete-scheduled-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -433,12 +432,10 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await scheduledTasksDeleteScheduledTask(flexprice, {
-    id: "<id>",
-  });
+  const res = await scheduledTasksDeleteScheduledTask(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
     console.log("scheduledTasksDeleteScheduledTask failed:", res.error);
   }
@@ -451,20 +448,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DeleteScheduledTaskRequest](../../sdk/models/deletescheduledtaskrequest.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.ErrorsErrorResponse](../../sdk/models/errorserrorresponse.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
 
 ## triggerScheduledTaskRun
 
@@ -482,9 +481,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.scheduledTasks.triggerScheduledTaskRun({
-    id: "<id>",
-  });
+  const result = await flexprice.scheduledTasks.triggerScheduledTaskRun("<id>");
 
   console.log(result);
 }
@@ -498,7 +495,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { scheduledTasksTriggerScheduledTaskRun } from "@flexprice/sdk/funcs/scheduledTasksTriggerScheduledTaskRun.js";
+import { scheduledTasksTriggerScheduledTaskRun } from "@flexprice/sdk/funcs/scheduled-tasks-trigger-scheduled-task-run.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -508,9 +505,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await scheduledTasksTriggerScheduledTaskRun(flexprice, {
-    id: "<id>",
-  });
+  const res = await scheduledTasksTriggerScheduledTaskRun(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -526,17 +521,20 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.TriggerScheduledTaskRunRequest](../../sdk/models/triggerscheduledtaskrunrequest.md)                                                                                    | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
+| `body`                                                                                                                                                                         | [models.DtoTriggerForceRunRequest](../../sdk/models/dto-trigger-force-run-request.md)                                                                                          | :heavy_minus_sign:                                                                                                                                                             | Optional start and end time for custom range                                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.TriggerScheduledTaskRunResponse](../../sdk/models/triggerscheduledtaskrunresponse.md)\>**
+**Promise\<[models.DtoTriggerForceRunResponse](../../sdk/models/dto-trigger-force-run-response.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |

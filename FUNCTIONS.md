@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { addonsCreateAddon } from "@flexprice/sdk/funcs/addonsCreateAddon.js";
+import { addonsCreateAddon } from "@flexprice/sdk/funcs/addons-create-addon.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

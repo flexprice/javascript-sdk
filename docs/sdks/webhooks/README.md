@@ -28,10 +28,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleChargebeeWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const result = await flexprice.webhooks.handleChargebeeWebhook("<id>", "<id>");
 
   console.log(result);
 }
@@ -45,7 +42,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleChargebeeWebhook } from "@flexprice/sdk/funcs/webhooksHandleChargebeeWebhook.js";
+import { webhooksHandleChargebeeWebhook } from "@flexprice/sdk/funcs/webhooks-handle-chargebee-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -55,10 +52,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleChargebeeWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const res = await webhooksHandleChargebeeWebhook(flexprice, "<id>", "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -74,14 +68,15 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleChargebeeWebhookRequest](../../sdk/models/handlechargebeewebhookrequest.md)                                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.HandleChargebeeWebhookResponse](../../sdk/models/handlechargebeewebhookresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 
@@ -105,11 +100,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleHubspotWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-    xHubSpotSignatureV3: "<value>",
-  });
+  const result = await flexprice.webhooks.handleHubspotWebhook("<id>", "<id>", "<value>");
 
   console.log(result);
 }
@@ -123,7 +114,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleHubspotWebhook } from "@flexprice/sdk/funcs/webhooksHandleHubspotWebhook.js";
+import { webhooksHandleHubspotWebhook } from "@flexprice/sdk/funcs/webhooks-handle-hubspot-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -133,11 +124,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleHubspotWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-    xHubSpotSignatureV3: "<value>",
-  });
+  const res = await webhooksHandleHubspotWebhook(flexprice, "<id>", "<id>", "<value>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -153,7 +140,9 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleHubspotWebhookRequest](../../sdk/models/handlehubspotwebhookrequest.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `xHubSpotSignatureV3`                                                                                                                                                          | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | HubSpot webhook signature                                                                                                                                                      |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -184,10 +173,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleMoyasarWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const result = await flexprice.webhooks.handleMoyasarWebhook("<id>", "<id>");
 
   console.log(result);
 }
@@ -201,7 +187,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleMoyasarWebhook } from "@flexprice/sdk/funcs/webhooksHandleMoyasarWebhook.js";
+import { webhooksHandleMoyasarWebhook } from "@flexprice/sdk/funcs/webhooks-handle-moyasar-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -211,10 +197,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleMoyasarWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const res = await webhooksHandleMoyasarWebhook(flexprice, "<id>", "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -230,7 +213,9 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleMoyasarWebhookRequest](../../sdk/models/handlemoyasarwebhookrequest.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `xMoyasarSignature`                                                                                                                                                            | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Moyasar webhook signature                                                                                                                                                      |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -261,10 +246,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleNomodWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const result = await flexprice.webhooks.handleNomodWebhook("<id>", "<id>");
 
   console.log(result);
 }
@@ -278,7 +260,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleNomodWebhook } from "@flexprice/sdk/funcs/webhooksHandleNomodWebhook.js";
+import { webhooksHandleNomodWebhook } from "@flexprice/sdk/funcs/webhooks-handle-nomod-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -288,10 +270,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleNomodWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const res = await webhooksHandleNomodWebhook(flexprice, "<id>", "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -307,14 +286,16 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleNomodWebhookRequest](../../sdk/models/handlenomodwebhookrequest.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `xApiKey`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Nomod webhook secret (if configured)                                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.HandleNomodWebhookResponse](../../sdk/models/handlenomodwebhookresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 
@@ -338,10 +319,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleQuickbooksWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const result = await flexprice.webhooks.handleQuickbooksWebhook("<id>", "<id>");
 
   console.log(result);
 }
@@ -355,7 +333,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleQuickbooksWebhook } from "@flexprice/sdk/funcs/webhooksHandleQuickbooksWebhook.js";
+import { webhooksHandleQuickbooksWebhook } from "@flexprice/sdk/funcs/webhooks-handle-quickbooks-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -365,10 +343,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleQuickbooksWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-  });
+  const res = await webhooksHandleQuickbooksWebhook(flexprice, "<id>", "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -384,14 +359,16 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleQuickbooksWebhookRequest](../../sdk/models/handlequickbookswebhookrequest.md)                                                                                    | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `intuitSignature`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | QuickBooks webhook signature                                                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.HandleQuickbooksWebhookResponse](../../sdk/models/handlequickbookswebhookresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 
@@ -415,11 +392,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleRazorpayWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-    xRazorpaySignature: "<value>",
-  });
+  const result = await flexprice.webhooks.handleRazorpayWebhook("<id>", "<id>", "<value>");
 
   console.log(result);
 }
@@ -433,7 +406,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleRazorpayWebhook } from "@flexprice/sdk/funcs/webhooksHandleRazorpayWebhook.js";
+import { webhooksHandleRazorpayWebhook } from "@flexprice/sdk/funcs/webhooks-handle-razorpay-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -443,11 +416,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleRazorpayWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-    xRazorpaySignature: "<value>",
-  });
+  const res = await webhooksHandleRazorpayWebhook(flexprice, "<id>", "<id>", "<value>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -463,7 +432,9 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleRazorpayWebhookRequest](../../sdk/models/handlerazorpaywebhookrequest.md)                                                                                        | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `xRazorpaySignature`                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Razorpay webhook signature                                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -494,11 +465,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.webhooks.handleStripeWebhook({
-    tenantId: "<id>",
-    environmentId: "<id>",
-    stripeSignature: "<value>",
-  });
+  const result = await flexprice.webhooks.handleStripeWebhook("<id>", "<id>", "<value>");
 
   console.log(result);
 }
@@ -512,7 +479,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhooksHandleStripeWebhook } from "@flexprice/sdk/funcs/webhooksHandleStripeWebhook.js";
+import { webhooksHandleStripeWebhook } from "@flexprice/sdk/funcs/webhooks-handle-stripe-webhook.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -522,11 +489,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await webhooksHandleStripeWebhook(flexprice, {
-    tenantId: "<id>",
-    environmentId: "<id>",
-    stripeSignature: "<value>",
-  });
+  const res = await webhooksHandleStripeWebhook(flexprice, "<id>", "<id>", "<value>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -542,14 +505,16 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.HandleStripeWebhookRequest](../../sdk/models/handlestripewebhookrequest.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `tenantId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
+| `environmentId`                                                                                                                                                                | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Environment ID                                                                                                                                                                 |
+| `stripeSignature`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Stripe webhook signature                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.HandleStripeWebhookResponse](../../sdk/models/handlestripewebhookresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 

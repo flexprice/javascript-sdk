@@ -37,7 +37,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { rbacListRBACRoles } from "@flexprice/sdk/funcs/rbacListRBACRoles.js";
+import { rbacListRBACRoles } from "@flexprice/sdk/funcs/rbac-list-rbac-roles.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -69,7 +69,7 @@ run();
 
 ### Response
 
-**Promise\<[models.ListRbacRolesResponse](../../sdk/models/listrbacrolesresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 
@@ -93,9 +93,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.rbac.getRbacRole({
-    id: "<id>",
-  });
+  const result = await flexprice.rbac.getRbacRole("<id>");
 
   console.log(result);
 }
@@ -109,7 +107,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { rbacGetRBACRole } from "@flexprice/sdk/funcs/rbacGetRBACRole.js";
+import { rbacGetRBACRole } from "@flexprice/sdk/funcs/rbac-get-rbac-role.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -119,9 +117,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await rbacGetRBACRole(flexprice, {
-    id: "<id>",
-  });
+  const res = await rbacGetRBACRole(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -137,14 +133,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.GetRbacRoleRequest](../../sdk/models/getrbacrolerequest.md)                                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Role ID                                                                                                                                                                        |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.GetRbacRoleResponse](../../sdk/models/getrbacroleresponse.md)\>**
+**Promise\<[{ [k: string]: any }](../../models/.md)\>**
 
 ### Errors
 
