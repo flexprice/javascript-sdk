@@ -27,6 +27,10 @@ export type DtoSubscriptionUsageByMetersResponse = {
   overageFactor?: number | undefined;
   price?: PricePrice | undefined;
   quantity?: number | undefined;
+  /**
+   * For feature_usage: direct match by sub_line_item_id
+   */
+  subscriptionLineItemId?: string | undefined;
 };
 
 /** @internal */
@@ -47,6 +51,7 @@ export const DtoSubscriptionUsageByMetersResponse$inboundSchema: z.ZodMiniType<
     overage_factor: types.optional(types.number()),
     price: types.optional(PricePrice$inboundSchema),
     quantity: types.optional(types.number()),
+    subscription_line_item_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -56,6 +61,7 @@ export const DtoSubscriptionUsageByMetersResponse$inboundSchema: z.ZodMiniType<
       "meter_display_name": "meterDisplayName",
       "meter_id": "meterId",
       "overage_factor": "overageFactor",
+      "subscription_line_item_id": "subscriptionLineItemId",
     });
   }),
 );

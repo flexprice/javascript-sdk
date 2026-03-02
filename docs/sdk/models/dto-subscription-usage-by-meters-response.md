@@ -22,3 +22,4 @@ let value: DtoSubscriptionUsageByMetersResponse = {};
 | `overageFactor`                                      | *number*                                             | :heavy_minus_sign:                                   | Factor applied to this charge if in overage          |
 | `price`                                              | [models.PricePrice](../../sdk/models/price-price.md) | :heavy_minus_sign:                                   | N/A                                                  |
 | `quantity`                                           | *number*                                             | :heavy_minus_sign:                                   | N/A                                                  |
+| `subscriptionLineItemId`                             | *string*                                             | :heavy_minus_sign:                                   | For feature_usage: direct match by sub_line_item_id  |

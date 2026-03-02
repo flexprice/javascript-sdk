@@ -22,10 +22,18 @@ import {
 export type MeterAggregation = {
   bucketSize?: WindowSize | undefined;
   /**
+   * Expression is an optional CEL expression to compute per-event quantity from event.properties.
+   *
+   * @remarks
+   * When set, it replaces Field-based extraction. Property names are used directly (e.g., token * duration * pixel).
+   */
+  expression?: string | undefined;
+  /**
    * Field is the key in $event.properties on which the aggregation is to be applied
    *
    * @remarks
    * For ex if the aggregation type is sum for API usage, the field could be "duration_ms"
+   * Ignored when Expression is set.
    */
   field?: string | undefined;
   /**
@@ -55,6 +63,7 @@ export const MeterAggregation$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     bucket_size: types.optional(WindowSize$inboundSchema),
+    expression: types.optional(types.string()),
     field: types.optional(types.string()),
     group_by: types.optional(types.string()),
     multiplier: types.optional(types.string()),
@@ -70,6 +79,7 @@ export const MeterAggregation$inboundSchema: z.ZodMiniType<
 /** @internal */
 export type MeterAggregation$Outbound = {
   bucket_size?: string | undefined;
+  expression?: string | undefined;
   field?: string | undefined;
   group_by?: string | undefined;
   multiplier?: string | undefined;
@@ -83,6 +93,7 @@ export const MeterAggregation$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     bucketSize: z.optional(WindowSize$outboundSchema),
+    expression: z.optional(z.string()),
     field: z.optional(z.string()),
     groupBy: z.optional(z.string()),
     multiplier: z.optional(z.string()),
