@@ -27,7 +27,6 @@ Use when resolving wallets by external customer id or lookup key (e.g. from your
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -51,7 +50,6 @@ import { walletsGetCustomerWallets } from "@flexprice/sdk/funcs/wallets-get-cust
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -100,7 +98,6 @@ Use when showing a customer's wallets (e.g. balance overview by currency or in a
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -124,7 +121,6 @@ import { walletsGetWalletsByCustomerId } from "@flexprice/sdk/funcs/wallets-get-
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -173,7 +169,6 @@ Use when giving a customer a prepaid or credit balance (e.g. prepaid plans or pr
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -199,7 +194,6 @@ import { walletsCreateWallet } from "@flexprice/sdk/funcs/wallets-create-wallet.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -250,7 +244,6 @@ Use when listing or searching wallets (e.g. admin view or reporting). Returns a 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -274,7 +267,6 @@ import { walletsQueryWallet } from "@flexprice/sdk/funcs/wallets-query-wallet.js
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -323,7 +315,6 @@ Use when searching or reporting on wallet transactions (e.g. cross-wallet histor
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -347,7 +338,6 @@ import { walletsQueryWalletTransaction } from "@flexprice/sdk/funcs/wallets-quer
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -396,7 +386,6 @@ Use when you need to load a single wallet (e.g. for a balance or settings view).
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -420,7 +409,6 @@ import { walletsGetWallet } from "@flexprice/sdk/funcs/wallets-get-wallet.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -469,7 +457,6 @@ Use when changing wallet settings (e.g. enabling or updating auto top-up thresho
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -493,7 +480,6 @@ import { walletsUpdateWallet } from "@flexprice/sdk/funcs/wallets-update-wallet.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -543,7 +529,6 @@ Use when displaying or checking current wallet balance (e.g. before charging or 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -567,7 +552,6 @@ import { walletsGetWalletBalance } from "@flexprice/sdk/funcs/wallets-get-wallet
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -617,7 +601,6 @@ Use when closing a customer wallet (e.g. churn or migration). Closes the wallet 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -641,7 +624,6 @@ import { walletsTerminateWallet } from "@flexprice/sdk/funcs/wallets-terminate-w
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -690,7 +672,6 @@ Use when adding funds to a wallet (e.g. top-up, refund, or manual credit). Suppo
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -716,7 +697,6 @@ import { walletsTopUpWallet } from "@flexprice/sdk/funcs/wallets-top-up-wallet.j
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -768,7 +748,6 @@ Use when showing transaction history for a wallet (e.g. credit/debit log or audi
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -794,7 +773,6 @@ import { walletsGetWalletTransactions } from "@flexprice/sdk/funcs/wallets-get-w
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

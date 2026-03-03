@@ -19,7 +19,6 @@ Use when listing API keys (e.g. admin view or rotating keys). Returns a paginate
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -43,7 +42,6 @@ import { secretsListApiKeys } from "@flexprice/sdk/funcs/secrets-list-api-keys.j
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -94,7 +92,6 @@ Use when issuing a new API key (e.g. for a service account or for the current us
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -121,7 +118,6 @@ import { secretsCreateApiKey } from "@flexprice/sdk/funcs/secrets-create-api-key
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -173,7 +169,6 @@ Use when revoking an API key (e.g. rotation or compromise). Permanently invalida
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -197,7 +192,6 @@ import { secretsDeleteApiKey } from "@flexprice/sdk/funcs/secrets-delete-api-key
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

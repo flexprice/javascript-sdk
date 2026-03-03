@@ -23,7 +23,6 @@ Use when listing or managing scheduled tasks in an admin UI. Returns a list; sup
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -47,7 +46,6 @@ import { scheduledTasksListScheduledTasks } from "@flexprice/sdk/funcs/scheduled
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -96,7 +94,6 @@ Use when setting up recurring data exports or other scheduled jobs. Ideal for re
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -125,7 +122,6 @@ import { scheduledTasksCreateScheduledTask } from "@flexprice/sdk/funcs/schedule
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -179,7 +175,6 @@ Use when you need to trigger a billing-period update workflow (e.g. to recalcula
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -203,7 +198,6 @@ import { scheduledTasksScheduleUpdateBillingPeriod } from "@flexprice/sdk/funcs/
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -252,7 +246,6 @@ Use when you need to load a single scheduled task (e.g. to show details in a UI 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -276,7 +269,6 @@ import { scheduledTasksGetScheduledTask } from "@flexprice/sdk/funcs/scheduled-t
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -325,7 +317,6 @@ Use when pausing or resuming a scheduled task. Only the enabled field can be cha
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -351,7 +342,6 @@ import { scheduledTasksUpdateScheduledTask } from "@flexprice/sdk/funcs/schedule
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -403,7 +393,6 @@ Use when removing a scheduled task from the active roster. Archives the task and
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -427,7 +416,6 @@ import { scheduledTasksDeleteScheduledTask } from "@flexprice/sdk/funcs/schedule
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -476,7 +464,6 @@ Use when you need to run a scheduled export immediately (e.g. on-demand report o
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -500,7 +487,6 @@ import { scheduledTasksTriggerScheduledTaskRun } from "@flexprice/sdk/funcs/sche
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

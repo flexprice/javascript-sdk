@@ -22,7 +22,6 @@ Use when listing or searching async tasks (e.g. admin queue view). Returns list 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -46,7 +45,6 @@ import { tasksListTasks } from "@flexprice/sdk/funcs/tasks-list-tasks.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -95,7 +93,6 @@ Use when submitting a file or job for async processing (e.g. export or import). 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -124,7 +121,6 @@ import { tasksCreateTask } from "@flexprice/sdk/funcs/tasks-create-task.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -178,7 +174,6 @@ Use when fetching the outcome of a completed task (e.g. export URL or error mess
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -202,7 +197,6 @@ import { tasksGetTaskResult } from "@flexprice/sdk/funcs/tasks-get-task-result.j
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -251,7 +245,6 @@ Use when checking task status or progress (e.g. polling after create). Returns t
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -275,7 +268,6 @@ import { tasksGetTask } from "@flexprice/sdk/funcs/tasks-get-task.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -324,7 +316,6 @@ Use when letting a user download an exported file (e.g. report or data export). 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -348,7 +339,6 @@ import { tasksDownloadTaskExport } from "@flexprice/sdk/funcs/tasks-download-tas
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -397,7 +387,6 @@ Use when updating task status (e.g. marking complete or failed from a worker). T
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -423,7 +412,6 @@ import { tasksUpdateTaskStatus } from "@flexprice/sdk/funcs/tasks-update-task-st
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

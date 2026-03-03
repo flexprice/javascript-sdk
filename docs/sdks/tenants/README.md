@@ -19,7 +19,6 @@ Use when showing the current tenant's billing usage (e.g. admin billing page or 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -43,7 +42,6 @@ import { tenantsGetTenantBillingUsage } from "@flexprice/sdk/funcs/tenants-get-t
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -91,7 +89,6 @@ Use when changing tenant details (e.g. name or billing info). Request body conta
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -115,7 +112,6 @@ import { tenantsUpdateTenant } from "@flexprice/sdk/funcs/tenants-update-tenant.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -164,7 +160,6 @@ Get tenant by ID
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -188,7 +183,6 @@ import { tenantsGetTenantById } from "@flexprice/sdk/funcs/tenants-get-tenant-by
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

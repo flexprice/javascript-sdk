@@ -21,7 +21,6 @@ Use when listing tax rates (e.g. tax config UI). Returns tax rates with optional
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -45,7 +44,6 @@ import { taxRatesGetTaxRates } from "@flexprice/sdk/funcs/tax-rates-get-tax-rate
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -94,7 +92,6 @@ Use when defining a new tax rate (e.g. VAT or sales tax) for use in invoices. At
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -121,7 +118,6 @@ import { taxRatesCreateTaxRate } from "@flexprice/sdk/funcs/tax-rates-create-tax
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -173,7 +169,6 @@ Use when you need to load a single tax rate (e.g. for display or when creating a
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -197,7 +192,6 @@ import { taxRatesGetTaxRate } from "@flexprice/sdk/funcs/tax-rates-get-tax-rate.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -246,7 +240,6 @@ Use when changing a tax rate (e.g. rate value or name). Request body contains th
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -270,7 +263,6 @@ import { taxRatesUpdateTaxRate } from "@flexprice/sdk/funcs/tax-rates-update-tax
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -320,7 +312,6 @@ Use when retiring a tax rate (e.g. no longer applicable). Fails if still referen
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -344,7 +335,6 @@ import { taxRatesDeleteTaxRate } from "@flexprice/sdk/funcs/tax-rates-delete-tax
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

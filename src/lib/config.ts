@@ -5,16 +5,34 @@
 import { HTTPClient } from "./http.js";
 import { Logger } from "./logger.js";
 import { RetryConfig } from "./retries.js";
-import { pathToFunc } from "./url.js";
+import { Params, pathToFunc } from "./url.js";
+
+/**
+ * Contains the list of servers available to the SDK
+ */
+export const ServerList = [
+  /**
+   * US Region
+   */
+  "https://us.api.flexprice.io/v1",
+  /**
+   * India Region
+   */
+  "https://api.cloud.flexprice.io/v1",
+] as const;
 
 export type SDKOptions = {
   apiKeyAuth?: string | (() => Promise<string>) | undefined;
 
   httpClient?: HTTPClient;
   /**
-   * Specifies the server URL to be used by the SDK
+   * Allows overriding the default server used by the SDK
    */
-  serverURL: string;
+  serverIdx?: number | undefined;
+  /**
+   * Allows overriding the default server URL used by the SDK
+   */
+  serverURL?: string | undefined;
   /**
    * Allows overriding the default user agent used by the SDK
    */
@@ -28,13 +46,17 @@ export type SDKOptions = {
 };
 
 export function serverURLFromOptions(options: SDKOptions): URL | null {
-  const serverURL = options.serverURL;
+  let serverURL = options.serverURL;
+
+  const params: Params = {};
 
   if (!serverURL) {
-    return null;
+    const serverIdx = options.serverIdx ?? 0;
+    if (serverIdx < 0 || serverIdx >= ServerList.length) {
+      throw new Error(`Invalid server index ${serverIdx}`);
+    }
+    serverURL = ServerList[serverIdx] || "";
   }
-
-  const params: Record<string, string | undefined> = {};
 
   const u = pathToFunc(serverURL)(params);
   return new URL(u);
@@ -44,6 +66,6 @@ export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0",
   sdkVersion: "2.0.1",
-  genVersion: "2.845.15",
-  userAgent: "speakeasy-sdk/typescript 2.0.1 2.845.15 1.0 @flexprice/sdk",
+  genVersion: "2.846.1",
+  userAgent: "speakeasy-sdk/typescript 2.0.1 2.846.1 1.0 @flexprice/sdk",
 } as const;

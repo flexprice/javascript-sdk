@@ -1,11 +1,11 @@
-# GithubComFlexpriceFlexpriceInternalTypesValue
+# Value
 
 ## Example Usage
 
 ```typescript
-import { GithubComFlexpriceFlexpriceInternalTypesValue } from "@flexprice/sdk/sdk/models";
+import { Value } from "@flexprice/sdk/sdk/models";
 
-let value: GithubComFlexpriceFlexpriceInternalTypesValue = {};
+let value: Value = {};
 ```
 
 ## Fields

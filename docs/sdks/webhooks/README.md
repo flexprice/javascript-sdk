@@ -23,7 +23,6 @@ Use as the Chargebee webhook endpoint URL. Receives payment and subscription eve
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -47,7 +46,6 @@ import { webhooksHandleChargebeeWebhook } from "@flexprice/sdk/funcs/webhooks-ha
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -95,7 +93,6 @@ Use as the HubSpot webhook endpoint URL. Receives deal and customer events (e.g.
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -119,7 +116,6 @@ import { webhooksHandleHubspotWebhook } from "@flexprice/sdk/funcs/webhooks-hand
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -168,7 +164,6 @@ Use as the Moyasar webhook endpoint URL. Receives payment events from Moyasar to
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -192,7 +187,6 @@ import { webhooksHandleMoyasarWebhook } from "@flexprice/sdk/funcs/webhooks-hand
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -241,7 +235,6 @@ Use as the Nomod webhook endpoint URL. Receives payment and invoice events from 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -265,7 +258,6 @@ import { webhooksHandleNomodWebhook } from "@flexprice/sdk/funcs/webhooks-handle
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -314,7 +306,6 @@ Use as the QuickBooks webhook endpoint URL. Receives payment events from QuickBo
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -338,7 +329,6 @@ import { webhooksHandleQuickbooksWebhook } from "@flexprice/sdk/funcs/webhooks-h
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -387,7 +377,6 @@ Use as the Razorpay webhook endpoint URL. Receives payment capture and failure e
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -411,7 +400,6 @@ import { webhooksHandleRazorpayWebhook } from "@flexprice/sdk/funcs/webhooks-han
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -460,7 +448,6 @@ Use as the Stripe webhook endpoint URL. Receives payment and customer events fro
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -484,7 +471,6 @@ import { webhooksHandleStripeWebhook } from "@flexprice/sdk/funcs/webhooks-handl
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

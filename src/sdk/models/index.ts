@@ -360,7 +360,6 @@ export * from "./github-com-flexprice-flexprice-internal-domain-coupon-coupon.js
 export * from "./github-com-flexprice-flexprice-internal-domain-customer-customer.js";
 export * from "./github-com-flexprice-flexprice-internal-domain-feature-feature.js";
 export * from "./github-com-flexprice-flexprice-internal-domain-plan-plan.js";
-export * from "./github-com-flexprice-flexprice-internal-types-value.js";
 export * from "./group-filter.js";
 export * from "./handle-chargebee-webhook-op.js";
 export * from "./handle-hubspot-webhook-op.js";
@@ -484,6 +483,7 @@ export * from "./update-tax-rate-op.js";
 export * from "./update-wallet-op.js";
 export * from "./user-filter.js";
 export * from "./user-type.js";
+export * from "./value.js";
 export * from "./void-credit-note-op.js";
 export * from "./void-invoice-op.js";
 export * from "./wallet-config-price-type.js";

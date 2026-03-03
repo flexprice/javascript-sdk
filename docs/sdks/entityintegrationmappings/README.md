@@ -18,7 +18,6 @@ Use when linking a FlexPrice entity to an external system (e.g. CRM or payment p
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -47,7 +46,6 @@ import { entityIntegrationMappingsCreateEntityIntegrationMapping } from "@flexpr
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -101,7 +99,6 @@ Use when unlinking a FlexPrice entity from an external system or cleaning up sta
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -125,7 +122,6 @@ import { entityIntegrationMappingsDeleteEntityIntegrationMapping } from "@flexpr
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

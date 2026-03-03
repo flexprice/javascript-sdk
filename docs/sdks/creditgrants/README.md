@@ -21,7 +21,6 @@ Use when giving a customer or plan credits (e.g. prepaid balance or promotional 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -50,7 +49,6 @@ import { creditGrantsCreateCreditGrant } from "@flexprice/sdk/funcs/credit-grant
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -104,7 +102,6 @@ Use when you need to load a single credit grant (e.g. for display or to check ba
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -128,7 +125,6 @@ import { creditGrantsGetCreditGrant } from "@flexprice/sdk/funcs/credit-grants-g
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -177,7 +173,6 @@ Use when changing a credit grant (e.g. amount or end date). Request body contain
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -201,7 +196,6 @@ import { creditGrantsUpdateCreditGrant } from "@flexprice/sdk/funcs/credit-grant
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -251,7 +245,6 @@ Use when removing or ending a credit grant (e.g. revoke promo or close prepaid).
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -275,7 +268,6 @@ import { creditGrantsDeleteCreditGrant } from "@flexprice/sdk/funcs/credit-grant
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -325,7 +317,6 @@ Use when listing credits attached to a plan (e.g. included prepaid or promo cred
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -349,7 +340,6 @@ import { creditGrantsGetPlanCreditGrants } from "@flexprice/sdk/funcs/credit-gra
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

@@ -9,17 +9,13 @@ import {
   FilterOperatorType,
   FilterOperatorType$outboundSchema,
 } from "./filter-operator-type.js";
-import {
-  GithubComFlexpriceFlexpriceInternalTypesValue,
-  GithubComFlexpriceFlexpriceInternalTypesValue$Outbound,
-  GithubComFlexpriceFlexpriceInternalTypesValue$outboundSchema,
-} from "./github-com-flexprice-flexprice-internal-types-value.js";
+import { Value, Value$Outbound, Value$outboundSchema } from "./value.js";
 
 export type FilterCondition = {
   dataType?: DataType | undefined;
   field?: string | undefined;
   operator?: FilterOperatorType | undefined;
-  value?: GithubComFlexpriceFlexpriceInternalTypesValue | undefined;
+  value?: Value | undefined;
 };
 
 /** @internal */
@@ -27,7 +23,7 @@ export type FilterCondition$Outbound = {
   data_type?: string | undefined;
   field?: string | undefined;
   operator?: string | undefined;
-  value?: GithubComFlexpriceFlexpriceInternalTypesValue$Outbound | undefined;
+  value?: Value$Outbound | undefined;
 };
 
 /** @internal */
@@ -39,9 +35,7 @@ export const FilterCondition$outboundSchema: z.ZodMiniType<
     dataType: z.optional(DataType$outboundSchema),
     field: z.optional(z.string()),
     operator: z.optional(FilterOperatorType$outboundSchema),
-    value: z.optional(
-      GithubComFlexpriceFlexpriceInternalTypesValue$outboundSchema,
-    ),
+    value: z.optional(Value$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

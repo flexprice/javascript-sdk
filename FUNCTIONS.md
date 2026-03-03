@@ -25,7 +25,6 @@ import { addonsCreateAddon } from "@flexprice/sdk/funcs/addons-create-addon.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

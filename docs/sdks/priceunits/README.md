@@ -23,7 +23,6 @@ Use when listing price units (e.g. in a catalog or when creating prices). Return
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -47,7 +46,6 @@ import { priceUnitsListPriceUnits } from "@flexprice/sdk/funcs/price-units-list-
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -96,7 +94,6 @@ Use when defining a new unit of measure for pricing (e.g. GB, API call, seat). I
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -126,7 +123,6 @@ import { priceUnitsCreatePriceUnit } from "@flexprice/sdk/funcs/price-units-crea
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -181,7 +177,6 @@ Use when resolving a price unit by code (e.g. from an external catalog or config
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -205,7 +200,6 @@ import { priceUnitsGetPriceUnitByCode } from "@flexprice/sdk/funcs/price-units-g
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -254,7 +248,6 @@ Use when searching or listing price units (e.g. admin catalog). Returns a pagina
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -278,7 +271,6 @@ import { priceUnitsQueryPriceUnit } from "@flexprice/sdk/funcs/price-units-query
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -327,7 +319,6 @@ Use when you need to load a single price unit (e.g. for display or when creating
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -351,7 +342,6 @@ import { priceUnitsGetPriceUnit } from "@flexprice/sdk/funcs/price-units-get-pri
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -399,7 +389,6 @@ Use when renaming or updating metadata for a price unit. Code is immutable once 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -423,7 +412,6 @@ import { priceUnitsUpdatePriceUnit } from "@flexprice/sdk/funcs/price-units-upda
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -472,7 +460,6 @@ Use when removing a price unit that is no longer needed. Fails if any price refe
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -496,7 +483,6 @@ import { priceUnitsDeletePriceUnit } from "@flexprice/sdk/funcs/price-units-dele
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

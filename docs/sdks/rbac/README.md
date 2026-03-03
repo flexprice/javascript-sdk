@@ -18,7 +18,6 @@ Use when building role pickers or permission UIs. Returns all roles with permiss
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -42,7 +41,6 @@ import { rbacListRBACRoles } from "@flexprice/sdk/funcs/rbac-list-rbac-roles.js"
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -88,7 +86,6 @@ Use when you need to show or edit a single role (e.g. role detail page). Include
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -112,7 +109,6 @@ import { rbacGetRBACRole } from "@flexprice/sdk/funcs/rbac-get-rbac-role.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

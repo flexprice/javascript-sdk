@@ -17,7 +17,6 @@ Use when listing or auditing workflow runs (e.g. ops dashboard or debugging). Re
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -41,7 +40,6 @@ import { workflowsQueryWorkflow } from "@flexprice/sdk/funcs/workflows-query-wor
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

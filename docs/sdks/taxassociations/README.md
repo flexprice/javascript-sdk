@@ -21,7 +21,6 @@ Use when listing tax associations (e.g. tax config or audit). Returns list with 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -45,7 +44,6 @@ import { taxAssociationsListTaxAssociations } from "@flexprice/sdk/funcs/tax-ass
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -97,7 +95,6 @@ Use when linking a tax rate to an entity (e.g. customer, product, or region) so 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -123,7 +120,6 @@ import { taxAssociationsCreateTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -174,7 +170,6 @@ Use when you need to load a single tax association (e.g. for display or editing)
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -198,7 +193,6 @@ import { taxAssociationsGetTaxAssociation } from "@flexprice/sdk/funcs/tax-assoc
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -247,7 +241,6 @@ Use when changing a tax association (e.g. switch rate or entity). Request body c
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -271,7 +264,6 @@ import { taxAssociationsUpdateTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -321,7 +313,6 @@ Use when removing a tax association (e.g. entity no longer subject to that rate)
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -345,7 +336,6 @@ import { taxAssociationsDeleteTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

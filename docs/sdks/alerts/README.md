@@ -17,7 +17,6 @@ Use when viewing or searching alert history (e.g. support triage or customer-fac
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -41,7 +40,6 @@ import { alertsQueryAlertLog } from "@flexprice/sdk/funcs/alerts-query-alert-log
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

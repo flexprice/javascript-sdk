@@ -20,7 +20,6 @@ Use when issuing a refund or adjustment (e.g. customer dispute or proration). Li
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -47,7 +46,6 @@ import { creditNotesCreateCreditNote } from "@flexprice/sdk/funcs/credit-notes-c
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -99,7 +97,6 @@ Use when you need to load a single credit note (e.g. for display or reconciliati
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -123,7 +120,6 @@ import { creditNotesGetCreditNote } from "@flexprice/sdk/funcs/credit-notes-get-
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -172,7 +168,6 @@ Use when locking a draft credit note and applying the credit (e.g. after approva
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -196,7 +191,6 @@ import { creditNotesProcessCreditNote } from "@flexprice/sdk/funcs/credit-notes-
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -245,7 +239,6 @@ Use when cancelling a draft credit note (e.g. created by mistake). Only draft cr
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -269,7 +262,6 @@ import { creditNotesVoidCreditNote } from "@flexprice/sdk/funcs/credit-notes-voi
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

@@ -21,7 +21,6 @@ Use when creating a discount (e.g. promo code or referral). Ideal for percent or
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -49,7 +48,6 @@ import { couponsCreateCoupon } from "@flexprice/sdk/funcs/coupons-create-coupon.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -102,7 +100,6 @@ Use when listing or searching coupons (e.g. promo management). Returns a paginat
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -126,7 +123,6 @@ import { couponsQueryCoupon } from "@flexprice/sdk/funcs/coupons-query-coupon.js
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -175,7 +171,6 @@ Use when you need to load a single coupon (e.g. for display or to validate a cod
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -199,7 +194,6 @@ import { couponsGetCoupon } from "@flexprice/sdk/funcs/coupons-get-coupon.js";
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -248,7 +242,6 @@ Use when changing coupon config (e.g. value, validity, or usage limits).
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -272,7 +265,6 @@ import { couponsUpdateCoupon } from "@flexprice/sdk/funcs/coupons-update-coupon.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -322,7 +314,6 @@ Use when retiring a coupon (e.g. campaign ended). Returns 200 with success messa
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -346,7 +337,6 @@ import { couponsDeleteCoupon } from "@flexprice/sdk/funcs/coupons-delete-coupon.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

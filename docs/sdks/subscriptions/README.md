@@ -41,7 +41,6 @@ Use when onboarding a customer to a plan or starting a new subscription. Ideal f
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -70,7 +69,6 @@ import { subscriptionsCreateSubscription } from "@flexprice/sdk/funcs/subscripti
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -124,7 +122,6 @@ Use when adding an optional product or add-on to an existing subscription (e.g. 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -151,7 +148,6 @@ import { subscriptionsAddSubscriptionAddon } from "@flexprice/sdk/funcs/subscrip
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -203,7 +199,6 @@ Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -229,7 +224,6 @@ import { subscriptionsRemoveSubscriptionAddon } from "@flexprice/sdk/funcs/subsc
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -280,7 +274,6 @@ Use when changing a subscription line item (e.g. quantity or price). Implemented
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -304,7 +297,6 @@ import { subscriptionsUpdateSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -354,7 +346,6 @@ Use when removing a charge or seat from a subscription (e.g. downgrade). Line it
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -378,7 +369,6 @@ import { subscriptionsDeleteSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -428,7 +418,6 @@ Use when listing or searching subscriptions (e.g. admin view or customer subscri
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -452,7 +441,6 @@ import { subscriptionsQuerySubscription } from "@flexprice/sdk/funcs/subscriptio
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -501,7 +489,6 @@ Use when showing usage for a subscription (e.g. in a portal or for overage check
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -530,7 +517,6 @@ import { subscriptionsGetSubscriptionUsage } from "@flexprice/sdk/funcs/subscrip
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -584,7 +570,6 @@ Use when you need to load a single subscription (e.g. for a billing portal or to
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -608,7 +593,6 @@ import { subscriptionsGetSubscription } from "@flexprice/sdk/funcs/subscriptions
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -657,7 +641,6 @@ Use when changing subscription details (e.g. quantity, billing anchor, or parent
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -681,7 +664,6 @@ import { subscriptionsUpdateSubscription } from "@flexprice/sdk/funcs/subscripti
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -731,7 +713,6 @@ Use when turning a draft subscription live (e.g. after collecting payment or com
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -757,7 +738,6 @@ import { subscriptionsActivateSubscription } from "@flexprice/sdk/funcs/subscrip
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -809,7 +789,6 @@ Use when listing which add-ons are currently attached to a subscription (e.g. fo
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -833,7 +812,6 @@ import { subscriptionsGetSubscriptionAddonAssociations } from "@flexprice/sdk/fu
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -882,7 +860,6 @@ Use when a customer churns or downgrades. Supports immediate or end-of-period ca
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -908,7 +885,6 @@ import { subscriptionsCancelSubscription } from "@flexprice/sdk/funcs/subscripti
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -960,7 +936,6 @@ Use when applying a plan change (e.g. upgrade or downgrade). Executes proration 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -990,7 +965,6 @@ import { subscriptionsExecuteSubscriptionChange } from "@flexprice/sdk/funcs/sub
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1046,7 +1020,6 @@ Use when showing a customer the cost of a plan change before they confirm (e.g. 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1076,7 +1049,6 @@ import { subscriptionsPreviewSubscriptionChange } from "@flexprice/sdk/funcs/sub
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1132,7 +1104,6 @@ Use when checking what features or limits a subscription has (e.g. entitlement c
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1156,7 +1127,6 @@ import { subscriptionsGetSubscriptionEntitlements } from "@flexprice/sdk/funcs/s
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1206,7 +1176,6 @@ Use when showing upcoming or pending credits for a subscription (e.g. in a porta
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1230,7 +1199,6 @@ import { subscriptionsGetSubscriptionUpcomingGrants } from "@flexprice/sdk/funcs
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1279,7 +1247,6 @@ Use when adding a new charge or seat to a subscription (e.g. extra seat or one-t
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1303,7 +1270,6 @@ import { subscriptionsCreateSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1353,7 +1319,6 @@ Use when temporarily stopping a subscription (e.g. customer hold or seasonal pau
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1379,7 +1344,6 @@ import { subscriptionsPauseSubscription } from "@flexprice/sdk/funcs/subscriptio
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1431,7 +1395,6 @@ Use when showing pause history for a subscription (e.g. support or audit). Retur
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1455,7 +1418,6 @@ import { subscriptionsListSubscriptionPauses } from "@flexprice/sdk/funcs/subscr
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1504,7 +1466,6 @@ Use when reactivating a paused subscription (e.g. end of hold). Billing and acce
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1530,7 +1491,6 @@ import { subscriptionsResumeSubscription } from "@flexprice/sdk/funcs/subscripti
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1582,7 +1542,6 @@ Use when you need a subscription with related data (line items, prices, plan). S
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1606,7 +1565,6 @@ import { subscriptionsGetSubscriptionV2 } from "@flexprice/sdk/funcs/subscriptio
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1656,7 +1614,6 @@ Use when listing or searching scheduled changes across subscriptions (e.g. admin
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1680,7 +1637,6 @@ import { subscriptionsListAllSubscriptionSchedules } from "@flexprice/sdk/funcs/
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1730,7 +1686,6 @@ Use when you need to load a single scheduled change (e.g. to show when a plan ch
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1754,7 +1709,6 @@ import { subscriptionsGetSubscriptionSchedule } from "@flexprice/sdk/funcs/subsc
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1801,7 +1755,6 @@ Use when cancelling a scheduled change (e.g. customer changed mind). Identify by
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1825,7 +1778,6 @@ import { subscriptionsCancelSubscriptionSchedule } from "@flexprice/sdk/funcs/su
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1873,7 +1825,6 @@ Use when listing scheduled changes for a subscription (e.g. upcoming plan change
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -1897,7 +1848,6 @@ import { subscriptionsListSubscriptionSchedules } from "@flexprice/sdk/funcs/sub
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 

@@ -29,7 +29,6 @@ Use when showing a customer's invoice overview (e.g. billing portal or balance s
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -53,7 +52,6 @@ import { invoicesGetCustomerInvoiceSummary } from "@flexprice/sdk/funcs/invoices
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -102,7 +100,6 @@ Use when creating a manual or one-off invoice (e.g. custom charge or non-recurri
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -132,7 +129,6 @@ import { invoicesCreateInvoice } from "@flexprice/sdk/funcs/invoices-create-invo
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -187,7 +183,6 @@ Use when showing a customer what they will be charged (e.g. preview before check
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -213,7 +208,6 @@ import { invoicesGetInvoicePreview } from "@flexprice/sdk/funcs/invoices-get-inv
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -264,7 +258,6 @@ Use when listing or searching invoices (e.g. admin view or customer history). Re
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -288,7 +281,6 @@ import { invoicesQueryInvoice } from "@flexprice/sdk/funcs/invoices-query-invoic
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -337,7 +329,6 @@ Use when loading an invoice for display or editing (e.g. portal or reconciliatio
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -361,7 +352,6 @@ import { invoicesGetInvoice } from "@flexprice/sdk/funcs/invoices-get-invoice.js
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -412,7 +402,6 @@ Use when updating invoice metadata or due date (e.g. PDF URL, net terms). For pa
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -436,7 +425,6 @@ import { invoicesUpdateInvoice } from "@flexprice/sdk/funcs/invoices-update-invo
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -486,7 +474,6 @@ Use when sending an invoice to the customer (e.g. trigger email or Slack). Paylo
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -510,7 +497,6 @@ import { invoicesTriggerInvoiceCommsWebhook } from "@flexprice/sdk/funcs/invoice
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -559,7 +545,6 @@ Use when locking an invoice for payment (e.g. after review). Once finalized, lin
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -583,7 +568,6 @@ import { invoicesFinalizeInvoice } from "@flexprice/sdk/funcs/invoices-finalize-
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -632,7 +616,6 @@ Use when reconciling payment status from an external gateway or manual entry (e.
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -658,7 +641,6 @@ import { invoicesUpdateInvoicePaymentStatus } from "@flexprice/sdk/funcs/invoice
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -710,7 +692,6 @@ Use when paying an invoice with the customer's wallet balance (e.g. prepaid cred
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -734,7 +715,6 @@ import { invoicesAttemptInvoicePayment } from "@flexprice/sdk/funcs/invoices-att
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -783,7 +763,6 @@ Use when delivering an invoice PDF to the customer (e.g. email attachment or dow
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -807,7 +786,6 @@ import { invoicesGetInvoicePdf } from "@flexprice/sdk/funcs/invoices-get-invoice
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -855,7 +833,6 @@ Use when subscription or usage data changed and you need to refresh a draft invo
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -879,7 +856,6 @@ import { invoicesRecalculateInvoice } from "@flexprice/sdk/funcs/invoices-recalc
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -929,7 +905,6 @@ Use when cancelling an invoice (e.g. order cancelled or duplicate). Only unpaid 
 import { Flexprice } from "@flexprice/sdk";
 
 const flexprice = new Flexprice({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
@@ -953,7 +928,6 @@ import { invoicesVoidInvoice } from "@flexprice/sdk/funcs/invoices-void-invoice.
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const flexprice = new FlexpriceCore({
-  serverURL: "https://api.example.com",
   apiKeyAuth: "<YOUR_API_KEY_HERE>",
 });
 
