@@ -12,10 +12,6 @@ import {
   AlertSettings$inboundSchema,
 } from "./alert-settings.js";
 import { FeatureType, FeatureType$inboundSchema } from "./feature-type.js";
-import {
-  ReportingUnit,
-  ReportingUnit$inboundSchema,
-} from "./reporting-unit.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
@@ -30,7 +26,6 @@ export type GithubComFlexpriceFlexpriceInternalDomainFeatureFeature = {
   metadata?: { [k: string]: string } | undefined;
   meterId?: string | undefined;
   name?: string | undefined;
-  reportingUnit?: ReportingUnit | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   type?: FeatureType | undefined;
@@ -57,7 +52,6 @@ export const GithubComFlexpriceFlexpriceInternalDomainFeatureFeature$inboundSche
       metadata: types.optional(z.record(z.string(), types.string())),
       meter_id: types.optional(types.string()),
       name: types.optional(types.string()),
-      reporting_unit: types.optional(ReportingUnit$inboundSchema),
       status: types.optional(Status$inboundSchema),
       tenant_id: types.optional(types.string()),
       type: types.optional(FeatureType$inboundSchema),
@@ -74,7 +68,6 @@ export const GithubComFlexpriceFlexpriceInternalDomainFeatureFeature$inboundSche
         "environment_id": "environmentId",
         "lookup_key": "lookupKey",
         "meter_id": "meterId",
-        "reporting_unit": "reportingUnit",
         "tenant_id": "tenantId",
         "unit_plural": "unitPlural",
         "unit_singular": "unitSingular",

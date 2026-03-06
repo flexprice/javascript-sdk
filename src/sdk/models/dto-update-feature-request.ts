@@ -14,11 +14,6 @@ import {
   MeterFilter$Outbound,
   MeterFilter$outboundSchema,
 } from "./meter-filter.js";
-import {
-  ReportingUnit,
-  ReportingUnit$Outbound,
-  ReportingUnit$outboundSchema,
-} from "./reporting-unit.js";
 
 export type DtoUpdateFeatureRequest = {
   alertSettings?: AlertSettings | undefined;
@@ -26,7 +21,6 @@ export type DtoUpdateFeatureRequest = {
   filters?: Array<MeterFilter> | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
-  reportingUnit?: ReportingUnit | undefined;
   unitPlural?: string | undefined;
   unitSingular?: string | undefined;
 };
@@ -38,7 +32,6 @@ export type DtoUpdateFeatureRequest$Outbound = {
   filters?: Array<MeterFilter$Outbound> | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
-  reporting_unit?: ReportingUnit$Outbound | undefined;
   unit_plural?: string | undefined;
   unit_singular?: string | undefined;
 };
@@ -54,14 +47,12 @@ export const DtoUpdateFeatureRequest$outboundSchema: z.ZodMiniType<
     filters: z.optional(z.array(MeterFilter$outboundSchema)),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
-    reportingUnit: z.optional(ReportingUnit$outboundSchema),
     unitPlural: z.optional(z.string()),
     unitSingular: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       alertSettings: "alert_settings",
-      reportingUnit: "reporting_unit",
       unitPlural: "unit_plural",
       unitSingular: "unit_singular",
     });
