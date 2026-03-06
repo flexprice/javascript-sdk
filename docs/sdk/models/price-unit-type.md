@@ -6,11 +6,11 @@
 import { PriceUnitType } from "@flexprice/sdk/sdk/models";
 
 let value: PriceUnitType = "FIAT";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "FIAT" | "CUSTOM" | Unrecognized<string>

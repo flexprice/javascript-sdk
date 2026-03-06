@@ -6,11 +6,11 @@
 import { CreditNoteStatus } from "@flexprice/sdk/sdk/models";
 
 let value: CreditNoteStatus = "DRAFT";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "DRAFT" | "FINALIZED" | "VOIDED" | Unrecognized<string>

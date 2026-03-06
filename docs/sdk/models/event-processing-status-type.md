@@ -6,11 +6,11 @@
 import { EventProcessingStatusType } from "@flexprice/sdk/sdk/models";
 
 let value: EventProcessingStatusType = "processing";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "processed" | "processing" | "failed" | Unrecognized<string>

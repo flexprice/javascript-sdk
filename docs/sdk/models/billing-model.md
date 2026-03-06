@@ -6,11 +6,11 @@
 import { BillingModel } from "@flexprice/sdk/sdk/models";
 
 let value: BillingModel = "FLAT_FEE";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "FLAT_FEE" | "PACKAGE" | "TIERED" | Unrecognized<string>

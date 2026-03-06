@@ -6,11 +6,11 @@
 import { ApplicationStatus } from "@flexprice/sdk/sdk/models";
 
 let value: ApplicationStatus = "cancelled";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "applied" | "failed" | "pending" | "skipped" | "cancelled" | Unrecognized<string>

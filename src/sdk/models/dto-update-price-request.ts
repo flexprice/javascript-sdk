@@ -27,7 +27,12 @@ export type DtoUpdatePriceRequest = {
   displayName?: string | undefined;
   effectiveFrom?: string | undefined;
   /**
-   * GroupID is the id of the group to update the price in
+   * GroupID is the id of the group to update the price in.
+   *
+   * @remarks
+   * If not provided (nil), the group will not be changed
+   * If provided as empty string (""), the group will be removed (price will be ungrouped)
+   * If provided as a group ID, the price will be assigned to that group (must exist and be published)
    */
   groupId?: string | undefined;
   /**

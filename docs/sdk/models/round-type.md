@@ -6,11 +6,11 @@
 import { RoundType } from "@flexprice/sdk/sdk/models";
 
 let value: RoundType = "down";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "up" | "down" | Unrecognized<string>

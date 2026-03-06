@@ -417,6 +417,7 @@ export * from "./process-payment-op.js";
 export * from "./proration-behavior.js";
 export * from "./query-filter.js";
 export * from "./recalculate-invoice-op.js";
+export * from "./reporting-unit.js";
 export * from "./reset-usage.js";
 export * from "./response-validation-error.js";
 export * from "./resume-mode.js";

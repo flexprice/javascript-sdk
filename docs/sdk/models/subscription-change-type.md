@@ -6,11 +6,11 @@
 import { SubscriptionChangeType } from "@flexprice/sdk/sdk/models";
 
 let value: SubscriptionChangeType = "downgrade";
+
+// Open enum: unrecognized values are captured as Unrecognized<string>
 ```
 
 ## Values
-
-This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
 "upgrade" | "downgrade" | "lateral" | Unrecognized<string>
