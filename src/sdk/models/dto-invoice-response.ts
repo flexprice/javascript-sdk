@@ -146,6 +146,13 @@ export type DtoInvoiceResponse = {
    */
   periodStart?: string | undefined;
   /**
+   * recalculated_invoice_id is the ID of the replacement invoice created when this invoice was voided and recalculated.
+   *
+   * @remarks
+   * When set, it forms a parent→child link from this (voided) invoice to the new replacement invoice.
+   */
+  recalculatedInvoiceId?: string | undefined;
+  /**
    * refunded_amount is the total sum of credit notes of type "refund".
    *
    * @remarks
@@ -235,6 +242,7 @@ export const DtoInvoiceResponse$inboundSchema: z.ZodMiniType<
     payment_status: types.optional(PaymentStatus$inboundSchema),
     period_end: types.optional(types.string()),
     period_start: types.optional(types.string()),
+    recalculated_invoice_id: types.optional(types.string()),
     refunded_amount: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     subscription: types.optional(
@@ -280,6 +288,7 @@ export const DtoInvoiceResponse$inboundSchema: z.ZodMiniType<
       "payment_status": "paymentStatus",
       "period_end": "periodEnd",
       "period_start": "periodStart",
+      "recalculated_invoice_id": "recalculatedInvoiceId",
       "refunded_amount": "refundedAmount",
       "subscription_id": "subscriptionId",
       "tenant_id": "tenantId",

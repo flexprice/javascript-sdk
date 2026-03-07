@@ -36,6 +36,10 @@ import {
   GithubComFlexpriceFlexpriceInternalDomainPlanPlan$inboundSchema,
 } from "./github-com-flexprice-flexprice-internal-domain-plan-plan.js";
 import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
+import {
+  ReportingUnit,
+  ReportingUnit$inboundSchema,
+} from "./reporting-unit.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionSubscriptionLineItem,
@@ -74,6 +78,7 @@ export type DtoUsageAnalyticItem = {
    * Stores property values for flexible grouping (e.g., org_id -> "org123")
    */
   properties?: { [k: string]: string } | undefined;
+  reportingUnit?: ReportingUnit | undefined;
   source?: string | undefined;
   /**
    * List of sources when not grouping by source
@@ -90,6 +95,10 @@ export type DtoUsageAnalyticItem = {
   subscriptionLineItem?: SubscriptionSubscriptionLineItem | undefined;
   totalCost?: string | undefined;
   totalUsage?: string | undefined;
+  /**
+   * Empty string when feature has no reporting unit; otherwise the value in reporting units
+   */
+  totalUsageDisplay?: string | undefined;
   unit?: string | undefined;
   unitPlural?: string | undefined;
   windowSize?: WindowSize | undefined;
@@ -125,6 +134,7 @@ export const DtoUsageAnalyticItem$inboundSchema: z.ZodMiniType<
     price: types.optional(DtoPriceResponse$inboundSchema),
     price_id: types.optional(types.string()),
     properties: types.optional(z.record(z.string(), types.string())),
+    reporting_unit: types.optional(ReportingUnit$inboundSchema),
     source: types.optional(types.string()),
     sources: types.optional(z.array(types.string())),
     sub_line_item_id: types.optional(types.string()),
@@ -134,6 +144,7 @@ export const DtoUsageAnalyticItem$inboundSchema: z.ZodMiniType<
     ),
     total_cost: types.optional(types.string()),
     total_usage: types.optional(types.string()),
+    total_usage_display: types.optional(types.string()),
     unit: types.optional(types.string()),
     unit_plural: types.optional(types.string()),
     window_size: types.optional(WindowSize$inboundSchema),
@@ -149,11 +160,13 @@ export const DtoUsageAnalyticItem$inboundSchema: z.ZodMiniType<
       "meter_id": "meterId",
       "plan_id": "planId",
       "price_id": "priceId",
+      "reporting_unit": "reportingUnit",
       "sub_line_item_id": "subLineItemId",
       "subscription_id": "subscriptionId",
       "subscription_line_item": "subscriptionLineItem",
       "total_cost": "totalCost",
       "total_usage": "totalUsage",
+      "total_usage_display": "totalUsageDisplay",
       "unit_plural": "unitPlural",
       "window_size": "windowSize",
     });

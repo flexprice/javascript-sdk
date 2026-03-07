@@ -10,6 +10,7 @@ import { invoicesGetInvoicePdf } from "../funcs/invoices-get-invoice-pdf.js";
 import { invoicesGetInvoicePreview } from "../funcs/invoices-get-invoice-preview.js";
 import { invoicesGetInvoice } from "../funcs/invoices-get-invoice.js";
 import { invoicesQueryInvoice } from "../funcs/invoices-query-invoice.js";
+import { invoicesRecalculateInvoiceV2 } from "../funcs/invoices-recalculate-invoice-v2.js";
 import { invoicesRecalculateInvoice } from "../funcs/invoices-recalculate-invoice.js";
 import { invoicesTriggerInvoiceCommsWebhook } from "../funcs/invoices-trigger-invoice-comms-webhook.js";
 import { invoicesUpdateInvoicePaymentStatus } from "../funcs/invoices-update-invoice-payment-status.js";
@@ -218,17 +219,34 @@ export class Invoices extends ClientSDK {
   }
 
   /**
-   * Recalculate invoice
+   * Recalculate invoice (default: voided invoice)
    *
    * @remarks
-   * Use when subscription or usage data changed and you need to refresh a draft invoice before finalizing. Optional finalize=true to lock after recalc.
+   * Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
    */
   async recalculateInvoice(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.DtoInvoiceResponse> {
+    return unwrapAsync(invoicesRecalculateInvoice(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Recalculate draft invoice (v2)
+   *
+   * @remarks
+   * Recalculates a draft SUBSCRIPTION invoice in-place (replaces line items, reapplies credits/coupons/taxes). Use when subscription or usage data changed before finalizing.
+   */
+  async recalculateInvoiceV2(
     id: string,
     finalize?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.DtoInvoiceResponse> {
-    return unwrapAsync(invoicesRecalculateInvoice(
+    return unwrapAsync(invoicesRecalculateInvoiceV2(
       this,
       id,
       finalize,

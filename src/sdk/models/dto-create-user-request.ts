@@ -7,15 +7,20 @@ import { UserType, UserType$outboundSchema } from "./user-type.js";
 
 export type DtoCreateUserRequest = {
   /**
-   * Roles are required
+   * Required when type is "user"
    */
-  roles: Array<string>;
+  email?: string | undefined;
+  /**
+   * Required when type is "service_account"
+   */
+  roles?: Array<string> | undefined;
   type: UserType;
 };
 
 /** @internal */
 export type DtoCreateUserRequest$Outbound = {
-  roles: Array<string>;
+  email?: string | undefined;
+  roles?: Array<string> | undefined;
   type: string;
 };
 
@@ -24,7 +29,8 @@ export const DtoCreateUserRequest$outboundSchema: z.ZodMiniType<
   DtoCreateUserRequest$Outbound,
   DtoCreateUserRequest
 > = z.object({
-  roles: z.array(z.string()),
+  email: z.optional(z.string()),
+  roles: z.optional(z.array(z.string())),
   type: UserType$outboundSchema,
 });
 

@@ -6,11 +6,6 @@
 import { DtoCreateUserRequest } from "@flexprice/sdk/sdk/models";
 
 let value: DtoCreateUserRequest = {
-  roles: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
-  ],
   type: "service_account",
 };
 ```
@@ -19,5 +14,6 @@ let value: DtoCreateUserRequest = {
 
 | Field                                            | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `roles`                                          | *string*[]                                       | :heavy_check_mark:                               | Roles are required                               |
+| `email`                                          | *string*                                         | :heavy_minus_sign:                               | Required when type is "user"                     |
+| `roles`                                          | *string*[]                                       | :heavy_minus_sign:                               | Required when type is "service_account"          |
 | `type`                                           | [models.UserType](../../sdk/models/user-type.md) | :heavy_check_mark:                               | N/A                                              |

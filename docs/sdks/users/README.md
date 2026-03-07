@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [createUser](#createuser) - Create service account
+* [createUser](#createuser) - Create user or service account
 * [getUserInfo](#getuserinfo) - Get current user
 * [queryUser](#queryuser) - Query users
 
 ## createUser
 
-Use when provisioning API access for automation, CI/CD pipelines, or headless integrations that need scoped API keys.
+Create a user account (type=user, email required; returns user + password for login) or a service account (type=service_account, roles required) for API/automation access.
 
 ### Example Usage
 
@@ -24,7 +24,6 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.users.createUser({
-    roles: [],
     type: "user",
   });
 
@@ -50,7 +49,6 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await usersCreateUser(flexprice, {
-    roles: [],
     type: "user",
   });
   if (res.ok) {
@@ -75,7 +73,7 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoUserResponse](../../sdk/models/dto-user-response.md)\>**
+**Promise\<[models.DtoCreateUserResponse](../../sdk/models/dto-create-user-response.md)\>**
 
 ### Errors
 

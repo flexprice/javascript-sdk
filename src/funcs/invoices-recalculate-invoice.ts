@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -26,15 +26,14 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Recalculate invoice
+ * Recalculate invoice (default: voided invoice)
  *
  * @remarks
- * Use when subscription or usage data changed and you need to refresh a draft invoice before finalizing. Optional finalize=true to lock after recalc.
+ * Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
  */
 export function invoicesRecalculateInvoice(
   client: FlexpriceCore,
   id: string,
-  finalize?: boolean | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,7 +52,6 @@ export function invoicesRecalculateInvoice(
   return new APIPromise($do(
     client,
     id,
-    finalize,
     options,
   ));
 }
@@ -61,7 +59,6 @@ export function invoicesRecalculateInvoice(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  finalize?: boolean | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -82,7 +79,6 @@ async function $do(
 > {
   const input: models.RecalculateInvoiceRequest = {
     id: id,
-    finalize: finalize,
   };
 
   const parsed = safeParse(
@@ -104,10 +100,6 @@ async function $do(
   };
 
   const path = pathToFunc("/invoices/{id}/recalculate")(pathParams);
-
-  const query = encodeFormQuery({
-    "finalize": payload.finalize,
-  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -138,7 +130,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,

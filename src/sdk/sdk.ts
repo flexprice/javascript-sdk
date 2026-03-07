@@ -12,7 +12,6 @@ import { CreditNotes } from "./credit-notes.js";
 import { Customers } from "./customers.js";
 import { Entitlements } from "./entitlements.js";
 import { EntityIntegrationMappings } from "./entity-integration-mappings.js";
-import { Environments } from "./environments.js";
 import { Events } from "./events.js";
 import { Features } from "./features.js";
 import { Groups } from "./groups.js";
@@ -91,11 +90,6 @@ export class Flexprice extends ClientSDK {
     return (this._entityIntegrationMappings ??= new EntityIntegrationMappings(
       this._options,
     ));
-  }
-
-  private _environments?: Environments;
-  get environments(): Environments {
-    return (this._environments ??= new Environments(this._options));
   }
 
   private _events?: Events;

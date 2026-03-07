@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -26,19 +26,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update environment
+ * Recalculate draft invoice (v2)
  *
  * @remarks
- * Use when changing environment name or settings (e.g. renaming or updating metadata).
+ * Recalculates a draft SUBSCRIPTION invoice in-place (replaces line items, reapplies credits/coupons/taxes). Use when subscription or usage data changed before finalizing.
  */
-export function environmentsUpdateEnvironment(
+export function invoicesRecalculateInvoiceV2(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateEnvironmentRequest,
+  finalize?: boolean | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoEnvironmentResponse,
+    models.DtoInvoiceResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -53,7 +53,7 @@ export function environmentsUpdateEnvironment(
   return new APIPromise($do(
     client,
     id,
-    body,
+    finalize,
     options,
   ));
 }
@@ -61,12 +61,12 @@ export function environmentsUpdateEnvironment(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateEnvironmentRequest,
+  finalize?: boolean | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoEnvironmentResponse,
+      models.DtoInvoiceResponse,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -80,21 +80,22 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.UpdateEnvironmentRequest = {
+  const input: models.RecalculateInvoiceV2Request = {
     id: id,
-    body: body,
+    finalize: finalize,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.UpdateEnvironmentRequest$outboundSchema, value),
+    (value) =>
+      z.parse(models.RecalculateInvoiceV2Request$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body$ = encodeJSON("body", payload.body, { explode: true });
+  const body = null;
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -103,10 +104,13 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc("/environments/{id}")(pathParams);
+  const path = pathToFunc("/invoices/{id}/recalculate-v2")(pathParams);
+
+  const query = encodeFormQuery({
+    "finalize": payload.finalize,
+  });
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -117,7 +121,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "updateEnvironment",
+    operationID: "recalculateInvoiceV2",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -131,11 +135,12 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    body: body$,
+    query: query,
+    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -160,7 +165,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoEnvironmentResponse,
+    models.DtoInvoiceResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -171,7 +176,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoEnvironmentResponse$inboundSchema),
+    M.json(200, models.DtoInvoiceResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

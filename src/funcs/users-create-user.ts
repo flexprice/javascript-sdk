@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create service account
+ * Create user or service account
  *
  * @remarks
- * Use when provisioning API access for automation, CI/CD pipelines, or headless integrations that need scoped API keys.
+ * Create a user account (type=user, email required; returns user + password for login) or a service account (type=service_account, roles required) for API/automation access.
  */
 export function usersCreateUser(
   client: FlexpriceCore,
@@ -37,7 +37,7 @@ export function usersCreateUser(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoUserResponse,
+    models.DtoCreateUserResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoUserResponse,
+      models.DtoCreateUserResponse,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -145,7 +145,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoUserResponse,
+    models.DtoCreateUserResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -156,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.DtoUserResponse$inboundSchema),
+    M.json(201, models.DtoCreateUserResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

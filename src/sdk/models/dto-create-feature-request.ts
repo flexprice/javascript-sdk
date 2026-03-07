@@ -15,6 +15,11 @@ import {
   DtoCreateMeterRequest$outboundSchema,
 } from "./dto-create-meter-request.js";
 import { FeatureType, FeatureType$outboundSchema } from "./feature-type.js";
+import {
+  ReportingUnit,
+  ReportingUnit$Outbound,
+  ReportingUnit$outboundSchema,
+} from "./reporting-unit.js";
 
 export type DtoCreateFeatureRequest = {
   alertSettings?: AlertSettings | undefined;
@@ -24,6 +29,7 @@ export type DtoCreateFeatureRequest = {
   meter?: DtoCreateMeterRequest | undefined;
   meterId?: string | undefined;
   name: string;
+  reportingUnit?: ReportingUnit | undefined;
   type: FeatureType;
   unitPlural?: string | undefined;
   unitSingular?: string | undefined;
@@ -38,6 +44,7 @@ export type DtoCreateFeatureRequest$Outbound = {
   meter?: DtoCreateMeterRequest$Outbound | undefined;
   meter_id?: string | undefined;
   name: string;
+  reporting_unit?: ReportingUnit$Outbound | undefined;
   type: string;
   unit_plural?: string | undefined;
   unit_singular?: string | undefined;
@@ -56,6 +63,7 @@ export const DtoCreateFeatureRequest$outboundSchema: z.ZodMiniType<
     meter: z.optional(DtoCreateMeterRequest$outboundSchema),
     meterId: z.optional(z.string()),
     name: z.string(),
+    reportingUnit: z.optional(ReportingUnit$outboundSchema),
     type: FeatureType$outboundSchema,
     unitPlural: z.optional(z.string()),
     unitSingular: z.optional(z.string()),
@@ -65,6 +73,7 @@ export const DtoCreateFeatureRequest$outboundSchema: z.ZodMiniType<
       alertSettings: "alert_settings",
       lookupKey: "lookup_key",
       meterId: "meter_id",
+      reportingUnit: "reporting_unit",
       unitPlural: "unit_plural",
       unitSingular: "unit_singular",
     });

@@ -12,7 +12,6 @@ let value: RecalculateInvoiceRequest = {
 
 ## Fields
 
-| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *string*                                                            | :heavy_check_mark:                                                  | Invoice ID                                                          |
-| `finalize`                                                          | *boolean*                                                           | :heavy_minus_sign:                                                  | Whether to finalize the invoice after recalculation (default: true) |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *string*           | :heavy_check_mark: | Invoice ID         |

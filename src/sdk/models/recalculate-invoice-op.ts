@@ -9,16 +9,11 @@ export type RecalculateInvoiceRequest = {
    * Invoice ID
    */
   id: string;
-  /**
-   * Whether to finalize the invoice after recalculation (default: true)
-   */
-  finalize?: boolean | undefined;
 };
 
 /** @internal */
 export type RecalculateInvoiceRequest$Outbound = {
   id: string;
-  finalize?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,7 +22,6 @@ export const RecalculateInvoiceRequest$outboundSchema: z.ZodMiniType<
   RecalculateInvoiceRequest
 > = z.object({
   id: z.string(),
-  finalize: z.optional(z.boolean()),
 });
 
 export function recalculateInvoiceRequestToJSON(

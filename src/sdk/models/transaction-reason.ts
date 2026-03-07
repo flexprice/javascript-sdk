@@ -17,6 +17,7 @@ export const TransactionReason = {
   WalletTermination: "WALLET_TERMINATION",
   ManualBalanceDebit: "MANUAL_BALANCE_DEBIT",
   CreditAdjustment: "CREDIT_ADJUSTMENT",
+  InvoiceVoidRefund: "INVOICE_VOID_REFUND",
 } as const;
 export type TransactionReason = OpenEnum<typeof TransactionReason>;
 

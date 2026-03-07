@@ -677,7 +677,7 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.wallets.topUpWallet("<id>", {
-    transactionReason: "MANUAL_BALANCE_DEBIT",
+    transactionReason: "CREDIT_ADJUSTMENT",
   });
 
   console.log(result);
@@ -702,7 +702,7 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await walletsTopUpWallet(flexprice, "<id>", {
-    transactionReason: "MANUAL_BALANCE_DEBIT",
+    transactionReason: "CREDIT_ADJUSTMENT",
   });
   if (res.ok) {
     const { value: result } = res;

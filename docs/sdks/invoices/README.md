@@ -15,7 +15,8 @@
 * [updateInvoicePaymentStatus](#updateinvoicepaymentstatus) - Update invoice payment status
 * [attemptInvoicePayment](#attemptinvoicepayment) - Attempt invoice payment
 * [getInvoicePdf](#getinvoicepdf) - Get invoice PDF
-* [recalculateInvoice](#recalculateinvoice) - Recalculate invoice
+* [recalculateInvoice](#recalculateinvoice) - Recalculate invoice (default: voided invoice)
+* [recalculateInvoiceV2](#recalculateinvoicev2) - Recalculate draft invoice (v2)
 * [voidInvoice](#voidinvoice) - Void invoice
 
 ## getCustomerInvoiceSummary
@@ -824,7 +825,7 @@ run();
 
 ## recalculateInvoice
 
-Use when subscription or usage data changed and you need to refresh a draft invoice before finalizing. Optional finalize=true to lock after recalc.
+Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
 
 ### Example Usage
 
@@ -866,6 +867,77 @@ async function run() {
     console.log(result);
   } else {
     console.log("invoicesRecalculateInvoice failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Invoice ID                                                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.DtoInvoiceResponse](../../sdk/models/dto-invoice-response.md)\>**
+
+### Errors
+
+| Error Type                       | Status Code                      | Content Type                     |
+| -------------------------------- | -------------------------------- | -------------------------------- |
+| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
+| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
+| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+
+## recalculateInvoiceV2
+
+Recalculates a draft SUBSCRIPTION invoice in-place (replaces line items, reapplies credits/coupons/taxes). Use when subscription or usage data changed before finalizing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="recalculateInvoiceV2" method="post" path="/invoices/{id}/recalculate-v2" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.invoices.recalculateInvoiceV2("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { invoicesRecalculateInvoiceV2 } from "@flexprice/sdk/funcs/invoices-recalculate-invoice-v2.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await invoicesRecalculateInvoiceV2(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesRecalculateInvoiceV2 failed:", res.error);
   }
 }
 

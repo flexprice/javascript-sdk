@@ -11,15 +11,15 @@ import * as models from "./models/index.js";
 
 export class Users extends ClientSDK {
   /**
-   * Create service account
+   * Create user or service account
    *
    * @remarks
-   * Use when provisioning API access for automation, CI/CD pipelines, or headless integrations that need scoped API keys.
+   * Create a user account (type=user, email required; returns user + password for login) or a service account (type=service_account, roles required) for API/automation access.
    */
   async createUser(
     request: models.DtoCreateUserRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoUserResponse> {
+  ): Promise<models.DtoCreateUserResponse> {
     return unwrapAsync(usersCreateUser(
       this,
       request,
