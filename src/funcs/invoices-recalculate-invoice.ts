@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Recalculate invoice (default: voided invoice)
+ * Recalculate invoice (voided invoice)
  *
  * @remarks
- * Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
+ * Starts an async workflow that creates a fresh replacement invoice for a voided SUBSCRIPTION invoice (same billing period). Returns workflow_id and run_id; poll workflow status or GET the new invoice via recalculated_invoice_id after completion.
  */
 export function invoicesRecalculateInvoice(
   client: FlexpriceCore,
@@ -37,7 +37,7 @@ export function invoicesRecalculateInvoice(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoInvoiceResponse,
+    models.ModelsTemporalWorkflowResult,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoInvoiceResponse,
+      models.ModelsTemporalWorkflowResult,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoInvoiceResponse,
+    models.ModelsTemporalWorkflowResult,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -166,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoInvoiceResponse$inboundSchema),
+    M.json(202, models.ModelsTemporalWorkflowResult$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

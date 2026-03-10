@@ -24,6 +24,10 @@ import {
 export type DtoCreateFeatureRequest = {
   alertSettings?: AlertSettings | undefined;
   description?: string | undefined;
+  /**
+   * GroupID is the id of the group to add the feature to
+   */
+  groupId?: string | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   meter?: DtoCreateMeterRequest | undefined;
@@ -39,6 +43,7 @@ export type DtoCreateFeatureRequest = {
 export type DtoCreateFeatureRequest$Outbound = {
   alert_settings?: AlertSettings$Outbound | undefined;
   description?: string | undefined;
+  group_id?: string | undefined;
   lookup_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   meter?: DtoCreateMeterRequest$Outbound | undefined;
@@ -58,6 +63,7 @@ export const DtoCreateFeatureRequest$outboundSchema: z.ZodMiniType<
   z.object({
     alertSettings: z.optional(AlertSettings$outboundSchema),
     description: z.optional(z.string()),
+    groupId: z.optional(z.string()),
     lookupKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     meter: z.optional(DtoCreateMeterRequest$outboundSchema),
@@ -71,6 +77,7 @@ export const DtoCreateFeatureRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       alertSettings: "alert_settings",
+      groupId: "group_id",
       lookupKey: "lookup_key",
       meterId: "meter_id",
       reportingUnit: "reporting_unit",

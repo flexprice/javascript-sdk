@@ -24,6 +24,10 @@ export type DtoUpdateFeatureRequest = {
   alertSettings?: AlertSettings | undefined;
   description?: string | undefined;
   filters?: Array<MeterFilter> | undefined;
+  /**
+   * GroupID is the id of the group to assign the feature to. Pass empty string to clear.
+   */
+  groupId?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   reportingUnit?: ReportingUnit | undefined;
@@ -36,6 +40,7 @@ export type DtoUpdateFeatureRequest$Outbound = {
   alert_settings?: AlertSettings$Outbound | undefined;
   description?: string | undefined;
   filters?: Array<MeterFilter$Outbound> | undefined;
+  group_id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   reporting_unit?: ReportingUnit$Outbound | undefined;
@@ -52,6 +57,7 @@ export const DtoUpdateFeatureRequest$outboundSchema: z.ZodMiniType<
     alertSettings: z.optional(AlertSettings$outboundSchema),
     description: z.optional(z.string()),
     filters: z.optional(z.array(MeterFilter$outboundSchema)),
+    groupId: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
     reportingUnit: z.optional(ReportingUnit$outboundSchema),
@@ -61,6 +67,7 @@ export const DtoUpdateFeatureRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       alertSettings: "alert_settings",
+      groupId: "group_id",
       reportingUnit: "reporting_unit",
       unitPlural: "unit_plural",
       unitSingular: "unit_singular",

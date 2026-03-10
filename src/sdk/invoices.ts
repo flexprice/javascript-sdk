@@ -219,15 +219,15 @@ export class Invoices extends ClientSDK {
   }
 
   /**
-   * Recalculate invoice (default: voided invoice)
+   * Recalculate invoice (voided invoice)
    *
    * @remarks
-   * Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
+   * Starts an async workflow that creates a fresh replacement invoice for a voided SUBSCRIPTION invoice (same billing period). Returns workflow_id and run_id; poll workflow status or GET the new invoice via recalculated_invoice_id after completion.
    */
   async recalculateInvoice(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(invoicesRecalculateInvoice(
       this,
       id,

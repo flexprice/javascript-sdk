@@ -12,6 +12,10 @@ import {
   AlertSettings$inboundSchema,
 } from "./alert-settings.js";
 import {
+  DtoGroupResponse,
+  DtoGroupResponse$inboundSchema,
+} from "./dto-group-response.js";
+import {
   DtoMeterResponse,
   DtoMeterResponse$inboundSchema,
 } from "./dto-meter-response.js";
@@ -29,6 +33,8 @@ export type DtoFeatureResponse = {
   createdBy?: string | undefined;
   description?: string | undefined;
   environmentId?: string | undefined;
+  group?: DtoGroupResponse | undefined;
+  groupId?: string | undefined;
   id?: string | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -56,6 +62,8 @@ export const DtoFeatureResponse$inboundSchema: z.ZodMiniType<
     created_by: types.optional(types.string()),
     description: types.optional(types.string()),
     environment_id: types.optional(types.string()),
+    group: types.optional(DtoGroupResponse$inboundSchema),
+    group_id: types.optional(types.string()),
     id: types.optional(types.string()),
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
@@ -77,6 +85,7 @@ export const DtoFeatureResponse$inboundSchema: z.ZodMiniType<
       "created_at": "createdAt",
       "created_by": "createdBy",
       "environment_id": "environmentId",
+      "group_id": "groupId",
       "lookup_key": "lookupKey",
       "meter_id": "meterId",
       "reporting_unit": "reportingUnit",

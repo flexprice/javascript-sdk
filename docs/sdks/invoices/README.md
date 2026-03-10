@@ -15,7 +15,7 @@
 * [updateInvoicePaymentStatus](#updateinvoicepaymentstatus) - Update invoice payment status
 * [attemptInvoicePayment](#attemptinvoicepayment) - Attempt invoice payment
 * [getInvoicePdf](#getinvoicepdf) - Get invoice PDF
-* [recalculateInvoice](#recalculateinvoice) - Recalculate invoice (default: voided invoice)
+* [recalculateInvoice](#recalculateinvoice) - Recalculate invoice (voided invoice)
 * [recalculateInvoiceV2](#recalculateinvoicev2) - Recalculate draft invoice (v2)
 * [voidInvoice](#voidinvoice) - Void invoice
 
@@ -825,7 +825,7 @@ run();
 
 ## recalculateInvoice
 
-Creates a fresh replacement invoice for a voided SUBSCRIPTION invoice covering the same billing period. The original voided invoice is linked to the new invoice via recalculated_invoice_id. Can only be called once per voided invoice.
+Starts an async workflow that creates a fresh replacement invoice for a voided SUBSCRIPTION invoice (same billing period). Returns workflow_id and run_id; poll workflow status or GET the new invoice via recalculated_invoice_id after completion.
 
 ### Example Usage
 
@@ -884,7 +884,7 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoInvoiceResponse](../../sdk/models/dto-invoice-response.md)\>**
+**Promise\<[models.ModelsTemporalWorkflowResult](../../sdk/models/models-temporal-workflow-result.md)\>**
 
 ### Errors
 

@@ -358,7 +358,9 @@ export * from "./github-com-flexprice-flexprice-internal-domain-coupon-coupon.js
 export * from "./github-com-flexprice-flexprice-internal-domain-customer-customer.js";
 export * from "./github-com-flexprice-flexprice-internal-domain-feature-feature.js";
 export * from "./github-com-flexprice-flexprice-internal-domain-plan-plan.js";
+export * from "./group-entity-type.js";
 export * from "./group-filter.js";
+export * from "./group-group.js";
 export * from "./handle-chargebee-webhook-op.js";
 export * from "./handle-hubspot-webhook-op.js";
 export * from "./handle-moyasar-webhook-op.js";
