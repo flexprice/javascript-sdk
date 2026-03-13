@@ -35,6 +35,7 @@ import {
   GithubComFlexpriceFlexpriceInternalDomainPlanPlan,
   GithubComFlexpriceFlexpriceInternalDomainPlanPlan$inboundSchema,
 } from "./github-com-flexprice-flexprice-internal-domain-plan-plan.js";
+import { GroupGroup, GroupGroup$inboundSchema } from "./group-group.js";
 import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
 import {
   ReportingUnit,
@@ -60,6 +61,7 @@ export type DtoUsageAnalyticItem = {
   eventName?: string | undefined;
   feature?: GithubComFlexpriceFlexpriceInternalDomainFeatureFeature | undefined;
   featureId?: string | undefined;
+  group?: GroupGroup | undefined;
   meter?: MeterMeter | undefined;
   /**
    * Meter ID
@@ -123,6 +125,7 @@ export const DtoUsageAnalyticItem$inboundSchema: z.ZodMiniType<
       GithubComFlexpriceFlexpriceInternalDomainFeatureFeature$inboundSchema,
     ),
     feature_id: types.optional(types.string()),
+    group: types.optional(GroupGroup$inboundSchema),
     meter: types.optional(MeterMeter$inboundSchema),
     meter_id: types.optional(types.string()),
     name: types.optional(types.string()),

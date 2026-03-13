@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DtoGetPreviewInvoiceRequest = {
   /**
+   * hide_zero_charges_line_items indicates whether to hide line items with zero cost
+   */
+  hideZeroChargesLineItems?: boolean | undefined;
+  /**
    * period_end is the optional end date of the period to preview
    */
   periodEnd?: string | undefined;
@@ -22,6 +26,7 @@ export type DtoGetPreviewInvoiceRequest = {
 
 /** @internal */
 export type DtoGetPreviewInvoiceRequest$Outbound = {
+  hide_zero_charges_line_items: boolean;
   period_end?: string | undefined;
   period_start?: string | undefined;
   subscription_id: string;
@@ -33,12 +38,14 @@ export const DtoGetPreviewInvoiceRequest$outboundSchema: z.ZodMiniType<
   DtoGetPreviewInvoiceRequest
 > = z.pipe(
   z.object({
+    hideZeroChargesLineItems: z._default(z.boolean(), false),
     periodEnd: z.optional(z.string()),
     periodStart: z.optional(z.string()),
     subscriptionId: z.string(),
   }),
   z.transform((v) => {
     return remap$(v, {
+      hideZeroChargesLineItems: "hide_zero_charges_line_items",
       periodEnd: "period_end",
       periodStart: "period_start",
       subscriptionId: "subscription_id",
