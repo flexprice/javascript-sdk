@@ -10,6 +10,7 @@ export const PaymentGatewayType = {
   Razorpay: "razorpay",
   Nomod: "nomod",
   Moyasar: "moyasar",
+  Paddle: "paddle",
 } as const;
 export type PaymentGatewayType = ClosedEnum<typeof PaymentGatewayType>;
 

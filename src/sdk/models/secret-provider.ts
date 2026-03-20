@@ -16,6 +16,7 @@ export const SecretProvider = {
   Quickbooks: "quickbooks",
   Nomod: "nomod",
   Moyasar: "moyasar",
+  Paddle: "paddle",
 } as const;
 export type SecretProvider = OpenEnum<typeof SecretProvider>;
 

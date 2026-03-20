@@ -13,5 +13,5 @@ let value: SecretProvider = "chargebee";
 ## Values
 
 ```typescript
-"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "nomod" | "moyasar" | Unrecognized<string>
+"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "nomod" | "moyasar" | "paddle" | Unrecognized<string>
 ```

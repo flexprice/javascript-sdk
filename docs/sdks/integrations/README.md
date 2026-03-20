@@ -100,7 +100,7 @@ async function run() {
       "key": "<value>",
     },
     name: "<value>",
-    provider: "chargebee",
+    provider: "quickbooks",
   });
 
   console.log(result);
@@ -129,7 +129,7 @@ async function run() {
       "key": "<value>",
     },
     name: "<value>",
-    provider: "chargebee",
+    provider: "quickbooks",
   });
   if (res.ok) {
     const { value: result } = res;

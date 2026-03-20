@@ -365,6 +365,7 @@ export * from "./handle-chargebee-webhook-op.js";
 export * from "./handle-hubspot-webhook-op.js";
 export * from "./handle-moyasar-webhook-op.js";
 export * from "./handle-nomod-webhook-op.js";
+export * from "./handle-paddle-webhook-op.js";
 export * from "./handle-quickbooks-webhook-op.js";
 export * from "./handle-razorpay-webhook-op.js";
 export * from "./handle-stripe-webhook-op.js";

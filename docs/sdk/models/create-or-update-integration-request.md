@@ -13,7 +13,7 @@ let value: CreateOrUpdateIntegrationRequest = {
       "key1": "<value>",
     },
     name: "<value>",
-    provider: "chargebee",
+    provider: "quickbooks",
   },
 };
 ```

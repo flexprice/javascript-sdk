@@ -5,11 +5,11 @@
 ```typescript
 import { PaymentGatewayType } from "@flexprice/sdk/sdk/models";
 
-let value: PaymentGatewayType = "nomod";
+let value: PaymentGatewayType = "moyasar";
 ```
 
 ## Values
 
 ```typescript
-"stripe" | "razorpay" | "nomod" | "moyasar"
+"stripe" | "razorpay" | "nomod" | "moyasar" | "paddle"
 ```

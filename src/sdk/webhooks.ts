@@ -6,6 +6,7 @@ import { webhooksHandleChargebeeWebhook } from "../funcs/webhooks-handle-chargeb
 import { webhooksHandleHubspotWebhook } from "../funcs/webhooks-handle-hubspot-webhook.js";
 import { webhooksHandleMoyasarWebhook } from "../funcs/webhooks-handle-moyasar-webhook.js";
 import { webhooksHandleNomodWebhook } from "../funcs/webhooks-handle-nomod-webhook.js";
+import { webhooksHandlePaddleWebhook } from "../funcs/webhooks-handle-paddle-webhook.js";
 import { webhooksHandleQuickbooksWebhook } from "../funcs/webhooks-handle-quickbooks-webhook.js";
 import { webhooksHandleRazorpayWebhook } from "../funcs/webhooks-handle-razorpay-webhook.js";
 import { webhooksHandleStripeWebhook } from "../funcs/webhooks-handle-stripe-webhook.js";
@@ -91,6 +92,27 @@ export class Webhooks extends ClientSDK {
       tenantId,
       environmentId,
       xApiKey,
+      options,
+    ));
+  }
+
+  /**
+   * Handle Paddle webhook events
+   *
+   * @remarks
+   * Use as the Paddle webhook endpoint URL. Receives transaction.completed events from Paddle to update payment status in FlexPrice.
+   */
+  async handlePaddleWebhook(
+    tenantId: string,
+    environmentId: string,
+    paddleSignature: string,
+    options?: RequestOptions,
+  ): Promise<{ [k: string]: any }> {
+    return unwrapAsync(webhooksHandlePaddleWebhook(
+      this,
+      tenantId,
+      environmentId,
+      paddleSignature,
       options,
     ));
   }
