@@ -20,6 +20,10 @@ import {
   WebhookDtoWalletAlertInfo,
   WebhookDtoWalletAlertInfo$inboundSchema,
 } from "./webhook-dto-wallet-alert-info.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoWalletWebhookPayload = {
   alert?: WebhookDtoWalletAlertInfo | undefined;
@@ -27,7 +31,7 @@ export type WebhookDtoWalletWebhookPayload = {
    * Customer response object containing all customer information
    */
   customer?: DtoCustomerResponse | undefined;
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
   wallet?: DtoWalletResponse | undefined;
 };
 
@@ -39,7 +43,7 @@ export const WebhookDtoWalletWebhookPayload$inboundSchema: z.ZodMiniType<
   z.object({
     alert: types.optional(WebhookDtoWalletAlertInfo$inboundSchema),
     customer: types.optional(DtoCustomerResponse$inboundSchema),
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
     wallet: types.optional(DtoWalletResponse$inboundSchema),
   }),
   z.transform((v) => {

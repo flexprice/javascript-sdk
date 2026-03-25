@@ -12,10 +12,14 @@ import {
   DtoCreditNoteResponse$inboundSchema,
 } from "./dto-credit-note-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoCreditNoteWebhookPayload = {
   creditNote?: DtoCreditNoteResponse | undefined;
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
 };
 
 /** @internal */
@@ -25,7 +29,7 @@ export const WebhookDtoCreditNoteWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     credit_note: types.optional(DtoCreditNoteResponse$inboundSchema),
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

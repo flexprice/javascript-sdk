@@ -12,9 +12,13 @@ import {
   DtoSubscriptionPhaseResponse$inboundSchema,
 } from "./dto-subscription-phase-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoSubscriptionPhaseWebhookPayload = {
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
   phase?: DtoSubscriptionPhaseResponse | undefined;
 };
 
@@ -22,7 +26,7 @@ export type WebhookDtoSubscriptionPhaseWebhookPayload = {
 export const WebhookDtoSubscriptionPhaseWebhookPayload$inboundSchema:
   z.ZodMiniType<WebhookDtoSubscriptionPhaseWebhookPayload, unknown> = z.pipe(
     z.object({
-      event_type: types.optional(types.string()),
+      event_type: types.optional(WebhookEventName$inboundSchema),
       phase: types.optional(DtoSubscriptionPhaseResponse$inboundSchema),
     }),
     z.transform((v) => {

@@ -12,13 +12,17 @@ import {
   DtoCustomerResponse$inboundSchema,
 } from "./dto-customer-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoCustomerWebhookPayload = {
   /**
    * Customer response object containing all customer information
    */
   customer?: DtoCustomerResponse | undefined;
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
 };
 
 /** @internal */
@@ -28,7 +32,7 @@ export const WebhookDtoCustomerWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     customer: types.optional(DtoCustomerResponse$inboundSchema),
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

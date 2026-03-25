@@ -12,9 +12,13 @@ import {
   DtoFeatureResponse$inboundSchema,
 } from "./dto-feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoFeatureWebhookPayload = {
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
   feature?: DtoFeatureResponse | undefined;
 };
 
@@ -24,7 +28,7 @@ export const WebhookDtoFeatureWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
     feature: types.optional(DtoFeatureResponse$inboundSchema),
   }),
   z.transform((v) => {

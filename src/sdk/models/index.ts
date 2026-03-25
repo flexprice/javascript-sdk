@@ -500,5 +500,6 @@ export * from "./webhook-dto-subscription-webhook-payload.js";
 export * from "./webhook-dto-transaction-webhook-payload.js";
 export * from "./webhook-dto-wallet-alert-info.js";
 export * from "./webhook-dto-wallet-webhook-payload.js";
+export * from "./webhook-event-name.js";
 export * from "./window-size.js";
 export * from "./workflow-execution-filter.js";

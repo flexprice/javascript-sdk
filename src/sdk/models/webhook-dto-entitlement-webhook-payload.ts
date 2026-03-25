@@ -12,10 +12,14 @@ import {
   DtoEntitlementResponse$inboundSchema,
 } from "./dto-entitlement-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoEntitlementWebhookPayload = {
   entitlement?: DtoEntitlementResponse | undefined;
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
 };
 
 /** @internal */
@@ -25,7 +29,7 @@ export const WebhookDtoEntitlementWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     entitlement: types.optional(DtoEntitlementResponse$inboundSchema),
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

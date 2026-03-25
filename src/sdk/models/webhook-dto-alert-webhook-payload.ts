@@ -20,6 +20,10 @@ import {
   DtoWalletResponse$inboundSchema,
 } from "./dto-wallet-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoAlertWebhookPayload = {
   alertStatus?: string | undefined;
@@ -28,7 +32,7 @@ export type WebhookDtoAlertWebhookPayload = {
    * Customer response object containing all customer information
    */
   customer?: DtoCustomerResponse | undefined;
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
   feature?: DtoFeatureResponse | undefined;
   wallet?: DtoWalletResponse | undefined;
 };
@@ -42,7 +46,7 @@ export const WebhookDtoAlertWebhookPayload$inboundSchema: z.ZodMiniType<
     alert_status: types.optional(types.string()),
     alert_type: types.optional(types.string()),
     customer: types.optional(DtoCustomerResponse$inboundSchema),
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
     feature: types.optional(DtoFeatureResponse$inboundSchema),
     wallet: types.optional(DtoWalletResponse$inboundSchema),
   }),

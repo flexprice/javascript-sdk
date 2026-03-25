@@ -12,9 +12,13 @@ import {
   DtoPaymentResponse$inboundSchema,
 } from "./dto-payment-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookEventName,
+  WebhookEventName$inboundSchema,
+} from "./webhook-event-name.js";
 
 export type WebhookDtoPaymentWebhookPayload = {
-  eventType?: string | undefined;
+  eventType?: WebhookEventName | undefined;
   payment?: DtoPaymentResponse | undefined;
 };
 
@@ -24,7 +28,7 @@ export const WebhookDtoPaymentWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    event_type: types.optional(types.string()),
+    event_type: types.optional(WebhookEventName$inboundSchema),
     payment: types.optional(DtoPaymentResponse$inboundSchema),
   }),
   z.transform((v) => {
