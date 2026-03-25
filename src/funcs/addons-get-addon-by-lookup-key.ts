@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/addons/lookup/{lookup_key}")(pathParams);
 
   const headers = new Headers(compactMap({

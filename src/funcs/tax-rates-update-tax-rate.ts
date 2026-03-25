@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/taxes/rates/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

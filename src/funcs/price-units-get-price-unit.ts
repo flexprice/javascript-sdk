@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/prices/units/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

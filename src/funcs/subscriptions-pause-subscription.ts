@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/subscriptions/{id}/pause")(pathParams);
 
   const headers = new Headers(compactMap({

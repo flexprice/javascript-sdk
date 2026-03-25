@@ -31,7 +31,7 @@ import { TaxRates } from "./tax-rates.js";
 import { Tenants } from "./tenants.js";
 import { Users } from "./users.js";
 import { Wallets } from "./wallets.js";
-import { Webhooks } from "./webhooks.js";
+import { WebhookEvents } from "./webhook-events.js";
 import { Workflows } from "./workflows.js";
 
 export class Flexprice extends ClientSDK {
@@ -177,9 +177,9 @@ export class Flexprice extends ClientSDK {
     return (this._users ??= new Users(this._options));
   }
 
-  private _webhooks?: Webhooks;
-  get webhooks(): Webhooks {
-    return (this._webhooks ??= new Webhooks(this._options));
+  private _webhookEvents?: WebhookEvents;
+  get webhookEvents(): WebhookEvents {
+    return (this._webhookEvents ??= new WebhookEvents(this._options));
   }
 
   private _workflows?: Workflows;

@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const CancellationType = {
   Immediate: "immediate",
   EndOfPeriod: "end_of_period",
+  ScheduledDate: "scheduled_date",
 } as const;
 export type CancellationType = OpenEnum<typeof CancellationType>;
 

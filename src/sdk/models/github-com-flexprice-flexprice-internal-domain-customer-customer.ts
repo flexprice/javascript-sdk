@@ -62,7 +62,11 @@ export type GithubComFlexpriceFlexpriceInternalDomainCustomerCustomer = {
    */
   name?: string | undefined;
   /**
-   * ParentCustomerID is the parent customer identifier for the customer
+   * Deprecated: Customer parent hierarchy is deprecated in favor of subscription-level hierarchy.
+   *
+   * @remarks
+   * Retained for backward compatibility; no hierarchy rules are enforced at the service layer.
+   * ParentCustomerID is the parent customer identifier for the customer.
    */
   parentCustomerId?: string | undefined;
   status?: Status | undefined;

@@ -18,6 +18,13 @@ import {
 } from "./proration-behavior.js";
 
 export type DtoCancelSubscriptionRequest = {
+  /**
+   * CancelAt is the custom date to cancel the subscription.
+   *
+   * @remarks
+   * Required when CancellationType is "scheduled_date". Must be in the future.
+   */
+  cancelAt?: string | undefined;
   cancelImmediatelyInovicePolicy?: CancelImmediatelyInvoicePolicy | undefined;
   cancellationType: CancellationType;
   prorationBehavior?: ProrationBehavior | undefined;
@@ -29,6 +36,7 @@ export type DtoCancelSubscriptionRequest = {
 
 /** @internal */
 export type DtoCancelSubscriptionRequest$Outbound = {
+  cancel_at?: string | undefined;
   cancel_immediately_inovice_policy?: string | undefined;
   cancellation_type: string;
   proration_behavior?: string | undefined;
@@ -41,6 +49,7 @@ export const DtoCancelSubscriptionRequest$outboundSchema: z.ZodMiniType<
   DtoCancelSubscriptionRequest
 > = z.pipe(
   z.object({
+    cancelAt: z.optional(z.string()),
     cancelImmediatelyInovicePolicy: z.optional(
       CancelImmediatelyInvoicePolicy$outboundSchema,
     ),
@@ -50,6 +59,7 @@ export const DtoCancelSubscriptionRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      cancelAt: "cancel_at",
       cancelImmediatelyInovicePolicy: "cancel_immediately_inovice_policy",
       cancellationType: "cancellation_type",
       prorationBehavior: "proration_behavior",

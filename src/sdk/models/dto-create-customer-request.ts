@@ -64,14 +64,19 @@ export type DtoCreateCustomerRequest = {
    */
   name?: string | undefined;
   /**
-   * parent_customer_external_id is the external ID of the parent customer from your system
+   * Deprecated: See ParentCustomerID.
    *
    * @remarks
-   * Exactly one of parent_customer_id or parent_customer_external_id may be provided
+   * parent_customer_external_id is the external ID of the parent customer from your system.
+   * Exactly one of parent_customer_id or parent_customer_external_id may be provided.
    */
   parentCustomerExternalId?: string | undefined;
   /**
-   * parent_customer_id is the internal FlexPrice ID of the parent customer
+   * Deprecated: Customer parent hierarchy is deprecated in favor of subscription-level hierarchy.
+   *
+   * @remarks
+   * This field is accepted for backward compatibility but no hierarchy validations are enforced.
+   * parent_customer_id is the internal FlexPrice ID of the parent customer.
    */
   parentCustomerId?: string | undefined;
   /**

@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/entity-integration-mappings/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

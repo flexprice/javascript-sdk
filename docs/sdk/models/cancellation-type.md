@@ -5,7 +5,7 @@
 ```typescript
 import { CancellationType } from "@flexprice/sdk/sdk/models";
 
-let value: CancellationType = "immediate";
+let value: CancellationType = "end_of_period";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: CancellationType = "immediate";
 ## Values
 
 ```typescript
-"immediate" | "end_of_period" | Unrecognized<string>
+"immediate" | "end_of_period" | "scheduled_date" | Unrecognized<string>
 ```

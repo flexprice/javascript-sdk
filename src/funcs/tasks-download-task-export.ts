@@ -99,7 +99,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/tasks/{id}/download")(pathParams);
 
   const headers = new Headers(compactMap({

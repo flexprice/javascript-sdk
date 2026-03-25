@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/wallets/{id}/top-up")(pathParams);
 
   const headers = new Headers(compactMap({

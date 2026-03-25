@@ -96,7 +96,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/rbac/roles/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

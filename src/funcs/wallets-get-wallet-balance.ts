@@ -102,7 +102,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/wallets/{id}/balance/real-time")(pathParams);
 
   const query = encodeFormQuery({

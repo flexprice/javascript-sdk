@@ -125,6 +125,22 @@ export type DtoCreateSubscriptionRequest = {
   gatewayPaymentMethodId?: string | undefined;
   invoiceBilling?: InvoiceBilling | undefined;
   /**
+   * invoicing_customer_external_id is the external ID of the customer to use for invoicing.
+   *
+   * @remarks
+   * Resolved internally to an internal customer ID via external ID lookup.
+   * Mutually exclusive with invoicing_customer_id.
+   */
+  invoicingCustomerExternalId?: string | undefined;
+  /**
+   * invoicing_customer_id is the FlexPrice customer ID to use for invoicing.
+   *
+   * @remarks
+   * This can differ from the subscription customer (e.g., a billing entity invoicing on behalf of another customer).
+   * Mutually exclusive with invoicing_customer_external_id.
+   */
+  invoicingCustomerId?: string | undefined;
+  /**
    * LineItemCommitments allows setting commitment configuration per line item (keyed by price_id)
    */
   lineItemCommitments?:
@@ -191,6 +207,8 @@ export type DtoCreateSubscriptionRequest$Outbound = {
   external_customer_id?: string | undefined;
   gateway_payment_method_id?: string | undefined;
   invoice_billing?: string | undefined;
+  invoicing_customer_external_id?: string | undefined;
+  invoicing_customer_id?: string | undefined;
   line_item_commitments?:
     | { [k: string]: DtoLineItemCommitmentConfig$Outbound }
     | undefined;
@@ -244,6 +262,8 @@ export const DtoCreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     externalCustomerId: z.optional(z.string()),
     gatewayPaymentMethodId: z.optional(z.string()),
     invoiceBilling: z.optional(InvoiceBilling$outboundSchema),
+    invoicingCustomerExternalId: z.optional(z.string()),
+    invoicingCustomerId: z.optional(z.string()),
     lineItemCommitments: z.optional(
       z.record(z.string(), DtoLineItemCommitmentConfig$outboundSchema),
     ),
@@ -291,6 +311,8 @@ export const DtoCreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       externalCustomerId: "external_customer_id",
       gatewayPaymentMethodId: "gateway_payment_method_id",
       invoiceBilling: "invoice_billing",
+      invoicingCustomerExternalId: "invoicing_customer_external_id",
+      invoicingCustomerId: "invoicing_customer_id",
       lineItemCommitments: "line_item_commitments",
       lineItemCoupons: "line_item_coupons",
       lineItems: "line_items",

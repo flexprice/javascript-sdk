@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/secrets/api/keys/{id}")(pathParams);
 
   const headers = new Headers(compactMap({

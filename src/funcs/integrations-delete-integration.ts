@@ -98,7 +98,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/secrets/integrations/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
