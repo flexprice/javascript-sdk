@@ -17,7 +17,6 @@
 * [postWebhookEventsFeatureUpdated](#postwebhookeventsfeatureupdated) - feature.updated
 * [postWebhookEventsFeatureWalletBalanceAlert](#postwebhookeventsfeaturewalletbalancealert) - feature.wallet_balance.alert
 * [postWebhookEventsInvoiceCommunicationTriggered](#postwebhookeventsinvoicecommunicationtriggered) - invoice.communication.triggered
-* [postWebhookEventsInvoiceCreateDrafted](#postwebhookeventsinvoicecreatedrafted) - invoice.create.drafted
 * [postWebhookEventsInvoicePaymentOverdue](#postwebhookeventsinvoicepaymentoverdue) - invoice.payment.overdue
 * [postWebhookEventsInvoiceUpdate](#postwebhookeventsinvoiceupdate) - invoice.update
 * [postWebhookEventsInvoiceUpdateFinalized](#postwebhookeventsinvoiceupdatefinalized) - invoice.update.finalized
@@ -925,74 +924,6 @@ run();
 ### Response
 
 **Promise\<[models.WebhookDtoCommunicationWebhookPayload](../../sdk/models/webhook-dto-communication-webhook-payload.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
-
-## postWebhookEventsInvoiceCreateDrafted
-
-Fired when a new invoice is created in draft status. Doc-only for parsing.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/invoice.create.drafted" method="post" path="/webhook-events/invoice.create.drafted" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.webhookEvents.postWebhookEventsInvoiceCreateDrafted();
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { webhookEventsPostWebhookEventsInvoiceCreateDrafted } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-invoice-create-drafted.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await webhookEventsPostWebhookEventsInvoiceCreateDrafted(flexprice);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("webhookEventsPostWebhookEventsInvoiceCreateDrafted failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.WebhookDtoInvoiceWebhookPayload](../../sdk/models/webhook-dto-invoice-webhook-payload.md)\>**
 
 ### Errors
 

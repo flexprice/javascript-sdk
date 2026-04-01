@@ -15,7 +15,6 @@ import { webhookEventsPostWebhookEventsFeatureDeleted } from "../funcs/webhook-e
 import { webhookEventsPostWebhookEventsFeatureUpdated } from "../funcs/webhook-events-post-webhook-events-feature-updated.js";
 import { webhookEventsPostWebhookEventsFeatureWalletBalanceAlert } from "../funcs/webhook-events-post-webhook-events-feature-wallet-balance-alert.js";
 import { webhookEventsPostWebhookEventsInvoiceCommunicationTriggered } from "../funcs/webhook-events-post-webhook-events-invoice-communication-triggered.js";
-import { webhookEventsPostWebhookEventsInvoiceCreateDrafted } from "../funcs/webhook-events-post-webhook-events-invoice-create-drafted.js";
 import { webhookEventsPostWebhookEventsInvoicePaymentOverdue } from "../funcs/webhook-events-post-webhook-events-invoice-payment-overdue.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdateFinalized } from "../funcs/webhook-events-post-webhook-events-invoice-update-finalized.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdatePayment } from "../funcs/webhook-events-post-webhook-events-invoice-update-payment.js";
@@ -245,21 +244,6 @@ export class WebhookEvents extends ClientSDK {
         options,
       ),
     );
-  }
-
-  /**
-   * invoice.create.drafted
-   *
-   * @remarks
-   * Fired when a new invoice is created in draft status. Doc-only for parsing.
-   */
-  async postWebhookEventsInvoiceCreateDrafted(
-    options?: RequestOptions,
-  ): Promise<models.WebhookDtoInvoiceWebhookPayload> {
-    return unwrapAsync(webhookEventsPostWebhookEventsInvoiceCreateDrafted(
-      this,
-      options,
-    ));
   }
 
   /**

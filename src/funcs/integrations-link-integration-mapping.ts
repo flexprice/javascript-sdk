@@ -89,7 +89,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/integrations/mappings/link")();
+  const path = pathToFunc("/integrations/link")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
