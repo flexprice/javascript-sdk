@@ -31,6 +31,8 @@ import * as types$ from "../types/primitives.js";
  *
  * @remarks
  * Use when retiring a coupon (e.g. campaign ended). Returns 200 with success message.
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function couponsDeleteCoupon(
   client: FlexpriceCore,
@@ -107,7 +109,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
   const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

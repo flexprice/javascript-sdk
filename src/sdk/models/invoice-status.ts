@@ -10,6 +10,7 @@ export const InvoiceStatus = {
   Draft: "DRAFT",
   Finalized: "FINALIZED",
   Voided: "VOIDED",
+  Skipped: "SKIPPED",
 } as const;
 export type InvoiceStatus = OpenEnum<typeof InvoiceStatus>;
 

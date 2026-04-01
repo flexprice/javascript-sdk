@@ -6,6 +6,7 @@ import { scheduledTasksCreateScheduledTask } from "../funcs/scheduled-tasks-crea
 import { scheduledTasksDeleteScheduledTask } from "../funcs/scheduled-tasks-delete-scheduled-task.js";
 import { scheduledTasksGetScheduledTask } from "../funcs/scheduled-tasks-get-scheduled-task.js";
 import { scheduledTasksListScheduledTasks } from "../funcs/scheduled-tasks-list-scheduled-tasks.js";
+import { scheduledTasksScheduleDraftFinalization } from "../funcs/scheduled-tasks-schedule-draft-finalization.js";
 import { scheduledTasksScheduleUpdateBillingPeriod } from "../funcs/scheduled-tasks-schedule-update-billing-period.js";
 import { scheduledTasksTriggerScheduledTaskRun } from "../funcs/scheduled-tasks-trigger-scheduled-task-run.js";
 import { scheduledTasksUpdateScheduledTask } from "../funcs/scheduled-tasks-update-scheduled-task.js";
@@ -44,6 +45,21 @@ export class ScheduledTasks extends ClientSDK {
     return unwrapAsync(scheduledTasksCreateScheduledTask(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Schedule draft finalization
+   *
+   * @remarks
+   * Triggers the draft invoice finalization workflow that scans computed draft invoices whose finalization delay has elapsed and finalizes them (assign invoice number, sync to vendors, attempt payment).
+   */
+  async scheduleDraftFinalization(
+    options?: RequestOptions,
+  ): Promise<models.ScheduleDraftFinalizationResponse> {
+    return unwrapAsync(scheduledTasksScheduleDraftFinalization(
+      this,
       options,
     ));
   }

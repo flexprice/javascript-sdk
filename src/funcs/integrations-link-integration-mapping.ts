@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -26,18 +26,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete an integration
+ * Link integration mapping
  *
  * @remarks
- * Use when disconnecting an integration (e.g. switching provider or removing OAuth). Deletes stored credentials.
+ * Link a FlexPrice entity to provider entity with provider-specific side effects.
  */
-export function integrationsDeleteIntegration(
+export function integrationsLinkIntegrationMapping(
   client: FlexpriceCore,
-  id: string,
+  request: models.DtoLinkIntegrationMappingRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    void,
+    models.DtoLinkIntegrationMappingResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -51,19 +51,19 @@ export function integrationsDeleteIntegration(
 > {
   return new APIPromise($do(
     client,
-    id,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  id: string,
+  request: models.DtoLinkIntegrationMappingRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      void,
+      models.DtoLinkIntegrationMappingResponse,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -77,30 +77,22 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.DeleteIntegrationRequest = {
-    id: id,
-  };
-
   const parsed = safeParse(
-    input,
-    (value) => z.parse(models.DeleteIntegrationRequest$outboundSchema, value),
+    request,
+    (value) =>
+      z.parse(models.DtoLinkIntegrationMappingRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body = encodeJSON("body", payload, { explode: true });
 
-  const pathParams = {
-    id: encodeSimple("id", payload.id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-  const path = pathToFunc("/secrets/integrations/{id}")(pathParams);
+  const path = pathToFunc("/integrations/mappings/link")();
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -111,7 +103,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "deleteIntegration",
+    operationID: "linkIntegrationMapping",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -125,7 +117,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "DELETE",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -140,7 +132,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "500", "5XX"],
+    errorCodes: ["400", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -154,7 +146,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    void,
+    models.DtoLinkIntegrationMappingResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -165,8 +157,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.nil(204, z.void()),
-    M.jsonErr(404, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.DtoLinkIntegrationMappingResponse$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

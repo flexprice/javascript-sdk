@@ -5,11 +5,6 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  DtoIntegrationEntityMapping,
-  DtoIntegrationEntityMapping$Outbound,
-  DtoIntegrationEntityMapping$outboundSchema,
-} from "./dto-integration-entity-mapping.js";
-import {
   DtoTaxRateOverride,
   DtoTaxRateOverride$Outbound,
   DtoTaxRateOverride$outboundSchema,
@@ -51,10 +46,6 @@ export type DtoCreateCustomerRequest = {
    * external_id is the unique identifier from your system to reference this customer (required)
    */
   externalId: string;
-  /**
-   * integration_entity_mapping contains provider integration mappings for this customer
-   */
-  integrationEntityMapping?: Array<DtoIntegrationEntityMapping> | undefined;
   /**
    * metadata contains additional key-value pairs for storing extra information
    */
@@ -103,9 +94,6 @@ export type DtoCreateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   email?: string | undefined;
   external_id: string;
-  integration_entity_mapping?:
-    | Array<DtoIntegrationEntityMapping$Outbound>
-    | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   parent_customer_external_id?: string | undefined;
@@ -128,9 +116,6 @@ export const DtoCreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.string(),
-    integrationEntityMapping: z.optional(
-      z.array(DtoIntegrationEntityMapping$outboundSchema),
-    ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
     parentCustomerExternalId: z.optional(z.string()),
@@ -147,7 +132,6 @@ export const DtoCreateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       externalId: "external_id",
-      integrationEntityMapping: "integration_entity_mapping",
       parentCustomerExternalId: "parent_customer_external_id",
       parentCustomerId: "parent_customer_id",
       skipOnboardingWorkflow: "skip_onboarding_workflow",

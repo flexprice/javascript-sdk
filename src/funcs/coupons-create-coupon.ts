@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when creating a discount (e.g. promo code or referral). Ideal for percent or fixed value, with optional validity and usage limits.
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function couponsCreateCoupon(
   client: FlexpriceCore,
@@ -97,7 +99,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
   const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

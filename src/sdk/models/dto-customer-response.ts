@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  DtoEntityIntegrationMappingResponse,
+  DtoEntityIntegrationMappingResponse$inboundSchema,
+} from "./dto-entity-integration-mapping-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
@@ -56,6 +60,7 @@ export type DtoCustomerResponse = {
    * ID is the unique identifier for the customer
    */
   id?: string | undefined;
+  integrations?: Array<DtoEntityIntegrationMappingResponse> | undefined;
   /**
    * Metadata
    */
@@ -100,6 +105,9 @@ export const DtoCustomerResponse$inboundSchema: z.ZodMiniType<
     environment_id: types.optional(types.string()),
     external_id: types.optional(types.string()),
     id: types.optional(types.string()),
+    integrations: types.optional(
+      z.array(DtoEntityIntegrationMappingResponse$inboundSchema),
+    ),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
     parent_customer: types.optional(

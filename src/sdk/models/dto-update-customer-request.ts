@@ -4,11 +4,6 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  DtoIntegrationEntityMapping,
-  DtoIntegrationEntityMapping$Outbound,
-  DtoIntegrationEntityMapping$outboundSchema,
-} from "./dto-integration-entity-mapping.js";
 
 /**
  * Request object for updating an existing customer. All fields are optional - only provided fields will be updated
@@ -47,10 +42,6 @@ export type DtoUpdateCustomerRequest = {
    */
   externalId?: string | undefined;
   /**
-   * integration_entity_mapping contains provider integration mappings for this customer
-   */
-  integrationEntityMapping?: Array<DtoIntegrationEntityMapping> | undefined;
-  /**
    * metadata contains updated key-value pairs that will replace existing metadata
    */
   metadata?: { [k: string]: string } | undefined;
@@ -87,9 +78,6 @@ export type DtoUpdateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   email?: string | undefined;
   external_id?: string | undefined;
-  integration_entity_mapping?:
-    | Array<DtoIntegrationEntityMapping$Outbound>
-    | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   parent_customer_external_id?: string | undefined;
@@ -110,9 +98,6 @@ export const DtoUpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.optional(z.string()),
-    integrationEntityMapping: z.optional(
-      z.array(DtoIntegrationEntityMapping$outboundSchema),
-    ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
     parentCustomerExternalId: z.optional(z.string()),
@@ -127,7 +112,6 @@ export const DtoUpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       externalId: "external_id",
-      integrationEntityMapping: "integration_entity_mapping",
       parentCustomerExternalId: "parent_customer_external_id",
       parentCustomerId: "parent_customer_id",
     });

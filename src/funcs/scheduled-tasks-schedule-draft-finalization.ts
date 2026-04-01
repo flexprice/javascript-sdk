@@ -23,17 +23,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List linked integrations
+ * Schedule draft finalization
  *
  * @remarks
- * Use when showing which integrations are connected (e.g. settings page). Returns providers that have valid linked credentials.
+ * Triggers the draft invoice finalization workflow that scans computed draft invoices whose finalization delay has elapsed and finalizes them (assign invoice number, sync to vendors, attempt payment).
  */
-export function integrationsListLinkedIntegrations(
+export function scheduledTasksScheduleDraftFinalization(
   client: FlexpriceCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoLinkedIntegrationsResponse,
+    models.ScheduleDraftFinalizationResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -57,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoLinkedIntegrationsResponse,
+      models.ScheduleDraftFinalizationResponse,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -71,7 +71,7 @@ async function $do(
     APICall,
   ]
 > {
-  const path = pathToFunc("/secrets/integrations/linked")();
+  const path = pathToFunc("/tasks/scheduled/schedule-draft-finalization")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -84,7 +84,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "listLinkedIntegrations",
+    operationID: "scheduleDraftFinalization",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -98,7 +98,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -112,7 +112,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "500", "5XX"],
+    errorCodes: ["400", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -126,7 +126,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoLinkedIntegrationsResponse,
+    models.ScheduleDraftFinalizationResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -137,7 +137,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoLinkedIntegrationsResponse$inboundSchema),
+    M.json(200, models.ScheduleDraftFinalizationResponse$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

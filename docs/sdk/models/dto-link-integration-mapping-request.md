@@ -1,13 +1,13 @@
-# DtoCreateEntityIntegrationMappingRequest
+# DtoLinkIntegrationMappingRequest
 
 ## Example Usage
 
 ```typescript
-import { DtoCreateEntityIntegrationMappingRequest } from "@flexprice/sdk/sdk/models";
+import { DtoLinkIntegrationMappingRequest } from "@flexprice/sdk/sdk/models";
 
-let value: DtoCreateEntityIntegrationMappingRequest = {
+let value: DtoLinkIntegrationMappingRequest = {
   entityId: "<id>",
-  entityType: "item",
+  entityType: "plan",
   providerEntityId: "<id>",
   providerType: "<value>",
 };

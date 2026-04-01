@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when cancelling a draft credit note (e.g. created by mistake). Only draft credit notes can be voided.
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function creditNotesVoidCreditNote(
   client: FlexpriceCore,
@@ -106,7 +108,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
   const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

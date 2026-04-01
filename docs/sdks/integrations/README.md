@@ -4,18 +4,15 @@
 
 ### Available Operations
 
-* [getIntegration](#getintegration) - Get integration details
-* [createOrUpdateIntegration](#createorupdateintegration) - Create or update an integration
-* [listLinkedIntegrations](#listlinkedintegrations) - List linked integrations
-* [deleteIntegration](#deleteintegration) - Delete an integration
+* [linkIntegrationMapping](#linkintegrationmapping) - Link integration mapping
 
-## getIntegration
+## linkIntegrationMapping
 
-Use when you need to check or display integration config (e.g. which provider is linked). Sensitive values may be redacted.
+Link a FlexPrice entity to provider entity with provider-specific side effects.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="getIntegration" method="get" path="/secrets/integrations/by-provider/{provider}" -->
+<!-- UsageSnippet language="typescript" operationID="linkIntegrationMapping" method="post" path="/integrations/mappings/link" -->
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
@@ -24,83 +21,11 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.integrations.getIntegration("<value>");
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { integrationsGetIntegration } from "@flexprice/sdk/funcs/integrations-get-integration.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await integrationsGetIntegration(flexprice, "<value>");
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("integrationsGetIntegration failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `provider`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Integration provider                                                                                                                                                           |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.DtoSecretResponse](../../sdk/models/dto-secret-response.md)\>**
-
-### Errors
-
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 404                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
-
-## createOrUpdateIntegration
-
-Use when storing or updating credentials for an external integration (e.g. Stripe, HubSpot). Secrets are encrypted at rest.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="createOrUpdateIntegration" method="post" path="/secrets/integrations/create/{provider}" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.integrations.createOrUpdateIntegration("<value>", {
-    credentials: {
-      "key": "<value>",
-    },
-    name: "<value>",
-    provider: "quickbooks",
+  const result = await flexprice.integrations.linkIntegrationMapping({
+    entityId: "<id>",
+    entityType: "item_price",
+    providerEntityId: "<id>",
+    providerType: "<value>",
   });
 
   console.log(result);
@@ -115,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { integrationsCreateOrUpdateIntegration } from "@flexprice/sdk/funcs/integrations-create-or-update-integration.js";
+import { integrationsLinkIntegrationMapping } from "@flexprice/sdk/funcs/integrations-link-integration-mapping.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -124,18 +49,17 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await integrationsCreateOrUpdateIntegration(flexprice, "<value>", {
-    credentials: {
-      "key": "<value>",
-    },
-    name: "<value>",
-    provider: "quickbooks",
+  const res = await integrationsLinkIntegrationMapping(flexprice, {
+    entityId: "<id>",
+    entityType: "item_price",
+    providerEntityId: "<id>",
+    providerType: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("integrationsCreateOrUpdateIntegration failed:", res.error);
+    console.log("integrationsLinkIntegrationMapping failed:", res.error);
   }
 }
 
@@ -146,160 +70,19 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `provider`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Integration provider                                                                                                                                                           |
-| `body`                                                                                                                                                                         | [models.DtoCreateIntegrationRequest](../../sdk/models/dto-create-integration-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Integration creation request                                                                                                                                                   |
+| `request`                                                                                                                                                                      | [models.DtoLinkIntegrationMappingRequest](../../sdk/models/dto-link-integration-mapping-request.md)                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoSecretResponse](../../sdk/models/dto-secret-response.md)\>**
+**Promise\<[models.DtoLinkIntegrationMappingResponse](../../sdk/models/dto-link-integration-mapping-response.md)\>**
 
 ### Errors
 
 | Error Type                       | Status Code                      | Content Type                     |
 | -------------------------------- | -------------------------------- | -------------------------------- |
 | models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
-
-## listLinkedIntegrations
-
-Use when showing which integrations are connected (e.g. settings page). Returns providers that have valid linked credentials.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="listLinkedIntegrations" method="get" path="/secrets/integrations/linked" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.integrations.listLinkedIntegrations();
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { integrationsListLinkedIntegrations } from "@flexprice/sdk/funcs/integrations-list-linked-integrations.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await integrationsListLinkedIntegrations(flexprice);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("integrationsListLinkedIntegrations failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.DtoLinkedIntegrationsResponse](../../sdk/models/dto-linked-integrations-response.md)\>**
-
-### Errors
-
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
-
-## deleteIntegration
-
-Use when disconnecting an integration (e.g. switching provider or removing OAuth). Deletes stored credentials.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="deleteIntegration" method="delete" path="/secrets/integrations/{id}" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  await flexprice.integrations.deleteIntegration("<id>");
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { integrationsDeleteIntegration } from "@flexprice/sdk/funcs/integrations-delete-integration.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await integrationsDeleteIntegration(flexprice, "<id>");
-  if (res.ok) {
-    const { value: result } = res;
-    
-  } else {
-    console.log("integrationsDeleteIntegration failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Integration ID                                                                                                                                                                 |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
-
-### Errors
-
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 404                              | application/json                 |
 | models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
 | models.SDKError                  | 4XX, 5XX                         | \*/\*                            |

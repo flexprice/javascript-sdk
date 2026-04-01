@@ -8,6 +8,7 @@ import { OpenEnum } from "../../types/enums.js";
 
 export const ScheduledTaskInterval = {
   FifteenMIN: "15MIN",
+  ThirtyMIN: "30MIN",
   Custom: "custom",
   Hourly: "hourly",
   Daily: "daily",

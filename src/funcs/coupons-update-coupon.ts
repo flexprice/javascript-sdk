@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when changing coupon config (e.g. value, validity, or usage limits).
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function couponsUpdateCoupon(
   client: FlexpriceCore,
@@ -111,7 +113,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
   const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

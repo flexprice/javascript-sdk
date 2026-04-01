@@ -131,6 +131,84 @@ For a full list of operations, see the [API reference](https://docs.flexprice.io
 - **Validation or 4xx errors:** Confirm request body field names (snake_case vs camelCase) and required fields against the [API docs](https://docs.flexprice.io).
 - **Parameter passing:** Pass the request object directly to methods (e.g. `ingestEvent({ ... })`), not wrapped in an extra key, unless the SDK docs say otherwise.
 
+## Handling Webhooks
+
+Flexprice sends webhook events to your server for async updates on payments, invoices, subscriptions, wallets, and more.
+
+**Flow:**
+1. Register your endpoint URL in the Flexprice dashboard
+2. Receive `POST` with raw JSON body
+3. Read `event_type` to route
+4. Parse payload using SDK helpers
+5. Handle business logic idempotently
+6. Return `200` quickly
+
+```typescript
+import {
+  WebhookEventName,
+  webhookDtoPaymentWebhookPayloadFromJSON,
+  webhookDtoSubscriptionWebhookPayloadFromJSON,
+  webhookDtoInvoiceWebhookPayloadFromJSON,
+} from "@flexprice/sdk";
+
+function handleWebhook(rawBody: string): void {
+  const env = JSON.parse(rawBody) as { event_type: string };
+
+  switch (env.event_type as WebhookEventName) {
+    case WebhookEventName.PaymentSuccess:
+    case WebhookEventName.PaymentFailed:
+    case WebhookEventName.PaymentUpdated: {
+      const result = webhookDtoPaymentWebhookPayloadFromJSON(rawBody);
+      if (!result.ok) { console.error("parse error", result.error); break; }
+      const { payment } = result.value;
+      console.log("payment", payment?.id);
+      // TODO: update payment record
+      break;
+    }
+
+    case WebhookEventName.SubscriptionActivated:
+    case WebhookEventName.SubscriptionCancelled:
+    case WebhookEventName.SubscriptionUpdated: {
+      const result = webhookDtoSubscriptionWebhookPayloadFromJSON(rawBody);
+      if (!result.ok) { console.error("parse error", result.error); break; }
+      console.log("subscription", result.value.subscription?.id);
+      break;
+    }
+
+    case WebhookEventName.InvoiceUpdateFinalized:
+    case WebhookEventName.InvoicePaymentOverdue: {
+      const result = webhookDtoInvoiceWebhookPayloadFromJSON(rawBody);
+      if (!result.ok) { console.error("parse error", result.error); break; }
+      console.log("invoice", result.value.invoice?.id);
+      break;
+    }
+
+    default:
+      console.log("unhandled event:", env.event_type);
+  }
+}
+```
+
+> Fields are auto-camelCased by the SDK: `event_type` → `eventType`, `invoice_status` → `invoiceStatus`. The `fromJSON` helpers return a `SafeParseResult<T>` — always check `.ok` before accessing `.value`.
+
+### Event types
+
+| Category | Events |
+|---|---|
+| **Payment** | `payment.created` · `payment.updated` · `payment.success` · `payment.failed` · `payment.pending` |
+| **Invoice** | `invoice.create.drafted` · `invoice.update` · `invoice.update.finalized` · `invoice.update.payment` · `invoice.update.voided` · `invoice.payment.overdue` · `invoice.communication.triggered` |
+| **Subscription** | `subscription.created` · `subscription.draft.created` · `subscription.activated` · `subscription.updated` · `subscription.paused` · `subscription.resumed` · `subscription.cancelled` · `subscription.renewal.due` |
+| **Subscription Phase** | `subscription.phase.created` · `subscription.phase.updated` · `subscription.phase.deleted` |
+| **Customer** | `customer.created` · `customer.updated` · `customer.deleted` |
+| **Wallet** | `wallet.created` · `wallet.updated` · `wallet.terminated` · `wallet.transaction.created` · `wallet.credit_balance.dropped` · `wallet.credit_balance.recovered` · `wallet.ongoing_balance.dropped` · `wallet.ongoing_balance.recovered` |
+| **Feature / Entitlement** | `feature.created` · `feature.updated` · `feature.deleted` · `feature.wallet_balance.alert` · `entitlement.created` · `entitlement.updated` · `entitlement.deleted` |
+| **Credit Note** | `credit_note.created` · `credit_note.updated` |
+
+**Production rules:**
+- Keep handlers idempotent — Flexprice retries on non-`2xx`
+- Return `200` for unknown event types — prevents unnecessary retries
+- Do heavy processing async — respond fast, queue the work
+
 ## Documentation
 
 - [FlexPrice API documentation](https://docs.flexprice.io)

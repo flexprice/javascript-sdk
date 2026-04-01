@@ -25,8 +25,3 @@ export const SecretProvider$inboundSchema: z.ZodMiniType<
   SecretProvider,
   unknown
 > = openEnums.inboundSchema(SecretProvider);
-/** @internal */
-export const SecretProvider$outboundSchema: z.ZodMiniType<
-  string,
-  SecretProvider
-> = openEnums.outboundSchema(SecretProvider);

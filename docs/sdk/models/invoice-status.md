@@ -13,5 +13,5 @@ let value: InvoiceStatus = "FINALIZED";
 ## Values
 
 ```typescript
-"DRAFT" | "FINALIZED" | "VOIDED" | Unrecognized<string>
+"DRAFT" | "FINALIZED" | "VOIDED" | "SKIPPED" | Unrecognized<string>
 ```

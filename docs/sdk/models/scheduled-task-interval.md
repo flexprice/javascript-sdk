@@ -13,5 +13,5 @@ let value: ScheduledTaskInterval = "15MIN";
 ## Values
 
 ```typescript
-"15MIN" | "custom" | "hourly" | "daily" | Unrecognized<string>
+"15MIN" | "30MIN" | "custom" | "hourly" | "daily" | Unrecognized<string>
 ```

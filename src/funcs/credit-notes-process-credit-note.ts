@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when locking a draft credit note and applying the credit (e.g. after approval). Once finalized, applied per billing provider.
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function creditNotesProcessCreditNote(
   client: FlexpriceCore,
@@ -106,7 +108,7 @@ async function $do(
 
   const secConfig = await extractSecurity(client._options.apiKeyAuth);
   const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,

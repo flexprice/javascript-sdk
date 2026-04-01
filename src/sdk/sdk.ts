@@ -11,7 +11,6 @@ import { CreditGrants } from "./credit-grants.js";
 import { CreditNotes } from "./credit-notes.js";
 import { Customers } from "./customers.js";
 import { Entitlements } from "./entitlements.js";
-import { EntityIntegrationMappings } from "./entity-integration-mappings.js";
 import { Events } from "./events.js";
 import { Features } from "./features.js";
 import { Groups } from "./groups.js";
@@ -85,13 +84,6 @@ export class Flexprice extends ClientSDK {
     return (this._invoices ??= new Invoices(this._options));
   }
 
-  private _entityIntegrationMappings?: EntityIntegrationMappings;
-  get entityIntegrationMappings(): EntityIntegrationMappings {
-    return (this._entityIntegrationMappings ??= new EntityIntegrationMappings(
-      this._options,
-    ));
-  }
-
   private _events?: Events;
   get events(): Events {
     return (this._events ??= new Events(this._options));
@@ -105,6 +97,11 @@ export class Flexprice extends ClientSDK {
   private _groups?: Groups;
   get groups(): Groups {
     return (this._groups ??= new Groups(this._options));
+  }
+
+  private _integrations?: Integrations;
+  get integrations(): Integrations {
+    return (this._integrations ??= new Integrations(this._options));
   }
 
   private _payments?: Payments;
@@ -135,11 +132,6 @@ export class Flexprice extends ClientSDK {
   private _secrets?: Secrets;
   get secrets(): Secrets {
     return (this._secrets ??= new Secrets(this._options));
-  }
-
-  private _integrations?: Integrations;
-  get integrations(): Integrations {
-    return (this._integrations ??= new Integrations(this._options));
   }
 
   private _subscriptions?: Subscriptions;
