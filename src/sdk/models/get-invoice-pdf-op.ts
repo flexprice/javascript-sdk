@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetInvoicePdfRequest = {
   /**
@@ -13,22 +14,35 @@ export type GetInvoicePdfRequest = {
    * Return presigned URL from s3 instead of PDF
    */
   url?: boolean | undefined;
+  /**
+   * Force regeneration of the PDF even if one already exists in S3 (default: false). Note: force_generate has no effect if invoice_pdf_url is already set on the invoice.
+   */
+  forceGenerate?: boolean | undefined;
 };
 
 /** @internal */
 export type GetInvoicePdfRequest$Outbound = {
   id: string;
   url?: boolean | undefined;
+  force_generate?: boolean | undefined;
 };
 
 /** @internal */
 export const GetInvoicePdfRequest$outboundSchema: z.ZodMiniType<
   GetInvoicePdfRequest$Outbound,
   GetInvoicePdfRequest
-> = z.object({
-  id: z.string(),
-  url: z.optional(z.boolean()),
-});
+> = z.pipe(
+  z.object({
+    id: z.string(),
+    url: z.optional(z.boolean()),
+    forceGenerate: z.optional(z.boolean()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      forceGenerate: "force_generate",
+    });
+  }),
+);
 
 export function getInvoicePdfRequestToJSON(
   getInvoicePdfRequest: GetInvoicePdfRequest,

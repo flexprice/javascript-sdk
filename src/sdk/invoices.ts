@@ -203,17 +203,19 @@ export class Invoices extends ClientSDK {
    * Get invoice PDF
    *
    * @remarks
-   * Use when delivering an invoice PDF to the customer (e.g. email attachment or download). Use url=true for a presigned URL instead of binary.
+   * Use when delivering an invoice PDF to the customer (e.g. email attachment or download). Use url=true for a presigned URL instead of binary. Use force_generate=true to regenerate and re-upload the PDF even if one already exists in S3.
    */
   async getInvoicePdf(
     id: string,
     url?: boolean | undefined,
+    forceGenerate?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(invoicesGetInvoicePdf(
       this,
       id,
       url,
+      forceGenerate,
       options,
     ));
   }

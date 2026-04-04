@@ -592,7 +592,7 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoPlanResponse](../../sdk/models/dto-plan-response.md)\>**
+**Promise\<[models.DtoListEntitlementsResponse](../../sdk/models/dto-list-entitlements-response.md)\>**
 
 ### Errors
 

@@ -145,7 +145,7 @@ export class Entitlements extends ClientSDK {
   async getPlanEntitlements(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPlanResponse> {
+  ): Promise<models.DtoListEntitlementsResponse> {
     return unwrapAsync(entitlementsGetPlanEntitlements(
       this,
       id,

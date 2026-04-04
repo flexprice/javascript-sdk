@@ -37,7 +37,7 @@ export function entitlementsGetPlanEntitlements(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoPlanResponse,
+    models.DtoListEntitlementsResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoPlanResponse,
+      models.DtoListEntitlementsResponse,
       | models.ErrorsErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoPlanResponse,
+    models.DtoListEntitlementsResponse,
     | models.ErrorsErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -165,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoPlanResponse$inboundSchema),
+    M.json(200, models.DtoListEntitlementsResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

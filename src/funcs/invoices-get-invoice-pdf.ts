@@ -29,12 +29,13 @@ import { Result } from "../types/fp.js";
  * Get invoice PDF
  *
  * @remarks
- * Use when delivering an invoice PDF to the customer (e.g. email attachment or download). Use url=true for a presigned URL instead of binary.
+ * Use when delivering an invoice PDF to the customer (e.g. email attachment or download). Use url=true for a presigned URL instead of binary. Use force_generate=true to regenerate and re-upload the PDF even if one already exists in S3.
  */
 export function invoicesGetInvoicePdf(
   client: FlexpriceCore,
   id: string,
   url?: boolean | undefined,
+  forceGenerate?: boolean | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,6 +54,7 @@ export function invoicesGetInvoicePdf(
     client,
     id,
     url,
+    forceGenerate,
     options,
   ));
 }
@@ -61,6 +63,7 @@ async function $do(
   client: FlexpriceCore,
   id: string,
   url?: boolean | undefined,
+  forceGenerate?: boolean | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,6 +84,7 @@ async function $do(
   const input: models.GetInvoicePdfRequest = {
     id: id,
     url: url,
+    forceGenerate: forceGenerate,
   };
 
   const parsed = safeParse(
@@ -103,6 +107,7 @@ async function $do(
   const path = pathToFunc("/invoices/{id}/pdf")(pathParams);
 
   const query = encodeFormQuery({
+    "force_generate": payload.force_generate,
     "url": payload.url,
   });
 
