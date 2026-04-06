@@ -155,7 +155,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Payment](../../sdk/models/payment.md)\>**
+**Promise\<[models.PaymentResponse](../../sdk/models/payment-response.md)\>**
 
 ### Errors
 
@@ -226,7 +226,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Payment](../../sdk/models/payment.md)\>**
+**Promise\<[models.PaymentResponse](../../sdk/models/payment-response.md)\>**
 
 ### Errors
 
@@ -298,7 +298,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Payment](../../sdk/models/payment.md)\>**
+**Promise\<[models.PaymentResponse](../../sdk/models/payment-response.md)\>**
 
 ### Errors
 
@@ -440,7 +440,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Payment](../../sdk/models/payment.md)\>**
+**Promise\<[models.PaymentResponse](../../sdk/models/payment-response.md)\>**
 
 ### Errors
 

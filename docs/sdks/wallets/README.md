@@ -77,7 +77,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet[]](../../models/.md)\>**
+**Promise\<[models.WalletResponse[]](../../models/.md)\>**
 
 ### Errors
 
@@ -148,7 +148,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet[]](../../models/.md)\>**
+**Promise\<[models.WalletResponse[]](../../models/.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet](../../sdk/models/wallet.md)\>**
+**Promise\<[models.WalletResponse](../../sdk/models/wallet-response.md)\>**
 
 ### Errors
 
@@ -436,7 +436,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet](../../sdk/models/wallet.md)\>**
+**Promise\<[models.WalletResponse](../../sdk/models/wallet-response.md)\>**
 
 ### Errors
 
@@ -508,7 +508,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet](../../sdk/models/wallet.md)\>**
+**Promise\<[models.WalletResponse](../../sdk/models/wallet-response.md)\>**
 
 ### Errors
 
@@ -651,7 +651,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Wallet](../../sdk/models/wallet.md)\>**
+**Promise\<[models.WalletResponse](../../sdk/models/wallet-response.md)\>**
 
 ### Errors
 

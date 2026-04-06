@@ -93,7 +93,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Price](../../sdk/models/price.md)\>**
+**Promise\<[models.PriceResponse](../../sdk/models/price-response.md)\>**
 
 ### Errors
 
@@ -239,7 +239,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Price](../../sdk/models/price.md)\>**
+**Promise\<[models.PriceResponse](../../sdk/models/price-response.md)\>**
 
 ### Errors
 
@@ -381,7 +381,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Price](../../sdk/models/price.md)\>**
+**Promise\<[models.PriceResponse](../../sdk/models/price-response.md)\>**
 
 ### Errors
 
@@ -453,7 +453,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Price](../../sdk/models/price.md)\>**
+**Promise\<[models.PriceResponse](../../sdk/models/price-response.md)\>**
 
 ### Errors
 

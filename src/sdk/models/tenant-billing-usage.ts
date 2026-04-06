@@ -11,10 +11,13 @@ import {
   CustomerUsageSummaryResponse$inboundSchema,
 } from "./customer-usage-summary-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Subscription, Subscription$inboundSchema } from "./subscription.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 
 export type TenantBillingUsage = {
-  subscriptions?: Array<Subscription> | undefined;
+  subscriptions?: Array<SubscriptionResponse> | undefined;
   usage?: CustomerUsageSummaryResponse | undefined;
 };
 
@@ -23,7 +26,7 @@ export const TenantBillingUsage$inboundSchema: z.ZodMiniType<
   TenantBillingUsage,
   unknown
 > = z.object({
-  subscriptions: types.optional(z.array(Subscription$inboundSchema)),
+  subscriptions: types.optional(z.array(SubscriptionResponse$inboundSchema)),
   usage: types.optional(CustomerUsageSummaryResponse$inboundSchema),
 });
 

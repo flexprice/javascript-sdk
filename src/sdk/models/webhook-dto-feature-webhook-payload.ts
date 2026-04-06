@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
@@ -16,7 +19,7 @@ import {
 
 export type WebhookDtoFeatureWebhookPayload = {
   eventType?: WebhookEventName | undefined;
-  feature?: Feature1 | undefined;
+  feature?: FeatureResponse | undefined;
 };
 
 /** @internal */
@@ -26,7 +29,7 @@ export const WebhookDtoFeatureWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     event_type: types.optional(WebhookEventName$inboundSchema),
-    feature: types.optional(Feature1$inboundSchema),
+    feature: types.optional(FeatureResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -11,12 +11,15 @@ import {
   EntitlementSource,
   EntitlementSource$inboundSchema,
 } from "./entitlement-source.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type FeatureUsageSummary = {
   currentUsage?: string | undefined;
-  feature?: Feature1 | undefined;
+  feature?: FeatureResponse | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   isUnlimited?: boolean | undefined;
@@ -33,7 +36,7 @@ export const FeatureUsageSummary$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     current_usage: types.optional(types.string()),
-    feature: types.optional(Feature1$inboundSchema),
+    feature: types.optional(FeatureResponse$inboundSchema),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
     is_unlimited: types.optional(types.boolean()),

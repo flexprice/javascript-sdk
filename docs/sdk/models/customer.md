@@ -1,11 +1,11 @@
-# Customer2
+# Customer
 
 ## Example Usage
 
 ```typescript
-import { Customer2 } from "@flexprice/sdk/sdk/models";
+import { Customer } from "@flexprice/sdk/sdk/models";
 
-let value: Customer2 = {};
+let value: Customer = {};
 ```
 
 ## Fields

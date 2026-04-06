@@ -25,7 +25,7 @@ import {
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
-export type Payment = {
+export type PaymentResponse = {
   amount?: string | undefined;
   attempts?: Array<PaymentAttemptResponse> | undefined;
   createdAt?: Date | undefined;
@@ -57,7 +57,10 @@ export type Payment = {
 };
 
 /** @internal */
-export const Payment$inboundSchema: z.ZodMiniType<Payment, unknown> = z.pipe(
+export const PaymentResponse$inboundSchema: z.ZodMiniType<
+  PaymentResponse,
+  unknown
+> = z.pipe(
   z.object({
     amount: types.optional(types.string()),
     attempts: types.optional(z.array(PaymentAttemptResponse$inboundSchema)),
@@ -117,12 +120,12 @@ export const Payment$inboundSchema: z.ZodMiniType<Payment, unknown> = z.pipe(
   }),
 );
 
-export function paymentFromJSON(
+export function paymentResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Payment, SDKValidationError> {
+): SafeParseResult<PaymentResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Payment$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Payment' from JSON`,
+    (x) => PaymentResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PaymentResponse' from JSON`,
   );
 }

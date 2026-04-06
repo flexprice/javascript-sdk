@@ -11,7 +11,10 @@ import {
   CreditGrantResponse,
   CreditGrantResponse$inboundSchema,
 } from "./credit-grant-response.js";
-import { Invoice, Invoice$inboundSchema } from "./invoice.js";
+import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
 import {
   ProrationDetails,
   ProrationDetails$inboundSchema,
@@ -39,7 +42,7 @@ export type SubscriptionChangeExecuteResponse = {
    * effective_date is when the change took effect
    */
   effectiveDate?: Date | undefined;
-  invoice?: Invoice | undefined;
+  invoice?: InvoiceResponse | undefined;
   /**
    * is_scheduled indicates if the change was scheduled or executed immediately
    */
@@ -70,7 +73,7 @@ export const SubscriptionChangeExecuteResponse$inboundSchema: z.ZodMiniType<
     change_type: types.optional(SubscriptionChangeType$inboundSchema),
     credit_grants: types.optional(z.array(CreditGrantResponse$inboundSchema)),
     effective_date: types.optional(types.date()),
-    invoice: types.optional(Invoice$inboundSchema),
+    invoice: types.optional(InvoiceResponse$inboundSchema),
     is_scheduled: types.optional(types.boolean()),
     metadata: types.optional(z.record(z.string(), types.string())),
     new_subscription: types.optional(SubscriptionSummary$inboundSchema),

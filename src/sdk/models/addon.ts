@@ -7,59 +7,40 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  CreditGrantResponse,
-  CreditGrantResponse$inboundSchema,
-} from "./credit-grant-response.js";
-import {
-  EntitlementResponse,
-  EntitlementResponse$inboundSchema,
-} from "./entitlement-response.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import { AddonType, AddonType$inboundSchema } from "./addon-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Plan1 = {
+export type Addon = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
-  creditGrants?: Array<CreditGrantResponse> | undefined;
   description?: string | undefined;
-  displayOrder?: number | undefined;
-  entitlements?: Array<EntitlementResponse> | undefined;
   environmentId?: string | undefined;
   id?: string | undefined;
   lookupKey?: string | undefined;
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: any } | undefined;
   name?: string | undefined;
-  /**
-   * TODO: Add inline addons
-   */
-  prices?: Array<Price> | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
+  type?: AddonType | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
 /** @internal */
-export const Plan1$inboundSchema: z.ZodMiniType<Plan1, unknown> = z.pipe(
+export const Addon$inboundSchema: z.ZodMiniType<Addon, unknown> = z.pipe(
   z.object({
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
-    credit_grants: types.optional(z.array(CreditGrantResponse$inboundSchema)),
     description: types.optional(types.string()),
-    display_order: types.optional(types.number()),
-    entitlements: types.optional(z.array(z.lazy(() =>
-      EntitlementResponse$inboundSchema
-    ))),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
     lookup_key: types.optional(types.string()),
-    metadata: types.optional(z.record(z.string(), types.string())),
+    metadata: types.optional(z.record(z.string(), z.any())),
     name: types.optional(types.string()),
-    prices: types.optional(z.array(z.lazy(() => Price$inboundSchema))),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
+    type: types.optional(AddonType$inboundSchema),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
@@ -67,8 +48,6 @@ export const Plan1$inboundSchema: z.ZodMiniType<Plan1, unknown> = z.pipe(
     return remap$(v, {
       "created_at": "createdAt",
       "created_by": "createdBy",
-      "credit_grants": "creditGrants",
-      "display_order": "displayOrder",
       "environment_id": "environmentId",
       "lookup_key": "lookupKey",
       "tenant_id": "tenantId",
@@ -78,12 +57,12 @@ export const Plan1$inboundSchema: z.ZodMiniType<Plan1, unknown> = z.pipe(
   }),
 );
 
-export function plan1FromJSON(
+export function addonFromJSON(
   jsonString: string,
-): SafeParseResult<Plan1, SDKValidationError> {
+): SafeParseResult<Addon, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Plan1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Plan1' from JSON`,
+    (x) => Addon$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Addon' from JSON`,
   );
 }

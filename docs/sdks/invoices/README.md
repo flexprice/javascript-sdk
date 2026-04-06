@@ -163,7 +163,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 
@@ -238,7 +238,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 
@@ -382,7 +382,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 
@@ -454,7 +454,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 
@@ -672,7 +672,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 
@@ -957,7 +957,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Invoice](../../sdk/models/invoice.md)\>**
+**Promise\<[models.InvoiceResponse](../../sdk/models/invoice-response.md)\>**
 
 ### Errors
 

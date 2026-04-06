@@ -27,7 +27,7 @@ export class Wallets extends ClientSDK {
   async getCustomerWallets(
     request?: models.GetCustomerWalletsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<models.Wallet>> {
+  ): Promise<Array<models.WalletResponse>> {
     return unwrapAsync(walletsGetCustomerWallets(
       this,
       request,
@@ -44,7 +44,7 @@ export class Wallets extends ClientSDK {
   async getWalletsByCustomerId(
     id: string,
     options?: RequestOptions,
-  ): Promise<Array<models.Wallet>> {
+  ): Promise<Array<models.WalletResponse>> {
     return unwrapAsync(walletsGetWalletsByCustomerId(
       this,
       id,
@@ -61,7 +61,7 @@ export class Wallets extends ClientSDK {
   async createWallet(
     request: models.CreateWalletRequest,
     options?: RequestOptions,
-  ): Promise<models.Wallet> {
+  ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsCreateWallet(
       this,
       request,
@@ -112,7 +112,7 @@ export class Wallets extends ClientSDK {
   async getWallet(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Wallet> {
+  ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsGetWallet(
       this,
       id,
@@ -130,7 +130,7 @@ export class Wallets extends ClientSDK {
     id: string,
     body: models.UpdateWalletRequest,
     options?: RequestOptions,
-  ): Promise<models.Wallet> {
+  ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsUpdateWallet(
       this,
       id,
@@ -167,7 +167,7 @@ export class Wallets extends ClientSDK {
   async terminateWallet(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Wallet> {
+  ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsTerminateWallet(
       this,
       id,

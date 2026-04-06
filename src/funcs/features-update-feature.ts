@@ -38,7 +38,7 @@ export function featuresUpdateFeature(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Feature1,
+    models.FeatureResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -66,7 +66,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Feature1,
+      models.FeatureResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -160,7 +160,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Feature1,
+    models.FeatureResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -171,7 +171,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.Feature1$inboundSchema),
+    M.json(200, models.FeatureResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

@@ -1,13 +1,13 @@
-# Customer1
+# CustomerResponse
 
 Customer response object containing all customer information
 
 ## Example Usage
 
 ```typescript
-import { Customer1 } from "@flexprice/sdk/sdk/models";
+import { CustomerResponse } from "@flexprice/sdk/sdk/models";
 
-let value: Customer1 = {};
+let value: CustomerResponse = {};
 ```
 
 ## Fields

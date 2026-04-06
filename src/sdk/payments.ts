@@ -39,7 +39,7 @@ export class Payments extends ClientSDK {
   async createPayment(
     request: models.CreatePaymentRequest,
     options?: RequestOptions,
-  ): Promise<models.Payment> {
+  ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsCreatePayment(
       this,
       request,
@@ -56,7 +56,7 @@ export class Payments extends ClientSDK {
   async getPayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Payment> {
+  ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsGetPayment(
       this,
       id,
@@ -74,7 +74,7 @@ export class Payments extends ClientSDK {
     id: string,
     body: models.UpdatePaymentRequest,
     options?: RequestOptions,
-  ): Promise<models.Payment> {
+  ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsUpdatePayment(
       this,
       id,
@@ -109,7 +109,7 @@ export class Payments extends ClientSDK {
   async processPayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Payment> {
+  ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsProcessPayment(
       this,
       id,

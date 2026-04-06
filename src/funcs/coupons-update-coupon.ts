@@ -40,7 +40,7 @@ export function couponsUpdateCoupon(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Coupon,
+    models.CouponResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -68,7 +68,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Coupon,
+      models.CouponResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -161,7 +161,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Coupon,
+    models.CouponResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -172,7 +172,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.Coupon$inboundSchema),
+    M.json(200, models.CouponResponse$inboundSchema),
     M.jsonErr([400, 401, 403, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

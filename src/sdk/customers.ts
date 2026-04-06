@@ -27,7 +27,7 @@ export class Customers extends ClientSDK {
     id?: string | undefined,
     externalCustomerId?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.Customer1> {
+  ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersUpdateCustomer(
       this,
       body,
@@ -46,7 +46,7 @@ export class Customers extends ClientSDK {
   async createCustomer(
     request: models.CreateCustomerRequest,
     options?: RequestOptions,
-  ): Promise<models.Customer1> {
+  ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersCreateCustomer(
       this,
       request,
@@ -63,7 +63,7 @@ export class Customers extends ClientSDK {
   async getCustomerByExternalId(
     externalId: string,
     options?: RequestOptions,
-  ): Promise<models.Customer1> {
+  ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersGetCustomerByExternalId(
       this,
       externalId,
@@ -114,7 +114,7 @@ export class Customers extends ClientSDK {
   async getCustomer(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Customer1> {
+  ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersGetCustomer(
       this,
       id,

@@ -23,7 +23,7 @@ export class Prices extends ClientSDK {
   async createPrice(
     request: models.CreatePriceRequest,
     options?: RequestOptions,
-  ): Promise<models.Price> {
+  ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesCreatePrice(
       this,
       request,
@@ -57,7 +57,7 @@ export class Prices extends ClientSDK {
   async getPriceByLookupKey(
     lookupKey: string,
     options?: RequestOptions,
-  ): Promise<models.Price> {
+  ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesGetPriceByLookupKey(
       this,
       lookupKey,
@@ -91,7 +91,7 @@ export class Prices extends ClientSDK {
   async getPrice(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Price> {
+  ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesGetPrice(
       this,
       id,
@@ -109,7 +109,7 @@ export class Prices extends ClientSDK {
     id: string,
     body: models.UpdatePriceRequest,
     options?: RequestOptions,
-  ): Promise<models.Price> {
+  ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesUpdatePrice(
       this,
       id,

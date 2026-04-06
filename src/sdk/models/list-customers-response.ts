@@ -6,7 +6,10 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
 import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
@@ -17,7 +20,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
  * Response object for listing customers with pagination
  */
 export type ListCustomersResponse = {
-  items?: Array<Customer1> | undefined;
+  items?: Array<CustomerResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -26,7 +29,7 @@ export const ListCustomersResponse$inboundSchema: z.ZodMiniType<
   ListCustomersResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Customer1$inboundSchema)),
+  items: types.optional(z.array(CustomerResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

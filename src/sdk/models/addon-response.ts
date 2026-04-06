@@ -12,11 +12,14 @@ import {
   EntitlementResponse,
   EntitlementResponse$inboundSchema,
 } from "./entitlement-response.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Addon1 = {
+export type AddonResponse = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   description?: string | undefined;
@@ -29,7 +32,7 @@ export type Addon1 = {
   /**
    * Optional expanded fields
    */
-  prices?: Array<Price> | undefined;
+  prices?: Array<PriceResponse> | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   type?: AddonType | undefined;
@@ -38,20 +41,23 @@ export type Addon1 = {
 };
 
 /** @internal */
-export const Addon1$inboundSchema: z.ZodMiniType<Addon1, unknown> = z.pipe(
+export const AddonResponse$inboundSchema: z.ZodMiniType<
+  AddonResponse,
+  unknown
+> = z.pipe(
   z.object({
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     description: types.optional(types.string()),
-    entitlements: types.optional(z.array(z.lazy(() =>
-      EntitlementResponse$inboundSchema
-    ))),
+    entitlements: types.optional(
+      z.array(z.lazy(() => EntitlementResponse$inboundSchema)),
+    ),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), z.any())),
     name: types.optional(types.string()),
-    prices: types.optional(z.array(z.lazy(() => Price$inboundSchema))),
+    prices: types.optional(z.array(z.lazy(() => PriceResponse$inboundSchema))),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
     type: types.optional(AddonType$inboundSchema),
@@ -71,12 +77,12 @@ export const Addon1$inboundSchema: z.ZodMiniType<Addon1, unknown> = z.pipe(
   }),
 );
 
-export function addon1FromJSON(
+export function addonResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Addon1, SDKValidationError> {
+): SafeParseResult<AddonResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Addon1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Addon1' from JSON`,
+    (x) => AddonResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddonResponse' from JSON`,
   );
 }

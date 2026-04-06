@@ -9,10 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
+  WalletResponse,
+  WalletResponse$inboundSchema,
+} from "./wallet-response.js";
+import {
   WalletTransactionResponse,
   WalletTransactionResponse$inboundSchema,
 } from "./wallet-transaction-response.js";
-import { Wallet, Wallet$inboundSchema } from "./wallet.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -21,7 +24,7 @@ import {
 export type WebhookDtoTransactionWebhookPayload = {
   eventType?: WebhookEventName | undefined;
   transaction?: WalletTransactionResponse | undefined;
-  wallet?: Wallet | undefined;
+  wallet?: WalletResponse | undefined;
 };
 
 /** @internal */
@@ -32,7 +35,7 @@ export const WebhookDtoTransactionWebhookPayload$inboundSchema: z.ZodMiniType<
   z.object({
     event_type: types.optional(WebhookEventName$inboundSchema),
     transaction: types.optional(WalletTransactionResponse$inboundSchema),
-    wallet: types.optional(Wallet$inboundSchema),
+    wallet: types.optional(WalletResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

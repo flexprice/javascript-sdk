@@ -17,7 +17,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 /**
  * Customer response object containing all customer information
  */
-export type Customer1 = {
+export type CustomerResponse = {
   /**
    * AddressCity is the city of the customer's address
    */
@@ -76,56 +76,58 @@ export type Customer1 = {
 };
 
 /** @internal */
-export const Customer1$inboundSchema: z.ZodMiniType<Customer1, unknown> = z
-  .pipe(
-    z.object({
-      address_city: types.optional(types.string()),
-      address_country: types.optional(types.string()),
-      address_line1: types.optional(types.string()),
-      address_line2: types.optional(types.string()),
-      address_postal_code: types.optional(types.string()),
-      address_state: types.optional(types.string()),
-      created_at: types.optional(types.date()),
-      created_by: types.optional(types.string()),
-      email: types.optional(types.string()),
-      environment_id: types.optional(types.string()),
-      external_id: types.optional(types.string()),
-      id: types.optional(types.string()),
-      integrations: types.optional(
-        z.array(EntityIntegrationMappingResponse$inboundSchema),
-      ),
-      metadata: types.optional(z.record(z.string(), types.string())),
-      name: types.optional(types.string()),
-      status: types.optional(Status$inboundSchema),
-      tenant_id: types.optional(types.string()),
-      updated_at: types.optional(types.date()),
-      updated_by: types.optional(types.string()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "address_city": "addressCity",
-        "address_country": "addressCountry",
-        "address_line1": "addressLine1",
-        "address_line2": "addressLine2",
-        "address_postal_code": "addressPostalCode",
-        "address_state": "addressState",
-        "created_at": "createdAt",
-        "created_by": "createdBy",
-        "environment_id": "environmentId",
-        "external_id": "externalId",
-        "tenant_id": "tenantId",
-        "updated_at": "updatedAt",
-        "updated_by": "updatedBy",
-      });
-    }),
-  );
+export const CustomerResponse$inboundSchema: z.ZodMiniType<
+  CustomerResponse,
+  unknown
+> = z.pipe(
+  z.object({
+    address_city: types.optional(types.string()),
+    address_country: types.optional(types.string()),
+    address_line1: types.optional(types.string()),
+    address_line2: types.optional(types.string()),
+    address_postal_code: types.optional(types.string()),
+    address_state: types.optional(types.string()),
+    created_at: types.optional(types.date()),
+    created_by: types.optional(types.string()),
+    email: types.optional(types.string()),
+    environment_id: types.optional(types.string()),
+    external_id: types.optional(types.string()),
+    id: types.optional(types.string()),
+    integrations: types.optional(
+      z.array(EntityIntegrationMappingResponse$inboundSchema),
+    ),
+    metadata: types.optional(z.record(z.string(), types.string())),
+    name: types.optional(types.string()),
+    status: types.optional(Status$inboundSchema),
+    tenant_id: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
+    updated_by: types.optional(types.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "address_city": "addressCity",
+      "address_country": "addressCountry",
+      "address_line1": "addressLine1",
+      "address_line2": "addressLine2",
+      "address_postal_code": "addressPostalCode",
+      "address_state": "addressState",
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "environment_id": "environmentId",
+      "external_id": "externalId",
+      "tenant_id": "tenantId",
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+    });
+  }),
+);
 
-export function customer1FromJSON(
+export function customerResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Customer1, SDKValidationError> {
+): SafeParseResult<CustomerResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Customer1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Customer1' from JSON`,
+    (x) => CustomerResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CustomerResponse' from JSON`,
   );
 }

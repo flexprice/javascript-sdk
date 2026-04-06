@@ -12,7 +12,10 @@ import {
   EntitlementResponse,
   EntitlementResponse$inboundSchema,
 } from "./entitlement-response.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
@@ -29,7 +32,7 @@ export type CreateAddonResponse = {
   /**
    * Optional expanded fields
    */
-  prices?: Array<Price> | undefined;
+  prices?: Array<PriceResponse> | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   type?: AddonType | undefined;
@@ -52,7 +55,7 @@ export const CreateAddonResponse$inboundSchema: z.ZodMiniType<
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), z.any())),
     name: types.optional(types.string()),
-    prices: types.optional(z.array(Price$inboundSchema)),
+    prices: types.optional(z.array(PriceResponse$inboundSchema)),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
     type: types.optional(AddonType$inboundSchema),

@@ -9,17 +9,20 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
+  WalletResponse,
+  WalletResponse$inboundSchema,
+} from "./wallet-response.js";
+import {
   WalletTransactionResponse,
   WalletTransactionResponse$inboundSchema,
 } from "./wallet-transaction-response.js";
-import { Wallet, Wallet$inboundSchema } from "./wallet.js";
 
 export type TopUpWalletResponse = {
   /**
    * Invoice ID if an invoice was created (only for PURCHASED_CREDIT_INVOICED)
    */
   invoiceId?: string | undefined;
-  wallet?: Wallet | undefined;
+  wallet?: WalletResponse | undefined;
   walletTransaction?: WalletTransactionResponse | undefined;
 };
 
@@ -30,7 +33,7 @@ export const TopUpWalletResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     invoice_id: types.optional(types.string()),
-    wallet: types.optional(Wallet$inboundSchema),
+    wallet: types.optional(WalletResponse$inboundSchema),
     wallet_transaction: types.optional(WalletTransactionResponse$inboundSchema),
   }),
   z.transform((v) => {

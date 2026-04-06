@@ -9,7 +9,7 @@ import type { SDKOptions } from "../lib/config.js";
 import { Flexprice } from "../index.js";
 import type * as models from "./models/index.js";
 
-/** Return type of {@link Flexprice.customers.getCustomerByExternalId} (avoids models barrel alias e.g. Customer1). */
+/** Return type of {@link Flexprice.customers.getCustomerByExternalId} (typically {@link models.CustomerResponse}). */
 type CustomerFromLookup = Awaited<
   ReturnType<Flexprice["customers"]["getCustomerByExternalId"]>
 >;
@@ -30,9 +30,9 @@ export interface CustomerDashboardData {
   customer?: CustomerFromLookup;
   usage?: models.CustomerUsageSummaryResponse;
   entitlements?: models.CustomerEntitlementsResponse;
-  walletBalance?: models.Wallet;
-  activeSubscriptions?: models.Subscription[];
-  invoices?: models.Invoice[];
+  walletBalance?: models.WalletResponse;
+  activeSubscriptions?: models.SubscriptionResponse[];
+  invoices?: models.InvoiceResponse[];
   summary?: models.CustomerMultiCurrencyInvoiceSummary;
   metadata: {
     fetchedAt: string;
@@ -153,11 +153,11 @@ export class CustomerPortal {
         : undefined,
     ]);
 
-    const activeSubscriptions: models.Subscription[] =
+    const activeSubscriptions: models.SubscriptionResponse[] =
       subsResp && isRecord(subsResp) && "items" in subsResp && Array.isArray(subsResp["items"])
         ? subsResp["items"]
         : [];
-    const invoices: models.Invoice[] =
+    const invoices: models.InvoiceResponse[] =
       invoicesResp && isRecord(invoicesResp) && "items" in invoicesResp && Array.isArray(invoicesResp["items"])
         ? invoicesResp["items"]
         : [];

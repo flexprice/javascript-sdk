@@ -37,7 +37,7 @@ export function invoicesGetInvoicePreview(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Invoice,
+    models.InvoiceResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Invoice,
+      models.InvoiceResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -145,7 +145,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Invoice,
+    models.InvoiceResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -156,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.Invoice$inboundSchema),
+    M.json(200, models.InvoiceResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

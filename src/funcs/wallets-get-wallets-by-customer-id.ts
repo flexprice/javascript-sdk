@@ -37,7 +37,7 @@ export function walletsGetWalletsByCustomerId(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<models.Wallet>,
+    Array<models.WalletResponse>,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<models.Wallet>,
+      Array<models.WalletResponse>,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -155,7 +155,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    Array<models.Wallet>,
+    Array<models.WalletResponse>,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -166,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(models.Wallet$inboundSchema)),
+    M.json(200, z.array(models.WalletResponse$inboundSchema)),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

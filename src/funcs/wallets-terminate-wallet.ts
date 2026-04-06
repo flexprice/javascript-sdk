@@ -37,7 +37,7 @@ export function walletsTerminateWallet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Wallet,
+    models.WalletResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Wallet,
+      models.WalletResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Wallet,
+    models.WalletResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -165,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.Wallet$inboundSchema),
+    M.json(200, models.WalletResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

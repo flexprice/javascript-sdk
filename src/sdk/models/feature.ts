@@ -20,7 +20,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Feature2 = {
+export type Feature = {
   alertSettings?: AlertSettings | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
@@ -44,7 +44,7 @@ export type Feature2 = {
 };
 
 /** @internal */
-export const Feature2$inboundSchema: z.ZodMiniType<Feature2, unknown> = z.pipe(
+export const Feature$inboundSchema: z.ZodMiniType<Feature, unknown> = z.pipe(
   z.object({
     alert_settings: types.optional(AlertSettings$inboundSchema),
     created_at: types.optional(types.date()),
@@ -86,12 +86,12 @@ export const Feature2$inboundSchema: z.ZodMiniType<Feature2, unknown> = z.pipe(
   }),
 );
 
-export function feature2FromJSON(
+export function featureFromJSON(
   jsonString: string,
-): SafeParseResult<Feature2, SDKValidationError> {
+): SafeParseResult<Feature, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Feature2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Feature2' from JSON`,
+    (x) => Feature$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Feature' from JSON`,
   );
 }

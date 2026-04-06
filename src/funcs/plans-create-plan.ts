@@ -37,7 +37,7 @@ export function plansCreatePlan(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Plan1,
+    models.PlanResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Plan1,
+      models.PlanResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -145,7 +145,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Plan1,
+    models.PlanResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -156,7 +156,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.Plan1$inboundSchema),
+    M.json(201, models.PlanResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

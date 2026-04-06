@@ -10,11 +10,14 @@ import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
 } from "./pagination-response.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ListPricesResponse = {
-  items?: Array<Price> | undefined;
+  items?: Array<PriceResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -23,7 +26,7 @@ export const ListPricesResponse$inboundSchema: z.ZodMiniType<
   ListPricesResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Price$inboundSchema)),
+  items: types.optional(z.array(PriceResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

@@ -37,7 +37,7 @@ export function subscriptionsGetSubscription(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.Subscription,
+    models.SubscriptionResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.Subscription,
+      models.SubscriptionResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -154,7 +154,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.Subscription,
+    models.SubscriptionResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -165,7 +165,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.Subscription$inboundSchema),
+    M.json(200, models.SubscriptionResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

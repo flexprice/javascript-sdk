@@ -23,7 +23,7 @@ import { WalletConfig, WalletConfig$inboundSchema } from "./wallet-config.js";
 import { WalletStatus, WalletStatus$inboundSchema } from "./wallet-status.js";
 import { WalletType, WalletType$inboundSchema } from "./wallet-type.js";
 
-export type Wallet = {
+export type WalletResponse = {
   alertSettings?: AlertSettings | undefined;
   alertState?: AlertState | undefined;
   autoTopup?: AutoTopup | undefined;
@@ -67,7 +67,10 @@ export type Wallet = {
 };
 
 /** @internal */
-export const Wallet$inboundSchema: z.ZodMiniType<Wallet, unknown> = z.pipe(
+export const WalletResponse$inboundSchema: z.ZodMiniType<
+  WalletResponse,
+  unknown
+> = z.pipe(
   z.object({
     alert_settings: types.optional(AlertSettings$inboundSchema),
     alert_state: types.optional(AlertState$inboundSchema),
@@ -116,12 +119,12 @@ export const Wallet$inboundSchema: z.ZodMiniType<Wallet, unknown> = z.pipe(
   }),
 );
 
-export function walletFromJSON(
+export function walletResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Wallet, SDKValidationError> {
+): SafeParseResult<WalletResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Wallet$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Wallet' from JSON`,
+    (x) => WalletResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WalletResponse' from JSON`,
   );
 }

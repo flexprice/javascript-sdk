@@ -79,7 +79,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Coupon](../../sdk/models/coupon.md)\>**
+**Promise\<[models.CouponResponse](../../sdk/models/coupon-response.md)\>**
 
 ### Errors
 
@@ -221,7 +221,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Coupon](../../sdk/models/coupon.md)\>**
+**Promise\<[models.CouponResponse](../../sdk/models/coupon-response.md)\>**
 
 ### Errors
 
@@ -293,7 +293,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Coupon](../../sdk/models/coupon.md)\>**
+**Promise\<[models.CouponResponse](../../sdk/models/coupon-response.md)\>**
 
 ### Errors
 

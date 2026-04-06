@@ -23,15 +23,21 @@ import {
   CreditnoteCreditNoteLineItem,
   CreditnoteCreditNoteLineItem$inboundSchema,
 } from "./creditnote-credit-note-line-item.js";
-import { Customer2, Customer2$inboundSchema } from "./customer-2.js";
-import { Invoice, Invoice$inboundSchema } from "./invoice.js";
+import { Customer, Customer$inboundSchema } from "./customer.js";
+import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
 import {
   PaymentStatus,
   PaymentStatus$inboundSchema,
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
-import { Subscription, Subscription$inboundSchema } from "./subscription.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 
 export type CreditNoteResponse = {
   createdAt?: Date | undefined;
@@ -46,7 +52,7 @@ export type CreditNoteResponse = {
    * currency is the three-letter ISO currency code (e.g., USD, EUR) for the credit note
    */
   currency?: string | undefined;
-  customer?: Customer2 | undefined;
+  customer?: Customer | undefined;
   /**
    * customer_id is the unique identifier of the customer who owns this credit note
    */
@@ -67,7 +73,7 @@ export type CreditNoteResponse = {
    * idempotency_key is an optional key used to prevent duplicate credit note creation
    */
   idempotencyKey?: string | undefined;
-  invoice?: Invoice | undefined;
+  invoice?: InvoiceResponse | undefined;
   /**
    * invoice_id is the id of the invoice resource that this credit note is applied to
    */
@@ -84,7 +90,7 @@ export type CreditNoteResponse = {
   reason?: CreditNoteReason | undefined;
   refundStatus?: PaymentStatus | undefined;
   status?: Status | undefined;
-  subscription?: Subscription | undefined;
+  subscription?: SubscriptionResponse | undefined;
   /**
    * subscription_id is the optional unique identifier of the subscription related to this credit note
    */
@@ -114,13 +120,13 @@ export const CreditNoteResponse$inboundSchema: z.ZodMiniType<
     credit_note_status: types.optional(CreditNoteStatus$inboundSchema),
     credit_note_type: types.optional(CreditNoteType$inboundSchema),
     currency: types.optional(types.string()),
-    customer: types.optional(Customer2$inboundSchema),
+    customer: types.optional(Customer$inboundSchema),
     customer_id: types.optional(types.string()),
     environment_id: types.optional(types.string()),
     finalized_at: types.optional(types.date()),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
-    invoice: types.optional(Invoice$inboundSchema),
+    invoice: types.optional(InvoiceResponse$inboundSchema),
     invoice_id: types.optional(types.string()),
     line_items: types.optional(
       z.array(CreditnoteCreditNoteLineItem$inboundSchema),
@@ -130,7 +136,7 @@ export const CreditNoteResponse$inboundSchema: z.ZodMiniType<
     reason: types.optional(CreditNoteReason$inboundSchema),
     refund_status: types.optional(PaymentStatus$inboundSchema),
     status: types.optional(Status$inboundSchema),
-    subscription: types.optional(Subscription$inboundSchema),
+    subscription: types.optional(SubscriptionResponse$inboundSchema),
     subscription_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
     total_amount: types.optional(types.string()),

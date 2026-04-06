@@ -6,11 +6,14 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CreateBulkPriceResponse = {
-  items?: Array<Price> | undefined;
+  items?: Array<PriceResponse> | undefined;
 };
 
 /** @internal */
@@ -18,7 +21,7 @@ export const CreateBulkPriceResponse$inboundSchema: z.ZodMiniType<
   CreateBulkPriceResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Price$inboundSchema)),
+  items: types.optional(z.array(PriceResponse$inboundSchema)),
 });
 
 export function createBulkPriceResponseFromJSON(

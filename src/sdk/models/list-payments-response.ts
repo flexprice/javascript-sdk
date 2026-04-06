@@ -10,11 +10,14 @@ import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
 } from "./pagination-response.js";
-import { Payment, Payment$inboundSchema } from "./payment.js";
+import {
+  PaymentResponse,
+  PaymentResponse$inboundSchema,
+} from "./payment-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ListPaymentsResponse = {
-  items?: Array<Payment> | undefined;
+  items?: Array<PaymentResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -23,7 +26,7 @@ export const ListPaymentsResponse$inboundSchema: z.ZodMiniType<
   ListPaymentsResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Payment$inboundSchema)),
+  items: types.optional(z.array(PaymentResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

@@ -1,11 +1,11 @@
-# Wallet
+# WalletResponse
 
 ## Example Usage
 
 ```typescript
-import { Wallet } from "@flexprice/sdk/sdk/models";
+import { WalletResponse } from "@flexprice/sdk/sdk/models";
 
-let value: Wallet = {};
+let value: WalletResponse = {};
 ```
 
 ## Fields

@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Addon1, Addon1$inboundSchema } from "./addon-1.js";
+import {
+  AddonResponse,
+  AddonResponse$inboundSchema,
+} from "./addon-response.js";
 import {
   BillingCadence,
   BillingCadence$inboundSchema,
@@ -30,7 +33,7 @@ import {
   MeterResponse,
   MeterResponse$inboundSchema,
 } from "./meter-response.js";
-import { Plan1, Plan1$inboundSchema } from "./plan-1.js";
+import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import {
   PriceEntityType,
   PriceEntityType$inboundSchema,
@@ -55,8 +58,8 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Price = {
-  addon?: Addon1 | undefined;
+export type PriceResponse = {
+  addon?: AddonResponse | undefined;
   /**
    * Amount stored in main currency units (e.g., dollars, not cents)
    *
@@ -141,7 +144,7 @@ export type Price = {
    * ParentPriceID references the root price (always set for price lineage tracking)
    */
   parentPriceId?: string | undefined;
-  plan?: Plan1 | undefined;
+  plan?: PlanResponse | undefined;
   /**
    * PriceUnit is the code of the price unit (e.g., 'btc', 'eth')
    */
@@ -182,9 +185,12 @@ export type Price = {
 };
 
 /** @internal */
-export const Price$inboundSchema: z.ZodMiniType<Price, unknown> = z.pipe(
+export const PriceResponse$inboundSchema: z.ZodMiniType<
+  PriceResponse,
+  unknown
+> = z.pipe(
   z.object({
-    addon: types.optional(z.lazy(() => Addon1$inboundSchema)),
+    addon: types.optional(z.lazy(() => AddonResponse$inboundSchema)),
     amount: types.optional(types.string()),
     billing_cadence: types.optional(BillingCadence$inboundSchema),
     billing_model: types.optional(BillingModel$inboundSchema),
@@ -212,7 +218,7 @@ export const Price$inboundSchema: z.ZodMiniType<Price, unknown> = z.pipe(
     meter_id: types.optional(types.string()),
     min_quantity: z.optional(z.nullable(types.string())),
     parent_price_id: types.optional(types.string()),
-    plan: types.optional(z.lazy(() => Plan1$inboundSchema)),
+    plan: types.optional(z.lazy(() => PlanResponse$inboundSchema)),
     price_unit: types.optional(types.string()),
     price_unit_amount: types.optional(types.string()),
     price_unit_id: types.optional(types.string()),
@@ -271,12 +277,12 @@ export const Price$inboundSchema: z.ZodMiniType<Price, unknown> = z.pipe(
   }),
 );
 
-export function priceFromJSON(
+export function priceResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Price, SDKValidationError> {
+): SafeParseResult<PriceResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Price$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Price' from JSON`,
+    (x) => PriceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PriceResponse' from JSON`,
   );
 }

@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Addon1, Addon1$inboundSchema } from "./addon-1.js";
+import {
+  AddonResponse,
+  AddonResponse$inboundSchema,
+} from "./addon-response.js";
 import {
   EntitlementEntityType,
   EntitlementEntityType$inboundSchema,
@@ -16,14 +19,17 @@ import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
 } from "./entitlement-usage-reset-period.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { FeatureType, FeatureType$inboundSchema } from "./feature-type.js";
-import { Plan1, Plan1$inboundSchema } from "./plan-1.js";
+import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
 export type EntitlementResponse = {
-  addon?: Addon1 | undefined;
+  addon?: AddonResponse | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   displayOrder?: number | undefined;
@@ -31,14 +37,14 @@ export type EntitlementResponse = {
   entityId?: string | undefined;
   entityType?: EntitlementEntityType | undefined;
   environmentId?: string | undefined;
-  feature?: Feature1 | undefined;
+  feature?: FeatureResponse | undefined;
   featureId?: string | undefined;
   featureType?: FeatureType | undefined;
   id?: string | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   parentEntitlementId?: string | undefined;
-  plan?: Plan1 | undefined;
+  plan?: PlanResponse | undefined;
   /**
    * TODO: Remove this once we have a proper entitlement entity type
    */
@@ -59,7 +65,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    addon: types.optional(z.lazy(() => Addon1$inboundSchema)),
+    addon: types.optional(z.lazy(() => AddonResponse$inboundSchema)),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     display_order: types.optional(types.number()),
@@ -67,14 +73,14 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
     entity_id: types.optional(types.string()),
     entity_type: types.optional(EntitlementEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
-    feature: types.optional(Feature1$inboundSchema),
+    feature: types.optional(FeatureResponse$inboundSchema),
     feature_id: types.optional(types.string()),
     feature_type: types.optional(FeatureType$inboundSchema),
     id: types.optional(types.string()),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
     parent_entitlement_id: types.optional(types.string()),
-    plan: types.optional(z.lazy(() => Plan1$inboundSchema)),
+    plan: types.optional(z.lazy(() => PlanResponse$inboundSchema)),
     plan_id: types.optional(types.string()),
     start_date: types.optional(types.date()),
     static_value: types.optional(types.string()),

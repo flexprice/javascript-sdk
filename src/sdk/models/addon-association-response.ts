@@ -7,18 +7,24 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Addon1, Addon1$inboundSchema } from "./addon-1.js";
 import {
   AddonAssociationEntityType,
   AddonAssociationEntityType$inboundSchema,
 } from "./addon-association-entity-type.js";
+import {
+  AddonResponse,
+  AddonResponse$inboundSchema,
+} from "./addon-response.js";
 import { AddonStatus, AddonStatus$inboundSchema } from "./addon-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
-import { Subscription, Subscription$inboundSchema } from "./subscription.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 
 export type AddonAssociationResponse = {
-  addon?: Addon1 | undefined;
+  addon?: AddonResponse | undefined;
   addonId?: string | undefined;
   addonStatus?: AddonStatus | undefined;
   cancellationReason?: string | undefined;
@@ -33,7 +39,7 @@ export type AddonAssociationResponse = {
   metadata?: { [k: string]: any } | undefined;
   startDate?: Date | undefined;
   status?: Status | undefined;
-  subscription?: Subscription | undefined;
+  subscription?: SubscriptionResponse | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -45,7 +51,7 @@ export const AddonAssociationResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    addon: types.optional(Addon1$inboundSchema),
+    addon: types.optional(AddonResponse$inboundSchema),
     addon_id: types.optional(types.string()),
     addon_status: types.optional(AddonStatus$inboundSchema),
     cancellation_reason: types.optional(types.string()),
@@ -60,7 +66,7 @@ export const AddonAssociationResponse$inboundSchema: z.ZodMiniType<
     metadata: types.optional(z.record(z.string(), z.any())),
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
-    subscription: types.optional(Subscription$inboundSchema),
+    subscription: types.optional(SubscriptionResponse$inboundSchema),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),

@@ -24,11 +24,17 @@ import {
   CreditGrantResponse,
   CreditGrantResponse$inboundSchema,
 } from "./credit-grant-response.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
-import { Invoice, Invoice$inboundSchema } from "./invoice.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
+import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
 import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
 import { PaymentTerms, PaymentTerms$inboundSchema } from "./payment-terms.js";
-import { Plan1, Plan1$inboundSchema } from "./plan-1.js";
+import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import {
   ProrationBehavior,
   ProrationBehavior$inboundSchema,
@@ -56,7 +62,7 @@ import {
   SubscriptionType$inboundSchema,
 } from "./subscription-type.js";
 
-export type Subscription = {
+export type SubscriptionResponse = {
   /**
    * ActivePauseID references the current active pause configuration
    *
@@ -131,7 +137,7 @@ export type Subscription = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   /**
    * CustomerID is the identifier for the customer in our system
    */
@@ -161,7 +167,7 @@ export type Subscription = {
    * This can differ from the subscription customer (e.g., parent company invoicing for child company)
    */
   invoicingCustomerId?: string | undefined;
-  latestInvoice?: Invoice | undefined;
+  latestInvoice?: InvoiceResponse | undefined;
   lineItems?: Array<SubscriptionSubscriptionLineItem> | undefined;
   /**
    * LookupKey is the key used to lookup the subscription in our system
@@ -187,7 +193,7 @@ export type Subscription = {
    * Phases are the subscription phases for this subscription
    */
   phases?: Array<SubscriptionPhaseResponse> | undefined;
-  plan?: Plan1 | undefined;
+  plan?: PlanResponse | undefined;
   /**
    * PlanID is the identifier for the plan in our system
    */
@@ -218,123 +224,125 @@ export type Subscription = {
 };
 
 /** @internal */
-export const Subscription$inboundSchema: z.ZodMiniType<Subscription, unknown> =
-  z.pipe(
-    z.object({
-      active_pause_id: types.optional(types.string()),
-      billing_anchor: types.optional(types.date()),
-      billing_cadence: types.optional(BillingCadence$inboundSchema),
-      billing_cycle: types.optional(BillingCycle$inboundSchema),
-      billing_period: types.optional(BillingPeriod$inboundSchema),
-      billing_period_count: types.optional(types.number()),
-      cancel_at: types.optional(types.date()),
-      cancel_at_period_end: types.optional(types.boolean()),
-      cancelled_at: types.optional(types.date()),
-      collection_method: types.optional(types.string()),
-      commitment_amount: types.optional(types.string()),
-      commitment_duration: types.optional(BillingPeriod$inboundSchema),
-      coupon_associations: types.optional(
-        z.array(CouponAssociationResponse$inboundSchema),
-      ),
-      created_at: types.optional(types.date()),
-      created_by: types.optional(types.string()),
-      credit_grants: types.optional(z.array(CreditGrantResponse$inboundSchema)),
-      currency: types.optional(types.string()),
-      current_period_end: types.optional(types.date()),
-      current_period_start: types.optional(types.date()),
-      customer: types.optional(Customer1$inboundSchema),
-      customer_id: types.optional(types.string()),
-      customer_timezone: types.optional(types.string()),
-      enable_true_up: types.optional(types.boolean()),
-      end_date: types.optional(types.date()),
-      environment_id: types.optional(types.string()),
-      gateway_payment_method_id: types.optional(types.string()),
-      id: types.optional(types.string()),
-      invoicing_customer_id: types.optional(types.string()),
-      latest_invoice: types.optional(z.lazy(() => Invoice$inboundSchema)),
-      line_items: types.optional(
-        z.array(SubscriptionSubscriptionLineItem$inboundSchema),
-      ),
-      lookup_key: types.optional(types.string()),
-      metadata: types.optional(z.record(z.string(), types.string())),
-      overage_factor: types.optional(types.string()),
-      parent_subscription_id: types.optional(types.string()),
-      pause_status: types.optional(PauseStatus$inboundSchema),
-      pauses: types.optional(
-        z.array(SubscriptionSubscriptionPause$inboundSchema),
-      ),
-      payment_behavior: types.optional(types.string()),
-      payment_terms: types.optional(PaymentTerms$inboundSchema),
-      phases: types.optional(z.array(SubscriptionPhaseResponse$inboundSchema)),
-      plan: types.optional(Plan1$inboundSchema),
-      plan_id: types.optional(types.string()),
-      proration_behavior: types.optional(ProrationBehavior$inboundSchema),
-      start_date: types.optional(types.date()),
-      status: types.optional(Status$inboundSchema),
-      subscription_status: types.optional(SubscriptionStatus$inboundSchema),
-      subscription_type: types.optional(SubscriptionType$inboundSchema),
-      tenant_id: types.optional(types.string()),
-      trial_end: types.optional(types.date()),
-      trial_start: types.optional(types.date()),
-      updated_at: types.optional(types.date()),
-      updated_by: types.optional(types.string()),
-      version: types.optional(types.number()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "active_pause_id": "activePauseId",
-        "billing_anchor": "billingAnchor",
-        "billing_cadence": "billingCadence",
-        "billing_cycle": "billingCycle",
-        "billing_period": "billingPeriod",
-        "billing_period_count": "billingPeriodCount",
-        "cancel_at": "cancelAt",
-        "cancel_at_period_end": "cancelAtPeriodEnd",
-        "cancelled_at": "cancelledAt",
-        "collection_method": "collectionMethod",
-        "commitment_amount": "commitmentAmount",
-        "commitment_duration": "commitmentDuration",
-        "coupon_associations": "couponAssociations",
-        "created_at": "createdAt",
-        "created_by": "createdBy",
-        "credit_grants": "creditGrants",
-        "current_period_end": "currentPeriodEnd",
-        "current_period_start": "currentPeriodStart",
-        "customer_id": "customerId",
-        "customer_timezone": "customerTimezone",
-        "enable_true_up": "enableTrueUp",
-        "end_date": "endDate",
-        "environment_id": "environmentId",
-        "gateway_payment_method_id": "gatewayPaymentMethodId",
-        "invoicing_customer_id": "invoicingCustomerId",
-        "latest_invoice": "latestInvoice",
-        "line_items": "lineItems",
-        "lookup_key": "lookupKey",
-        "overage_factor": "overageFactor",
-        "parent_subscription_id": "parentSubscriptionId",
-        "pause_status": "pauseStatus",
-        "payment_behavior": "paymentBehavior",
-        "payment_terms": "paymentTerms",
-        "plan_id": "planId",
-        "proration_behavior": "prorationBehavior",
-        "start_date": "startDate",
-        "subscription_status": "subscriptionStatus",
-        "subscription_type": "subscriptionType",
-        "tenant_id": "tenantId",
-        "trial_end": "trialEnd",
-        "trial_start": "trialStart",
-        "updated_at": "updatedAt",
-        "updated_by": "updatedBy",
-      });
-    }),
-  );
+export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
+  SubscriptionResponse,
+  unknown
+> = z.pipe(
+  z.object({
+    active_pause_id: types.optional(types.string()),
+    billing_anchor: types.optional(types.date()),
+    billing_cadence: types.optional(BillingCadence$inboundSchema),
+    billing_cycle: types.optional(BillingCycle$inboundSchema),
+    billing_period: types.optional(BillingPeriod$inboundSchema),
+    billing_period_count: types.optional(types.number()),
+    cancel_at: types.optional(types.date()),
+    cancel_at_period_end: types.optional(types.boolean()),
+    cancelled_at: types.optional(types.date()),
+    collection_method: types.optional(types.string()),
+    commitment_amount: types.optional(types.string()),
+    commitment_duration: types.optional(BillingPeriod$inboundSchema),
+    coupon_associations: types.optional(
+      z.array(CouponAssociationResponse$inboundSchema),
+    ),
+    created_at: types.optional(types.date()),
+    created_by: types.optional(types.string()),
+    credit_grants: types.optional(z.array(CreditGrantResponse$inboundSchema)),
+    currency: types.optional(types.string()),
+    current_period_end: types.optional(types.date()),
+    current_period_start: types.optional(types.date()),
+    customer: types.optional(CustomerResponse$inboundSchema),
+    customer_id: types.optional(types.string()),
+    customer_timezone: types.optional(types.string()),
+    enable_true_up: types.optional(types.boolean()),
+    end_date: types.optional(types.date()),
+    environment_id: types.optional(types.string()),
+    gateway_payment_method_id: types.optional(types.string()),
+    id: types.optional(types.string()),
+    invoicing_customer_id: types.optional(types.string()),
+    latest_invoice: types.optional(z.lazy(() => InvoiceResponse$inboundSchema)),
+    line_items: types.optional(
+      z.array(SubscriptionSubscriptionLineItem$inboundSchema),
+    ),
+    lookup_key: types.optional(types.string()),
+    metadata: types.optional(z.record(z.string(), types.string())),
+    overage_factor: types.optional(types.string()),
+    parent_subscription_id: types.optional(types.string()),
+    pause_status: types.optional(PauseStatus$inboundSchema),
+    pauses: types.optional(
+      z.array(SubscriptionSubscriptionPause$inboundSchema),
+    ),
+    payment_behavior: types.optional(types.string()),
+    payment_terms: types.optional(PaymentTerms$inboundSchema),
+    phases: types.optional(z.array(SubscriptionPhaseResponse$inboundSchema)),
+    plan: types.optional(PlanResponse$inboundSchema),
+    plan_id: types.optional(types.string()),
+    proration_behavior: types.optional(ProrationBehavior$inboundSchema),
+    start_date: types.optional(types.date()),
+    status: types.optional(Status$inboundSchema),
+    subscription_status: types.optional(SubscriptionStatus$inboundSchema),
+    subscription_type: types.optional(SubscriptionType$inboundSchema),
+    tenant_id: types.optional(types.string()),
+    trial_end: types.optional(types.date()),
+    trial_start: types.optional(types.date()),
+    updated_at: types.optional(types.date()),
+    updated_by: types.optional(types.string()),
+    version: types.optional(types.number()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "active_pause_id": "activePauseId",
+      "billing_anchor": "billingAnchor",
+      "billing_cadence": "billingCadence",
+      "billing_cycle": "billingCycle",
+      "billing_period": "billingPeriod",
+      "billing_period_count": "billingPeriodCount",
+      "cancel_at": "cancelAt",
+      "cancel_at_period_end": "cancelAtPeriodEnd",
+      "cancelled_at": "cancelledAt",
+      "collection_method": "collectionMethod",
+      "commitment_amount": "commitmentAmount",
+      "commitment_duration": "commitmentDuration",
+      "coupon_associations": "couponAssociations",
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "credit_grants": "creditGrants",
+      "current_period_end": "currentPeriodEnd",
+      "current_period_start": "currentPeriodStart",
+      "customer_id": "customerId",
+      "customer_timezone": "customerTimezone",
+      "enable_true_up": "enableTrueUp",
+      "end_date": "endDate",
+      "environment_id": "environmentId",
+      "gateway_payment_method_id": "gatewayPaymentMethodId",
+      "invoicing_customer_id": "invoicingCustomerId",
+      "latest_invoice": "latestInvoice",
+      "line_items": "lineItems",
+      "lookup_key": "lookupKey",
+      "overage_factor": "overageFactor",
+      "parent_subscription_id": "parentSubscriptionId",
+      "pause_status": "pauseStatus",
+      "payment_behavior": "paymentBehavior",
+      "payment_terms": "paymentTerms",
+      "plan_id": "planId",
+      "proration_behavior": "prorationBehavior",
+      "start_date": "startDate",
+      "subscription_status": "subscriptionStatus",
+      "subscription_type": "subscriptionType",
+      "tenant_id": "tenantId",
+      "trial_end": "trialEnd",
+      "trial_start": "trialStart",
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+    });
+  }),
+);
 
-export function subscriptionFromJSON(
+export function subscriptionResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Subscription, SDKValidationError> {
+): SafeParseResult<SubscriptionResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Subscription$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Subscription' from JSON`,
+    (x) => SubscriptionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SubscriptionResponse' from JSON`,
   );
 }

@@ -7,62 +7,103 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  AlertSettings,
+  AlertSettings$inboundSchema,
+} from "./alert-settings.js";
+import { FeatureType, FeatureType$inboundSchema } from "./feature-type.js";
+import {
+  GroupResponse,
+  GroupResponse$inboundSchema,
+} from "./group-response.js";
+import {
+  MeterResponse,
+  MeterResponse$inboundSchema,
+} from "./meter-response.js";
+import {
+  ReportingUnit,
+  ReportingUnit$inboundSchema,
+} from "./reporting-unit.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Plan2 = {
+export type FeatureResponse = {
+  alertSettings?: AlertSettings | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   description?: string | undefined;
-  displayOrder?: number | undefined;
   environmentId?: string | undefined;
+  group?: GroupResponse | undefined;
+  groupId?: string | undefined;
   id?: string | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  meter?: MeterResponse | undefined;
+  meterId?: string | undefined;
   name?: string | undefined;
+  reportingUnit?: ReportingUnit | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
+  type?: FeatureType | undefined;
+  unitPlural?: string | undefined;
+  unitSingular?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
 /** @internal */
-export const Plan2$inboundSchema: z.ZodMiniType<Plan2, unknown> = z.pipe(
+export const FeatureResponse$inboundSchema: z.ZodMiniType<
+  FeatureResponse,
+  unknown
+> = z.pipe(
   z.object({
+    alert_settings: types.optional(AlertSettings$inboundSchema),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     description: types.optional(types.string()),
-    display_order: types.optional(types.number()),
     environment_id: types.optional(types.string()),
+    group: types.optional(GroupResponse$inboundSchema),
+    group_id: types.optional(types.string()),
     id: types.optional(types.string()),
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    meter: types.optional(MeterResponse$inboundSchema),
+    meter_id: types.optional(types.string()),
     name: types.optional(types.string()),
+    reporting_unit: types.optional(ReportingUnit$inboundSchema),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
+    type: types.optional(FeatureType$inboundSchema),
+    unit_plural: types.optional(types.string()),
+    unit_singular: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "alert_settings": "alertSettings",
       "created_at": "createdAt",
       "created_by": "createdBy",
-      "display_order": "displayOrder",
       "environment_id": "environmentId",
+      "group_id": "groupId",
       "lookup_key": "lookupKey",
+      "meter_id": "meterId",
+      "reporting_unit": "reportingUnit",
       "tenant_id": "tenantId",
+      "unit_plural": "unitPlural",
+      "unit_singular": "unitSingular",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",
     });
   }),
 );
 
-export function plan2FromJSON(
+export function featureResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Plan2, SDKValidationError> {
+): SafeParseResult<FeatureResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Plan2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Plan2' from JSON`,
+    (x) => FeatureResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FeatureResponse' from JSON`,
   );
 }

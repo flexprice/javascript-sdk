@@ -6,7 +6,7 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Customer2, Customer2$inboundSchema } from "./customer-2.js";
+import { Customer, Customer$inboundSchema } from "./customer.js";
 import {
   DebugTrackerStatus,
   DebugTrackerStatus$inboundSchema,
@@ -18,7 +18,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CustomerLookupResult = {
-  customer?: Customer2 | undefined;
+  customer?: Customer | undefined;
   error?: ErrorResponse | undefined;
   status?: DebugTrackerStatus | undefined;
 };
@@ -28,7 +28,7 @@ export const CustomerLookupResult$inboundSchema: z.ZodMiniType<
   CustomerLookupResult,
   unknown
 > = z.object({
-  customer: types.optional(Customer2$inboundSchema),
+  customer: types.optional(Customer$inboundSchema),
   error: types.optional(ErrorResponse$inboundSchema),
   status: types.optional(DebugTrackerStatus$inboundSchema),
 });

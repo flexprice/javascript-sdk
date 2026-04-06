@@ -10,7 +10,7 @@ import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type Customer2 = {
+export type Customer = {
   /**
    * AddressCity is the city of the customer's address
    */
@@ -68,53 +68,52 @@ export type Customer2 = {
 };
 
 /** @internal */
-export const Customer2$inboundSchema: z.ZodMiniType<Customer2, unknown> = z
-  .pipe(
-    z.object({
-      address_city: types.optional(types.string()),
-      address_country: types.optional(types.string()),
-      address_line1: types.optional(types.string()),
-      address_line2: types.optional(types.string()),
-      address_postal_code: types.optional(types.string()),
-      address_state: types.optional(types.string()),
-      created_at: types.optional(types.date()),
-      created_by: types.optional(types.string()),
-      email: types.optional(types.string()),
-      environment_id: types.optional(types.string()),
-      external_id: types.optional(types.string()),
-      id: types.optional(types.string()),
-      metadata: types.optional(z.record(z.string(), types.string())),
-      name: types.optional(types.string()),
-      status: types.optional(Status$inboundSchema),
-      tenant_id: types.optional(types.string()),
-      updated_at: types.optional(types.date()),
-      updated_by: types.optional(types.string()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "address_city": "addressCity",
-        "address_country": "addressCountry",
-        "address_line1": "addressLine1",
-        "address_line2": "addressLine2",
-        "address_postal_code": "addressPostalCode",
-        "address_state": "addressState",
-        "created_at": "createdAt",
-        "created_by": "createdBy",
-        "environment_id": "environmentId",
-        "external_id": "externalId",
-        "tenant_id": "tenantId",
-        "updated_at": "updatedAt",
-        "updated_by": "updatedBy",
-      });
-    }),
-  );
+export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
+  z.object({
+    address_city: types.optional(types.string()),
+    address_country: types.optional(types.string()),
+    address_line1: types.optional(types.string()),
+    address_line2: types.optional(types.string()),
+    address_postal_code: types.optional(types.string()),
+    address_state: types.optional(types.string()),
+    created_at: types.optional(types.date()),
+    created_by: types.optional(types.string()),
+    email: types.optional(types.string()),
+    environment_id: types.optional(types.string()),
+    external_id: types.optional(types.string()),
+    id: types.optional(types.string()),
+    metadata: types.optional(z.record(z.string(), types.string())),
+    name: types.optional(types.string()),
+    status: types.optional(Status$inboundSchema),
+    tenant_id: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
+    updated_by: types.optional(types.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "address_city": "addressCity",
+      "address_country": "addressCountry",
+      "address_line1": "addressLine1",
+      "address_line2": "addressLine2",
+      "address_postal_code": "addressPostalCode",
+      "address_state": "addressState",
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "environment_id": "environmentId",
+      "external_id": "externalId",
+      "tenant_id": "tenantId",
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+    });
+  }),
+);
 
-export function customer2FromJSON(
+export function customerFromJSON(
   jsonString: string,
-): SafeParseResult<Customer2, SDKValidationError> {
+): SafeParseResult<Customer, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Customer2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Customer2' from JSON`,
+    (x) => Customer$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Customer' from JSON`,
   );
 }

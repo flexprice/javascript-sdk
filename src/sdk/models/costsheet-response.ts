@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
@@ -23,7 +26,7 @@ export type CostsheetResponse = {
   /**
    * Associated prices
    */
-  prices?: Array<Price> | undefined;
+  prices?: Array<PriceResponse> | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
@@ -44,7 +47,7 @@ export const CostsheetResponse$inboundSchema: z.ZodMiniType<
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
-    prices: types.optional(z.array(Price$inboundSchema)),
+    prices: types.optional(z.array(PriceResponse$inboundSchema)),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),

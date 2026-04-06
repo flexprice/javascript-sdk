@@ -11,7 +11,10 @@ import {
   CouponApplicationResponse,
   CouponApplicationResponse$inboundSchema,
 } from "./coupon-application-response.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
 import {
   InvoiceLineItemResponse,
   InvoiceLineItemResponse$inboundSchema,
@@ -27,13 +30,16 @@ import {
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
-import { Subscription, Subscription$inboundSchema } from "./subscription.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 import {
   TaxAppliedResponse,
   TaxAppliedResponse$inboundSchema,
 } from "./tax-applied-response.js";
 
-export type Invoice = {
+export type InvoiceResponse = {
   /**
    * adjustment_amount is the total sum of credit notes of type "adjustment".
    *
@@ -78,7 +84,7 @@ export type Invoice = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   /**
    * customer_id is the ID of the customer who will receive this invoice
    */
@@ -158,7 +164,7 @@ export type Invoice = {
    */
   refundedAmount?: string | undefined;
   status?: Status | undefined;
-  subscription?: Subscription | undefined;
+  subscription?: SubscriptionResponse | undefined;
   /**
    * subscription_id is the ID of the subscription this invoice is associated with (only present for subscription-based invoices)
    */
@@ -201,7 +207,10 @@ export type Invoice = {
 };
 
 /** @internal */
-export const Invoice$inboundSchema: z.ZodMiniType<Invoice, unknown> = z.pipe(
+export const InvoiceResponse$inboundSchema: z.ZodMiniType<
+  InvoiceResponse,
+  unknown
+> = z.pipe(
   z.object({
     adjustment_amount: types.optional(types.string()),
     amount_due: types.optional(types.string()),
@@ -216,7 +225,7 @@ export const Invoice$inboundSchema: z.ZodMiniType<Invoice, unknown> = z.pipe(
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
-    customer: types.optional(Customer1$inboundSchema),
+    customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
     description: types.optional(types.string()),
     due_date: types.optional(types.date()),
@@ -239,7 +248,9 @@ export const Invoice$inboundSchema: z.ZodMiniType<Invoice, unknown> = z.pipe(
     recalculated_invoice_id: types.optional(types.string()),
     refunded_amount: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
-    subscription: types.optional(z.lazy(() => Subscription$inboundSchema)),
+    subscription: types.optional(
+      z.lazy(() => SubscriptionResponse$inboundSchema),
+    ),
     subscription_id: types.optional(types.string()),
     subtotal: types.optional(types.string()),
     taxes: types.optional(z.array(TaxAppliedResponse$inboundSchema)),
@@ -295,12 +306,12 @@ export const Invoice$inboundSchema: z.ZodMiniType<Invoice, unknown> = z.pipe(
   }),
 );
 
-export function invoiceFromJSON(
+export function invoiceResponseFromJSON(
   jsonString: string,
-): SafeParseResult<Invoice, SDKValidationError> {
+): SafeParseResult<InvoiceResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Invoice$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Invoice' from JSON`,
+    (x) => InvoiceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvoiceResponse' from JSON`,
   );
 }

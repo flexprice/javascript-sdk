@@ -23,7 +23,7 @@ export class Plans extends ClientSDK {
   async createPlan(
     request: models.CreatePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.Plan1> {
+  ): Promise<models.PlanResponse> {
     return unwrapAsync(plansCreatePlan(
       this,
       request,
@@ -57,7 +57,7 @@ export class Plans extends ClientSDK {
   async getPlan(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Plan1> {
+  ): Promise<models.PlanResponse> {
     return unwrapAsync(plansGetPlan(
       this,
       id,
@@ -75,7 +75,7 @@ export class Plans extends ClientSDK {
     id: string,
     body: models.UpdatePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.Plan1> {
+  ): Promise<models.PlanResponse> {
     return unwrapAsync(plansUpdatePlan(
       this,
       id,
@@ -111,7 +111,7 @@ export class Plans extends ClientSDK {
     id: string,
     body: models.ClonePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.Plan1> {
+  ): Promise<models.PlanResponse> {
     return unwrapAsync(plansPostPlansIdClone(
       this,
       id,

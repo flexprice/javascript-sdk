@@ -6,7 +6,10 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Addon1, Addon1$inboundSchema } from "./addon-1.js";
+import {
+  AddonResponse,
+  AddonResponse$inboundSchema,
+} from "./addon-response.js";
 import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
@@ -14,7 +17,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ListAddonsResponse = {
-  items?: Array<Addon1> | undefined;
+  items?: Array<AddonResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -23,7 +26,7 @@ export const ListAddonsResponse$inboundSchema: z.ZodMiniType<
   ListAddonsResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Addon1$inboundSchema)),
+  items: types.optional(z.array(AddonResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

@@ -47,7 +47,7 @@ export class Invoices extends ClientSDK {
   async createInvoice(
     request: models.CreateInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesCreateInvoice(
       this,
       request,
@@ -64,7 +64,7 @@ export class Invoices extends ClientSDK {
   async getInvoicePreview(
     request: models.GetPreviewInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesGetInvoicePreview(
       this,
       request,
@@ -100,7 +100,7 @@ export class Invoices extends ClientSDK {
     expandBySource?: boolean | undefined,
     groupBy?: Array<string> | undefined,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesGetInvoice(
       this,
       id,
@@ -120,7 +120,7 @@ export class Invoices extends ClientSDK {
     id: string,
     body: models.UpdateInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesUpdateInvoice(
       this,
       id,
@@ -173,7 +173,7 @@ export class Invoices extends ClientSDK {
     id: string,
     body: models.UpdatePaymentStatusRequest,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesUpdateInvoicePaymentStatus(
       this,
       id,
@@ -247,7 +247,7 @@ export class Invoices extends ClientSDK {
     id: string,
     finalize?: boolean | undefined,
     options?: RequestOptions,
-  ): Promise<models.Invoice> {
+  ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesRecalculateInvoiceV2(
       this,
       id,

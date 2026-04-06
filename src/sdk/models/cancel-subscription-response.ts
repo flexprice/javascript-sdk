@@ -11,7 +11,10 @@ import {
   CancellationType,
   CancellationType$inboundSchema,
 } from "./cancellation-type.js";
-import { Invoice, Invoice$inboundSchema } from "./invoice.js";
+import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
 import {
   ProrationDetail,
   ProrationDetail$inboundSchema,
@@ -31,7 +34,7 @@ export type CancelSubscriptionResponse = {
   message?: string | undefined;
   processedAt?: Date | undefined;
   prorationDetails?: Array<ProrationDetail> | undefined;
-  prorationInvoice?: Invoice | undefined;
+  prorationInvoice?: InvoiceResponse | undefined;
   reason?: string | undefined;
   status?: SubscriptionStatus | undefined;
   /**
@@ -52,7 +55,7 @@ export const CancelSubscriptionResponse$inboundSchema: z.ZodMiniType<
     message: types.optional(types.string()),
     processed_at: types.optional(types.date()),
     proration_details: types.optional(z.array(ProrationDetail$inboundSchema)),
-    proration_invoice: types.optional(Invoice$inboundSchema),
+    proration_invoice: types.optional(InvoiceResponse$inboundSchema),
     reason: types.optional(types.string()),
     status: types.optional(SubscriptionStatus$inboundSchema),
     subscription_id: types.optional(types.string()),

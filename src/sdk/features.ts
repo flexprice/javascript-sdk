@@ -20,7 +20,7 @@ export class Features extends ClientSDK {
   async createFeature(
     request: models.CreateFeatureRequest,
     options?: RequestOptions,
-  ): Promise<models.Feature1> {
+  ): Promise<models.FeatureResponse> {
     return unwrapAsync(featuresCreateFeature(
       this,
       request,
@@ -55,7 +55,7 @@ export class Features extends ClientSDK {
     id: string,
     body: models.UpdateFeatureRequest,
     options?: RequestOptions,
-  ): Promise<models.Feature1> {
+  ): Promise<models.FeatureResponse> {
     return unwrapAsync(featuresUpdateFeature(
       this,
       id,

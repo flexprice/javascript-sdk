@@ -21,7 +21,7 @@ export class Coupons extends ClientSDK {
   async createCoupon(
     request: models.CreateCouponRequest,
     options?: RequestOptions,
-  ): Promise<models.Coupon> {
+  ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsCreateCoupon(
       this,
       request,
@@ -55,7 +55,7 @@ export class Coupons extends ClientSDK {
   async getCoupon(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Coupon> {
+  ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsGetCoupon(
       this,
       id,
@@ -73,7 +73,7 @@ export class Coupons extends ClientSDK {
     id: string,
     body: models.UpdateCouponRequest,
     options?: RequestOptions,
-  ): Promise<models.Coupon> {
+  ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsUpdateCoupon(
       this,
       id,

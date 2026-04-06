@@ -42,7 +42,7 @@ export class Subscriptions extends ClientSDK {
   async createSubscription(
     request: models.CreateSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.Subscription> {
+  ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsCreateSubscription(
       this,
       request,
@@ -165,7 +165,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscription(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Subscription> {
+  ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsGetSubscription(
       this,
       id,
@@ -183,7 +183,7 @@ export class Subscriptions extends ClientSDK {
     id: string,
     body: models.UpdateSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.Subscription> {
+  ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsUpdateSubscription(
       this,
       id,
@@ -202,7 +202,7 @@ export class Subscriptions extends ClientSDK {
     id: string,
     body: models.ActivateDraftSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.Subscription> {
+  ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsActivateSubscription(
       this,
       id,
@@ -350,7 +350,7 @@ export class Subscriptions extends ClientSDK {
     id: string,
     body: models.ExecuteSubscriptionInheritanceRequest,
     options?: RequestOptions,
-  ): Promise<models.Subscription> {
+  ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsExecuteSubscriptionModify(
       this,
       id,

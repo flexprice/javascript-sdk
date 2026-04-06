@@ -77,7 +77,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Plan1](../../sdk/models/plan1.md)\>**
+**Promise\<[models.PlanResponse](../../sdk/models/plan-response.md)\>**
 
 ### Errors
 
@@ -219,7 +219,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Plan1](../../sdk/models/plan1.md)\>**
+**Promise\<[models.PlanResponse](../../sdk/models/plan-response.md)\>**
 
 ### Errors
 
@@ -291,7 +291,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Plan1](../../sdk/models/plan1.md)\>**
+**Promise\<[models.PlanResponse](../../sdk/models/plan-response.md)\>**
 
 ### Errors
 
@@ -434,7 +434,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Plan1](../../sdk/models/plan1.md)\>**
+**Promise\<[models.PlanResponse](../../sdk/models/plan-response.md)\>**
 
 ### Errors
 

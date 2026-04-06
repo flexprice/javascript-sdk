@@ -11,10 +11,13 @@ import {
   PaginationResponse$inboundSchema,
 } from "./pagination-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Subscription, Subscription$inboundSchema } from "./subscription.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 
 export type ListSubscriptionsResponse = {
-  items?: Array<Subscription> | undefined;
+  items?: Array<SubscriptionResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -23,7 +26,7 @@ export const ListSubscriptionsResponse$inboundSchema: z.ZodMiniType<
   ListSubscriptionsResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Subscription$inboundSchema)),
+  items: types.optional(z.array(SubscriptionResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

@@ -88,7 +88,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Feature1](../../sdk/models/feature1.md)\>**
+**Promise\<[models.FeatureResponse](../../sdk/models/feature-response.md)\>**
 
 ### Errors
 
@@ -231,7 +231,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Feature1](../../sdk/models/feature1.md)\>**
+**Promise\<[models.FeatureResponse](../../sdk/models/feature-response.md)\>**
 
 ### Errors
 

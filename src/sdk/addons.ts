@@ -39,7 +39,7 @@ export class Addons extends ClientSDK {
   async getAddonByLookupKey(
     lookupKey: string,
     options?: RequestOptions,
-  ): Promise<models.Addon1> {
+  ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsGetAddonByLookupKey(
       this,
       lookupKey,
@@ -73,7 +73,7 @@ export class Addons extends ClientSDK {
   async getAddon(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.Addon1> {
+  ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsGetAddon(
       this,
       id,
@@ -91,7 +91,7 @@ export class Addons extends ClientSDK {
     id: string,
     body: models.UpdateAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.Addon1> {
+  ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsUpdateAddon(
       this,
       id,

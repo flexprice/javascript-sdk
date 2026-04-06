@@ -151,7 +151,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Addon1](../../sdk/models/addon1.md)\>**
+**Promise\<[models.AddonResponse](../../sdk/models/addon-response.md)\>**
 
 ### Errors
 
@@ -293,7 +293,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Addon1](../../sdk/models/addon1.md)\>**
+**Promise\<[models.AddonResponse](../../sdk/models/addon-response.md)\>**
 
 ### Errors
 
@@ -365,7 +365,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Addon1](../../sdk/models/addon1.md)\>**
+**Promise\<[models.AddonResponse](../../sdk/models/addon-response.md)\>**
 
 ### Errors
 

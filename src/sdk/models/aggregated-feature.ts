@@ -14,12 +14,15 @@ import {
   EntitlementSource,
   EntitlementSource$inboundSchema,
 } from "./entitlement-source.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AggregatedFeature = {
   entitlement?: AggregatedEntitlement | undefined;
-  feature?: Feature1 | undefined;
+  feature?: FeatureResponse | undefined;
   sources?: Array<EntitlementSource> | undefined;
 };
 
@@ -29,7 +32,7 @@ export const AggregatedFeature$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   entitlement: types.optional(AggregatedEntitlement$inboundSchema),
-  feature: types.optional(Feature1$inboundSchema),
+  feature: types.optional(FeatureResponse$inboundSchema),
   sources: types.optional(z.array(EntitlementSource$inboundSchema)),
 });
 

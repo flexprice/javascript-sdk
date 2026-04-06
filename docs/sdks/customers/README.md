@@ -77,7 +77,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Customer1](../../sdk/models/customer1.md)\>**
+**Promise\<[models.CustomerResponse](../../sdk/models/customer-response.md)\>**
 
 ### Errors
 
@@ -152,7 +152,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Customer1](../../sdk/models/customer1.md)\>**
+**Promise\<[models.CustomerResponse](../../sdk/models/customer-response.md)\>**
 
 ### Errors
 
@@ -223,7 +223,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Customer1](../../sdk/models/customer1.md)\>**
+**Promise\<[models.CustomerResponse](../../sdk/models/customer-response.md)\>**
 
 ### Errors
 
@@ -436,7 +436,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Customer1](../../sdk/models/customer1.md)\>**
+**Promise\<[models.CustomerResponse](../../sdk/models/customer-response.md)\>**
 
 ### Errors
 

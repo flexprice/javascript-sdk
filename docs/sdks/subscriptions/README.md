@@ -102,7 +102,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Subscription](../../sdk/models/subscription.md)\>**
+**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
 
 ### Errors
 
@@ -621,7 +621,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Subscription](../../sdk/models/subscription.md)\>**
+**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
 
 ### Errors
 
@@ -693,7 +693,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Subscription](../../sdk/models/subscription.md)\>**
+**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
 
 ### Errors
 
@@ -769,7 +769,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Subscription](../../sdk/models/subscription.md)\>**
+**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
 
 ### Errors
 
@@ -1371,7 +1371,7 @@ run();
 
 ### Response
 
-**Promise\<[models.Subscription](../../sdk/models/subscription.md)\>**
+**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
 
 ### Errors
 

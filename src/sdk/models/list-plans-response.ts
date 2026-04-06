@@ -10,11 +10,11 @@ import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
 } from "./pagination-response.js";
-import { Plan1, Plan1$inboundSchema } from "./plan-1.js";
+import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ListPlansResponse = {
-  items?: Array<Plan1> | undefined;
+  items?: Array<PlanResponse> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -23,7 +23,7 @@ export const ListPlansResponse$inboundSchema: z.ZodMiniType<
   ListPlansResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(Plan1$inboundSchema)),
+  items: types.optional(z.array(PlanResponse$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

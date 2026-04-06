@@ -14,10 +14,19 @@ import {
 import { AlertInfo, AlertInfo$inboundSchema } from "./alert-info.js";
 import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
 import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Wallet, Wallet$inboundSchema } from "./wallet.js";
+import {
+  WalletResponse,
+  WalletResponse$inboundSchema,
+} from "./wallet-response.js";
 
 export type AlertLogResponse = {
   alertInfo?: AlertInfo | undefined;
@@ -28,12 +37,12 @@ export type AlertLogResponse = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   customerId?: string | undefined;
   entityId?: string | undefined;
   entityType?: AlertEntityType | undefined;
   environmentId?: string | undefined;
-  feature?: Feature1 | undefined;
+  feature?: FeatureResponse | undefined;
   id?: string | undefined;
   parentEntityId?: string | undefined;
   parentEntityType?: string | undefined;
@@ -41,7 +50,7 @@ export type AlertLogResponse = {
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
-  wallet?: Wallet | undefined;
+  wallet?: WalletResponse | undefined;
 };
 
 /** @internal */
@@ -55,12 +64,12 @@ export const AlertLogResponse$inboundSchema: z.ZodMiniType<
     alert_type: types.optional(AlertType$inboundSchema),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
-    customer: types.optional(Customer1$inboundSchema),
+    customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
     entity_id: types.optional(types.string()),
     entity_type: types.optional(AlertEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
-    feature: types.optional(Feature1$inboundSchema),
+    feature: types.optional(FeatureResponse$inboundSchema),
     id: types.optional(types.string()),
     parent_entity_id: types.optional(types.string()),
     parent_entity_type: types.optional(types.string()),
@@ -68,7 +77,7 @@ export const AlertLogResponse$inboundSchema: z.ZodMiniType<
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
-    wallet: types.optional(Wallet$inboundSchema),
+    wallet: types.optional(WalletResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

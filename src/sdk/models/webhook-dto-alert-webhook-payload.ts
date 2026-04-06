@@ -7,10 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
-import { Feature1, Feature1$inboundSchema } from "./feature-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
+import {
+  FeatureResponse,
+  FeatureResponse$inboundSchema,
+} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Wallet, Wallet$inboundSchema } from "./wallet.js";
+import {
+  WalletResponse,
+  WalletResponse$inboundSchema,
+} from "./wallet-response.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -22,10 +31,10 @@ export type WebhookDtoAlertWebhookPayload = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   eventType?: WebhookEventName | undefined;
-  feature?: Feature1 | undefined;
-  wallet?: Wallet | undefined;
+  feature?: FeatureResponse | undefined;
+  wallet?: WalletResponse | undefined;
 };
 
 /** @internal */
@@ -36,10 +45,10 @@ export const WebhookDtoAlertWebhookPayload$inboundSchema: z.ZodMiniType<
   z.object({
     alert_status: types.optional(types.string()),
     alert_type: types.optional(types.string()),
-    customer: types.optional(Customer1$inboundSchema),
+    customer: types.optional(CustomerResponse$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
-    feature: types.optional(Feature1$inboundSchema),
-    wallet: types.optional(Wallet$inboundSchema),
+    feature: types.optional(FeatureResponse$inboundSchema),
+    wallet: types.optional(WalletResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -1,34 +1,78 @@
-# Feature2
+# AddonResponse
 
 ## Example Usage
 
 ```typescript
-import { Feature2 } from "@flexprice/sdk/sdk/models";
+import { AddonResponse } from "@flexprice/sdk/sdk/models";
 
-let value: Feature2 = {};
+let value: AddonResponse = {
+  entitlements: [
+    {
+      addon: {
+        prices: [
+          {
+            addon: {},
+            meter: {
+              createdAt: new Date("2024-03-20T15:04:05Z"),
+              eventName: "api_request",
+              id: "550e8400-e29b-41d4-a716-446655440000",
+              name: "API Usage Meter",
+              status: "published",
+              tenantId: "tenant123",
+              updatedAt: new Date("2024-03-20T15:04:05Z"),
+            },
+            plan: {},
+          },
+        ],
+      },
+      feature: {
+        meter: {
+          createdAt: new Date("2024-03-20T15:04:05Z"),
+          eventName: "api_request",
+          id: "550e8400-e29b-41d4-a716-446655440000",
+          name: "API Usage Meter",
+          status: "published",
+          tenantId: "tenant123",
+          updatedAt: new Date("2024-03-20T15:04:05Z"),
+        },
+      },
+      plan: {},
+    },
+  ],
+  prices: [
+    {
+      addon: {},
+      meter: {
+        createdAt: new Date("2024-03-20T15:04:05Z"),
+        eventName: "api_request",
+        id: "550e8400-e29b-41d4-a716-446655440000",
+        name: "API Usage Meter",
+        status: "published",
+        tenantId: "tenant123",
+        updatedAt: new Date("2024-03-20T15:04:05Z"),
+      },
+      plan: {},
+    },
+  ],
+};
 ```
 
 ## Fields
 
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `alertSettings`                                                                               | [models.AlertSettings](../../sdk/models/alert-settings.md)                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `createdBy`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `description`                                                                                 | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `entitlements`                                                                                | [models.EntitlementResponse](../../sdk/models/entitlement-response.md)[]                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `environmentId`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `group`                                                                                       | [models.GroupGroup](../../sdk/models/group-group.md)                                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `groupId`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `lookupKey`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `metadata`                                                                                    | Record<string, *string*>                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `meterId`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `metadata`                                                                                    | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `reportingUnit`                                                                               | [models.ReportingUnit](../../sdk/models/reporting-unit.md)                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `prices`                                                                                      | [models.PriceResponse](../../sdk/models/price-response.md)[]                                  | :heavy_minus_sign:                                                                            | Optional expanded fields                                                                      |
 | `status`                                                                                      | [models.Status](../../sdk/models/status.md)                                                   | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `tenantId`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `type`                                                                                        | [models.FeatureType](../../sdk/models/feature-type.md)                                        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `unitPlural`                                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `unitSingular`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [models.AddonType](../../sdk/models/addon-type.md)                                            | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `updatedBy`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

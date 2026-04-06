@@ -24,10 +24,13 @@ import {
   CreditGrantResponse,
   CreditGrantResponse$inboundSchema,
 } from "./credit-grant-response.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
 import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
 import { PaymentTerms, PaymentTerms$inboundSchema } from "./payment-terms.js";
-import { Plan1, Plan1$inboundSchema } from "./plan-1.js";
+import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import {
   ProrationBehavior,
   ProrationBehavior$inboundSchema,
@@ -130,7 +133,7 @@ export type SubscriptionResponseV2 = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   /**
    * CustomerID is the identifier for the customer in our system
    */
@@ -194,7 +197,7 @@ export type SubscriptionResponseV2 = {
    * Phases are included when "phases" is in expand parameter
    */
   phases?: Array<SubscriptionPhaseResponse> | undefined;
-  plan?: Plan1 | undefined;
+  plan?: PlanResponse | undefined;
   /**
    * PlanID is the identifier for the plan in our system
    */
@@ -251,7 +254,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     current_period_end: types.optional(types.date()),
     current_period_start: types.optional(types.date()),
-    customer: types.optional(Customer1$inboundSchema),
+    customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
     customer_timezone: types.optional(types.string()),
     enable_true_up: types.optional(types.boolean()),
@@ -274,7 +277,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     payment_behavior: types.optional(types.string()),
     payment_terms: types.optional(PaymentTerms$inboundSchema),
     phases: types.optional(z.array(SubscriptionPhaseResponse$inboundSchema)),
-    plan: types.optional(Plan1$inboundSchema),
+    plan: types.optional(PlanResponse$inboundSchema),
     plan_id: types.optional(types.string()),
     proration_behavior: types.optional(ProrationBehavior$inboundSchema),
     start_date: types.optional(types.date()),

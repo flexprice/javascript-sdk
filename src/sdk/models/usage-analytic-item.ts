@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Addon2, Addon2$inboundSchema } from "./addon-2.js";
+import { Addon, Addon$inboundSchema } from "./addon.js";
 import {
   AggregationType,
   AggregationType$inboundSchema,
@@ -16,11 +16,14 @@ import {
   CommitmentInfo,
   CommitmentInfo$inboundSchema,
 } from "./commitment-info.js";
-import { Feature2, Feature2$inboundSchema } from "./feature-2.js";
+import { Feature, Feature$inboundSchema } from "./feature.js";
 import { GroupGroup, GroupGroup$inboundSchema } from "./group-group.js";
 import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
-import { Plan2, Plan2$inboundSchema } from "./plan-2.js";
-import { Price, Price$inboundSchema } from "./price.js";
+import { Plan, Plan$inboundSchema } from "./plan.js";
+import {
+  PriceResponse,
+  PriceResponse$inboundSchema,
+} from "./price-response.js";
 import {
   ReportingUnit,
   ReportingUnit$inboundSchema,
@@ -38,7 +41,7 @@ import { WindowSize, WindowSize$inboundSchema } from "./window-size.js";
 
 export type UsageAnalyticItem = {
   addOnId?: string | undefined;
-  addon?: Addon2 | undefined;
+  addon?: Addon | undefined;
   aggregationType?: AggregationType | undefined;
   commitmentInfo?: CommitmentInfo | undefined;
   currency?: string | undefined;
@@ -47,7 +50,7 @@ export type UsageAnalyticItem = {
    */
   eventCount?: number | undefined;
   eventName?: string | undefined;
-  feature?: Feature2 | undefined;
+  feature?: Feature | undefined;
   featureId?: string | undefined;
   group?: GroupGroup | undefined;
   meter?: MeterMeter | undefined;
@@ -56,10 +59,10 @@ export type UsageAnalyticItem = {
    */
   meterId?: string | undefined;
   name?: string | undefined;
-  plan?: Plan2 | undefined;
+  plan?: Plan | undefined;
   planId?: string | undefined;
   points?: Array<UsageAnalyticPoint> | undefined;
-  price?: Price | undefined;
+  price?: PriceResponse | undefined;
   /**
    * Price ID used for this usage
    */
@@ -101,22 +104,22 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     add_on_id: types.optional(types.string()),
-    addon: types.optional(Addon2$inboundSchema),
+    addon: types.optional(Addon$inboundSchema),
     aggregation_type: types.optional(AggregationType$inboundSchema),
     commitment_info: types.optional(CommitmentInfo$inboundSchema),
     currency: types.optional(types.string()),
     event_count: types.optional(types.number()),
     event_name: types.optional(types.string()),
-    feature: types.optional(Feature2$inboundSchema),
+    feature: types.optional(Feature$inboundSchema),
     feature_id: types.optional(types.string()),
     group: types.optional(GroupGroup$inboundSchema),
     meter: types.optional(MeterMeter$inboundSchema),
     meter_id: types.optional(types.string()),
     name: types.optional(types.string()),
-    plan: types.optional(Plan2$inboundSchema),
+    plan: types.optional(Plan$inboundSchema),
     plan_id: types.optional(types.string()),
     points: types.optional(z.array(UsageAnalyticPoint$inboundSchema)),
-    price: types.optional(Price$inboundSchema),
+    price: types.optional(PriceResponse$inboundSchema),
     price_id: types.optional(types.string()),
     properties: types.optional(z.record(z.string(), types.string())),
     reporting_unit: types.optional(ReportingUnit$inboundSchema),

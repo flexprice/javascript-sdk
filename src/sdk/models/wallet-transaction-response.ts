@@ -7,7 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Customer1, Customer1$inboundSchema } from "./customer-1.js";
+import {
+  CustomerResponse,
+  CustomerResponse$inboundSchema,
+} from "./customer-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 import {
@@ -24,10 +27,13 @@ import {
 } from "./transaction-type.js";
 import { UserResponse, UserResponse$inboundSchema } from "./user-response.js";
 import {
+  WalletResponse,
+  WalletResponse$inboundSchema,
+} from "./wallet-response.js";
+import {
   WalletTxReferenceType,
   WalletTxReferenceType$inboundSchema,
 } from "./wallet-tx-reference-type.js";
-import { Wallet, Wallet$inboundSchema } from "./wallet.js";
 
 export type WalletTransactionResponse = {
   amount?: string | undefined;
@@ -46,7 +52,7 @@ export type WalletTransactionResponse = {
   /**
    * Customer response object containing all customer information
    */
-  customer?: Customer1 | undefined;
+  customer?: CustomerResponse | undefined;
   customerId?: string | undefined;
   description?: string | undefined;
   environmentId?: string | undefined;
@@ -68,7 +74,7 @@ export type WalletTransactionResponse = {
   type?: TransactionType | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
-  wallet?: Wallet | undefined;
+  wallet?: WalletResponse | undefined;
   walletId?: string | undefined;
 };
 
@@ -88,7 +94,7 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
     credit_balance_before: types.optional(types.string()),
     credits_available: types.optional(types.string()),
     currency: types.optional(types.string()),
-    customer: types.optional(Customer1$inboundSchema),
+    customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
     description: types.optional(types.string()),
     environment_id: types.optional(types.string()),
@@ -107,7 +113,7 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
     type: types.optional(TransactionType$inboundSchema),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
-    wallet: types.optional(Wallet$inboundSchema),
+    wallet: types.optional(WalletResponse$inboundSchema),
     wallet_id: types.optional(types.string()),
   }),
   z.transform((v) => {
