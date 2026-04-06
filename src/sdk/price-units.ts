@@ -23,7 +23,7 @@ export class PriceUnits extends ClientSDK {
   async listPriceUnits(
     request?: models.ListPriceUnitsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListPriceUnitsResponse> {
+  ): Promise<models.ListPriceUnitsResponse> {
     return unwrapAsync(priceUnitsListPriceUnits(
       this,
       request,
@@ -38,9 +38,9 @@ export class PriceUnits extends ClientSDK {
    * Use when defining a new unit of measure for pricing (e.g. GB, API call, seat). Ideal for metered or usage-based prices.
    */
   async createPriceUnit(
-    request: models.DtoCreatePriceUnitRequest,
+    request: models.CreatePriceUnitRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreatePriceUnitResponse> {
+  ): Promise<models.CreatePriceUnitResponse> {
     return unwrapAsync(priceUnitsCreatePriceUnit(
       this,
       request,
@@ -57,7 +57,7 @@ export class PriceUnits extends ClientSDK {
   async getPriceUnitByCode(
     code: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceUnitResponse> {
+  ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsGetPriceUnitByCode(
       this,
       code,
@@ -74,7 +74,7 @@ export class PriceUnits extends ClientSDK {
   async queryPriceUnit(
     request: models.PriceUnitFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListPriceUnitsResponse> {
+  ): Promise<models.ListPriceUnitsResponse> {
     return unwrapAsync(priceUnitsQueryPriceUnit(
       this,
       request,
@@ -91,7 +91,7 @@ export class PriceUnits extends ClientSDK {
   async getPriceUnit(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceUnitResponse> {
+  ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsGetPriceUnit(
       this,
       id,
@@ -107,9 +107,9 @@ export class PriceUnits extends ClientSDK {
    */
   async updatePriceUnit(
     id: string,
-    body: models.DtoUpdatePriceUnitRequest,
+    body: models.UpdatePriceUnitRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceUnitResponse> {
+  ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsUpdatePriceUnit(
       this,
       id,
@@ -127,7 +127,7 @@ export class PriceUnits extends ClientSDK {
   async deletePriceUnit(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(priceUnitsDeletePriceUnit(
       this,
       id,

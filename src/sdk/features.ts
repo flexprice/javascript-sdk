@@ -18,9 +18,9 @@ export class Features extends ClientSDK {
    * Use when defining a new feature or capability to gate or meter (e.g. feature flags or usage-based limits). Ideal for boolean or usage features.
    */
   async createFeature(
-    request: models.DtoCreateFeatureRequest,
+    request: models.CreateFeatureRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoFeatureResponse> {
+  ): Promise<models.Feature1> {
     return unwrapAsync(featuresCreateFeature(
       this,
       request,
@@ -37,7 +37,7 @@ export class Features extends ClientSDK {
   async queryFeature(
     request: models.FeatureFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListFeaturesResponse> {
+  ): Promise<models.ListFeaturesResponse> {
     return unwrapAsync(featuresQueryFeature(
       this,
       request,
@@ -53,9 +53,9 @@ export class Features extends ClientSDK {
    */
   async updateFeature(
     id: string,
-    body: models.DtoUpdateFeatureRequest,
+    body: models.UpdateFeatureRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoFeatureResponse> {
+  ): Promise<models.Feature1> {
     return unwrapAsync(featuresUpdateFeature(
       this,
       id,
@@ -73,7 +73,7 @@ export class Features extends ClientSDK {
   async deleteFeature(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(featuresDeleteFeature(
       this,
       id,

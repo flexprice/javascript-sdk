@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateSubscriptionLineItemRequest,
-  DtoUpdateSubscriptionLineItemRequest$Outbound,
-  DtoUpdateSubscriptionLineItemRequest$outboundSchema,
-} from "./dto-update-subscription-line-item-request.js";
+  UpdateSubscriptionLineItemRequest,
+  UpdateSubscriptionLineItemRequest$Outbound,
+  UpdateSubscriptionLineItemRequest$outboundSchema,
+} from "./update-subscription-line-item-request.js";
 
-export type UpdateSubscriptionLineItemRequest = {
+export type UpdateSubscriptionLineItemRequestRequest = {
   /**
    * Line Item ID
    */
@@ -17,30 +17,32 @@ export type UpdateSubscriptionLineItemRequest = {
   /**
    * Update Line Item Request
    */
-  body: DtoUpdateSubscriptionLineItemRequest;
+  body: UpdateSubscriptionLineItemRequest;
 };
 
 /** @internal */
-export type UpdateSubscriptionLineItemRequest$Outbound = {
+export type UpdateSubscriptionLineItemRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateSubscriptionLineItemRequest$Outbound;
+  body: UpdateSubscriptionLineItemRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
-  UpdateSubscriptionLineItemRequest$Outbound,
-  UpdateSubscriptionLineItemRequest
-> = z.object({
-  id: z.string(),
-  body: DtoUpdateSubscriptionLineItemRequest$outboundSchema,
-});
+export const UpdateSubscriptionLineItemRequestRequest$outboundSchema:
+  z.ZodMiniType<
+    UpdateSubscriptionLineItemRequestRequest$Outbound,
+    UpdateSubscriptionLineItemRequestRequest
+  > = z.object({
+    id: z.string(),
+    body: UpdateSubscriptionLineItemRequest$outboundSchema,
+  });
 
-export function updateSubscriptionLineItemRequestToJSON(
-  updateSubscriptionLineItemRequest: UpdateSubscriptionLineItemRequest,
+export function updateSubscriptionLineItemRequestRequestToJSON(
+  updateSubscriptionLineItemRequestRequest:
+    UpdateSubscriptionLineItemRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateSubscriptionLineItemRequest$outboundSchema.parse(
-      updateSubscriptionLineItemRequest,
+    UpdateSubscriptionLineItemRequestRequest$outboundSchema.parse(
+      updateSubscriptionLineItemRequestRequest,
     ),
   );
 }

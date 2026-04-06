@@ -7,15 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  DtoWalletResponse,
-  DtoWalletResponse$inboundSchema,
-} from "./dto-wallet-response.js";
-import {
-  DtoWalletTransactionResponse,
-  DtoWalletTransactionResponse$inboundSchema,
-} from "./dto-wallet-transaction-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WalletTransactionResponse,
+  WalletTransactionResponse$inboundSchema,
+} from "./wallet-transaction-response.js";
+import { Wallet, Wallet$inboundSchema } from "./wallet.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -23,8 +20,8 @@ import {
 
 export type WebhookDtoTransactionWebhookPayload = {
   eventType?: WebhookEventName | undefined;
-  transaction?: DtoWalletTransactionResponse | undefined;
-  wallet?: DtoWalletResponse | undefined;
+  transaction?: WalletTransactionResponse | undefined;
+  wallet?: Wallet | undefined;
 };
 
 /** @internal */
@@ -34,8 +31,8 @@ export const WebhookDtoTransactionWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     event_type: types.optional(WebhookEventName$inboundSchema),
-    transaction: types.optional(DtoWalletTransactionResponse$inboundSchema),
-    wallet: types.optional(DtoWalletResponse$inboundSchema),
+    transaction: types.optional(WalletTransactionResponse$inboundSchema),
+    wallet: types.optional(Wallet$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

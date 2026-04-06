@@ -71,15 +71,15 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoTaxRateResponse[]](../../models/.md)\>**
+**Promise\<[models.TaxRateResponse[]](../../models/.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## createTaxRate
 
@@ -141,22 +141,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoCreateTaxRateRequest](../../sdk/models/dto-create-tax-rate-request.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.CreateTaxRateRequest](../../sdk/models/create-tax-rate-request.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoTaxRateResponse](../../sdk/models/dto-tax-rate-response.md)\>**
+**Promise\<[models.TaxRateResponse](../../sdk/models/tax-rate-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getTaxRate
 
@@ -219,15 +219,15 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoTaxRateResponse](../../sdk/models/dto-tax-rate-response.md)\>**
+**Promise\<[models.TaxRateResponse](../../sdk/models/tax-rate-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateTaxRate
 
@@ -284,22 +284,22 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tax rate ID                                                                                                                                                                    |
-| `body`                                                                                                                                                                         | [models.DtoUpdateTaxRateRequest](../../sdk/models/dto-update-tax-rate-request.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | Tax rate to update                                                                                                                                                             |
+| `body`                                                                                                                                                                         | [models.UpdateTaxRateRequest](../../sdk/models/update-tax-rate-request.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | Tax rate to update                                                                                                                                                             |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoTaxRateResponse](../../sdk/models/dto-tax-rate-response.md)\>**
+**Promise\<[models.TaxRateResponse](../../sdk/models/tax-rate-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## deleteTaxRate
 
@@ -366,8 +366,8 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |

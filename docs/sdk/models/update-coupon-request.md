@@ -5,15 +5,12 @@
 ```typescript
 import { UpdateCouponRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdateCouponRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: UpdateCouponRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `id`                                                                           | *string*                                                                       | :heavy_check_mark:                                                             | Coupon ID                                                                      |
-| `body`                                                                         | [models.DtoUpdateCouponRequest](../../sdk/models/dto-update-coupon-request.md) | :heavy_check_mark:                                                             | Coupon update request                                                          |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `metadata`               | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
+| `name`                   | *string*                 | :heavy_minus_sign:       | N/A                      |

@@ -34,12 +34,12 @@ import { Result } from "../types/fp.js";
 export function subscriptionsCreateSubscriptionLineItem(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoCreateSubscriptionLineItemRequest,
+  body: models.CreateSubscriptionLineItemRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoSubscriptionLineItemResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionLineItemResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -61,13 +61,13 @@ export function subscriptionsCreateSubscriptionLineItem(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoCreateSubscriptionLineItemRequest,
+  body: models.CreateSubscriptionLineItemRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoSubscriptionLineItemResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.SubscriptionLineItemResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -80,7 +80,7 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.CreateSubscriptionLineItemRequest = {
+  const input: models.CreateSubscriptionLineItemRequestRequest = {
     id: id,
     body: body,
   };
@@ -88,7 +88,10 @@ async function $do(
   const parsed = safeParse(
     input,
     (value) =>
-      z.parse(models.CreateSubscriptionLineItemRequest$outboundSchema, value),
+      z.parse(
+        models.CreateSubscriptionLineItemRequestRequest$outboundSchema,
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,8 +163,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoSubscriptionLineItemResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionLineItemResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -171,9 +174,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.DtoSubscriptionLineItemResponse$inboundSchema),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(201, models.SubscriptionLineItemResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

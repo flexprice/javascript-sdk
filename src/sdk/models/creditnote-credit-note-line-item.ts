@@ -12,7 +12,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 
 export type CreditnoteCreditNoteLineItem = {
   amount?: string | undefined;
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   creditNoteId?: string | undefined;
   currency?: string | undefined;
@@ -23,7 +23,7 @@ export type CreditnoteCreditNoteLineItem = {
   metadata?: { [k: string]: string } | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -34,7 +34,7 @@ export const CreditnoteCreditNoteLineItem$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: types.optional(types.string()),
-    created_at: types.optional(types.string()),
+    created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     credit_note_id: types.optional(types.string()),
     currency: types.optional(types.string()),
@@ -45,7 +45,7 @@ export const CreditnoteCreditNoteLineItem$inboundSchema: z.ZodMiniType<
     metadata: types.optional(z.record(z.string(), types.string())),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
-    updated_at: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
   z.transform((v) => {

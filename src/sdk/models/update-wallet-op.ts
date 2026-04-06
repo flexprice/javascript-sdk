@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateWalletRequest,
-  DtoUpdateWalletRequest$Outbound,
-  DtoUpdateWalletRequest$outboundSchema,
-} from "./dto-update-wallet-request.js";
+  UpdateWalletRequest,
+  UpdateWalletRequest$Outbound,
+  UpdateWalletRequest$outboundSchema,
+} from "./update-wallet-request.js";
 
-export type UpdateWalletRequest = {
+export type UpdateWalletRequestRequest = {
   /**
    * Wallet ID
    */
@@ -17,28 +17,28 @@ export type UpdateWalletRequest = {
   /**
    * Update wallet request
    */
-  body: DtoUpdateWalletRequest;
+  body: UpdateWalletRequest;
 };
 
 /** @internal */
-export type UpdateWalletRequest$Outbound = {
+export type UpdateWalletRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateWalletRequest$Outbound;
+  body: UpdateWalletRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateWalletRequest$outboundSchema: z.ZodMiniType<
-  UpdateWalletRequest$Outbound,
-  UpdateWalletRequest
+export const UpdateWalletRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateWalletRequestRequest$Outbound,
+  UpdateWalletRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateWalletRequest$outboundSchema,
+  body: UpdateWalletRequest$outboundSchema,
 });
 
-export function updateWalletRequestToJSON(
-  updateWalletRequest: UpdateWalletRequest,
+export function updateWalletRequestRequestToJSON(
+  updateWalletRequestRequest: UpdateWalletRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateWalletRequest$outboundSchema.parse(updateWalletRequest),
+    UpdateWalletRequestRequest$outboundSchema.parse(updateWalletRequestRequest),
   );
 }

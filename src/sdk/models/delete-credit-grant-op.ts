@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoDeleteCreditGrantRequest,
-  DtoDeleteCreditGrantRequest$Outbound,
-  DtoDeleteCreditGrantRequest$outboundSchema,
-} from "./dto-delete-credit-grant-request.js";
+  DeleteCreditGrantRequest,
+  DeleteCreditGrantRequest$Outbound,
+  DeleteCreditGrantRequest$outboundSchema,
+} from "./delete-credit-grant-request.js";
 
-export type DeleteCreditGrantRequest = {
+export type DeleteCreditGrantRequestRequest = {
   /**
    * Credit Grant ID
    */
@@ -17,28 +17,30 @@ export type DeleteCreditGrantRequest = {
   /**
    * Optional: effective_date for subscription-scoped grants
    */
-  body?: DtoDeleteCreditGrantRequest | undefined;
+  body?: DeleteCreditGrantRequest | undefined;
 };
 
 /** @internal */
-export type DeleteCreditGrantRequest$Outbound = {
+export type DeleteCreditGrantRequestRequest$Outbound = {
   id: string;
-  body?: DtoDeleteCreditGrantRequest$Outbound | undefined;
+  body?: DeleteCreditGrantRequest$Outbound | undefined;
 };
 
 /** @internal */
-export const DeleteCreditGrantRequest$outboundSchema: z.ZodMiniType<
-  DeleteCreditGrantRequest$Outbound,
-  DeleteCreditGrantRequest
+export const DeleteCreditGrantRequestRequest$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantRequestRequest$Outbound,
+  DeleteCreditGrantRequestRequest
 > = z.object({
   id: z.string(),
-  body: z.optional(DtoDeleteCreditGrantRequest$outboundSchema),
+  body: z.optional(DeleteCreditGrantRequest$outboundSchema),
 });
 
-export function deleteCreditGrantRequestToJSON(
-  deleteCreditGrantRequest: DeleteCreditGrantRequest,
+export function deleteCreditGrantRequestRequestToJSON(
+  deleteCreditGrantRequestRequest: DeleteCreditGrantRequestRequest,
 ): string {
   return JSON.stringify(
-    DeleteCreditGrantRequest$outboundSchema.parse(deleteCreditGrantRequest),
+    DeleteCreditGrantRequestRequest$outboundSchema.parse(
+      deleteCreditGrantRequestRequest,
+    ),
   );
 }

@@ -5,15 +5,15 @@
 ```typescript
 import { UpdatePlanRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdatePlanRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: UpdatePlanRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `id`                                                                       | *string*                                                                   | :heavy_check_mark:                                                         | Plan ID                                                                    |
-| `body`                                                                     | [models.DtoUpdatePlanRequest](../../sdk/models/dto-update-plan-request.md) | :heavy_check_mark:                                                         | Plan update                                                                |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `description`            | *string*                 | :heavy_minus_sign:       | N/A                      |
+| `displayOrder`           | *number*                 | :heavy_minus_sign:       | N/A                      |
+| `lookupKey`              | *string*                 | :heavy_minus_sign:       | N/A                      |
+| `metadata`               | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
+| `name`                   | *string*                 | :heavy_minus_sign:       | N/A                      |

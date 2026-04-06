@@ -17,7 +17,7 @@ export class Workflows extends ClientSDK {
   async queryWorkflow(
     request: models.WorkflowExecutionFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListWorkflowsResponse> {
+  ): Promise<models.ListWorkflowsResponse> {
     return unwrapAsync(workflowsQueryWorkflow(
       this,
       request,

@@ -8,9 +8,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
-  DtoEntitlementResponse,
-  DtoEntitlementResponse$inboundSchema,
-} from "./dto-entitlement-response.js";
+  EntitlementResponse,
+  EntitlementResponse$inboundSchema,
+} from "./entitlement-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
@@ -18,7 +18,7 @@ import {
 } from "./webhook-event-name.js";
 
 export type WebhookDtoEntitlementWebhookPayload = {
-  entitlement?: DtoEntitlementResponse | undefined;
+  entitlement?: EntitlementResponse | undefined;
   eventType?: WebhookEventName | undefined;
 };
 
@@ -28,7 +28,7 @@ export const WebhookDtoEntitlementWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    entitlement: types.optional(DtoEntitlementResponse$inboundSchema),
+    entitlement: types.optional(EntitlementResponse$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {

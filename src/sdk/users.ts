@@ -17,9 +17,9 @@ export class Users extends ClientSDK {
    * Create a user account (type=user, email required; returns user + password for login) or a service account (type=service_account, roles required) for API/automation access.
    */
   async createUser(
-    request: models.DtoCreateUserRequest,
+    request: models.CreateUserRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateUserResponse> {
+  ): Promise<models.CreateUserResponse> {
     return unwrapAsync(usersCreateUser(
       this,
       request,
@@ -35,7 +35,7 @@ export class Users extends ClientSDK {
    */
   async getUserInfo(
     options?: RequestOptions,
-  ): Promise<models.DtoUserResponse> {
+  ): Promise<models.UserResponse> {
     return unwrapAsync(usersGetUserInfo(
       this,
       options,
@@ -51,7 +51,7 @@ export class Users extends ClientSDK {
   async queryUser(
     request: models.UserFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListUsersResponse> {
+  ): Promise<models.ListUsersResponse> {
     return unwrapAsync(usersQueryUser(
       this,
       request,

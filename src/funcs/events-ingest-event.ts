@@ -34,12 +34,12 @@ import * as types$ from "../types/primitives.js";
  */
 export function eventsIngestEvent(
   client: FlexpriceCore,
-  request: models.DtoIngestEventRequest,
+  request: models.IngestEventRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     { [k: string]: string },
-    | models.ErrorsErrorsErrorResponse
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -59,13 +59,13 @@ export function eventsIngestEvent(
 
 async function $do(
   client: FlexpriceCore,
-  request: models.DtoIngestEventRequest,
+  request: models.IngestEventRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       { [k: string]: string },
-      | models.ErrorsErrorsErrorResponse
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -80,7 +80,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(models.DtoIngestEventRequest$outboundSchema, value),
+    (value) => z.parse(models.IngestEventRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -147,7 +147,7 @@ async function $do(
 
   const [result] = await M.match<
     { [k: string]: string },
-    | models.ErrorsErrorsErrorResponse
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -158,8 +158,8 @@ async function $do(
     | SDKValidationError
   >(
     M.json(202, z.record(z.string(), types$.string())),
-    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

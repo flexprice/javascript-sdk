@@ -41,7 +41,7 @@ export function couponsDeleteCoupon(
 ): APIPromise<
   Result<
     { [k: string]: string },
-    | models.ErrorsErrorsErrorResponse
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -67,7 +67,7 @@ async function $do(
   [
     Result<
       { [k: string]: string },
-      | models.ErrorsErrorsErrorResponse
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -158,7 +158,7 @@ async function $do(
 
   const [result] = await M.match<
     { [k: string]: string },
-    | models.ErrorsErrorsErrorResponse
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -169,11 +169,8 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, z.record(z.string(), types$.string())),
-    M.jsonErr(
-      [400, 401, 403, 404],
-      models.ErrorsErrorsErrorResponse$inboundSchema,
-    ),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

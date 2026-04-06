@@ -34,12 +34,12 @@ import { Result } from "../types/fp.js";
 export function walletsUpdateWallet(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateWalletRequest,
+  body: models.UpdateWalletRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoWalletResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Wallet,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -61,13 +61,13 @@ export function walletsUpdateWallet(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateWalletRequest,
+  body: models.UpdateWalletRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoWalletResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.Wallet,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -80,14 +80,14 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.UpdateWalletRequest = {
+  const input: models.UpdateWalletRequestRequest = {
     id: id,
     body: body,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.UpdateWalletRequest$outboundSchema, value),
+    (value) => z.parse(models.UpdateWalletRequestRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,8 +159,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoWalletResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Wallet,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -170,9 +170,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoWalletResponse$inboundSchema),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.Wallet$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

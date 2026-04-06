@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateCouponRequest,
-  DtoUpdateCouponRequest$Outbound,
-  DtoUpdateCouponRequest$outboundSchema,
-} from "./dto-update-coupon-request.js";
+  UpdateCouponRequest,
+  UpdateCouponRequest$Outbound,
+  UpdateCouponRequest$outboundSchema,
+} from "./update-coupon-request.js";
 
-export type UpdateCouponRequest = {
+export type UpdateCouponRequestRequest = {
   /**
    * Coupon ID
    */
@@ -17,28 +17,28 @@ export type UpdateCouponRequest = {
   /**
    * Coupon update request
    */
-  body: DtoUpdateCouponRequest;
+  body: UpdateCouponRequest;
 };
 
 /** @internal */
-export type UpdateCouponRequest$Outbound = {
+export type UpdateCouponRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateCouponRequest$Outbound;
+  body: UpdateCouponRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateCouponRequest$outboundSchema: z.ZodMiniType<
-  UpdateCouponRequest$Outbound,
-  UpdateCouponRequest
+export const UpdateCouponRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateCouponRequestRequest$Outbound,
+  UpdateCouponRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateCouponRequest$outboundSchema,
+  body: UpdateCouponRequest$outboundSchema,
 });
 
-export function updateCouponRequestToJSON(
-  updateCouponRequest: UpdateCouponRequest,
+export function updateCouponRequestRequestToJSON(
+  updateCouponRequestRequest: UpdateCouponRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateCouponRequest$outboundSchema.parse(updateCouponRequest),
+    UpdateCouponRequestRequest$outboundSchema.parse(updateCouponRequestRequest),
   );
 }

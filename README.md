@@ -28,7 +28,7 @@ Then in your code:
 import { FlexPrice } from "@flexprice/sdk";
 ```
 
-**All generated modules** (shared models, enums, errors, operation types, SDK types) are re-exported from the package root so you can import everything from one place. Run `npm run build` before publishing so both ESM and CommonJS entry points (`dist/esm/index.js` and `dist/commonjs/index.js`) include these re-exports; then `import` and `require("flexprice-ts-temp")` both expose types/enums from the root.
+**All generated modules** (shared models, enums, errors, operation types, SDK types) are re-exported from the package root so you can import everything from one place. Run `npm run build` before publishing so both ESM and CommonJS entry points (`dist/esm/index.js` and `dist/commonjs/index.js`) include these re-exports; then `import` and `require("@flexprice/sdk")` both expose types/enums from the root.
 
 ```typescript
 import {
@@ -44,32 +44,43 @@ import {
 
 Runnable samples are in the `examples/` directory.
 
+## Environment
+
+| Variable | Required | Description |
+| -------- | -------- | ----------- |
+| `FLEXPRICE_API_KEY` | Yes | API key |
+| `FLEXPRICE_API_HOST` | Optional | Full base URL including `https://` and `/v1` (default: `https://us.api.flexprice.io/v1`). No trailing slash. |
+
+**Integration tests** in [api/tests/ts/test_sdk.ts](../tests/ts/test_sdk.ts) use a different env shape; see [api/tests/README.md](../tests/README.md).
+
 ## Quick start
 
-Initialize the client with your server URL and API key, then create a customer and ingest an event:
+Initialize the client, then create a customer and ingest an event:
 
 ```typescript
 import { FlexPrice } from "@flexprice/sdk";
 
-// Always include /v1 in the base URL; no trailing space or slash.
+const apiKey = process.env.FLEXPRICE_API_KEY ?? "YOUR_API_KEY";
+const serverURL =
+  process.env.FLEXPRICE_API_HOST ?? "https://us.api.flexprice.io/v1";
+
 const flexPrice = new FlexPrice({
-  serverURL: "https://us.api.flexprice.io/v1",
-  apiKeyAuth: process.env.FLEXPRICE_API_KEY ?? "YOUR_API_KEY",
+  serverURL,
+  apiKeyAuth: apiKey,
 });
 
 async function main() {
-  // Create a customer
+  const externalId = `customer-${Date.now()}`;
   const customer = await flexPrice.customers.createCustomer({
-    externalId: "customer-123",
+    externalId,
     email: "user@example.com",
     name: "Example Customer",
   });
   console.log(customer);
 
-  // Ingest an event (use snake_case for request body fields where required by the API)
   const eventResult = await flexPrice.events.ingestEvent({
     eventName: "Sample Event",
-    externalCustomerId: "customer-123",
+    externalCustomerId: externalId,
     properties: { source: "ts_sdk", environment: "test" },
     source: "ts_sdk",
   });
@@ -97,8 +108,11 @@ The package ships with TypeScript definitions. Use the client with full type saf
 ```typescript
 import { FlexPrice } from "@flexprice/sdk";
 
+const serverURL =
+  process.env.FLEXPRICE_API_HOST ?? "https://us.api.flexprice.io/v1";
+
 const flexPrice = new FlexPrice({
-  serverURL: "https://us.api.flexprice.io/v1",
+  serverURL,
   apiKeyAuth: process.env.FLEXPRICE_API_KEY!,
 });
 
@@ -113,7 +127,8 @@ const result = await flexPrice.events.ingestEvent({
 ## Authentication
 
 - Set the API key via `apiKeyAuth` when constructing `FlexPrice`. The SDK sends it in the `x-api-key` header.
-- Use environment variables (e.g. `FLEXPRICE_API_KEY`) and never expose keys in client-side or public code. Get keys from your [FlexPrice dashboard](https://app.flexprice.io) or docs.
+- Set `FLEXPRICE_API_HOST` to a full URL (see [Environment](#environment)) or rely on the default `https://us.api.flexprice.io/v1`.
+- Use environment variables and never expose keys in client-side or public code. Get keys from your [FlexPrice dashboard](https://app.flexprice.io) or docs.
 
 ## Features
 
@@ -127,7 +142,7 @@ For a full list of operations, see the [API reference](https://docs.flexprice.io
 ## Troubleshooting
 
 - **Missing or invalid API key:** Ensure `apiKeyAuth` is set and the key is active. Use server-side only.
-- **Wrong server URL:** Use `https://us.api.flexprice.io/v1`. Always include `/v1`; no trailing space or slash.
+- **Wrong server URL:** Use a full URL such as `https://us.api.flexprice.io/v1` (include `/v1`; no trailing slash).
 - **Validation or 4xx errors:** Confirm request body field names (snake_case vs camelCase) and required fields against the [API docs](https://docs.flexprice.io).
 - **Parameter passing:** Pass the request object directly to methods (e.g. `ingestEvent({ ... })`), not wrapped in an extra key, unless the SDK docs say otherwise.
 
@@ -213,3 +228,4 @@ function handleWebhook(rawBody: string): void {
 
 - [FlexPrice API documentation](https://docs.flexprice.io)
 - [TypeScript SDK examples](examples/) in this repo
+- [SDK integration tests](../tests/README.md) — different `FLEXPRICE_API_HOST` shape for automated tests

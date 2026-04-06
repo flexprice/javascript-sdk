@@ -74,15 +74,15 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoListScheduledTasksResponse](../../sdk/models/dto-list-scheduled-tasks-response.md)\>**
+**Promise\<[models.ListScheduledTasksResponse](../../sdk/models/list-scheduled-tasks-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## createScheduledTask
 
@@ -148,22 +148,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoCreateScheduledTaskRequest](../../sdk/models/dto-create-scheduled-task-request.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.CreateScheduledTaskRequest](../../sdk/models/create-scheduled-task-request.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
+**Promise\<[models.ScheduledTaskResponse](../../sdk/models/scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## scheduleDraftFinalization
 
@@ -229,11 +229,11 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## scheduleUpdateBillingPeriod
 
@@ -300,11 +300,11 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getScheduledTask
 
@@ -367,15 +367,15 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
+**Promise\<[models.ScheduledTaskResponse](../../sdk/models/scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## updateScheduledTask
 
@@ -436,22 +436,22 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
-| `body`                                                                                                                                                                         | [models.DtoUpdateScheduledTaskRequest](../../sdk/models/dto-update-scheduled-task-request.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | Update request (enabled: true/false to pause/resume)                                                                                                                           |
+| `body`                                                                                                                                                                         | [models.UpdateScheduledTaskRequest](../../sdk/models/update-scheduled-task-request.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | Update request (enabled: true/false to pause/resume)                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoScheduledTaskResponse](../../sdk/models/dto-scheduled-task-response.md)\>**
+**Promise\<[models.ScheduledTaskResponse](../../sdk/models/scheduled-task-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## deleteScheduledTask
 
@@ -518,11 +518,11 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## triggerScheduledTaskRun
 
@@ -579,19 +579,19 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Scheduled Task ID                                                                                                                                                              |
-| `body`                                                                                                                                                                         | [models.DtoTriggerForceRunRequest](../../sdk/models/dto-trigger-force-run-request.md)                                                                                          | :heavy_minus_sign:                                                                                                                                                             | Optional start and end time for custom range                                                                                                                                   |
+| `body`                                                                                                                                                                         | [models.TriggerForceRunRequest](../../sdk/models/trigger-force-run-request.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Optional start and end time for custom range                                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoTriggerForceRunResponse](../../sdk/models/dto-trigger-force-run-response.md)\>**
+**Promise\<[models.TriggerForceRunResponse](../../sdk/models/trigger-force-run-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |

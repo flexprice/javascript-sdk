@@ -5,15 +5,15 @@
 ```typescript
 import { UpdateTaxRateRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdateTaxRateRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: UpdateTaxRateRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `id`                                                                              | *string*                                                                          | :heavy_check_mark:                                                                | Tax rate ID                                                                       |
-| `body`                                                                            | [models.DtoUpdateTaxRateRequest](../../sdk/models/dto-update-tax-rate-request.md) | :heavy_check_mark:                                                                | Tax rate to update                                                                |
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `code`                                                                        | *string*                                                                      | :heavy_minus_sign:                                                            | code is the updated unique alphanumeric identifier for the tax rate           |
+| `description`                                                                 | *string*                                                                      | :heavy_minus_sign:                                                            | description is the updated text description for the tax rate                  |
+| `metadata`                                                                    | Record<string, *string*>                                                      | :heavy_minus_sign:                                                            | metadata contains updated key-value pairs that will replace existing metadata |
+| `name`                                                                        | *string*                                                                      | :heavy_minus_sign:                                                            | name is the updated human-readable name for the tax rate                      |
+| `taxRateStatus`                                                               | [models.TaxRateStatus](../../sdk/models/tax-rate-status.md)                   | :heavy_minus_sign:                                                            | N/A                                                                           |

@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoDeleteSubscriptionLineItemRequest,
-  DtoDeleteSubscriptionLineItemRequest$Outbound,
-  DtoDeleteSubscriptionLineItemRequest$outboundSchema,
-} from "./dto-delete-subscription-line-item-request.js";
+  DeleteSubscriptionLineItemRequest,
+  DeleteSubscriptionLineItemRequest$Outbound,
+  DeleteSubscriptionLineItemRequest$outboundSchema,
+} from "./delete-subscription-line-item-request.js";
 
-export type DeleteSubscriptionLineItemRequest = {
+export type DeleteSubscriptionLineItemRequestRequest = {
   /**
    * Line Item ID
    */
@@ -17,30 +17,32 @@ export type DeleteSubscriptionLineItemRequest = {
   /**
    * Delete Line Item Request
    */
-  body: DtoDeleteSubscriptionLineItemRequest;
+  body: DeleteSubscriptionLineItemRequest;
 };
 
 /** @internal */
-export type DeleteSubscriptionLineItemRequest$Outbound = {
+export type DeleteSubscriptionLineItemRequestRequest$Outbound = {
   id: string;
-  body: DtoDeleteSubscriptionLineItemRequest$Outbound;
+  body: DeleteSubscriptionLineItemRequest$Outbound;
 };
 
 /** @internal */
-export const DeleteSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
-  DeleteSubscriptionLineItemRequest$Outbound,
-  DeleteSubscriptionLineItemRequest
-> = z.object({
-  id: z.string(),
-  body: DtoDeleteSubscriptionLineItemRequest$outboundSchema,
-});
+export const DeleteSubscriptionLineItemRequestRequest$outboundSchema:
+  z.ZodMiniType<
+    DeleteSubscriptionLineItemRequestRequest$Outbound,
+    DeleteSubscriptionLineItemRequestRequest
+  > = z.object({
+    id: z.string(),
+    body: DeleteSubscriptionLineItemRequest$outboundSchema,
+  });
 
-export function deleteSubscriptionLineItemRequestToJSON(
-  deleteSubscriptionLineItemRequest: DeleteSubscriptionLineItemRequest,
+export function deleteSubscriptionLineItemRequestRequestToJSON(
+  deleteSubscriptionLineItemRequestRequest:
+    DeleteSubscriptionLineItemRequestRequest,
 ): string {
   return JSON.stringify(
-    DeleteSubscriptionLineItemRequest$outboundSchema.parse(
-      deleteSubscriptionLineItemRequest,
+    DeleteSubscriptionLineItemRequestRequest$outboundSchema.parse(
+      deleteSubscriptionLineItemRequestRequest,
     ),
   );
 }

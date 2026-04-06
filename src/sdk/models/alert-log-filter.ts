@@ -33,7 +33,7 @@ export type AlertLogFilter = {
   alertStatus?: AlertState | undefined;
   alertType?: AlertType | undefined;
   customerId?: string | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   entityId?: string | undefined;
   entityType?: AlertEntityType | undefined;
   expand?: string | undefined;
@@ -45,7 +45,7 @@ export type AlertLogFilter = {
   offset?: number | undefined;
   order?: AlertLogFilterOrder | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -81,7 +81,7 @@ export const AlertLogFilter$outboundSchema: z.ZodMiniType<
     alertStatus: z.optional(AlertState$outboundSchema),
     alertType: z.optional(AlertType$outboundSchema),
     customerId: z.optional(z.string()),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityId: z.optional(z.string()),
     entityType: z.optional(AlertEntityType$outboundSchema),
     expand: z.optional(z.string()),
@@ -90,7 +90,7 @@ export const AlertLogFilter$outboundSchema: z.ZodMiniType<
     offset: z.optional(z.int()),
     order: z.optional(AlertLogFilterOrder$outboundSchema),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

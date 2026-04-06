@@ -21,7 +21,7 @@ export class TaxRates extends ClientSDK {
   async getTaxRates(
     request?: models.GetTaxRatesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<models.DtoTaxRateResponse>> {
+  ): Promise<Array<models.TaxRateResponse>> {
     return unwrapAsync(taxRatesGetTaxRates(
       this,
       request,
@@ -36,9 +36,9 @@ export class TaxRates extends ClientSDK {
    * Use when defining a new tax rate (e.g. VAT or sales tax) for use in invoices. Attach to customers or products via tax associations.
    */
   async createTaxRate(
-    request: models.DtoCreateTaxRateRequest,
+    request: models.CreateTaxRateRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxRateResponse> {
+  ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesCreateTaxRate(
       this,
       request,
@@ -55,7 +55,7 @@ export class TaxRates extends ClientSDK {
   async getTaxRate(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxRateResponse> {
+  ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesGetTaxRate(
       this,
       id,
@@ -71,9 +71,9 @@ export class TaxRates extends ClientSDK {
    */
   async updateTaxRate(
     id: string,
-    body: models.DtoUpdateTaxRateRequest,
+    body: models.UpdateTaxRateRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxRateResponse> {
+  ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesUpdateTaxRate(
       this,
       id,

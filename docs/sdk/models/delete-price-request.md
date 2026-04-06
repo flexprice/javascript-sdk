@@ -5,15 +5,11 @@
 ```typescript
 import { DeletePriceRequest } from "@flexprice/sdk/sdk/models";
 
-let value: DeletePriceRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: DeletePriceRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `id`                                                                         | *string*                                                                     | :heavy_check_mark:                                                           | Price ID                                                                     |
-| `body`                                                                       | [models.DtoDeletePriceRequest](../../sdk/models/dto-delete-price-request.md) | :heavy_check_mark:                                                           | Delete Price Request                                                         |
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `endDate`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |

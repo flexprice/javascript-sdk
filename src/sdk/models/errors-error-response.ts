@@ -3,35 +3,143 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  ErrorsErrorDetail,
-  ErrorsErrorDetail$inboundSchema,
-} from "./errors-error-detail.js";
+import { FlexPriceError } from "./flex-price-error.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
-export type ErrorsErrorResponse = {
-  error?: ErrorsErrorDetail | undefined;
-  success?: boolean | undefined;
+export const Code = {
+  NotFound: "not_found",
+  AlreadyExists: "already_exists",
+  VersionConflict: "version_conflict",
+  ValidationError: "validation_error",
+  InvalidOperation: "invalid_operation",
+  PermissionDenied: "permission_denied",
+  HttpClientError: "http_client_error",
+  DatabaseError: "database_error",
+  SystemError: "system_error",
+  InternalError: "internal_error",
+  ServiceUnavailable: "service_unavailable",
+} as const;
+export type Code = OpenEnum<typeof Code>;
+
+export type Details = {};
+
+export type ErrorsErrorResponseData = {
+  code?: Code | undefined;
+  details?: { [k: string]: Details } | undefined;
+  httpStatusCode?: number | undefined;
+  message?: string | undefined;
 };
+
+export class ErrorsErrorResponse extends FlexPriceError {
+  code?: Code | undefined;
+  details?: { [k: string]: Details } | undefined;
+  httpStatusCode?: number | undefined;
+
+  /** The original data that was passed to this error instance. */
+  data$: ErrorsErrorResponseData;
+
+  constructor(
+    err: ErrorsErrorResponseData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    if (err.code != null) this.code = err.code;
+    if (err.details != null) this.details = err.details;
+    if (err.httpStatusCode != null) this.httpStatusCode = err.httpStatusCode;
+
+    this.name = "ErrorsErrorResponse";
+  }
+}
+
+export type ErrorResponse = {
+  code?: Code | undefined;
+  details?: { [k: string]: Details } | undefined;
+  httpStatusCode?: number | undefined;
+  message?: string | undefined;
+};
+
+/** @internal */
+export const Code$inboundSchema: z.ZodMiniType<Code, unknown> = openEnums
+  .inboundSchema(Code);
+
+/** @internal */
+export const Details$inboundSchema: z.ZodMiniType<Details, unknown> = z.object(
+  {},
+);
+
+export function detailsFromJSON(
+  jsonString: string,
+): SafeParseResult<Details, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Details$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Details' from JSON`,
+  );
+}
 
 /** @internal */
 export const ErrorsErrorResponse$inboundSchema: z.ZodMiniType<
   ErrorsErrorResponse,
   unknown
-> = z.object({
-  error: types.optional(ErrorsErrorDetail$inboundSchema),
-  success: types.optional(types.boolean()),
-});
+> = z.pipe(
+  z.object({
+    code: types.optional(Code$inboundSchema),
+    details: types.optional(
+      z.record(z.string(), z.lazy(() => Details$inboundSchema)),
+    ),
+    http_status_code: types.optional(types.number()),
+    message: types.optional(types.string()),
+    request$: z.custom<Request>(x => x instanceof Request),
+    response$: z.custom<Response>(x => x instanceof Response),
+    body$: z.string(),
+  }),
+  z.transform((v) => {
+    const remapped = remap$(v, {
+      "http_status_code": "httpStatusCode",
+    });
 
-export function errorsErrorResponseFromJSON(
+    return new ErrorsErrorResponse(remapped, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
+  }),
+);
+
+/** @internal */
+export const ErrorResponse$inboundSchema: z.ZodMiniType<
+  ErrorResponse,
+  unknown
+> = z.pipe(
+  z.object({
+    code: types.optional(Code$inboundSchema),
+    details: types.optional(
+      z.record(z.string(), z.lazy(() => Details$inboundSchema)),
+    ),
+    http_status_code: types.optional(types.number()),
+    message: types.optional(types.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "http_status_code": "httpStatusCode",
+    });
+  }),
+);
+
+export function errorResponseFromJSON(
   jsonString: string,
-): SafeParseResult<ErrorsErrorResponse, SDKValidationError> {
+): SafeParseResult<ErrorResponse, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ErrorsErrorResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ErrorsErrorResponse' from JSON`,
+    (x) => ErrorResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ErrorResponse' from JSON`,
   );
 }

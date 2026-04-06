@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoCancelSubscriptionRequest,
-  DtoCancelSubscriptionRequest$Outbound,
-  DtoCancelSubscriptionRequest$outboundSchema,
-} from "./dto-cancel-subscription-request.js";
+  CancelSubscriptionRequest,
+  CancelSubscriptionRequest$Outbound,
+  CancelSubscriptionRequest$outboundSchema,
+} from "./cancel-subscription-request.js";
 
-export type CancelSubscriptionRequest = {
+export type CancelSubscriptionRequestRequest = {
   /**
    * Subscription ID
    */
@@ -17,28 +17,30 @@ export type CancelSubscriptionRequest = {
   /**
    * Cancel Subscription Request
    */
-  body: DtoCancelSubscriptionRequest;
+  body: CancelSubscriptionRequest;
 };
 
 /** @internal */
-export type CancelSubscriptionRequest$Outbound = {
+export type CancelSubscriptionRequestRequest$Outbound = {
   id: string;
-  body: DtoCancelSubscriptionRequest$Outbound;
+  body: CancelSubscriptionRequest$Outbound;
 };
 
 /** @internal */
-export const CancelSubscriptionRequest$outboundSchema: z.ZodMiniType<
-  CancelSubscriptionRequest$Outbound,
-  CancelSubscriptionRequest
+export const CancelSubscriptionRequestRequest$outboundSchema: z.ZodMiniType<
+  CancelSubscriptionRequestRequest$Outbound,
+  CancelSubscriptionRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoCancelSubscriptionRequest$outboundSchema,
+  body: CancelSubscriptionRequest$outboundSchema,
 });
 
-export function cancelSubscriptionRequestToJSON(
-  cancelSubscriptionRequest: CancelSubscriptionRequest,
+export function cancelSubscriptionRequestRequestToJSON(
+  cancelSubscriptionRequestRequest: CancelSubscriptionRequestRequest,
 ): string {
   return JSON.stringify(
-    CancelSubscriptionRequest$outboundSchema.parse(cancelSubscriptionRequest),
+    CancelSubscriptionRequestRequest$outboundSchema.parse(
+      cancelSubscriptionRequestRequest,
+    ),
   );
 }

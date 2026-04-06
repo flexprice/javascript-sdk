@@ -5,14 +5,11 @@
 ```typescript
 import { DeleteCreditGrantRequest } from "@flexprice/sdk/sdk/models";
 
-let value: DeleteCreditGrantRequest = {
-  id: "<id>",
-};
+let value: DeleteCreditGrantRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `id`                                                                                      | *string*                                                                                  | :heavy_check_mark:                                                                        | Credit Grant ID                                                                           |
-| `body`                                                                                    | [models.DtoDeleteCreditGrantRequest](../../sdk/models/dto-delete-credit-grant-request.md) | :heavy_minus_sign:                                                                        | Optional: effective_date for subscription-scoped grants                                   |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `effectiveDate`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_minus_sign:                                                                               | EffectiveDate is optional; when set (subscription scope) the grant end date is set to this time. |

@@ -22,13 +22,13 @@ export type DashboardOptions = {
 };
 
 export interface CustomerDashboardData {
-  customer?: models.DtoCustomerResponse;
-  usage?: models.DtoCustomerUsageSummaryResponse;
-  entitlements?: models.DtoCustomerEntitlementsResponse;
-  walletBalance?: models.DtoWalletResponse;
-  activeSubscriptions?: models.DtoSubscriptionResponse[];
-  invoices?: models.DtoInvoiceResponse[];
-  summary?: models.DtoCustomerMultiCurrencyInvoiceSummary;
+  customer?: models.Customer;
+  usage?: models.CustomerUsageSummaryResponse;
+  entitlements?: models.CustomerEntitlementsResponse;
+  walletBalance?: models.Wallet;
+  activeSubscriptions?: models.Subscription[];
+  invoices?: models.Invoice[];
+  summary?: models.CustomerMultiCurrencyInvoiceSummary;
   metadata: {
     fetchedAt: string;
     customerId: string;
@@ -148,11 +148,11 @@ export class CustomerPortal {
         : undefined,
     ]);
 
-    const activeSubscriptions: models.DtoSubscriptionResponse[] =
+    const activeSubscriptions: models.Subscription[] =
       subsResp && isRecord(subsResp) && "items" in subsResp && Array.isArray(subsResp["items"])
         ? subsResp["items"]
         : [];
-    const invoices: models.DtoInvoiceResponse[] =
+    const invoices: models.Invoice[] =
       invoicesResp && isRecord(invoicesResp) && "items" in invoicesResp && Array.isArray(invoicesResp["items"])
         ? invoicesResp["items"]
         : [];
@@ -171,7 +171,7 @@ export class CustomerPortal {
 
     const result: CustomerDashboardData = { metadata };
 
-    if (opts.includeCustomer && customerData) result.customer = customerData as models.DtoCustomerResponse;
+    if (opts.includeCustomer && customerData) result.customer = customerData as models.Customer;
     if (usage && isSuccess(usage)) result.usage = usage;
     if (entitlements && isSuccess(entitlements)) result.entitlements = entitlements;
     if (walletBalance && isSuccess(walletBalance)) result.walletBalance = walletBalance;

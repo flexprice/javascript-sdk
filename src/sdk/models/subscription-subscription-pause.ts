@@ -14,7 +14,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
 export type SubscriptionSubscriptionPause = {
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
    * EnvironmentID is the environment identifier for the pause
@@ -28,20 +28,20 @@ export type SubscriptionSubscriptionPause = {
   /**
    * OriginalPeriodEnd is the end of the billing period when the pause was created
    */
-  originalPeriodEnd?: string | undefined;
+  originalPeriodEnd?: Date | undefined;
   /**
    * OriginalPeriodStart is the start of the billing period when the pause was created
    */
-  originalPeriodStart?: string | undefined;
+  originalPeriodStart?: Date | undefined;
   /**
    * PauseEnd is when the pause will end (null for indefinite)
    */
-  pauseEnd?: string | undefined;
+  pauseEnd?: Date | undefined;
   pauseMode?: PauseMode | undefined;
   /**
    * PauseStart is when the pause actually started
    */
-  pauseStart?: string | undefined;
+  pauseStart?: Date | undefined;
   pauseStatus?: PauseStatus | undefined;
   /**
    * Reason is the reason for pausing
@@ -51,14 +51,14 @@ export type SubscriptionSubscriptionPause = {
   /**
    * ResumedAt is when the pause was actually ended (if manually resumed)
    */
-  resumedAt?: string | undefined;
+  resumedAt?: Date | undefined;
   status?: Status | undefined;
   /**
    * SubscriptionID is the identifier for the subscription
    */
   subscriptionId?: string | undefined;
   tenantId?: string | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -68,24 +68,24 @@ export const SubscriptionSubscriptionPause$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    created_at: types.optional(types.string()),
+    created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
-    original_period_end: types.optional(types.string()),
-    original_period_start: types.optional(types.string()),
-    pause_end: types.optional(types.string()),
+    original_period_end: types.optional(types.date()),
+    original_period_start: types.optional(types.date()),
+    pause_end: types.optional(types.date()),
     pause_mode: types.optional(PauseMode$inboundSchema),
-    pause_start: types.optional(types.string()),
+    pause_start: types.optional(types.date()),
     pause_status: types.optional(PauseStatus$inboundSchema),
     reason: types.optional(types.string()),
     resume_mode: types.optional(ResumeMode$inboundSchema),
-    resumed_at: types.optional(types.string()),
+    resumed_at: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
-    updated_at: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
   z.transform((v) => {

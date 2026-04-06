@@ -40,7 +40,7 @@ export type WalletTransactionFilterOrder = ClosedEnum<
 export type WalletTransactionFilter = {
   createdBy?: string | undefined;
   creditsAvailableGt?: number | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   expiryDateAfter?: string | undefined;
   expiryDateBefore?: string | undefined;
@@ -56,7 +56,7 @@ export type WalletTransactionFilter = {
   referenceId?: string | undefined;
   referenceType?: string | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   transactionReason?: TransactionReason | undefined;
   transactionStatus?: TransactionStatus | undefined;
@@ -100,7 +100,7 @@ export const WalletTransactionFilter$outboundSchema: z.ZodMiniType<
   z.object({
     createdBy: z.optional(z.string()),
     creditsAvailableGt: z.optional(z.number()),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     expiryDateAfter: z.optional(z.string()),
     expiryDateBefore: z.optional(z.string()),
@@ -113,7 +113,7 @@ export const WalletTransactionFilter$outboundSchema: z.ZodMiniType<
     referenceId: z.optional(z.string()),
     referenceType: z.optional(z.string()),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     transactionReason: z.optional(TransactionReason$outboundSchema),
     transactionStatus: z.optional(TransactionStatus$outboundSchema),

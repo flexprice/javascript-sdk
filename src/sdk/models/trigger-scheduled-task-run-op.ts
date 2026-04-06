@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoTriggerForceRunRequest,
-  DtoTriggerForceRunRequest$Outbound,
-  DtoTriggerForceRunRequest$outboundSchema,
-} from "./dto-trigger-force-run-request.js";
+  TriggerForceRunRequest,
+  TriggerForceRunRequest$Outbound,
+  TriggerForceRunRequest$outboundSchema,
+} from "./trigger-force-run-request.js";
 
 export type TriggerScheduledTaskRunRequest = {
   /**
@@ -17,13 +17,13 @@ export type TriggerScheduledTaskRunRequest = {
   /**
    * Optional start and end time for custom range
    */
-  body?: DtoTriggerForceRunRequest | undefined;
+  body?: TriggerForceRunRequest | undefined;
 };
 
 /** @internal */
 export type TriggerScheduledTaskRunRequest$Outbound = {
   id: string;
-  body?: DtoTriggerForceRunRequest$Outbound | undefined;
+  body?: TriggerForceRunRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const TriggerScheduledTaskRunRequest$outboundSchema: z.ZodMiniType<
   TriggerScheduledTaskRunRequest
 > = z.object({
   id: z.string(),
-  body: z.optional(DtoTriggerForceRunRequest$outboundSchema),
+  body: z.optional(TriggerForceRunRequest$outboundSchema),
 });
 
 export function triggerScheduledTaskRunRequestToJSON(

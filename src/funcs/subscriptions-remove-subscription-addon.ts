@@ -33,12 +33,12 @@ import { Result } from "../types/fp.js";
  */
 export function subscriptionsRemoveSubscriptionAddon(
   client: FlexpriceCore,
-  request: models.DtoRemoveAddonRequest,
+  request: models.RemoveAddonRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoSuccessResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SuccessResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -58,13 +58,13 @@ export function subscriptionsRemoveSubscriptionAddon(
 
 async function $do(
   client: FlexpriceCore,
-  request: models.DtoRemoveAddonRequest,
+  request: models.RemoveAddonRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoSuccessResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.SuccessResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -79,7 +79,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(models.DtoRemoveAddonRequest$outboundSchema, value),
+    (value) => z.parse(models.RemoveAddonRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -145,8 +145,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoSuccessResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SuccessResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -156,9 +156,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoSuccessResponse$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.SuccessResponse$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

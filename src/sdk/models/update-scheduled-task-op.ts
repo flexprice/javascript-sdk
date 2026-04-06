@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateScheduledTaskRequest,
-  DtoUpdateScheduledTaskRequest$Outbound,
-  DtoUpdateScheduledTaskRequest$outboundSchema,
-} from "./dto-update-scheduled-task-request.js";
+  UpdateScheduledTaskRequest,
+  UpdateScheduledTaskRequest$Outbound,
+  UpdateScheduledTaskRequest$outboundSchema,
+} from "./update-scheduled-task-request.js";
 
-export type UpdateScheduledTaskRequest = {
+export type UpdateScheduledTaskRequestRequest = {
   /**
    * Scheduled Task ID
    */
@@ -17,28 +17,30 @@ export type UpdateScheduledTaskRequest = {
   /**
    * Update request (enabled: true/false to pause/resume)
    */
-  body: DtoUpdateScheduledTaskRequest;
+  body: UpdateScheduledTaskRequest;
 };
 
 /** @internal */
-export type UpdateScheduledTaskRequest$Outbound = {
+export type UpdateScheduledTaskRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateScheduledTaskRequest$Outbound;
+  body: UpdateScheduledTaskRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateScheduledTaskRequest$outboundSchema: z.ZodMiniType<
-  UpdateScheduledTaskRequest$Outbound,
-  UpdateScheduledTaskRequest
+export const UpdateScheduledTaskRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateScheduledTaskRequestRequest$Outbound,
+  UpdateScheduledTaskRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateScheduledTaskRequest$outboundSchema,
+  body: UpdateScheduledTaskRequest$outboundSchema,
 });
 
-export function updateScheduledTaskRequestToJSON(
-  updateScheduledTaskRequest: UpdateScheduledTaskRequest,
+export function updateScheduledTaskRequestRequestToJSON(
+  updateScheduledTaskRequestRequest: UpdateScheduledTaskRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateScheduledTaskRequest$outboundSchema.parse(updateScheduledTaskRequest),
+    UpdateScheduledTaskRequestRequest$outboundSchema.parse(
+      updateScheduledTaskRequestRequest,
+    ),
   );
 }

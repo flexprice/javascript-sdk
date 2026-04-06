@@ -24,7 +24,7 @@ export const PriceUnitFilterOrder = {
 export type PriceUnitFilterOrder = ClosedEnum<typeof PriceUnitFilterOrder>;
 
 export type PriceUnitFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * filters allows complex filtering based on multiple fields
@@ -35,7 +35,7 @@ export type PriceUnitFilter = {
   order?: PriceUnitFilterOrder | undefined;
   priceUnitIds?: Array<string> | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -64,7 +64,7 @@ export const PriceUnitFilter$outboundSchema: z.ZodMiniType<
   PriceUnitFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
@@ -72,7 +72,7 @@ export const PriceUnitFilter$outboundSchema: z.ZodMiniType<
     order: z.optional(PriceUnitFilterOrder$outboundSchema),
     priceUnitIds: z.optional(z.array(z.string())),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

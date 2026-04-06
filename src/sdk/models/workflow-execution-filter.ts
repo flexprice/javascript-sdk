@@ -26,7 +26,7 @@ export type WorkflowExecutionFilterOrder = ClosedEnum<
 >;
 
 export type WorkflowExecutionFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   /**
    * e.g. plan, invoice, subscription
    */
@@ -44,7 +44,7 @@ export type WorkflowExecutionFilter = {
   offset?: number | undefined;
   order?: WorkflowExecutionFilterOrder | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   taskQueue?: string | undefined;
   /**
@@ -88,7 +88,7 @@ export const WorkflowExecutionFilter$outboundSchema: z.ZodMiniType<
   WorkflowExecutionFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entity: z.optional(z.string()),
     entityId: z.optional(z.string()),
     expand: z.optional(z.string()),
@@ -97,7 +97,7 @@ export const WorkflowExecutionFilter$outboundSchema: z.ZodMiniType<
     offset: z.optional(z.int()),
     order: z.optional(WorkflowExecutionFilterOrder$outboundSchema),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     taskQueue: z.optional(z.string()),
     workflowId: z.optional(z.string()),

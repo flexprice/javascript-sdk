@@ -5,15 +5,14 @@
 ```typescript
 import { UpdateSubscriptionRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdateSubscriptionRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: UpdateSubscriptionRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `id`                                                                                       | *string*                                                                                   | :heavy_check_mark:                                                                         | Subscription ID                                                                            |
-| `body`                                                                                     | [models.DtoUpdateSubscriptionRequest](../../sdk/models/dto-update-subscription-request.md) | :heavy_check_mark:                                                                         | Update Subscription Request                                                                |
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `cancelAt`                                                                                              | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)           | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |
+| `cancelAtPeriodEnd`                                                                                     | *boolean*                                                                                               | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |
+| `parentSubscriptionId`                                                                                  | *string*                                                                                                | :heavy_minus_sign:                                                                                      | ParentSubscriptionID sets or clears the parent subscription. Omit to leave unchanged; send "" to clear. |
+| `status`                                                                                                | [models.SubscriptionStatus](../../sdk/models/subscription-status.md)                                    | :heavy_minus_sign:                                                                                      | N/A                                                                                                     |

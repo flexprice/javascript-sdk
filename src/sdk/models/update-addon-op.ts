@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateAddonRequest,
-  DtoUpdateAddonRequest$Outbound,
-  DtoUpdateAddonRequest$outboundSchema,
-} from "./dto-update-addon-request.js";
+  UpdateAddonRequest,
+  UpdateAddonRequest$Outbound,
+  UpdateAddonRequest$outboundSchema,
+} from "./update-addon-request.js";
 
-export type UpdateAddonRequest = {
+export type UpdateAddonRequestRequest = {
   /**
    * Addon ID
    */
@@ -17,28 +17,28 @@ export type UpdateAddonRequest = {
   /**
    * Update Addon Request
    */
-  body: DtoUpdateAddonRequest;
+  body: UpdateAddonRequest;
 };
 
 /** @internal */
-export type UpdateAddonRequest$Outbound = {
+export type UpdateAddonRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateAddonRequest$Outbound;
+  body: UpdateAddonRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateAddonRequest$outboundSchema: z.ZodMiniType<
-  UpdateAddonRequest$Outbound,
-  UpdateAddonRequest
+export const UpdateAddonRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateAddonRequestRequest$Outbound,
+  UpdateAddonRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateAddonRequest$outboundSchema,
+  body: UpdateAddonRequest$outboundSchema,
 });
 
-export function updateAddonRequestToJSON(
-  updateAddonRequest: UpdateAddonRequest,
+export function updateAddonRequestRequestToJSON(
+  updateAddonRequestRequest: UpdateAddonRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateAddonRequest$outboundSchema.parse(updateAddonRequest),
+    UpdateAddonRequestRequest$outboundSchema.parse(updateAddonRequestRequest),
   );
 }

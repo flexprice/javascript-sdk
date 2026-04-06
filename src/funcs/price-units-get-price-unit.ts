@@ -37,8 +37,8 @@ export function priceUnitsGetPriceUnit(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoPriceUnitResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.PriceUnitResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -63,8 +63,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoPriceUnitResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.PriceUnitResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -154,8 +154,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoPriceUnitResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.PriceUnitResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -165,8 +165,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoPriceUnitResponse$inboundSchema),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.PriceUnitResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

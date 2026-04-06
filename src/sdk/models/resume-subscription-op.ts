@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoResumeSubscriptionRequest,
-  DtoResumeSubscriptionRequest$Outbound,
-  DtoResumeSubscriptionRequest$outboundSchema,
-} from "./dto-resume-subscription-request.js";
+  ResumeSubscriptionRequest,
+  ResumeSubscriptionRequest$Outbound,
+  ResumeSubscriptionRequest$outboundSchema,
+} from "./resume-subscription-request.js";
 
-export type ResumeSubscriptionRequest = {
+export type ResumeSubscriptionRequestRequest = {
   /**
    * Subscription ID
    */
@@ -17,28 +17,30 @@ export type ResumeSubscriptionRequest = {
   /**
    * Resume subscription request
    */
-  body: DtoResumeSubscriptionRequest;
+  body: ResumeSubscriptionRequest;
 };
 
 /** @internal */
-export type ResumeSubscriptionRequest$Outbound = {
+export type ResumeSubscriptionRequestRequest$Outbound = {
   id: string;
-  body: DtoResumeSubscriptionRequest$Outbound;
+  body: ResumeSubscriptionRequest$Outbound;
 };
 
 /** @internal */
-export const ResumeSubscriptionRequest$outboundSchema: z.ZodMiniType<
-  ResumeSubscriptionRequest$Outbound,
-  ResumeSubscriptionRequest
+export const ResumeSubscriptionRequestRequest$outboundSchema: z.ZodMiniType<
+  ResumeSubscriptionRequestRequest$Outbound,
+  ResumeSubscriptionRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoResumeSubscriptionRequest$outboundSchema,
+  body: ResumeSubscriptionRequest$outboundSchema,
 });
 
-export function resumeSubscriptionRequestToJSON(
-  resumeSubscriptionRequest: ResumeSubscriptionRequest,
+export function resumeSubscriptionRequestRequestToJSON(
+  resumeSubscriptionRequestRequest: ResumeSubscriptionRequestRequest,
 ): string {
   return JSON.stringify(
-    ResumeSubscriptionRequest$outboundSchema.parse(resumeSubscriptionRequest),
+    ResumeSubscriptionRequestRequest$outboundSchema.parse(
+      resumeSubscriptionRequestRequest,
+    ),
   );
 }

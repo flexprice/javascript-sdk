@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdatePriceRequest,
-  DtoUpdatePriceRequest$Outbound,
-  DtoUpdatePriceRequest$outboundSchema,
-} from "./dto-update-price-request.js";
+  UpdatePriceRequest,
+  UpdatePriceRequest$Outbound,
+  UpdatePriceRequest$outboundSchema,
+} from "./update-price-request.js";
 
-export type UpdatePriceRequest = {
+export type UpdatePriceRequestRequest = {
   /**
    * Price ID
    */
@@ -17,28 +17,28 @@ export type UpdatePriceRequest = {
   /**
    * Price configuration
    */
-  body: DtoUpdatePriceRequest;
+  body: UpdatePriceRequest;
 };
 
 /** @internal */
-export type UpdatePriceRequest$Outbound = {
+export type UpdatePriceRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdatePriceRequest$Outbound;
+  body: UpdatePriceRequest$Outbound;
 };
 
 /** @internal */
-export const UpdatePriceRequest$outboundSchema: z.ZodMiniType<
-  UpdatePriceRequest$Outbound,
-  UpdatePriceRequest
+export const UpdatePriceRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdatePriceRequestRequest$Outbound,
+  UpdatePriceRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdatePriceRequest$outboundSchema,
+  body: UpdatePriceRequest$outboundSchema,
 });
 
-export function updatePriceRequestToJSON(
-  updatePriceRequest: UpdatePriceRequest,
+export function updatePriceRequestRequestToJSON(
+  updatePriceRequestRequest: UpdatePriceRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdatePriceRequest$outboundSchema.parse(updatePriceRequest),
+    UpdatePriceRequestRequest$outboundSchema.parse(updatePriceRequestRequest),
   );
 }

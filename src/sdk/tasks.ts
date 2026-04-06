@@ -22,7 +22,7 @@ export class Tasks extends ClientSDK {
   async listTasks(
     request?: models.ListTasksRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListTasksResponse> {
+  ): Promise<models.ListTasksResponse> {
     return unwrapAsync(tasksListTasks(
       this,
       request,
@@ -37,9 +37,9 @@ export class Tasks extends ClientSDK {
    * Use when submitting a file or job for async processing (e.g. export or import). Returns task ID to poll for status and result.
    */
   async createTask(
-    request: models.DtoCreateTaskRequest,
+    request: models.CreateTaskRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTaskResponse> {
+  ): Promise<models.TaskResponse> {
     return unwrapAsync(tasksCreateTask(
       this,
       request,
@@ -73,7 +73,7 @@ export class Tasks extends ClientSDK {
   async getTask(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoTaskResponse> {
+  ): Promise<models.TaskResponse> {
     return unwrapAsync(tasksGetTask(
       this,
       id,
@@ -106,9 +106,9 @@ export class Tasks extends ClientSDK {
    */
   async updateTaskStatus(
     id: string,
-    body: models.DtoUpdateTaskStatusRequest,
+    body: models.UpdateTaskStatusRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(tasksUpdateTaskStatus(
       this,
       id,

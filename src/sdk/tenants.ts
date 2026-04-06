@@ -18,7 +18,7 @@ export class Tenants extends ClientSDK {
    */
   async getTenantBillingUsage(
     options?: RequestOptions,
-  ): Promise<models.DtoTenantBillingUsage> {
+  ): Promise<models.TenantBillingUsage> {
     return unwrapAsync(tenantsGetTenantBillingUsage(
       this,
       options,
@@ -32,9 +32,9 @@ export class Tenants extends ClientSDK {
    * Use when changing tenant details (e.g. name or billing info). Request body contains the fields to update.
    */
   async updateTenant(
-    request: models.DtoUpdateTenantRequest,
+    request: models.UpdateTenantRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTenantResponse> {
+  ): Promise<models.TenantResponse> {
     return unwrapAsync(tenantsUpdateTenant(
       this,
       request,
@@ -51,7 +51,7 @@ export class Tenants extends ClientSDK {
   async getTenantById(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoTenantResponse> {
+  ): Promise<models.TenantResponse> {
     return unwrapAsync(tenantsGetTenantById(
       this,
       id,

@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoActivateDraftSubscriptionRequest,
-  DtoActivateDraftSubscriptionRequest$Outbound,
-  DtoActivateDraftSubscriptionRequest$outboundSchema,
-} from "./dto-activate-draft-subscription-request.js";
+  ActivateDraftSubscriptionRequest,
+  ActivateDraftSubscriptionRequest$Outbound,
+  ActivateDraftSubscriptionRequest$outboundSchema,
+} from "./activate-draft-subscription-request.js";
 
 export type ActivateSubscriptionRequest = {
   /**
@@ -17,13 +17,13 @@ export type ActivateSubscriptionRequest = {
   /**
    * Activate Draft Subscription Request
    */
-  body: DtoActivateDraftSubscriptionRequest;
+  body: ActivateDraftSubscriptionRequest;
 };
 
 /** @internal */
 export type ActivateSubscriptionRequest$Outbound = {
   id: string;
-  body: DtoActivateDraftSubscriptionRequest$Outbound;
+  body: ActivateDraftSubscriptionRequest$Outbound;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const ActivateSubscriptionRequest$outboundSchema: z.ZodMiniType<
   ActivateSubscriptionRequest
 > = z.object({
   id: z.string(),
-  body: DtoActivateDraftSubscriptionRequest$outboundSchema,
+  body: ActivateDraftSubscriptionRequest$outboundSchema,
 });
 
 export function activateSubscriptionRequestToJSON(

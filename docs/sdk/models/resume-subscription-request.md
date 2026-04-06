@@ -1,21 +1,21 @@
 # ResumeSubscriptionRequest
 
+Request object for resuming a paused subscription
+
 ## Example Usage
 
 ```typescript
 import { ResumeSubscriptionRequest } from "@flexprice/sdk/sdk/models";
 
 let value: ResumeSubscriptionRequest = {
-  id: "<id>",
-  body: {
-    resumeMode: "immediate",
-  },
+  resumeMode: "immediate",
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `id`                                                                                       | *string*                                                                                   | :heavy_check_mark:                                                                         | Subscription ID                                                                            |
-| `body`                                                                                     | [models.DtoResumeSubscriptionRequest](../../sdk/models/dto-resume-subscription-request.md) | :heavy_check_mark:                                                                         | Resume subscription request                                                                |
+| Field                                                                                                                                                                                            | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dryRun`                                                                                                                                                                                         | *boolean*                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                               | Whether to perform a dry run<br/>@Description If true, validates the request and shows impact without actually resuming the subscription<br/>@Example false                                      |
+| `metadata`                                                                                                                                                                                       | Record<string, *string*>                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                               | Additional metadata as key-value pairs<br/>@Description Optional metadata for storing additional information about the resume operation<br/>@Example {"resumed_by": "admin", "reason": "issue_resolved"} |
+| `resumeMode`                                                                                                                                                                                     | [models.ResumeMode](../../sdk/models/resume-mode.md)                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |

@@ -22,9 +22,9 @@ export class Costs extends ClientSDK {
    * Use when setting up a new pricing configuration (e.g. a new product or region). Costsheets group prices and define the default for the environment.
    */
   async createCostsheet(
-    request: models.DtoCreateCostsheetRequest,
+    request: models.CreateCostsheetRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateCostsheetResponse> {
+  ): Promise<models.CreateCostsheetResponse> {
     return unwrapAsync(costsCreateCostsheet(
       this,
       request,
@@ -40,7 +40,7 @@ export class Costs extends ClientSDK {
    */
   async getActiveCostsheet(
     options?: RequestOptions,
-  ): Promise<models.DtoCostsheetResponse> {
+  ): Promise<models.CostsheetResponse> {
     return unwrapAsync(costsGetActiveCostsheet(
       this,
       options,
@@ -54,9 +54,9 @@ export class Costs extends ClientSDK {
    * Use when building dashboards or reports that need revenue vs cost, ROI, and margin over a time period (e.g. finance views or executive summaries).
    */
   async getDetailedCostAnalytics(
-    request: models.DtoGetCostAnalyticsRequest,
+    request: models.GetCostAnalyticsRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetDetailedCostAnalyticsResponse> {
+  ): Promise<models.GetDetailedCostAnalyticsResponse> {
     return unwrapAsync(costsGetDetailedCostAnalytics(
       this,
       request,
@@ -71,9 +71,9 @@ export class Costs extends ClientSDK {
    * Use when you need the same revenue/cost/ROI analytics but computed from the costsheet usage-tracking pipeline (e.g. for consistency with usage-based cost data).
    */
   async getDetailedCostAnalyticsV2(
-    request: models.DtoGetCostAnalyticsRequest,
+    request: models.GetCostAnalyticsRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetDetailedCostAnalyticsResponse> {
+  ): Promise<models.GetDetailedCostAnalyticsResponse> {
     return unwrapAsync(costsGetDetailedCostAnalyticsV2(
       this,
       request,
@@ -90,7 +90,7 @@ export class Costs extends ClientSDK {
   async queryCostsheet(
     request: models.CostsheetFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListCostsheetResponse> {
+  ): Promise<models.ListCostsheetResponse> {
     return unwrapAsync(costsQueryCostsheet(
       this,
       request,
@@ -108,7 +108,7 @@ export class Costs extends ClientSDK {
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoGetCostsheetResponse> {
+  ): Promise<models.GetCostsheetResponse> {
     return unwrapAsync(costsGetCostsheet(
       this,
       id,
@@ -125,9 +125,9 @@ export class Costs extends ClientSDK {
    */
   async updateCostsheet(
     id: string,
-    body: models.DtoUpdateCostsheetRequest,
+    body: models.UpdateCostsheetRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoUpdateCostsheetResponse> {
+  ): Promise<models.UpdateCostsheetResponse> {
     return unwrapAsync(costsUpdateCostsheet(
       this,
       id,
@@ -145,7 +145,7 @@ export class Costs extends ClientSDK {
   async deleteCostsheet(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoDeleteCostsheetResponse> {
+  ): Promise<models.DeleteCostsheetResponse> {
     return unwrapAsync(costsDeleteCostsheet(
       this,
       id,

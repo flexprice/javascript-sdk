@@ -18,7 +18,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 
 export type MeterMeter = {
   aggregation?: MeterAggregation | undefined;
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
    * EnvironmentID is the environment identifier for the meter
@@ -50,7 +50,7 @@ export type MeterMeter = {
   resetUsage?: ResetUsage | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -59,7 +59,7 @@ export const MeterMeter$inboundSchema: z.ZodMiniType<MeterMeter, unknown> = z
   .pipe(
     z.object({
       aggregation: types.optional(MeterAggregation$inboundSchema),
-      created_at: types.optional(types.string()),
+      created_at: types.optional(types.date()),
       created_by: types.optional(types.string()),
       environment_id: types.optional(types.string()),
       event_name: types.optional(types.string()),
@@ -69,7 +69,7 @@ export const MeterMeter$inboundSchema: z.ZodMiniType<MeterMeter, unknown> = z
       reset_usage: types.optional(ResetUsage$inboundSchema),
       status: types.optional(Status$inboundSchema),
       tenant_id: types.optional(types.string()),
-      updated_at: types.optional(types.string()),
+      updated_at: types.optional(types.date()),
       updated_by: types.optional(types.string()),
     }),
     z.transform((v) => {

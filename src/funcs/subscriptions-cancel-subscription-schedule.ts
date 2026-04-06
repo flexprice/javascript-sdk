@@ -34,11 +34,11 @@ import { Result } from "../types/fp.js";
 export function subscriptionsCancelSubscriptionSchedule(
   client: FlexpriceCore,
   scheduleId: string,
-  body?: models.DtoCancelScheduleRequest | undefined,
+  body?: models.CancelScheduleRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoCancelScheduleResponse,
+    models.CancelScheduleResponse,
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -60,12 +60,12 @@ export function subscriptionsCancelSubscriptionSchedule(
 async function $do(
   client: FlexpriceCore,
   scheduleId: string,
-  body?: models.DtoCancelScheduleRequest | undefined,
+  body?: models.CancelScheduleRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoCancelScheduleResponse,
+      models.CancelScheduleResponse,
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -156,7 +156,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    models.DtoCancelScheduleResponse,
+    models.CancelScheduleResponse,
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -166,7 +166,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoCancelScheduleResponse$inboundSchema),
+    M.json(200, models.CancelScheduleResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

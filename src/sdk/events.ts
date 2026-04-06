@@ -22,7 +22,7 @@ export class Events extends ClientSDK {
    * Use when sending a single usage event from your app (e.g. one API call or one GB stored). Events are processed asynchronously; returns 202 with event_id.
    */
   async ingestEvent(
-    request: models.DtoIngestEventRequest,
+    request: models.IngestEventRequest,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(eventsIngestEvent(
@@ -39,9 +39,9 @@ export class Events extends ClientSDK {
    * Use when building analytics views (e.g. usage by feature or customer over time). Supports filtering, grouping, and time-series breakdown.
    */
   async getUsageAnalytics(
-    request: models.DtoGetUsageAnalyticsRequest,
+    request: models.GetUsageAnalyticsRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetUsageAnalyticsResponse> {
+  ): Promise<models.GetUsageAnalyticsResponse> {
     return unwrapAsync(eventsGetUsageAnalytics(
       this,
       request,
@@ -56,7 +56,7 @@ export class Events extends ClientSDK {
    * Use when batching usage events (e.g. backfill or high-volume ingestion). More efficient than single event calls; returns 202 when accepted.
    */
   async ingestEventsBulk(
-    request: models.DtoBulkIngestEventRequest,
+    request: models.BulkIngestEventRequest,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(eventsIngestEventsBulk(
@@ -74,7 +74,7 @@ export class Events extends ClientSDK {
    */
   async getHuggingfaceInferenceData(
     options?: RequestOptions,
-  ): Promise<models.DtoGetHuggingFaceBillingDataResponse> {
+  ): Promise<models.GetHuggingFaceBillingDataResponse> {
     return unwrapAsync(eventsGetHuggingfaceInferenceData(
       this,
       options,
@@ -88,9 +88,9 @@ export class Events extends ClientSDK {
    * Use when debugging ingestion or exporting raw event data (e.g. support or audit). Returns a paginated list; supports time range and sorting.
    */
   async listRawEvents(
-    request: models.DtoGetEventsRequest,
+    request: models.GetEventsRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetEventsResponse> {
+  ): Promise<models.GetEventsResponse> {
     return unwrapAsync(eventsListRawEvents(
       this,
       request,
@@ -105,9 +105,9 @@ export class Events extends ClientSDK {
    * Use when building usage reports or dashboards across events. Supports filters and grouping; defaults to last 7 days if no range provided.
    */
   async getUsageStatistics(
-    request: models.DtoGetUsageRequest,
+    request: models.GetUsageRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetUsageResponse> {
+  ): Promise<models.GetUsageResponse> {
     return unwrapAsync(eventsGetUsageStatistics(
       this,
       request,
@@ -122,9 +122,9 @@ export class Events extends ClientSDK {
    * Use when showing usage for a specific meter (e.g. dashboard or overage check). Supports time range, filters, and grouping by customer or subscription.
    */
   async getUsageByMeter(
-    request: models.DtoGetUsageByMeterRequest,
+    request: models.GetUsageByMeterRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetUsageResponse> {
+  ): Promise<models.GetUsageResponse> {
     return unwrapAsync(eventsGetUsageByMeter(
       this,
       request,
@@ -141,7 +141,7 @@ export class Events extends ClientSDK {
   async getEvent(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoGetEventByIDResponse> {
+  ): Promise<models.GetEventByIDResponse> {
     return unwrapAsync(eventsGetEvent(
       this,
       id,

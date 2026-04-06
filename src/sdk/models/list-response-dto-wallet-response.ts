@@ -7,17 +7,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
-  DtoWalletResponse,
-  DtoWalletResponse$inboundSchema,
-} from "./dto-wallet-response.js";
-import {
   PaginationResponse,
   PaginationResponse$inboundSchema,
 } from "./pagination-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import { Wallet, Wallet$inboundSchema } from "./wallet.js";
 
 export type ListResponseDtoWalletResponse = {
-  items?: Array<DtoWalletResponse> | undefined;
+  items?: Array<Wallet> | undefined;
   pagination?: PaginationResponse | undefined;
 };
 
@@ -26,7 +23,7 @@ export const ListResponseDtoWalletResponse$inboundSchema: z.ZodMiniType<
   ListResponseDtoWalletResponse,
   unknown
 > = z.object({
-  items: types.optional(z.array(DtoWalletResponse$inboundSchema)),
+  items: types.optional(z.array(Wallet$inboundSchema)),
   pagination: types.optional(PaginationResponse$inboundSchema),
 });
 

@@ -18,9 +18,9 @@ export class Groups extends ClientSDK {
    * Use when organizing entities into a group (e.g. for filtering prices or plans by product line or region).
    */
   async createGroup(
-    request: models.DtoCreateGroupRequest,
+    request: models.CreateGroupRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGroupResponse> {
+  ): Promise<models.GroupResponse> {
     return unwrapAsync(groupsCreateGroup(
       this,
       request,
@@ -37,7 +37,7 @@ export class Groups extends ClientSDK {
   async queryGroup(
     request: models.GroupFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListGroupsResponse> {
+  ): Promise<models.ListGroupsResponse> {
     return unwrapAsync(groupsQueryGroup(
       this,
       request,
@@ -54,7 +54,7 @@ export class Groups extends ClientSDK {
   async getGroup(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoGroupResponse> {
+  ): Promise<models.GroupResponse> {
     return unwrapAsync(groupsGetGroup(
       this,
       id,

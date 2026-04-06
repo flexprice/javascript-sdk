@@ -24,7 +24,7 @@ export class Entitlements extends ClientSDK {
   async getAddonEntitlements(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoListEntitlementsResponse> {
+  ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsGetAddonEntitlements(
       this,
       id,
@@ -39,9 +39,9 @@ export class Entitlements extends ClientSDK {
    * Use when attaching a feature (and its limit) to a plan or addon (e.g. "10 seats" or "1000 API calls"). Defines what the plan/addon includes.
    */
   async createEntitlement(
-    request: models.DtoCreateEntitlementRequest,
+    request: models.CreateEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoEntitlementResponse> {
+  ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsCreateEntitlement(
       this,
       request,
@@ -56,9 +56,9 @@ export class Entitlements extends ClientSDK {
    * Use when attaching many features to a plan or addon at once (e.g. initial plan setup or import). Bulk version of create entitlement.
    */
   async createEntitlementsBulk(
-    request: models.DtoCreateBulkEntitlementRequest,
+    request: models.CreateBulkEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateBulkEntitlementResponse> {
+  ): Promise<models.CreateBulkEntitlementResponse> {
     return unwrapAsync(entitlementsCreateEntitlementsBulk(
       this,
       request,
@@ -75,7 +75,7 @@ export class Entitlements extends ClientSDK {
   async queryEntitlement(
     request: models.EntitlementFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListEntitlementsResponse> {
+  ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsQueryEntitlement(
       this,
       request,
@@ -92,7 +92,7 @@ export class Entitlements extends ClientSDK {
   async getEntitlement(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoEntitlementResponse> {
+  ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsGetEntitlement(
       this,
       id,
@@ -108,9 +108,9 @@ export class Entitlements extends ClientSDK {
    */
   async updateEntitlement(
     id: string,
-    body: models.DtoUpdateEntitlementRequest,
+    body: models.UpdateEntitlementRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoEntitlementResponse> {
+  ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsUpdateEntitlement(
       this,
       id,
@@ -128,7 +128,7 @@ export class Entitlements extends ClientSDK {
   async deleteEntitlement(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(entitlementsDeleteEntitlement(
       this,
       id,
@@ -145,7 +145,7 @@ export class Entitlements extends ClientSDK {
   async getPlanEntitlements(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoListEntitlementsResponse> {
+  ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsGetPlanEntitlements(
       this,
       id,

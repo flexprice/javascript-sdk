@@ -12,13 +12,13 @@ let value: WebhookDtoEntitlementWebhookPayload = {
         {
           addon: {},
           meter: {
-            createdAt: "2024-03-20T15:04:05Z",
+            createdAt: new Date("2024-03-20T15:04:05Z"),
             eventName: "api_request",
             id: "550e8400-e29b-41d4-a716-446655440000",
             name: "API Usage Meter",
             status: "published",
             tenantId: "tenant123",
-            updatedAt: "2024-03-20T15:04:05Z",
+            updatedAt: new Date("2024-03-20T15:04:05Z"),
           },
           plan: {},
         },
@@ -26,13 +26,13 @@ let value: WebhookDtoEntitlementWebhookPayload = {
     },
     feature: {
       meter: {
-        createdAt: "2024-03-20T15:04:05Z",
+        createdAt: new Date("2024-03-20T15:04:05Z"),
         eventName: "api_request",
         id: "550e8400-e29b-41d4-a716-446655440000",
         name: "API Usage Meter",
         status: "published",
         tenantId: "tenant123",
-        updatedAt: "2024-03-20T15:04:05Z",
+        updatedAt: new Date("2024-03-20T15:04:05Z"),
       },
     },
     plan: {},
@@ -42,7 +42,7 @@ let value: WebhookDtoEntitlementWebhookPayload = {
 
 ## Fields
 
-| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `entitlement`                                                                 | [models.DtoEntitlementResponse](../../sdk/models/dto-entitlement-response.md) | :heavy_minus_sign:                                                            | N/A                                                                           |
-| `eventType`                                                                   | [models.WebhookEventName](../../sdk/models/webhook-event-name.md)             | :heavy_minus_sign:                                                            | N/A                                                                           |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `entitlement`                                                          | [models.EntitlementResponse](../../sdk/models/entitlement-response.md) | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `eventType`                                                            | [models.WebhookEventName](../../sdk/models/webhook-event-name.md)      | :heavy_minus_sign:                                                     | N/A                                                                    |

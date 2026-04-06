@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateInvoiceRequest,
-  DtoUpdateInvoiceRequest$Outbound,
-  DtoUpdateInvoiceRequest$outboundSchema,
-} from "./dto-update-invoice-request.js";
+  UpdateInvoiceRequest,
+  UpdateInvoiceRequest$Outbound,
+  UpdateInvoiceRequest$outboundSchema,
+} from "./update-invoice-request.js";
 
-export type UpdateInvoiceRequest = {
+export type UpdateInvoiceRequestRequest = {
   /**
    * Invoice ID
    */
@@ -17,28 +17,30 @@ export type UpdateInvoiceRequest = {
   /**
    * Invoice Update Request
    */
-  body: DtoUpdateInvoiceRequest;
+  body: UpdateInvoiceRequest;
 };
 
 /** @internal */
-export type UpdateInvoiceRequest$Outbound = {
+export type UpdateInvoiceRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateInvoiceRequest$Outbound;
+  body: UpdateInvoiceRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateInvoiceRequest$outboundSchema: z.ZodMiniType<
-  UpdateInvoiceRequest$Outbound,
-  UpdateInvoiceRequest
+export const UpdateInvoiceRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateInvoiceRequestRequest$Outbound,
+  UpdateInvoiceRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateInvoiceRequest$outboundSchema,
+  body: UpdateInvoiceRequest$outboundSchema,
 });
 
-export function updateInvoiceRequestToJSON(
-  updateInvoiceRequest: UpdateInvoiceRequest,
+export function updateInvoiceRequestRequestToJSON(
+  updateInvoiceRequestRequest: UpdateInvoiceRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateInvoiceRequest$outboundSchema.parse(updateInvoiceRequest),
+    UpdateInvoiceRequestRequest$outboundSchema.parse(
+      updateInvoiceRequestRequest,
+    ),
   );
 }

@@ -8,8 +8,8 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
-  ErrorsErrorResponse,
-  ErrorsErrorResponse$inboundSchema,
+  ErrorResponse,
+  ErrorResponse$inboundSchema,
 } from "./errors-error-response.js";
 import {
   FailurePointType,
@@ -18,7 +18,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type FailurePoint = {
-  error?: ErrorsErrorResponse | undefined;
+  error?: ErrorResponse | undefined;
   failurePointType?: FailurePointType | undefined;
 };
 
@@ -26,7 +26,7 @@ export type FailurePoint = {
 export const FailurePoint$inboundSchema: z.ZodMiniType<FailurePoint, unknown> =
   z.pipe(
     z.object({
-      error: types.optional(ErrorsErrorResponse$inboundSchema),
+      error: types.optional(ErrorResponse$inboundSchema),
       failure_point_type: types.optional(FailurePointType$inboundSchema),
     }),
     z.transform((v) => {

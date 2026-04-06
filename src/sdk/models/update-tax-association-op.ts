@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoTaxAssociationUpdateRequest,
-  DtoTaxAssociationUpdateRequest$Outbound,
-  DtoTaxAssociationUpdateRequest$outboundSchema,
-} from "./dto-tax-association-update-request.js";
+  TaxAssociationUpdateRequest,
+  TaxAssociationUpdateRequest$Outbound,
+  TaxAssociationUpdateRequest$outboundSchema,
+} from "./tax-association-update-request.js";
 
 export type UpdateTaxAssociationRequest = {
   /**
@@ -17,13 +17,13 @@ export type UpdateTaxAssociationRequest = {
   /**
    * Tax Config Request
    */
-  body: DtoTaxAssociationUpdateRequest;
+  body: TaxAssociationUpdateRequest;
 };
 
 /** @internal */
 export type UpdateTaxAssociationRequest$Outbound = {
   id: string;
-  body: DtoTaxAssociationUpdateRequest$Outbound;
+  body: TaxAssociationUpdateRequest$Outbound;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const UpdateTaxAssociationRequest$outboundSchema: z.ZodMiniType<
   UpdateTaxAssociationRequest
 > = z.object({
   id: z.string(),
-  body: DtoTaxAssociationUpdateRequest$outboundSchema,
+  body: TaxAssociationUpdateRequest$outboundSchema,
 });
 
 export function updateTaxAssociationRequestToJSON(

@@ -10,6 +10,7 @@ import { subscriptionsCreateSubscriptionLineItem } from "../funcs/subscriptions-
 import { subscriptionsCreateSubscription } from "../funcs/subscriptions-create-subscription.js";
 import { subscriptionsDeleteSubscriptionLineItem } from "../funcs/subscriptions-delete-subscription-line-item.js";
 import { subscriptionsExecuteSubscriptionChange } from "../funcs/subscriptions-execute-subscription-change.js";
+import { subscriptionsExecuteSubscriptionModify } from "../funcs/subscriptions-execute-subscription-modify.js";
 import { subscriptionsGetSubscriptionAddonAssociations } from "../funcs/subscriptions-get-subscription-addon-associations.js";
 import { subscriptionsGetSubscriptionEntitlements } from "../funcs/subscriptions-get-subscription-entitlements.js";
 import { subscriptionsGetSubscriptionSchedule } from "../funcs/subscriptions-get-subscription-schedule.js";
@@ -39,9 +40,9 @@ export class Subscriptions extends ClientSDK {
    * Use when onboarding a customer to a plan or starting a new subscription. Ideal for draft subscriptions (activate later) or active from start.
    */
   async createSubscription(
-    request: models.DtoCreateSubscriptionRequest,
+    request: models.CreateSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionResponse> {
+  ): Promise<models.Subscription> {
     return unwrapAsync(subscriptionsCreateSubscription(
       this,
       request,
@@ -56,9 +57,9 @@ export class Subscriptions extends ClientSDK {
    * Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
    */
   async addSubscriptionAddon(
-    request: models.DtoAddAddonRequest,
+    request: models.AddAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoAddonAssociationResponse> {
+  ): Promise<models.AddonAssociationResponse> {
     return unwrapAsync(subscriptionsAddSubscriptionAddon(
       this,
       request,
@@ -73,9 +74,9 @@ export class Subscriptions extends ClientSDK {
    * Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
    */
   async removeSubscriptionAddon(
-    request: models.DtoRemoveAddonRequest,
+    request: models.RemoveAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(subscriptionsRemoveSubscriptionAddon(
       this,
       request,
@@ -91,9 +92,9 @@ export class Subscriptions extends ClientSDK {
    */
   async updateSubscriptionLineItem(
     id: string,
-    body: models.DtoUpdateSubscriptionLineItemRequest,
+    body: models.UpdateSubscriptionLineItemRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionLineItemResponse> {
+  ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsUpdateSubscriptionLineItem(
       this,
       id,
@@ -110,9 +111,9 @@ export class Subscriptions extends ClientSDK {
    */
   async deleteSubscriptionLineItem(
     id: string,
-    body: models.DtoDeleteSubscriptionLineItemRequest,
+    body: models.DeleteSubscriptionLineItemRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionLineItemResponse> {
+  ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsDeleteSubscriptionLineItem(
       this,
       id,
@@ -130,7 +131,7 @@ export class Subscriptions extends ClientSDK {
   async querySubscription(
     request: models.SubscriptionFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListSubscriptionsResponse> {
+  ): Promise<models.ListSubscriptionsResponse> {
     return unwrapAsync(subscriptionsQuerySubscription(
       this,
       request,
@@ -145,9 +146,9 @@ export class Subscriptions extends ClientSDK {
    * Use when showing usage for a subscription (e.g. in a portal or for overage checks). Supports time range and filters.
    */
   async getSubscriptionUsage(
-    request: models.DtoGetUsageBySubscriptionRequest,
+    request: models.GetUsageBySubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoGetUsageBySubscriptionResponse> {
+  ): Promise<models.GetUsageBySubscriptionResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionUsage(
       this,
       request,
@@ -164,7 +165,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscription(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionResponse> {
+  ): Promise<models.Subscription> {
     return unwrapAsync(subscriptionsGetSubscription(
       this,
       id,
@@ -180,9 +181,9 @@ export class Subscriptions extends ClientSDK {
    */
   async updateSubscription(
     id: string,
-    body: models.DtoUpdateSubscriptionRequest,
+    body: models.UpdateSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionResponse> {
+  ): Promise<models.Subscription> {
     return unwrapAsync(subscriptionsUpdateSubscription(
       this,
       id,
@@ -199,9 +200,9 @@ export class Subscriptions extends ClientSDK {
    */
   async activateSubscription(
     id: string,
-    body: models.DtoActivateDraftSubscriptionRequest,
+    body: models.ActivateDraftSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionResponse> {
+  ): Promise<models.Subscription> {
     return unwrapAsync(subscriptionsActivateSubscription(
       this,
       id,
@@ -219,7 +220,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscriptionAddonAssociations(
     id: string,
     options?: RequestOptions,
-  ): Promise<Array<models.DtoAddonAssociationResponse>> {
+  ): Promise<Array<models.AddonAssociationResponse>> {
     return unwrapAsync(subscriptionsGetSubscriptionAddonAssociations(
       this,
       id,
@@ -235,9 +236,9 @@ export class Subscriptions extends ClientSDK {
    */
   async cancelSubscription(
     id: string,
-    body: models.DtoCancelSubscriptionRequest,
+    body: models.CancelSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCancelSubscriptionResponse> {
+  ): Promise<models.CancelSubscriptionResponse> {
     return unwrapAsync(subscriptionsCancelSubscription(
       this,
       id,
@@ -254,9 +255,9 @@ export class Subscriptions extends ClientSDK {
    */
   async executeSubscriptionChange(
     id: string,
-    body: models.DtoSubscriptionChangeRequest,
+    body: models.SubscriptionChangeRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionChangeExecuteResponse> {
+  ): Promise<models.SubscriptionChangeExecuteResponse> {
     return unwrapAsync(subscriptionsExecuteSubscriptionChange(
       this,
       id,
@@ -273,9 +274,9 @@ export class Subscriptions extends ClientSDK {
    */
   async previewSubscriptionChange(
     id: string,
-    body: models.DtoSubscriptionChangeRequest,
+    body: models.SubscriptionChangeRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionChangePreviewResponse> {
+  ): Promise<models.SubscriptionChangePreviewResponse> {
     return unwrapAsync(subscriptionsPreviewSubscriptionChange(
       this,
       id,
@@ -294,7 +295,7 @@ export class Subscriptions extends ClientSDK {
     id: string,
     featureIds?: Array<string> | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionEntitlementsResponse> {
+  ): Promise<models.SubscriptionEntitlementsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionEntitlements(
       this,
       id,
@@ -312,7 +313,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscriptionUpcomingGrants(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoListCreditGrantApplicationsResponse> {
+  ): Promise<models.ListCreditGrantApplicationsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionUpcomingGrants(
       this,
       id,
@@ -328,10 +329,29 @@ export class Subscriptions extends ClientSDK {
    */
   async createSubscriptionLineItem(
     id: string,
-    body: models.DtoCreateSubscriptionLineItemRequest,
+    body: models.CreateSubscriptionLineItemRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionLineItemResponse> {
+  ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsCreateSubscriptionLineItem(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Add customers to subscription inheritance
+   *
+   * @remarks
+   * Attach additional child customers (by external ID) to an active standalone or parent subscription; creates inherited skeleton subscriptions for each. The subscription must be active.
+   */
+  async executeSubscriptionModify(
+    id: string,
+    body: models.ExecuteSubscriptionInheritanceRequest,
+    options?: RequestOptions,
+  ): Promise<models.Subscription> {
+    return unwrapAsync(subscriptionsExecuteSubscriptionModify(
       this,
       id,
       body,
@@ -347,9 +367,9 @@ export class Subscriptions extends ClientSDK {
    */
   async pauseSubscription(
     id: string,
-    body: models.DtoPauseSubscriptionRequest,
+    body: models.PauseSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionPauseResponse> {
+  ): Promise<models.SubscriptionPauseResponse> {
     return unwrapAsync(subscriptionsPauseSubscription(
       this,
       id,
@@ -367,7 +387,7 @@ export class Subscriptions extends ClientSDK {
   async listSubscriptionPauses(
     id: string,
     options?: RequestOptions,
-  ): Promise<Array<models.DtoListSubscriptionPausesResponse>> {
+  ): Promise<Array<models.ListSubscriptionPausesResponse>> {
     return unwrapAsync(subscriptionsListSubscriptionPauses(
       this,
       id,
@@ -383,9 +403,9 @@ export class Subscriptions extends ClientSDK {
    */
   async resumeSubscription(
     id: string,
-    body: models.DtoResumeSubscriptionRequest,
+    body: models.ResumeSubscriptionRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionPauseResponse> {
+  ): Promise<models.SubscriptionPauseResponse> {
     return unwrapAsync(subscriptionsResumeSubscription(
       this,
       id,
@@ -404,7 +424,7 @@ export class Subscriptions extends ClientSDK {
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionResponseV2> {
+  ): Promise<models.SubscriptionResponseV2> {
     return unwrapAsync(subscriptionsGetSubscriptionV2(
       this,
       id,
@@ -425,7 +445,7 @@ export class Subscriptions extends ClientSDK {
     limit?: number | undefined,
     offset?: number | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoGetPendingSchedulesResponse> {
+  ): Promise<models.GetPendingSchedulesResponse> {
     return unwrapAsync(subscriptionsListAllSubscriptionSchedules(
       this,
       pendingOnly,
@@ -445,7 +465,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscriptionSchedule(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSubscriptionScheduleResponse> {
+  ): Promise<models.SubscriptionScheduleResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionSchedule(
       this,
       id,
@@ -461,9 +481,9 @@ export class Subscriptions extends ClientSDK {
    */
   async cancelSubscriptionSchedule(
     scheduleId: string,
-    body?: models.DtoCancelScheduleRequest | undefined,
+    body?: models.CancelScheduleRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoCancelScheduleResponse> {
+  ): Promise<models.CancelScheduleResponse> {
     return unwrapAsync(subscriptionsCancelSubscriptionSchedule(
       this,
       scheduleId,
@@ -481,7 +501,7 @@ export class Subscriptions extends ClientSDK {
   async listSubscriptionSchedules(
     subscriptionId: string,
     options?: RequestOptions,
-  ): Promise<models.DtoGetPendingSchedulesResponse> {
+  ): Promise<models.GetPendingSchedulesResponse> {
     return unwrapAsync(subscriptionsListSubscriptionSchedules(
       this,
       subscriptionId,

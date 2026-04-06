@@ -7,11 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  DtoSubscriptionPhaseResponse,
-  DtoSubscriptionPhaseResponse$inboundSchema,
-} from "./dto-subscription-phase-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SubscriptionPhaseResponse,
+  SubscriptionPhaseResponse$inboundSchema,
+} from "./subscription-phase-response.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -19,7 +19,7 @@ import {
 
 export type WebhookDtoSubscriptionPhaseWebhookPayload = {
   eventType?: WebhookEventName | undefined;
-  phase?: DtoSubscriptionPhaseResponse | undefined;
+  phase?: SubscriptionPhaseResponse | undefined;
 };
 
 /** @internal */
@@ -27,7 +27,7 @@ export const WebhookDtoSubscriptionPhaseWebhookPayload$inboundSchema:
   z.ZodMiniType<WebhookDtoSubscriptionPhaseWebhookPayload, unknown> = z.pipe(
     z.object({
       event_type: types.optional(WebhookEventName$inboundSchema),
-      phase: types.optional(DtoSubscriptionPhaseResponse$inboundSchema),
+      phase: types.optional(SubscriptionPhaseResponse$inboundSchema),
     }),
     z.transform((v) => {
       return remap$(v, {

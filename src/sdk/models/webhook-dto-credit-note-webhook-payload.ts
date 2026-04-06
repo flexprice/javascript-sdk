@@ -8,9 +8,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
-  DtoCreditNoteResponse,
-  DtoCreditNoteResponse$inboundSchema,
-} from "./dto-credit-note-response.js";
+  CreditNoteResponse,
+  CreditNoteResponse$inboundSchema,
+} from "./credit-note-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
@@ -18,7 +18,7 @@ import {
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCreditNoteWebhookPayload = {
-  creditNote?: DtoCreditNoteResponse | undefined;
+  creditNote?: CreditNoteResponse | undefined;
   eventType?: WebhookEventName | undefined;
 };
 
@@ -28,7 +28,7 @@ export const WebhookDtoCreditNoteWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    credit_note: types.optional(DtoCreditNoteResponse$inboundSchema),
+    credit_note: types.optional(CreditNoteResponse$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {

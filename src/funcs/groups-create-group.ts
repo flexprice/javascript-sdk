@@ -33,12 +33,12 @@ import { Result } from "../types/fp.js";
  */
 export function groupsCreateGroup(
   client: FlexpriceCore,
-  request: models.DtoCreateGroupRequest,
+  request: models.CreateGroupRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoGroupResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.GroupResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -58,13 +58,13 @@ export function groupsCreateGroup(
 
 async function $do(
   client: FlexpriceCore,
-  request: models.DtoCreateGroupRequest,
+  request: models.CreateGroupRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoGroupResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.GroupResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -79,7 +79,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(models.DtoCreateGroupRequest$outboundSchema, value),
+    (value) => z.parse(models.CreateGroupRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -145,8 +145,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoGroupResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.GroupResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -156,9 +156,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.DtoGroupResponse$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(201, models.GroupResponse$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

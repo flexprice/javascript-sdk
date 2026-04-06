@@ -23,11 +23,11 @@ export class Customers extends ClientSDK {
    * Use when updating customer details (e.g. name, email, or metadata). Identify by id or external_customer_id.
    */
   async updateCustomer(
-    body: models.DtoUpdateCustomerRequest,
+    body: models.UpdateCustomerRequest,
     id?: string | undefined,
     externalCustomerId?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerResponse> {
+  ): Promise<models.Customer1> {
     return unwrapAsync(customersUpdateCustomer(
       this,
       body,
@@ -44,9 +44,9 @@ export class Customers extends ClientSDK {
    * Use when onboarding a new billing customer (e.g. sign-up or CRM sync). Ideal for linking via external_customer_id to your app's user id.
    */
   async createCustomer(
-    request: models.DtoCreateCustomerRequest,
+    request: models.CreateCustomerRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerResponse> {
+  ): Promise<models.Customer1> {
     return unwrapAsync(customersCreateCustomer(
       this,
       request,
@@ -63,7 +63,7 @@ export class Customers extends ClientSDK {
   async getCustomerByExternalId(
     externalId: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerResponse> {
+  ): Promise<models.Customer1> {
     return unwrapAsync(customersGetCustomerByExternalId(
       this,
       externalId,
@@ -80,7 +80,7 @@ export class Customers extends ClientSDK {
   async queryCustomer(
     request: models.CustomerFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListCustomersResponse> {
+  ): Promise<models.ListCustomersResponse> {
     return unwrapAsync(customersQueryCustomer(
       this,
       request,
@@ -97,7 +97,7 @@ export class Customers extends ClientSDK {
   async getCustomerUsageSummary(
     request?: models.GetCustomerUsageSummaryRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerUsageSummaryResponse> {
+  ): Promise<models.CustomerUsageSummaryResponse> {
     return unwrapAsync(customersGetCustomerUsageSummary(
       this,
       request,
@@ -114,7 +114,7 @@ export class Customers extends ClientSDK {
   async getCustomer(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerResponse> {
+  ): Promise<models.Customer1> {
     return unwrapAsync(customersGetCustomer(
       this,
       id,
@@ -148,7 +148,7 @@ export class Customers extends ClientSDK {
   async getCustomerEntitlements(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerEntitlementsResponse> {
+  ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlements(
       this,
       id,
@@ -165,7 +165,7 @@ export class Customers extends ClientSDK {
   async getCustomerUpcomingGrants(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoListCreditGrantApplicationsResponse> {
+  ): Promise<models.ListCreditGrantApplicationsResponse> {
     return unwrapAsync(customersGetCustomerUpcomingGrants(
       this,
       id,

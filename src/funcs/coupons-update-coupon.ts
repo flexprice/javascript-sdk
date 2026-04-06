@@ -36,12 +36,12 @@ import { Result } from "../types/fp.js";
 export function couponsUpdateCoupon(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateCouponRequest,
+  body: models.UpdateCouponRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoCouponResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Coupon,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -63,13 +63,13 @@ export function couponsUpdateCoupon(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateCouponRequest,
+  body: models.UpdateCouponRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoCouponResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.Coupon,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -82,14 +82,14 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.UpdateCouponRequest = {
+  const input: models.UpdateCouponRequestRequest = {
     id: id,
     body: body,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.UpdateCouponRequest$outboundSchema, value),
+    (value) => z.parse(models.UpdateCouponRequestRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -161,8 +161,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoCouponResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Coupon,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -172,12 +172,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoCouponResponse$inboundSchema),
-    M.jsonErr(
-      [400, 401, 403, 404],
-      models.ErrorsErrorsErrorResponse$inboundSchema,
-    ),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.Coupon$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

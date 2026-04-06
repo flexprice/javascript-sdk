@@ -24,7 +24,7 @@ export class TaxAssociations extends ClientSDK {
     externalCustomerId?: string | undefined,
     taxRateId?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListTaxAssociationsResponse> {
+  ): Promise<models.ListTaxAssociationsResponse> {
     return unwrapAsync(taxAssociationsListTaxAssociations(
       this,
       entityType,
@@ -42,9 +42,9 @@ export class TaxAssociations extends ClientSDK {
    * Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
    */
   async createTaxAssociation(
-    request: models.DtoCreateTaxAssociationRequest,
+    request: models.CreateTaxAssociationRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxAssociationResponse> {
+  ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsCreateTaxAssociation(
       this,
       request,
@@ -61,7 +61,7 @@ export class TaxAssociations extends ClientSDK {
   async getTaxAssociation(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxAssociationResponse> {
+  ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsGetTaxAssociation(
       this,
       id,
@@ -77,9 +77,9 @@ export class TaxAssociations extends ClientSDK {
    */
   async updateTaxAssociation(
     id: string,
-    body: models.DtoTaxAssociationUpdateRequest,
+    body: models.TaxAssociationUpdateRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxAssociationResponse> {
+  ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsUpdateTaxAssociation(
       this,
       id,
@@ -97,7 +97,7 @@ export class TaxAssociations extends ClientSDK {
   async deleteTaxAssociation(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoTaxAssociationResponse> {
+  ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsDeleteTaxAssociation(
       this,
       id,

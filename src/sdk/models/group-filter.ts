@@ -24,7 +24,7 @@ export const GroupFilterOrder = {
 export type GroupFilterOrder = ClosedEnum<typeof GroupFilterOrder>;
 
 export type GroupFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   entityType?: string | undefined;
   expand?: string | undefined;
   /**
@@ -41,7 +41,7 @@ export type GroupFilter = {
   offset?: number | undefined;
   order?: GroupFilterOrder | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -73,7 +73,7 @@ export const GroupFilter$outboundSchema: z.ZodMiniType<
   GroupFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityType: z.optional(z.string()),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
@@ -84,7 +84,7 @@ export const GroupFilter$outboundSchema: z.ZodMiniType<
     offset: z.optional(z.int()),
     order: z.optional(GroupFilterOrder$outboundSchema),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

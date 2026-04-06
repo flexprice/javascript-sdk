@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoClonePlanRequest,
-  DtoClonePlanRequest$Outbound,
-  DtoClonePlanRequest$outboundSchema,
-} from "./dto-clone-plan-request.js";
+  ClonePlanRequest,
+  ClonePlanRequest$Outbound,
+  ClonePlanRequest$outboundSchema,
+} from "./clone-plan-request.js";
 
 export type PostPlansIdCloneRequest = {
   /**
@@ -17,13 +17,13 @@ export type PostPlansIdCloneRequest = {
   /**
    * Clone configuration
    */
-  body: DtoClonePlanRequest;
+  body: ClonePlanRequest;
 };
 
 /** @internal */
 export type PostPlansIdCloneRequest$Outbound = {
   id: string;
-  body: DtoClonePlanRequest$Outbound;
+  body: ClonePlanRequest$Outbound;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const PostPlansIdCloneRequest$outboundSchema: z.ZodMiniType<
   PostPlansIdCloneRequest
 > = z.object({
   id: z.string(),
-  body: DtoClonePlanRequest$outboundSchema,
+  body: ClonePlanRequest$outboundSchema,
 });
 
 export function postPlansIdCloneRequestToJSON(

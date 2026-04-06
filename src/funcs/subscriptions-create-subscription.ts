@@ -33,12 +33,12 @@ import { Result } from "../types/fp.js";
  */
 export function subscriptionsCreateSubscription(
   client: FlexpriceCore,
-  request: models.DtoCreateSubscriptionRequest,
+  request: models.CreateSubscriptionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoSubscriptionResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Subscription,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -58,13 +58,13 @@ export function subscriptionsCreateSubscription(
 
 async function $do(
   client: FlexpriceCore,
-  request: models.DtoCreateSubscriptionRequest,
+  request: models.CreateSubscriptionRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoSubscriptionResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.Subscription,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -79,8 +79,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      z.parse(models.DtoCreateSubscriptionRequest$outboundSchema, value),
+    (value) => z.parse(models.CreateSubscriptionRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -146,8 +145,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoSubscriptionResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.Subscription,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -157,9 +156,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.DtoSubscriptionResponse$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(201, models.Subscription$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

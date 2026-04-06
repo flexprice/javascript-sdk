@@ -17,7 +17,7 @@ export class Alerts extends ClientSDK {
   async queryAlertLog(
     request: models.AlertLogFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListAlertLogsResponse> {
+  ): Promise<models.ListAlertLogsResponse> {
     return unwrapAsync(alertsQueryAlertLog(
       this,
       request,

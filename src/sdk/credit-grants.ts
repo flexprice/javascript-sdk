@@ -19,9 +19,9 @@ export class CreditGrants extends ClientSDK {
    * Use when giving a customer or plan credits (e.g. prepaid balance or promotional credits). Scope can be plan or subscription; supports start/end dates.
    */
   async createCreditGrant(
-    request: models.DtoCreateCreditGrantRequest,
+    request: models.CreateCreditGrantRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditGrantResponse> {
+  ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsCreateCreditGrant(
       this,
       request,
@@ -38,7 +38,7 @@ export class CreditGrants extends ClientSDK {
   async getCreditGrant(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditGrantResponse> {
+  ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsGetCreditGrant(
       this,
       id,
@@ -54,9 +54,9 @@ export class CreditGrants extends ClientSDK {
    */
   async updateCreditGrant(
     id: string,
-    body: models.DtoUpdateCreditGrantRequest,
+    body: models.UpdateCreditGrantRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditGrantResponse> {
+  ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsUpdateCreditGrant(
       this,
       id,
@@ -73,9 +73,9 @@ export class CreditGrants extends ClientSDK {
    */
   async deleteCreditGrant(
     id: string,
-    body?: models.DtoDeleteCreditGrantRequest | undefined,
+    body?: models.DeleteCreditGrantRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(creditGrantsDeleteCreditGrant(
       this,
       id,
@@ -93,7 +93,7 @@ export class CreditGrants extends ClientSDK {
   async getPlanCreditGrants(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoListCreditGrantsResponse> {
+  ): Promise<models.ListCreditGrantsResponse> {
     return unwrapAsync(creditGrantsGetPlanCreditGrants(
       this,
       id,

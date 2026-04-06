@@ -6,16 +6,16 @@
 import { CancelSubscriptionRequest } from "@flexprice/sdk/sdk/models";
 
 let value: CancelSubscriptionRequest = {
-  id: "<id>",
-  body: {
-    cancellationType: "immediate",
-  },
+  cancellationType: "immediate",
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `id`                                                                                       | *string*                                                                                   | :heavy_check_mark:                                                                         | Subscription ID                                                                            |
-| `body`                                                                                     | [models.DtoCancelSubscriptionRequest](../../sdk/models/dto-cancel-subscription-request.md) | :heavy_check_mark:                                                                         | Cancel Subscription Request                                                                |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `cancelAt`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)  | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `cancelImmediatelyInovicePolicy`                                                               | [models.CancelImmediatelyInvoicePolicy](../../sdk/models/cancel-immediately-invoice-policy.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `cancellationType`                                                                             | [models.CancellationType](../../sdk/models/cancellation-type.md)                               | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `prorationBehavior`                                                                            | [models.ProrationBehavior](../../sdk/models/proration-behavior.md)                             | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `reason`                                                                                       | *string*                                                                                       | :heavy_minus_sign:                                                                             | Reason for cancellation (for audit and business intelligence)                                  |

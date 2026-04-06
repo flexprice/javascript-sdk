@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateSubscriptionRequest,
-  DtoUpdateSubscriptionRequest$Outbound,
-  DtoUpdateSubscriptionRequest$outboundSchema,
-} from "./dto-update-subscription-request.js";
+  UpdateSubscriptionRequest,
+  UpdateSubscriptionRequest$Outbound,
+  UpdateSubscriptionRequest$outboundSchema,
+} from "./update-subscription-request.js";
 
-export type UpdateSubscriptionRequest = {
+export type UpdateSubscriptionRequestRequest = {
   /**
    * Subscription ID
    */
@@ -17,28 +17,30 @@ export type UpdateSubscriptionRequest = {
   /**
    * Update Subscription Request
    */
-  body: DtoUpdateSubscriptionRequest;
+  body: UpdateSubscriptionRequest;
 };
 
 /** @internal */
-export type UpdateSubscriptionRequest$Outbound = {
+export type UpdateSubscriptionRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateSubscriptionRequest$Outbound;
+  body: UpdateSubscriptionRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
-  UpdateSubscriptionRequest$Outbound,
-  UpdateSubscriptionRequest
+export const UpdateSubscriptionRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateSubscriptionRequestRequest$Outbound,
+  UpdateSubscriptionRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateSubscriptionRequest$outboundSchema,
+  body: UpdateSubscriptionRequest$outboundSchema,
 });
 
-export function updateSubscriptionRequestToJSON(
-  updateSubscriptionRequest: UpdateSubscriptionRequest,
+export function updateSubscriptionRequestRequestToJSON(
+  updateSubscriptionRequestRequest: UpdateSubscriptionRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateSubscriptionRequest$outboundSchema.parse(updateSubscriptionRequest),
+    UpdateSubscriptionRequestRequest$outboundSchema.parse(
+      updateSubscriptionRequestRequest,
+    ),
   );
 }

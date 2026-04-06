@@ -26,7 +26,7 @@ export type CustomerFilterOrder = ClosedEnum<typeof CustomerFilterOrder>;
 export type CustomerFilter = {
   customerIds?: Array<string> | undefined;
   email?: string | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   externalId?: string | undefined;
   externalIds?: Array<string> | undefined;
@@ -34,9 +34,8 @@ export type CustomerFilter = {
   limit?: number | undefined;
   offset?: number | undefined;
   order?: CustomerFilterOrder | undefined;
-  parentCustomerIds?: Array<string> | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -57,7 +56,6 @@ export type CustomerFilter$Outbound = {
   limit?: number | undefined;
   offset?: number | undefined;
   order?: string | undefined;
-  parent_customer_ids?: Array<string> | undefined;
   sort?: Array<SortCondition$Outbound> | undefined;
   start_time?: string | undefined;
   status?: string | undefined;
@@ -71,7 +69,7 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
   z.object({
     customerIds: z.optional(z.array(z.string())),
     email: z.optional(z.string()),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     externalId: z.optional(z.string()),
     externalIds: z.optional(z.array(z.string())),
@@ -79,9 +77,8 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
     order: z.optional(CustomerFilterOrder$outboundSchema),
-    parentCustomerIds: z.optional(z.array(z.string())),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {
@@ -90,7 +87,6 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
       endTime: "end_time",
       externalId: "external_id",
       externalIds: "external_ids",
-      parentCustomerIds: "parent_customer_ids",
       startTime: "start_time",
     });
   }),

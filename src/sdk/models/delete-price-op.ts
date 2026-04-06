@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoDeletePriceRequest,
-  DtoDeletePriceRequest$Outbound,
-  DtoDeletePriceRequest$outboundSchema,
-} from "./dto-delete-price-request.js";
+  DeletePriceRequest,
+  DeletePriceRequest$Outbound,
+  DeletePriceRequest$outboundSchema,
+} from "./delete-price-request.js";
 
-export type DeletePriceRequest = {
+export type DeletePriceRequestRequest = {
   /**
    * Price ID
    */
@@ -17,28 +17,28 @@ export type DeletePriceRequest = {
   /**
    * Delete Price Request
    */
-  body: DtoDeletePriceRequest;
+  body: DeletePriceRequest;
 };
 
 /** @internal */
-export type DeletePriceRequest$Outbound = {
+export type DeletePriceRequestRequest$Outbound = {
   id: string;
-  body: DtoDeletePriceRequest$Outbound;
+  body: DeletePriceRequest$Outbound;
 };
 
 /** @internal */
-export const DeletePriceRequest$outboundSchema: z.ZodMiniType<
-  DeletePriceRequest$Outbound,
-  DeletePriceRequest
+export const DeletePriceRequestRequest$outboundSchema: z.ZodMiniType<
+  DeletePriceRequestRequest$Outbound,
+  DeletePriceRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoDeletePriceRequest$outboundSchema,
+  body: DeletePriceRequest$outboundSchema,
 });
 
-export function deletePriceRequestToJSON(
-  deletePriceRequest: DeletePriceRequest,
+export function deletePriceRequestRequestToJSON(
+  deletePriceRequestRequest: DeletePriceRequestRequest,
 ): string {
   return JSON.stringify(
-    DeletePriceRequest$outboundSchema.parse(deletePriceRequest),
+    DeletePriceRequestRequest$outboundSchema.parse(deletePriceRequestRequest),
   );
 }

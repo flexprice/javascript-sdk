@@ -24,7 +24,7 @@ export type PriceFilterOrder = ClosedEnum<typeof PriceFilterOrder>;
 
 export type PriceFilter = {
   allowExpiredPrices?: boolean | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   entityIds?: Array<string> | undefined;
   entityType?: PriceEntityType | undefined;
   expand?: string | undefined;
@@ -44,7 +44,7 @@ export type PriceFilter = {
   priceIds?: Array<string> | undefined;
   sort?: string | undefined;
   startDateLt?: string | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   subscriptionId?: string | undefined;
 };
@@ -83,7 +83,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     allowExpiredPrices: z._default(z.boolean(), false),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityIds: z.optional(z.array(z.string())),
     entityType: z.optional(PriceEntityType$outboundSchema),
     expand: z.optional(z.string()),
@@ -97,7 +97,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
     priceIds: z.optional(z.array(z.string())),
     sort: z.optional(z.string()),
     startDateLt: z.optional(z.string()),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     subscriptionId: z.optional(z.string()),
   }),

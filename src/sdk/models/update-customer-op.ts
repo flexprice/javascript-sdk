@@ -5,12 +5,12 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  DtoUpdateCustomerRequest,
-  DtoUpdateCustomerRequest$Outbound,
-  DtoUpdateCustomerRequest$outboundSchema,
-} from "./dto-update-customer-request.js";
+  UpdateCustomerRequest,
+  UpdateCustomerRequest$Outbound,
+  UpdateCustomerRequest$outboundSchema,
+} from "./update-customer-request.js";
 
-export type UpdateCustomerRequest = {
+export type UpdateCustomerRequestRequest = {
   /**
    * Customer ID
    */
@@ -22,25 +22,25 @@ export type UpdateCustomerRequest = {
   /**
    * Customer
    */
-  body: DtoUpdateCustomerRequest;
+  body: UpdateCustomerRequest;
 };
 
 /** @internal */
-export type UpdateCustomerRequest$Outbound = {
+export type UpdateCustomerRequestRequest$Outbound = {
   id?: string | undefined;
   external_customer_id?: string | undefined;
-  body: DtoUpdateCustomerRequest$Outbound;
+  body: UpdateCustomerRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
-  UpdateCustomerRequest$Outbound,
-  UpdateCustomerRequest
+export const UpdateCustomerRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateCustomerRequestRequest$Outbound,
+  UpdateCustomerRequestRequest
 > = z.pipe(
   z.object({
     id: z.optional(z.string()),
     externalCustomerId: z.optional(z.string()),
-    body: DtoUpdateCustomerRequest$outboundSchema,
+    body: UpdateCustomerRequest$outboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -49,10 +49,12 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
   }),
 );
 
-export function updateCustomerRequestToJSON(
-  updateCustomerRequest: UpdateCustomerRequest,
+export function updateCustomerRequestRequestToJSON(
+  updateCustomerRequestRequest: UpdateCustomerRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateCustomerRequest$outboundSchema.parse(updateCustomerRequest),
+    UpdateCustomerRequestRequest$outboundSchema.parse(
+      updateCustomerRequestRequest,
+    ),
   );
 }

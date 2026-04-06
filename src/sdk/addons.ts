@@ -20,9 +20,9 @@ export class Addons extends ClientSDK {
    * Use when defining an optional purchasable item (e.g. extra storage or support tier). Ideal for add-ons that customers can attach to a subscription.
    */
   async createAddon(
-    request: models.DtoCreateAddonRequest,
+    request: models.CreateAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateAddonResponse> {
+  ): Promise<models.CreateAddonResponse> {
     return unwrapAsync(addonsCreateAddon(
       this,
       request,
@@ -39,7 +39,7 @@ export class Addons extends ClientSDK {
   async getAddonByLookupKey(
     lookupKey: string,
     options?: RequestOptions,
-  ): Promise<models.DtoAddonResponse> {
+  ): Promise<models.Addon1> {
     return unwrapAsync(addonsGetAddonByLookupKey(
       this,
       lookupKey,
@@ -56,7 +56,7 @@ export class Addons extends ClientSDK {
   async queryAddon(
     request: models.AddonFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListAddonsResponse> {
+  ): Promise<models.ListAddonsResponse> {
     return unwrapAsync(addonsQueryAddon(
       this,
       request,
@@ -73,7 +73,7 @@ export class Addons extends ClientSDK {
   async getAddon(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoAddonResponse> {
+  ): Promise<models.Addon1> {
     return unwrapAsync(addonsGetAddon(
       this,
       id,
@@ -89,9 +89,9 @@ export class Addons extends ClientSDK {
    */
   async updateAddon(
     id: string,
-    body: models.DtoUpdateAddonRequest,
+    body: models.UpdateAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoAddonResponse> {
+  ): Promise<models.Addon1> {
     return unwrapAsync(addonsUpdateAddon(
       this,
       id,
@@ -109,7 +109,7 @@ export class Addons extends ClientSDK {
   async deleteAddon(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(addonsDeleteAddon(
       this,
       id,

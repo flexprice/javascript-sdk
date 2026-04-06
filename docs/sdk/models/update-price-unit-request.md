@@ -5,15 +5,12 @@
 ```typescript
 import { UpdatePriceUnitRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdatePriceUnitRequest = {
-  id: "<id>",
-  body: {},
-};
+let value: UpdatePriceUnitRequest = {};
 ```
 
 ## Fields
 
-| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `id`                                                                                  | *string*                                                                              | :heavy_check_mark:                                                                    | Price unit ID                                                                         |
-| `body`                                                                                | [models.DtoUpdatePriceUnitRequest](../../sdk/models/dto-update-price-unit-request.md) | :heavy_check_mark:                                                                    | Price unit details to update                                                          |
+| Field                    | Type                     | Required                 | Description              |
+| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| `metadata`               | Record<string, *string*> | :heavy_minus_sign:       | N/A                      |
+| `name`                   | *string*                 | :heavy_minus_sign:       | N/A                      |

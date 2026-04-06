@@ -54,7 +54,7 @@ export type InvoiceFilter = {
    * This is the ID returned by FlexPrice when creating or retrieving customers
    */
   customerId?: string | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * external_customer_id filters invoices for a customer using your system's customer identifier
@@ -110,7 +110,7 @@ export type InvoiceFilter = {
    */
   skipLineItems?: boolean | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   /**
    * subscription_id filters invoices generated for a specific subscription
@@ -162,7 +162,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     amountDueGt: z.optional(z.number()),
     amountRemainingGt: z.optional(z.number()),
     customerId: z.optional(z.string()),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     externalCustomerId: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
@@ -179,7 +179,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     periodStartLte: z.optional(z.string()),
     skipLineItems: z.optional(z.boolean()),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     subscriptionId: z.optional(z.string()),
   }),

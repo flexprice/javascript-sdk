@@ -6,16 +6,12 @@
 import { UpdateTaskStatusRequest } from "@flexprice/sdk/sdk/models";
 
 let value: UpdateTaskStatusRequest = {
-  id: "<id>",
-  body: {
-    taskStatus: "PROCESSING",
-  },
+  taskStatus: "PROCESSING",
 };
 ```
 
 ## Fields
 
-| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `id`                                                                                    | *string*                                                                                | :heavy_check_mark:                                                                      | Task ID                                                                                 |
-| `body`                                                                                  | [models.DtoUpdateTaskStatusRequest](../../sdk/models/dto-update-task-status-request.md) | :heavy_check_mark:                                                                      | Status update                                                                           |
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `taskStatus`                                         | [models.TaskStatus](../../sdk/models/task-status.md) | :heavy_check_mark:                                   | N/A                                                  |

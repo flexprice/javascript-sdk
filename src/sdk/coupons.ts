@@ -19,9 +19,9 @@ export class Coupons extends ClientSDK {
    * Use when creating a discount (e.g. promo code or referral). Ideal for percent or fixed value, with optional validity and usage limits.
    */
   async createCoupon(
-    request: models.DtoCreateCouponRequest,
+    request: models.CreateCouponRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCouponResponse> {
+  ): Promise<models.Coupon> {
     return unwrapAsync(couponsCreateCoupon(
       this,
       request,
@@ -38,7 +38,7 @@ export class Coupons extends ClientSDK {
   async queryCoupon(
     request: models.CouponFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListCouponsResponse> {
+  ): Promise<models.ListCouponsResponse> {
     return unwrapAsync(couponsQueryCoupon(
       this,
       request,
@@ -55,7 +55,7 @@ export class Coupons extends ClientSDK {
   async getCoupon(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCouponResponse> {
+  ): Promise<models.Coupon> {
     return unwrapAsync(couponsGetCoupon(
       this,
       id,
@@ -71,9 +71,9 @@ export class Coupons extends ClientSDK {
    */
   async updateCoupon(
     id: string,
-    body: models.DtoUpdateCouponRequest,
+    body: models.UpdateCouponRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCouponResponse> {
+  ): Promise<models.Coupon> {
     return unwrapAsync(couponsUpdateCoupon(
       this,
       id,

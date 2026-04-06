@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateCostsheetRequest,
-  DtoUpdateCostsheetRequest$Outbound,
-  DtoUpdateCostsheetRequest$outboundSchema,
-} from "./dto-update-costsheet-request.js";
+  UpdateCostsheetRequest,
+  UpdateCostsheetRequest$Outbound,
+  UpdateCostsheetRequest$outboundSchema,
+} from "./update-costsheet-request.js";
 
-export type UpdateCostsheetRequest = {
+export type UpdateCostsheetRequestRequest = {
   /**
    * Costsheet ID
    */
@@ -17,28 +17,30 @@ export type UpdateCostsheetRequest = {
   /**
    * Costsheet configuration
    */
-  body: DtoUpdateCostsheetRequest;
+  body: UpdateCostsheetRequest;
 };
 
 /** @internal */
-export type UpdateCostsheetRequest$Outbound = {
+export type UpdateCostsheetRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateCostsheetRequest$Outbound;
+  body: UpdateCostsheetRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateCostsheetRequest$outboundSchema: z.ZodMiniType<
-  UpdateCostsheetRequest$Outbound,
-  UpdateCostsheetRequest
+export const UpdateCostsheetRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateCostsheetRequestRequest$Outbound,
+  UpdateCostsheetRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateCostsheetRequest$outboundSchema,
+  body: UpdateCostsheetRequest$outboundSchema,
 });
 
-export function updateCostsheetRequestToJSON(
-  updateCostsheetRequest: UpdateCostsheetRequest,
+export function updateCostsheetRequestRequestToJSON(
+  updateCostsheetRequestRequest: UpdateCostsheetRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateCostsheetRequest$outboundSchema.parse(updateCostsheetRequest),
+    UpdateCostsheetRequestRequest$outboundSchema.parse(
+      updateCostsheetRequestRequest,
+    ),
   );
 }

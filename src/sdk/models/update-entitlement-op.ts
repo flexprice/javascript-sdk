@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateEntitlementRequest,
-  DtoUpdateEntitlementRequest$Outbound,
-  DtoUpdateEntitlementRequest$outboundSchema,
-} from "./dto-update-entitlement-request.js";
+  UpdateEntitlementRequest,
+  UpdateEntitlementRequest$Outbound,
+  UpdateEntitlementRequest$outboundSchema,
+} from "./update-entitlement-request.js";
 
-export type UpdateEntitlementRequest = {
+export type UpdateEntitlementRequestRequest = {
   /**
    * Entitlement ID
    */
@@ -17,28 +17,30 @@ export type UpdateEntitlementRequest = {
   /**
    * Entitlement configuration
    */
-  body: DtoUpdateEntitlementRequest;
+  body: UpdateEntitlementRequest;
 };
 
 /** @internal */
-export type UpdateEntitlementRequest$Outbound = {
+export type UpdateEntitlementRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateEntitlementRequest$Outbound;
+  body: UpdateEntitlementRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
-  UpdateEntitlementRequest$Outbound,
-  UpdateEntitlementRequest
+export const UpdateEntitlementRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementRequestRequest$Outbound,
+  UpdateEntitlementRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateEntitlementRequest$outboundSchema,
+  body: UpdateEntitlementRequest$outboundSchema,
 });
 
-export function updateEntitlementRequestToJSON(
-  updateEntitlementRequest: UpdateEntitlementRequest,
+export function updateEntitlementRequestRequestToJSON(
+  updateEntitlementRequestRequest: UpdateEntitlementRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateEntitlementRequest$outboundSchema.parse(updateEntitlementRequest),
+    UpdateEntitlementRequestRequest$outboundSchema.parse(
+      updateEntitlementRequestRequest,
+    ),
   );
 }

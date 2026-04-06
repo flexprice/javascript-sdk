@@ -24,7 +24,7 @@ export const PlanFilterOrder = {
 export type PlanFilterOrder = ClosedEnum<typeof PlanFilterOrder>;
 
 export type PlanFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * filters allows complex filtering based on multiple fields
@@ -36,7 +36,7 @@ export type PlanFilter = {
   order?: PlanFilterOrder | undefined;
   planIds?: Array<string> | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -66,7 +66,7 @@ export const PlanFilter$outboundSchema: z.ZodMiniType<
   PlanFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
@@ -75,7 +75,7 @@ export const PlanFilter$outboundSchema: z.ZodMiniType<
     order: z.optional(PlanFilterOrder$outboundSchema),
     planIds: z.optional(z.array(z.string())),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

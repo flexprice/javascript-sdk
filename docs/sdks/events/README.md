@@ -89,7 +89,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoIngestEventRequest](../../sdk/models/dto-ingest-event-request.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.IngestEventRequest](../../sdk/models/ingest-event-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -100,11 +100,11 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getUsageAnalytics
 
@@ -121,9 +121,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.events.getUsageAnalytics({
-    externalCustomerId: "<id>",
-  });
+  const result = await flexprice.events.getUsageAnalytics({});
 
   console.log(result);
 }
@@ -146,9 +144,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await eventsGetUsageAnalytics(flexprice, {
-    externalCustomerId: "<id>",
-  });
+  const res = await eventsGetUsageAnalytics(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -164,22 +160,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetUsageAnalyticsRequest](../../sdk/models/dto-get-usage-analytics-request.md)                                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.GetUsageAnalyticsRequest](../../sdk/models/get-usage-analytics-request.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoGetUsageAnalyticsResponse](../../sdk/models/dto-get-usage-analytics-response.md)\>**
+**Promise\<[models.GetUsageAnalyticsResponse](../../sdk/models/get-usage-analytics-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## ingestEventsBulk
 
@@ -239,7 +235,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoBulkIngestEventRequest](../../sdk/models/dto-bulk-ingest-event-request.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.BulkIngestEventRequest](../../sdk/models/bulk-ingest-event-request.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -250,11 +246,11 @@ run();
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getHuggingfaceInferenceData
 
@@ -316,14 +312,14 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoGetHuggingFaceBillingDataResponse](../../sdk/models/dto-get-hugging-face-billing-data-response.md)\>**
+**Promise\<[models.GetHuggingFaceBillingDataResponse](../../sdk/models/get-hugging-face-billing-data-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## listRawEvents
 
@@ -341,10 +337,10 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.events.listRawEvents({
-    endTime: "2024-12-09T00:00:00Z",
+    endTime: new Date("2024-12-09T00:00:00Z"),
     order: "desc",
     sort: "timestamp",
-    startTime: "2024-11-09T00:00:00Z",
+    startTime: new Date("2024-11-09T00:00:00Z"),
   });
 
   console.log(result);
@@ -369,10 +365,10 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await eventsListRawEvents(flexprice, {
-    endTime: "2024-12-09T00:00:00Z",
+    endTime: new Date("2024-12-09T00:00:00Z"),
     order: "desc",
     sort: "timestamp",
-    startTime: "2024-11-09T00:00:00Z",
+    startTime: new Date("2024-11-09T00:00:00Z"),
   });
   if (res.ok) {
     const { value: result } = res;
@@ -389,22 +385,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetEventsRequest](../../sdk/models/dto-get-events-request.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.GetEventsRequest](../../sdk/models/get-events-request.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoGetEventsResponse](../../sdk/models/dto-get-events-response.md)\>**
+**Promise\<[models.GetEventsResponse](../../sdk/models/get-events-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getUsageStatistics
 
@@ -423,13 +419,13 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.events.getUsageStatistics({
     aggregationType: "COUNT_UNIQUE",
-    billingAnchor: "2024-03-05T14:30:45.123456789Z",
+    billingAnchor: new Date("2024-03-05T14:30:45.123456789Z"),
     customerId: "customer456",
-    endTime: "2024-03-20T00:00:00Z",
+    endTime: new Date("2024-03-20T00:00:00Z"),
     eventName: "api_request",
     externalCustomerId: "customer456",
     propertyName: "request_size",
-    startTime: "2024-03-13T00:00:00Z",
+    startTime: new Date("2024-03-13T00:00:00Z"),
   });
 
   console.log(result);
@@ -455,13 +451,13 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await eventsGetUsageStatistics(flexprice, {
     aggregationType: "COUNT_UNIQUE",
-    billingAnchor: "2024-03-05T14:30:45.123456789Z",
+    billingAnchor: new Date("2024-03-05T14:30:45.123456789Z"),
     customerId: "customer456",
-    endTime: "2024-03-20T00:00:00Z",
+    endTime: new Date("2024-03-20T00:00:00Z"),
     eventName: "api_request",
     externalCustomerId: "customer456",
     propertyName: "request_size",
-    startTime: "2024-03-13T00:00:00Z",
+    startTime: new Date("2024-03-13T00:00:00Z"),
   });
   if (res.ok) {
     const { value: result } = res;
@@ -478,22 +474,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetUsageRequest](../../sdk/models/dto-get-usage-request.md)                                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.GetUsageRequest](../../sdk/models/get-usage-request.md)                                                                                                                | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoGetUsageResponse](../../sdk/models/dto-get-usage-response.md)\>**
+**Promise\<[models.GetUsageResponse](../../sdk/models/get-usage-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getUsageByMeter
 
@@ -511,12 +507,12 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.events.getUsageByMeter({
-    billingAnchor: "2024-03-05T14:30:45Z",
+    billingAnchor: new Date("2024-03-05T14:30:45Z"),
     customerId: "customer456",
-    endTime: "2024-12-09T00:00:00Z",
+    endTime: new Date("2024-12-09T00:00:00Z"),
     externalCustomerId: "user_5",
     meterId: "123",
-    startTime: "2024-11-09T00:00:00Z",
+    startTime: new Date("2024-11-09T00:00:00Z"),
   });
 
   console.log(result);
@@ -541,12 +537,12 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await eventsGetUsageByMeter(flexprice, {
-    billingAnchor: "2024-03-05T14:30:45Z",
+    billingAnchor: new Date("2024-03-05T14:30:45Z"),
     customerId: "customer456",
-    endTime: "2024-12-09T00:00:00Z",
+    endTime: new Date("2024-12-09T00:00:00Z"),
     externalCustomerId: "user_5",
     meterId: "123",
-    startTime: "2024-11-09T00:00:00Z",
+    startTime: new Date("2024-11-09T00:00:00Z"),
   });
   if (res.ok) {
     const { value: result } = res;
@@ -563,22 +559,22 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.DtoGetUsageByMeterRequest](../../sdk/models/dto-get-usage-by-meter-request.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [models.GetUsageByMeterRequest](../../sdk/models/get-usage-by-meter-request.md)                                                                                                | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.DtoGetUsageResponse](../../sdk/models/dto-get-usage-response.md)\>**
+**Promise\<[models.GetUsageResponse](../../sdk/models/get-usage-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 400, 404                         | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## getEvent
 
@@ -641,12 +637,12 @@ run();
 
 ### Response
 
-**Promise\<[models.DtoGetEventByIDResponse](../../sdk/models/dto-get-event-by-id-response.md)\>**
+**Promise\<[models.GetEventByIDResponse](../../sdk/models/get-event-by-id-response.md)\>**
 
 ### Errors
 
-| Error Type                       | Status Code                      | Content Type                     |
-| -------------------------------- | -------------------------------- | -------------------------------- |
-| models.ErrorsErrorsErrorResponse | 404                              | application/json                 |
-| models.ErrorsErrorsErrorResponse | 500                              | application/json                 |
-| models.SDKError                  | 4XX, 5XX                         | \*/\*                            |
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 404                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |

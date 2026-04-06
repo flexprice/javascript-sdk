@@ -21,9 +21,9 @@ export class Plans extends ClientSDK {
    * Use when defining a new pricing plan (e.g. Free, Pro, Enterprise). Attach prices and entitlements; customers subscribe to plans.
    */
   async createPlan(
-    request: models.DtoCreatePlanRequest,
+    request: models.CreatePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPlanResponse> {
+  ): Promise<models.Plan1> {
     return unwrapAsync(plansCreatePlan(
       this,
       request,
@@ -40,7 +40,7 @@ export class Plans extends ClientSDK {
   async queryPlan(
     request: models.PlanFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListPlansResponse> {
+  ): Promise<models.ListPlansResponse> {
     return unwrapAsync(plansQueryPlan(
       this,
       request,
@@ -57,7 +57,7 @@ export class Plans extends ClientSDK {
   async getPlan(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPlanResponse> {
+  ): Promise<models.Plan1> {
     return unwrapAsync(plansGetPlan(
       this,
       id,
@@ -73,9 +73,9 @@ export class Plans extends ClientSDK {
    */
   async updatePlan(
     id: string,
-    body: models.DtoUpdatePlanRequest,
+    body: models.UpdatePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPlanResponse> {
+  ): Promise<models.Plan1> {
     return unwrapAsync(plansUpdatePlan(
       this,
       id,
@@ -93,7 +93,7 @@ export class Plans extends ClientSDK {
   async deletePlan(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(plansDeletePlan(
       this,
       id,
@@ -109,9 +109,9 @@ export class Plans extends ClientSDK {
    */
   async postPlansIdClone(
     id: string,
-    body: models.DtoClonePlanRequest,
+    body: models.ClonePlanRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPlanResponse> {
+  ): Promise<models.Plan1> {
     return unwrapAsync(plansPostPlansIdClone(
       this,
       id,

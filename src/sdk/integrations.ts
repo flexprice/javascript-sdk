@@ -15,9 +15,9 @@ export class Integrations extends ClientSDK {
    * Link a FlexPrice entity to provider entity with provider-specific side effects.
    */
   async linkIntegrationMapping(
-    request: models.DtoLinkIntegrationMappingRequest,
+    request: models.LinkIntegrationMappingRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoLinkIntegrationMappingResponse> {
+  ): Promise<models.LinkIntegrationMappingResponse> {
     return unwrapAsync(integrationsLinkIntegrationMapping(
       this,
       request,

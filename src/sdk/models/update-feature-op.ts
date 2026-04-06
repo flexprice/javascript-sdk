@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateFeatureRequest,
-  DtoUpdateFeatureRequest$Outbound,
-  DtoUpdateFeatureRequest$outboundSchema,
-} from "./dto-update-feature-request.js";
+  UpdateFeatureRequest,
+  UpdateFeatureRequest$Outbound,
+  UpdateFeatureRequest$outboundSchema,
+} from "./update-feature-request.js";
 
-export type UpdateFeatureRequest = {
+export type UpdateFeatureRequestRequest = {
   /**
    * Feature ID
    */
@@ -17,28 +17,30 @@ export type UpdateFeatureRequest = {
   /**
    * Feature update data
    */
-  body: DtoUpdateFeatureRequest;
+  body: UpdateFeatureRequest;
 };
 
 /** @internal */
-export type UpdateFeatureRequest$Outbound = {
+export type UpdateFeatureRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateFeatureRequest$Outbound;
+  body: UpdateFeatureRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateFeatureRequest$outboundSchema: z.ZodMiniType<
-  UpdateFeatureRequest$Outbound,
-  UpdateFeatureRequest
+export const UpdateFeatureRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateFeatureRequestRequest$Outbound,
+  UpdateFeatureRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateFeatureRequest$outboundSchema,
+  body: UpdateFeatureRequest$outboundSchema,
 });
 
-export function updateFeatureRequestToJSON(
-  updateFeatureRequest: UpdateFeatureRequest,
+export function updateFeatureRequestRequestToJSON(
+  updateFeatureRequestRequest: UpdateFeatureRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateFeatureRequest$outboundSchema.parse(updateFeatureRequest),
+    UpdateFeatureRequestRequest$outboundSchema.parse(
+      updateFeatureRequestRequest,
+    ),
   );
 }

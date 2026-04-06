@@ -60,7 +60,7 @@ export type PricePrice = {
    * ConversionRate is the conversion rate of the price unit to the fiat currency
    */
   conversionRate?: string | undefined;
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
    * Currency 3 digit ISO currency code in lowercase ex usd, eur, gbp
@@ -88,7 +88,7 @@ export type PricePrice = {
   /**
    * EndDate is the end date of the price
    */
-  endDate?: string | undefined;
+  endDate?: Date | undefined;
   /**
    * EntityID holds the value of the "entity_id" field.
    */
@@ -144,7 +144,7 @@ export type PricePrice = {
   /**
    * StartDate is the start date of the price
    */
-  startDate?: string | undefined;
+  startDate?: Date | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   tierMode?: BillingTier | undefined;
@@ -158,7 +158,7 @@ export type PricePrice = {
    */
   trialPeriod?: number | undefined;
   type?: PriceType | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -172,14 +172,14 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
       billing_period: types.optional(BillingPeriod$inboundSchema),
       billing_period_count: types.optional(types.number()),
       conversion_rate: types.optional(types.string()),
-      created_at: types.optional(types.string()),
+      created_at: types.optional(types.date()),
       created_by: types.optional(types.string()),
       currency: types.optional(types.string()),
       description: types.optional(types.string()),
       display_amount: types.optional(types.string()),
       display_name: types.optional(types.string()),
       display_price_unit_amount: types.optional(types.string()),
-      end_date: types.optional(types.string()),
+      end_date: types.optional(types.date()),
       entity_id: types.optional(types.string()),
       entity_type: types.optional(PriceEntityType$inboundSchema),
       environment_id: types.optional(types.string()),
@@ -196,7 +196,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
       price_unit_id: types.optional(types.string()),
       price_unit_tiers: types.optional(z.array(PricePriceTier$inboundSchema)),
       price_unit_type: types.optional(PriceUnitType$inboundSchema),
-      start_date: types.optional(types.string()),
+      start_date: types.optional(types.date()),
       status: types.optional(Status$inboundSchema),
       tenant_id: types.optional(types.string()),
       tier_mode: types.optional(BillingTier$inboundSchema),
@@ -206,7 +206,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
       ),
       trial_period: types.optional(types.number()),
       type: types.optional(PriceType$inboundSchema),
-      updated_at: types.optional(types.string()),
+      updated_at: types.optional(types.date()),
       updated_by: types.optional(types.string()),
     }),
     z.transform((v) => {

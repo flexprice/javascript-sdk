@@ -35,12 +35,12 @@ import { Result } from "../types/fp.js";
  */
 export function creditNotesCreateCreditNote(
   client: FlexpriceCore,
-  request: models.DtoCreateCreditNoteRequest,
+  request: models.CreateCreditNoteRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoCreditNoteResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.CreditNoteResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -60,13 +60,13 @@ export function creditNotesCreateCreditNote(
 
 async function $do(
   client: FlexpriceCore,
-  request: models.DtoCreateCreditNoteRequest,
+  request: models.CreateCreditNoteRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoCreditNoteResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.CreditNoteResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -81,7 +81,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => z.parse(models.DtoCreateCreditNoteRequest$outboundSchema, value),
+    (value) => z.parse(models.CreateCreditNoteRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -147,8 +147,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoCreditNoteResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.CreditNoteResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -158,12 +158,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.DtoCreditNoteResponse$inboundSchema),
-    M.jsonErr(
-      [400, 401, 403, 404],
-      models.ErrorsErrorsErrorResponse$inboundSchema,
-    ),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(201, models.CreditNoteResponse$inboundSchema),
+    M.jsonErr([400, 401, 403, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

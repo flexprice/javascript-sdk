@@ -24,7 +24,7 @@ export class ScheduledTasks extends ClientSDK {
   async listScheduledTasks(
     request?: models.ListScheduledTasksRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListScheduledTasksResponse> {
+  ): Promise<models.ListScheduledTasksResponse> {
     return unwrapAsync(scheduledTasksListScheduledTasks(
       this,
       request,
@@ -39,9 +39,9 @@ export class ScheduledTasks extends ClientSDK {
    * Use when setting up recurring data exports or other scheduled jobs. Ideal for report generation or syncing data on a schedule.
    */
   async createScheduledTask(
-    request: models.DtoCreateScheduledTaskRequest,
+    request: models.CreateScheduledTaskRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoScheduledTaskResponse> {
+  ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksCreateScheduledTask(
       this,
       request,
@@ -90,7 +90,7 @@ export class ScheduledTasks extends ClientSDK {
   async getScheduledTask(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoScheduledTaskResponse> {
+  ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksGetScheduledTask(
       this,
       id,
@@ -106,9 +106,9 @@ export class ScheduledTasks extends ClientSDK {
    */
   async updateScheduledTask(
     id: string,
-    body: models.DtoUpdateScheduledTaskRequest,
+    body: models.UpdateScheduledTaskRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoScheduledTaskResponse> {
+  ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksUpdateScheduledTask(
       this,
       id,
@@ -142,9 +142,9 @@ export class ScheduledTasks extends ClientSDK {
    */
   async triggerScheduledTaskRun(
     id: string,
-    body?: models.DtoTriggerForceRunRequest | undefined,
+    body?: models.TriggerForceRunRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoTriggerForceRunResponse> {
+  ): Promise<models.TriggerForceRunResponse> {
     return unwrapAsync(scheduledTasksTriggerScheduledTaskRun(
       this,
       id,

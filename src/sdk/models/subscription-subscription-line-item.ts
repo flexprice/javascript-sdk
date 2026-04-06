@@ -44,12 +44,12 @@ export type SubscriptionSubscriptionLineItem = {
   commitmentTrueUpEnabled?: boolean | undefined;
   commitmentType?: CommitmentType | undefined;
   commitmentWindowed?: boolean | undefined;
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   currency?: string | undefined;
   customerId?: string | undefined;
   displayName?: string | undefined;
-  endDate?: string | undefined;
+  endDate?: Date | undefined;
   entityId?: string | undefined;
   entityType?: SubscriptionLineItemEntityType | undefined;
   environmentId?: string | undefined;
@@ -65,13 +65,13 @@ export type SubscriptionSubscriptionLineItem = {
   priceUnit?: string | undefined;
   priceUnitId?: string | undefined;
   quantity?: string | undefined;
-  startDate?: string | undefined;
+  startDate?: Date | undefined;
   status?: Status | undefined;
   subscriptionId?: string | undefined;
   subscriptionPhaseId?: string | undefined;
   tenantId?: string | undefined;
   trialPeriod?: number | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -90,12 +90,12 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     commitment_true_up_enabled: types.optional(types.boolean()),
     commitment_type: types.optional(CommitmentType$inboundSchema),
     commitment_windowed: types.optional(types.boolean()),
-    created_at: types.optional(types.string()),
+    created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
     customer_id: types.optional(types.string()),
     display_name: types.optional(types.string()),
-    end_date: types.optional(types.string()),
+    end_date: types.optional(types.date()),
     entity_id: types.optional(types.string()),
     entity_type: types.optional(SubscriptionLineItemEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
@@ -111,13 +111,13 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     price_unit: types.optional(types.string()),
     price_unit_id: types.optional(types.string()),
     quantity: types.optional(types.string()),
-    start_date: types.optional(types.string()),
+    start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
     subscription_phase_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
     trial_period: types.optional(types.number()),
-    updated_at: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
   z.transform((v) => {

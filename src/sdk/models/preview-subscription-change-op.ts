@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoSubscriptionChangeRequest,
-  DtoSubscriptionChangeRequest$Outbound,
-  DtoSubscriptionChangeRequest$outboundSchema,
-} from "./dto-subscription-change-request.js";
+  SubscriptionChangeRequest,
+  SubscriptionChangeRequest$Outbound,
+  SubscriptionChangeRequest$outboundSchema,
+} from "./subscription-change-request.js";
 
 export type PreviewSubscriptionChangeRequest = {
   /**
@@ -17,13 +17,13 @@ export type PreviewSubscriptionChangeRequest = {
   /**
    * Subscription change preview request
    */
-  body: DtoSubscriptionChangeRequest;
+  body: SubscriptionChangeRequest;
 };
 
 /** @internal */
 export type PreviewSubscriptionChangeRequest$Outbound = {
   id: string;
-  body: DtoSubscriptionChangeRequest$Outbound;
+  body: SubscriptionChangeRequest$Outbound;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const PreviewSubscriptionChangeRequest$outboundSchema: z.ZodMiniType<
   PreviewSubscriptionChangeRequest
 > = z.object({
   id: z.string(),
-  body: DtoSubscriptionChangeRequest$outboundSchema,
+  body: SubscriptionChangeRequest$outboundSchema,
 });
 
 export function previewSubscriptionChangeRequestToJSON(

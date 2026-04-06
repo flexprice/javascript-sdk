@@ -27,7 +27,7 @@ export class Wallets extends ClientSDK {
   async getCustomerWallets(
     request?: models.GetCustomerWalletsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<models.DtoWalletResponse>> {
+  ): Promise<Array<models.Wallet>> {
     return unwrapAsync(walletsGetCustomerWallets(
       this,
       request,
@@ -44,7 +44,7 @@ export class Wallets extends ClientSDK {
   async getWalletsByCustomerId(
     id: string,
     options?: RequestOptions,
-  ): Promise<Array<models.DtoWalletResponse>> {
+  ): Promise<Array<models.Wallet>> {
     return unwrapAsync(walletsGetWalletsByCustomerId(
       this,
       id,
@@ -59,9 +59,9 @@ export class Wallets extends ClientSDK {
    * Use when giving a customer a prepaid or credit balance (e.g. prepaid plans or promotional credits).
    */
   async createWallet(
-    request: models.DtoCreateWalletRequest,
+    request: models.CreateWalletRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoWalletResponse> {
+  ): Promise<models.Wallet> {
     return unwrapAsync(walletsCreateWallet(
       this,
       request,
@@ -95,7 +95,7 @@ export class Wallets extends ClientSDK {
   async queryWalletTransaction(
     request: models.WalletTransactionFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListWalletTransactionsResponse> {
+  ): Promise<models.ListWalletTransactionsResponse> {
     return unwrapAsync(walletsQueryWalletTransaction(
       this,
       request,
@@ -112,7 +112,7 @@ export class Wallets extends ClientSDK {
   async getWallet(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoWalletResponse> {
+  ): Promise<models.Wallet> {
     return unwrapAsync(walletsGetWallet(
       this,
       id,
@@ -128,9 +128,9 @@ export class Wallets extends ClientSDK {
    */
   async updateWallet(
     id: string,
-    body: models.DtoUpdateWalletRequest,
+    body: models.UpdateWalletRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoWalletResponse> {
+  ): Promise<models.Wallet> {
     return unwrapAsync(walletsUpdateWallet(
       this,
       id,
@@ -149,7 +149,7 @@ export class Wallets extends ClientSDK {
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoWalletBalanceResponse> {
+  ): Promise<models.WalletBalanceResponse> {
     return unwrapAsync(walletsGetWalletBalance(
       this,
       id,
@@ -167,7 +167,7 @@ export class Wallets extends ClientSDK {
   async terminateWallet(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoWalletResponse> {
+  ): Promise<models.Wallet> {
     return unwrapAsync(walletsTerminateWallet(
       this,
       id,
@@ -183,9 +183,9 @@ export class Wallets extends ClientSDK {
    */
   async topUpWallet(
     id: string,
-    body: models.DtoTopUpWalletRequest,
+    body: models.TopUpWalletRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoTopUpWalletResponse> {
+  ): Promise<models.TopUpWalletResponse> {
     return unwrapAsync(walletsTopUpWallet(
       this,
       id,
@@ -203,7 +203,7 @@ export class Wallets extends ClientSDK {
   async getWalletTransactions(
     request: models.GetWalletTransactionsRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoListWalletTransactionsResponse> {
+  ): Promise<models.ListWalletTransactionsResponse> {
     return unwrapAsync(walletsGetWalletTransactions(
       this,
       request,

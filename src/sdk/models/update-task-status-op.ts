@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateTaskStatusRequest,
-  DtoUpdateTaskStatusRequest$Outbound,
-  DtoUpdateTaskStatusRequest$outboundSchema,
-} from "./dto-update-task-status-request.js";
+  UpdateTaskStatusRequest,
+  UpdateTaskStatusRequest$Outbound,
+  UpdateTaskStatusRequest$outboundSchema,
+} from "./update-task-status-request.js";
 
-export type UpdateTaskStatusRequest = {
+export type UpdateTaskStatusRequestRequest = {
   /**
    * Task ID
    */
@@ -17,28 +17,30 @@ export type UpdateTaskStatusRequest = {
   /**
    * Status update
    */
-  body: DtoUpdateTaskStatusRequest;
+  body: UpdateTaskStatusRequest;
 };
 
 /** @internal */
-export type UpdateTaskStatusRequest$Outbound = {
+export type UpdateTaskStatusRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateTaskStatusRequest$Outbound;
+  body: UpdateTaskStatusRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateTaskStatusRequest$outboundSchema: z.ZodMiniType<
-  UpdateTaskStatusRequest$Outbound,
-  UpdateTaskStatusRequest
+export const UpdateTaskStatusRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusRequestRequest$Outbound,
+  UpdateTaskStatusRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateTaskStatusRequest$outboundSchema,
+  body: UpdateTaskStatusRequest$outboundSchema,
 });
 
-export function updateTaskStatusRequestToJSON(
-  updateTaskStatusRequest: UpdateTaskStatusRequest,
+export function updateTaskStatusRequestRequestToJSON(
+  updateTaskStatusRequestRequest: UpdateTaskStatusRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateTaskStatusRequest$outboundSchema.parse(updateTaskStatusRequest),
+    UpdateTaskStatusRequestRequest$outboundSchema.parse(
+      updateTaskStatusRequestRequest,
+    ),
   );
 }

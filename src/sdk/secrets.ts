@@ -21,7 +21,7 @@ export class Secrets extends ClientSDK {
     offset?: number | undefined,
     status?: string | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListSecretsResponse> {
+  ): Promise<models.ListSecretsResponse> {
     return unwrapAsync(secretsListApiKeys(
       this,
       limit,
@@ -38,9 +38,9 @@ export class Secrets extends ClientSDK {
    * Use when issuing a new API key (e.g. for a service account or for the current user). Provide service_account_id to create for a service account.
    */
   async createApiKey(
-    request: models.DtoCreateAPIKeyRequest,
+    request: models.CreateAPIKeyRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateAPIKeyResponse> {
+  ): Promise<models.CreateAPIKeyResponse> {
     return unwrapAsync(secretsCreateApiKey(
       this,
       request,

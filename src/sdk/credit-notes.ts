@@ -18,9 +18,9 @@ export class CreditNotes extends ClientSDK {
    * Use when issuing a refund or adjustment (e.g. customer dispute or proration). Links to an invoice; create as draft then finalize.
    */
   async createCreditNote(
-    request: models.DtoCreateCreditNoteRequest,
+    request: models.CreateCreditNoteRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditNoteResponse> {
+  ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesCreateCreditNote(
       this,
       request,
@@ -37,7 +37,7 @@ export class CreditNotes extends ClientSDK {
   async getCreditNote(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditNoteResponse> {
+  ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesGetCreditNote(
       this,
       id,
@@ -54,7 +54,7 @@ export class CreditNotes extends ClientSDK {
   async processCreditNote(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditNoteResponse> {
+  ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesProcessCreditNote(
       this,
       id,
@@ -71,7 +71,7 @@ export class CreditNotes extends ClientSDK {
   async voidCreditNote(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCreditNoteResponse> {
+  ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesVoidCreditNote(
       this,
       id,

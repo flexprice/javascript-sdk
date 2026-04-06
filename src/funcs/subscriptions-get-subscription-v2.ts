@@ -38,8 +38,8 @@ export function subscriptionsGetSubscriptionV2(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoSubscriptionResponseV2,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionResponseV2,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -66,8 +66,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoSubscriptionResponseV2,
-      | models.ErrorsErrorsErrorResponse
+      models.SubscriptionResponseV2,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -163,8 +163,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoSubscriptionResponseV2,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionResponseV2,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -174,9 +174,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoSubscriptionResponseV2$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.SubscriptionResponseV2$inboundSchema),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -29,7 +29,7 @@ export const EntitlementFilterOrder = {
 export type EntitlementFilterOrder = ClosedEnum<typeof EntitlementFilterOrder>;
 
 export type EntitlementFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   entityIds?: Array<string> | undefined;
   entityType?: EntitlementEntityType | undefined;
   expand?: string | undefined;
@@ -45,7 +45,7 @@ export type EntitlementFilter = {
   order?: EntitlementFilterOrder | undefined;
   planIds?: Array<string> | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -79,7 +79,7 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
   EntitlementFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityIds: z.optional(z.array(z.string())),
     entityType: z.optional(EntitlementEntityType$outboundSchema),
     expand: z.optional(z.string()),
@@ -92,7 +92,7 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
     order: z.optional(EntitlementFilterOrder$outboundSchema),
     planIds: z.optional(z.array(z.string())),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

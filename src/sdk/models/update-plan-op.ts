@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdatePlanRequest,
-  DtoUpdatePlanRequest$Outbound,
-  DtoUpdatePlanRequest$outboundSchema,
-} from "./dto-update-plan-request.js";
+  UpdatePlanRequest,
+  UpdatePlanRequest$Outbound,
+  UpdatePlanRequest$outboundSchema,
+} from "./update-plan-request.js";
 
-export type UpdatePlanRequest = {
+export type UpdatePlanRequestRequest = {
   /**
    * Plan ID
    */
@@ -17,28 +17,28 @@ export type UpdatePlanRequest = {
   /**
    * Plan update
    */
-  body: DtoUpdatePlanRequest;
+  body: UpdatePlanRequest;
 };
 
 /** @internal */
-export type UpdatePlanRequest$Outbound = {
+export type UpdatePlanRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdatePlanRequest$Outbound;
+  body: UpdatePlanRequest$Outbound;
 };
 
 /** @internal */
-export const UpdatePlanRequest$outboundSchema: z.ZodMiniType<
-  UpdatePlanRequest$Outbound,
-  UpdatePlanRequest
+export const UpdatePlanRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdatePlanRequestRequest$Outbound,
+  UpdatePlanRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdatePlanRequest$outboundSchema,
+  body: UpdatePlanRequest$outboundSchema,
 });
 
-export function updatePlanRequestToJSON(
-  updatePlanRequest: UpdatePlanRequest,
+export function updatePlanRequestRequestToJSON(
+  updatePlanRequestRequest: UpdatePlanRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdatePlanRequest$outboundSchema.parse(updatePlanRequest),
+    UpdatePlanRequestRequest$outboundSchema.parse(updatePlanRequestRequest),
   );
 }

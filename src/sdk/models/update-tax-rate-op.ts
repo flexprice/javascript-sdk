@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateTaxRateRequest,
-  DtoUpdateTaxRateRequest$Outbound,
-  DtoUpdateTaxRateRequest$outboundSchema,
-} from "./dto-update-tax-rate-request.js";
+  UpdateTaxRateRequest,
+  UpdateTaxRateRequest$Outbound,
+  UpdateTaxRateRequest$outboundSchema,
+} from "./update-tax-rate-request.js";
 
-export type UpdateTaxRateRequest = {
+export type UpdateTaxRateRequestRequest = {
   /**
    * Tax rate ID
    */
@@ -17,28 +17,30 @@ export type UpdateTaxRateRequest = {
   /**
    * Tax rate to update
    */
-  body: DtoUpdateTaxRateRequest;
+  body: UpdateTaxRateRequest;
 };
 
 /** @internal */
-export type UpdateTaxRateRequest$Outbound = {
+export type UpdateTaxRateRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateTaxRateRequest$Outbound;
+  body: UpdateTaxRateRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateTaxRateRequest$outboundSchema: z.ZodMiniType<
-  UpdateTaxRateRequest$Outbound,
-  UpdateTaxRateRequest
+export const UpdateTaxRateRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateTaxRateRequestRequest$Outbound,
+  UpdateTaxRateRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateTaxRateRequest$outboundSchema,
+  body: UpdateTaxRateRequest$outboundSchema,
 });
 
-export function updateTaxRateRequestToJSON(
-  updateTaxRateRequest: UpdateTaxRateRequest,
+export function updateTaxRateRequestRequestToJSON(
+  updateTaxRateRequestRequest: UpdateTaxRateRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateTaxRateRequest$outboundSchema.parse(updateTaxRateRequest),
+    UpdateTaxRateRequestRequest$outboundSchema.parse(
+      updateTaxRateRequestRequest,
+    ),
   );
 }

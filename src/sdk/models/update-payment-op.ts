@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdatePaymentRequest,
-  DtoUpdatePaymentRequest$Outbound,
-  DtoUpdatePaymentRequest$outboundSchema,
-} from "./dto-update-payment-request.js";
+  UpdatePaymentRequest,
+  UpdatePaymentRequest$Outbound,
+  UpdatePaymentRequest$outboundSchema,
+} from "./update-payment-request.js";
 
-export type UpdatePaymentRequest = {
+export type UpdatePaymentRequestRequest = {
   /**
    * Payment ID
    */
@@ -17,28 +17,30 @@ export type UpdatePaymentRequest = {
   /**
    * Payment configuration
    */
-  body: DtoUpdatePaymentRequest;
+  body: UpdatePaymentRequest;
 };
 
 /** @internal */
-export type UpdatePaymentRequest$Outbound = {
+export type UpdatePaymentRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdatePaymentRequest$Outbound;
+  body: UpdatePaymentRequest$Outbound;
 };
 
 /** @internal */
-export const UpdatePaymentRequest$outboundSchema: z.ZodMiniType<
-  UpdatePaymentRequest$Outbound,
-  UpdatePaymentRequest
+export const UpdatePaymentRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdatePaymentRequestRequest$Outbound,
+  UpdatePaymentRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdatePaymentRequest$outboundSchema,
+  body: UpdatePaymentRequest$outboundSchema,
 });
 
-export function updatePaymentRequestToJSON(
-  updatePaymentRequest: UpdatePaymentRequest,
+export function updatePaymentRequestRequestToJSON(
+  updatePaymentRequestRequest: UpdatePaymentRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdatePaymentRequest$outboundSchema.parse(updatePaymentRequest),
+    UpdatePaymentRequestRequest$outboundSchema.parse(
+      updatePaymentRequestRequest,
+    ),
   );
 }

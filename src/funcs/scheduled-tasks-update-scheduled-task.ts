@@ -34,12 +34,12 @@ import { Result } from "../types/fp.js";
 export function scheduledTasksUpdateScheduledTask(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateScheduledTaskRequest,
+  body: models.UpdateScheduledTaskRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoScheduledTaskResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.ScheduledTaskResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -61,13 +61,13 @@ export function scheduledTasksUpdateScheduledTask(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoUpdateScheduledTaskRequest,
+  body: models.UpdateScheduledTaskRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoScheduledTaskResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.ScheduledTaskResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -80,14 +80,15 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.UpdateScheduledTaskRequest = {
+  const input: models.UpdateScheduledTaskRequestRequest = {
     id: id,
     body: body,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.UpdateScheduledTaskRequest$outboundSchema, value),
+    (value) =>
+      z.parse(models.UpdateScheduledTaskRequestRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,8 +160,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoScheduledTaskResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.ScheduledTaskResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -170,9 +171,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoScheduledTaskResponse$inboundSchema),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.ScheduledTaskResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

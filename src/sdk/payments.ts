@@ -22,7 +22,7 @@ export class Payments extends ClientSDK {
   async listPayments(
     request?: models.ListPaymentsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoListPaymentsResponse> {
+  ): Promise<models.ListPaymentsResponse> {
     return unwrapAsync(paymentsListPayments(
       this,
       request,
@@ -37,9 +37,9 @@ export class Payments extends ClientSDK {
    * Use when recording a payment against an invoice (e.g. after receiving funds via a gateway or manual entry).
    */
   async createPayment(
-    request: models.DtoCreatePaymentRequest,
+    request: models.CreatePaymentRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPaymentResponse> {
+  ): Promise<models.Payment> {
     return unwrapAsync(paymentsCreatePayment(
       this,
       request,
@@ -56,7 +56,7 @@ export class Payments extends ClientSDK {
   async getPayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPaymentResponse> {
+  ): Promise<models.Payment> {
     return unwrapAsync(paymentsGetPayment(
       this,
       id,
@@ -72,9 +72,9 @@ export class Payments extends ClientSDK {
    */
   async updatePayment(
     id: string,
-    body: models.DtoUpdatePaymentRequest,
+    body: models.UpdatePaymentRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPaymentResponse> {
+  ): Promise<models.Payment> {
     return unwrapAsync(paymentsUpdatePayment(
       this,
       id,
@@ -92,7 +92,7 @@ export class Payments extends ClientSDK {
   async deletePayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(paymentsDeletePayment(
       this,
       id,
@@ -109,7 +109,7 @@ export class Payments extends ClientSDK {
   async processPayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPaymentResponse> {
+  ): Promise<models.Payment> {
     return unwrapAsync(paymentsProcessPayment(
       this,
       id,

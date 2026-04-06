@@ -25,7 +25,7 @@ export const UserFilterOrder = {
 export type UserFilterOrder = ClosedEnum<typeof UserFilterOrder>;
 
 export type UserFilter = {
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * filters allows complex filtering based on multiple fields
@@ -36,7 +36,7 @@ export type UserFilter = {
   order?: UserFilterOrder | undefined;
   roles?: Array<string> | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   type?: UserType | undefined;
   /**
@@ -72,7 +72,7 @@ export const UserFilter$outboundSchema: z.ZodMiniType<
   UserFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
@@ -80,7 +80,7 @@ export const UserFilter$outboundSchema: z.ZodMiniType<
     order: z.optional(UserFilterOrder$outboundSchema),
     roles: z.optional(z.array(z.string())),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     type: z.optional(UserType$outboundSchema),
     userIds: z.optional(z.array(z.string())),

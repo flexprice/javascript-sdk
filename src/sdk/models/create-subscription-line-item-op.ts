@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoCreateSubscriptionLineItemRequest,
-  DtoCreateSubscriptionLineItemRequest$Outbound,
-  DtoCreateSubscriptionLineItemRequest$outboundSchema,
-} from "./dto-create-subscription-line-item-request.js";
+  CreateSubscriptionLineItemRequest,
+  CreateSubscriptionLineItemRequest$Outbound,
+  CreateSubscriptionLineItemRequest$outboundSchema,
+} from "./create-subscription-line-item-request.js";
 
-export type CreateSubscriptionLineItemRequest = {
+export type CreateSubscriptionLineItemRequestRequest = {
   /**
    * Subscription ID
    */
@@ -17,30 +17,32 @@ export type CreateSubscriptionLineItemRequest = {
   /**
    * Create Line Item Request
    */
-  body: DtoCreateSubscriptionLineItemRequest;
+  body: CreateSubscriptionLineItemRequest;
 };
 
 /** @internal */
-export type CreateSubscriptionLineItemRequest$Outbound = {
+export type CreateSubscriptionLineItemRequestRequest$Outbound = {
   id: string;
-  body: DtoCreateSubscriptionLineItemRequest$Outbound;
+  body: CreateSubscriptionLineItemRequest$Outbound;
 };
 
 /** @internal */
-export const CreateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
-  CreateSubscriptionLineItemRequest$Outbound,
-  CreateSubscriptionLineItemRequest
-> = z.object({
-  id: z.string(),
-  body: DtoCreateSubscriptionLineItemRequest$outboundSchema,
-});
+export const CreateSubscriptionLineItemRequestRequest$outboundSchema:
+  z.ZodMiniType<
+    CreateSubscriptionLineItemRequestRequest$Outbound,
+    CreateSubscriptionLineItemRequestRequest
+  > = z.object({
+    id: z.string(),
+    body: CreateSubscriptionLineItemRequest$outboundSchema,
+  });
 
-export function createSubscriptionLineItemRequestToJSON(
-  createSubscriptionLineItemRequest: CreateSubscriptionLineItemRequest,
+export function createSubscriptionLineItemRequestRequestToJSON(
+  createSubscriptionLineItemRequestRequest:
+    CreateSubscriptionLineItemRequestRequest,
 ): string {
   return JSON.stringify(
-    CreateSubscriptionLineItemRequest$outboundSchema.parse(
-      createSubscriptionLineItemRequest,
+    CreateSubscriptionLineItemRequestRequest$outboundSchema.parse(
+      createSubscriptionLineItemRequestRequest,
     ),
   );
 }

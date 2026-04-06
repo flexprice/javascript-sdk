@@ -4,10 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdatePaymentStatusRequest,
-  DtoUpdatePaymentStatusRequest$Outbound,
-  DtoUpdatePaymentStatusRequest$outboundSchema,
-} from "./dto-update-payment-status-request.js";
+  UpdatePaymentStatusRequest,
+  UpdatePaymentStatusRequest$Outbound,
+  UpdatePaymentStatusRequest$outboundSchema,
+} from "./update-payment-status-request.js";
 
 export type UpdateInvoicePaymentStatusRequest = {
   /**
@@ -17,13 +17,13 @@ export type UpdateInvoicePaymentStatusRequest = {
   /**
    * Payment Status Update Request
    */
-  body: DtoUpdatePaymentStatusRequest;
+  body: UpdatePaymentStatusRequest;
 };
 
 /** @internal */
 export type UpdateInvoicePaymentStatusRequest$Outbound = {
   id: string;
-  body: DtoUpdatePaymentStatusRequest$Outbound;
+  body: UpdatePaymentStatusRequest$Outbound;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const UpdateInvoicePaymentStatusRequest$outboundSchema: z.ZodMiniType<
   UpdateInvoicePaymentStatusRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdatePaymentStatusRequest$outboundSchema,
+  body: UpdatePaymentStatusRequest$outboundSchema,
 });
 
 export function updateInvoicePaymentStatusRequestToJSON(

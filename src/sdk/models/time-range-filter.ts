@@ -6,8 +6,8 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TimeRangeFilter = {
-  endTime?: string | undefined;
-  startTime?: string | undefined;
+  endTime?: Date | undefined;
+  startTime?: Date | undefined;
 };
 
 /** @internal */
@@ -22,8 +22,8 @@ export const TimeRangeFilter$outboundSchema: z.ZodMiniType<
   TimeRangeFilter
 > = z.pipe(
   z.object({
-    endTime: z.optional(z.string()),
-    startTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {

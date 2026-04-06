@@ -37,8 +37,8 @@ export function subscriptionsListSubscriptionPauses(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<models.DtoListSubscriptionPausesResponse>,
-    | models.ErrorsErrorsErrorResponse
+    Array<models.ListSubscriptionPausesResponse>,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -63,8 +63,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<models.DtoListSubscriptionPausesResponse>,
-      | models.ErrorsErrorsErrorResponse
+      Array<models.ListSubscriptionPausesResponse>,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -155,8 +155,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    Array<models.DtoListSubscriptionPausesResponse>,
-    | models.ErrorsErrorsErrorResponse
+    Array<models.ListSubscriptionPausesResponse>,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -166,12 +166,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      z.array(models.DtoListSubscriptionPausesResponse$inboundSchema),
-    ),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, z.array(models.ListSubscriptionPausesResponse$inboundSchema)),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

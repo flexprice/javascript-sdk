@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoUpdateCreditGrantRequest,
-  DtoUpdateCreditGrantRequest$Outbound,
-  DtoUpdateCreditGrantRequest$outboundSchema,
-} from "./dto-update-credit-grant-request.js";
+  UpdateCreditGrantRequest,
+  UpdateCreditGrantRequest$Outbound,
+  UpdateCreditGrantRequest$outboundSchema,
+} from "./update-credit-grant-request.js";
 
-export type UpdateCreditGrantRequest = {
+export type UpdateCreditGrantRequestRequest = {
   /**
    * Credit Grant ID
    */
@@ -17,28 +17,30 @@ export type UpdateCreditGrantRequest = {
   /**
    * Credit Grant configuration
    */
-  body: DtoUpdateCreditGrantRequest;
+  body: UpdateCreditGrantRequest;
 };
 
 /** @internal */
-export type UpdateCreditGrantRequest$Outbound = {
+export type UpdateCreditGrantRequestRequest$Outbound = {
   id: string;
-  body: DtoUpdateCreditGrantRequest$Outbound;
+  body: UpdateCreditGrantRequest$Outbound;
 };
 
 /** @internal */
-export const UpdateCreditGrantRequest$outboundSchema: z.ZodMiniType<
-  UpdateCreditGrantRequest$Outbound,
-  UpdateCreditGrantRequest
+export const UpdateCreditGrantRequestRequest$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantRequestRequest$Outbound,
+  UpdateCreditGrantRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoUpdateCreditGrantRequest$outboundSchema,
+  body: UpdateCreditGrantRequest$outboundSchema,
 });
 
-export function updateCreditGrantRequestToJSON(
-  updateCreditGrantRequest: UpdateCreditGrantRequest,
+export function updateCreditGrantRequestRequestToJSON(
+  updateCreditGrantRequestRequest: UpdateCreditGrantRequestRequest,
 ): string {
   return JSON.stringify(
-    UpdateCreditGrantRequest$outboundSchema.parse(updateCreditGrantRequest),
+    UpdateCreditGrantRequestRequest$outboundSchema.parse(
+      updateCreditGrantRequestRequest,
+    ),
   );
 }

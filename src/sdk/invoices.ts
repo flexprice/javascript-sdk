@@ -30,7 +30,7 @@ export class Invoices extends ClientSDK {
   async getCustomerInvoiceSummary(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoCustomerMultiCurrencyInvoiceSummary> {
+  ): Promise<models.CustomerMultiCurrencyInvoiceSummary> {
     return unwrapAsync(invoicesGetCustomerInvoiceSummary(
       this,
       id,
@@ -45,9 +45,9 @@ export class Invoices extends ClientSDK {
    * Use when creating a manual or one-off invoice (e.g. custom charge or non-recurring billing). Invoice is created in draft; finalize when ready.
    */
   async createInvoice(
-    request: models.DtoCreateInvoiceRequest,
+    request: models.CreateInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesCreateInvoice(
       this,
       request,
@@ -62,9 +62,9 @@ export class Invoices extends ClientSDK {
    * Use when showing a customer what they will be charged (e.g. preview before checkout or plan change). No invoice is created.
    */
   async getInvoicePreview(
-    request: models.DtoGetPreviewInvoiceRequest,
+    request: models.GetPreviewInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesGetInvoicePreview(
       this,
       request,
@@ -81,7 +81,7 @@ export class Invoices extends ClientSDK {
   async queryInvoice(
     request: models.InvoiceFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListInvoicesResponse> {
+  ): Promise<models.ListInvoicesResponse> {
     return unwrapAsync(invoicesQueryInvoice(
       this,
       request,
@@ -100,7 +100,7 @@ export class Invoices extends ClientSDK {
     expandBySource?: boolean | undefined,
     groupBy?: Array<string> | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesGetInvoice(
       this,
       id,
@@ -118,9 +118,9 @@ export class Invoices extends ClientSDK {
    */
   async updateInvoice(
     id: string,
-    body: models.DtoUpdateInvoiceRequest,
+    body: models.UpdateInvoiceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesUpdateInvoice(
       this,
       id,
@@ -138,7 +138,7 @@ export class Invoices extends ClientSDK {
   async triggerInvoiceCommsWebhook(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesTriggerInvoiceCommsWebhook(
       this,
       id,
@@ -155,7 +155,7 @@ export class Invoices extends ClientSDK {
   async finalizeInvoice(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesFinalizeInvoice(
       this,
       id,
@@ -171,9 +171,9 @@ export class Invoices extends ClientSDK {
    */
   async updateInvoicePaymentStatus(
     id: string,
-    body: models.DtoUpdatePaymentStatusRequest,
+    body: models.UpdatePaymentStatusRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesUpdateInvoicePaymentStatus(
       this,
       id,
@@ -191,7 +191,7 @@ export class Invoices extends ClientSDK {
   async attemptInvoicePayment(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesAttemptInvoicePayment(
       this,
       id,
@@ -247,7 +247,7 @@ export class Invoices extends ClientSDK {
     id: string,
     finalize?: boolean | undefined,
     options?: RequestOptions,
-  ): Promise<models.DtoInvoiceResponse> {
+  ): Promise<models.Invoice> {
     return unwrapAsync(invoicesRecalculateInvoiceV2(
       this,
       id,
@@ -265,7 +265,7 @@ export class Invoices extends ClientSDK {
   async voidInvoice(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesVoidInvoice(
       this,
       id,

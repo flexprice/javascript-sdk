@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoPauseSubscriptionRequest,
-  DtoPauseSubscriptionRequest$Outbound,
-  DtoPauseSubscriptionRequest$outboundSchema,
-} from "./dto-pause-subscription-request.js";
+  PauseSubscriptionRequest,
+  PauseSubscriptionRequest$Outbound,
+  PauseSubscriptionRequest$outboundSchema,
+} from "./pause-subscription-request.js";
 
-export type PauseSubscriptionRequest = {
+export type PauseSubscriptionRequestRequest = {
   /**
    * Subscription ID
    */
@@ -17,28 +17,30 @@ export type PauseSubscriptionRequest = {
   /**
    * Pause subscription request
    */
-  body: DtoPauseSubscriptionRequest;
+  body: PauseSubscriptionRequest;
 };
 
 /** @internal */
-export type PauseSubscriptionRequest$Outbound = {
+export type PauseSubscriptionRequestRequest$Outbound = {
   id: string;
-  body: DtoPauseSubscriptionRequest$Outbound;
+  body: PauseSubscriptionRequest$Outbound;
 };
 
 /** @internal */
-export const PauseSubscriptionRequest$outboundSchema: z.ZodMiniType<
-  PauseSubscriptionRequest$Outbound,
-  PauseSubscriptionRequest
+export const PauseSubscriptionRequestRequest$outboundSchema: z.ZodMiniType<
+  PauseSubscriptionRequestRequest$Outbound,
+  PauseSubscriptionRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoPauseSubscriptionRequest$outboundSchema,
+  body: PauseSubscriptionRequest$outboundSchema,
 });
 
-export function pauseSubscriptionRequestToJSON(
-  pauseSubscriptionRequest: PauseSubscriptionRequest,
+export function pauseSubscriptionRequestRequestToJSON(
+  pauseSubscriptionRequestRequest: PauseSubscriptionRequestRequest,
 ): string {
   return JSON.stringify(
-    PauseSubscriptionRequest$outboundSchema.parse(pauseSubscriptionRequest),
+    PauseSubscriptionRequestRequest$outboundSchema.parse(
+      pauseSubscriptionRequestRequest,
+    ),
   );
 }

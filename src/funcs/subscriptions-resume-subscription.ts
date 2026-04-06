@@ -34,12 +34,12 @@ import { Result } from "../types/fp.js";
 export function subscriptionsResumeSubscription(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoResumeSubscriptionRequest,
+  body: models.ResumeSubscriptionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoSubscriptionPauseResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionPauseResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -61,13 +61,13 @@ export function subscriptionsResumeSubscription(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.DtoResumeSubscriptionRequest,
+  body: models.ResumeSubscriptionRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.DtoSubscriptionPauseResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.SubscriptionPauseResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -80,14 +80,15 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.ResumeSubscriptionRequest = {
+  const input: models.ResumeSubscriptionRequestRequest = {
     id: id,
     body: body,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.ResumeSubscriptionRequest$outboundSchema, value),
+    (value) =>
+      z.parse(models.ResumeSubscriptionRequestRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -159,8 +160,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoSubscriptionPauseResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.SubscriptionPauseResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -170,9 +171,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoSubscriptionPauseResponse$inboundSchema),
-    M.jsonErr([400, 404], models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.SubscriptionPauseResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -21,9 +21,9 @@ export class Prices extends ClientSDK {
    * Use when adding a new price to a plan or catalog (e.g. per-seat, flat, or metered). Ideal for both simple and usage-based pricing.
    */
   async createPrice(
-    request: models.DtoCreatePriceRequest,
+    request: models.CreatePriceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceResponse> {
+  ): Promise<models.Price> {
     return unwrapAsync(pricesCreatePrice(
       this,
       request,
@@ -38,9 +38,9 @@ export class Prices extends ClientSDK {
    * Use when creating many prices at once (e.g. importing a catalog or setting up a plan with multiple tiers).
    */
   async createPricesBulk(
-    request: models.DtoCreateBulkPriceRequest,
+    request: models.CreateBulkPriceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoCreateBulkPriceResponse> {
+  ): Promise<models.CreateBulkPriceResponse> {
     return unwrapAsync(pricesCreatePricesBulk(
       this,
       request,
@@ -57,7 +57,7 @@ export class Prices extends ClientSDK {
   async getPriceByLookupKey(
     lookupKey: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceResponse> {
+  ): Promise<models.Price> {
     return unwrapAsync(pricesGetPriceByLookupKey(
       this,
       lookupKey,
@@ -74,7 +74,7 @@ export class Prices extends ClientSDK {
   async queryPrice(
     request: models.PriceFilter,
     options?: RequestOptions,
-  ): Promise<models.DtoListPricesResponse> {
+  ): Promise<models.ListPricesResponse> {
     return unwrapAsync(pricesQueryPrice(
       this,
       request,
@@ -91,7 +91,7 @@ export class Prices extends ClientSDK {
   async getPrice(
     id: string,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceResponse> {
+  ): Promise<models.Price> {
     return unwrapAsync(pricesGetPrice(
       this,
       id,
@@ -107,9 +107,9 @@ export class Prices extends ClientSDK {
    */
   async updatePrice(
     id: string,
-    body: models.DtoUpdatePriceRequest,
+    body: models.UpdatePriceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoPriceResponse> {
+  ): Promise<models.Price> {
     return unwrapAsync(pricesUpdatePrice(
       this,
       id,
@@ -126,9 +126,9 @@ export class Prices extends ClientSDK {
    */
   async deletePrice(
     id: string,
-    body: models.DtoDeletePriceRequest,
+    body: models.DeletePriceRequest,
     options?: RequestOptions,
-  ): Promise<models.DtoSuccessResponse> {
+  ): Promise<models.SuccessResponse> {
     return unwrapAsync(pricesDeletePrice(
       this,
       id,

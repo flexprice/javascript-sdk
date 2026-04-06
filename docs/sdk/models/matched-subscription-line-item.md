@@ -1,0 +1,22 @@
+# MatchedSubscriptionLineItem
+
+## Example Usage
+
+```typescript
+import { MatchedSubscriptionLineItem } from "@flexprice/sdk/sdk/models";
+
+let value: MatchedSubscriptionLineItem = {};
+```
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `endDate`                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `isActiveForEvent`                                                                                 | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `priceId`                                                                                          | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `startDate`                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)      | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `subLineItemId`                                                                                    | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `subscriptionId`                                                                                   | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `subscriptionLineItem`                                                                             | [models.SubscriptionSubscriptionLineItem](../../sdk/models/subscription-subscription-line-item.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `timestampWithinRange`                                                                             | *boolean*                                                                                          | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

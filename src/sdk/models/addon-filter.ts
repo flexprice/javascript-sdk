@@ -27,7 +27,7 @@ export type AddonFilterOrder = ClosedEnum<typeof AddonFilterOrder>;
 export type AddonFilter = {
   addonIds?: Array<string> | undefined;
   addonType?: AddonType | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * filters allows complex filtering based on multiple fields
@@ -38,7 +38,7 @@ export type AddonFilter = {
   offset?: number | undefined;
   order?: AddonFilterOrder | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
 };
 
@@ -71,7 +71,7 @@ export const AddonFilter$outboundSchema: z.ZodMiniType<
   z.object({
     addonIds: z.optional(z.array(z.string())),
     addonType: z.optional(AddonType$outboundSchema),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
@@ -79,7 +79,7 @@ export const AddonFilter$outboundSchema: z.ZodMiniType<
     offset: z.optional(z.int()),
     order: z.optional(AddonFilterOrder$outboundSchema),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
   }),
   z.transform((v) => {

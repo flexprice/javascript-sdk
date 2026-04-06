@@ -15,7 +15,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
 export type GroupGroup = {
-  createdAt?: string | undefined;
+  createdAt?: Date | undefined;
   createdBy?: string | undefined;
   entityType?: GroupEntityType | undefined;
   environmentId?: string | undefined;
@@ -25,7 +25,7 @@ export type GroupGroup = {
   name?: string | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
-  updatedAt?: string | undefined;
+  updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
 
@@ -33,7 +33,7 @@ export type GroupGroup = {
 export const GroupGroup$inboundSchema: z.ZodMiniType<GroupGroup, unknown> = z
   .pipe(
     z.object({
-      created_at: types.optional(types.string()),
+      created_at: types.optional(types.date()),
       created_by: types.optional(types.string()),
       entity_type: types.optional(GroupEntityType$inboundSchema),
       environment_id: types.optional(types.string()),
@@ -43,7 +43,7 @@ export const GroupGroup$inboundSchema: z.ZodMiniType<GroupGroup, unknown> = z
       name: types.optional(types.string()),
       status: types.optional(Status$inboundSchema),
       tenant_id: types.optional(types.string()),
-      updated_at: types.optional(types.string()),
+      updated_at: types.optional(types.date()),
       updated_by: types.optional(types.string()),
     }),
     z.transform((v) => {

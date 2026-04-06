@@ -28,6 +28,10 @@ import {
   SubscriptionStatus,
   SubscriptionStatus$outboundSchema,
 } from "./subscription-status.js";
+import {
+  SubscriptionType,
+  SubscriptionType$outboundSchema,
+} from "./subscription-type.js";
 
 export const SubscriptionFilterOrder = {
   Asc: "asc",
@@ -41,7 +45,7 @@ export type SubscriptionFilter = {
   /**
    * ActiveAt filters subscriptions that are active at the given time
    */
-  activeAt?: string | undefined;
+  activeAt?: Date | undefined;
   /**
    * BillingCadence filters by billing cadence
    */
@@ -55,6 +59,10 @@ export type SubscriptionFilter = {
    */
   customerId?: string | undefined;
   /**
+   * CustomerIDs filters by customer IDs
+   */
+  customerIds?: Array<string> | undefined;
+  /**
    * EffectiveDateForUpdate selects subscriptions that need a billing-period pass on or before this time:
    *
    * @remarks
@@ -62,7 +70,7 @@ export type SubscriptionFilter = {
    * When nil, period/cancel cutoff logic is not applied by this field (see TimeRangeFilter for legacy period-end filtering).
    */
   effectiveDateForUpdate?: string | undefined;
-  endTime?: string | undefined;
+  endTime?: Date | undefined;
   expand?: string | undefined;
   /**
    * ExternalCustomerID filters by external customer ID
@@ -85,13 +93,17 @@ export type SubscriptionFilter = {
    */
   planId?: string | undefined;
   sort?: Array<SortCondition> | undefined;
-  startTime?: string | undefined;
+  startTime?: Date | undefined;
   status?: Status | undefined;
   subscriptionIds?: Array<string> | undefined;
   /**
    * SubscriptionStatus filters by subscription status
    */
   subscriptionStatus?: Array<SubscriptionStatus> | undefined;
+  /**
+   * SubscriptionType filters by subscription type
+   */
+  subscriptionType?: Array<SubscriptionType> | undefined;
   /**
    * WithLineItems includes line items in the response
    */
@@ -109,6 +121,7 @@ export type SubscriptionFilter$Outbound = {
   billing_cadence?: Array<string> | undefined;
   billing_period?: Array<string> | undefined;
   customer_id?: string | undefined;
+  customer_ids?: Array<string> | undefined;
   effective_date_for_update?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
@@ -125,6 +138,7 @@ export type SubscriptionFilter$Outbound = {
   status?: string | undefined;
   subscription_ids?: Array<string> | undefined;
   subscription_status?: Array<string> | undefined;
+  subscription_type?: Array<string> | undefined;
   with_line_items?: boolean | undefined;
 };
 
@@ -134,12 +148,13 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
   SubscriptionFilter
 > = z.pipe(
   z.object({
-    activeAt: z.optional(z.string()),
+    activeAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     billingCadence: z.optional(z.array(BillingCadence$outboundSchema)),
     billingPeriod: z.optional(z.array(BillingPeriod$outboundSchema)),
     customerId: z.optional(z.string()),
+    customerIds: z.optional(z.array(z.string())),
     effectiveDateForUpdate: z.optional(z.string()),
-    endTime: z.optional(z.string()),
+    endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     externalCustomerId: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
@@ -150,10 +165,11 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
     parentSubscriptionIds: z.optional(z.array(z.string())),
     planId: z.optional(z.string()),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
-    startTime: z.optional(z.string()),
+    startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     subscriptionIds: z.optional(z.array(z.string())),
     subscriptionStatus: z.optional(z.array(SubscriptionStatus$outboundSchema)),
+    subscriptionType: z.optional(z.array(SubscriptionType$outboundSchema)),
     withLineItems: z.optional(z.boolean()),
   }),
   z.transform((v) => {
@@ -162,6 +178,7 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
       billingCadence: "billing_cadence",
       billingPeriod: "billing_period",
       customerId: "customer_id",
+      customerIds: "customer_ids",
       effectiveDateForUpdate: "effective_date_for_update",
       endTime: "end_time",
       externalCustomerId: "external_customer_id",
@@ -171,6 +188,7 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
       startTime: "start_time",
       subscriptionIds: "subscription_ids",
       subscriptionStatus: "subscription_status",
+      subscriptionType: "subscription_type",
       withLineItems: "with_line_items",
     });
   }),

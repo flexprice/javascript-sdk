@@ -4,12 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import {
-  DtoTopUpWalletRequest,
-  DtoTopUpWalletRequest$Outbound,
-  DtoTopUpWalletRequest$outboundSchema,
-} from "./dto-top-up-wallet-request.js";
+  TopUpWalletRequest,
+  TopUpWalletRequest$Outbound,
+  TopUpWalletRequest$outboundSchema,
+} from "./top-up-wallet-request.js";
 
-export type TopUpWalletRequest = {
+export type TopUpWalletRequestRequest = {
   /**
    * Wallet ID
    */
@@ -17,28 +17,28 @@ export type TopUpWalletRequest = {
   /**
    * Top up request
    */
-  body: DtoTopUpWalletRequest;
+  body: TopUpWalletRequest;
 };
 
 /** @internal */
-export type TopUpWalletRequest$Outbound = {
+export type TopUpWalletRequestRequest$Outbound = {
   id: string;
-  body: DtoTopUpWalletRequest$Outbound;
+  body: TopUpWalletRequest$Outbound;
 };
 
 /** @internal */
-export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
-  TopUpWalletRequest$Outbound,
-  TopUpWalletRequest
+export const TopUpWalletRequestRequest$outboundSchema: z.ZodMiniType<
+  TopUpWalletRequestRequest$Outbound,
+  TopUpWalletRequestRequest
 > = z.object({
   id: z.string(),
-  body: DtoTopUpWalletRequest$outboundSchema,
+  body: TopUpWalletRequest$outboundSchema,
 });
 
-export function topUpWalletRequestToJSON(
-  topUpWalletRequest: TopUpWalletRequest,
+export function topUpWalletRequestRequestToJSON(
+  topUpWalletRequestRequest: TopUpWalletRequestRequest,
 ): string {
   return JSON.stringify(
-    TopUpWalletRequest$outboundSchema.parse(topUpWalletRequest),
+    TopUpWalletRequestRequest$outboundSchema.parse(topUpWalletRequestRequest),
   );
 }

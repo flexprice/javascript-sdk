@@ -5,10 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  DtoCancelScheduleRequest,
-  DtoCancelScheduleRequest$Outbound,
-  DtoCancelScheduleRequest$outboundSchema,
-} from "./dto-cancel-schedule-request.js";
+  CancelScheduleRequest,
+  CancelScheduleRequest$Outbound,
+  CancelScheduleRequest$outboundSchema,
+} from "./cancel-schedule-request.js";
 
 export type CancelSubscriptionScheduleRequest = {
   /**
@@ -18,13 +18,13 @@ export type CancelSubscriptionScheduleRequest = {
   /**
    * Cancel request (optional if using path parameter)
    */
-  body?: DtoCancelScheduleRequest | undefined;
+  body?: CancelScheduleRequest | undefined;
 };
 
 /** @internal */
 export type CancelSubscriptionScheduleRequest$Outbound = {
   schedule_id: string;
-  body?: DtoCancelScheduleRequest$Outbound | undefined;
+  body?: CancelScheduleRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const CancelSubscriptionScheduleRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     scheduleId: z.string(),
-    body: z.optional(DtoCancelScheduleRequest$outboundSchema),
+    body: z.optional(CancelScheduleRequest$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

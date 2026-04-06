@@ -33,8 +33,8 @@ export function costsGetActiveCostsheet(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.DtoCostsheetResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.CostsheetResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -57,8 +57,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.DtoCostsheetResponse,
-      | models.ErrorsErrorsErrorResponse
+      models.CostsheetResponse,
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -126,8 +126,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.DtoCostsheetResponse,
-    | models.ErrorsErrorsErrorResponse
+    models.CostsheetResponse,
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -137,9 +137,9 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.DtoCostsheetResponse$inboundSchema),
-    M.jsonErr(404, models.ErrorsErrorsErrorResponse$inboundSchema),
-    M.jsonErr(500, models.ErrorsErrorsErrorResponse$inboundSchema),
+    M.json(200, models.CostsheetResponse$inboundSchema),
+    M.jsonErr(404, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
