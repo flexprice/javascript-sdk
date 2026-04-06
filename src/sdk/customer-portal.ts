@@ -9,6 +9,11 @@ import type { SDKOptions } from "../lib/config.js";
 import { Flexprice } from "../index.js";
 import type * as models from "./models/index.js";
 
+/** Return type of {@link Flexprice.customers.getCustomerByExternalId} (avoids models barrel alias e.g. Customer1). */
+type CustomerFromLookup = Awaited<
+  ReturnType<Flexprice["customers"]["getCustomerByExternalId"]>
+>;
+
 export type DashboardOptions = {
   subscriptionLimit?: number;
   invoiceLimit?: number;
@@ -22,7 +27,7 @@ export type DashboardOptions = {
 };
 
 export interface CustomerDashboardData {
-  customer?: models.Customer;
+  customer?: CustomerFromLookup;
   usage?: models.CustomerUsageSummaryResponse;
   entitlements?: models.CustomerEntitlementsResponse;
   walletBalance?: models.Wallet;
@@ -171,7 +176,7 @@ export class CustomerPortal {
 
     const result: CustomerDashboardData = { metadata };
 
-    if (opts.includeCustomer && customerData) result.customer = customerData as models.Customer;
+    if (opts.includeCustomer && customerData) result.customer = customerData as CustomerFromLookup;
     if (usage && isSuccess(usage)) result.usage = usage;
     if (entitlements && isSuccess(entitlements)) result.entitlements = entitlements;
     if (walletBalance && isSuccess(walletBalance)) result.walletBalance = walletBalance;
