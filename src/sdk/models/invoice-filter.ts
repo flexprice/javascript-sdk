@@ -113,6 +113,10 @@ export type InvoiceFilter = {
   startTime?: Date | undefined;
   status?: Status | undefined;
   /**
+   * subscription_customer_id filters invoices by the subscription owner's customer ID
+   */
+  subscriptionCustomerId?: Array<string> | undefined;
+  /**
    * subscription_id filters invoices generated for a specific subscription
    *
    * @remarks
@@ -150,6 +154,7 @@ export type InvoiceFilter$Outbound = {
   sort?: Array<SortCondition$Outbound> | undefined;
   start_time?: string | undefined;
   status?: string | undefined;
+  subscription_customer_id?: Array<string> | undefined;
   subscription_id?: string | undefined;
 };
 
@@ -181,6 +186,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     sort: z.optional(z.array(SortCondition$outboundSchema)),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
+    subscriptionCustomerId: z.optional(z.array(z.string())),
     subscriptionId: z.optional(z.string()),
   }),
   z.transform((v) => {
@@ -200,6 +206,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
       periodStartLte: "period_start_lte",
       skipLineItems: "skip_line_items",
       startTime: "start_time",
+      subscriptionCustomerId: "subscription_customer_id",
       subscriptionId: "subscription_id",
     });
   }),

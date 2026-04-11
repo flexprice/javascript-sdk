@@ -1,11 +1,11 @@
-# ExecuteSubscriptionInheritanceRequest
+# SubModifyInheritanceRequest
 
 ## Example Usage
 
 ```typescript
-import { ExecuteSubscriptionInheritanceRequest } from "@flexprice/sdk/sdk/models";
+import { SubModifyInheritanceRequest } from "@flexprice/sdk/sdk/models";
 
-let value: ExecuteSubscriptionInheritanceRequest = {};
+let value: SubModifyInheritanceRequest = {};
 ```
 
 ## Fields

@@ -21,7 +21,8 @@
 * [getSubscriptionEntitlements](#getsubscriptionentitlements) - Get subscription entitlements
 * [getSubscriptionUpcomingGrants](#getsubscriptionupcominggrants) - Get upcoming credit grant applications
 * [createSubscriptionLineItem](#createsubscriptionlineitem) - Create subscription line item
-* [executeSubscriptionModify](#executesubscriptionmodify) - Add customers to subscription inheritance
+* [executeSubscriptionModify](#executesubscriptionmodify) - Execute subscription modification
+* [previewSubscriptionModify](#previewsubscriptionmodify) - Preview subscription modification
 * [pauseSubscription](#pausesubscription) - Pause a subscription
 * [listSubscriptionPauses](#listsubscriptionpauses) - List all pauses for a subscription
 * [resumeSubscription](#resumesubscription) - Resume a paused subscription
@@ -47,9 +48,8 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.subscriptions.createSubscription({
-    billingCadence: "ONETIME",
-    billingPeriod: "DAILY",
-    currency: "New Leu",
+    billingPeriod: "ONETIME",
+    currency: "Kwacha",
     planId: "<id>",
   });
 
@@ -75,9 +75,8 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await subscriptionsCreateSubscription(flexprice, {
-    billingCadence: "ONETIME",
-    billingPeriod: "DAILY",
-    currency: "New Leu",
+    billingPeriod: "ONETIME",
+    currency: "Kwacha",
     planId: "<id>",
   });
   if (res.ok) {
@@ -944,8 +943,8 @@ async function run() {
   const result = await flexprice.subscriptions.executeSubscriptionChange("<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
-    billingPeriod: "QUARTERLY",
-    prorationBehavior: "create_prorations",
+    billingPeriod: "ANNUAL",
+    prorationBehavior: "none",
     targetPlanId: "<id>",
   });
 
@@ -973,8 +972,8 @@ async function run() {
   const res = await subscriptionsExecuteSubscriptionChange(flexprice, "<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
-    billingPeriod: "QUARTERLY",
-    prorationBehavior: "create_prorations",
+    billingPeriod: "ANNUAL",
+    prorationBehavior: "none",
     targetPlanId: "<id>",
   });
   if (res.ok) {
@@ -1027,9 +1026,9 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.subscriptions.previewSubscriptionChange("<id>", {
     billingCadence: "RECURRING",
-    billingCycle: "calendar",
-    billingPeriod: "HALF_YEARLY",
-    prorationBehavior: "create_prorations",
+    billingCycle: "anniversary",
+    billingPeriod: "ONETIME",
+    prorationBehavior: "none",
     targetPlanId: "<id>",
   });
 
@@ -1056,9 +1055,9 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await subscriptionsPreviewSubscriptionChange(flexprice, "<id>", {
     billingCadence: "RECURRING",
-    billingCycle: "calendar",
-    billingPeriod: "HALF_YEARLY",
-    prorationBehavior: "create_prorations",
+    billingCycle: "anniversary",
+    billingPeriod: "ONETIME",
+    prorationBehavior: "none",
     targetPlanId: "<id>",
   });
   if (res.ok) {
@@ -1311,7 +1310,7 @@ run();
 
 ## executeSubscriptionModify
 
-Attach additional child customers (by external ID) to an active standalone or parent subscription; creates inherited skeleton subscriptions for each. The subscription must be active.
+Execute a mid-cycle subscription modification (inheritance or quantity change).
 
 ### Example Usage
 
@@ -1324,7 +1323,9 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.subscriptions.executeSubscriptionModify("<id>", {});
+  const result = await flexprice.subscriptions.executeSubscriptionModify("<id>", {
+    type: "inheritance",
+  });
 
   console.log(result);
 }
@@ -1347,7 +1348,9 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await subscriptionsExecuteSubscriptionModify(flexprice, "<id>", {});
+  const res = await subscriptionsExecuteSubscriptionModify(flexprice, "<id>", {
+    type: "inheritance",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -1364,14 +1367,90 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
-| `body`                                                                                                                                                                         | [models.ExecuteSubscriptionInheritanceRequest](../../sdk/models/execute-subscription-inheritance-request.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | External customer IDs to inherit                                                                                                                                               |
+| `body`                                                                                                                                                                         | [models.ExecuteSubscriptionModifyRequest](../../sdk/models/execute-subscription-modify-request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | Modification request                                                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[models.SubscriptionResponse](../../sdk/models/subscription-response.md)\>**
+**Promise\<[models.SubscriptionModifyResponse](../../sdk/models/subscription-modify-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## previewSubscriptionModify
+
+Preview the impact of a mid-cycle subscription modification without committing changes.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="previewSubscriptionModify" method="post" path="/subscriptions/{id}/modify/preview" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.previewSubscriptionModify("<id>", {
+    type: "quantity_change",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsPreviewSubscriptionModify } from "@flexprice/sdk/funcs/subscriptions-preview-subscription-modify.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsPreviewSubscriptionModify(flexprice, "<id>", {
+    type: "quantity_change",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsPreviewSubscriptionModify failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
+| `body`                                                                                                                                                                         | [models.ExecuteSubscriptionModifyRequest](../../sdk/models/execute-subscription-modify-request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | Modification preview request                                                                                                                                                   |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.SubscriptionModifyResponse](../../sdk/models/subscription-modify-response.md)\>**
 
 ### Errors
 

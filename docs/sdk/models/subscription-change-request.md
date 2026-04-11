@@ -10,7 +10,7 @@ import { SubscriptionChangeRequest } from "@flexprice/sdk/sdk/models";
 let value: SubscriptionChangeRequest = {
   billingCadence: "RECURRING",
   billingCycle: "anniversary",
-  billingPeriod: "MONTHLY",
+  billingPeriod: "ANNUAL",
   prorationBehavior: "create_prorations",
   targetPlanId: "<id>",
 };

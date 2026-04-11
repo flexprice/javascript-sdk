@@ -6,10 +6,9 @@
 import { SubscriptionPriceCreateRequest } from "@flexprice/sdk/sdk/models";
 
 let value: SubscriptionPriceCreateRequest = {
-  billingCadence: "ONETIME",
-  billingModel: "FLAT_FEE",
-  billingPeriod: "MONTHLY",
-  invoiceCadence: "ADVANCE",
+  billingModel: "PACKAGE",
+  billingPeriod: "ANNUAL",
+  invoiceCadence: "ARREAR",
   priceUnitType: "CUSTOM",
   type: "FIXED",
 };
@@ -20,7 +19,6 @@ let value: SubscriptionPriceCreateRequest = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `amount`                                                                                      | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `billingCadence`                                                                              | [models.BillingCadence](../../sdk/models/billing-cadence.md)                                  | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `billingModel`                                                                                | [models.BillingModel](../../sdk/models/billing-model.md)                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `billingPeriod`                                                                               | [models.BillingPeriod](../../sdk/models/billing-period.md)                                    | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `billingPeriodCount`                                                                          | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

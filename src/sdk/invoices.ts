@@ -9,6 +9,7 @@ import { invoicesGetCustomerInvoiceSummary } from "../funcs/invoices-get-custome
 import { invoicesGetInvoicePdf } from "../funcs/invoices-get-invoice-pdf.js";
 import { invoicesGetInvoicePreview } from "../funcs/invoices-get-invoice-preview.js";
 import { invoicesGetInvoice } from "../funcs/invoices-get-invoice.js";
+import { invoicesGetMeterUsagePreviewInvoice } from "../funcs/invoices-get-meter-usage-preview-invoice.js";
 import { invoicesQueryInvoice } from "../funcs/invoices-query-invoice.js";
 import { invoicesRecalculateInvoiceV2 } from "../funcs/invoices-recalculate-invoice-v2.js";
 import { invoicesRecalculateInvoice } from "../funcs/invoices-recalculate-invoice.js";
@@ -49,6 +50,23 @@ export class Invoices extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesCreateInvoice(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get invoice preview using meter_usage data
+   *
+   * @remarks
+   * Preview invoice using the meter_usage table for usage data instead of feature_usage.
+   */
+  async getMeterUsagePreviewInvoice(
+    request: models.GetPreviewInvoiceRequest,
+    options?: RequestOptions,
+  ): Promise<models.InvoiceResponse> {
+    return unwrapAsync(invoicesGetMeterUsagePreviewInvoice(
       this,
       request,
       options,

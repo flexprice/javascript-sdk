@@ -14,6 +14,7 @@ export const SecretProvider = {
   Razorpay: "razorpay",
   Chargebee: "chargebee",
   Quickbooks: "quickbooks",
+  ZohoBooks: "zoho_books",
   Nomod: "nomod",
   Moyasar: "moyasar",
   Paddle: "paddle",

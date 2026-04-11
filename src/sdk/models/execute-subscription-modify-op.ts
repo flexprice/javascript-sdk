@@ -4,43 +4,45 @@
 
 import * as z from "zod/v4-mini";
 import {
-  ExecuteSubscriptionInheritanceRequest,
-  ExecuteSubscriptionInheritanceRequest$Outbound,
-  ExecuteSubscriptionInheritanceRequest$outboundSchema,
-} from "./execute-subscription-inheritance-request.js";
+  ExecuteSubscriptionModifyRequest,
+  ExecuteSubscriptionModifyRequest$Outbound,
+  ExecuteSubscriptionModifyRequest$outboundSchema,
+} from "./execute-subscription-modify-request.js";
 
-export type ExecuteSubscriptionModifyRequest = {
+export type ExecuteSubscriptionModifyRequestRequest = {
   /**
    * Subscription ID
    */
   id: string;
   /**
-   * External customer IDs to inherit
+   * Modification request
    */
-  body: ExecuteSubscriptionInheritanceRequest;
+  body: ExecuteSubscriptionModifyRequest;
 };
 
 /** @internal */
-export type ExecuteSubscriptionModifyRequest$Outbound = {
+export type ExecuteSubscriptionModifyRequestRequest$Outbound = {
   id: string;
-  body: ExecuteSubscriptionInheritanceRequest$Outbound;
+  body: ExecuteSubscriptionModifyRequest$Outbound;
 };
 
 /** @internal */
-export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
-  ExecuteSubscriptionModifyRequest$Outbound,
-  ExecuteSubscriptionModifyRequest
-> = z.object({
-  id: z.string(),
-  body: ExecuteSubscriptionInheritanceRequest$outboundSchema,
-});
+export const ExecuteSubscriptionModifyRequestRequest$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionModifyRequestRequest$Outbound,
+    ExecuteSubscriptionModifyRequestRequest
+  > = z.object({
+    id: z.string(),
+    body: ExecuteSubscriptionModifyRequest$outboundSchema,
+  });
 
-export function executeSubscriptionModifyRequestToJSON(
-  executeSubscriptionModifyRequest: ExecuteSubscriptionModifyRequest,
+export function executeSubscriptionModifyRequestRequestToJSON(
+  executeSubscriptionModifyRequestRequest:
+    ExecuteSubscriptionModifyRequestRequest,
 ): string {
   return JSON.stringify(
-    ExecuteSubscriptionModifyRequest$outboundSchema.parse(
-      executeSubscriptionModifyRequest,
+    ExecuteSubscriptionModifyRequestRequest$outboundSchema.parse(
+      executeSubscriptionModifyRequestRequest,
     ),
   );
 }

@@ -10,8 +10,8 @@ let value: ExecuteSubscriptionChangeRequest = {
   body: {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
-    billingPeriod: "QUARTERLY",
-    prorationBehavior: "create_prorations",
+    billingPeriod: "WEEKLY",
+    prorationBehavior: "none",
     targetPlanId: "<id>",
   },
 };

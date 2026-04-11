@@ -26,19 +26,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Add customers to subscription inheritance
+ * Execute subscription modification
  *
  * @remarks
- * Attach additional child customers (by external ID) to an active standalone or parent subscription; creates inherited skeleton subscriptions for each. The subscription must be active.
+ * Execute a mid-cycle subscription modification (inheritance or quantity change).
  */
 export function subscriptionsExecuteSubscriptionModify(
   client: FlexpriceCore,
   id: string,
-  body: models.ExecuteSubscriptionInheritanceRequest,
+  body: models.ExecuteSubscriptionModifyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.SubscriptionResponse,
+    models.SubscriptionModifyResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -61,12 +61,12 @@ export function subscriptionsExecuteSubscriptionModify(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.ExecuteSubscriptionInheritanceRequest,
+  body: models.ExecuteSubscriptionModifyRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.SubscriptionResponse,
+      models.SubscriptionModifyResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -80,7 +80,7 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.ExecuteSubscriptionModifyRequest = {
+  const input: models.ExecuteSubscriptionModifyRequestRequest = {
     id: id,
     body: body,
   };
@@ -88,7 +88,10 @@ async function $do(
   const parsed = safeParse(
     input,
     (value) =>
-      z.parse(models.ExecuteSubscriptionModifyRequest$outboundSchema, value),
+      z.parse(
+        models.ExecuteSubscriptionModifyRequestRequest$outboundSchema,
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -160,7 +163,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.SubscriptionResponse,
+    models.SubscriptionModifyResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -171,7 +174,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.SubscriptionResponse$inboundSchema),
+    M.json(200, models.SubscriptionModifyResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

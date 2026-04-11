@@ -3,22 +3,18 @@
  */
 
 import * as z from "zod/v4-mini";
-import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum } from "../../types/enums.js";
 
 export const BillingCadence = {
   Recurring: "RECURRING",
-  Onetime: "ONETIME",
 } as const;
-export type BillingCadence = OpenEnum<typeof BillingCadence>;
+export type BillingCadence = ClosedEnum<typeof BillingCadence>;
 
 /** @internal */
-export const BillingCadence$inboundSchema: z.ZodMiniType<
-  BillingCadence,
-  unknown
-> = openEnums.inboundSchema(BillingCadence);
+export const BillingCadence$inboundSchema: z.ZodMiniEnum<
+  typeof BillingCadence
+> = z.enum(BillingCadence);
 /** @internal */
-export const BillingCadence$outboundSchema: z.ZodMiniType<
-  string,
-  BillingCadence
-> = openEnums.outboundSchema(BillingCadence);
+export const BillingCadence$outboundSchema: z.ZodMiniEnum<
+  typeof BillingCadence
+> = BillingCadence$inboundSchema;

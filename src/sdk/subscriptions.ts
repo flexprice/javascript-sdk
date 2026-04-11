@@ -23,6 +23,7 @@ import { subscriptionsListSubscriptionPauses } from "../funcs/subscriptions-list
 import { subscriptionsListSubscriptionSchedules } from "../funcs/subscriptions-list-subscription-schedules.js";
 import { subscriptionsPauseSubscription } from "../funcs/subscriptions-pause-subscription.js";
 import { subscriptionsPreviewSubscriptionChange } from "../funcs/subscriptions-preview-subscription-change.js";
+import { subscriptionsPreviewSubscriptionModify } from "../funcs/subscriptions-preview-subscription-modify.js";
 import { subscriptionsQuerySubscription } from "../funcs/subscriptions-query-subscription.js";
 import { subscriptionsRemoveSubscriptionAddon } from "../funcs/subscriptions-remove-subscription-addon.js";
 import { subscriptionsResumeSubscription } from "../funcs/subscriptions-resume-subscription.js";
@@ -341,17 +342,36 @@ export class Subscriptions extends ClientSDK {
   }
 
   /**
-   * Add customers to subscription inheritance
+   * Execute subscription modification
    *
    * @remarks
-   * Attach additional child customers (by external ID) to an active standalone or parent subscription; creates inherited skeleton subscriptions for each. The subscription must be active.
+   * Execute a mid-cycle subscription modification (inheritance or quantity change).
    */
   async executeSubscriptionModify(
     id: string,
-    body: models.ExecuteSubscriptionInheritanceRequest,
+    body: models.ExecuteSubscriptionModifyRequest,
     options?: RequestOptions,
-  ): Promise<models.SubscriptionResponse> {
+  ): Promise<models.SubscriptionModifyResponse> {
     return unwrapAsync(subscriptionsExecuteSubscriptionModify(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Preview subscription modification
+   *
+   * @remarks
+   * Preview the impact of a mid-cycle subscription modification without committing changes.
+   */
+  async previewSubscriptionModify(
+    id: string,
+    body: models.ExecuteSubscriptionModifyRequest,
+    options?: RequestOptions,
+  ): Promise<models.SubscriptionModifyResponse> {
+    return unwrapAsync(subscriptionsPreviewSubscriptionModify(
       this,
       id,
       body,

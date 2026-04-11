@@ -166,6 +166,13 @@ export type InvoiceResponse = {
   status?: Status | undefined;
   subscription?: SubscriptionResponse | undefined;
   /**
+   * subscription_customer_id is the subscription owner's customer ID (Subscription.CustomerID).
+   *
+   * @remarks
+   * It may differ from customer_id when the subscription uses an invoicing customer. Set internally; nullable in DB.
+   */
+  subscriptionCustomerId?: string | undefined;
+  /**
    * subscription_id is the ID of the subscription this invoice is associated with (only present for subscription-based invoices)
    */
   subscriptionId?: string | undefined;
@@ -251,6 +258,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     subscription: types.optional(
       z.lazy(() => SubscriptionResponse$inboundSchema),
     ),
+    subscription_customer_id: types.optional(types.string()),
     subscription_id: types.optional(types.string()),
     subtotal: types.optional(types.string()),
     taxes: types.optional(z.array(TaxAppliedResponse$inboundSchema)),
@@ -294,6 +302,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "period_start": "periodStart",
       "recalculated_invoice_id": "recalculatedInvoiceId",
       "refunded_amount": "refundedAmount",
+      "subscription_customer_id": "subscriptionCustomerId",
       "subscription_id": "subscriptionId",
       "tenant_id": "tenantId",
       "total_discount": "totalDiscount",

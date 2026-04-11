@@ -9,10 +9,6 @@ import {
   AddAddonToSubscriptionRequest$Outbound,
   AddAddonToSubscriptionRequest$outboundSchema,
 } from "./add-addon-to-subscription-request.js";
-import {
-  BillingCadence,
-  BillingCadence$outboundSchema,
-} from "./billing-cadence.js";
 import { BillingCycle, BillingCycle$outboundSchema } from "./billing-cycle.js";
 import {
   BillingPeriod,
@@ -81,7 +77,6 @@ export type CreateSubscriptionRequest = {
    * Addons represents addons to be added to the subscription during creation
    */
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
-  billingCadence: BillingCadence;
   billingCycle?: BillingCycle | undefined;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
@@ -169,7 +164,6 @@ export type CreateSubscriptionRequest = {
 /** @internal */
 export type CreateSubscriptionRequest$Outbound = {
   addons?: Array<AddAddonToSubscriptionRequest$Outbound> | undefined;
-  billing_cadence: string;
   billing_cycle?: string | undefined;
   billing_period: string;
   billing_period_count?: number | undefined;
@@ -217,7 +211,6 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addons: z.optional(z.array(AddAddonToSubscriptionRequest$outboundSchema)),
-    billingCadence: BillingCadence$outboundSchema,
     billingCycle: z.optional(BillingCycle$outboundSchema),
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
@@ -263,7 +256,6 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
-      billingCadence: "billing_cadence",
       billingCycle: "billing_cycle",
       billingPeriod: "billing_period",
       billingPeriodCount: "billing_period_count",

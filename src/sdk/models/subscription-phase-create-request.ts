@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  CreateSubscriptionLineItemRequest,
+  CreateSubscriptionLineItemRequest$Outbound,
+  CreateSubscriptionLineItemRequest$outboundSchema,
+} from "./create-subscription-line-item-request.js";
+import {
   OverrideLineItemRequest,
   OverrideLineItemRequest$Outbound,
   OverrideLineItemRequest$outboundSchema,
@@ -20,6 +25,13 @@ export type SubscriptionPhaseCreateRequest = {
    * LineItemCoupons represents line item-level coupons (map of line_item_id to coupon IDs)
    */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
+  /**
+   * LineItems are extra line items to add during this phase, primarily one-time charges.
+   *
+   * @remarks
+   * Each item's start_date defaults to the phase's start_date when not provided.
+   */
+  lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
   metadata?: { [k: string]: string } | undefined;
   /**
    * OverrideLineItems allows customizing specific prices for this phase
@@ -36,6 +48,7 @@ export type SubscriptionPhaseCreateRequest$Outbound = {
   coupons?: Array<string> | undefined;
   end_date?: string | undefined;
   line_item_coupons?: { [k: string]: Array<string> } | undefined;
+  line_items?: Array<CreateSubscriptionLineItemRequest$Outbound> | undefined;
   metadata?: { [k: string]: string } | undefined;
   override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
   start_date: string;
@@ -50,6 +63,9 @@ export const SubscriptionPhaseCreateRequest$outboundSchema: z.ZodMiniType<
     coupons: z.optional(z.array(z.string())),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     lineItemCoupons: z.optional(z.record(z.string(), z.array(z.string()))),
+    lineItems: z.optional(
+      z.array(CreateSubscriptionLineItemRequest$outboundSchema),
+    ),
     metadata: z.optional(z.record(z.string(), z.string())),
     overrideLineItems: z.optional(
       z.array(OverrideLineItemRequest$outboundSchema),
@@ -60,6 +76,7 @@ export const SubscriptionPhaseCreateRequest$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       endDate: "end_date",
       lineItemCoupons: "line_item_coupons",
+      lineItems: "line_items",
       overrideLineItems: "override_line_items",
       startDate: "start_date",
     });

@@ -13,6 +13,7 @@ export const BillingPeriod = {
   Daily: "DAILY",
   Quarterly: "QUARTERLY",
   HalfYearly: "HALF_YEARLY",
+  Onetime: "ONETIME",
 } as const;
 export type BillingPeriod = OpenEnum<typeof BillingPeriod>;
 

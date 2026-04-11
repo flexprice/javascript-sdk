@@ -28,15 +28,14 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.prices.createPrice({
-    billingCadence: "RECURRING",
-    billingModel: "PACKAGE",
-    billingPeriod: "HALF_YEARLY",
-    currency: "Serbian Dinar",
+    billingModel: "FLAT_FEE",
+    billingPeriod: "DAILY",
+    currency: "Dong",
     entityId: "<id>",
     entityType: "PRICE",
-    invoiceCadence: "ARREAR",
-    priceUnitType: "CUSTOM",
-    type: "USAGE",
+    invoiceCadence: "ADVANCE",
+    priceUnitType: "FIAT",
+    type: "FIXED",
   });
 
   console.log(result);
@@ -61,15 +60,14 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await pricesCreatePrice(flexprice, {
-    billingCadence: "RECURRING",
-    billingModel: "PACKAGE",
-    billingPeriod: "HALF_YEARLY",
-    currency: "Serbian Dinar",
+    billingModel: "FLAT_FEE",
+    billingPeriod: "DAILY",
+    currency: "Dong",
     entityId: "<id>",
     entityType: "PRICE",
-    invoiceCadence: "ARREAR",
-    priceUnitType: "CUSTOM",
-    type: "USAGE",
+    invoiceCadence: "ADVANCE",
+    priceUnitType: "FIAT",
+    type: "FIXED",
   });
   if (res.ok) {
     const { value: result } = res;

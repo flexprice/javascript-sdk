@@ -4,10 +4,6 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import {
-  BillingCadence,
-  BillingCadence$outboundSchema,
-} from "./billing-cadence.js";
 import { BillingModel, BillingModel$outboundSchema } from "./billing-model.js";
 import {
   BillingPeriod,
@@ -41,7 +37,6 @@ import {
 
 export type SubscriptionPriceCreateRequest = {
   amount?: string | undefined;
-  billingCadence: BillingCadence;
   billingModel: BillingModel;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
@@ -67,7 +62,6 @@ export type SubscriptionPriceCreateRequest = {
 /** @internal */
 export type SubscriptionPriceCreateRequest$Outbound = {
   amount?: string | undefined;
-  billing_cadence: string;
   billing_model: string;
   billing_period: string;
   billing_period_count?: number | undefined;
@@ -97,7 +91,6 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: z.optional(z.string()),
-    billingCadence: BillingCadence$outboundSchema,
     billingModel: BillingModel$outboundSchema,
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
@@ -121,7 +114,6 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
-      billingCadence: "billing_cadence",
       billingModel: "billing_model",
       billingPeriod: "billing_period",
       billingPeriodCount: "billing_period_count",

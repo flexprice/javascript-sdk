@@ -13,5 +13,5 @@ let value: BillingPeriod = "MONTHLY";
 ## Values
 
 ```typescript
-"MONTHLY" | "ANNUAL" | "WEEKLY" | "DAILY" | "QUARTERLY" | "HALF_YEARLY" | Unrecognized<string>
+"MONTHLY" | "ANNUAL" | "WEEKLY" | "DAILY" | "QUARTERLY" | "HALF_YEARLY" | "ONETIME" | Unrecognized<string>
 ```
