@@ -9,7 +9,7 @@
 * [getPlan](#getplan) - Get plan
 * [updatePlan](#updateplan) - Update plan
 * [deletePlan](#deleteplan) - Delete plan
-* [postPlansIdClone](#postplansidclone) - Clone a plan
+* [clonePlan](#cloneplan) - Clone a plan
 * [syncPlanPrices](#syncplanprices) - Synchronize plan prices
 
 ## createPlan
@@ -372,13 +372,13 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## postPlansIdClone
+## clonePlan
 
 Clone an existing plan, copying its active prices, published entitlements, and published credit grants
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="post_/plans/{id}/clone" method="post" path="/plans/{id}/clone" -->
+<!-- UsageSnippet language="typescript" operationID="clonePlan" method="post" path="/plans/{id}/clone" -->
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
@@ -387,7 +387,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.plans.postPlansIdClone("<id>", {});
+  const result = await flexprice.plans.clonePlan("<id>", {});
 
   console.log(result);
 }
@@ -401,7 +401,7 @@ The standalone function version of this method:
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { plansPostPlansIdClone } from "@flexprice/sdk/funcs/plans-post-plans-id-clone.js";
+import { plansClonePlan } from "@flexprice/sdk/funcs/plans-clone-plan.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -410,12 +410,12 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await plansPostPlansIdClone(flexprice, "<id>", {});
+  const res = await plansClonePlan(flexprice, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("plansPostPlansIdClone failed:", res.error);
+    console.log("plansClonePlan failed:", res.error);
   }
 }
 

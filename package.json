@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "FlexPrice",
   "engines": {
     "node": ">=18"
@@ -37,14 +37,14 @@
   "type": "module",
   "main": "./esm/index.js",
   "scripts": {
-    "lint": "oxlint --max-warnings=0 --deny-warnings 'src/**/*.{ts,tsx}'",
+    "lint": "oxlint --max-warnings=0 --deny-warnings src/**/*.ts src/**/*.tsx",
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {},
   "devDependencies": {
     "@typescript/native-preview": "7.0.0-dev.20260302.1",
-    "oxlint": "^1.50.0",
+    "oxlint": "^1.60.0",
     "typescript": "~5.8.3"
   },
   "dependencies": {

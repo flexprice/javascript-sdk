@@ -9,7 +9,7 @@ import {
   ClonePlanRequest$outboundSchema,
 } from "./clone-plan-request.js";
 
-export type PostPlansIdCloneRequest = {
+export type ClonePlanRequestRequest = {
   /**
    * Source Plan ID
    */
@@ -21,24 +21,24 @@ export type PostPlansIdCloneRequest = {
 };
 
 /** @internal */
-export type PostPlansIdCloneRequest$Outbound = {
+export type ClonePlanRequestRequest$Outbound = {
   id: string;
   body: ClonePlanRequest$Outbound;
 };
 
 /** @internal */
-export const PostPlansIdCloneRequest$outboundSchema: z.ZodMiniType<
-  PostPlansIdCloneRequest$Outbound,
-  PostPlansIdCloneRequest
+export const ClonePlanRequestRequest$outboundSchema: z.ZodMiniType<
+  ClonePlanRequestRequest$Outbound,
+  ClonePlanRequestRequest
 > = z.object({
   id: z.string(),
   body: ClonePlanRequest$outboundSchema,
 });
 
-export function postPlansIdCloneRequestToJSON(
-  postPlansIdCloneRequest: PostPlansIdCloneRequest,
+export function clonePlanRequestRequestToJSON(
+  clonePlanRequestRequest: ClonePlanRequestRequest,
 ): string {
   return JSON.stringify(
-    PostPlansIdCloneRequest$outboundSchema.parse(postPlansIdCloneRequest),
+    ClonePlanRequestRequest$outboundSchema.parse(clonePlanRequestRequest),
   );
 }

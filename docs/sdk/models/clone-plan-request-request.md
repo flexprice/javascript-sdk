@@ -1,11 +1,11 @@
-# PostPlansIdCloneRequest
+# ClonePlanRequestRequest
 
 ## Example Usage
 
 ```typescript
-import { PostPlansIdCloneRequest } from "@flexprice/sdk/sdk/models";
+import { ClonePlanRequestRequest } from "@flexprice/sdk/sdk/models";
 
-let value: PostPlansIdCloneRequest = {
+let value: ClonePlanRequestRequest = {
   id: "<id>",
   body: {},
 };

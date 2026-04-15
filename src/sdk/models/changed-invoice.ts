@@ -3,29 +3,60 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  ChangedInvoiceAction,
+  ChangedInvoiceAction$inboundSchema,
+} from "./changed-invoice-action.js";
+import {
+  ChangedInvoiceStatus,
+  ChangedInvoiceStatus$inboundSchema,
+} from "./changed-invoice-status.js";
+import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WalletTransactionResponse,
+  WalletTransactionResponse$inboundSchema,
+} from "./wallet-transaction-response.js";
 
 export type ChangedInvoice = {
   /**
-   * "created" | "wallet_credit"
+   * created (proration invoice) | wallet_credit (downgrade credit)
    */
-  action?: string | undefined;
+  action?: ChangedInvoiceAction | undefined;
   id?: string | undefined;
-  status?: string | undefined;
+  invoice?: InvoiceResponse | undefined;
+  /**
+   * preview | issued | INITIATED | PENDING | PROCESSING | SUCCEEDED | OVERPAID | FAILED | REFUNDED | PARTIALLY_REFUNDED
+   */
+  status?: ChangedInvoiceStatus | undefined;
+  walletTransaction?: WalletTransactionResponse | undefined;
 };
 
 /** @internal */
 export const ChangedInvoice$inboundSchema: z.ZodMiniType<
   ChangedInvoice,
   unknown
-> = z.object({
-  action: types.optional(types.string()),
-  id: types.optional(types.string()),
-  status: types.optional(types.string()),
-});
+> = z.pipe(
+  z.object({
+    action: types.optional(ChangedInvoiceAction$inboundSchema),
+    id: types.optional(types.string()),
+    invoice: types.optional(InvoiceResponse$inboundSchema),
+    status: types.optional(ChangedInvoiceStatus$inboundSchema),
+    wallet_transaction: types.optional(WalletTransactionResponse$inboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "wallet_transaction": "walletTransaction",
+    });
+  }),
+);
 
 export function changedInvoiceFromJSON(
   jsonString: string,

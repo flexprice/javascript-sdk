@@ -11,6 +11,7 @@ import { CreditGrants } from "./credit-grants.js";
 import { CreditNotes } from "./credit-notes.js";
 import { Customers } from "./customers.js";
 import { Entitlements } from "./entitlements.js";
+import { Environments } from "./environments.js";
 import { Events } from "./events.js";
 import { Features } from "./features.js";
 import { Groups } from "./groups.js";
@@ -83,6 +84,11 @@ export class Flexprice extends ClientSDK {
   private _invoices?: Invoices;
   get invoices(): Invoices {
     return (this._invoices ??= new Invoices(this._options));
+  }
+
+  private _environments?: Environments;
+  get environments(): Environments {
+    return (this._environments ??= new Environments(this._options));
   }
 
   private _events?: Events;

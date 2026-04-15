@@ -6,6 +6,10 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  ChangedSubscriptionAction,
+  ChangedSubscriptionAction$inboundSchema,
+} from "./changed-subscription-action.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionStatus,
@@ -14,9 +18,9 @@ import {
 
 export type ChangedSubscription = {
   /**
-   * "created" | "updated"
+   * created | updated
    */
-  action?: string | undefined;
+  action?: ChangedSubscriptionAction | undefined;
   id?: string | undefined;
   status?: SubscriptionStatus | undefined;
 };
@@ -26,7 +30,7 @@ export const ChangedSubscription$inboundSchema: z.ZodMiniType<
   ChangedSubscription,
   unknown
 > = z.object({
-  action: types.optional(types.string()),
+  action: types.optional(ChangedSubscriptionAction$inboundSchema),
   id: types.optional(types.string()),
   status: types.optional(SubscriptionStatus$inboundSchema),
 });

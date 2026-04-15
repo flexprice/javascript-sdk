@@ -5,7 +5,22 @@
 ```typescript
 import { ChangedResources } from "@flexprice/sdk/sdk/models";
 
-let value: ChangedResources = {};
+let value: ChangedResources = {
+  invoices: [
+    {
+      invoice: {
+        subscription: {
+          latestInvoice: {
+            subscription: {
+              plan: {},
+            },
+          },
+          plan: {},
+        },
+      },
+    },
+  ],
+};
 ```
 
 ## Fields

@@ -6,6 +6,22 @@
 import { SubscriptionModifyResponse } from "@flexprice/sdk/sdk/models";
 
 let value: SubscriptionModifyResponse = {
+  changedResources: {
+    invoices: [
+      {
+        invoice: {
+          subscription: {
+            latestInvoice: {
+              subscription: {
+                plan: {},
+              },
+            },
+            plan: {},
+          },
+        },
+      },
+    ],
+  },
   subscription: {
     latestInvoice: {
       subscription: {

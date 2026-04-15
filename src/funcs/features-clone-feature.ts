@@ -26,19 +26,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Clone a plan
+ * Clone a feature
  *
  * @remarks
- * Clone an existing plan, copying its active prices, published entitlements, and published credit grants
+ * Clone an existing feature
  */
-export function plansPostPlansIdClone(
+export function featuresCloneFeature(
   client: FlexpriceCore,
   id: string,
-  body: models.ClonePlanRequest,
+  body: models.CloneFeatureRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.PlanResponse,
+    models.FeatureResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -61,12 +61,12 @@ export function plansPostPlansIdClone(
 async function $do(
   client: FlexpriceCore,
   id: string,
-  body: models.ClonePlanRequest,
+  body: models.CloneFeatureRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.PlanResponse,
+      models.FeatureResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -80,14 +80,14 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.PostPlansIdCloneRequest = {
+  const input: models.CloneFeatureRequestRequest = {
     id: id,
     body: body,
   };
 
   const parsed = safeParse(
     input,
-    (value) => z.parse(models.PostPlansIdCloneRequest$outboundSchema, value),
+    (value) => z.parse(models.CloneFeatureRequestRequest$outboundSchema, value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -102,7 +102,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/plans/{id}/clone")(pathParams);
+  const path = pathToFunc("/features/{id}/clone")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -116,7 +116,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "post_/plans/{id}/clone",
+    operationID: "cloneFeature",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -159,7 +159,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.PlanResponse,
+    models.FeatureResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -170,7 +170,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, models.PlanResponse$inboundSchema),
+    M.json(201, models.FeatureResponse$inboundSchema),
     M.jsonErr([400, 404, 409], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

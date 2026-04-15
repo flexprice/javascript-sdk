@@ -7,13 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  ChangedLineItemAction,
+  ChangedLineItemAction$inboundSchema,
+} from "./changed-line-item-action.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ChangedLineItem = {
   /**
-   * "created" | "updated" | "ended"
+   * created | updated | ended
    */
-  changeAction?: string | undefined;
+  changeAction?: ChangedLineItemAction | undefined;
   endDate?: Date | undefined;
   id?: string | undefined;
   priceId?: string | undefined;
@@ -27,7 +31,7 @@ export const ChangedLineItem$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    change_action: types.optional(types.string()),
+    change_action: types.optional(ChangedLineItemAction$inboundSchema),
     end_date: types.optional(types.date()),
     id: types.optional(types.string()),
     price_id: types.optional(types.string()),

@@ -77,6 +77,15 @@ export type CreateSubscriptionRequest = {
    * Addons represents addons to be added to the subscription during creation
    */
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
+  /**
+   * BillingAnchor overrides the derived billing anchor when billing_cycle is anniversary.
+   *
+   * @remarks
+   * For monthly billing, the day-of-month (and time-of-day) define cycle boundaries: if start_date
+   * is before that day in the month, the first billing period ends on the next occurrence of that
+   * day in the same month (a shorter first period); subsequent periods follow the usual interval.
+   */
+  billingAnchor?: Date | undefined;
   billingCycle?: BillingCycle | undefined;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
@@ -164,6 +173,7 @@ export type CreateSubscriptionRequest = {
 /** @internal */
 export type CreateSubscriptionRequest$Outbound = {
   addons?: Array<AddAddonToSubscriptionRequest$Outbound> | undefined;
+  billing_anchor?: string | undefined;
   billing_cycle?: string | undefined;
   billing_period: string;
   billing_period_count?: number | undefined;
@@ -211,6 +221,9 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addons: z.optional(z.array(AddAddonToSubscriptionRequest$outboundSchema)),
+    billingAnchor: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     billingCycle: z.optional(BillingCycle$outboundSchema),
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
@@ -256,6 +269,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      billingAnchor: "billing_anchor",
       billingCycle: "billing_cycle",
       billingPeriod: "billing_period",
       billingPeriodCount: "billing_period_count",
