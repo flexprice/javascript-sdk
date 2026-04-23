@@ -4,15 +4,31 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
 
 export type RemoveAddonRequest = {
   addonAssociationId: string;
+  /**
+   * EffectiveDate is the date the cancellation takes effect.
+   *
+   * @remarks
+   * When nil the addon is cancelled at the end of the current period.
+   * When provided it must fall within [CurrentPeriodStart, CurrentPeriodEnd]; mid-period
+   * values combined with create_prorations will issue a wallet credit for unused time.
+   */
+  effectiveDate?: Date | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   reason?: string | undefined;
 };
 
 /** @internal */
 export type RemoveAddonRequest$Outbound = {
   addon_association_id: string;
+  effective_date?: string | undefined;
+  proration_behavior?: string | undefined;
   reason?: string | undefined;
 };
 
@@ -23,11 +39,17 @@ export const RemoveAddonRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addonAssociationId: z.string(),
+    effectiveDate: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     reason: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       addonAssociationId: "addon_association_id",
+      effectiveDate: "effective_date",
+      prorationBehavior: "proration_behavior",
     });
   }),
 );

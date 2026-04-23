@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { AddonType, AddonType$inboundSchema } from "./addon-type.js";
 import {
   EntitlementResponse,
   EntitlementResponse$inboundSchema,
@@ -35,7 +34,6 @@ export type CreateAddonResponse = {
   prices?: Array<PriceResponse> | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
-  type?: AddonType | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
@@ -58,7 +56,6 @@ export const CreateAddonResponse$inboundSchema: z.ZodMiniType<
     prices: types.optional(z.array(PriceResponse$inboundSchema)),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
-    type: types.optional(AddonType$inboundSchema),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),

@@ -32,6 +32,7 @@ import {
 } from "./subscription-line-item-entity-type.js";
 
 export type SubscriptionLineItemResponse = {
+  addonAssociationId?: string | undefined;
   billingPeriod?: BillingPeriod | undefined;
   /**
    * from price at create; default 1
@@ -84,6 +85,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    addon_association_id: types.optional(types.string()),
     billing_period: types.optional(BillingPeriod$inboundSchema),
     billing_period_count: types.optional(types.number()),
     commitment_amount: types.optional(types.string()),
@@ -125,6 +127,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "addon_association_id": "addonAssociationId",
       "billing_period": "billingPeriod",
       "billing_period_count": "billingPeriodCount",
       "commitment_amount": "commitmentAmount",

@@ -13,5 +13,5 @@ let value: AddonStatus = "cancelled";
 ## Values
 
 ```typescript
-"active" | "cancelled" | "paused" | Unrecognized<string>
+"active" | "cancelled" | "pending" | Unrecognized<string>
 ```

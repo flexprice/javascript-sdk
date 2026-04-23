@@ -5,7 +5,6 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { AddonType, AddonType$outboundSchema } from "./addon-type.js";
 import {
   FilterCondition,
   FilterCondition$Outbound,
@@ -26,7 +25,6 @@ export type AddonFilterOrder = ClosedEnum<typeof AddonFilterOrder>;
 
 export type AddonFilter = {
   addonIds?: Array<string> | undefined;
-  addonType?: AddonType | undefined;
   endTime?: Date | undefined;
   expand?: string | undefined;
   /**
@@ -50,7 +48,6 @@ export const AddonFilterOrder$outboundSchema: z.ZodMiniEnum<
 /** @internal */
 export type AddonFilter$Outbound = {
   addon_ids?: Array<string> | undefined;
-  addon_type?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
@@ -70,7 +67,6 @@ export const AddonFilter$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addonIds: z.optional(z.array(z.string())),
-    addonType: z.optional(AddonType$outboundSchema),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
@@ -85,7 +81,6 @@ export const AddonFilter$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       addonIds: "addon_ids",
-      addonType: "addon_type",
       endTime: "end_time",
       lookupKeys: "lookup_keys",
       startTime: "start_time",

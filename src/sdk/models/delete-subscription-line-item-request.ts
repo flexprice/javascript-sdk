@@ -4,14 +4,20 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
 
 export type DeleteSubscriptionLineItemRequest = {
   effectiveFrom?: string | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
 };
 
 /** @internal */
 export type DeleteSubscriptionLineItemRequest$Outbound = {
   effective_from?: string | undefined;
+  proration_behavior?: string | undefined;
 };
 
 /** @internal */
@@ -21,10 +27,12 @@ export const DeleteSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     effectiveFrom: z.optional(z.string()),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       effectiveFrom: "effective_from",
+      prorationBehavior: "proration_behavior",
     });
   }),
 );

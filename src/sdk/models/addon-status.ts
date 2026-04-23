@@ -9,7 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const AddonStatus = {
   Active: "active",
   Cancelled: "cancelled",
-  Paused: "paused",
+  Pending: "pending",
 } as const;
 export type AddonStatus = OpenEnum<typeof AddonStatus>;
 

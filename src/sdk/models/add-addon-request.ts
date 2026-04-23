@@ -4,19 +4,26 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
   LineItemCommitmentConfig,
   LineItemCommitmentConfig$Outbound,
   LineItemCommitmentConfig$outboundSchema,
 } from "./line-item-commitment-config.js";
+import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
 
 export type AddAddonRequest = {
   addonId: string;
+  cadence?: AddonCadence | undefined;
   /**
    * LineItemCommitments allows setting commitment configuration per addon line item (keyed by price_id)
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   metadata?: { [k: string]: any } | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
   subscriptionId: string;
 };
@@ -24,10 +31,12 @@ export type AddAddonRequest = {
 /** @internal */
 export type AddAddonRequest$Outbound = {
   addon_id: string;
+  cadence?: string | undefined;
   line_item_commitments?:
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
   metadata?: { [k: string]: any } | undefined;
+  proration_behavior?: string | undefined;
   start_date?: string | undefined;
   subscription_id: string;
 };
@@ -39,10 +48,12 @@ export const AddAddonRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addonId: z.string(),
+    cadence: z.optional(AddonCadence$outboundSchema),
     lineItemCommitments: z.optional(
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),
     metadata: z.optional(z.record(z.string(), z.any())),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionId: z.string(),
   }),
@@ -50,6 +61,7 @@ export const AddAddonRequest$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       addonId: "addon_id",
       lineItemCommitments: "line_item_commitments",
+      prorationBehavior: "proration_behavior",
       startDate: "start_date",
       subscriptionId: "subscription_id",
     });

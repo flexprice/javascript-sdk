@@ -32,7 +32,6 @@ async function run() {
   const res = await addonsCreateAddon(flexprice, {
     lookupKey: "<value>",
     name: "<value>",
-    type: "multiple_instance",
   });
   if (res.ok) {
     const { value: result } = res;

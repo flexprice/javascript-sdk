@@ -13,6 +13,10 @@ import {
   CommitmentType$outboundSchema,
 } from "./commitment-type.js";
 import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
+import {
   SubscriptionPriceCreateRequest,
   SubscriptionPriceCreateRequest$Outbound,
   SubscriptionPriceCreateRequest$outboundSchema,
@@ -37,6 +41,7 @@ export type CreateSubscriptionLineItemRequest = {
    * PriceID references an existing price (plan, addon, or subscription-scoped). Exactly one of price_id or price must be set.
    */
   priceId?: string | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   quantity?: number | undefined;
   startDate?: Date | undefined;
   subscriptionPhaseId?: string | undefined;
@@ -56,6 +61,7 @@ export type CreateSubscriptionLineItemRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   price?: SubscriptionPriceCreateRequest$Outbound | undefined;
   price_id?: string | undefined;
+  proration_behavior?: string | undefined;
   quantity?: number | undefined;
   start_date?: string | undefined;
   subscription_phase_id?: string | undefined;
@@ -79,6 +85,7 @@ export const CreateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     price: z.optional(SubscriptionPriceCreateRequest$outboundSchema),
     priceId: z.optional(z.string()),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     quantity: z.optional(z.number()),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionPhaseId: z.optional(z.string()),
@@ -95,6 +102,7 @@ export const CreateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
       displayName: "display_name",
       endDate: "end_date",
       priceId: "price_id",
+      prorationBehavior: "proration_behavior",
       startDate: "start_date",
       subscriptionPhaseId: "subscription_phase_id",
     });

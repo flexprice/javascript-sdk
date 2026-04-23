@@ -4,29 +4,38 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
   LineItemCommitmentConfig,
   LineItemCommitmentConfig$Outbound,
   LineItemCommitmentConfig$outboundSchema,
 } from "./line-item-commitment-config.js";
+import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
 
 export type AddAddonToSubscriptionRequest = {
   addonId: string;
+  cadence?: AddonCadence | undefined;
   /**
    * LineItemCommitments allows setting commitment configuration per addon line item (keyed by price_id)
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   metadata?: { [k: string]: any } | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
 };
 
 /** @internal */
 export type AddAddonToSubscriptionRequest$Outbound = {
   addon_id: string;
+  cadence?: string | undefined;
   line_item_commitments?:
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
   metadata?: { [k: string]: any } | undefined;
+  proration_behavior?: string | undefined;
   start_date?: string | undefined;
 };
 
@@ -37,16 +46,19 @@ export const AddAddonToSubscriptionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addonId: z.string(),
+    cadence: z.optional(AddonCadence$outboundSchema),
     lineItemCommitments: z.optional(
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),
     metadata: z.optional(z.record(z.string(), z.any())),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {
       addonId: "addon_id",
       lineItemCommitments: "line_item_commitments",
+      prorationBehavior: "proration_behavior",
       startDate: "start_date",
     });
   }),
