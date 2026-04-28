@@ -55,7 +55,7 @@ export type SubscriptionPriceCreateRequest = {
   tierMode?: BillingTier | undefined;
   tiers?: Array<CreatePriceTier> | undefined;
   transformQuantity?: PriceTransformQuantity | undefined;
-  trialPeriod?: number | undefined;
+  trialPeriodDays?: number | undefined;
   type: PriceType;
 };
 
@@ -80,7 +80,7 @@ export type SubscriptionPriceCreateRequest$Outbound = {
   tier_mode?: string | undefined;
   tiers?: Array<CreatePriceTier$Outbound> | undefined;
   transform_quantity?: PriceTransformQuantity$Outbound | undefined;
-  trial_period?: number | undefined;
+  trial_period_days?: number | undefined;
   type: string;
 };
 
@@ -109,7 +109,7 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
     tierMode: z.optional(BillingTier$outboundSchema),
     tiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
     transformQuantity: z.optional(PriceTransformQuantity$outboundSchema),
-    trialPeriod: z.optional(z.int()),
+    trialPeriodDays: z.optional(z.int()),
     type: PriceType$outboundSchema,
   }),
   z.transform((v) => {
@@ -129,7 +129,7 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
       startDate: "start_date",
       tierMode: "tier_mode",
       transformQuantity: "transform_quantity",
-      trialPeriod: "trial_period",
+      trialPeriodDays: "trial_period_days",
     });
   }),
 );

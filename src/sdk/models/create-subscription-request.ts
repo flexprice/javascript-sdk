@@ -166,8 +166,13 @@ export type CreateSubscriptionRequest = {
    * tax_rate_overrides is the tax rate overrides	to be applied to the subscription
    */
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
-  trialEnd?: Date | undefined;
-  trialStart?: Date | undefined;
+  /**
+   * TrialPeriodDays: nil = inherit trial length from plan recurring-fixed prices (must be uniform).
+   *
+   * @remarks
+   * 0 = explicitly no trial (overrides catalog). >0 = override duration in days.
+   */
+  trialPeriodDays?: number | undefined;
 };
 
 /** @internal */
@@ -210,8 +215,7 @@ export type CreateSubscriptionRequest$Outbound = {
   start_date?: string | undefined;
   subscription_status?: string | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
-  trial_end?: string | undefined;
-  trial_start?: string | undefined;
+  trial_period_days?: number | undefined;
 };
 
 /** @internal */
@@ -264,8 +268,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionStatus: z.optional(SubscriptionStatus$outboundSchema),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
-    trialEnd: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
-    trialStart: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    trialPeriodDays: z.optional(z.int()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -297,8 +300,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       startDate: "start_date",
       subscriptionStatus: "subscription_status",
       taxRateOverrides: "tax_rate_overrides",
-      trialEnd: "trial_end",
-      trialStart: "trial_start",
+      trialPeriodDays: "trial_period_days",
     });
   }),
 );

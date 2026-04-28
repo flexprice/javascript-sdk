@@ -71,7 +71,6 @@ export type SubscriptionSubscriptionLineItem = {
   subscriptionId?: string | undefined;
   subscriptionPhaseId?: string | undefined;
   tenantId?: string | undefined;
-  trialPeriod?: number | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
@@ -118,7 +117,6 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     subscription_id: types.optional(types.string()),
     subscription_phase_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
-    trial_period: types.optional(types.number()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),
@@ -154,7 +152,6 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
       "subscription_id": "subscriptionId",
       "subscription_phase_id": "subscriptionPhaseId",
       "tenant_id": "tenantId",
-      "trial_period": "trialPeriod",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",
     });

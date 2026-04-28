@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "author": "FlexPrice",
   "engines": {
     "node": ">=18"

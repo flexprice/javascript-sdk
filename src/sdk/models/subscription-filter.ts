@@ -105,6 +105,13 @@ export type SubscriptionFilter = {
    */
   subscriptionType?: Array<SubscriptionType> | undefined;
   /**
+   * TrialEndDueLTE, when set, restricts to subscriptions with trial_end not nil and trial_end <= trial_end_due_lte.
+   *
+   * @remarks
+   * Use with subscription_status trialing for trial-end cron processing.
+   */
+  trialEndDueLte?: Date | undefined;
+  /**
    * WithLineItems includes line items in the response
    */
   withLineItems?: boolean | undefined;
@@ -139,6 +146,7 @@ export type SubscriptionFilter$Outbound = {
   subscription_ids?: Array<string> | undefined;
   subscription_status?: Array<string> | undefined;
   subscription_type?: Array<string> | undefined;
+  trial_end_due_lte?: string | undefined;
   with_line_items?: boolean | undefined;
 };
 
@@ -170,6 +178,9 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
     subscriptionIds: z.optional(z.array(z.string())),
     subscriptionStatus: z.optional(z.array(SubscriptionStatus$outboundSchema)),
     subscriptionType: z.optional(z.array(SubscriptionType$outboundSchema)),
+    trialEndDueLte: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     withLineItems: z.optional(z.boolean()),
   }),
   z.transform((v) => {
@@ -189,6 +200,7 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
       subscriptionIds: "subscription_ids",
       subscriptionStatus: "subscription_status",
       subscriptionType: "subscription_type",
+      trialEndDueLte: "trial_end_due_lte",
       withLineItems: "with_line_items",
     });
   }),

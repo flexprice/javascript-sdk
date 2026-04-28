@@ -16,6 +16,3 @@ export type ResumeMode = OpenEnum<typeof ResumeMode>;
 /** @internal */
 export const ResumeMode$inboundSchema: z.ZodMiniType<ResumeMode, unknown> =
   openEnums.inboundSchema(ResumeMode);
-/** @internal */
-export const ResumeMode$outboundSchema: z.ZodMiniType<string, ResumeMode> =
-  openEnums.outboundSchema(ResumeMode);

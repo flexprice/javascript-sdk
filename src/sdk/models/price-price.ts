@@ -151,12 +151,12 @@ export type PricePrice = {
   tiers?: Array<PricePriceTier> | undefined;
   transformQuantity?: PriceJSONBTransformQuantity | undefined;
   /**
-   * TrialPeriod is the number of days for the trial period
+   * TrialPeriodDays is the number of days for the trial period
    *
    * @remarks
    * Note: This is only applicable for recurring prices (BILLING_CADENCE_RECURRING)
    */
-  trialPeriod?: number | undefined;
+  trialPeriodDays?: number | undefined;
   type?: PriceType | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -204,7 +204,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
       transform_quantity: types.optional(
         PriceJSONBTransformQuantity$inboundSchema,
       ),
-      trial_period: types.optional(types.number()),
+      trial_period_days: types.optional(types.number()),
       type: types.optional(PriceType$inboundSchema),
       updated_at: types.optional(types.date()),
       updated_by: types.optional(types.string()),
@@ -240,7 +240,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
         "tenant_id": "tenantId",
         "tier_mode": "tierMode",
         "transform_quantity": "transformQuantity",
-        "trial_period": "trialPeriod",
+        "trial_period_days": "trialPeriodDays",
         "updated_at": "updatedAt",
         "updated_by": "updatedBy",
       });

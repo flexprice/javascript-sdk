@@ -19,14 +19,11 @@ import { subscriptionsGetSubscriptionUsage } from "../funcs/subscriptions-get-su
 import { subscriptionsGetSubscriptionV2 } from "../funcs/subscriptions-get-subscription-v2.js";
 import { subscriptionsGetSubscription } from "../funcs/subscriptions-get-subscription.js";
 import { subscriptionsListAllSubscriptionSchedules } from "../funcs/subscriptions-list-all-subscription-schedules.js";
-import { subscriptionsListSubscriptionPauses } from "../funcs/subscriptions-list-subscription-pauses.js";
 import { subscriptionsListSubscriptionSchedules } from "../funcs/subscriptions-list-subscription-schedules.js";
-import { subscriptionsPauseSubscription } from "../funcs/subscriptions-pause-subscription.js";
 import { subscriptionsPreviewSubscriptionChange } from "../funcs/subscriptions-preview-subscription-change.js";
 import { subscriptionsPreviewSubscriptionModify } from "../funcs/subscriptions-preview-subscription-modify.js";
 import { subscriptionsQuerySubscription } from "../funcs/subscriptions-query-subscription.js";
 import { subscriptionsRemoveSubscriptionAddon } from "../funcs/subscriptions-remove-subscription-addon.js";
-import { subscriptionsResumeSubscription } from "../funcs/subscriptions-resume-subscription.js";
 import { subscriptionsUpdateSubscriptionLineItem } from "../funcs/subscriptions-update-subscription-line-item.js";
 import { subscriptionsUpdateSubscription } from "../funcs/subscriptions-update-subscription.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -372,61 +369,6 @@ export class Subscriptions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.SubscriptionModifyResponse> {
     return unwrapAsync(subscriptionsPreviewSubscriptionModify(
-      this,
-      id,
-      body,
-      options,
-    ));
-  }
-
-  /**
-   * Pause a subscription
-   *
-   * @remarks
-   * Use when temporarily stopping a subscription (e.g. customer hold or seasonal pause). Billing and access pause; resume when ready.
-   */
-  async pauseSubscription(
-    id: string,
-    body: models.PauseSubscriptionRequest,
-    options?: RequestOptions,
-  ): Promise<models.SubscriptionPauseResponse> {
-    return unwrapAsync(subscriptionsPauseSubscription(
-      this,
-      id,
-      body,
-      options,
-    ));
-  }
-
-  /**
-   * List all pauses for a subscription
-   *
-   * @remarks
-   * Use when showing pause history for a subscription (e.g. support or audit). Returns all past and future pauses.
-   */
-  async listSubscriptionPauses(
-    id: string,
-    options?: RequestOptions,
-  ): Promise<Array<models.ListSubscriptionPausesResponse>> {
-    return unwrapAsync(subscriptionsListSubscriptionPauses(
-      this,
-      id,
-      options,
-    ));
-  }
-
-  /**
-   * Resume a paused subscription
-   *
-   * @remarks
-   * Use when reactivating a paused subscription (e.g. end of hold). Billing and access resume from the resume date.
-   */
-  async resumeSubscription(
-    id: string,
-    body: models.ResumeSubscriptionRequest,
-    options?: RequestOptions,
-  ): Promise<models.SubscriptionPauseResponse> {
-    return unwrapAsync(subscriptionsResumeSubscription(
       this,
       id,
       body,
