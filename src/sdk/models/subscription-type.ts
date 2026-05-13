@@ -8,8 +8,10 @@ import { OpenEnum } from "../../types/enums.js";
 
 export const SubscriptionType = {
   Standalone: "standalone",
+  DelegatedInvoicing: "delegated_invoicing",
   Parent: "parent",
   Inherited: "inherited",
+  GroupedInvoicing: "grouped_invoicing",
 } as const;
 export type SubscriptionType = OpenEnum<typeof SubscriptionType>;
 

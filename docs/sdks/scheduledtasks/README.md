@@ -101,7 +101,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.scheduledTasks.createScheduledTask({
     connectionId: "<id>",
-    entityType: "credit_topups",
+    entityType: "credit_usage",
     interval: "custom",
     jobConfig: {},
   });
@@ -129,7 +129,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await scheduledTasksCreateScheduledTask(flexprice, {
     connectionId: "<id>",
-    entityType: "credit_topups",
+    entityType: "credit_usage",
     interval: "custom",
     jobConfig: {},
   });

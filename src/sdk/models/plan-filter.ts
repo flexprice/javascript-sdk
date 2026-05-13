@@ -32,6 +32,7 @@ export type PlanFilter = {
   filters?: Array<FilterCondition> | undefined;
   limit?: number | undefined;
   lookupKey?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
   offset?: number | undefined;
   order?: PlanFilterOrder | undefined;
   planIds?: Array<string> | undefined;
@@ -52,6 +53,7 @@ export type PlanFilter$Outbound = {
   filters?: Array<FilterCondition$Outbound> | undefined;
   limit?: number | undefined;
   lookup_key?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
   offset?: number | undefined;
   order?: string | undefined;
   plan_ids?: Array<string> | undefined;
@@ -71,6 +73,7 @@ export const PlanFilter$outboundSchema: z.ZodMiniType<
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
     lookupKey: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
     offset: z.optional(z.int()),
     order: z.optional(PlanFilterOrder$outboundSchema),
     planIds: z.optional(z.array(z.string())),

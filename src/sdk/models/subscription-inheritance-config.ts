@@ -6,9 +6,34 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type SubscriptionInheritanceConfig = {
+  /**
+   * ExternalCustomerIDsToInheritSubscription: child customer external IDs for which
+   *
+   * @remarks
+   * inherited skeleton subscriptions will be created. Only valid for parent behavior.
+   */
   externalCustomerIdsToInheritSubscription?: Array<string> | undefined;
+  /**
+   * InvoicingCustomerExternalID sets a different billing recipient (external ID).
+   *
+   * @remarks
+   * Required for delegated; rejected for inherited; optional for others.
+   */
   invoicingCustomerExternalId?: string | undefined;
+  /**
+   * ParentSubscriptionID links this subscription to an existing parent.
+   *
+   * @remarks
+   * Required for inherited and grouped_invoicing; rejected for standalone, delegated, parent.
+   */
   parentSubscriptionId?: string | undefined;
+  /**
+   * SubscriptionsIDsForGroupedInvoicing: existing standalone subscription IDs to convert to
+   *
+   * @remarks
+   * grouped_invoicing under this parent at creation time. Only valid for parent behavior.
+   */
+  subscriptionsIdsForGroupedInvoicing?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -16,6 +41,7 @@ export type SubscriptionInheritanceConfig$Outbound = {
   external_customer_ids_to_inherit_subscription?: Array<string> | undefined;
   invoicing_customer_external_id?: string | undefined;
   parent_subscription_id?: string | undefined;
+  subscriptions_ids_for_grouped_invoicing?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -27,6 +53,7 @@ export const SubscriptionInheritanceConfig$outboundSchema: z.ZodMiniType<
     externalCustomerIdsToInheritSubscription: z.optional(z.array(z.string())),
     invoicingCustomerExternalId: z.optional(z.string()),
     parentSubscriptionId: z.optional(z.string()),
+    subscriptionsIdsForGroupedInvoicing: z.optional(z.array(z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -34,6 +61,8 @@ export const SubscriptionInheritanceConfig$outboundSchema: z.ZodMiniType<
         "external_customer_ids_to_inherit_subscription",
       invoicingCustomerExternalId: "invoicing_customer_external_id",
       parentSubscriptionId: "parent_subscription_id",
+      subscriptionsIdsForGroupedInvoicing:
+        "subscriptions_ids_for_grouped_invoicing",
     });
   }),
 );

@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  SubModifyGroupedInvoicingParams,
+  SubModifyGroupedInvoicingParams$Outbound,
+  SubModifyGroupedInvoicingParams$outboundSchema,
+} from "./sub-modify-grouped-invoicing-params.js";
+import {
   SubModifyInheritanceRequest,
   SubModifyInheritanceRequest$Outbound,
   SubModifyInheritanceRequest$outboundSchema,
@@ -20,6 +25,7 @@ import {
 } from "./subscription-modify-type.js";
 
 export type ExecuteSubscriptionModifyRequest = {
+  groupedInvoicingParams?: SubModifyGroupedInvoicingParams | undefined;
   inheritanceParams?: SubModifyInheritanceRequest | undefined;
   quantityChangeParams?: SubModifyQuantityChangeRequest | undefined;
   type: SubscriptionModifyType;
@@ -27,6 +33,9 @@ export type ExecuteSubscriptionModifyRequest = {
 
 /** @internal */
 export type ExecuteSubscriptionModifyRequest$Outbound = {
+  grouped_invoicing_params?:
+    | SubModifyGroupedInvoicingParams$Outbound
+    | undefined;
   inheritance_params?: SubModifyInheritanceRequest$Outbound | undefined;
   quantity_change_params?: SubModifyQuantityChangeRequest$Outbound | undefined;
   type: string;
@@ -38,6 +47,9 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   ExecuteSubscriptionModifyRequest
 > = z.pipe(
   z.object({
+    groupedInvoicingParams: z.optional(
+      SubModifyGroupedInvoicingParams$outboundSchema,
+    ),
     inheritanceParams: z.optional(SubModifyInheritanceRequest$outboundSchema),
     quantityChangeParams: z.optional(
       SubModifyQuantityChangeRequest$outboundSchema,
@@ -46,6 +58,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      groupedInvoicingParams: "grouped_invoicing_params",
       inheritanceParams: "inheritance_params",
       quantityChangeParams: "quantity_change_params",
     });

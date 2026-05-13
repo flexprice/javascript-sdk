@@ -8,6 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  ExportMetadataField,
+  ExportMetadataField$inboundSchema,
+  ExportMetadataField$Outbound,
+  ExportMetadataField$outboundSchema,
+} from "./export-metadata-field.js";
+import {
   S3CompressionType,
   S3CompressionType$inboundSchema,
   S3CompressionType$outboundSchema,
@@ -31,6 +37,10 @@ export type S3JobConfig = {
    */
   endpointUrl?: string | undefined;
   /**
+   * Optional user-selected metadata columns
+   */
+  exportMetadataFields?: Array<ExportMetadataField> | undefined;
+  /**
    * Optional prefix for S3 keys (e.g., "flexprice-exports/")
    */
   keyPrefix?: string | undefined;
@@ -39,7 +49,7 @@ export type S3JobConfig = {
    */
   region?: string | undefined;
   /**
-   * Use path-style addressing instead of virtual-hosted-style (required for MinIO)
+   * Use path-style addressing (required for MinIO)
    */
   usePathStyle?: boolean | undefined;
 };
@@ -52,6 +62,9 @@ export const S3JobConfig$inboundSchema: z.ZodMiniType<S3JobConfig, unknown> = z
       compression: types.optional(S3CompressionType$inboundSchema),
       encryption: types.optional(S3EncryptionType$inboundSchema),
       endpoint_url: types.optional(types.string()),
+      export_metadata_fields: types.optional(
+        z.array(ExportMetadataField$inboundSchema),
+      ),
       key_prefix: types.optional(types.string()),
       region: types.optional(types.string()),
       use_path_style: types.optional(types.boolean()),
@@ -59,6 +72,7 @@ export const S3JobConfig$inboundSchema: z.ZodMiniType<S3JobConfig, unknown> = z
     z.transform((v) => {
       return remap$(v, {
         "endpoint_url": "endpointUrl",
+        "export_metadata_fields": "exportMetadataFields",
         "key_prefix": "keyPrefix",
         "use_path_style": "usePathStyle",
       });
@@ -70,6 +84,7 @@ export type S3JobConfig$Outbound = {
   compression?: string | undefined;
   encryption?: string | undefined;
   endpoint_url?: string | undefined;
+  export_metadata_fields?: Array<ExportMetadataField$Outbound> | undefined;
   key_prefix?: string | undefined;
   region?: string | undefined;
   use_path_style?: boolean | undefined;
@@ -85,6 +100,9 @@ export const S3JobConfig$outboundSchema: z.ZodMiniType<
     compression: z.optional(S3CompressionType$outboundSchema),
     encryption: z.optional(S3EncryptionType$outboundSchema),
     endpointUrl: z.optional(z.string()),
+    exportMetadataFields: z.optional(
+      z.array(ExportMetadataField$outboundSchema),
+    ),
     keyPrefix: z.optional(z.string()),
     region: z.optional(z.string()),
     usePathStyle: z.optional(z.boolean()),
@@ -92,6 +110,7 @@ export const S3JobConfig$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       endpointUrl: "endpoint_url",
+      exportMetadataFields: "export_metadata_fields",
       keyPrefix: "key_prefix",
       usePathStyle: "use_path_style",
     });

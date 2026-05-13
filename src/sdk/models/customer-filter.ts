@@ -32,6 +32,7 @@ export type CustomerFilter = {
   externalIds?: Array<string> | undefined;
   filters?: Array<FilterCondition> | undefined;
   limit?: number | undefined;
+  metadata?: { [k: string]: string } | undefined;
   offset?: number | undefined;
   order?: CustomerFilterOrder | undefined;
   sort?: Array<SortCondition> | undefined;
@@ -54,6 +55,7 @@ export type CustomerFilter$Outbound = {
   external_ids?: Array<string> | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
   limit?: number | undefined;
+  metadata?: { [k: string]: string } | undefined;
   offset?: number | undefined;
   order?: string | undefined;
   sort?: Array<SortCondition$Outbound> | undefined;
@@ -75,6 +77,7 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
     externalIds: z.optional(z.array(z.string())),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
     limit: z.optional(z.int()),
+    metadata: z.optional(z.record(z.string(), z.string())),
     offset: z.optional(z.int()),
     order: z.optional(CustomerFilterOrder$outboundSchema),
     sort: z.optional(z.array(SortCondition$outboundSchema)),

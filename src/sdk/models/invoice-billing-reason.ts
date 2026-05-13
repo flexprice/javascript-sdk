@@ -10,6 +10,7 @@ export const InvoiceBillingReason = {
   SubscriptionCycle: "SUBSCRIPTION_CYCLE",
   SubscriptionUpdate: "SUBSCRIPTION_UPDATE",
   SubscriptionTrialEnd: "SUBSCRIPTION_TRIAL_END",
+  SubscriptionTrialStart: "SUBSCRIPTION_TRIAL_START",
   Proration: "PRORATION",
   Manual: "MANUAL",
 } as const;

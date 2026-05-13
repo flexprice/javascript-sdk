@@ -20,3 +20,8 @@ export const SubscriptionLineItemEntityType$inboundSchema: z.ZodMiniType<
   SubscriptionLineItemEntityType,
   unknown
 > = openEnums.inboundSchema(SubscriptionLineItemEntityType);
+/** @internal */
+export const SubscriptionLineItemEntityType$outboundSchema: z.ZodMiniType<
+  string,
+  SubscriptionLineItemEntityType
+> = openEnums.outboundSchema(SubscriptionLineItemEntityType);

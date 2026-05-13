@@ -13,5 +13,5 @@ let value: SubscriptionType = "inherited";
 ## Values
 
 ```typescript
-"standalone" | "parent" | "inherited" | Unrecognized<string>
+"standalone" | "delegated_invoicing" | "parent" | "inherited" | "grouped_invoicing" | Unrecognized<string>
 ```

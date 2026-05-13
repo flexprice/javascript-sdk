@@ -13,5 +13,5 @@ let value: ScheduledTaskEntityType = "invoice";
 ## Values
 
 ```typescript
-"events" | "invoice" | "credit_topups" | "credit_usage" | Unrecognized<string>
+"events" | "invoice" | "credit_topups" | "credit_usage" | "usage_analytics" | Unrecognized<string>
 ```

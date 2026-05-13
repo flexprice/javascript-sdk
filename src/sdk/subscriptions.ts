@@ -22,6 +22,7 @@ import { subscriptionsListAllSubscriptionSchedules } from "../funcs/subscription
 import { subscriptionsListSubscriptionSchedules } from "../funcs/subscriptions-list-subscription-schedules.js";
 import { subscriptionsPreviewSubscriptionChange } from "../funcs/subscriptions-preview-subscription-change.js";
 import { subscriptionsPreviewSubscriptionModify } from "../funcs/subscriptions-preview-subscription-modify.js";
+import { subscriptionsQuerySubscriptionLineItems } from "../funcs/subscriptions-query-subscription-line-items.js";
 import { subscriptionsQuerySubscription } from "../funcs/subscriptions-query-subscription.js";
 import { subscriptionsRemoveSubscriptionAddon } from "../funcs/subscriptions-remove-subscription-addon.js";
 import { subscriptionsUpdateSubscriptionLineItem } from "../funcs/subscriptions-update-subscription-line-item.js";
@@ -76,6 +77,23 @@ export class Subscriptions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(subscriptionsRemoveSubscriptionAddon(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Search subscription line items
+   *
+   * @remarks
+   * List subscription line items with a JSON filter (subscription, customer, price, pagination, expand=prices, etc.).
+   */
+  async querySubscriptionLineItems(
+    request: models.SubscriptionLineItemFilter,
+    options?: RequestOptions,
+  ): Promise<models.ListSubscriptionLineItemsResponse> {
+    return unwrapAsync(subscriptionsQuerySubscriptionLineItems(
       this,
       request,
       options,
