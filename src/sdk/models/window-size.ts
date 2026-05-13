@@ -7,7 +7,6 @@ import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
 export const WindowSize = {
-  Month: "MONTH",
   Minute: "MINUTE",
   FifteenMIN: "15MIN",
   ThirtyMIN: "30MIN",
@@ -17,6 +16,7 @@ export const WindowSize = {
   TwelveHOUR: "12HOUR",
   Day: "DAY",
   Week: "WEEK",
+  Month: "MONTH",
 } as const;
 export type WindowSize = OpenEnum<typeof WindowSize>;
 

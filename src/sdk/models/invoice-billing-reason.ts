@@ -13,6 +13,7 @@ export const InvoiceBillingReason = {
   SubscriptionTrialStart: "SUBSCRIPTION_TRIAL_START",
   Proration: "PRORATION",
   Manual: "MANUAL",
+  AutoInvoiceThreshold: "AUTO_INVOICE_THRESHOLD",
 } as const;
 export type InvoiceBillingReason = ClosedEnum<typeof InvoiceBillingReason>;
 

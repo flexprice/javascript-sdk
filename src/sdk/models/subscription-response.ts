@@ -71,6 +71,14 @@ export type SubscriptionResponse = {
    */
   activePauseId?: string | undefined;
   /**
+   * AutoInvoiceThreshold is the usage amount (in subscription currency) that triggers
+   *
+   * @remarks
+   * an intermediate invoice. Overrides the plan-level threshold when set.
+   * Nil means: inherit from the plan's threshold (which may also be nil = disabled).
+   */
+  autoInvoiceThreshold?: string | undefined;
+  /**
    * BillingAnchor is the reference point that aligns future billing cycle dates.
    *
    * @remarks
@@ -230,6 +238,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     active_pause_id: types.optional(types.string()),
+    auto_invoice_threshold: types.optional(types.string()),
     billing_anchor: types.optional(types.date()),
     billing_cadence: types.optional(BillingCadence$inboundSchema),
     billing_cycle: types.optional(BillingCycle$inboundSchema),
@@ -291,6 +300,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "active_pause_id": "activePauseId",
+      "auto_invoice_threshold": "autoInvoiceThreshold",
       "billing_anchor": "billingAnchor",
       "billing_cadence": "billingCadence",
       "billing_cycle": "billingCycle",

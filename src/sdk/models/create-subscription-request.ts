@@ -78,6 +78,16 @@ export type CreateSubscriptionRequest = {
    */
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
   /**
+   * AutoInvoiceThreshold is the usage amount (in subscription currency) that triggers
+   *
+   * @remarks
+   * an intermediate invoice mid-period. Set once at creation; cannot be changed later.
+   * Allowed only when the subscription resolves to type standalone (no parent hierarchy rows).
+   * Plan line items must be usage-based only (no fixed or other non-usage plan prices).
+   * Nil means auto invoice threshold billing is disabled for this subscription.
+   */
+  autoInvoiceThreshold?: string | undefined;
+  /**
    * BillingAnchor overrides the derived billing anchor when billing_cycle is anniversary.
    *
    * @remarks
@@ -178,6 +188,7 @@ export type CreateSubscriptionRequest = {
 /** @internal */
 export type CreateSubscriptionRequest$Outbound = {
   addons?: Array<AddAddonToSubscriptionRequest$Outbound> | undefined;
+  auto_invoice_threshold?: string | undefined;
   billing_anchor?: string | undefined;
   billing_cycle?: string | undefined;
   billing_period: string;
@@ -225,6 +236,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addons: z.optional(z.array(AddAddonToSubscriptionRequest$outboundSchema)),
+    autoInvoiceThreshold: z.optional(z.string()),
     billingAnchor: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
@@ -272,6 +284,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      autoInvoiceThreshold: "auto_invoice_threshold",
       billingAnchor: "billing_anchor",
       billingCycle: "billing_cycle",
       billingPeriod: "billing_period",
