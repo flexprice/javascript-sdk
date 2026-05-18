@@ -4,41 +4,18 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { ErrorCode, ErrorCode$inboundSchema } from "./error-code.js";
 import { FlexPriceError } from "./flex-price-error.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
-
-export const Code = {
-  NotFound: "not_found",
-  AlreadyExists: "already_exists",
-  VersionConflict: "version_conflict",
-  ValidationError: "validation_error",
-  InvalidOperation: "invalid_operation",
-  PermissionDenied: "permission_denied",
-  HttpClientError: "http_client_error",
-  DatabaseError: "database_error",
-  SystemError: "system_error",
-  InternalError: "internal_error",
-  ServiceUnavailable: "service_unavailable",
-} as const;
-export type Code = OpenEnum<typeof Code>;
-
-export type Details = {};
 
 export type ErrorsErrorResponseData = {
-  code?: Code | undefined;
-  details?: { [k: string]: Details } | undefined;
+  code?: ErrorCode | undefined;
   httpStatusCode?: number | undefined;
   message?: string | undefined;
 };
 
 export class ErrorsErrorResponse extends FlexPriceError {
-  code?: Code | undefined;
-  details?: { [k: string]: Details } | undefined;
+  code?: ErrorCode | undefined;
   httpStatusCode?: number | undefined;
 
   /** The original data that was passed to this error instance. */
@@ -52,37 +29,10 @@ export class ErrorsErrorResponse extends FlexPriceError {
     super(message, httpMeta);
     this.data$ = err;
     if (err.code != null) this.code = err.code;
-    if (err.details != null) this.details = err.details;
     if (err.httpStatusCode != null) this.httpStatusCode = err.httpStatusCode;
 
     this.name = "ErrorsErrorResponse";
   }
-}
-
-export type ErrorResponse = {
-  code?: Code | undefined;
-  details?: { [k: string]: Details } | undefined;
-  httpStatusCode?: number | undefined;
-  message?: string | undefined;
-};
-
-/** @internal */
-export const Code$inboundSchema: z.ZodMiniType<Code, unknown> = openEnums
-  .inboundSchema(Code);
-
-/** @internal */
-export const Details$inboundSchema: z.ZodMiniType<Details, unknown> = z.object(
-  {},
-);
-
-export function detailsFromJSON(
-  jsonString: string,
-): SafeParseResult<Details, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Details$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Details' from JSON`,
-  );
 }
 
 /** @internal */
@@ -91,10 +41,7 @@ export const ErrorsErrorResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    code: types.optional(Code$inboundSchema),
-    details: types.optional(
-      z.record(z.string(), z.lazy(() => Details$inboundSchema)),
-    ),
+    code: types.optional(ErrorCode$inboundSchema),
     http_status_code: types.optional(types.number()),
     message: types.optional(types.string()),
     request$: z.custom<Request>(x => x instanceof Request),
@@ -113,33 +60,3 @@ export const ErrorsErrorResponse$inboundSchema: z.ZodMiniType<
     });
   }),
 );
-
-/** @internal */
-export const ErrorResponse$inboundSchema: z.ZodMiniType<
-  ErrorResponse,
-  unknown
-> = z.pipe(
-  z.object({
-    code: types.optional(Code$inboundSchema),
-    details: types.optional(
-      z.record(z.string(), z.lazy(() => Details$inboundSchema)),
-    ),
-    http_status_code: types.optional(types.number()),
-    message: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "http_status_code": "httpStatusCode",
-    });
-  }),
-);
-
-export function errorResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<ErrorResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ErrorResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ErrorResponse' from JSON`,
-  );
-}

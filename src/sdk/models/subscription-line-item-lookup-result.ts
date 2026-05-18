@@ -14,7 +14,7 @@ import {
 import {
   ErrorResponse,
   ErrorResponse$inboundSchema,
-} from "./errors-error-response.js";
+} from "./error-response.js";
 import {
   MatchedSubscriptionLineItem,
   MatchedSubscriptionLineItem$inboundSchema,

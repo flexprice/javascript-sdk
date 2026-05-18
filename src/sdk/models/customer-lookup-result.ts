@@ -14,7 +14,7 @@ import {
 import {
   ErrorResponse,
   ErrorResponse$inboundSchema,
-} from "./errors-error-response.js";
+} from "./error-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CustomerLookupResult = {

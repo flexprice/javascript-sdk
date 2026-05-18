@@ -10,7 +10,7 @@ import * as types from "../../types/primitives.js";
 import {
   ErrorResponse,
   ErrorResponse$inboundSchema,
-} from "./errors-error-response.js";
+} from "./error-response.js";
 import {
   FailurePointType,
   FailurePointType$inboundSchema,

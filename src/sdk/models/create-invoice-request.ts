@@ -96,6 +96,13 @@ export type CreateInvoiceRequest = {
   invoiceStatus?: InvoiceStatus | undefined;
   invoiceType?: InvoiceType | undefined;
   /**
+   * issue_date overrides the user-facing date of the invoice.
+   *
+   * @remarks
+   * Defaults to created_at if not provided.
+   */
+  issueDate?: Date | undefined;
+  /**
    * Invoice Line Item Coupons
    */
   lineItemCoupons?: Array<InvoiceLineItemCoupon> | undefined;
@@ -160,6 +167,7 @@ export type CreateInvoiceRequest$Outbound = {
   invoice_pdf_url?: string | undefined;
   invoice_status?: string | undefined;
   invoice_type?: string | undefined;
+  issue_date?: string | undefined;
   line_item_coupons?: Array<InvoiceLineItemCoupon$Outbound> | undefined;
   line_items?: Array<CreateInvoiceLineItemRequest$Outbound> | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -196,6 +204,7 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
     invoicePdfUrl: z.optional(z.string()),
     invoiceStatus: z.optional(InvoiceStatus$outboundSchema),
     invoiceType: z.optional(InvoiceType$outboundSchema),
+    issueDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     lineItemCoupons: z.optional(z.array(InvoiceLineItemCoupon$outboundSchema)),
     lineItems: z.optional(z.array(CreateInvoiceLineItemRequest$outboundSchema)),
     metadata: z.optional(z.record(z.string(), z.string())),
@@ -226,6 +235,7 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
       invoicePdfUrl: "invoice_pdf_url",
       invoiceStatus: "invoice_status",
       invoiceType: "invoice_type",
+      issueDate: "issue_date",
       lineItemCoupons: "line_item_coupons",
       lineItems: "line_items",
       paymentStatus: "payment_status",

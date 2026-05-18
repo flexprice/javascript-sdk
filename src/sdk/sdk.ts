@@ -17,7 +17,6 @@ import { Features } from "./features.js";
 import { Groups } from "./groups.js";
 import { Integrations } from "./integrations.js";
 import { Invoices } from "./invoices.js";
-import { MeterUsage } from "./meter-usage.js";
 import { Payments } from "./payments.js";
 import { Plans } from "./plans.js";
 import { PriceUnits } from "./price-units.js";
@@ -109,11 +108,6 @@ export class Flexprice extends ClientSDK {
   private _integrations?: Integrations;
   get integrations(): Integrations {
     return (this._integrations ??= new Integrations(this._options));
-  }
-
-  private _meterUsage?: MeterUsage;
-  get meterUsage(): MeterUsage {
-    return (this._meterUsage ??= new MeterUsage(this._options));
   }
 
   private _payments?: Payments;

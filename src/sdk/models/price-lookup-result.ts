@@ -14,7 +14,7 @@ import {
 import {
   ErrorResponse,
   ErrorResponse$inboundSchema,
-} from "./errors-error-response.js";
+} from "./error-response.js";
 import { MatchedPrice, MatchedPrice$inboundSchema } from "./matched-price.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
