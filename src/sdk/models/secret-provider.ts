@@ -18,6 +18,7 @@ export const SecretProvider = {
   Nomod: "nomod",
   Moyasar: "moyasar",
   Paddle: "paddle",
+  Whop: "whop",
 } as const;
 export type SecretProvider = OpenEnum<typeof SecretProvider>;
 

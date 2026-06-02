@@ -21,6 +21,7 @@ export type EntityIntegrationMappingResponse = {
   entityType?: IntegrationEntityType | undefined;
   environmentId?: string | undefined;
   id?: string | undefined;
+  metadata?: { [k: string]: any } | undefined;
   providerEntityId?: string | undefined;
   providerType?: string | undefined;
   status?: Status | undefined;
@@ -41,6 +42,7 @@ export const EntityIntegrationMappingResponse$inboundSchema: z.ZodMiniType<
     entity_type: types.optional(IntegrationEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
+    metadata: types.optional(z.record(z.string(), z.any())),
     provider_entity_id: types.optional(types.string()),
     provider_type: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),

@@ -5,6 +5,7 @@
 import { usersCreateUser } from "../funcs/users-create-user.js";
 import { usersGetUserInfo } from "../funcs/users-get-user-info.js";
 import { usersQueryUser } from "../funcs/users-query-user.js";
+import { usersUpdateUser } from "../funcs/users-update-user.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
 import * as models from "./models/index.js";
@@ -38,6 +39,23 @@ export class Users extends ClientSDK {
   ): Promise<models.UserResponse> {
     return unwrapAsync(usersGetUserInfo(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * Update current user
+   *
+   * @remarks
+   * Update the current authenticated user. Only metadata updates are supported.
+   */
+  async updateUser(
+    request: models.UpdateUserRequest,
+    options?: RequestOptions,
+  ): Promise<models.UpdateUserResponse> {
+    return unwrapAsync(usersUpdateUser(
+      this,
+      request,
       options,
     ));
   }

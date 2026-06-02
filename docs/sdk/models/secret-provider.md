@@ -13,5 +13,5 @@ let value: SecretProvider = "quickbooks";
 ## Values
 
 ```typescript
-"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "zoho_books" | "nomod" | "moyasar" | "paddle" | Unrecognized<string>
+"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "zoho_books" | "nomod" | "moyasar" | "paddle" | "whop" | Unrecognized<string>
 ```

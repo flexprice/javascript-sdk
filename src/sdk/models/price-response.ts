@@ -164,6 +164,15 @@ export type PriceResponse = {
   priceUnitType?: PriceUnitType | undefined;
   pricingUnit?: PriceUnitResponse | undefined;
   /**
+   * Sequence is the monotonic stamp bumped on every state change that
+   *
+   * @remarks
+   * subscription line items need to react to. Read by the plan-price sync;
+   * set by the database (DEFAULT nextval) on create and by the price
+   * repository on termination / compatibility-affecting edits.
+   */
+  sequence?: number | undefined;
+  /**
    * StartDate is the start date of the price
    */
   startDate?: Date | undefined;
@@ -225,6 +234,7 @@ export const PriceResponse$inboundSchema: z.ZodMiniType<
     price_unit_tiers: types.optional(z.array(PricePriceTier$inboundSchema)),
     price_unit_type: types.optional(PriceUnitType$inboundSchema),
     pricing_unit: types.optional(PriceUnitResponse$inboundSchema),
+    sequence: types.optional(types.number()),
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),

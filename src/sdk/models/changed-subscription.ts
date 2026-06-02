@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -21,19 +22,31 @@ export type ChangedSubscription = {
    * created | updated
    */
   action?: ChangedSubscriptionAction | undefined;
+  currentPeriodEnd?: Date | undefined;
   id?: string | undefined;
   status?: SubscriptionStatus | undefined;
+  trialEnd?: Date | undefined;
 };
 
 /** @internal */
 export const ChangedSubscription$inboundSchema: z.ZodMiniType<
   ChangedSubscription,
   unknown
-> = z.object({
-  action: types.optional(ChangedSubscriptionAction$inboundSchema),
-  id: types.optional(types.string()),
-  status: types.optional(SubscriptionStatus$inboundSchema),
-});
+> = z.pipe(
+  z.object({
+    action: types.optional(ChangedSubscriptionAction$inboundSchema),
+    current_period_end: types.optional(types.date()),
+    id: types.optional(types.string()),
+    status: types.optional(SubscriptionStatus$inboundSchema),
+    trial_end: types.optional(types.date()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "current_period_end": "currentPeriodEnd",
+      "trial_end": "trialEnd",
+    });
+  }),
+);
 
 export function changedSubscriptionFromJSON(
   jsonString: string,

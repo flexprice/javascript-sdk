@@ -19,6 +19,7 @@ export type CreateUserResponse = {
    */
   email?: string | undefined;
   id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
   password?: string | undefined;
   roles?: Array<string> | undefined;
   tenant?: TenantResponse | undefined;
@@ -32,6 +33,7 @@ export const CreateUserResponse$inboundSchema: z.ZodMiniType<
 > = z.object({
   email: types.optional(types.string()),
   id: types.optional(types.string()),
+  metadata: types.optional(z.record(z.string(), types.string())),
   password: types.optional(types.string()),
   roles: types.optional(z.array(types.string())),
   tenant: types.optional(TenantResponse$inboundSchema),

@@ -20,6 +20,11 @@ import {
   SubModifyQuantityChangeRequest$outboundSchema,
 } from "./sub-modify-quantity-change-request.js";
 import {
+  SubModifyTrialEndRequest,
+  SubModifyTrialEndRequest$Outbound,
+  SubModifyTrialEndRequest$outboundSchema,
+} from "./sub-modify-trial-end-request.js";
+import {
   SubscriptionModifyType,
   SubscriptionModifyType$outboundSchema,
 } from "./subscription-modify-type.js";
@@ -28,6 +33,7 @@ export type ExecuteSubscriptionModifyRequest = {
   groupedInvoicingParams?: SubModifyGroupedInvoicingParams | undefined;
   inheritanceParams?: SubModifyInheritanceRequest | undefined;
   quantityChangeParams?: SubModifyQuantityChangeRequest | undefined;
+  trialEndParams?: SubModifyTrialEndRequest | undefined;
   type: SubscriptionModifyType;
 };
 
@@ -38,6 +44,7 @@ export type ExecuteSubscriptionModifyRequest$Outbound = {
     | undefined;
   inheritance_params?: SubModifyInheritanceRequest$Outbound | undefined;
   quantity_change_params?: SubModifyQuantityChangeRequest$Outbound | undefined;
+  trial_end_params?: SubModifyTrialEndRequest$Outbound | undefined;
   type: string;
 };
 
@@ -54,6 +61,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
     quantityChangeParams: z.optional(
       SubModifyQuantityChangeRequest$outboundSchema,
     ),
+    trialEndParams: z.optional(SubModifyTrialEndRequest$outboundSchema),
     type: SubscriptionModifyType$outboundSchema,
   }),
   z.transform((v) => {
@@ -61,6 +69,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
       groupedInvoicingParams: "grouped_invoicing_params",
       inheritanceParams: "inheritance_params",
       quantityChangeParams: "quantity_change_params",
+      trialEndParams: "trial_end_params",
     });
   }),
 );

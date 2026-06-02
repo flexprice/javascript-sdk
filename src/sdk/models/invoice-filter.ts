@@ -11,6 +11,10 @@ import {
   FilterCondition$outboundSchema,
 } from "./filter-condition.js";
 import {
+  InvoiceBillingReason,
+  InvoiceBillingReason$outboundSchema,
+} from "./invoice-billing-reason.js";
+import {
   InvoiceStatus,
   InvoiceStatus$outboundSchema,
 } from "./invoice-status.js";
@@ -47,6 +51,14 @@ export type InvoiceFilter = {
    * Useful for finding invoices that still have significant unpaid amounts
    */
   amountRemainingGt?: number | undefined;
+  billingReason?: InvoiceBillingReason | undefined;
+  /**
+   * currency filters invoices by their currency (ISO 4217 code, e.g. "usd", "eur").
+   *
+   * @remarks
+   * Matches on the invoices.currency column exactly.
+   */
+  currency?: string | undefined;
   /**
    * customer_id filters invoices for a specific customer using FlexPrice's internal customer ID
    *
@@ -134,6 +146,8 @@ export const InvoiceFilterOrder$outboundSchema: z.ZodMiniEnum<
 export type InvoiceFilter$Outbound = {
   amount_due_gt?: number | undefined;
   amount_remaining_gt?: number | undefined;
+  billing_reason?: string | undefined;
+  currency?: string | undefined;
   customer_id?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
@@ -166,6 +180,8 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
   z.object({
     amountDueGt: z.optional(z.number()),
     amountRemainingGt: z.optional(z.number()),
+    billingReason: z.optional(InvoiceBillingReason$outboundSchema),
+    currency: z.optional(z.string()),
     customerId: z.optional(z.string()),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
@@ -193,6 +209,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       amountDueGt: "amount_due_gt",
       amountRemainingGt: "amount_remaining_gt",
+      billingReason: "billing_reason",
       customerId: "customer_id",
       endTime: "end_time",
       externalCustomerId: "external_customer_id",

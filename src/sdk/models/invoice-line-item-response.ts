@@ -23,6 +23,13 @@ import {
 } from "./usage-breakdown-item.js";
 
 export type InvoiceLineItemResponse = {
+  /**
+   * adjusted_entitlement_quantity is the entitlement-covered portion deducted from raw usage.
+   *
+   * @remarks
+   * Nil when no entitlement was applied. Raw usage = Quantity + AdjustedEntitlementQuantity.
+   */
+  adjustedEntitlementQuantity?: string | undefined;
   amount?: string | undefined;
   commitmentInfo?: CommitmentInfo | undefined;
   createdAt?: Date | undefined;
@@ -61,6 +68,10 @@ export type InvoiceLineItemResponse = {
   quantity?: string | undefined;
   status?: Status | undefined;
   subscriptionId?: string | undefined;
+  /**
+   * sub_line_item_id links this invoice line item to the subscription_line_item that generated it.
+   */
+  subscriptionLineItemId?: string | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -80,6 +91,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    adjusted_entitlement_quantity: types.optional(types.string()),
     amount: types.optional(types.string()),
     commitment_info: types.optional(CommitmentInfo$inboundSchema),
     created_at: types.optional(types.date()),
@@ -109,6 +121,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
     quantity: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
+    subscription_line_item_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
@@ -117,6 +130,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "adjusted_entitlement_quantity": "adjustedEntitlementQuantity",
       "commitment_info": "commitmentInfo",
       "created_at": "createdAt",
       "created_by": "createdBy",
@@ -140,6 +154,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
       "price_unit_amount": "priceUnitAmount",
       "price_unit_id": "priceUnitId",
       "subscription_id": "subscriptionId",
+      "subscription_line_item_id": "subscriptionLineItemId",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",

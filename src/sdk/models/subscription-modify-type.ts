@@ -9,6 +9,7 @@ export const SubscriptionModifyType = {
   Inheritance: "inheritance",
   QuantityChange: "quantity_change",
   GroupedInvoicing: "grouped_invoicing",
+  TrialEnd: "trial_end",
 } as const;
 export type SubscriptionModifyType = ClosedEnum<typeof SubscriptionModifyType>;
 

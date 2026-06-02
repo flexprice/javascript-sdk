@@ -214,6 +214,14 @@ export type SubscriptionResponse = {
   status?: Status | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
   subscriptionType?: SubscriptionType | undefined;
+  /**
+   * SyncedPriceSequence is the plan-price sequence up to which this
+   *
+   * @remarks
+   * subscription's line items have been reconciled. Bumped by the
+   * plan-price sync after a successful pass.
+   */
+  syncedPriceSequence?: number | undefined;
   tenantId?: string | undefined;
   /**
    * TrialEnd is the end date of the trial period
@@ -290,6 +298,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     status: types.optional(Status$inboundSchema),
     subscription_status: types.optional(SubscriptionStatus$inboundSchema),
     subscription_type: types.optional(SubscriptionType$inboundSchema),
+    synced_price_sequence: types.optional(types.number()),
     tenant_id: types.optional(types.string()),
     trial_end: types.optional(types.date()),
     trial_start: types.optional(types.date()),
@@ -338,6 +347,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
       "start_date": "startDate",
       "subscription_status": "subscriptionStatus",
       "subscription_type": "subscriptionType",
+      "synced_price_sequence": "syncedPriceSequence",
       "tenant_id": "tenantId",
       "trial_end": "trialEnd",
       "trial_start": "trialStart",

@@ -11,5 +11,5 @@ let value: PaymentGatewayType = "moyasar";
 ## Values
 
 ```typescript
-"stripe" | "razorpay" | "nomod" | "moyasar" | "paddle"
+"stripe" | "razorpay" | "nomod" | "moyasar" | "paddle" | "whop"
 ```

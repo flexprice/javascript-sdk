@@ -210,6 +210,14 @@ export type SubscriptionResponseV2 = {
    * PlanID is the identifier for the plan in our system
    */
   planId?: string | undefined;
+  /**
+   * PlanPricesOutOfSync is true when the subscription's synced_price_sequence
+   *
+   * @remarks
+   * is behind the plan's current max prices.sequence — i.e. plan-price
+   * changes have not yet been reconciled into this subscription's line items.
+   */
+  planPricesOutOfSync?: boolean | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
   /**
    * StartDate is the start date of the subscription
@@ -218,6 +226,14 @@ export type SubscriptionResponseV2 = {
   status?: Status | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
   subscriptionType?: SubscriptionType | undefined;
+  /**
+   * SyncedPriceSequence is the plan-price sequence up to which this
+   *
+   * @remarks
+   * subscription's line items have been reconciled. Bumped by the
+   * plan-price sync after a successful pass.
+   */
+  syncedPriceSequence?: number | undefined;
   tenantId?: string | undefined;
   /**
    * TrialEnd is the end date of the trial period
@@ -288,11 +304,13 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     phases: types.optional(z.array(SubscriptionPhaseResponse$inboundSchema)),
     plan: types.optional(PlanResponse$inboundSchema),
     plan_id: types.optional(types.string()),
+    plan_prices_out_of_sync: types.optional(types.boolean()),
     proration_behavior: types.optional(ProrationBehavior$inboundSchema),
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription_status: types.optional(SubscriptionStatus$inboundSchema),
     subscription_type: types.optional(SubscriptionType$inboundSchema),
+    synced_price_sequence: types.optional(types.number()),
     tenant_id: types.optional(types.string()),
     trial_end: types.optional(types.date()),
     trial_start: types.optional(types.date()),
@@ -336,10 +354,12 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
       "payment_behavior": "paymentBehavior",
       "payment_terms": "paymentTerms",
       "plan_id": "planId",
+      "plan_prices_out_of_sync": "planPricesOutOfSync",
       "proration_behavior": "prorationBehavior",
       "start_date": "startDate",
       "subscription_status": "subscriptionStatus",
       "subscription_type": "subscriptionType",
+      "synced_price_sequence": "syncedPriceSequence",
       "tenant_id": "tenantId",
       "trial_end": "trialEnd",
       "trial_start": "trialStart",

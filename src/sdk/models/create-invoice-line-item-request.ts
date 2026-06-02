@@ -12,6 +12,10 @@ import {
 
 export type CreateInvoiceLineItemRequest = {
   /**
+   * adjusted_entitlement_quantity is the entitlement-covered units deducted from raw usage.
+   */
+  adjustedEntitlementQuantity?: string | undefined;
+  /**
    * amount is the monetary amount for this line item
    */
   amount: string;
@@ -88,10 +92,22 @@ export type CreateInvoiceLineItemRequest = {
    * quantity is the quantity of units for this line item
    */
   quantity: string;
+  /**
+   * subscription_id overrides the invoice's subscription_id for this specific line item.
+   *
+   * @remarks
+   * Used for grouped invoicing where child line items belong to child subscriptions.
+   */
+  subscriptionId?: string | undefined;
+  /**
+   * sub_line_item_id links this line item to the subscription_line_item that generated it.
+   */
+  subscriptionLineItemId?: string | undefined;
 };
 
 /** @internal */
 export type CreateInvoiceLineItemRequest$Outbound = {
+  adjusted_entitlement_quantity?: string | undefined;
   amount: string;
   commitment_info?: CommitmentInfo$Outbound | undefined;
   display_name?: string | undefined;
@@ -112,6 +128,8 @@ export type CreateInvoiceLineItemRequest$Outbound = {
   price_unit?: string | undefined;
   price_unit_amount?: string | undefined;
   quantity: string;
+  subscription_id?: string | undefined;
+  subscription_line_item_id?: string | undefined;
 };
 
 /** @internal */
@@ -120,6 +138,7 @@ export const CreateInvoiceLineItemRequest$outboundSchema: z.ZodMiniType<
   CreateInvoiceLineItemRequest
 > = z.pipe(
   z.object({
+    adjustedEntitlementQuantity: z.optional(z.string()),
     amount: z.string(),
     commitmentInfo: z.optional(CommitmentInfo$outboundSchema),
     displayName: z.optional(z.string()),
@@ -142,9 +161,12 @@ export const CreateInvoiceLineItemRequest$outboundSchema: z.ZodMiniType<
     priceUnit: z.optional(z.string()),
     priceUnitAmount: z.optional(z.string()),
     quantity: z.string(),
+    subscriptionId: z.optional(z.string()),
+    subscriptionLineItemId: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      adjustedEntitlementQuantity: "adjusted_entitlement_quantity",
       commitmentInfo: "commitment_info",
       displayName: "display_name",
       entityId: "entity_id",
@@ -162,6 +184,8 @@ export const CreateInvoiceLineItemRequest$outboundSchema: z.ZodMiniType<
       priceType: "price_type",
       priceUnit: "price_unit",
       priceUnitAmount: "price_unit_amount",
+      subscriptionId: "subscription_id",
+      subscriptionLineItemId: "subscription_line_item_id",
     });
   }),
 );

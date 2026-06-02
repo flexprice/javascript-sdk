@@ -1469,7 +1469,7 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.subscriptions.previewSubscriptionModify("<id>", {
-    type: "grouped_invoicing",
+    type: "trial_end",
   });
 
   console.log(result);
@@ -1494,7 +1494,7 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await subscriptionsPreviewSubscriptionModify(flexprice, "<id>", {
-    type: "grouped_invoicing",
+    type: "trial_end",
   });
   if (res.ok) {
     const { value: result } = res;

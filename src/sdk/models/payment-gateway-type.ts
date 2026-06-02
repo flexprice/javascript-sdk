@@ -11,6 +11,7 @@ export const PaymentGatewayType = {
   Nomod: "nomod",
   Moyasar: "moyasar",
   Paddle: "paddle",
+  Whop: "whop",
 } as const;
 export type PaymentGatewayType = ClosedEnum<typeof PaymentGatewayType>;
 
