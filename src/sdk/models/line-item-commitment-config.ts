@@ -9,6 +9,11 @@ import {
   BillingPeriod$outboundSchema,
 } from "./billing-period.js";
 import {
+  CommitmentBucketRequest,
+  CommitmentBucketRequest$Outbound,
+  CommitmentBucketRequest$outboundSchema,
+} from "./commitment-bucket-request.js";
+import {
   CommitmentType,
   CommitmentType$outboundSchema,
 } from "./commitment-type.js";
@@ -23,6 +28,15 @@ export type LineItemCommitmentConfig = {
    * CommitmentQuantity is the minimum quantity committed for this line item
    */
   commitmentQuantity?: number | undefined;
+  /**
+   * CommitmentTimeBuckets defines per-bucket commitment + inline price for
+   *
+   * @remarks
+   * windows whose start UTC hour falls within each configured bucket. Each
+   * bucket carries its own price (materialized by the service). Requires
+   * IsWindowCommitment=true.
+   */
+  commitmentTimeBuckets?: Array<CommitmentBucketRequest> | undefined;
   commitmentType?: CommitmentType | undefined;
   /**
    * EnableTrueUp determines if true-up fee should be applied when usage is below commitment
@@ -43,6 +57,7 @@ export type LineItemCommitmentConfig$Outbound = {
   commitment_amount?: number | undefined;
   commitment_duration?: string | undefined;
   commitment_quantity?: number | undefined;
+  commitment_time_buckets?: Array<CommitmentBucketRequest$Outbound> | undefined;
   commitment_type?: string | undefined;
   enable_true_up?: boolean | undefined;
   is_window_commitment?: boolean | undefined;
@@ -58,6 +73,9 @@ export const LineItemCommitmentConfig$outboundSchema: z.ZodMiniType<
     commitmentAmount: z.optional(z.number()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
     commitmentQuantity: z.optional(z.number()),
+    commitmentTimeBuckets: z.optional(
+      z.array(CommitmentBucketRequest$outboundSchema),
+    ),
     commitmentType: z.optional(CommitmentType$outboundSchema),
     enableTrueUp: z.optional(z.boolean()),
     isWindowCommitment: z.optional(z.boolean()),
@@ -68,6 +86,7 @@ export const LineItemCommitmentConfig$outboundSchema: z.ZodMiniType<
       commitmentAmount: "commitment_amount",
       commitmentDuration: "commitment_duration",
       commitmentQuantity: "commitment_quantity",
+      commitmentTimeBuckets: "commitment_time_buckets",
       commitmentType: "commitment_type",
       enableTrueUp: "enable_true_up",
       isWindowCommitment: "is_window_commitment",

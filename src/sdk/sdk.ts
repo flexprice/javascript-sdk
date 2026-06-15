@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Addons } from "./addons.js";
 import { Alerts } from "./alerts.js";
 import { Costs } from "./costs.js";
+import { CouponAssociations } from "./coupon-associations.js";
 import { Coupons } from "./coupons.js";
 import { CreditGrants } from "./credit-grants.js";
 import { CreditNotes } from "./credit-notes.js";
@@ -58,6 +59,11 @@ export class Flexprice extends ClientSDK {
   private _coupons?: Coupons;
   get coupons(): Coupons {
     return (this._coupons ??= new Coupons(this._options));
+  }
+
+  private _couponAssociations?: CouponAssociations;
+  get couponAssociations(): CouponAssociations {
+    return (this._couponAssociations ??= new CouponAssociations(this._options));
   }
 
   private _creditGrants?: CreditGrants;

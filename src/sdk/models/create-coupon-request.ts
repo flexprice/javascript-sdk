@@ -13,6 +13,7 @@ import { CouponType, CouponType$outboundSchema } from "./coupon-type.js";
 export type CreateCouponRequest = {
   amountOff?: string | undefined;
   cadence: CouponCadence;
+  couponCode?: string | undefined;
   currency?: string | undefined;
   durationInPeriods?: number | undefined;
   maxRedemptions?: number | undefined;
@@ -29,6 +30,7 @@ export type CreateCouponRequest = {
 export type CreateCouponRequest$Outbound = {
   amount_off?: string | undefined;
   cadence: string;
+  coupon_code?: string | undefined;
   currency?: string | undefined;
   duration_in_periods?: number | undefined;
   max_redemptions?: number | undefined;
@@ -49,6 +51,7 @@ export const CreateCouponRequest$outboundSchema: z.ZodMiniType<
   z.object({
     amountOff: z.optional(z.string()),
     cadence: CouponCadence$outboundSchema,
+    couponCode: z.optional(z.string()),
     currency: z.optional(z.string()),
     durationInPeriods: z.optional(z.int()),
     maxRedemptions: z.optional(z.int()),
@@ -63,6 +66,7 @@ export const CreateCouponRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       amountOff: "amount_off",
+      couponCode: "coupon_code",
       durationInPeriods: "duration_in_periods",
       maxRedemptions: "max_redemptions",
       percentageOff: "percentage_off",

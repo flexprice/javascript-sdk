@@ -1,0 +1,26 @@
+# BucketSummary
+
+## Example Usage
+
+```typescript
+import { BucketSummary } from "@flexprice/sdk/sdk/models";
+
+let value: BucketSummary = {};
+```
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `baseCharge`                                                                         | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `bucketId`                                                                           | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `commitmentType`                                                                     | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `commitmentValue`                                                                    | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `computedOverage`                                                                    | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `computedTrueUp`                                                                     | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `computedUtilized`                                                                   | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `end`                                                                                | [models.Bucket](../../sdk/models/bucket.md)                                          | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `priceId`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | PriceID is the bucket's own price (the line item's price for the<br/>out-of-bucket row). |
+| `start`                                                                              | [models.Bucket](../../sdk/models/bucket.md)                                          | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `subscriptionLineItemId`                                                             | *string*                                                                             | :heavy_minus_sign:                                                                   | SubscriptionLineItemID is the line item this bucket is configured on.                |
+| `totalUsage`                                                                         | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |

@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AttributedToCustomerResult,
+  AttributedToCustomerResult$inboundSchema,
+} from "./attributed-to-customer-result.js";
+import {
   CustomerLookupResult,
   CustomerLookupResult$inboundSchema,
 } from "./customer-lookup-result.js";
@@ -27,6 +31,7 @@ import {
 } from "./subscription-line-item-lookup-result.js";
 
 export type DebugTracker = {
+  attributedToCustomer?: AttributedToCustomerResult | undefined;
   customerLookup?: CustomerLookupResult | undefined;
   failurePoint?: FailurePoint | undefined;
   meterMatching?: MeterMatchingResult | undefined;
@@ -38,6 +43,9 @@ export type DebugTracker = {
 export const DebugTracker$inboundSchema: z.ZodMiniType<DebugTracker, unknown> =
   z.pipe(
     z.object({
+      attributed_to_customer: types.optional(
+        AttributedToCustomerResult$inboundSchema,
+      ),
       customer_lookup: types.optional(CustomerLookupResult$inboundSchema),
       failure_point: types.optional(FailurePoint$inboundSchema),
       meter_matching: types.optional(MeterMatchingResult$inboundSchema),
@@ -48,6 +56,7 @@ export const DebugTracker$inboundSchema: z.ZodMiniType<DebugTracker, unknown> =
     }),
     z.transform((v) => {
       return remap$(v, {
+        "attributed_to_customer": "attributedToCustomer",
         "customer_lookup": "customerLookup",
         "failure_point": "failurePoint",
         "meter_matching": "meterMatching",

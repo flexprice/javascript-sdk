@@ -8,7 +8,7 @@ import { ExecuteSubscriptionModifyRequestRequest } from "@flexprice/sdk/sdk/mode
 let value: ExecuteSubscriptionModifyRequestRequest = {
   id: "<id>",
   body: {
-    type: "grouped_invoicing",
+    type: "trial_end",
   },
 };
 ```

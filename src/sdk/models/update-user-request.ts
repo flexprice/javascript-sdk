@@ -6,11 +6,13 @@ import * as z from "zod/v4-mini";
 
 export type UpdateUserRequest = {
   metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
 export type UpdateUserRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
 };
 
 /** @internal */
@@ -19,6 +21,7 @@ export const UpdateUserRequest$outboundSchema: z.ZodMiniType<
   UpdateUserRequest
 > = z.object({
   metadata: z.optional(z.record(z.string(), z.string())),
+  name: z.optional(z.string()),
 });
 
 export function updateUserRequestToJSON(

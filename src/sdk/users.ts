@@ -3,8 +3,10 @@
  */
 
 import { usersCreateUser } from "../funcs/users-create-user.js";
+import { usersDeleteServiceAccount } from "../funcs/users-delete-service-account.js";
 import { usersGetUserInfo } from "../funcs/users-get-user-info.js";
 import { usersQueryUser } from "../funcs/users-query-user.js";
+import { usersUpdateServiceAccount } from "../funcs/users-update-service-account.js";
 import { usersUpdateUser } from "../funcs/users-update-user.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -47,7 +49,7 @@ export class Users extends ClientSDK {
    * Update current user
    *
    * @remarks
-   * Update the current authenticated user. Only metadata updates are supported.
+   * Update the current authenticated user. Supports name and metadata updates.
    */
   async updateUser(
     request: models.UpdateUserRequest,
@@ -73,6 +75,42 @@ export class Users extends ClientSDK {
     return unwrapAsync(usersQueryUser(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Update service account
+   *
+   * @remarks
+   * Update a service account by ID (name only).
+   */
+  async updateServiceAccount(
+    id: string,
+    body: models.UpdateServiceAccountRequest,
+    options?: RequestOptions,
+  ): Promise<models.UpdateServiceAccountResponse> {
+    return unwrapAsync(usersUpdateServiceAccount(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Delete service account
+   *
+   * @remarks
+   * Soft-delete (archive) a service account by ID.
+   */
+  async deleteServiceAccount(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(usersDeleteServiceAccount(
+      this,
+      id,
       options,
     ));
   }

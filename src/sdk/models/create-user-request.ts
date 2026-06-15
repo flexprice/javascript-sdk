@@ -11,6 +11,10 @@ export type CreateUserRequest = {
    */
   email?: string | undefined;
   /**
+   * Display name; optional for service accounts
+   */
+  name?: string | undefined;
+  /**
    * Required when type is "service_account"
    */
   roles?: Array<string> | undefined;
@@ -20,6 +24,7 @@ export type CreateUserRequest = {
 /** @internal */
 export type CreateUserRequest$Outbound = {
   email?: string | undefined;
+  name?: string | undefined;
   roles?: Array<string> | undefined;
   type: string;
 };
@@ -30,6 +35,7 @@ export const CreateUserRequest$outboundSchema: z.ZodMiniType<
   CreateUserRequest
 > = z.object({
   email: z.optional(z.string()),
+  name: z.optional(z.string()),
   roles: z.optional(z.array(z.string())),
   type: UserType$outboundSchema,
 });

@@ -13,6 +13,10 @@ import {
   AggregationType$inboundSchema,
 } from "./aggregation-type.js";
 import {
+  BucketSummary,
+  BucketSummary$inboundSchema,
+} from "./bucket-summary.js";
+import {
   CommitmentInfo,
   CommitmentInfo$inboundSchema,
 } from "./commitment-info.js";
@@ -43,6 +47,13 @@ export type UsageAnalyticItem = {
   addOnId?: string | undefined;
   addon?: Addon | undefined;
   aggregationType?: AggregationType | undefined;
+  /**
+   * BucketSummaries is populated only when BreakdownBucket=true. Contains one
+   *
+   * @remarks
+   * entry per defined CommitmentTimeBucket plus one for out-of-bucket usage.
+   */
+  bucketSummaries?: Array<BucketSummary> | undefined;
   commitmentInfo?: CommitmentInfo | undefined;
   currency?: string | undefined;
   /**
@@ -106,6 +117,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
     add_on_id: types.optional(types.string()),
     addon: types.optional(Addon$inboundSchema),
     aggregation_type: types.optional(AggregationType$inboundSchema),
+    bucket_summaries: types.optional(z.array(BucketSummary$inboundSchema)),
     commitment_info: types.optional(CommitmentInfo$inboundSchema),
     currency: types.optional(types.string()),
     event_count: types.optional(types.number()),
@@ -141,6 +153,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
     return remap$(v, {
       "add_on_id": "addOnId",
       "aggregation_type": "aggregationType",
+      "bucket_summaries": "bucketSummaries",
       "commitment_info": "commitmentInfo",
       "event_count": "eventCount",
       "event_name": "eventName",

@@ -27,6 +27,10 @@ import {
   SubscriptionLineItemEntityType,
   SubscriptionLineItemEntityType$inboundSchema,
 } from "./subscription-line-item-entity-type.js";
+import {
+  TimeOfDayBucket,
+  TimeOfDayBucket$inboundSchema,
+} from "./time-of-day-bucket.js";
 
 export type SubscriptionSubscriptionLineItem = {
   addonAssociationId?: string | undefined;
@@ -42,6 +46,7 @@ export type SubscriptionSubscriptionLineItem = {
   commitmentDuration?: BillingPeriod | undefined;
   commitmentOverageFactor?: string | undefined;
   commitmentQuantity?: string | undefined;
+  commitmentTimeBuckets?: Array<TimeOfDayBucket> | undefined;
   commitmentTrueUpEnabled?: boolean | undefined;
   commitmentType?: CommitmentType | undefined;
   commitmentWindowed?: boolean | undefined;
@@ -88,6 +93,9 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     commitment_duration: types.optional(BillingPeriod$inboundSchema),
     commitment_overage_factor: types.optional(types.string()),
     commitment_quantity: types.optional(types.string()),
+    commitment_time_buckets: types.optional(
+      z.array(TimeOfDayBucket$inboundSchema),
+    ),
     commitment_true_up_enabled: types.optional(types.boolean()),
     commitment_type: types.optional(CommitmentType$inboundSchema),
     commitment_windowed: types.optional(types.boolean()),
@@ -129,6 +137,7 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
       "commitment_duration": "commitmentDuration",
       "commitment_overage_factor": "commitmentOverageFactor",
       "commitment_quantity": "commitmentQuantity",
+      "commitment_time_buckets": "commitmentTimeBuckets",
       "commitment_true_up_enabled": "commitmentTrueUpEnabled",
       "commitment_type": "commitmentType",
       "commitment_windowed": "commitmentWindowed",

@@ -12,11 +12,19 @@ import {
 export type CreateTaxAssociationRequest = {
   autoApply?: boolean | undefined;
   currency?: string | undefined;
+  /**
+   * EndDate sets when this association expires. Must be after StartDate when both are provided.
+   */
+  endDate?: Date | undefined;
   entityId?: string | undefined;
   entityType?: TaxRateEntityType | undefined;
   externalCustomerId?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
+  /**
+   * StartDate sets when this association becomes active. Defaults to now if omitted.
+   */
+  startDate?: Date | undefined;
   taxRateCode: string;
 };
 
@@ -24,11 +32,13 @@ export type CreateTaxAssociationRequest = {
 export type CreateTaxAssociationRequest$Outbound = {
   auto_apply?: boolean | undefined;
   currency?: string | undefined;
+  end_date?: string | undefined;
   entity_id?: string | undefined;
   entity_type?: string | undefined;
   external_customer_id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
+  start_date?: string | undefined;
   tax_rate_code: string;
 };
 
@@ -40,19 +50,23 @@ export const CreateTaxAssociationRequest$outboundSchema: z.ZodMiniType<
   z.object({
     autoApply: z.optional(z.boolean()),
     currency: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityId: z.optional(z.string()),
     entityType: z.optional(TaxRateEntityType$outboundSchema),
     externalCustomerId: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     priority: z.optional(z.int()),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     taxRateCode: z.string(),
   }),
   z.transform((v) => {
     return remap$(v, {
       autoApply: "auto_apply",
+      endDate: "end_date",
       entityId: "entity_id",
       entityType: "entity_type",
       externalCustomerId: "external_customer_id",
+      startDate: "start_date",
       taxRateCode: "tax_rate_code",
     });
   }),

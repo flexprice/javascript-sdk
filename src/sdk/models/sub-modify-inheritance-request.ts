@@ -4,14 +4,28 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  InheritanceAction,
+  InheritanceAction$outboundSchema,
+} from "./inheritance-action.js";
 
 export type SubModifyInheritanceRequest = {
+  action?: InheritanceAction | undefined;
+  /**
+   * ExternalCustomerIDsToInheritSubscription is used for action="add".
+   */
   externalCustomerIdsToInheritSubscription?: Array<string> | undefined;
+  /**
+   * ExternalCustomerIDsToRemove is used for action="remove".
+   */
+  externalCustomerIdsToRemove?: Array<string> | undefined;
 };
 
 /** @internal */
 export type SubModifyInheritanceRequest$Outbound = {
+  action?: string | undefined;
   external_customer_ids_to_inherit_subscription?: Array<string> | undefined;
+  external_customer_ids_to_remove?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -20,12 +34,15 @@ export const SubModifyInheritanceRequest$outboundSchema: z.ZodMiniType<
   SubModifyInheritanceRequest
 > = z.pipe(
   z.object({
+    action: z.optional(InheritanceAction$outboundSchema),
     externalCustomerIdsToInheritSubscription: z.optional(z.array(z.string())),
+    externalCustomerIdsToRemove: z.optional(z.array(z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
       externalCustomerIdsToInheritSubscription:
         "external_customer_ids_to_inherit_subscription",
+      externalCustomerIdsToRemove: "external_customer_ids_to_remove",
     });
   }),
 );

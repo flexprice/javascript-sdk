@@ -11,6 +11,14 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type UsageAnalyticPoint = {
   /**
+   * Bucket identity (only populated when BreakdownBucket=true and the line item
+   *
+   * @remarks
+   * has CommitmentTimeBuckets). Empty strings indicate out-of-bucket windows.
+   */
+  bucketId?: string | undefined;
+  bucketPriceId?: string | undefined;
+  /**
    * Commitment breakdown (only populated for windowed commitments)
    */
   computedCommitmentUtilizedAmount?: string | undefined;
@@ -31,6 +39,8 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    bucket_id: types.optional(types.string()),
+    bucket_price_id: types.optional(types.string()),
     computed_commitment_utilized_amount: types.optional(types.string()),
     computed_overage_amount: types.optional(types.string()),
     computed_true_up_amount: types.optional(types.string()),
@@ -41,6 +51,8 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "bucket_id": "bucketId",
+      "bucket_price_id": "bucketPriceId",
       "computed_commitment_utilized_amount": "computedCommitmentUtilizedAmount",
       "computed_overage_amount": "computedOverageAmount",
       "computed_true_up_amount": "computedTrueUpAmount",

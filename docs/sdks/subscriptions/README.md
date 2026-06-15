@@ -1379,7 +1379,7 @@ run();
 
 ## executeSubscriptionModify
 
-Execute a mid-cycle subscription modification (inheritance or quantity change).
+Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax).
 
 ### Example Usage
 
@@ -1455,7 +1455,7 @@ run();
 
 ## previewSubscriptionModify
 
-Preview the impact of a mid-cycle subscription modification without committing changes.
+Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax) without committing changes.
 
 ### Example Usage
 
@@ -1469,7 +1469,7 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.subscriptions.previewSubscriptionModify("<id>", {
-    type: "trial_end",
+    type: "coupon",
   });
 
   console.log(result);
@@ -1494,7 +1494,7 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await subscriptionsPreviewSubscriptionModify(flexprice, "<id>", {
-    type: "trial_end",
+    type: "coupon",
   });
   if (res.ok) {
     const { value: result } = res;

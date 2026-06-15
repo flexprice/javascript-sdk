@@ -15,5 +15,6 @@ let value: CreateUserRequest = {
 | Field                                            | Type                                             | Required                                         | Description                                      |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | `email`                                          | *string*                                         | :heavy_minus_sign:                               | Required when type is "user"                     |
+| `name`                                           | *string*                                         | :heavy_minus_sign:                               | Display name; optional for service accounts      |
 | `roles`                                          | *string*[]                                       | :heavy_minus_sign:                               | Required when type is "service_account"          |
 | `type`                                           | [models.UserType](../../sdk/models/user-type.md) | :heavy_check_mark:                               | N/A                                              |

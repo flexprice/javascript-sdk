@@ -6,6 +6,10 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
+  BillingPeriod,
+  BillingPeriod$outboundSchema,
+} from "./billing-period.js";
+import {
   FilterCondition,
   FilterCondition$Outbound,
   FilterCondition$outboundSchema,
@@ -24,6 +28,7 @@ export type PriceFilterOrder = ClosedEnum<typeof PriceFilterOrder>;
 
 export type PriceFilter = {
   allowExpiredPrices?: boolean | undefined;
+  billingPeriods?: Array<BillingPeriod> | undefined;
   endTime?: Date | undefined;
   entityIds?: Array<string> | undefined;
   entityType?: PriceEntityType | undefined;
@@ -57,6 +62,7 @@ export const PriceFilterOrder$outboundSchema: z.ZodMiniEnum<
 /** @internal */
 export type PriceFilter$Outbound = {
   allow_expired_prices: boolean;
+  billing_periods?: Array<string> | undefined;
   end_time?: string | undefined;
   entity_ids?: Array<string> | undefined;
   entity_type?: string | undefined;
@@ -83,6 +89,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     allowExpiredPrices: z._default(z.boolean(), false),
+    billingPeriods: z.optional(z.array(BillingPeriod$outboundSchema)),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityIds: z.optional(z.array(z.string())),
     entityType: z.optional(PriceEntityType$outboundSchema),
@@ -104,6 +111,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       allowExpiredPrices: "allow_expired_prices",
+      billingPeriods: "billing_periods",
       endTime: "end_time",
       entityIds: "entity_ids",
       entityType: "entity_type",

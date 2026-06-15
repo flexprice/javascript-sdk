@@ -18,6 +18,14 @@ import {
 } from "./proration-behavior.js";
 
 export type CancelSubscriptionRequest = {
+  /**
+   * CancelAt is the exact date/time when the subscription should be cancelled.
+   *
+   * @remarks
+   * Required for cancellation_type "scheduled_date"; optional for "immediate" (past dates only — backdated cancellation).
+   * For "scheduled_date", accepts both future dates (deferred cancellation) and past dates (backdated cancellation).
+   * For "immediate", accepts past/current dates only; use "scheduled_date" for future dates.
+   */
   cancelAt?: Date | undefined;
   cancelImmediatelyInovicePolicy?: CancelImmediatelyInvoicePolicy | undefined;
   cancellationType: CancellationType;

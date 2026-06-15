@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  SubModifyCouponParams,
+  SubModifyCouponParams$Outbound,
+  SubModifyCouponParams$outboundSchema,
+} from "./sub-modify-coupon-params.js";
+import {
   SubModifyGroupedInvoicingParams,
   SubModifyGroupedInvoicingParams$Outbound,
   SubModifyGroupedInvoicingParams$outboundSchema,
@@ -20,6 +25,11 @@ import {
   SubModifyQuantityChangeRequest$outboundSchema,
 } from "./sub-modify-quantity-change-request.js";
 import {
+  SubModifyTaxParams,
+  SubModifyTaxParams$Outbound,
+  SubModifyTaxParams$outboundSchema,
+} from "./sub-modify-tax-params.js";
+import {
   SubModifyTrialEndRequest,
   SubModifyTrialEndRequest$Outbound,
   SubModifyTrialEndRequest$outboundSchema,
@@ -30,20 +40,24 @@ import {
 } from "./subscription-modify-type.js";
 
 export type ExecuteSubscriptionModifyRequest = {
+  couponParams?: SubModifyCouponParams | undefined;
   groupedInvoicingParams?: SubModifyGroupedInvoicingParams | undefined;
   inheritanceParams?: SubModifyInheritanceRequest | undefined;
   quantityChangeParams?: SubModifyQuantityChangeRequest | undefined;
+  taxParams?: SubModifyTaxParams | undefined;
   trialEndParams?: SubModifyTrialEndRequest | undefined;
   type: SubscriptionModifyType;
 };
 
 /** @internal */
 export type ExecuteSubscriptionModifyRequest$Outbound = {
+  coupon_params?: SubModifyCouponParams$Outbound | undefined;
   grouped_invoicing_params?:
     | SubModifyGroupedInvoicingParams$Outbound
     | undefined;
   inheritance_params?: SubModifyInheritanceRequest$Outbound | undefined;
   quantity_change_params?: SubModifyQuantityChangeRequest$Outbound | undefined;
+  tax_params?: SubModifyTaxParams$Outbound | undefined;
   trial_end_params?: SubModifyTrialEndRequest$Outbound | undefined;
   type: string;
 };
@@ -54,6 +68,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   ExecuteSubscriptionModifyRequest
 > = z.pipe(
   z.object({
+    couponParams: z.optional(SubModifyCouponParams$outboundSchema),
     groupedInvoicingParams: z.optional(
       SubModifyGroupedInvoicingParams$outboundSchema,
     ),
@@ -61,14 +76,17 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
     quantityChangeParams: z.optional(
       SubModifyQuantityChangeRequest$outboundSchema,
     ),
+    taxParams: z.optional(SubModifyTaxParams$outboundSchema),
     trialEndParams: z.optional(SubModifyTrialEndRequest$outboundSchema),
     type: SubscriptionModifyType$outboundSchema,
   }),
   z.transform((v) => {
     return remap$(v, {
+      couponParams: "coupon_params",
       groupedInvoicingParams: "grouped_invoicing_params",
       inheritanceParams: "inheritance_params",
       quantityChangeParams: "quantity_change_params",
+      taxParams: "tax_params",
       trialEndParams: "trial_end_params",
     });
   }),

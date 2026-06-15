@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update current user
  *
  * @remarks
- * Update the current authenticated user. Only metadata updates are supported.
+ * Update the current authenticated user. Supports name and metadata updates.
  */
 export function usersUpdateUser(
   client: FlexpriceCore,

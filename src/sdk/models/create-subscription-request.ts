@@ -53,6 +53,11 @@ import {
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import {
+  SubscriptionCouponInput,
+  SubscriptionCouponInput$Outbound,
+  SubscriptionCouponInput$outboundSchema,
+} from "./subscription-coupon-input.js";
+import {
   SubscriptionInheritanceConfig,
   SubscriptionInheritanceConfig$Outbound,
   SubscriptionInheritanceConfig$outboundSchema,
@@ -105,6 +110,9 @@ export type CreateSubscriptionRequest = {
    */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Deprecated: use SubscriptionCoupons instead.
+   */
   coupons?: Array<string> | undefined;
   /**
    * Credit grants to be applied when subscription is created
@@ -143,6 +151,9 @@ export type CreateSubscriptionRequest = {
    * LineItemCommitments allows setting commitment configuration per line item (keyed by price_id)
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
+  /**
+   * Deprecated: use SubscriptionCoupons instead.
+   */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
   /**
    * LineItems are extra line items to add at creation (each with price_id or price), in addition to plan prices
@@ -171,6 +182,13 @@ export type CreateSubscriptionRequest = {
   planId: string;
   prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
+  /**
+   * SubscriptionCoupons is the preferred way to attach coupons at creation.
+   *
+   * @remarks
+   * Accepts coupon_code; optionally targets a line item via price_id.
+   */
+  subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
   /**
    * tax_rate_overrides is the tax rate overrides	to be applied to the subscription
@@ -224,6 +242,7 @@ export type CreateSubscriptionRequest$Outbound = {
   plan_id: string;
   proration_behavior?: string | undefined;
   start_date?: string | undefined;
+  subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   subscription_status?: string | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   trial_period_days?: number | undefined;
@@ -278,6 +297,9 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     planId: z.string(),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionCoupons: z.optional(
+      z.array(SubscriptionCouponInput$outboundSchema),
+    ),
     subscriptionStatus: z.optional(SubscriptionStatus$outboundSchema),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     trialPeriodDays: z.optional(z.int()),
@@ -311,6 +333,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       planId: "plan_id",
       prorationBehavior: "proration_behavior",
       startDate: "start_date",
+      subscriptionCoupons: "subscription_coupons",
       subscriptionStatus: "subscription_status",
       taxRateOverrides: "tax_rate_overrides",
       trialPeriodDays: "trial_period_days",

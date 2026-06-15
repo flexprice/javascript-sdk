@@ -14,15 +14,20 @@ import {
   OverrideLineItemRequest$Outbound,
   OverrideLineItemRequest$outboundSchema,
 } from "./override-line-item-request.js";
+import {
+  SubscriptionCouponInput,
+  SubscriptionCouponInput$Outbound,
+  SubscriptionCouponInput$outboundSchema,
+} from "./subscription-coupon-input.js";
 
 export type SubscriptionPhaseCreateRequest = {
   /**
-   * Coupons represents subscription-level coupons to be applied to this phase
+   * Deprecated: use SubscriptionCoupons instead.
    */
   coupons?: Array<string> | undefined;
   endDate?: Date | undefined;
   /**
-   * LineItemCoupons represents line item-level coupons (map of line_item_id to coupon IDs)
+   * Deprecated: use SubscriptionCoupons instead.
    */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
   /**
@@ -41,6 +46,10 @@ export type SubscriptionPhaseCreateRequest = {
    */
   overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   startDate: Date;
+  /**
+   * SubscriptionCoupons is the preferred way to attach coupons to this phase.
+   */
+  subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
 };
 
 /** @internal */
@@ -52,6 +61,7 @@ export type SubscriptionPhaseCreateRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
   start_date: string;
+  subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
 };
 
 /** @internal */
@@ -71,6 +81,9 @@ export const SubscriptionPhaseCreateRequest$outboundSchema: z.ZodMiniType<
       z.array(OverrideLineItemRequest$outboundSchema),
     ),
     startDate: z.pipe(z.date(), z.transform(v => v.toISOString())),
+    subscriptionCoupons: z.optional(
+      z.array(SubscriptionCouponInput$outboundSchema),
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -79,6 +92,7 @@ export const SubscriptionPhaseCreateRequest$outboundSchema: z.ZodMiniType<
       lineItems: "line_items",
       overrideLineItems: "override_line_items",
       startDate: "start_date",
+      subscriptionCoupons: "subscription_coupons",
     });
   }),
 );

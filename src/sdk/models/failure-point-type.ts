@@ -11,6 +11,7 @@ export const FailurePointType = {
   MeterLookup: "meter_lookup",
   PriceLookup: "price_lookup",
   SubscriptionLineItemLookup: "subscription_line_item_lookup",
+  AttributedToCustomer: "attributed_to_customer",
 } as const;
 export type FailurePointType = OpenEnum<typeof FailurePointType>;
 

@@ -11,6 +11,11 @@ import {
 } from "./billing-period.js";
 import { BillingTier, BillingTier$outboundSchema } from "./billing-tier.js";
 import {
+  CommitmentBucketRequest,
+  CommitmentBucketRequest$Outbound,
+  CommitmentBucketRequest$outboundSchema,
+} from "./commitment-bucket-request.js";
+import {
   CommitmentType,
   CommitmentType$outboundSchema,
 } from "./commitment-type.js";
@@ -38,6 +43,10 @@ export type UpdateSubscriptionLineItemRequest = {
   commitmentDuration?: BillingPeriod | undefined;
   commitmentOverageFactor?: number | undefined;
   commitmentQuantity?: number | undefined;
+  /**
+   * Pointer so an explicit empty array can clear existing buckets (omission keeps them).
+   */
+  commitmentTimeBuckets?: Array<CommitmentBucketRequest> | undefined;
   commitmentTrueUpEnabled?: boolean | undefined;
   commitmentType?: CommitmentType | undefined;
   commitmentWindowed?: boolean | undefined;
@@ -65,6 +74,7 @@ export type UpdateSubscriptionLineItemRequest$Outbound = {
   commitment_duration?: string | undefined;
   commitment_overage_factor?: number | undefined;
   commitment_quantity?: number | undefined;
+  commitment_time_buckets?: Array<CommitmentBucketRequest$Outbound> | undefined;
   commitment_true_up_enabled?: boolean | undefined;
   commitment_type?: string | undefined;
   commitment_windowed?: boolean | undefined;
@@ -87,6 +97,9 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
     commitmentOverageFactor: z.optional(z.number()),
     commitmentQuantity: z.optional(z.number()),
+    commitmentTimeBuckets: z.optional(
+      z.array(CommitmentBucketRequest$outboundSchema),
+    ),
     commitmentTrueUpEnabled: z.optional(z.boolean()),
     commitmentType: z.optional(CommitmentType$outboundSchema),
     commitmentWindowed: z.optional(z.boolean()),
@@ -103,6 +116,7 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
       commitmentDuration: "commitment_duration",
       commitmentOverageFactor: "commitment_overage_factor",
       commitmentQuantity: "commitment_quantity",
+      commitmentTimeBuckets: "commitment_time_buckets",
       commitmentTrueUpEnabled: "commitment_true_up_enabled",
       commitmentType: "commitment_type",
       commitmentWindowed: "commitment_windowed",

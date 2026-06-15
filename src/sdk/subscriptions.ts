@@ -360,7 +360,7 @@ export class Subscriptions extends ClientSDK {
    * Execute subscription modification
    *
    * @remarks
-   * Execute a mid-cycle subscription modification (inheritance or quantity change).
+   * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax).
    */
   async executeSubscriptionModify(
     id: string,
@@ -379,7 +379,7 @@ export class Subscriptions extends ClientSDK {
    * Preview subscription modification
    *
    * @remarks
-   * Preview the impact of a mid-cycle subscription modification without committing changes.
+   * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax) without committing changes.
    */
   async previewSubscriptionModify(
     id: string,

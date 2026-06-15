@@ -30,6 +30,10 @@ export type TaxAssociationResponse = {
    */
   currency?: string | undefined;
   /**
+   * EndDate is the optional date until which this association is active
+   */
+  endDate?: Date | undefined;
+  /**
    * ID of the entity this tax rate applies to
    */
   entityId?: string | undefined;
@@ -50,6 +54,10 @@ export type TaxAssociationResponse = {
    * Priority for tax resolution (lower number = higher priority)
    */
   priority?: number | undefined;
+  /**
+   * StartDate is the date from which this association is active
+   */
+  startDate?: Date | undefined;
   status?: Status | undefined;
   taxRate?: TaxRateResponse | undefined;
   /**
@@ -71,12 +79,14 @@ export const TaxAssociationResponse$inboundSchema: z.ZodMiniType<
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
+    end_date: types.optional(types.date()),
     entity_id: types.optional(types.string()),
     entity_type: types.optional(TaxRateEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     priority: types.optional(types.number()),
+    start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     tax_rate: types.optional(TaxRateResponse$inboundSchema),
     tax_rate_id: types.optional(types.string()),
@@ -89,9 +99,11 @@ export const TaxAssociationResponse$inboundSchema: z.ZodMiniType<
       "auto_apply": "autoApply",
       "created_at": "createdAt",
       "created_by": "createdBy",
+      "end_date": "endDate",
       "entity_id": "entityId",
       "entity_type": "entityType",
       "environment_id": "environmentId",
+      "start_date": "startDate",
       "tax_rate": "taxRate",
       "tax_rate_id": "taxRateId",
       "tenant_id": "tenantId",

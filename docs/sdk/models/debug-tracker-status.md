@@ -5,7 +5,7 @@
 ```typescript
 import { DebugTrackerStatus } from "@flexprice/sdk/sdk/models";
 
-let value: DebugTrackerStatus = "error";
+let value: DebugTrackerStatus = "attributed";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: DebugTrackerStatus = "error";
 ## Values
 
 ```typescript
-"unprocessed" | "not_found" | "found" | "error" | Unrecognized<string>
+"unprocessed" | "not_found" | "found" | "error" | "processing" | "attributed" | Unrecognized<string>
 ```

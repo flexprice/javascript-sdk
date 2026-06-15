@@ -8,7 +8,7 @@ import { PreviewSubscriptionModifyRequest } from "@flexprice/sdk/sdk/models";
 let value: PreviewSubscriptionModifyRequest = {
   id: "<id>",
   body: {
-    type: "grouped_invoicing",
+    type: "trial_end",
   },
 };
 ```

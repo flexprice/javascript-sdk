@@ -18,6 +18,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 export type Coupon = {
   amountOff?: string | undefined;
   cadence?: CouponCadence | undefined;
+  couponCode?: string | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   currency?: string | undefined;
@@ -44,6 +45,7 @@ export const Coupon$inboundSchema: z.ZodMiniType<Coupon, unknown> = z.pipe(
   z.object({
     amount_off: types.optional(types.string()),
     cadence: types.optional(CouponCadence$inboundSchema),
+    coupon_code: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
@@ -67,6 +69,7 @@ export const Coupon$inboundSchema: z.ZodMiniType<Coupon, unknown> = z.pipe(
   z.transform((v) => {
     return remap$(v, {
       "amount_off": "amountOff",
+      "coupon_code": "couponCode",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "duration_in_periods": "durationInPeriods",

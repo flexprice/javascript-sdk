@@ -11,6 +11,8 @@ export const DebugTrackerStatus = {
   NotFound: "not_found",
   Found: "found",
   Error: "error",
+  Processing: "processing",
+  Attributed: "attributed",
 } as const;
 export type DebugTrackerStatus = OpenEnum<typeof DebugTrackerStatus>;
 

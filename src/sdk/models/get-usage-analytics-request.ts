@@ -7,6 +7,15 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type GetUsageAnalyticsRequest = {
+  /**
+   * BreakdownBucket when true augments each time-series point with BucketID/PriceID
+   *
+   * @remarks
+   * and appends a BucketSummaries rollup to each item. Requires WindowSize to be set
+   * and the item to be linked to a subscription line item that has CommitmentTimeBuckets.
+   * Default: false (opt-in, backward compatible).
+   */
+  breakdownBucket?: boolean | undefined;
   endTime?: Date | undefined;
   /**
    * allowed values: "price", "meter", "feature", "subscription_line_item","plan","addon"
@@ -42,6 +51,7 @@ export type GetUsageAnalyticsRequest = {
 
 /** @internal */
 export type GetUsageAnalyticsRequest$Outbound = {
+  breakdown_bucket?: boolean | undefined;
   end_time?: string | undefined;
   expand?: Array<string> | undefined;
   external_customer_id?: string | undefined;
@@ -60,6 +70,7 @@ export const GetUsageAnalyticsRequest$outboundSchema: z.ZodMiniType<
   GetUsageAnalyticsRequest
 > = z.pipe(
   z.object({
+    breakdownBucket: z.optional(z.boolean()),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.array(z.string())),
     externalCustomerId: z.optional(z.string()),
@@ -73,6 +84,7 @@ export const GetUsageAnalyticsRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      breakdownBucket: "breakdown_bucket",
       endTime: "end_time",
       externalCustomerId: "external_customer_id",
       featureIds: "feature_ids",
