@@ -24,6 +24,7 @@ export const CouponFilterOrder = {
 export type CouponFilterOrder = ClosedEnum<typeof CouponFilterOrder>;
 
 export type CouponFilter = {
+  couponCodes?: Array<string> | undefined;
   couponIds?: Array<string> | undefined;
   expand?: string | undefined;
   filters?: Array<FilterCondition> | undefined;
@@ -41,6 +42,7 @@ export const CouponFilterOrder$outboundSchema: z.ZodMiniEnum<
 
 /** @internal */
 export type CouponFilter$Outbound = {
+  coupon_codes?: Array<string> | undefined;
   coupon_ids?: Array<string> | undefined;
   expand?: string | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
@@ -57,6 +59,7 @@ export const CouponFilter$outboundSchema: z.ZodMiniType<
   CouponFilter
 > = z.pipe(
   z.object({
+    couponCodes: z.optional(z.array(z.string())),
     couponIds: z.optional(z.array(z.string())),
     expand: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
@@ -68,6 +71,7 @@ export const CouponFilter$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      couponCodes: "coupon_codes",
       couponIds: "coupon_ids",
     });
   }),

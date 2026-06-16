@@ -20,15 +20,11 @@ export type SubModifyCouponParams = {
    */
   couponCode?: string | undefined;
   /**
-   * Optional. When to apply the change; defaults to now if omitted.
-   */
-  effectiveDate?: Date | undefined;
-  /**
    * Optional. When the coupon association ends.
    */
   endDate?: Date | undefined;
   /**
-   * Optional. When the coupon association starts; defaults to EffectiveDate.
+   * Optional. When the coupon association starts; defaults to now.
    */
   startDate?: Date | undefined;
   /**
@@ -46,7 +42,6 @@ export type SubModifyCouponParams$Outbound = {
   action: string;
   association_id?: string | undefined;
   coupon_code?: string | undefined;
-  effective_date?: string | undefined;
   end_date?: string | undefined;
   start_date?: string | undefined;
   subscription_id?: string | undefined;
@@ -62,9 +57,6 @@ export const SubModifyCouponParams$outboundSchema: z.ZodMiniType<
     action: SubModifyCouponAction$outboundSchema,
     associationId: z.optional(z.string()),
     couponCode: z.optional(z.string()),
-    effectiveDate: z.optional(
-      z.pipe(z.date(), z.transform(v => v.toISOString())),
-    ),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionId: z.optional(z.string()),
@@ -74,7 +66,6 @@ export const SubModifyCouponParams$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       associationId: "association_id",
       couponCode: "coupon_code",
-      effectiveDate: "effective_date",
       endDate: "end_date",
       startDate: "start_date",
       subscriptionId: "subscription_id",

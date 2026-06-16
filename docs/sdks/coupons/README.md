@@ -5,6 +5,7 @@
 ### Available Operations
 
 * [createCoupon](#createcoupon) - Create coupon
+* [getCouponByCode](#getcouponbycode) - Get coupon by code
 * [queryCoupon](#querycoupon) - Query coupons
 * [getCoupon](#getcoupon) - Get coupon
 * [updateCoupon](#updatecoupon) - Update coupon
@@ -86,6 +87,77 @@ run();
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models.ErrorsErrorResponse | 400, 401, 403, 404         | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getCouponByCode
+
+Use when resolving a coupon by promo code (e.g. checkout or validation).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getCouponByCode" method="get" path="/coupons/code/{code}" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.coupons.getCouponByCode("<value>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { couponsGetCouponByCode } from "@flexprice/sdk/funcs/coupons-get-coupon-by-code.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await couponsGetCouponByCode(flexprice, "<value>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("couponsGetCouponByCode failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `code`                                                                                                                                                                         | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Coupon code                                                                                                                                                                    |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.CouponResponse](../../sdk/models/coupon-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 

@@ -4,6 +4,7 @@
 
 import { couponsCreateCoupon } from "../funcs/coupons-create-coupon.js";
 import { couponsDeleteCoupon } from "../funcs/coupons-delete-coupon.js";
+import { couponsGetCouponByCode } from "../funcs/coupons-get-coupon-by-code.js";
 import { couponsGetCoupon } from "../funcs/coupons-get-coupon.js";
 import { couponsQueryCoupon } from "../funcs/coupons-query-coupon.js";
 import { couponsUpdateCoupon } from "../funcs/coupons-update-coupon.js";
@@ -25,6 +26,23 @@ export class Coupons extends ClientSDK {
     return unwrapAsync(couponsCreateCoupon(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Get coupon by code
+   *
+   * @remarks
+   * Use when resolving a coupon by promo code (e.g. checkout or validation).
+   */
+  async getCouponByCode(
+    code: string,
+    options?: RequestOptions,
+  ): Promise<models.CouponResponse> {
+    return unwrapAsync(couponsGetCouponByCode(
+      this,
+      code,
       options,
     ));
   }

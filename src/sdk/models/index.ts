@@ -206,6 +206,7 @@ export * from "./get-cost-analytics-request.js";
 export * from "./get-costsheet-op.js";
 export * from "./get-costsheet-response.js";
 export * from "./get-coupon-association-op.js";
+export * from "./get-coupon-by-code-op.js";
 export * from "./get-coupon-op.js";
 export * from "./get-credit-grant-op.js";
 export * from "./get-credit-note-op.js";
