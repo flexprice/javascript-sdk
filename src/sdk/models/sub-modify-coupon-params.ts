@@ -14,7 +14,7 @@ export type SubModifyCouponParams = {
   /**
    * Required when action="remove". ID of the CouponAssociation to soft-delete.
    */
-  associationId?: string | undefined;
+  couponAssociationId?: string | undefined;
   /**
    * Required for action="add". Coupon code of the coupon to attach.
    */
@@ -40,7 +40,7 @@ export type SubModifyCouponParams = {
 /** @internal */
 export type SubModifyCouponParams$Outbound = {
   action: string;
-  association_id?: string | undefined;
+  coupon_association_id?: string | undefined;
   coupon_code?: string | undefined;
   end_date?: string | undefined;
   start_date?: string | undefined;
@@ -55,7 +55,7 @@ export const SubModifyCouponParams$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     action: SubModifyCouponAction$outboundSchema,
-    associationId: z.optional(z.string()),
+    couponAssociationId: z.optional(z.string()),
     couponCode: z.optional(z.string()),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -64,7 +64,7 @@ export const SubModifyCouponParams$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
-      associationId: "association_id",
+      couponAssociationId: "coupon_association_id",
       couponCode: "coupon_code",
       endDate: "end_date",
       startDate: "start_date",

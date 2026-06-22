@@ -39,11 +39,23 @@ export type GetUsageRequest = {
   externalCustomerId?: string | undefined;
   filters?: { [k: string]: Array<string> } | undefined;
   /**
+   * GroupBy lists the analytics group_by dimensions.
+   *
+   * @remarks
+   *   - "source"        — group by event source column
+   *   - "properties.X"  — group by JSON property X
+   */
+  groupBy?: Array<string> | undefined;
+  /**
    * GroupByProperty is the property name in event.properties to group by before aggregating.
    *
    * @remarks
    * When set, aggregation is applied per unique value of this property within each bucket,
    * then the per-group results are summed to produce the bucket total.
+   *
+   * Deprecated: prefer GroupBy []string{"properties.<X>"} for parity with
+   * other analytics endpoints. ToUsageParams translates this field into
+   * GroupBy when GroupBy is otherwise empty.
    */
   groupByProperty?: string | undefined;
   multiplier?: string | undefined;
@@ -65,6 +77,7 @@ export type GetUsageRequest$Outbound = {
   event_name: string;
   external_customer_id?: string | undefined;
   filters?: { [k: string]: Array<string> } | undefined;
+  group_by?: Array<string> | undefined;
   group_by_property?: string | undefined;
   multiplier?: string | undefined;
   property_name?: string | undefined;
@@ -88,6 +101,7 @@ export const GetUsageRequest$outboundSchema: z.ZodMiniType<
     eventName: z.string(),
     externalCustomerId: z.optional(z.string()),
     filters: z.optional(z.record(z.string(), z.array(z.string()))),
+    groupBy: z.optional(z.array(z.string())),
     groupByProperty: z.optional(z.string()),
     multiplier: z.optional(z.string()),
     propertyName: z.optional(z.string()),
@@ -103,6 +117,7 @@ export const GetUsageRequest$outboundSchema: z.ZodMiniType<
       endTime: "end_time",
       eventName: "event_name",
       externalCustomerId: "external_customer_id",
+      groupBy: "group_by",
       groupByProperty: "group_by_property",
       propertyName: "property_name",
       startTime: "start_time",

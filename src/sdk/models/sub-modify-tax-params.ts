@@ -12,13 +12,13 @@ import {
 export type SubModifyTaxParams = {
   action: SubModifyTaxAction;
   /**
-   * Required when action="remove". ID of the TaxAssociation to soft-delete.
-   */
-  associationId?: string | undefined;
-  /**
    * Optional. When to apply the change; defaults to now if omitted.
    */
   effectiveDate?: Date | undefined;
+  /**
+   * Required when action="remove". ID of the TaxAssociation to soft-delete.
+   */
+  taxAssociationId?: string | undefined;
   /**
    * Required when action="add". ID of the active tax rate to attach.
    */
@@ -28,8 +28,8 @@ export type SubModifyTaxParams = {
 /** @internal */
 export type SubModifyTaxParams$Outbound = {
   action: string;
-  association_id?: string | undefined;
   effective_date?: string | undefined;
+  tax_association_id?: string | undefined;
   tax_rate_id?: string | undefined;
 };
 
@@ -40,16 +40,16 @@ export const SubModifyTaxParams$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     action: SubModifyTaxAction$outboundSchema,
-    associationId: z.optional(z.string()),
     effectiveDate: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
+    taxAssociationId: z.optional(z.string()),
     taxRateId: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
-      associationId: "association_id",
       effectiveDate: "effective_date",
+      taxAssociationId: "tax_association_id",
       taxRateId: "tax_rate_id",
     });
   }),

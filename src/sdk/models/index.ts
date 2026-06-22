@@ -353,6 +353,7 @@ export * from "./plan-filter.js";
 export * from "./plan-response.js";
 export * from "./plan-summary.js";
 export * from "./plan.js";
+export * from "./point-bucket.js";
 export * from "./preview-subscription-change-op.js";
 export * from "./preview-subscription-modify-op.js";
 export * from "./price-entity-type.js";

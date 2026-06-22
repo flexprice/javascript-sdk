@@ -28,9 +28,17 @@ export type SecretResponse = {
    * RBAC roles
    */
   roles?: Array<string> | undefined;
+  /**
+   * name of the service account (populated for service_account user_type)
+   */
+  serviceAccountName?: string | undefined;
   status?: Status | undefined;
   type?: SecretType | undefined;
   updatedAt?: Date | undefined;
+  /**
+   * user or service account this key belongs to
+   */
+  userId?: string | undefined;
   userType?: UserType | undefined;
 };
 
@@ -48,9 +56,11 @@ export const SecretResponse$inboundSchema: z.ZodMiniType<
     name: types.optional(types.string()),
     provider: types.optional(SecretProvider$inboundSchema),
     roles: types.optional(z.array(types.string())),
+    service_account_name: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     type: types.optional(SecretType$inboundSchema),
     updated_at: types.optional(types.date()),
+    user_id: types.optional(types.string()),
     user_type: types.optional(UserType$inboundSchema),
   }),
   z.transform((v) => {
@@ -59,7 +69,9 @@ export const SecretResponse$inboundSchema: z.ZodMiniType<
       "display_id": "displayId",
       "expires_at": "expiresAt",
       "last_used_at": "lastUsedAt",
+      "service_account_name": "serviceAccountName",
       "updated_at": "updatedAt",
+      "user_id": "userId",
       "user_type": "userType",
     });
   }),

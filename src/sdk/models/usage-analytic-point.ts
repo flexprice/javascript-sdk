@@ -7,17 +7,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { PointBucket, PointBucket$inboundSchema } from "./point-bucket.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type UsageAnalyticPoint = {
   /**
-   * Bucket identity (only populated when BreakdownBucket=true and the line item
+   * Buckets lists every commitment bucket this (possibly rolled-up) window
    *
    * @remarks
-   * has CommitmentTimeBuckets). Empty strings indicate out-of-bucket windows.
+   * overlaps — only populated when BreakdownBucket=true and the line item has
+   * CommitmentTimeBuckets. A coarse window can overlap more than one bucket, and
+   * only partially, so this is a list. Empty when the window touches no bucket.
+   * It is an informational HINT only: the point's single cost/computed_* totals
+   * mix all overlapped buckets and out-of-bucket time and CANNOT be split per
+   * bucket — read bucket_summaries for exact per-bucket cost.
    */
-  bucketId?: string | undefined;
-  bucketPriceId?: string | undefined;
+  buckets?: Array<PointBucket> | undefined;
   /**
    * Commitment breakdown (only populated for windowed commitments)
    */
@@ -39,8 +44,7 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    bucket_id: types.optional(types.string()),
-    bucket_price_id: types.optional(types.string()),
+    buckets: types.optional(z.array(PointBucket$inboundSchema)),
     computed_commitment_utilized_amount: types.optional(types.string()),
     computed_overage_amount: types.optional(types.string()),
     computed_true_up_amount: types.optional(types.string()),
@@ -51,8 +55,6 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
-      "bucket_id": "bucketId",
-      "bucket_price_id": "bucketPriceId",
       "computed_commitment_utilized_amount": "computedCommitmentUtilizedAmount",
       "computed_overage_amount": "computedOverageAmount",
       "computed_true_up_amount": "computedTrueUpAmount",
