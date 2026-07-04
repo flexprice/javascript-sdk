@@ -3,14 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateCreditGrantRequest = {
+  endDate?: Date | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
 export type UpdateCreditGrantRequest$Outbound = {
+  end_date?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
 };
@@ -19,10 +22,18 @@ export type UpdateCreditGrantRequest$Outbound = {
 export const UpdateCreditGrantRequest$outboundSchema: z.ZodMiniType<
   UpdateCreditGrantRequest$Outbound,
   UpdateCreditGrantRequest
-> = z.object({
-  metadata: z.optional(z.record(z.string(), z.string())),
-  name: z.optional(z.string()),
-});
+> = z.pipe(
+  z.object({
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    name: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      endDate: "end_date",
+    });
+  }),
+);
 
 export function updateCreditGrantRequestToJSON(
   updateCreditGrantRequest: UpdateCreditGrantRequest,

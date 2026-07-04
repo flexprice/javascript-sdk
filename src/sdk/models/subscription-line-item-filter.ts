@@ -49,10 +49,11 @@ export type SubscriptionLineItemFilter = {
   sort?: Array<SortCondition> | undefined;
   startTime?: Date | undefined;
   status?: Status | undefined;
+  subscriptionIds?: Array<string> | undefined;
   /**
    * Specific filters
    */
-  subscriptionIds?: Array<string> | undefined;
+  subscriptionLineItemIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -82,6 +83,7 @@ export type SubscriptionLineItemFilter$Outbound = {
   start_time?: string | undefined;
   status?: string | undefined;
   subscription_ids?: Array<string> | undefined;
+  subscription_line_item_ids?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -112,6 +114,7 @@ export const SubscriptionLineItemFilter$outboundSchema: z.ZodMiniType<
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     subscriptionIds: z.optional(z.array(z.string())),
+    subscriptionLineItemIds: z.optional(z.array(z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -127,6 +130,7 @@ export const SubscriptionLineItemFilter$outboundSchema: z.ZodMiniType<
       priceIds: "price_ids",
       startTime: "start_time",
       subscriptionIds: "subscription_ids",
+      subscriptionLineItemIds: "subscription_line_item_ids",
     });
   }),
 );

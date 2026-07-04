@@ -15,6 +15,7 @@ export const PaymentStatus = {
   Failed: "FAILED",
   Refunded: "REFUNDED",
   PartiallyRefunded: "PARTIALLY_REFUNDED",
+  Voided: "VOIDED",
 } as const;
 export type PaymentStatus = OpenEnum<typeof PaymentStatus>;
 

@@ -29,11 +29,16 @@ export type UsageAnalyticPoint = {
   computedCommitmentUtilizedAmount?: string | undefined;
   computedOverageAmount?: string | undefined;
   computedTrueUpAmount?: string | undefined;
+  /**
+   * Cost is the final cost after discount (Subtotal - Discount)
+   */
   cost?: string | undefined;
+  discount?: string | undefined;
   /**
    * Number of events in this time window
    */
   eventCount?: number | undefined;
+  subtotal?: string | undefined;
   timestamp?: string | undefined;
   usage?: string | undefined;
 };
@@ -49,7 +54,9 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
     computed_overage_amount: types.optional(types.string()),
     computed_true_up_amount: types.optional(types.string()),
     cost: types.optional(types.string()),
+    discount: types.optional(types.string()),
     event_count: types.optional(types.number()),
+    subtotal: types.optional(types.string()),
     timestamp: types.optional(types.string()),
     usage: types.optional(types.string()),
   }),

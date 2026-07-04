@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type OverrideEntitlementRequest = {
   /**
+   * ConfigValue is the config value for config features
+   */
+  configValue?: { [k: string]: any } | undefined;
+  /**
    * EntitlementID references the plan/addon entitlement to override
    */
   entitlementId: string;
@@ -29,6 +33,7 @@ export type OverrideEntitlementRequest = {
 
 /** @internal */
 export type OverrideEntitlementRequest$Outbound = {
+  config_value?: { [k: string]: any } | undefined;
   entitlement_id: string;
   is_enabled?: boolean | undefined;
   static_value?: string | undefined;
@@ -41,6 +46,7 @@ export const OverrideEntitlementRequest$outboundSchema: z.ZodMiniType<
   OverrideEntitlementRequest
 > = z.pipe(
   z.object({
+    configValue: z.optional(z.record(z.string(), z.any())),
     entitlementId: z.string(),
     isEnabled: z.optional(z.boolean()),
     staticValue: z.optional(z.string()),
@@ -48,6 +54,7 @@ export const OverrideEntitlementRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      configValue: "config_value",
       entitlementId: "entitlement_id",
       isEnabled: "is_enabled",
       staticValue: "static_value",

@@ -13,5 +13,5 @@ let value: PaymentStatus = "OVERPAID";
 ## Values
 
 ```typescript
-"INITIATED" | "PENDING" | "PROCESSING" | "SUCCEEDED" | "OVERPAID" | "FAILED" | "REFUNDED" | "PARTIALLY_REFUNDED" | Unrecognized<string>
+"INITIATED" | "PENDING" | "PROCESSING" | "SUCCEEDED" | "OVERPAID" | "FAILED" | "REFUNDED" | "PARTIALLY_REFUNDED" | "VOIDED" | Unrecognized<string>
 ```

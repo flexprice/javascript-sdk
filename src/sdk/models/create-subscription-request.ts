@@ -127,13 +127,6 @@ export type CreateSubscriptionRequest = {
    */
   customerId?: string | undefined;
   /**
-   * Timezone of the customer.
-   *
-   * @remarks
-   * If not set, the default value is UTC.
-   */
-  customerTimezone?: string | undefined;
-  /**
    * Enable Commitment True Up Fee
    */
   enableTrueUp?: boolean | undefined;
@@ -195,6 +188,13 @@ export type CreateSubscriptionRequest = {
    */
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
   /**
+   * Timezone of the customer.
+   *
+   * @remarks
+   * If not set, the default value is UTC.
+   */
+  timezone?: string | undefined;
+  /**
    * TrialPeriodDays: nil = inherit trial length from plan recurring-fixed prices (must be uniform).
    *
    * @remarks
@@ -218,7 +218,6 @@ export type CreateSubscriptionRequest$Outbound = {
   credit_grants?: Array<CreateCreditGrantRequest$Outbound> | undefined;
   currency: string;
   customer_id?: string | undefined;
-  customer_timezone?: string | undefined;
   enable_true_up?: boolean | undefined;
   end_date?: string | undefined;
   external_customer_id?: string | undefined;
@@ -245,6 +244,7 @@ export type CreateSubscriptionRequest$Outbound = {
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   subscription_status?: string | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
+  timezone?: string | undefined;
   trial_period_days?: number | undefined;
 };
 
@@ -269,7 +269,6 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     creditGrants: z.optional(z.array(CreateCreditGrantRequest$outboundSchema)),
     currency: z.string(),
     customerId: z.optional(z.string()),
-    customerTimezone: z.optional(z.string()),
     enableTrueUp: z.optional(z.boolean()),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     externalCustomerId: z.optional(z.string()),
@@ -302,6 +301,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     ),
     subscriptionStatus: z.optional(SubscriptionStatus$outboundSchema),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
+    timezone: z.optional(z.string()),
     trialPeriodDays: z.optional(z.int()),
   }),
   z.transform((v) => {
@@ -316,7 +316,6 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       commitmentDuration: "commitment_duration",
       creditGrants: "credit_grants",
       customerId: "customer_id",
-      customerTimezone: "customer_timezone",
       enableTrueUp: "enable_true_up",
       endDate: "end_date",
       externalCustomerId: "external_customer_id",

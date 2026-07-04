@@ -35,6 +35,7 @@ export type GetUsageByMeterRequest = {
   filters?: { [k: string]: Array<string> } | undefined;
   meterId: string;
   startTime?: Date | undefined;
+  timezone?: string | undefined;
   windowSize?: WindowSize | undefined;
 };
 
@@ -48,6 +49,7 @@ export type GetUsageByMeterRequest$Outbound = {
   filters?: { [k: string]: Array<string> } | undefined;
   meter_id: string;
   start_time?: string | undefined;
+  timezone?: string | undefined;
   window_size?: string | undefined;
 };
 
@@ -67,6 +69,7 @@ export const GetUsageByMeterRequest$outboundSchema: z.ZodMiniType<
     filters: z.optional(z.record(z.string(), z.array(z.string()))),
     meterId: z.string(),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    timezone: z.optional(z.string()),
     windowSize: z.optional(WindowSize$outboundSchema),
   }),
   z.transform((v) => {

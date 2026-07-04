@@ -97,7 +97,12 @@ export type UsageAnalyticItem = {
    */
   subscriptionId?: string | undefined;
   subscriptionLineItem?: SubscriptionSubscriptionLineItem | undefined;
+  subtotal?: string | undefined;
+  /**
+   * TotalCost is the final cost after discount (Subtotal - TotalDiscount)
+   */
   totalCost?: string | undefined;
+  totalDiscount?: string | undefined;
   totalUsage?: string | undefined;
   /**
    * Empty string when feature has no reporting unit; otherwise the value in reporting units
@@ -142,7 +147,9 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
     subscription_line_item: types.optional(
       SubscriptionSubscriptionLineItem$inboundSchema,
     ),
+    subtotal: types.optional(types.string()),
     total_cost: types.optional(types.string()),
+    total_discount: types.optional(types.string()),
     total_usage: types.optional(types.string()),
     total_usage_display: types.optional(types.string()),
     unit: types.optional(types.string()),
@@ -166,6 +173,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
       "subscription_id": "subscriptionId",
       "subscription_line_item": "subscriptionLineItem",
       "total_cost": "totalCost",
+      "total_discount": "totalDiscount",
       "total_usage": "totalUsage",
       "total_usage_display": "totalUsageDisplay",
       "unit_plural": "unitPlural",

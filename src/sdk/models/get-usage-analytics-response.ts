@@ -21,7 +21,12 @@ export type GetUsageAnalyticsResponse = {
   currency?: string | undefined;
   customAnalytics?: Array<CustomAnalyticItem> | undefined;
   items?: Array<UsageAnalyticItem> | undefined;
+  subtotal?: string | undefined;
+  /**
+   * TotalCost is the final cost after discount (Subtotal - TotalDiscount)
+   */
   totalCost?: string | undefined;
+  totalDiscount?: string | undefined;
 };
 
 /** @internal */
@@ -33,12 +38,15 @@ export const GetUsageAnalyticsResponse$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     custom_analytics: types.optional(z.array(CustomAnalyticItem$inboundSchema)),
     items: types.optional(z.array(UsageAnalyticItem$inboundSchema)),
+    subtotal: types.optional(types.string()),
     total_cost: types.optional(types.string()),
+    total_discount: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       "custom_analytics": "customAnalytics",
       "total_cost": "totalCost",
+      "total_discount": "totalDiscount",
     });
   }),
 );

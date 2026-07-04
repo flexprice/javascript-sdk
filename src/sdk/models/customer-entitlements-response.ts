@@ -12,10 +12,15 @@ import {
   AggregatedFeature$inboundSchema,
 } from "./aggregated-feature.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SubscriptionResponse,
+  SubscriptionResponse$inboundSchema,
+} from "./subscription-response.js";
 
 export type CustomerEntitlementsResponse = {
   customerId?: string | undefined;
   features?: Array<AggregatedFeature> | undefined;
+  subscriptions?: Array<SubscriptionResponse> | undefined;
 };
 
 /** @internal */
@@ -26,6 +31,7 @@ export const CustomerEntitlementsResponse$inboundSchema: z.ZodMiniType<
   z.object({
     customer_id: types.optional(types.string()),
     features: types.optional(z.array(AggregatedFeature$inboundSchema)),
+    subscriptions: types.optional(z.array(SubscriptionResponse$inboundSchema)),
   }),
   z.transform((v) => {
     return remap$(v, {

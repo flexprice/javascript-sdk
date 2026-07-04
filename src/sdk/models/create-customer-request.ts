@@ -77,6 +77,13 @@ export type CreateCustomerRequest = {
    * tax_rate_overrides contains tax rate configurations to be linked to this customer
    */
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
+  /**
+   * timezone is the customer's IANA timezone name (e.g. "Asia/Kolkata", "America/New_York")
+   *
+   * @remarks
+   * Defaults to "UTC" if not provided
+   */
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -96,6 +103,7 @@ export type CreateCustomerRequest$Outbound = {
   name?: string | undefined;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -119,6 +127,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     name: z.optional(z.string()),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
+    timezone: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {

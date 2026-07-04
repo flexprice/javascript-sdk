@@ -13,7 +13,7 @@ let value: CreateFeatureRequest = {
     resetUsage: "BILLING_PERIOD",
   },
   name: "<value>",
-  type: "boolean",
+  type: "static",
 };
 ```
 

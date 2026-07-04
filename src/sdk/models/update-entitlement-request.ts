@@ -10,6 +10,7 @@ import {
 } from "./entitlement-usage-reset-period.js";
 
 export type UpdateEntitlementRequest = {
+  configValue?: { [k: string]: any } | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   staticValue?: string | undefined;
@@ -19,6 +20,7 @@ export type UpdateEntitlementRequest = {
 
 /** @internal */
 export type UpdateEntitlementRequest$Outbound = {
+  config_value?: { [k: string]: any } | undefined;
   is_enabled?: boolean | undefined;
   is_soft_limit?: boolean | undefined;
   static_value?: string | undefined;
@@ -32,6 +34,7 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
   UpdateEntitlementRequest
 > = z.pipe(
   z.object({
+    configValue: z.optional(z.record(z.string(), z.any())),
     isEnabled: z.optional(z.boolean()),
     isSoftLimit: z.optional(z.boolean()),
     staticValue: z.optional(z.string()),
@@ -40,6 +43,7 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      configValue: "config_value",
       isEnabled: "is_enabled",
       isSoftLimit: "is_soft_limit",
       staticValue: "static_value",

@@ -146,7 +146,6 @@ export type SubscriptionResponseV2 = {
    * CustomerID is the identifier for the customer in our system
    */
   customerId?: string | undefined;
-  customerTimezone?: string | undefined;
   enableTrueUp?: boolean | undefined;
   /**
    * EndDate is the end date of the subscription
@@ -235,6 +234,7 @@ export type SubscriptionResponseV2 = {
    */
   syncedPriceSequence?: number | undefined;
   tenantId?: string | undefined;
+  timezone?: string | undefined;
   /**
    * TrialEnd is the end date of the trial period
    */
@@ -281,7 +281,6 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     current_period_start: types.optional(types.date()),
     customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
-    customer_timezone: types.optional(types.string()),
     enable_true_up: types.optional(types.boolean()),
     end_date: types.optional(types.date()),
     environment_id: types.optional(types.string()),
@@ -312,6 +311,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     subscription_type: types.optional(SubscriptionType$inboundSchema),
     synced_price_sequence: types.optional(types.number()),
     tenant_id: types.optional(types.string()),
+    timezone: types.optional(types.string()),
     trial_end: types.optional(types.date()),
     trial_start: types.optional(types.date()),
     updated_at: types.optional(types.date()),
@@ -340,7 +340,6 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
       "current_period_end": "currentPeriodEnd",
       "current_period_start": "currentPeriodStart",
       "customer_id": "customerId",
-      "customer_timezone": "customerTimezone",
       "enable_true_up": "enableTrueUp",
       "end_date": "endDate",
       "environment_id": "environmentId",

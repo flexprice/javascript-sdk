@@ -7,12 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { Coupon, Coupon$inboundSchema } from "./coupon.js";
+import {
+  CouponResponse,
+  CouponResponse$inboundSchema,
+} from "./coupon-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
+import {
+  SubscriptionLineItemResponse,
+  SubscriptionLineItemResponse$inboundSchema,
+} from "./subscription-line-item-response.js";
 
 export type CouponAssociationResponse = {
-  coupon?: Coupon | undefined;
+  coupon?: CouponResponse | undefined;
   couponId?: string | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
@@ -29,6 +36,7 @@ export type CouponAssociationResponse = {
    * Mandatory
    */
   subscriptionId?: string | undefined;
+  subscriptionLineItem?: SubscriptionLineItemResponse | undefined;
   /**
    * Optional
    */
@@ -48,7 +56,7 @@ export const CouponAssociationResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    coupon: types.optional(Coupon$inboundSchema),
+    coupon: types.optional(CouponResponse$inboundSchema),
     coupon_id: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -59,6 +67,9 @@ export const CouponAssociationResponse$inboundSchema: z.ZodMiniType<
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
+    subscription_line_item: types.optional(
+      SubscriptionLineItemResponse$inboundSchema,
+    ),
     subscription_line_item_id: types.optional(types.string()),
     subscription_phase_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
@@ -74,6 +85,7 @@ export const CouponAssociationResponse$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "start_date": "startDate",
       "subscription_id": "subscriptionId",
+      "subscription_line_item": "subscriptionLineItem",
       "subscription_line_item_id": "subscriptionLineItemId",
       "subscription_phase_id": "subscriptionPhaseId",
       "tenant_id": "tenantId",

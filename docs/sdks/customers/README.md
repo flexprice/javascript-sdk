@@ -7,6 +7,7 @@
 * [updateCustomer](#updatecustomer) - Update customer
 * [createCustomer](#createcustomer) - Create customer
 * [getCustomerByExternalId](#getcustomerbyexternalid) - Get customer by external ID
+* [getCustomerEntitlementsByExternalID](#getcustomerentitlementsbyexternalid) - Get customer entitlements by external ID
 * [queryCustomer](#querycustomer) - Query customers
 * [getCustomerUsageSummary](#getcustomerusagesummary) - Get customer usage summary
 * [getCustomer](#getcustomer) - Get customer
@@ -224,6 +225,77 @@ run();
 ### Response
 
 **Promise\<[models.CustomerResponse](../../sdk/models/customer-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getCustomerEntitlementsByExternalID
+
+Use when checking entitlements by your app's customer id (e.g. feature gating at the edge). Supports optional filters (feature_ids, subscription_ids).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getCustomerEntitlementsByExternalID" method="get" path="/customers/external/{external_id}/entitlements" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.customers.getCustomerEntitlementsByExternalID("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { customersGetCustomerEntitlementsByExternalID } from "@flexprice/sdk/funcs/customers-get-customer-entitlements-by-external-id.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await customersGetCustomerEntitlementsByExternalID(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersGetCustomerEntitlementsByExternalID failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `externalId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Customer External ID                                                                                                                                                           |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.CustomerEntitlementsResponse](../../sdk/models/customer-entitlements-response.md)\>**
 
 ### Errors
 

@@ -5,6 +5,7 @@
 import { customersCreateCustomer } from "../funcs/customers-create-customer.js";
 import { customersDeleteCustomer } from "../funcs/customers-delete-customer.js";
 import { customersGetCustomerByExternalId } from "../funcs/customers-get-customer-by-external-id.js";
+import { customersGetCustomerEntitlementsByExternalID } from "../funcs/customers-get-customer-entitlements-by-external-id.js";
 import { customersGetCustomerEntitlements } from "../funcs/customers-get-customer-entitlements.js";
 import { customersGetCustomerUpcomingGrants } from "../funcs/customers-get-customer-upcoming-grants.js";
 import { customersGetCustomerUsageSummary } from "../funcs/customers-get-customer-usage-summary.js";
@@ -65,6 +66,23 @@ export class Customers extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersGetCustomerByExternalId(
+      this,
+      externalId,
+      options,
+    ));
+  }
+
+  /**
+   * Get customer entitlements by external ID
+   *
+   * @remarks
+   * Use when checking entitlements by your app's customer id (e.g. feature gating at the edge). Supports optional filters (feature_ids, subscription_ids).
+   */
+  async getCustomerEntitlementsByExternalID(
+    externalId: string,
+    options?: RequestOptions,
+  ): Promise<models.CustomerEntitlementsResponse> {
+    return unwrapAsync(customersGetCustomerEntitlementsByExternalID(
       this,
       externalId,
       options,

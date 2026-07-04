@@ -18,6 +18,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type EntitlementSource = {
+  configValue?: { [k: string]: any } | undefined;
   entitlementId?: string | undefined;
   entityId?: string | undefined;
   entityName?: string | undefined;
@@ -36,6 +37,7 @@ export const EntitlementSource$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    config_value: types.optional(z.record(z.string(), z.any())),
     entitlement_id: types.optional(types.string()),
     entity_id: types.optional(types.string()),
     entity_name: types.optional(types.string()),
@@ -49,6 +51,7 @@ export const EntitlementSource$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "config_value": "configValue",
       "entitlement_id": "entitlementId",
       "entity_id": "entityId",
       "entity_name": "entityName",

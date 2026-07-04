@@ -6,8 +6,78 @@
 import { SubscriptionResponse } from "@flexprice/sdk/sdk/models";
 
 let value: SubscriptionResponse = {
+  couponAssociations: [
+    {
+      subscriptionLineItem: {
+        price: {
+          addon: {
+            prices: [
+              {
+                addon: {},
+                meter: {
+                  createdAt: new Date("2024-03-20T15:04:05Z"),
+                  eventName: "api_request",
+                  id: "550e8400-e29b-41d4-a716-446655440000",
+                  name: "API Usage Meter",
+                  status: "published",
+                  tenantId: "tenant123",
+                  updatedAt: new Date("2024-03-20T15:04:05Z"),
+                },
+                plan: {},
+              },
+            ],
+          },
+          meter: {
+            createdAt: new Date("2024-03-20T15:04:05Z"),
+            eventName: "api_request",
+            id: "550e8400-e29b-41d4-a716-446655440000",
+            name: "API Usage Meter",
+            status: "published",
+            tenantId: "tenant123",
+            updatedAt: new Date("2024-03-20T15:04:05Z"),
+          },
+          plan: {},
+        },
+      },
+    },
+  ],
   latestInvoice: {
     subscription: {
+      couponAssociations: [
+        {
+          subscriptionLineItem: {
+            price: {
+              addon: {
+                prices: [
+                  {
+                    addon: {},
+                    meter: {
+                      createdAt: new Date("2024-03-20T15:04:05Z"),
+                      eventName: "api_request",
+                      id: "550e8400-e29b-41d4-a716-446655440000",
+                      name: "API Usage Meter",
+                      status: "published",
+                      tenantId: "tenant123",
+                      updatedAt: new Date("2024-03-20T15:04:05Z"),
+                    },
+                    plan: {},
+                  },
+                ],
+              },
+              meter: {
+                createdAt: new Date("2024-03-20T15:04:05Z"),
+                eventName: "api_request",
+                id: "550e8400-e29b-41d4-a716-446655440000",
+                name: "API Usage Meter",
+                status: "published",
+                tenantId: "tenant123",
+                updatedAt: new Date("2024-03-20T15:04:05Z"),
+              },
+              plan: {},
+            },
+          },
+        },
+      ],
       plan: {},
     },
   },
@@ -41,7 +111,6 @@ let value: SubscriptionResponse = {
 | `currentPeriodStart`                                                                                                                                                                                                                              | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | CurrentPeriodStart is the end of the current period that the subscription has been invoiced for.<br/>At the end of this period, a new invoice will be created.                                                                                    |
 | `customer`                                                                                                                                                                                                                                        | [models.CustomerResponse](../../sdk/models/customer-response.md)                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                | Customer response object containing all customer information                                                                                                                                                                                      |
 | `customerId`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | CustomerID is the identifier for the customer in our system                                                                                                                                                                                       |
-| `customerTimezone`                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
 | `enableTrueUp`                                                                                                                                                                                                                                    | *boolean*                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
 | `endDate`                                                                                                                                                                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | EndDate is the end date of the subscription                                                                                                                                                                                                       |
 | `environmentId`                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | EnvironmentID is the environment identifier for the subscription                                                                                                                                                                                  |
@@ -68,6 +137,7 @@ let value: SubscriptionResponse = {
 | `subscriptionType`                                                                                                                                                                                                                                | [models.SubscriptionType](../../sdk/models/subscription-type.md)                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
 | `syncedPriceSequence`                                                                                                                                                                                                                             | *number*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | SyncedPriceSequence is the plan-price sequence up to which this<br/>subscription's line items have been reconciled. Bumped by the<br/>plan-price sync after a successful pass.                                                                    |
 | `tenantId`                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
+| `timezone`                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
 | `trialEnd`                                                                                                                                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | TrialEnd is the end date of the trial period                                                                                                                                                                                                      |
 | `trialStart`                                                                                                                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | TrialStart is the start date of the trial period                                                                                                                                                                                                  |
 | `updatedAt`                                                                                                                                                                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |

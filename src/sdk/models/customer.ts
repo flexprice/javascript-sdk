@@ -63,6 +63,13 @@ export type Customer = {
   name?: string | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
+  /**
+   * Timezone is the customer's IANA timezone name (e.g. "Asia/Kolkata").
+   *
+   * @remarks
+   * Defaults to "UTC". Inherited by subscriptions at creation time.
+   */
+  timezone?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
 };
@@ -86,6 +93,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
     name: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
+    timezone: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
   }),

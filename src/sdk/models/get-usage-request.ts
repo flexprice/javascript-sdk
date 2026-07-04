@@ -64,6 +64,7 @@ export type GetUsageRequest = {
    */
   propertyName?: string | undefined;
   startTime?: Date | undefined;
+  timezone?: string | undefined;
   windowSize?: WindowSize | undefined;
 };
 
@@ -82,6 +83,7 @@ export type GetUsageRequest$Outbound = {
   multiplier?: string | undefined;
   property_name?: string | undefined;
   start_time?: string | undefined;
+  timezone?: string | undefined;
   window_size?: string | undefined;
 };
 
@@ -106,6 +108,7 @@ export const GetUsageRequest$outboundSchema: z.ZodMiniType<
     multiplier: z.optional(z.string()),
     propertyName: z.optional(z.string()),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    timezone: z.optional(z.string()),
     windowSize: z.optional(WindowSize$outboundSchema),
   }),
   z.transform((v) => {

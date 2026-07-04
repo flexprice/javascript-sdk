@@ -101,8 +101,8 @@ async function run() {
     amount: "883.46",
     currency: "CFP Franc",
     destinationId: "<id>",
-    destinationType: "INVOICE",
-    paymentMethodType: "OFFLINE",
+    destinationType: "CUSTOMER",
+    paymentMethodType: "ACH",
   });
 
   console.log(result);
@@ -130,8 +130,8 @@ async function run() {
     amount: "883.46",
     currency: "CFP Franc",
     destinationId: "<id>",
-    destinationType: "INVOICE",
-    paymentMethodType: "OFFLINE",
+    destinationType: "CUSTOMER",
+    paymentMethodType: "ACH",
   });
   if (res.ok) {
     const { value: result } = res;

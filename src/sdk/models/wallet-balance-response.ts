@@ -49,6 +49,15 @@ export type WalletBalanceResponse = {
   description?: string | undefined;
   environmentId?: string | undefined;
   id?: string | undefined;
+  /**
+   * IsCachedFallback is true whenever the response is sourced from cache:
+   *
+   * @remarks
+   * either an explicit cache request, or fallback after a real-time failure.
+   * Clients should treat the absence of this field as if it were true and
+   * only trust freshness when the server explicitly emits false.
+   */
+  isCachedFallback?: boolean | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
   realTimeBalance?: string | undefined;
@@ -94,6 +103,7 @@ export const WalletBalanceResponse$inboundSchema: z.ZodMiniType<
     description: types.optional(types.string()),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
+    is_cached_fallback: types.optional(types.boolean()),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
     real_time_balance: types.optional(types.string()),
@@ -121,6 +131,7 @@ export const WalletBalanceResponse$inboundSchema: z.ZodMiniType<
       "current_period_usage": "currentPeriodUsage",
       "customer_id": "customerId",
       "environment_id": "environmentId",
+      "is_cached_fallback": "isCachedFallback",
       "real_time_balance": "realTimeBalance",
       "real_time_credit_balance": "realTimeCreditBalance",
       "tenant_id": "tenantId",

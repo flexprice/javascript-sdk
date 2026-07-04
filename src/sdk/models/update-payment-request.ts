@@ -13,7 +13,9 @@ export type UpdatePaymentRequest = {
   paymentGateway?: string | undefined;
   paymentMethodId?: string | undefined;
   paymentStatus?: string | undefined;
+  refundedAt?: Date | undefined;
   succeededAt?: Date | undefined;
+  voidedAt?: Date | undefined;
 };
 
 /** @internal */
@@ -25,7 +27,9 @@ export type UpdatePaymentRequest$Outbound = {
   payment_gateway?: string | undefined;
   payment_method_id?: string | undefined;
   payment_status?: string | undefined;
+  refunded_at?: string | undefined;
   succeeded_at?: string | undefined;
+  voided_at?: string | undefined;
 };
 
 /** @internal */
@@ -41,9 +45,11 @@ export const UpdatePaymentRequest$outboundSchema: z.ZodMiniType<
     paymentGateway: z.optional(z.string()),
     paymentMethodId: z.optional(z.string()),
     paymentStatus: z.optional(z.string()),
+    refundedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     succeededAt: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
+    voidedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -53,7 +59,9 @@ export const UpdatePaymentRequest$outboundSchema: z.ZodMiniType<
       paymentGateway: "payment_gateway",
       paymentMethodId: "payment_method_id",
       paymentStatus: "payment_status",
+      refundedAt: "refunded_at",
       succeededAt: "succeeded_at",
+      voidedAt: "voided_at",
     });
   }),
 );

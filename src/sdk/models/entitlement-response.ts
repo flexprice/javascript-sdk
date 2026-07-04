@@ -30,6 +30,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 
 export type EntitlementResponse = {
   addon?: AddonResponse | undefined;
+  configValue?: { [k: string]: any } | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   displayOrder?: number | undefined;
@@ -66,6 +67,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addon: types.optional(z.lazy(() => AddonResponse$inboundSchema)),
+    config_value: types.optional(z.record(z.string(), z.any())),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     display_order: types.optional(types.number()),
@@ -95,6 +97,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "config_value": "configValue",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "display_order": "displayOrder",

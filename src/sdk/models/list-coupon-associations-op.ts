@@ -19,6 +19,10 @@ export type ListCouponAssociationsRequest = {
    */
   activeOnly?: boolean | undefined;
   /**
+   * Comma-separated fields: coupon, subscription_line_items, subscription_line_items.prices
+   */
+  expand?: string | undefined;
+  /**
    * Page size
    */
   limit?: number | undefined;
@@ -33,6 +37,7 @@ export type ListCouponAssociationsRequest$Outbound = {
   subscription_ids?: Array<string> | undefined;
   coupon_ids?: Array<string> | undefined;
   active_only?: boolean | undefined;
+  expand?: string | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
 };
@@ -46,6 +51,7 @@ export const ListCouponAssociationsRequest$outboundSchema: z.ZodMiniType<
     subscriptionIds: z.optional(z.array(z.string())),
     couponIds: z.optional(z.array(z.string())),
     activeOnly: z.optional(z.boolean()),
+    expand: z.optional(z.string()),
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
   }),

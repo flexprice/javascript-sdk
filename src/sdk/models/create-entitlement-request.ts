@@ -15,6 +15,7 @@ import {
 import { FeatureType, FeatureType$outboundSchema } from "./feature-type.js";
 
 export type CreateEntitlementRequest = {
+  configValue?: { [k: string]: any } | undefined;
   endDate?: Date | undefined;
   entityId?: string | undefined;
   entityType?: EntitlementEntityType | undefined;
@@ -32,6 +33,7 @@ export type CreateEntitlementRequest = {
 
 /** @internal */
 export type CreateEntitlementRequest$Outbound = {
+  config_value?: { [k: string]: any } | undefined;
   end_date?: string | undefined;
   entity_id?: string | undefined;
   entity_type?: string | undefined;
@@ -53,6 +55,7 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
   CreateEntitlementRequest
 > = z.pipe(
   z.object({
+    configValue: z.optional(z.record(z.string(), z.any())),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityId: z.optional(z.string()),
     entityType: z.optional(EntitlementEntityType$outboundSchema),
@@ -69,6 +72,7 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      configValue: "config_value",
       endDate: "end_date",
       entityId: "entity_id",
       entityType: "entity_type",

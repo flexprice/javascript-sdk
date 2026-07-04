@@ -5,7 +5,7 @@
 ```typescript
 import { FeatureType } from "@flexprice/sdk/sdk/models";
 
-let value: FeatureType = "metered";
+let value: FeatureType = "boolean";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: FeatureType = "metered";
 ## Values
 
 ```typescript
-"metered" | "boolean" | "static" | Unrecognized<string>
+"metered" | "boolean" | "static" | "config" | Unrecognized<string>
 ```

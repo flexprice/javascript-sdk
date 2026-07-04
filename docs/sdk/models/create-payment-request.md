@@ -10,7 +10,7 @@ let value: CreatePaymentRequest = {
   currency: "Moroccan Dirham",
   destinationId: "<id>",
   destinationType: "INVOICE",
-  paymentMethodType: "OFFLINE",
+  paymentMethodType: "PAYMENT_LINK",
 };
 ```
 

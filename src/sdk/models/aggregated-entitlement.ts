@@ -13,16 +13,30 @@ import {
 } from "./entitlement-usage-reset-period.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
+export type ConfigValue = {};
+
 export type AggregatedEntitlement = {
+  configValues?: Array<{ [k: string]: ConfigValue }> | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
-  /**
-   * For static/SLA features
-   */
   staticValues?: Array<string> | undefined;
   usageLimit?: number | undefined;
   usageResetPeriod?: EntitlementUsageResetPeriod | undefined;
 };
+
+/** @internal */
+export const ConfigValue$inboundSchema: z.ZodMiniType<ConfigValue, unknown> = z
+  .object({});
+
+export function configValueFromJSON(
+  jsonString: string,
+): SafeParseResult<ConfigValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ConfigValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ConfigValue' from JSON`,
+  );
+}
 
 /** @internal */
 export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
@@ -30,6 +44,9 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    config_values: types.optional(
+      z.array(z.record(z.string(), z.lazy(() => ConfigValue$inboundSchema))),
+    ),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
     static_values: types.optional(z.array(types.string())),
@@ -40,6 +57,7 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "config_values": "configValues",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",
       "static_values": "staticValues",

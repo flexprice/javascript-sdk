@@ -49,6 +49,10 @@ export const WebhookEventName = {
   InvoiceCommunicationTriggered: "invoice.communication.triggered",
   CreditNoteCreated: "credit_note.created",
   CreditNoteUpdated: "credit_note.updated",
+  CheckoutSessionInitiated: "checkout.session.initiated",
+  CheckoutSessionCompleted: "checkout.session.completed",
+  CheckoutSessionFailed: "checkout.session.failed",
+  CheckoutSessionExpired: "checkout.session.expired",
 } as const;
 export type WebhookEventName = OpenEnum<typeof WebhookEventName>;
 

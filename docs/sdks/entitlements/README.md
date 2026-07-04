@@ -180,7 +180,7 @@ async function run() {
     items: [
       {
         featureId: "<id>",
-        featureType: "static",
+        featureType: "config",
       },
     ],
   });
@@ -210,7 +210,7 @@ async function run() {
     items: [
       {
         featureId: "<id>",
-        featureType: "static",
+        featureType: "config",
       },
     ],
   });

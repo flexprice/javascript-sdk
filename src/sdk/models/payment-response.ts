@@ -54,6 +54,7 @@ export type PaymentResponse = {
   trackAttempts?: boolean | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
+  voidedAt?: Date | undefined;
 };
 
 /** @internal */
@@ -90,6 +91,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
     track_attempts: types.optional(types.boolean()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
+    voided_at: types.optional(types.date()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -116,6 +118,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
       "track_attempts": "trackAttempts",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",
+      "voided_at": "voidedAt",
     });
   }),
 );

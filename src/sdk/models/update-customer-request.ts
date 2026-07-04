@@ -60,6 +60,10 @@ export type UpdateCustomerRequest = {
    * name is the updated name or company name for the customer
    */
   name?: string | undefined;
+  /**
+   * timezone is the updated IANA timezone name for the customer (e.g. "Asia/Kolkata", "America/New_York")
+   */
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -77,6 +81,7 @@ export type UpdateCustomerRequest$Outbound = {
     | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
+  timezone?: string | undefined;
 };
 
 /** @internal */
@@ -98,6 +103,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
+    timezone: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {

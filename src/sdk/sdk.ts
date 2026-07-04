@@ -5,6 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { Addons } from "./addons.js";
 import { Alerts } from "./alerts.js";
+import { Checkout } from "./checkout.js";
 import { Costs } from "./costs.js";
 import { CouponAssociations } from "./coupon-associations.js";
 import { Coupons } from "./coupons.js";
@@ -49,6 +50,11 @@ export class Flexprice extends ClientSDK {
   private _alerts?: Alerts;
   get alerts(): Alerts {
     return (this._alerts ??= new Alerts(this._options));
+  }
+
+  private _checkout?: Checkout;
+  get checkout(): Checkout {
+    return (this._checkout ??= new Checkout(this._options));
   }
 
   private _costs?: Costs;

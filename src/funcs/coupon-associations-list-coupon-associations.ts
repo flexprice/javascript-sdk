@@ -102,6 +102,7 @@ async function $do(
     }, { explode: false }),
     encodeFormQuery({
       "active_only": payload?.active_only,
+      "expand": payload?.expand,
       "limit": payload?.limit,
       "offset": payload?.offset,
     }),

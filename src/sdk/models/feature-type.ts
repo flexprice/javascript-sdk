@@ -10,6 +10,7 @@ export const FeatureType = {
   Metered: "metered",
   Boolean: "boolean",
   Static: "static",
+  Config: "config",
 } as const;
 export type FeatureType = OpenEnum<typeof FeatureType>;
 
