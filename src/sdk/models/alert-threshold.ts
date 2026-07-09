@@ -15,7 +15,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AlertThreshold = {
   condition?: AlertCondition | undefined;
-  threshold?: number | undefined;
+  threshold?: string | undefined;
 };
 
 /** @internal */
@@ -24,12 +24,12 @@ export const AlertThreshold$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   condition: types.optional(AlertCondition$inboundSchema),
-  threshold: types.optional(types.number()),
+  threshold: types.optional(types.string()),
 });
 /** @internal */
 export type AlertThreshold$Outbound = {
   condition?: string | undefined;
-  threshold?: number | undefined;
+  threshold?: string | undefined;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const AlertThreshold$outboundSchema: z.ZodMiniType<
   AlertThreshold
 > = z.object({
   condition: z.optional(AlertCondition$outboundSchema),
-  threshold: z.optional(z.number()),
+  threshold: z.optional(z.string()),
 });
 
 export function alertThresholdToJSON(alertThreshold: AlertThreshold): string {

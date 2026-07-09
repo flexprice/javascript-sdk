@@ -16,7 +16,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type AlertInfo = {
   alertSettings?: AlertSettings | undefined;
   timestamp?: string | undefined;
-  valueAtTime?: number | undefined;
+  valueAtTime?: Date | undefined;
 };
 
 /** @internal */
@@ -25,7 +25,7 @@ export const AlertInfo$inboundSchema: z.ZodMiniType<AlertInfo, unknown> = z
     z.object({
       alert_settings: types.optional(AlertSettings$inboundSchema),
       timestamp: types.optional(types.string()),
-      value_at_time: types.optional(types.number()),
+      value_at_time: types.optional(types.date()),
     }),
     z.transform((v) => {
       return remap$(v, {
