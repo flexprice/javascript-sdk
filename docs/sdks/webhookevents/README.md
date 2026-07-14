@@ -12,6 +12,7 @@
 * [postWebhookEventsEntitlementCreated](#postwebhookeventsentitlementcreated) - entitlement.created
 * [postWebhookEventsEntitlementDeleted](#postwebhookeventsentitlementdeleted) - entitlement.deleted
 * [postWebhookEventsEntitlementUpdated](#postwebhookeventsentitlementupdated) - entitlement.updated
+* [postWebhookEventsEventRejected](#postwebhookeventseventrejected) - event.rejected
 * [postWebhookEventsFeatureCreated](#postwebhookeventsfeaturecreated) - feature.created
 * [postWebhookEventsFeatureDeleted](#postwebhookeventsfeaturedeleted) - feature.deleted
 * [postWebhookEventsFeatureUpdated](#postwebhookeventsfeatureupdated) - feature.updated
@@ -584,6 +585,74 @@ run();
 ### Response
 
 **Promise\<[models.WebhookDtoEntitlementWebhookPayload](../../sdk/models/webhook-dto-entitlement-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsEventRejected
+
+Fired when an ingested usage event produces no meter usage — either no meter is registered for its event name, or meters exist for the name but the event matched none of their filters. Throttled to at most once per configured window per event name. Doc-only for parsing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/event.rejected" method="post" path="/webhook-events/event.rejected" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsEventRejected();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsEventRejected } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-event-rejected.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsEventRejected(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsEventRejected failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoRejectedEventWebhookPayload](../../sdk/models/webhook-dto-rejected-event-webhook-payload.md)\>**
 
 ### Errors
 

@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const CreditGrantScope = {
   Plan: "PLAN",
   Subscription: "SUBSCRIPTION",
+  Addon: "ADDON",
 } as const;
 export type CreditGrantScope = OpenEnum<typeof CreditGrantScope>;
 

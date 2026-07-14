@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  CreditGrantResponse,
+  CreditGrantResponse$inboundSchema,
+} from "./credit-grant-response.js";
+import {
   EntitlementResponse,
   EntitlementResponse$inboundSchema,
 } from "./entitlement-response.js";
@@ -21,6 +25,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 export type AddonResponse = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
+  creditGrants?: Array<CreditGrantResponse> | undefined;
   description?: string | undefined;
   entitlements?: Array<EntitlementResponse> | undefined;
   environmentId?: string | undefined;
@@ -46,6 +51,7 @@ export const AddonResponse$inboundSchema: z.ZodMiniType<
   z.object({
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
+    credit_grants: types.optional(z.array(CreditGrantResponse$inboundSchema)),
     description: types.optional(types.string()),
     entitlements: types.optional(
       z.array(z.lazy(() => EntitlementResponse$inboundSchema)),
@@ -65,6 +71,7 @@ export const AddonResponse$inboundSchema: z.ZodMiniType<
     return remap$(v, {
       "created_at": "createdAt",
       "created_by": "createdBy",
+      "credit_grants": "creditGrants",
       "environment_id": "environmentId",
       "lookup_key": "lookupKey",
       "tenant_id": "tenantId",

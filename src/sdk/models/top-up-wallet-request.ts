@@ -22,6 +22,15 @@ export type TopUpWalletRequest = {
    */
   amount?: string | undefined;
   /**
+   * bonus_credits_to_add is an explicit override for the bonus credits granted alongside this
+   *
+   * @remarks
+   * purchase. When nil/omitted, the bonus is resolved from the tenant's
+   * bonus_credits_topup_config slabs (if enabled). When set, it must be greater than 0 and is
+   * used as-is, skipping slab resolution. To grant no bonus, omit this field entirely.
+   */
+  bonusCreditsToAdd?: string | undefined;
+  /**
    * credits_to_add is the number of credits to add to the wallet
    */
   creditsToAdd?: string | undefined;
@@ -55,6 +64,7 @@ export type TopUpWalletRequest = {
 /** @internal */
 export type TopUpWalletRequest$Outbound = {
   amount?: string | undefined;
+  bonus_credits_to_add?: string | undefined;
   credits_to_add?: string | undefined;
   description?: string | undefined;
   expiry_date_utc?: string | undefined;
@@ -71,6 +81,7 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: z.optional(z.string()),
+    bonusCreditsToAdd: z.optional(z.string()),
     creditsToAdd: z.optional(z.string()),
     description: z.optional(z.string()),
     expiryDateUtc: z.optional(z.string()),
@@ -81,6 +92,7 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      bonusCreditsToAdd: "bonus_credits_to_add",
       creditsToAdd: "credits_to_add",
       expiryDateUtc: "expiry_date_utc",
       idempotencyKey: "idempotency_key",

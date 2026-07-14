@@ -45,6 +45,16 @@ export const WebhookEventName = {
   WalletCreditBalanceRecovered: "wallet.credit_balance.recovered",
   WalletOngoingBalanceDropped: "wallet.ongoing_balance.dropped",
   WalletOngoingBalanceRecovered: "wallet.ongoing_balance.recovered",
+  SubscriptionSpendThresholdReached: "subscription.spend.threshold_reached",
+  SubscriptionSpendThresholdRecovered: "subscription.spend.threshold_recovered",
+  SubscriptionLineItemSpendThresholdReached:
+    "subscription.line_item_spend.threshold_reached",
+  SubscriptionLineItemSpendThresholdRecovered:
+    "subscription.line_item_spend.threshold_recovered",
+  SubscriptionGroupSpendThresholdReached:
+    "subscription.group_spend.threshold_reached",
+  SubscriptionGroupSpendThresholdRecovered:
+    "subscription.group_spend.threshold_recovered",
   SubscriptionRenewalDue: "subscription.renewal.due",
   InvoiceCommunicationTriggered: "invoice.communication.triggered",
   CreditNoteCreated: "credit_note.created",
@@ -53,6 +63,7 @@ export const WebhookEventName = {
   CheckoutSessionCompleted: "checkout.session.completed",
   CheckoutSessionFailed: "checkout.session.failed",
   CheckoutSessionExpired: "checkout.session.expired",
+  EventRejected: "event.rejected",
 } as const;
 export type WebhookEventName = OpenEnum<typeof WebhookEventName>;
 

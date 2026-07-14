@@ -13,5 +13,5 @@ let value: CreditGrantScope = "PLAN";
 ## Values
 
 ```typescript
-"PLAN" | "SUBSCRIPTION" | Unrecognized<string>
+"PLAN" | "SUBSCRIPTION" | "ADDON" | Unrecognized<string>
 ```

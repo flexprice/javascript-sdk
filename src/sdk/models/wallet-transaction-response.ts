@@ -60,6 +60,13 @@ export type WalletTransactionResponse = {
   id?: string | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  /**
+   * ParentTransactionID is the ID of the parent wallet_transaction this row was earned from
+   *
+   * @remarks
+   * (the purchase tx, for a bonus grant). Empty for ordinary transactions.
+   */
+  parentTransactionId?: string | undefined;
   priority?: number | undefined;
   referenceId?: string | undefined;
   referenceType?: WalletTxReferenceType | undefined;
@@ -102,6 +109,7 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    parent_transaction_id: types.optional(types.string()),
     priority: types.optional(types.number()),
     reference_id: types.optional(types.string()),
     reference_type: types.optional(WalletTxReferenceType$inboundSchema),
@@ -130,6 +138,7 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "expiry_date": "expiryDate",
       "idempotency_key": "idempotencyKey",
+      "parent_transaction_id": "parentTransactionId",
       "reference_id": "referenceId",
       "reference_type": "referenceType",
       "tenant_id": "tenantId",

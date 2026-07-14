@@ -1,0 +1,16 @@
+# ListAlertSettingsResponse
+
+## Example Usage
+
+```typescript
+import { ListAlertSettingsResponse } from "@flexprice/sdk/sdk/models";
+
+let value: ListAlertSettingsResponse = {};
+```
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `items`                                                                       | [models.AlertSettingsResponse](../../sdk/models/alert-settings-response.md)[] | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `pagination`                                                                  | [models.PaginationResponse](../../sdk/models/pagination-response.md)          | :heavy_minus_sign:                                                            | N/A                                                                           |

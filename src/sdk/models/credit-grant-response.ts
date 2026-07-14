@@ -31,6 +31,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
 export type CreditGrantResponse = {
+  addonId?: string | undefined;
   cadence?: CreditGrantCadence | undefined;
   /**
    * amount in the currency =  number of credits * conversion_rate
@@ -81,6 +82,7 @@ export const CreditGrantResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    addon_id: types.optional(types.string()),
     cadence: types.optional(CreditGrantCadence$inboundSchema),
     conversion_rate: types.optional(types.string()),
     created_at: types.optional(types.date()),
@@ -112,6 +114,7 @@ export const CreditGrantResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "addon_id": "addonId",
       "conversion_rate": "conversionRate",
       "created_at": "createdAt",
       "created_by": "createdBy",

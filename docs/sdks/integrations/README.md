@@ -95,7 +95,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.integrations.linkIntegrationMapping({
     entityId: "<id>",
-    entityType: "item_price",
+    entityType: "price",
     providerEntityId: "<id>",
     providerType: "<value>",
   });
@@ -123,7 +123,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await integrationsLinkIntegrationMapping(flexprice, {
     entityId: "<id>",
-    entityType: "item_price",
+    entityType: "price",
     providerEntityId: "<id>",
     providerType: "<value>",
   });

@@ -17,6 +17,7 @@ export const IntegrationEntityType = {
   Item: "item",
   ItemPrice: "item_price",
   Price: "price",
+  InvoiceLineItem: "invoice_line_item",
 } as const;
 export type IntegrationEntityType = OpenEnum<typeof IntegrationEntityType>;
 

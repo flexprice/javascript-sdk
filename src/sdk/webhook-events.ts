@@ -10,6 +10,7 @@ import { webhookEventsPostWebhookEventsCustomerUpdated } from "../funcs/webhook-
 import { webhookEventsPostWebhookEventsEntitlementCreated } from "../funcs/webhook-events-post-webhook-events-entitlement-created.js";
 import { webhookEventsPostWebhookEventsEntitlementDeleted } from "../funcs/webhook-events-post-webhook-events-entitlement-deleted.js";
 import { webhookEventsPostWebhookEventsEntitlementUpdated } from "../funcs/webhook-events-post-webhook-events-entitlement-updated.js";
+import { webhookEventsPostWebhookEventsEventRejected } from "../funcs/webhook-events-post-webhook-events-event-rejected.js";
 import { webhookEventsPostWebhookEventsFeatureCreated } from "../funcs/webhook-events-post-webhook-events-feature-created.js";
 import { webhookEventsPostWebhookEventsFeatureDeleted } from "../funcs/webhook-events-post-webhook-events-feature-deleted.js";
 import { webhookEventsPostWebhookEventsFeatureUpdated } from "../funcs/webhook-events-post-webhook-events-feature-updated.js";
@@ -164,6 +165,21 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoEntitlementWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsEntitlementUpdated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * event.rejected
+   *
+   * @remarks
+   * Fired when an ingested usage event produces no meter usage — either no meter is registered for its event name, or meters exist for the name but the event matched none of their filters. Throttled to at most once per configured window per event name. Doc-only for parsing.
+   */
+  async postWebhookEventsEventRejected(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoRejectedEventWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsEventRejected(
       this,
       options,
     ));

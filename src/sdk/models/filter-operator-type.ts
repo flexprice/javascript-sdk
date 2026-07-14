@@ -11,6 +11,7 @@ export const FilterOperatorType = {
   NotContains: "not_contains",
   Gt: "gt",
   Lt: "lt",
+  Gte: "gte",
   In: "in",
   NotIn: "not_in",
   Before: "before",

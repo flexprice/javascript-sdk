@@ -5,7 +5,7 @@
 ```typescript
 import { SecretProvider } from "@flexprice/sdk/sdk/models";
 
-let value: SecretProvider = "quickbooks";
+let value: SecretProvider = "zoho_books";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: SecretProvider = "quickbooks";
 ## Values
 
 ```typescript
-"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "zoho_books" | "nomod" | "moyasar" | "paddle" | "whop" | Unrecognized<string>
+"flexprice" | "stripe" | "s3" | "hubspot" | "razorpay" | "chargebee" | "quickbooks" | "zoho_books" | "nomod" | "moyasar" | "paddle" | "whop" | "tabs" | Unrecognized<string>
 ```

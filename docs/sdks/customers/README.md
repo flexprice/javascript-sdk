@@ -105,6 +105,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.customers.createCustomer({
     externalId: "<id>",
+    name: "<value>",
   });
 
   console.log(result);
@@ -130,6 +131,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await customersCreateCustomer(flexprice, {
     externalId: "<id>",
+    name: "<value>",
   });
   if (res.ok) {
     const { value: result } = res;

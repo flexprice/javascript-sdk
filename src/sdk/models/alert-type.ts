@@ -10,6 +10,9 @@ export const AlertType = {
   LowOngoingBalance: "low_ongoing_balance",
   LowCreditBalance: "low_credit_balance",
   FeatureWalletBalance: "feature_wallet_balance",
+  SubscriptionSpend: "subscription_spend",
+  SubscriptionLineItemSpend: "subscription_line_item_spend",
+  SubscriptionGroupSpend: "subscription_group_spend",
 } as const;
 export type AlertType = OpenEnum<typeof AlertType>;
 

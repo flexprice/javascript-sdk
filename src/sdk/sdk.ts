@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Addons } from "./addons.js";
+import { AlertSettings } from "./alert-settings.js";
 import { Alerts } from "./alerts.js";
 import { Checkout } from "./checkout.js";
 import { Costs } from "./costs.js";
@@ -42,6 +43,11 @@ export class Flexprice extends ClientSDK {
     return (this._addons ??= new Addons(this._options));
   }
 
+  private _creditGrants?: CreditGrants;
+  get creditGrants(): CreditGrants {
+    return (this._creditGrants ??= new CreditGrants(this._options));
+  }
+
   private _entitlements?: Entitlements;
   get entitlements(): Entitlements {
     return (this._entitlements ??= new Entitlements(this._options));
@@ -50,6 +56,11 @@ export class Flexprice extends ClientSDK {
   private _alerts?: Alerts;
   get alerts(): Alerts {
     return (this._alerts ??= new Alerts(this._options));
+  }
+
+  private _alertSettings?: AlertSettings;
+  get alertSettings(): AlertSettings {
+    return (this._alertSettings ??= new AlertSettings(this._options));
   }
 
   private _checkout?: Checkout;
@@ -70,11 +81,6 @@ export class Flexprice extends ClientSDK {
   private _couponAssociations?: CouponAssociations;
   get couponAssociations(): CouponAssociations {
     return (this._couponAssociations ??= new CouponAssociations(this._options));
-  }
-
-  private _creditGrants?: CreditGrants;
-  get creditGrants(): CreditGrants {
-    return (this._creditGrants ??= new CreditGrants(this._options));
   }
 
   private _creditNotes?: CreditNotes;

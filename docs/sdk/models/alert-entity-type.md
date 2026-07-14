@@ -5,7 +5,7 @@
 ```typescript
 import { AlertEntityType } from "@flexprice/sdk/sdk/models";
 
-let value: AlertEntityType = "wallet";
+let value: AlertEntityType = "feature";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: AlertEntityType = "wallet";
 ## Values
 
 ```typescript
-"wallet" | "feature" | Unrecognized<string>
+"wallet" | "feature" | "subscription" | "subscription_line_item" | "group" | Unrecognized<string>
 ```

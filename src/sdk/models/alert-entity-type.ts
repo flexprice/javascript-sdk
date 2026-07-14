@@ -9,6 +9,9 @@ import { OpenEnum } from "../../types/enums.js";
 export const AlertEntityType = {
   Wallet: "wallet",
   Feature: "feature",
+  Subscription: "subscription",
+  SubscriptionLineItem: "subscription_line_item",
+  Group: "group",
 } as const;
 export type AlertEntityType = OpenEnum<typeof AlertEntityType>;
 

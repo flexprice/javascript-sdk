@@ -18,6 +18,7 @@ export const TransactionReason = {
   ManualBalanceDebit: "MANUAL_BALANCE_DEBIT",
   CreditAdjustment: "CREDIT_ADJUSTMENT",
   InvoiceVoidRefund: "INVOICE_VOID_REFUND",
+  PurchasedCreditBonus: "PURCHASED_CREDIT_BONUS",
 } as const;
 export type TransactionReason = OpenEnum<typeof TransactionReason>;
 

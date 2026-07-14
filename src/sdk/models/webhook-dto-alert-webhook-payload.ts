@@ -7,6 +7,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
+import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
 import {
   CustomerResponse,
   CustomerResponse$inboundSchema,
@@ -26,8 +28,8 @@ import {
 } from "./webhook-event-name.js";
 
 export type WebhookDtoAlertWebhookPayload = {
-  alertStatus?: string | undefined;
-  alertType?: string | undefined;
+  alertStatus?: AlertState | undefined;
+  alertType?: AlertType | undefined;
   /**
    * Customer response object containing all customer information
    */
@@ -43,8 +45,8 @@ export const WebhookDtoAlertWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    alert_status: types.optional(types.string()),
-    alert_type: types.optional(types.string()),
+    alert_status: types.optional(AlertState$inboundSchema),
+    alert_type: types.optional(AlertType$inboundSchema),
     customer: types.optional(CustomerResponse$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
     feature: types.optional(FeatureResponse$inboundSchema),

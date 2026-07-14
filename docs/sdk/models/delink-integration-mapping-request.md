@@ -7,7 +7,7 @@ import { DelinkIntegrationMappingRequest } from "@flexprice/sdk/sdk/models";
 
 let value: DelinkIntegrationMappingRequest = {
   entityId: "<id>",
-  entityType: "invoice",
+  entityType: "subscription",
   providerType: "<value>",
 };
 ```

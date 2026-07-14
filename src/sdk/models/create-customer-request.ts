@@ -64,7 +64,7 @@ export type CreateCustomerRequest = {
   /**
    * name is the full name or company name of the customer
    */
-  name?: string | undefined;
+  name: string;
   /**
    * skip_onboarding_workflow when true, prevents the customer onboarding workflow from being triggered
    *
@@ -100,7 +100,7 @@ export type CreateCustomerRequest$Outbound = {
     | Array<CreateEntityIntegrationMappingRequest$Outbound>
     | undefined;
   metadata?: { [k: string]: string } | undefined;
-  name?: string | undefined;
+  name: string;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   timezone?: string | undefined;
@@ -124,7 +124,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       z.array(CreateEntityIntegrationMappingRequest$outboundSchema),
     ),
     metadata: z.optional(z.record(z.string(), z.string())),
-    name: z.optional(z.string()),
+    name: z.string(),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     timezone: z.optional(z.string()),

@@ -26,6 +26,7 @@ import {
 } from "./credit-grant-scope.js";
 
 export type CreateCreditGrantRequest = {
+  addonId?: string | undefined;
   cadence: CreditGrantCadence;
   /**
    * amount in the currency =  number of credits * conversion_rate
@@ -63,6 +64,7 @@ export type CreateCreditGrantRequest = {
 
 /** @internal */
 export type CreateCreditGrantRequest$Outbound = {
+  addon_id?: string | undefined;
   cadence: string;
   conversion_rate?: string | undefined;
   credits: string;
@@ -88,6 +90,7 @@ export const CreateCreditGrantRequest$outboundSchema: z.ZodMiniType<
   CreateCreditGrantRequest
 > = z.pipe(
   z.object({
+    addonId: z.optional(z.string()),
     cadence: CreditGrantCadence$outboundSchema,
     conversionRate: z.optional(z.string()),
     credits: z.string(),
@@ -110,6 +113,7 @@ export const CreateCreditGrantRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      addonId: "addon_id",
       conversionRate: "conversion_rate",
       endDate: "end_date",
       expirationDuration: "expiration_duration",

@@ -4,6 +4,7 @@
 
 import { creditGrantsCreateCreditGrant } from "../funcs/credit-grants-create-credit-grant.js";
 import { creditGrantsDeleteCreditGrant } from "../funcs/credit-grants-delete-credit-grant.js";
+import { creditGrantsGetAddonCreditGrants } from "../funcs/credit-grants-get-addon-credit-grants.js";
 import { creditGrantsGetCreditGrant } from "../funcs/credit-grants-get-credit-grant.js";
 import { creditGrantsGetPlanCreditGrants } from "../funcs/credit-grants-get-plan-credit-grants.js";
 import { creditGrantsUpdateCreditGrant } from "../funcs/credit-grants-update-credit-grant.js";
@@ -12,6 +13,23 @@ import { unwrapAsync } from "../types/fp.js";
 import * as models from "./models/index.js";
 
 export class CreditGrants extends ClientSDK {
+  /**
+   * Get addon credit grants
+   *
+   * @remarks
+   * Use when listing credits attached to an addon (e.g. included prepaid or promo credits).
+   */
+  async getAddonCreditGrants(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ListCreditGrantsResponse> {
+    return unwrapAsync(creditGrantsGetAddonCreditGrants(
+      this,
+      id,
+      options,
+    ));
+  }
+
   /**
    * Create credit grant
    *
