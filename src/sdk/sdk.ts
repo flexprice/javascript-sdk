@@ -20,6 +20,7 @@ import { Features } from "./features.js";
 import { Groups } from "./groups.js";
 import { Integrations } from "./integrations.js";
 import { Invoices } from "./invoices.js";
+import { Marketplace } from "./marketplace.js";
 import { Payments } from "./payments.js";
 import { Plans } from "./plans.js";
 import { PriceUnits } from "./price-units.js";
@@ -126,6 +127,11 @@ export class Flexprice extends ClientSDK {
   private _integrations?: Integrations;
   get integrations(): Integrations {
     return (this._integrations ??= new Integrations(this._options));
+  }
+
+  private _marketplace?: Marketplace;
+  get marketplace(): Marketplace {
+    return (this._marketplace ??= new Marketplace(this._options));
   }
 
   private _payments?: Payments;

@@ -16,6 +16,10 @@ import {
   CheckoutJSONBCheckoutConfiguration$inboundSchema,
 } from "./checkout-jsonb-checkout-configuration.js";
 import {
+  CheckoutJSONBCheckoutPaymentProviderConfig,
+  CheckoutJSONBCheckoutPaymentProviderConfig$inboundSchema,
+} from "./checkout-jsonb-checkout-payment-provider-config.js";
+import {
   CheckoutJSONBCheckoutProviderResult,
   CheckoutJSONBCheckoutProviderResult$inboundSchema,
 } from "./checkout-jsonb-checkout-provider-result.js";
@@ -82,6 +86,9 @@ export type CheckoutSessionResponse = {
   metadata?: { [k: string]: string } | undefined;
   paymentAction?: PaymentAction | undefined;
   paymentProvider?: CheckoutPaymentProvider | undefined;
+  paymentProviderConfig?:
+    | CheckoutJSONBCheckoutPaymentProviderConfig
+    | undefined;
   providerResult?: CheckoutJSONBCheckoutProviderResult | undefined;
   result?: CheckoutJSONBCheckoutResult | undefined;
   status?: Status | undefined;
@@ -125,6 +132,9 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
     metadata: types.optional(z.record(z.string(), types.string())),
     payment_action: types.optional(PaymentAction$inboundSchema),
     payment_provider: types.optional(CheckoutPaymentProvider$inboundSchema),
+    payment_provider_config: types.optional(
+      CheckoutJSONBCheckoutPaymentProviderConfig$inboundSchema,
+    ),
     provider_result: types.optional(
       CheckoutJSONBCheckoutProviderResult$inboundSchema,
     ),
@@ -153,6 +163,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
       "idempotency_key": "idempotencyKey",
       "payment_action": "paymentAction",
       "payment_provider": "paymentProvider",
+      "payment_provider_config": "paymentProviderConfig",
       "provider_result": "providerResult",
       "success_url": "successUrl",
       "tenant_id": "tenantId",

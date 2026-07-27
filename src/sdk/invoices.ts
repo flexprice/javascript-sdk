@@ -99,6 +99,7 @@ export class Invoices extends ClientSDK {
     id: string,
     expandBySource?: boolean | undefined,
     groupBy?: Array<string> | undefined,
+    expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesGetInvoice(
@@ -106,6 +107,7 @@ export class Invoices extends ClientSDK {
       id,
       expandBySource,
       groupBy,
+      expand,
       options,
     ));
   }

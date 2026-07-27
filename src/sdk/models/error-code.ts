@@ -19,6 +19,7 @@ export const ErrorCode = {
   DatabaseError: "database_error",
   ServiceUnavailable: "service_unavailable",
   TooManyRequests: "too_many_requests",
+  NotImplemented: "not_implemented",
 } as const;
 export type ErrorCode = OpenEnum<typeof ErrorCode>;
 

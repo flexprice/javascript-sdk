@@ -4,6 +4,11 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  GroupedInvoicingChildRequest,
+  GroupedInvoicingChildRequest$Outbound,
+  GroupedInvoicingChildRequest$outboundSchema,
+} from "./grouped-invoicing-child-request.js";
 
 export type SubscriptionInheritanceConfig = {
   /**
@@ -13,6 +18,12 @@ export type SubscriptionInheritanceConfig = {
    * inherited skeleton subscriptions will be created. Only valid for parent behavior.
    */
   externalCustomerIdsToInheritSubscription?: Array<string> | undefined;
+  /**
+   * grouped_invoicing_children_to_create creates new grouped_invoicing children under this parent
+   */
+  groupedInvoicingChildrenToCreate?:
+    | Array<GroupedInvoicingChildRequest>
+    | undefined;
   /**
    * InvoicingCustomerExternalID sets a different billing recipient (external ID).
    *
@@ -39,6 +50,9 @@ export type SubscriptionInheritanceConfig = {
 /** @internal */
 export type SubscriptionInheritanceConfig$Outbound = {
   external_customer_ids_to_inherit_subscription?: Array<string> | undefined;
+  grouped_invoicing_children_to_create?:
+    | Array<GroupedInvoicingChildRequest$Outbound>
+    | undefined;
   invoicing_customer_external_id?: string | undefined;
   parent_subscription_id?: string | undefined;
   subscriptions_ids_for_grouped_invoicing?: Array<string> | undefined;
@@ -51,6 +65,9 @@ export const SubscriptionInheritanceConfig$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     externalCustomerIdsToInheritSubscription: z.optional(z.array(z.string())),
+    groupedInvoicingChildrenToCreate: z.optional(
+      z.array(GroupedInvoicingChildRequest$outboundSchema),
+    ),
     invoicingCustomerExternalId: z.optional(z.string()),
     parentSubscriptionId: z.optional(z.string()),
     subscriptionsIdsForGroupedInvoicing: z.optional(z.array(z.string())),
@@ -59,6 +76,7 @@ export const SubscriptionInheritanceConfig$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       externalCustomerIdsToInheritSubscription:
         "external_customer_ids_to_inherit_subscription",
+      groupedInvoicingChildrenToCreate: "grouped_invoicing_children_to_create",
       invoicingCustomerExternalId: "invoicing_customer_external_id",
       parentSubscriptionId: "parent_subscription_id",
       subscriptionsIdsForGroupedInvoicing:

@@ -13,5 +13,5 @@ let value: PaymentMethodType = "OFFLINE";
 ## Values
 
 ```typescript
-"CARD" | "ACH" | "OFFLINE" | "CREDITS" | "PAYMENT_LINK" | Unrecognized<string>
+"CARD" | "ACH" | "OFFLINE" | "CREDITS" | "PAYMENT_LINK" | "UPI" | Unrecognized<string>
 ```

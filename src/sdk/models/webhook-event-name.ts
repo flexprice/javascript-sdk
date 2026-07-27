@@ -28,6 +28,7 @@ export const WebhookEventName = {
   WalletUpdated: "wallet.updated",
   WalletTerminated: "wallet.terminated",
   WalletTransactionCreated: "wallet.transaction.created",
+  WalletTransactionUpdated: "wallet.transaction.updated",
   PaymentCreated: "payment.created",
   PaymentUpdated: "payment.updated",
   PaymentFailed: "payment.failed",
@@ -45,6 +46,7 @@ export const WebhookEventName = {
   WalletCreditBalanceRecovered: "wallet.credit_balance.recovered",
   WalletOngoingBalanceDropped: "wallet.ongoing_balance.dropped",
   WalletOngoingBalanceRecovered: "wallet.ongoing_balance.recovered",
+  WalletOngoingBalanceUpdated: "wallet.ongoing_balance.updated",
   SubscriptionSpendThresholdReached: "subscription.spend.threshold_reached",
   SubscriptionSpendThresholdRecovered: "subscription.spend.threshold_recovered",
   SubscriptionLineItemSpendThresholdReached:
@@ -55,6 +57,7 @@ export const WebhookEventName = {
     "subscription.group_spend.threshold_reached",
   SubscriptionGroupSpendThresholdRecovered:
     "subscription.group_spend.threshold_recovered",
+  EntitlementGrantExhausted: "entitlement.grant.exhausted",
   SubscriptionRenewalDue: "subscription.renewal.due",
   InvoiceCommunicationTriggered: "invoice.communication.triggered",
   CreditNoteCreated: "credit_note.created",

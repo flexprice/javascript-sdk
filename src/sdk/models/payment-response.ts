@@ -33,6 +33,7 @@ export type PaymentResponse = {
   currency?: string | undefined;
   destinationId?: string | undefined;
   destinationType?: PaymentDestinationType | undefined;
+  environmentId?: string | undefined;
   errorMessage?: string | undefined;
   failedAt?: Date | undefined;
   gatewayMetadata?: { [k: string]: string } | undefined;
@@ -70,6 +71,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     destination_id: types.optional(types.string()),
     destination_type: types.optional(PaymentDestinationType$inboundSchema),
+    environment_id: types.optional(types.string()),
     error_message: types.optional(types.string()),
     failed_at: types.optional(types.date()),
     gateway_metadata: types.optional(z.record(z.string(), types.string())),
@@ -99,6 +101,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
       "created_by": "createdBy",
       "destination_id": "destinationId",
       "destination_type": "destinationType",
+      "environment_id": "environmentId",
       "error_message": "errorMessage",
       "failed_at": "failedAt",
       "gateway_metadata": "gatewayMetadata",

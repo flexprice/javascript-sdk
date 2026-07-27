@@ -42,6 +42,10 @@ export type CustomerResponse = {
    * AddressState is the state of the customer's address
    */
   addressState?: string | undefined;
+  /**
+   * Contact is an optional contact number for the customer (e.g. phone)
+   */
+  contact?: string | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
@@ -94,6 +98,7 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
     address_line2: types.optional(types.string()),
     address_postal_code: types.optional(types.string()),
     address_state: types.optional(types.string()),
+    contact: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     email: types.optional(types.string()),

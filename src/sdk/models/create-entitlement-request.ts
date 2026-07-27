@@ -5,9 +5,21 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  EntitlementAggregationMode,
+  EntitlementAggregationMode$outboundSchema,
+} from "./entitlement-aggregation-mode.js";
+import {
   EntitlementEntityType,
   EntitlementEntityType$outboundSchema,
 } from "./entitlement-entity-type.js";
+import {
+  EntitlementGrantDurationUnit,
+  EntitlementGrantDurationUnit$outboundSchema,
+} from "./entitlement-grant-duration-unit.js";
+import {
+  EntitlementGrantMeasure,
+  EntitlementGrantMeasure$outboundSchema,
+} from "./entitlement-grant-measure.js";
 import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$outboundSchema,
@@ -15,12 +27,17 @@ import {
 import { FeatureType, FeatureType$outboundSchema } from "./feature-type.js";
 
 export type CreateEntitlementRequest = {
+  aggregationMode?: EntitlementAggregationMode | undefined;
   configValue?: { [k: string]: any } | undefined;
   endDate?: Date | undefined;
   entityId?: string | undefined;
   entityType?: EntitlementEntityType | undefined;
   featureId: string;
   featureType: FeatureType;
+  grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
+  grantDurationValue?: number | undefined;
+  grantMeasure?: EntitlementGrantMeasure | undefined;
+  grantQuota?: string | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   parentEntitlementId?: string | undefined;
@@ -33,12 +50,17 @@ export type CreateEntitlementRequest = {
 
 /** @internal */
 export type CreateEntitlementRequest$Outbound = {
+  aggregation_mode?: string | undefined;
   config_value?: { [k: string]: any } | undefined;
   end_date?: string | undefined;
   entity_id?: string | undefined;
   entity_type?: string | undefined;
   feature_id: string;
   feature_type: string;
+  grant_duration_unit?: string | undefined;
+  grant_duration_value?: number | undefined;
+  grant_measure?: string | undefined;
+  grant_quota?: string | undefined;
   is_enabled?: boolean | undefined;
   is_soft_limit?: boolean | undefined;
   parent_entitlement_id?: string | undefined;
@@ -55,12 +77,17 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
   CreateEntitlementRequest
 > = z.pipe(
   z.object({
+    aggregationMode: z.optional(EntitlementAggregationMode$outboundSchema),
     configValue: z.optional(z.record(z.string(), z.any())),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityId: z.optional(z.string()),
     entityType: z.optional(EntitlementEntityType$outboundSchema),
     featureId: z.string(),
     featureType: FeatureType$outboundSchema,
+    grantDurationUnit: z.optional(EntitlementGrantDurationUnit$outboundSchema),
+    grantDurationValue: z.optional(z.int()),
+    grantMeasure: z.optional(EntitlementGrantMeasure$outboundSchema),
+    grantQuota: z.optional(z.string()),
     isEnabled: z.optional(z.boolean()),
     isSoftLimit: z.optional(z.boolean()),
     parentEntitlementId: z.optional(z.string()),
@@ -72,12 +99,17 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      aggregationMode: "aggregation_mode",
       configValue: "config_value",
       endDate: "end_date",
       entityId: "entity_id",
       entityType: "entity_type",
       featureId: "feature_id",
       featureType: "feature_type",
+      grantDurationUnit: "grant_duration_unit",
+      grantDurationValue: "grant_duration_value",
+      grantMeasure: "grant_measure",
+      grantQuota: "grant_quota",
       isEnabled: "is_enabled",
       isSoftLimit: "is_soft_limit",
       parentEntitlementId: "parent_entitlement_id",

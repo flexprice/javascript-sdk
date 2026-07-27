@@ -13,6 +13,8 @@ export const AlertType = {
   SubscriptionSpend: "subscription_spend",
   SubscriptionLineItemSpend: "subscription_line_item_spend",
   SubscriptionGroupSpend: "subscription_group_spend",
+  EntitlementGrantThreshold: "entitlement_grant_threshold",
+  EntitlementGrantExhausted: "entitlement_grant_exhausted",
 } as const;
 export type AlertType = OpenEnum<typeof AlertType>;
 

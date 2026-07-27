@@ -20,6 +20,9 @@ export const SecretProvider = {
   Paddle: "paddle",
   Whop: "whop",
   Tabs: "tabs",
+  AwsMarketplace: "aws_marketplace",
+  GcpMarketplace: "gcp_marketplace",
+  AzureMarketplace: "azure_marketplace",
 } as const;
 export type SecretProvider = OpenEnum<typeof SecretProvider>;
 
@@ -28,3 +31,8 @@ export const SecretProvider$inboundSchema: z.ZodMiniType<
   SecretProvider,
   unknown
 > = openEnums.inboundSchema(SecretProvider);
+/** @internal */
+export const SecretProvider$outboundSchema: z.ZodMiniType<
+  string,
+  SecretProvider
+> = openEnums.outboundSchema(SecretProvider);

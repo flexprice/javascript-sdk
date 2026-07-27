@@ -12,9 +12,21 @@ import {
   AddonResponse$inboundSchema,
 } from "./addon-response.js";
 import {
+  EntitlementAggregationMode,
+  EntitlementAggregationMode$inboundSchema,
+} from "./entitlement-aggregation-mode.js";
+import {
   EntitlementEntityType,
   EntitlementEntityType$inboundSchema,
 } from "./entitlement-entity-type.js";
+import {
+  EntitlementGrantDurationUnit,
+  EntitlementGrantDurationUnit$inboundSchema,
+} from "./entitlement-grant-duration-unit.js";
+import {
+  EntitlementGrantMeasure,
+  EntitlementGrantMeasure$inboundSchema,
+} from "./entitlement-grant-measure.js";
 import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
@@ -30,6 +42,7 @@ import { Status, Status$inboundSchema } from "./status.js";
 
 export type EntitlementResponse = {
   addon?: AddonResponse | undefined;
+  aggregationMode?: EntitlementAggregationMode | undefined;
   configValue?: { [k: string]: any } | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
@@ -41,6 +54,10 @@ export type EntitlementResponse = {
   feature?: FeatureResponse | undefined;
   featureId?: string | undefined;
   featureType?: FeatureType | undefined;
+  grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
+  grantDurationValue?: number | undefined;
+  grantMeasure?: EntitlementGrantMeasure | undefined;
+  grantQuota?: number | undefined;
   id?: string | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
@@ -67,6 +84,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addon: types.optional(z.lazy(() => AddonResponse$inboundSchema)),
+    aggregation_mode: types.optional(EntitlementAggregationMode$inboundSchema),
     config_value: types.optional(z.record(z.string(), z.any())),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -78,6 +96,12 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
     feature: types.optional(FeatureResponse$inboundSchema),
     feature_id: types.optional(types.string()),
     feature_type: types.optional(FeatureType$inboundSchema),
+    grant_duration_unit: types.optional(
+      EntitlementGrantDurationUnit$inboundSchema,
+    ),
+    grant_duration_value: types.optional(types.number()),
+    grant_measure: types.optional(EntitlementGrantMeasure$inboundSchema),
+    grant_quota: types.optional(types.number()),
     id: types.optional(types.string()),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
@@ -97,6 +121,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "aggregation_mode": "aggregationMode",
       "config_value": "configValue",
       "created_at": "createdAt",
       "created_by": "createdBy",
@@ -107,6 +132,10 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "feature_id": "featureId",
       "feature_type": "featureType",
+      "grant_duration_unit": "grantDurationUnit",
+      "grant_duration_value": "grantDurationValue",
+      "grant_measure": "grantMeasure",
+      "grant_quota": "grantQuota",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",
       "parent_entitlement_id": "parentEntitlementId",

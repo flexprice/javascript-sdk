@@ -8,6 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AggregatedEntitlementBucket,
+  AggregatedEntitlementBucket$inboundSchema,
+} from "./aggregated-entitlement-bucket.js";
+import {
+  EntitlementAggregationMode,
+  EntitlementAggregationMode$inboundSchema,
+} from "./entitlement-aggregation-mode.js";
+import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
 } from "./entitlement-usage-reset-period.js";
@@ -16,6 +24,8 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type ConfigValue = {};
 
 export type AggregatedEntitlement = {
+  aggregationMode?: EntitlementAggregationMode | undefined;
+  buckets?: Array<AggregatedEntitlementBucket> | undefined;
   configValues?: Array<{ [k: string]: ConfigValue }> | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
@@ -44,6 +54,8 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    aggregation_mode: types.optional(EntitlementAggregationMode$inboundSchema),
+    buckets: types.optional(z.array(AggregatedEntitlementBucket$inboundSchema)),
     config_values: types.optional(
       z.array(z.record(z.string(), z.lazy(() => ConfigValue$inboundSchema))),
     ),
@@ -57,6 +69,7 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "aggregation_mode": "aggregationMode",
       "config_values": "configValues",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",

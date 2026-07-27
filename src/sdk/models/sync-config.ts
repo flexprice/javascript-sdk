@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AWSMarketplaceSyncConfig,
+  AWSMarketplaceSyncConfig$inboundSchema,
+} from "./aws-marketplace-sync-config.js";
+import {
   EntitySyncConfig,
   EntitySyncConfig$inboundSchema,
 } from "./entity-sync-config.js";
@@ -22,6 +26,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type SyncConfig = {
+  awsMarketplace?: AWSMarketplaceSyncConfig | undefined;
   customer?: EntitySyncConfig | undefined;
   deal?: EntitySyncConfig | undefined;
   invoice?: EntitySyncConfig | undefined;
@@ -37,6 +42,7 @@ export type SyncConfig = {
 export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
   .pipe(
     z.object({
+      aws_marketplace: types.optional(AWSMarketplaceSyncConfig$inboundSchema),
       customer: types.optional(EntitySyncConfig$inboundSchema),
       deal: types.optional(EntitySyncConfig$inboundSchema),
       invoice: types.optional(EntitySyncConfig$inboundSchema),
@@ -49,6 +55,7 @@ export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
     }),
     z.transform((v) => {
       return remap$(v, {
+        "aws_marketplace": "awsMarketplace",
         "invoice_sync_settings": "invoiceSyncSettings",
       });
     }),

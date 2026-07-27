@@ -11,6 +11,10 @@ import {
   ChangedResources,
   ChangedResources$inboundSchema,
 } from "./changed-resources.js";
+import {
+  CheckoutSessionResponse,
+  CheckoutSessionResponse$inboundSchema,
+} from "./checkout-session-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionResponse,
@@ -19,6 +23,7 @@ import {
 
 export type SubscriptionModifyResponse = {
   changedResources?: ChangedResources | undefined;
+  checkoutSession?: CheckoutSessionResponse | undefined;
   subscription?: SubscriptionResponse | undefined;
 };
 
@@ -29,11 +34,13 @@ export const SubscriptionModifyResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     changed_resources: types.optional(ChangedResources$inboundSchema),
+    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
     subscription: types.optional(SubscriptionResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "changed_resources": "changedResources",
+      "checkout_session": "checkoutSession",
     });
   }),
 );

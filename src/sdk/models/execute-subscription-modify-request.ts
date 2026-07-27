@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  CheckoutParams,
+  CheckoutParams$Outbound,
+  CheckoutParams$outboundSchema,
+} from "./checkout-params.js";
+import {
   SubModifyCouponParams,
   SubModifyCouponParams$Outbound,
   SubModifyCouponParams$outboundSchema,
@@ -40,6 +45,7 @@ import {
 } from "./subscription-modify-type.js";
 
 export type ExecuteSubscriptionModifyRequest = {
+  checkout?: CheckoutParams | undefined;
   couponParams?: SubModifyCouponParams | undefined;
   groupedInvoicingParams?: SubModifyGroupedInvoicingParams | undefined;
   inheritanceParams?: SubModifyInheritanceRequest | undefined;
@@ -51,6 +57,7 @@ export type ExecuteSubscriptionModifyRequest = {
 
 /** @internal */
 export type ExecuteSubscriptionModifyRequest$Outbound = {
+  checkout?: CheckoutParams$Outbound | undefined;
   coupon_params?: SubModifyCouponParams$Outbound | undefined;
   grouped_invoicing_params?:
     | SubModifyGroupedInvoicingParams$Outbound
@@ -68,6 +75,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   ExecuteSubscriptionModifyRequest
 > = z.pipe(
   z.object({
+    checkout: z.optional(CheckoutParams$outboundSchema),
     couponParams: z.optional(SubModifyCouponParams$outboundSchema),
     groupedInvoicingParams: z.optional(
       SubModifyGroupedInvoicingParams$outboundSchema,

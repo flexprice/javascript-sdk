@@ -20,6 +20,15 @@ export type GetCostAnalyticsRequest = {
    */
   featureIds?: Array<string> | undefined;
   /**
+   * IncludeChildren, when true and ExternalCustomerID belongs to a parent
+   *
+   * @remarks
+   * customer, aggregates every inherited-child customer's usage into the
+   * revenue and cost totals. Default (false) restricts the query to the
+   * customer's own usage — mirrors the meter-usage analytics contract.
+   */
+  includeChildren?: boolean | undefined;
+  /**
    * Pagination
    */
   limit?: number | undefined;
@@ -36,6 +45,7 @@ export type GetCostAnalyticsRequest$Outbound = {
   expand?: Array<string> | undefined;
   external_customer_id?: string | undefined;
   feature_ids?: Array<string> | undefined;
+  include_children?: boolean | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
   start_time?: string | undefined;
@@ -51,6 +61,7 @@ export const GetCostAnalyticsRequest$outboundSchema: z.ZodMiniType<
     expand: z.optional(z.array(z.string())),
     externalCustomerId: z.optional(z.string()),
     featureIds: z.optional(z.array(z.string())),
+    includeChildren: z.optional(z.boolean()),
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -60,6 +71,7 @@ export const GetCostAnalyticsRequest$outboundSchema: z.ZodMiniType<
       endTime: "end_time",
       externalCustomerId: "external_customer_id",
       featureIds: "feature_ids",
+      includeChildren: "include_children",
       startTime: "start_time",
     });
   }),

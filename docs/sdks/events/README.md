@@ -8,10 +8,10 @@
 * [getUsageAnalytics](#getusageanalytics) - Get usage analytics
 * [ingestEventsBulk](#ingesteventsbulk) - Bulk ingest events
 * [getHuggingfaceInferenceData](#gethuggingfaceinferencedata) - Get Hugging Face inference data
+* [getEvent](#getevent) - Get event
 * [listRawEvents](#listrawevents) - List raw events
 * [getUsageStatistics](#getusagestatistics) - Get usage statistics
 * [getUsageByMeter](#getusagebymeter) - Get usage by meter
-* [getEvent](#getevent) - Get event
 
 ## ingestEvent
 
@@ -254,7 +254,7 @@ run();
 
 ## getHuggingfaceInferenceData
 
-Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation).
+Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation). Reads the meter-usage pipeline.
 
 ### Example Usage
 
@@ -267,7 +267,12 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.events.getHuggingfaceInferenceData();
+  const result = await flexprice.events.getHuggingfaceInferenceData({
+    requestIds: [
+      "<value 1>",
+      "<value 2>",
+    ],
+  });
 
   console.log(result);
 }
@@ -290,7 +295,12 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await eventsGetHuggingfaceInferenceData(flexprice);
+  const res = await eventsGetHuggingfaceInferenceData(flexprice, {
+    requestIds: [
+      "<value 1>",
+      "<value 2>",
+    ],
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -306,6 +316,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [models.GetHuggingFaceBillingDataRequest](../../sdk/models/get-hugging-face-billing-data-request.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -318,6 +329,77 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getEvent
+
+Use when debugging a specific event (e.g. why it failed or how it was aggregated). Reads the meter-usage pipeline; includes processing status and step-by-step debug tracker when unprocessed. Uses ?id= query param because event IDs can contain "/".
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getEvent" method="get" path="/events/lookup" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.events.getEvent("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { eventsGetEvent } from "@flexprice/sdk/funcs/events-get-event.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await eventsGetEvent(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("eventsGetEvent failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Event ID                                                                                                                                                                       |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.GetEventByIDResponse](../../sdk/models/get-event-by-id-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 404                        | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
@@ -573,76 +655,5 @@ run();
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models.ErrorsErrorResponse | 400, 404                   | application/json           |
-| models.ErrorsErrorResponse | 500                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## getEvent
-
-Use when debugging a specific event (e.g. why it failed or how it was aggregated). Includes processing status and debug info.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="getEvent" method="get" path="/events/{id}" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.events.getEvent("<id>");
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { eventsGetEvent } from "@flexprice/sdk/funcs/events-get-event.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await eventsGetEvent(flexprice, "<id>");
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("eventsGetEvent failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Event ID                                                                                                                                                                       |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.GetEventByIDResponse](../../sdk/models/get-event-by-id-response.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 404                        | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |

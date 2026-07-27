@@ -44,6 +44,10 @@ export type CreateCustomerRequest = {
    */
   addressState?: string | undefined;
   /**
+   * contact is an optional contact number for the customer (e.g. phone)
+   */
+  contact?: string | undefined;
+  /**
    * email is the customer's email address and must be a valid email format if provided
    */
   email?: string | undefined;
@@ -65,6 +69,10 @@ export type CreateCustomerRequest = {
    * name is the full name or company name of the customer
    */
   name: string;
+  /**
+   * onboarding_workflow_name is given if a custom onboarding workflow is to be triggered for this customer
+   */
+  onboardingWorkflowName?: string | undefined;
   /**
    * skip_onboarding_workflow when true, prevents the customer onboarding workflow from being triggered
    *
@@ -94,6 +102,7 @@ export type CreateCustomerRequest$Outbound = {
   address_line2?: string | undefined;
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
+  contact?: string | undefined;
   email?: string | undefined;
   external_id: string;
   integration_entity_mapping?:
@@ -101,6 +110,7 @@ export type CreateCustomerRequest$Outbound = {
     | undefined;
   metadata?: { [k: string]: string } | undefined;
   name: string;
+  onboarding_workflow_name?: string | undefined;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   timezone?: string | undefined;
@@ -118,6 +128,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressLine2: z.optional(z.string()),
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
+    contact: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.string(),
     integrationEntityMapping: z.optional(
@@ -125,6 +136,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.string(),
+    onboardingWorkflowName: z.optional(z.string()),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     timezone: z.optional(z.string()),
@@ -139,6 +151,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressState: "address_state",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
+      onboardingWorkflowName: "onboarding_workflow_name",
       skipOnboardingWorkflow: "skip_onboarding_workflow",
       taxRateOverrides: "tax_rate_overrides",
     });

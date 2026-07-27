@@ -39,6 +39,10 @@ export type EntitlementFilter = {
    * Specific filters for entitlements
    */
   filters?: Array<FilterCondition> | undefined;
+  /**
+   * HasGrantConfig filters on grant-config presence (grant_quota set or not).
+   */
+  hasGrantConfig?: boolean | undefined;
   isEnabled?: boolean | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
@@ -63,6 +67,7 @@ export type EntitlementFilter$Outbound = {
   feature_ids?: Array<string> | undefined;
   feature_type?: string | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
+  has_grant_config?: boolean | undefined;
   is_enabled?: boolean | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
@@ -86,6 +91,7 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
     featureIds: z.optional(z.array(z.string())),
     featureType: z.optional(FeatureType$outboundSchema),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
+    hasGrantConfig: z.optional(z.boolean()),
     isEnabled: z.optional(z.boolean()),
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
@@ -102,6 +108,7 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
       entityType: "entity_type",
       featureIds: "feature_ids",
       featureType: "feature_type",
+      hasGrantConfig: "has_grant_config",
       isEnabled: "is_enabled",
       planIds: "plan_ids",
       startTime: "start_time",

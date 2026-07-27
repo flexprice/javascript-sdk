@@ -46,6 +46,21 @@ let value: SubscriptionModifyResponse = {
                 },
               },
             ],
+            entitlements: [
+              {
+                feature: {
+                  meter: {
+                    createdAt: new Date("2024-03-20T15:04:05Z"),
+                    eventName: "api_request",
+                    id: "550e8400-e29b-41d4-a716-446655440000",
+                    name: "API Usage Meter",
+                    status: "published",
+                    tenantId: "tenant123",
+                    updatedAt: new Date("2024-03-20T15:04:05Z"),
+                  },
+                },
+              },
+            ],
             latestInvoice: {
               subscription: {
                 couponAssociations: [
@@ -79,6 +94,21 @@ let value: SubscriptionModifyResponse = {
                           updatedAt: new Date("2024-03-20T15:04:05Z"),
                         },
                         plan: {},
+                      },
+                    },
+                  },
+                ],
+                entitlements: [
+                  {
+                    feature: {
+                      meter: {
+                        createdAt: new Date("2024-03-20T15:04:05Z"),
+                        eventName: "api_request",
+                        id: "550e8400-e29b-41d4-a716-446655440000",
+                        name: "API Usage Meter",
+                        status: "published",
+                        tenantId: "tenant123",
+                        updatedAt: new Date("2024-03-20T15:04:05Z"),
                       },
                     },
                   },
@@ -128,6 +158,21 @@ let value: SubscriptionModifyResponse = {
         },
       },
     ],
+    entitlements: [
+      {
+        feature: {
+          meter: {
+            createdAt: new Date("2024-03-20T15:04:05Z"),
+            eventName: "api_request",
+            id: "550e8400-e29b-41d4-a716-446655440000",
+            name: "API Usage Meter",
+            status: "published",
+            tenantId: "tenant123",
+            updatedAt: new Date("2024-03-20T15:04:05Z"),
+          },
+        },
+      },
+    ],
     latestInvoice: {
       subscription: {
         couponAssociations: [
@@ -165,6 +210,21 @@ let value: SubscriptionModifyResponse = {
             },
           },
         ],
+        entitlements: [
+          {
+            feature: {
+              meter: {
+                createdAt: new Date("2024-03-20T15:04:05Z"),
+                eventName: "api_request",
+                id: "550e8400-e29b-41d4-a716-446655440000",
+                name: "API Usage Meter",
+                status: "published",
+                tenantId: "tenant123",
+                updatedAt: new Date("2024-03-20T15:04:05Z"),
+              },
+            },
+          },
+        ],
         plan: {},
       },
     },
@@ -175,7 +235,8 @@ let value: SubscriptionModifyResponse = {
 
 ## Fields
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `changedResources`                                                       | [models.ChangedResources](../../sdk/models/changed-resources.md)         | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `subscription`                                                           | [models.SubscriptionResponse](../../sdk/models/subscription-response.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `changedResources`                                                              | [models.ChangedResources](../../sdk/models/changed-resources.md)                | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `checkoutSession`                                                               | [models.CheckoutSessionResponse](../../sdk/models/checkout-session-response.md) | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `subscription`                                                                  | [models.SubscriptionResponse](../../sdk/models/subscription-response.md)        | :heavy_minus_sign:                                                              | N/A                                                                             |

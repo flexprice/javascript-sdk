@@ -3,15 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const CollectionMethod = {
   ChargeAutomatically: "charge_automatically",
   SendInvoice: "send_invoice",
 } as const;
-export type CollectionMethod = ClosedEnum<typeof CollectionMethod>;
+export type CollectionMethod = OpenEnum<typeof CollectionMethod>;
 
 /** @internal */
-export const CollectionMethod$outboundSchema: z.ZodMiniEnum<
-  typeof CollectionMethod
-> = z.enum(CollectionMethod);
+export const CollectionMethod$inboundSchema: z.ZodMiniType<
+  CollectionMethod,
+  unknown
+> = openEnums.inboundSchema(CollectionMethod);
+/** @internal */
+export const CollectionMethod$outboundSchema: z.ZodMiniType<
+  string,
+  CollectionMethod
+> = openEnums.outboundSchema(CollectionMethod);

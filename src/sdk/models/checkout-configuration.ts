@@ -9,14 +9,21 @@ import {
   CreateSubscriptionParams$Outbound,
   CreateSubscriptionParams$outboundSchema,
 } from "./create-subscription-params.js";
+import {
+  ModifySubscriptionParams,
+  ModifySubscriptionParams$Outbound,
+  ModifySubscriptionParams$outboundSchema,
+} from "./modify-subscription-params.js";
 
 export type CheckoutConfiguration = {
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
+  modifySubscriptionParams?: ModifySubscriptionParams | undefined;
 };
 
 /** @internal */
 export type CheckoutConfiguration$Outbound = {
   create_subscription_params?: CreateSubscriptionParams$Outbound | undefined;
+  modify_subscription_params?: ModifySubscriptionParams$Outbound | undefined;
 };
 
 /** @internal */
@@ -28,10 +35,14 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
     createSubscriptionParams: z.optional(
       CreateSubscriptionParams$outboundSchema,
     ),
+    modifySubscriptionParams: z.optional(
+      ModifySubscriptionParams$outboundSchema,
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       createSubscriptionParams: "create_subscription_params",
+      modifySubscriptionParams: "modify_subscription_params",
     });
   }),
 );

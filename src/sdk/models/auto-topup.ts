@@ -6,19 +6,71 @@ import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  DurationUnit,
+  DurationUnit$inboundSchema,
+  DurationUnit$outboundSchema,
+} from "./duration-unit.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+
+export type AutoTopupDuration = {
+  unit?: DurationUnit | undefined;
+  value?: number | undefined;
+};
 
 export type AutoTopup = {
   amount?: number | undefined;
+  cooldown?: AutoTopupDuration | undefined;
   enabled?: boolean | undefined;
   invoicing?: boolean | undefined;
   threshold?: number | undefined;
 };
 
 /** @internal */
+export const AutoTopupDuration$inboundSchema: z.ZodMiniType<
+  AutoTopupDuration,
+  unknown
+> = z.object({
+  unit: types.optional(DurationUnit$inboundSchema),
+  value: types.optional(types.number()),
+});
+/** @internal */
+export type AutoTopupDuration$Outbound = {
+  unit?: string | undefined;
+  value?: number | undefined;
+};
+
+/** @internal */
+export const AutoTopupDuration$outboundSchema: z.ZodMiniType<
+  AutoTopupDuration$Outbound,
+  AutoTopupDuration
+> = z.object({
+  unit: z.optional(DurationUnit$outboundSchema),
+  value: z.optional(z.int()),
+});
+
+export function autoTopupDurationToJSON(
+  autoTopupDuration: AutoTopupDuration,
+): string {
+  return JSON.stringify(
+    AutoTopupDuration$outboundSchema.parse(autoTopupDuration),
+  );
+}
+export function autoTopupDurationFromJSON(
+  jsonString: string,
+): SafeParseResult<AutoTopupDuration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AutoTopupDuration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AutoTopupDuration' from JSON`,
+  );
+}
+
+/** @internal */
 export const AutoTopup$inboundSchema: z.ZodMiniType<AutoTopup, unknown> = z
   .object({
     amount: types.optional(types.number()),
+    cooldown: types.optional(z.lazy(() => AutoTopupDuration$inboundSchema)),
     enabled: types.optional(types.boolean()),
     invoicing: types.optional(types.boolean()),
     threshold: types.optional(types.number()),
@@ -26,6 +78,7 @@ export const AutoTopup$inboundSchema: z.ZodMiniType<AutoTopup, unknown> = z
 /** @internal */
 export type AutoTopup$Outbound = {
   amount?: number | undefined;
+  cooldown?: AutoTopupDuration$Outbound | undefined;
   enabled?: boolean | undefined;
   invoicing?: boolean | undefined;
   threshold?: number | undefined;
@@ -37,6 +90,7 @@ export const AutoTopup$outboundSchema: z.ZodMiniType<
   AutoTopup
 > = z.object({
   amount: z.optional(z.number()),
+  cooldown: z.optional(z.lazy(() => AutoTopupDuration$outboundSchema)),
   enabled: z.optional(z.boolean()),
   invoicing: z.optional(z.boolean()),
   threshold: z.optional(z.number()),

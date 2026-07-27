@@ -10,9 +10,10 @@ let value: AutoTopup = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `amount`           | *number*           | :heavy_minus_sign: | N/A                |
-| `enabled`          | *boolean*          | :heavy_minus_sign: | N/A                |
-| `invoicing`        | *boolean*          | :heavy_minus_sign: | N/A                |
-| `threshold`        | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                               | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `amount`                                                            | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `cooldown`                                                          | [models.AutoTopupDuration](../../sdk/models/auto-topup-duration.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `enabled`                                                           | *boolean*                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `invoicing`                                                         | *boolean*                                                           | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `threshold`                                                         | *number*                                                            | :heavy_minus_sign:                                                  | N/A                                                                 |

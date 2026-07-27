@@ -8,7 +8,7 @@ import { CreateAlertSettingsRequest } from "@flexprice/sdk/sdk/models";
 let value: CreateAlertSettingsRequest = {
   config: {},
   entityId: "<id>",
-  entityType: "subscription_line_item",
+  entityType: "group",
 };
 ```
 

@@ -70,13 +70,32 @@ export class Events extends ClientSDK {
    * Get Hugging Face inference data
    *
    * @remarks
-   * Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation).
+   * Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation). Reads the meter-usage pipeline.
    */
   async getHuggingfaceInferenceData(
+    request: models.GetHuggingFaceBillingDataRequest,
     options?: RequestOptions,
   ): Promise<models.GetHuggingFaceBillingDataResponse> {
     return unwrapAsync(eventsGetHuggingfaceInferenceData(
       this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get event
+   *
+   * @remarks
+   * Use when debugging a specific event (e.g. why it failed or how it was aggregated). Reads the meter-usage pipeline; includes processing status and step-by-step debug tracker when unprocessed. Uses ?id= query param because event IDs can contain "/".
+   */
+  async getEvent(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.GetEventByIDResponse> {
+    return unwrapAsync(eventsGetEvent(
+      this,
+      id,
       options,
     ));
   }
@@ -128,23 +147,6 @@ export class Events extends ClientSDK {
     return unwrapAsync(eventsGetUsageByMeter(
       this,
       request,
-      options,
-    ));
-  }
-
-  /**
-   * Get event
-   *
-   * @remarks
-   * Use when debugging a specific event (e.g. why it failed or how it was aggregated). Includes processing status and debug info.
-   */
-  async getEvent(
-    id: string,
-    options?: RequestOptions,
-  ): Promise<models.GetEventByIDResponse> {
-    return unwrapAsync(eventsGetEvent(
-      this,
-      id,
       options,
     ));
   }

@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AggregatedFeature,
+  AggregatedFeature$inboundSchema,
+} from "./aggregated-feature.js";
+import {
   BillingCadence,
   BillingCadence$inboundSchema,
 } from "./billing-cadence.js";
@@ -156,6 +160,14 @@ export type SubscriptionResponse = {
    */
   endDate?: Date | undefined;
   /**
+   * Entitlements is populated only when the caller adds "entitlements" to
+   *
+   * @remarks
+   * the search filter's expand string. Each entry is a feature with its
+   * aggregated entitlement info (same shape as CustomerEntitlementsResponse.Features).
+   */
+  entitlements?: Array<AggregatedFeature> | undefined;
+  /**
    * EnvironmentID is the environment identifier for the subscription
    */
   environmentId?: string | undefined;
@@ -271,6 +283,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     customer_id: types.optional(types.string()),
     enable_true_up: types.optional(types.boolean()),
     end_date: types.optional(types.date()),
+    entitlements: types.optional(z.array(AggregatedFeature$inboundSchema)),
     environment_id: types.optional(types.string()),
     gateway_payment_method_id: types.optional(types.string()),
     id: types.optional(types.string()),

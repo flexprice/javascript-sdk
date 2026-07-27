@@ -112,7 +112,14 @@ export type SubscriptionFilter = {
    */
   trialEndDueLte?: Date | undefined;
   /**
-   * WithLineItems includes line items in the response
+   * WithLineItems includes line items in the response.
+   *
+   * @remarks
+   *
+   * Deprecated: use expand="subscription_line_items" instead. Retained for
+   * backwards compatibility and for internal callers that need to force-disable
+   * line item loading (set to false). The service layer ORs this with the
+   * expand check before invoking the repository.
    */
   withLineItems?: boolean | undefined;
 };

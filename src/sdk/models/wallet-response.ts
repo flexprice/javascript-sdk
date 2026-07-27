@@ -49,6 +49,8 @@ export type WalletResponse = {
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
+  realTimeBalance?: string | undefined;
+  realTimeCreditBalance?: string | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   /**
@@ -89,6 +91,8 @@ export const WalletResponse$inboundSchema: z.ZodMiniType<
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
+    real_time_balance: types.optional(types.string()),
+    real_time_credit_balance: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
     topup_conversion_rate: types.optional(types.string()),
@@ -109,6 +113,8 @@ export const WalletResponse$inboundSchema: z.ZodMiniType<
       "credits_available_breakdown": "creditsAvailableBreakdown",
       "customer_id": "customerId",
       "environment_id": "environmentId",
+      "real_time_balance": "realTimeBalance",
+      "real_time_credit_balance": "realTimeCreditBalance",
       "tenant_id": "tenantId",
       "topup_conversion_rate": "topupConversionRate",
       "updated_at": "updatedAt",

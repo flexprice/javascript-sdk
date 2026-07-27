@@ -22,6 +22,14 @@ export type TopUpWalletRequest = {
    */
   amount?: string | undefined;
   /**
+   * bonus_credits_expiry_date_utc is the expiry (UTC, full precision) applied to the bonus
+   *
+   * @remarks
+   * credits transaction. Independent of expiry_date_utc, which governs the purchase credits.
+   * Only honored when bonus credits are actually granted (explicit BonusCreditsToAdd or slab).
+   */
+  bonusCreditsExpiryDateUtc?: string | undefined;
+  /**
    * bonus_credits_to_add is an explicit override for the bonus credits granted alongside this
    *
    * @remarks
@@ -45,6 +53,7 @@ export type TopUpWalletRequest = {
    * ex 2025-01-01 00:00:00 UTC
    */
   expiryDateUtc?: string | undefined;
+  forceSyncInvoice?: boolean | undefined;
   /**
    * idempotency_key is a unique key for the transaction
    */
@@ -64,10 +73,12 @@ export type TopUpWalletRequest = {
 /** @internal */
 export type TopUpWalletRequest$Outbound = {
   amount?: string | undefined;
+  bonus_credits_expiry_date_utc?: string | undefined;
   bonus_credits_to_add?: string | undefined;
   credits_to_add?: string | undefined;
   description?: string | undefined;
   expiry_date_utc?: string | undefined;
+  force_sync_invoice?: boolean | undefined;
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
@@ -81,10 +92,12 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: z.optional(z.string()),
+    bonusCreditsExpiryDateUtc: z.optional(z.string()),
     bonusCreditsToAdd: z.optional(z.string()),
     creditsToAdd: z.optional(z.string()),
     description: z.optional(z.string()),
     expiryDateUtc: z.optional(z.string()),
+    forceSyncInvoice: z.optional(z.boolean()),
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     priority: z.optional(z.int()),
@@ -92,9 +105,11 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      bonusCreditsExpiryDateUtc: "bonus_credits_expiry_date_utc",
       bonusCreditsToAdd: "bonus_credits_to_add",
       creditsToAdd: "credits_to_add",
       expiryDateUtc: "expiry_date_utc",
+      forceSyncInvoice: "force_sync_invoice",
       idempotencyKey: "idempotency_key",
       transactionReason: "transaction_reason",
     });

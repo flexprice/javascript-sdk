@@ -18,6 +18,10 @@ export type GetInvoiceRequest = {
    * Group usage breakdown by specified fields (e.g., source, feature_id, properties.org_id)
    */
   groupBy?: Array<string> | undefined;
+  /**
+   * Comma-separated related fields to include. Supports 'tax_applied.tax_rate' to attach rate details to each applied tax.
+   */
+  expand?: string | undefined;
 };
 
 /** @internal */
@@ -25,6 +29,7 @@ export type GetInvoiceRequest$Outbound = {
   id: string;
   expand_by_source?: boolean | undefined;
   group_by?: Array<string> | undefined;
+  expand?: string | undefined;
 };
 
 /** @internal */
@@ -36,6 +41,7 @@ export const GetInvoiceRequest$outboundSchema: z.ZodMiniType<
     id: z.string(),
     expandBySource: z.optional(z.boolean()),
     groupBy: z.optional(z.array(z.string())),
+    expand: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -41,6 +41,21 @@ let value: SubscriptionResponse = {
       },
     },
   ],
+  entitlements: [
+    {
+      feature: {
+        meter: {
+          createdAt: new Date("2024-03-20T15:04:05Z"),
+          eventName: "api_request",
+          id: "550e8400-e29b-41d4-a716-446655440000",
+          name: "API Usage Meter",
+          status: "published",
+          tenantId: "tenant123",
+          updatedAt: new Date("2024-03-20T15:04:05Z"),
+        },
+      },
+    },
+  ],
   latestInvoice: {
     subscription: {
       couponAssociations: [
@@ -74,6 +89,21 @@ let value: SubscriptionResponse = {
                 updatedAt: new Date("2024-03-20T15:04:05Z"),
               },
               plan: {},
+            },
+          },
+        },
+      ],
+      entitlements: [
+        {
+          feature: {
+            meter: {
+              createdAt: new Date("2024-03-20T15:04:05Z"),
+              eventName: "api_request",
+              id: "550e8400-e29b-41d4-a716-446655440000",
+              name: "API Usage Meter",
+              status: "published",
+              tenantId: "tenant123",
+              updatedAt: new Date("2024-03-20T15:04:05Z"),
             },
           },
         },
@@ -113,6 +143,7 @@ let value: SubscriptionResponse = {
 | `customerId`                                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | CustomerID is the identifier for the customer in our system                                                                                                                                                                                       |
 | `enableTrueUp`                                                                                                                                                                                                                                    | *boolean*                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                | N/A                                                                                                                                                                                                                                               |
 | `endDate`                                                                                                                                                                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                | EndDate is the end date of the subscription                                                                                                                                                                                                       |
+| `entitlements`                                                                                                                                                                                                                                    | [models.AggregatedFeature](../../sdk/models/aggregated-feature.md)[]                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                | Entitlements is populated only when the caller adds "entitlements" to<br/>the search filter's expand string. Each entry is a feature with its<br/>aggregated entitlement info (same shape as CustomerEntitlementsResponse.Features).              |
 | `environmentId`                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | EnvironmentID is the environment identifier for the subscription                                                                                                                                                                                  |
 | `gatewayPaymentMethodId`                                                                                                                                                                                                                          | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | GatewayPaymentMethodID is the gateway payment method ID for this subscription                                                                                                                                                                     |
 | `id`                                                                                                                                                                                                                                              | *string*                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                | ID is the unique identifier for the subscription                                                                                                                                                                                                  |

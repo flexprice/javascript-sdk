@@ -14,6 +14,11 @@ import {
   CheckoutConfiguration$outboundSchema,
 } from "./checkout-configuration.js";
 import {
+  CheckoutPaymentProviderConfig,
+  CheckoutPaymentProviderConfig$Outbound,
+  CheckoutPaymentProviderConfig$outboundSchema,
+} from "./checkout-payment-provider-config.js";
+import {
   CheckoutPaymentProvider,
   CheckoutPaymentProvider$outboundSchema,
 } from "./checkout-payment-provider.js";
@@ -27,6 +32,7 @@ export type CreateCheckoutSessionRequest = {
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   paymentProvider: CheckoutPaymentProvider;
+  paymentProviderConfig?: CheckoutPaymentProviderConfig | undefined;
   successUrl?: string | undefined;
 };
 
@@ -40,6 +46,7 @@ export type CreateCheckoutSessionRequest$Outbound = {
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   payment_provider: string;
+  payment_provider_config?: CheckoutPaymentProviderConfig$Outbound | undefined;
   success_url?: string | undefined;
 };
 
@@ -57,6 +64,9 @@ export const CreateCheckoutSessionRequest$outboundSchema: z.ZodMiniType<
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     paymentProvider: CheckoutPaymentProvider$outboundSchema,
+    paymentProviderConfig: z.optional(
+      CheckoutPaymentProviderConfig$outboundSchema,
+    ),
     successUrl: z.optional(z.string()),
   }),
   z.transform((v) => {
@@ -66,6 +76,7 @@ export const CreateCheckoutSessionRequest$outboundSchema: z.ZodMiniType<
       failureUrl: "failure_url",
       idempotencyKey: "idempotency_key",
       paymentProvider: "payment_provider",
+      paymentProviderConfig: "payment_provider_config",
       successUrl: "success_url",
     });
   }),

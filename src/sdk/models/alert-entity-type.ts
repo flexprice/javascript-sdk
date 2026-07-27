@@ -12,6 +12,7 @@ export const AlertEntityType = {
   Subscription: "subscription",
   SubscriptionLineItem: "subscription_line_item",
   Group: "group",
+  EntitlementGrant: "entitlement_grant",
 } as const;
 export type AlertEntityType = OpenEnum<typeof AlertEntityType>;
 

@@ -14,14 +14,14 @@ export type LineItemQuantityChange = {
    */
   effectiveDate?: Date | undefined;
   id: string;
-  quantity: string;
+  quantity?: string | undefined;
 };
 
 /** @internal */
 export type LineItemQuantityChange$Outbound = {
   effective_date?: string | undefined;
   id: string;
-  quantity: string;
+  quantity?: string | undefined;
 };
 
 /** @internal */
@@ -34,7 +34,7 @@ export const LineItemQuantityChange$outboundSchema: z.ZodMiniType<
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
     id: z.string(),
-    quantity: z.string(),
+    quantity: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {

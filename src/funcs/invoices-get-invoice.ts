@@ -37,6 +37,7 @@ export function invoicesGetInvoice(
   id: string,
   expandBySource?: boolean | undefined,
   groupBy?: Array<string> | undefined,
+  expand?: string | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,6 +58,7 @@ export function invoicesGetInvoice(
     id,
     expandBySource,
     groupBy,
+    expand,
     options,
   ));
 }
@@ -66,6 +68,7 @@ async function $do(
   id: string,
   expandBySource?: boolean | undefined,
   groupBy?: Array<string> | undefined,
+  expand?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -88,6 +91,7 @@ async function $do(
     id: id,
     expandBySource: expandBySource,
     groupBy: groupBy,
+    expand: expand,
   };
 
   const parsed = safeParse(
@@ -114,6 +118,7 @@ async function $do(
       "group_by": payload.group_by,
     }, { explode: false }),
     encodeFormQuery({
+      "expand": payload.expand,
       "expand_by_source": payload.expand_by_source,
     }),
   );

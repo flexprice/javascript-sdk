@@ -39,6 +39,10 @@ export type UpdateCustomerRequest = {
    */
   addressState?: string | undefined;
   /**
+   * contact is the updated contact number for the customer (e.g. phone)
+   */
+  contact?: string | undefined;
+  /**
    * email is the updated email address and must be a valid email format if provided
    */
   email?: string | undefined;
@@ -74,6 +78,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_line2?: string | undefined;
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
+  contact?: string | undefined;
   email?: string | undefined;
   external_id?: string | undefined;
   integration_entity_mapping?:
@@ -96,6 +101,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressLine2: z.optional(z.string()),
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
+    contact: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.optional(z.string()),
     integrationEntityMapping: z.optional(

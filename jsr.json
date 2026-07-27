@@ -2,7 +2,7 @@
 
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.21",
+  "version": "2.1.22",
   "exports": {
     ".": "./src/index.ts",    
     "./sdk/models": "./src/sdk/models/index.ts",

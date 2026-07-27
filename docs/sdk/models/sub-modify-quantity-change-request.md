@@ -9,7 +9,6 @@ let value: SubModifyQuantityChangeRequest = {
   lineItems: [
     {
       id: "<id>",
-      quantity: "<value>",
     },
   ],
 };

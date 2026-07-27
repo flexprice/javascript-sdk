@@ -78,6 +78,15 @@ export type CreateInvoiceRequest = {
    */
   dueDate?: Date | undefined;
   /**
+   * force_sync_invoice, when true, attempts to synchronously sync this invoice to
+   *
+   * @remarks
+   * Moyasar (if enabled) before returning, instead of relying solely on the async
+   * Kafka + Temporal vendor-sync pipeline. Only honored by CreateOneOffInvoice.
+   * Best-effort: sync failures do not fail invoice creation.
+   */
+  forceSyncInvoice?: boolean | undefined;
+  /**
    * idempotency_key is an optional key used to prevent duplicate invoice creation
    */
   idempotencyKey?: string | undefined;
@@ -161,6 +170,7 @@ export type CreateInvoiceRequest$Outbound = {
   customer_id: string;
   description?: string | undefined;
   due_date?: string | undefined;
+  force_sync_invoice?: boolean | undefined;
   idempotency_key?: string | undefined;
   invoice_coupons?: Array<InvoiceCoupon$Outbound> | undefined;
   invoice_number?: string | undefined;
@@ -198,6 +208,7 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
     customerId: z.string(),
     description: z.optional(z.string()),
     dueDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    forceSyncInvoice: z.optional(z.boolean()),
     idempotencyKey: z.optional(z.string()),
     invoiceCoupons: z.optional(z.array(InvoiceCoupon$outboundSchema)),
     invoiceNumber: z.optional(z.string()),
@@ -229,6 +240,7 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
       billingReason: "billing_reason",
       customerId: "customer_id",
       dueDate: "due_date",
+      forceSyncInvoice: "force_sync_invoice",
       idempotencyKey: "idempotency_key",
       invoiceCoupons: "invoice_coupons",
       invoiceNumber: "invoice_number",
