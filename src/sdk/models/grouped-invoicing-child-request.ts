@@ -4,16 +4,125 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  AddAddonToSubscriptionRequest,
+  AddAddonToSubscriptionRequest$Outbound,
+  AddAddonToSubscriptionRequest$outboundSchema,
+} from "./add-addon-to-subscription-request.js";
+import {
+  BillingPeriod,
+  BillingPeriod$outboundSchema,
+} from "./billing-period.js";
+import {
+  CreateCreditGrantRequest,
+  CreateCreditGrantRequest$Outbound,
+  CreateCreditGrantRequest$outboundSchema,
+} from "./create-credit-grant-request.js";
+import {
+  CreateSubscriptionLineItemRequest,
+  CreateSubscriptionLineItemRequest$Outbound,
+  CreateSubscriptionLineItemRequest$outboundSchema,
+} from "./create-subscription-line-item-request.js";
+import {
+  LineItemCommitmentConfig,
+  LineItemCommitmentConfig$Outbound,
+  LineItemCommitmentConfig$outboundSchema,
+} from "./line-item-commitment-config.js";
+import {
+  OverrideEntitlementRequest,
+  OverrideEntitlementRequest$Outbound,
+  OverrideEntitlementRequest$outboundSchema,
+} from "./override-entitlement-request.js";
+import {
+  OverrideLineItemRequest,
+  OverrideLineItemRequest$Outbound,
+  OverrideLineItemRequest$outboundSchema,
+} from "./override-line-item-request.js";
+import {
+  SubscriptionCouponInput,
+  SubscriptionCouponInput$Outbound,
+  SubscriptionCouponInput$outboundSchema,
+} from "./subscription-coupon-input.js";
+import {
+  SubscriptionPhaseCreateRequest,
+  SubscriptionPhaseCreateRequest$Outbound,
+  SubscriptionPhaseCreateRequest$outboundSchema,
+} from "./subscription-phase-create-request.js";
+import {
+  TaxRateOverride,
+  TaxRateOverride$Outbound,
+  TaxRateOverride$outboundSchema,
+} from "./tax-rate-override.js";
 
 export type GroupedInvoicingChildRequest = {
+  addons?: Array<AddAddonToSubscriptionRequest> | undefined;
+  commitmentAmount?: string | undefined;
+  commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Deprecated: use SubscriptionCoupons instead.
+   */
+  coupons?: Array<string> | undefined;
+  creditGrants?: Array<CreateCreditGrantRequest> | undefined;
+  enableTrueUp?: boolean | undefined;
   externalCustomerId: string;
+  /**
+   * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
+   */
+  lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
+  /**
+   * Deprecated: use SubscriptionCoupons instead.
+   */
+  lineItemCoupons?: { [k: string]: Array<string> } | undefined;
+  /**
+   * LineItems are extra (non-plan) line items added at creation.
+   */
+  lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
+  overageFactor?: string | undefined;
+  overrideEntitlements?: Array<OverrideEntitlementRequest> | undefined;
+  /**
+   * OverrideLineItems overrides specific plan prices for this subscription.
+   */
+  overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
+  phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
+  /**
+   * SubscriptionCoupons is the preferred way to attach coupons at creation.
+   *
+   * @remarks
+   * Accepts coupon_code; optionally targets a line item via price_id.
+   */
+  subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
+  taxRateOverrides?: Array<TaxRateOverride> | undefined;
+  /**
+   * TrialPeriodDays: nil = inherit from plan prices, 0 = no trial, >0 = override in days.
+   */
+  trialPeriodDays?: number | undefined;
 };
 
 /** @internal */
 export type GroupedInvoicingChildRequest$Outbound = {
+  addons?: Array<AddAddonToSubscriptionRequest$Outbound> | undefined;
+  commitment_amount?: string | undefined;
+  commitment_duration?: string | undefined;
+  coupons?: Array<string> | undefined;
+  credit_grants?: Array<CreateCreditGrantRequest$Outbound> | undefined;
+  enable_true_up?: boolean | undefined;
   external_customer_id: string;
+  line_item_commitments?:
+    | { [k: string]: LineItemCommitmentConfig$Outbound }
+    | undefined;
+  line_item_coupons?: { [k: string]: Array<string> } | undefined;
+  line_items?: Array<CreateSubscriptionLineItemRequest$Outbound> | undefined;
+  overage_factor?: string | undefined;
+  override_entitlements?:
+    | Array<OverrideEntitlementRequest$Outbound>
+    | undefined;
+  override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
+  phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
+  subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
+  tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
+  trial_period_days?: number | undefined;
 };
 
 /** @internal */
@@ -22,13 +131,52 @@ export const GroupedInvoicingChildRequest$outboundSchema: z.ZodMiniType<
   GroupedInvoicingChildRequest
 > = z.pipe(
   z.object({
+    addons: z.optional(z.array(AddAddonToSubscriptionRequest$outboundSchema)),
+    commitmentAmount: z.optional(z.string()),
+    commitmentDuration: z.optional(BillingPeriod$outboundSchema),
+    coupons: z.optional(z.array(z.string())),
+    creditGrants: z.optional(z.array(CreateCreditGrantRequest$outboundSchema)),
+    enableTrueUp: z.optional(z.boolean()),
     externalCustomerId: z.string(),
+    lineItemCommitments: z.optional(
+      z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
+    ),
+    lineItemCoupons: z.optional(z.record(z.string(), z.array(z.string()))),
+    lineItems: z.optional(
+      z.array(CreateSubscriptionLineItemRequest$outboundSchema),
+    ),
+    overageFactor: z.optional(z.string()),
+    overrideEntitlements: z.optional(
+      z.array(OverrideEntitlementRequest$outboundSchema),
+    ),
+    overrideLineItems: z.optional(
+      z.array(OverrideLineItemRequest$outboundSchema),
+    ),
+    phases: z.optional(z.array(SubscriptionPhaseCreateRequest$outboundSchema)),
     planId: z.string(),
+    subscriptionCoupons: z.optional(
+      z.array(SubscriptionCouponInput$outboundSchema),
+    ),
+    taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
+    trialPeriodDays: z.optional(z.int()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      commitmentAmount: "commitment_amount",
+      commitmentDuration: "commitment_duration",
+      creditGrants: "credit_grants",
+      enableTrueUp: "enable_true_up",
       externalCustomerId: "external_customer_id",
+      lineItemCommitments: "line_item_commitments",
+      lineItemCoupons: "line_item_coupons",
+      lineItems: "line_items",
+      overageFactor: "overage_factor",
+      overrideEntitlements: "override_entitlements",
+      overrideLineItems: "override_line_items",
       planId: "plan_id",
+      subscriptionCoupons: "subscription_coupons",
+      taxRateOverrides: "tax_rate_overrides",
+      trialPeriodDays: "trial_period_days",
     });
   }),
 );

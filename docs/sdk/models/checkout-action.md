@@ -13,5 +13,5 @@ let value: CheckoutAction = "modify_subscription";
 ## Values
 
 ```typescript
-"create_subscription" | "modify_subscription" | Unrecognized<string>
+"create_subscription" | "modify_subscription" | "wallet_topup" | Unrecognized<string>
 ```

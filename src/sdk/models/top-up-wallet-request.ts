@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  CheckoutParams,
+  CheckoutParams$Outbound,
+  CheckoutParams$outboundSchema,
+} from "./checkout-params.js";
+import {
   TransactionReason,
   TransactionReason$outboundSchema,
 } from "./transaction-reason.js";
@@ -38,6 +43,7 @@ export type TopUpWalletRequest = {
    * used as-is, skipping slab resolution. To grant no bonus, omit this field entirely.
    */
   bonusCreditsToAdd?: string | undefined;
+  checkout?: CheckoutParams | undefined;
   /**
    * credits_to_add is the number of credits to add to the wallet
    */
@@ -75,6 +81,7 @@ export type TopUpWalletRequest$Outbound = {
   amount?: string | undefined;
   bonus_credits_expiry_date_utc?: string | undefined;
   bonus_credits_to_add?: string | undefined;
+  checkout?: CheckoutParams$Outbound | undefined;
   credits_to_add?: string | undefined;
   description?: string | undefined;
   expiry_date_utc?: string | undefined;
@@ -94,6 +101,7 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
     amount: z.optional(z.string()),
     bonusCreditsExpiryDateUtc: z.optional(z.string()),
     bonusCreditsToAdd: z.optional(z.string()),
+    checkout: z.optional(CheckoutParams$outboundSchema),
     creditsToAdd: z.optional(z.string()),
     description: z.optional(z.string()),
     expiryDateUtc: z.optional(z.string()),

@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.22",
+  "version": "2.1.23",
   "author": "FlexPrice",
   "engines": {
     "node": ">=18"
@@ -37,7 +37,7 @@
   "type": "module",
   "main": "./esm/index.js",
   "scripts": {
-    "lint": "oxlint --max-warnings=0 --deny-warnings src/**/*.ts src/**/*.tsx",
+    "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },

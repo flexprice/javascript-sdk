@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const CheckoutAction = {
   CreateSubscription: "create_subscription",
   ModifySubscription: "modify_subscription",
+  WalletTopup: "wallet_topup",
 } as const;
 export type CheckoutAction = OpenEnum<typeof CheckoutAction>;
 

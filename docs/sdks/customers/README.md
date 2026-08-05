@@ -8,6 +8,7 @@
 * [createCustomer](#createcustomer) - Create customer
 * [getCustomerByExternalId](#getcustomerbyexternalid) - Get customer by external ID
 * [getCustomerEntitlementsByExternalID](#getcustomerentitlementsbyexternalid) - Get customer entitlements by external ID
+* [getSubscriptionsForCustomer](#getsubscriptionsforcustomer) - Get subscriptions for customer by external ID
 * [queryCustomer](#querycustomer) - Query customers
 * [getCustomerUsageSummary](#getcustomerusagesummary) - Get customer usage summary
 * [getCustomer](#getcustomer) - Get customer
@@ -298,6 +299,78 @@ run();
 ### Response
 
 **Promise\<[models.CustomerEntitlementsResponse](../../sdk/models/customer-entitlements-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## getSubscriptionsForCustomer
+
+Returns all subscriptions for a customer looked up by external_id, with line-item meters and entitlements attached (no pagination).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getSubscriptionsForCustomer" method="get" path="/customers/external/{external_id}/subscriptions" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.customers.getSubscriptionsForCustomer("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { customersGetSubscriptionsForCustomer } from "@flexprice/sdk/funcs/customers-get-subscriptions-for-customer.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await customersGetSubscriptionsForCustomer(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersGetSubscriptionsForCustomer failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `externalId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Customer External ID                                                                                                                                                           |
+| `expand`                                                                                                                                                                       | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Comma-separated fields to expand: subscription_line_items, subscription_line_items.meters, entitlements, plan, customer                                                        |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.ListSubscriptionsResponse](../../sdk/models/list-subscriptions-response.md)\>**
 
 ### Errors
 

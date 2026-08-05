@@ -6,21 +6,9 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type SubscriptionCouponInput = {
-  /**
-   * CouponCode is the coupon's human-readable code (case-insensitive). Required.
-   */
   couponCode: string;
-  /**
-   * EndDate is when the coupon ends; overrides duration_in_periods calculation.
-   */
   endDate?: Date | undefined;
-  /**
-   * PriceID is the price ID of the line item to target; omit for subscription-level.
-   */
   priceId?: string | undefined;
-  /**
-   * StartDate is when the coupon starts; defaults to subscription/phase StartDate.
-   */
   startDate?: Date | undefined;
 };
 

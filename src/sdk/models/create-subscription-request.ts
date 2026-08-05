@@ -78,70 +78,44 @@ import {
 } from "./tax-rate-override.js";
 
 export type CreateSubscriptionRequest = {
-  /**
-   * Addons represents addons to be added to the subscription during creation
-   */
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
   /**
-   * AutoInvoiceThreshold is the usage amount (in subscription currency) that triggers
+   * AutoInvoiceThreshold triggers a mid-period invoice when usage (in subscription currency) exceeds this amount.
    *
    * @remarks
-   * an intermediate invoice mid-period. Set once at creation; cannot be changed later.
-   * Allowed only when the subscription resolves to type standalone (no parent hierarchy rows).
-   * Plan line items must be usage-based only (no fixed or other non-usage plan prices).
-   * Nil means auto invoice threshold billing is disabled for this subscription.
+   * Standalone subscriptions only; all plan prices must be usage-based. Immutable after creation.
    */
   autoInvoiceThreshold?: string | undefined;
   /**
-   * BillingAnchor overrides the derived billing anchor when billing_cycle is anniversary.
+   * BillingAnchor overrides the derived anchor for anniversary billing. For monthly billing,
    *
    * @remarks
-   * For monthly billing, the day-of-month (and time-of-day) define cycle boundaries: if start_date
-   * is before that day in the month, the first billing period ends on the next occurrence of that
-   * day in the same month (a shorter first period); subsequent periods follow the usual interval.
+   * the day-of-month defines cycle boundaries (shorter first period if start is before that day).
    */
   billingAnchor?: Date | undefined;
   billingCycle?: BillingCycle | undefined;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
   collectionMethod?: CollectionMethod | undefined;
-  /**
-   * CommitmentAmount is the minimum amount a customer commits to paying for a billing period
-   */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
    * Deprecated: use SubscriptionCoupons instead.
    */
   coupons?: Array<string> | undefined;
-  /**
-   * Credit grants to be applied when subscription is created
-   */
   creditGrants?: Array<CreateCreditGrantRequest> | undefined;
   currency: string;
   /**
-   * customer_id is the flexprice customer id
-   *
-   * @remarks
-   * and it is prioritized over external_customer_id in case both are provided.
+   * CustomerID takes priority over ExternalCustomerID when both are provided.
    */
   customerId?: string | undefined;
-  /**
-   * Enable Commitment True Up Fee
-   */
   enableTrueUp?: boolean | undefined;
   endDate?: Date | undefined;
-  /**
-   * external_customer_id is the customer id in your DB
-   *
-   * @remarks
-   * and must be same as what you provided as external_id while creating the customer in flexprice.
-   */
   externalCustomerId?: string | undefined;
   gatewayPaymentMethodId?: string | undefined;
   inheritance?: SubscriptionInheritanceConfig | undefined;
   /**
-   * LineItemCommitments allows setting commitment configuration per line item (keyed by price_id)
+   * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   /**
@@ -149,28 +123,19 @@ export type CreateSubscriptionRequest = {
    */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
   /**
-   * LineItems are extra line items to add at creation (each with price_id or price), in addition to plan prices
+   * LineItems are extra (non-plan) line items added at creation.
    */
   lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
-  /**
-   * OverageFactor is a multiplier applied to usage beyond the commitment amount
-   */
   overageFactor?: string | undefined;
-  /**
-   * OverrideEntitlements allows customizing specific entitlements for this subscription
-   */
   overrideEntitlements?: Array<OverrideEntitlementRequest> | undefined;
   /**
-   * OverrideLineItems allows customizing specific prices for this subscription
+   * OverrideLineItems overrides specific plan prices for this subscription.
    */
   overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   paymentBehavior?: PaymentBehavior | undefined;
   paymentTerms?: PaymentTerms | undefined;
-  /**
-   * Phases represents subscription phases to be created with the subscription
-   */
   phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
   prorationBehavior?: ProrationBehavior | undefined;
@@ -183,22 +148,10 @@ export type CreateSubscriptionRequest = {
    */
   subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
-  /**
-   * tax_rate_overrides is the tax rate overrides	to be applied to the subscription
-   */
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
-  /**
-   * Timezone of the customer.
-   *
-   * @remarks
-   * If not set, the default value is UTC.
-   */
   timezone?: string | undefined;
   /**
-   * TrialPeriodDays: nil = inherit trial length from plan recurring-fixed prices (must be uniform).
-   *
-   * @remarks
-   * 0 = explicitly no trial (overrides catalog). >0 = override duration in days.
+   * TrialPeriodDays: nil = inherit from plan prices, 0 = no trial, >0 = override in days.
    */
   trialPeriodDays?: number | undefined;
 };

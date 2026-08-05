@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  CheckoutSessionResponse,
+  CheckoutSessionResponse$inboundSchema,
+} from "./checkout-session-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WalletResponse,
@@ -18,6 +22,7 @@ import {
 } from "./wallet-transaction-response.js";
 
 export type TopUpWalletResponse = {
+  checkoutSession?: CheckoutSessionResponse | undefined;
   /**
    * Invoice ID if an invoice was created (only for PURCHASED_CREDIT_INVOICED)
    */
@@ -32,12 +37,14 @@ export const TopUpWalletResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
     invoice_id: types.optional(types.string()),
     wallet: types.optional(WalletResponse$inboundSchema),
     wallet_transaction: types.optional(WalletTransactionResponse$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "checkout_session": "checkoutSession",
       "invoice_id": "invoiceId",
       "wallet_transaction": "walletTransaction",
     });

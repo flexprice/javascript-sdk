@@ -12,37 +12,22 @@ import {
 
 export type SubscriptionInheritanceConfig = {
   /**
-   * ExternalCustomerIDsToInheritSubscription: child customer external IDs for which
-   *
-   * @remarks
-   * inherited skeleton subscriptions will be created. Only valid for parent behavior.
+   * ExternalCustomerIDsToInheritSubscription creates inherited skeleton subscriptions for child customers. Parent only.
    */
   externalCustomerIdsToInheritSubscription?: Array<string> | undefined;
-  /**
-   * grouped_invoicing_children_to_create creates new grouped_invoicing children under this parent
-   */
   groupedInvoicingChildrenToCreate?:
     | Array<GroupedInvoicingChildRequest>
     | undefined;
   /**
-   * InvoicingCustomerExternalID sets a different billing recipient (external ID).
-   *
-   * @remarks
-   * Required for delegated; rejected for inherited; optional for others.
+   * InvoicingCustomerExternalID routes invoices to a different customer. Required for delegated; rejected for inherited.
    */
   invoicingCustomerExternalId?: string | undefined;
   /**
-   * ParentSubscriptionID links this subscription to an existing parent.
-   *
-   * @remarks
-   * Required for inherited and grouped_invoicing; rejected for standalone, delegated, parent.
+   * ParentSubscriptionID links to an existing parent. Required for inherited/grouped_invoicing; rejected for standalone/delegated/parent.
    */
   parentSubscriptionId?: string | undefined;
   /**
-   * SubscriptionsIDsForGroupedInvoicing: existing standalone subscription IDs to convert to
-   *
-   * @remarks
-   * grouped_invoicing under this parent at creation time. Only valid for parent behavior.
+   * SubscriptionsIDsForGroupedInvoicing converts existing standalone subscriptions to grouped_invoicing under this parent. Parent only.
    */
   subscriptionsIdsForGroupedInvoicing?: Array<string> | undefined;
 };

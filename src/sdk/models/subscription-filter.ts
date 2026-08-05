@@ -112,6 +112,17 @@ export type SubscriptionFilter = {
    */
   trialEndDueLte?: Date | undefined;
   /**
+   * WithCouponAssociations eager-loads coupon associations and their coupons.
+   *
+   * @remarks
+   *
+   * Kept separate from WithLineItems because the coupon_associations table has no
+   * index leading with subscription_id, so Ent's edge load degrades to a full table
+   * scan. Only set it when the response actually surfaces the associations; the
+   * service layer back-fills it from expand="coupon_associations".
+   */
+  withCouponAssociations?: boolean | undefined;
+  /**
    * WithLineItems includes line items in the response.
    *
    * @remarks
@@ -154,6 +165,7 @@ export type SubscriptionFilter$Outbound = {
   subscription_status?: Array<string> | undefined;
   subscription_type?: Array<string> | undefined;
   trial_end_due_lte?: string | undefined;
+  with_coupon_associations?: boolean | undefined;
   with_line_items?: boolean | undefined;
 };
 
@@ -188,6 +200,7 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
     trialEndDueLte: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
+    withCouponAssociations: z.optional(z.boolean()),
     withLineItems: z.optional(z.boolean()),
   }),
   z.transform((v) => {
@@ -208,6 +221,7 @@ export const SubscriptionFilter$outboundSchema: z.ZodMiniType<
       subscriptionStatus: "subscription_status",
       subscriptionType: "subscription_type",
       trialEndDueLte: "trial_end_due_lte",
+      withCouponAssociations: "with_coupon_associations",
       withLineItems: "with_line_items",
     });
   }),

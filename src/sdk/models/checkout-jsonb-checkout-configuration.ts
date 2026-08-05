@@ -16,10 +16,15 @@ import {
   ModifySubscriptionParams$inboundSchema,
 } from "./modify-subscription-params.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WalletTopupParams,
+  WalletTopupParams$inboundSchema,
+} from "./wallet-topup-params.js";
 
 export type CheckoutJSONBCheckoutConfiguration = {
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
+  walletTopupParams?: WalletTopupParams | undefined;
 };
 
 /** @internal */
@@ -34,11 +39,13 @@ export const CheckoutJSONBCheckoutConfiguration$inboundSchema: z.ZodMiniType<
     modify_subscription_params: types.optional(
       ModifySubscriptionParams$inboundSchema,
     ),
+    wallet_topup_params: types.optional(WalletTopupParams$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "create_subscription_params": "createSubscriptionParams",
       "modify_subscription_params": "modifySubscriptionParams",
+      "wallet_topup_params": "walletTopupParams",
     });
   }),
 );

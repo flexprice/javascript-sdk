@@ -34,6 +34,10 @@ export type GetCostAnalyticsRequest = {
   limit?: number | undefined;
   offset?: number | undefined;
   /**
+   * Property filters to filter the events by the keys in `properties` field of the event
+   */
+  propertyFilters?: { [k: string]: Array<string> } | undefined;
+  /**
    * Time range fields (optional - defaults to last 7 days if not provided)
    */
   startTime?: Date | undefined;
@@ -48,6 +52,7 @@ export type GetCostAnalyticsRequest$Outbound = {
   include_children?: boolean | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
+  property_filters?: { [k: string]: Array<string> } | undefined;
   start_time?: string | undefined;
 };
 
@@ -64,6 +69,7 @@ export const GetCostAnalyticsRequest$outboundSchema: z.ZodMiniType<
     includeChildren: z.optional(z.boolean()),
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
+    propertyFilters: z.optional(z.record(z.string(), z.array(z.string()))),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
@@ -72,6 +78,7 @@ export const GetCostAnalyticsRequest$outboundSchema: z.ZodMiniType<
       externalCustomerId: "external_customer_id",
       featureIds: "feature_ids",
       includeChildren: "include_children",
+      propertyFilters: "property_filters",
       startTime: "start_time",
     });
   }),

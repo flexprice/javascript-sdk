@@ -11,6 +11,11 @@ import {
   LineItemCommitmentConfig$outboundSchema,
 } from "./line-item-commitment-config.js";
 import {
+  OverrideLineItemRequest,
+  OverrideLineItemRequest$Outbound,
+  OverrideLineItemRequest$outboundSchema,
+} from "./override-line-item-request.js";
+import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
@@ -23,6 +28,10 @@ export type AddAddonToSubscriptionRequest = {
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   metadata?: { [k: string]: any } | undefined;
+  /**
+   * OverrideLineItems allows overriding price/quantity/billing model for specific addon prices
+   */
+  overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
 };
@@ -35,6 +44,7 @@ export type AddAddonToSubscriptionRequest$Outbound = {
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
   metadata?: { [k: string]: any } | undefined;
+  override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
   proration_behavior?: string | undefined;
   start_date?: string | undefined;
 };
@@ -51,6 +61,9 @@ export const AddAddonToSubscriptionRequest$outboundSchema: z.ZodMiniType<
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),
     metadata: z.optional(z.record(z.string(), z.any())),
+    overrideLineItems: z.optional(
+      z.array(OverrideLineItemRequest$outboundSchema),
+    ),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
@@ -58,6 +71,7 @@ export const AddAddonToSubscriptionRequest$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       addonId: "addon_id",
       lineItemCommitments: "line_item_commitments",
+      overrideLineItems: "override_line_items",
       prorationBehavior: "proration_behavior",
       startDate: "start_date",
     });

@@ -31,18 +31,12 @@ export type SubscriptionPhaseCreateRequest = {
    */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
   /**
-   * LineItems are extra line items to add during this phase, primarily one-time charges.
-   *
-   * @remarks
-   * Each item's start_date defaults to the phase's start_date when not provided.
+   * LineItems are extra (non-plan) line items for this phase; start_date defaults to phase start.
    */
   lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
   metadata?: { [k: string]: string } | undefined;
   /**
-   * OverrideLineItems allows customizing specific prices for this phase
-   *
-   * @remarks
-   * If not provided, phase will use the same line items as the subscription (plan prices)
+   * OverrideLineItems overrides specific plan prices for this phase.
    */
   overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   startDate: Date;

@@ -14,16 +14,23 @@ import {
   ModifySubscriptionParams$Outbound,
   ModifySubscriptionParams$outboundSchema,
 } from "./modify-subscription-params.js";
+import {
+  WalletTopupParams,
+  WalletTopupParams$Outbound,
+  WalletTopupParams$outboundSchema,
+} from "./wallet-topup-params.js";
 
 export type CheckoutConfiguration = {
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
+  walletTopupParams?: WalletTopupParams | undefined;
 };
 
 /** @internal */
 export type CheckoutConfiguration$Outbound = {
   create_subscription_params?: CreateSubscriptionParams$Outbound | undefined;
   modify_subscription_params?: ModifySubscriptionParams$Outbound | undefined;
+  wallet_topup_params?: WalletTopupParams$Outbound | undefined;
 };
 
 /** @internal */
@@ -38,11 +45,13 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
     modifySubscriptionParams: z.optional(
       ModifySubscriptionParams$outboundSchema,
     ),
+    walletTopupParams: z.optional(WalletTopupParams$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       createSubscriptionParams: "create_subscription_params",
       modifySubscriptionParams: "modify_subscription_params",
+      walletTopupParams: "wallet_topup_params",
     });
   }),
 );

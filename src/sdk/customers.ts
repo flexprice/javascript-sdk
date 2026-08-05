@@ -10,6 +10,7 @@ import { customersGetCustomerEntitlements } from "../funcs/customers-get-custome
 import { customersGetCustomerUpcomingGrants } from "../funcs/customers-get-customer-upcoming-grants.js";
 import { customersGetCustomerUsageSummary } from "../funcs/customers-get-customer-usage-summary.js";
 import { customersGetCustomer } from "../funcs/customers-get-customer.js";
+import { customersGetSubscriptionsForCustomer } from "../funcs/customers-get-subscriptions-for-customer.js";
 import { customersQueryCustomer } from "../funcs/customers-query-customer.js";
 import { customersUpdateCustomer } from "../funcs/customers-update-customer.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -85,6 +86,25 @@ export class Customers extends ClientSDK {
     return unwrapAsync(customersGetCustomerEntitlementsByExternalID(
       this,
       externalId,
+      options,
+    ));
+  }
+
+  /**
+   * Get subscriptions for customer by external ID
+   *
+   * @remarks
+   * Returns all subscriptions for a customer looked up by external_id, with line-item meters and entitlements attached (no pagination).
+   */
+  async getSubscriptionsForCustomer(
+    externalId: string,
+    expand?: string | undefined,
+    options?: RequestOptions,
+  ): Promise<models.ListSubscriptionsResponse> {
+    return unwrapAsync(customersGetSubscriptionsForCustomer(
+      this,
+      externalId,
+      expand,
       options,
     ));
   }

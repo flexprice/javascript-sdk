@@ -19,35 +19,24 @@ import {
 } from "./commitment-type.js";
 
 export type LineItemCommitmentConfig = {
-  /**
-   * CommitmentAmount is the minimum amount committed for this line item
-   */
   commitmentAmount?: number | undefined;
   commitmentDuration?: BillingPeriod | undefined;
-  /**
-   * CommitmentQuantity is the minimum quantity committed for this line item
-   */
   commitmentQuantity?: number | undefined;
   /**
-   * CommitmentTimeBuckets defines per-bucket commitment + inline price for
-   *
-   * @remarks
-   * windows whose start UTC hour falls within each configured bucket. Each
-   * bucket carries its own price (materialized by the service). Requires
-   * IsWindowCommitment=true.
+   * CommitmentTimeBuckets scopes commitment to specific UTC-hour windows; requires IsWindowCommitment=true.
    */
   commitmentTimeBuckets?: Array<CommitmentBucketRequest> | undefined;
   commitmentType?: CommitmentType | undefined;
   /**
-   * EnableTrueUp determines if true-up fee should be applied when usage is below commitment
+   * EnableTrueUp charges the shortfall when usage is below commitment.
    */
   enableTrueUp?: boolean | undefined;
   /**
-   * IsWindowCommitment determines if commitment is applied per window (e.g., per day) rather than per billing period
+   * IsWindowCommitment applies commitment per window (e.g. per day) rather than per billing period.
    */
   isWindowCommitment?: boolean | undefined;
   /**
-   * OverageFactor is a multiplier applied to usage beyond the commitment
+   * OverageFactor is a multiplier on usage beyond commitment; 1.0 = base rate.
    */
   overageFactor?: number | undefined;
 };
