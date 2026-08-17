@@ -6,6 +6,10 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateInvoiceRequest = {
+  /**
+   * When true, recalculates discount from existing coupon associations (draft invoices only).
+   */
+  applyDiscount?: boolean | undefined;
   dueDate?: Date | undefined;
   /**
    * invoice_pdf_url is the URL where customers can download the PDF version of this invoice
@@ -16,6 +20,7 @@ export type UpdateInvoiceRequest = {
 
 /** @internal */
 export type UpdateInvoiceRequest$Outbound = {
+  apply_discount?: boolean | undefined;
   due_date?: string | undefined;
   invoice_pdf_url?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -27,12 +32,14 @@ export const UpdateInvoiceRequest$outboundSchema: z.ZodMiniType<
   UpdateInvoiceRequest
 > = z.pipe(
   z.object({
+    applyDiscount: z.optional(z.boolean()),
     dueDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     invoicePdfUrl: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
+      applyDiscount: "apply_discount",
       dueDate: "due_date",
       invoicePdfUrl: "invoice_pdf_url",
     });

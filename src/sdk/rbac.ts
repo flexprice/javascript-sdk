@@ -6,6 +6,7 @@ import { rbacGetRBACRole } from "../funcs/rbac-get-rbac-role.js";
 import { rbacListRBACRoles } from "../funcs/rbac-list-rbac-roles.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
+import * as models from "./models/index.js";
 
 export class Rbac extends ClientSDK {
   /**
@@ -15,10 +16,12 @@ export class Rbac extends ClientSDK {
    * Use when building role pickers or permission UIs. Returns all roles with permissions and descriptions.
    */
   async listRbacRoles(
+    userType?: models.ListRbacRolesUserType | undefined,
     options?: RequestOptions,
   ): Promise<{ [k: string]: any }> {
     return unwrapAsync(rbacListRBACRoles(
       this,
+      userType,
       options,
     ));
   }

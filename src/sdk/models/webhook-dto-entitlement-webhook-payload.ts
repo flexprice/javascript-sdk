@@ -7,18 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  EntitlementResponse,
-  EntitlementResponse$inboundSchema,
-} from "./entitlement-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookDtoEntitlement,
+  WebhookDtoEntitlement$inboundSchema,
+} from "./webhook-dto-entitlement.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoEntitlementWebhookPayload = {
-  entitlement?: EntitlementResponse | undefined;
+  entitlement?: WebhookDtoEntitlement | undefined;
   eventType?: WebhookEventName | undefined;
 };
 
@@ -28,7 +28,7 @@ export const WebhookDtoEntitlementWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    entitlement: types.optional(EntitlementResponse$inboundSchema),
+    entitlement: types.optional(WebhookDtoEntitlement$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {

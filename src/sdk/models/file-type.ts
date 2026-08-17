@@ -15,6 +15,3 @@ export type FileType = OpenEnum<typeof FileType>;
 /** @internal */
 export const FileType$inboundSchema: z.ZodMiniType<FileType, unknown> =
   openEnums.inboundSchema(FileType);
-/** @internal */
-export const FileType$outboundSchema: z.ZodMiniType<string, FileType> =
-  openEnums.outboundSchema(FileType);

@@ -38,7 +38,7 @@ export function taxRatesGetTaxRates(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<models.TaxRateResponse>,
+    models.ListTaxRatesResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<models.TaxRateResponse>,
+      models.ListTaxRatesResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -165,7 +165,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    Array<models.TaxRateResponse>,
+    models.ListTaxRatesResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -176,7 +176,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(models.TaxRateResponse$inboundSchema)),
+    M.json(200, models.ListTaxRatesResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

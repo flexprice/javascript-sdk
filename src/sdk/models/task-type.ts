@@ -15,6 +15,3 @@ export type TaskType = OpenEnum<typeof TaskType>;
 /** @internal */
 export const TaskType$inboundSchema: z.ZodMiniType<TaskType, unknown> =
   openEnums.inboundSchema(TaskType);
-/** @internal */
-export const TaskType$outboundSchema: z.ZodMiniType<string, TaskType> =
-  openEnums.outboundSchema(TaskType);

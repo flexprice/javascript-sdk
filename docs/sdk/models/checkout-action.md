@@ -5,7 +5,7 @@
 ```typescript
 import { CheckoutAction } from "@flexprice/sdk/sdk/models";
 
-let value: CheckoutAction = "modify_subscription";
+let value: CheckoutAction = "wallet_topup";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: CheckoutAction = "modify_subscription";
 ## Values
 
 ```typescript
-"create_subscription" | "modify_subscription" | "wallet_topup" | Unrecognized<string>
+"create_subscription" | "modify_subscription" | "wallet_topup" | "add_addon" | Unrecognized<string>
 ```

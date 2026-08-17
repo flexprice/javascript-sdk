@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  AddAddonParams,
+  AddAddonParams$Outbound,
+  AddAddonParams$outboundSchema,
+} from "./add-addon-params.js";
+import {
   CreateSubscriptionParams,
   CreateSubscriptionParams$Outbound,
   CreateSubscriptionParams$outboundSchema,
@@ -21,6 +26,7 @@ import {
 } from "./wallet-topup-params.js";
 
 export type CheckoutConfiguration = {
+  addAddonParams?: AddAddonParams | undefined;
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
   walletTopupParams?: WalletTopupParams | undefined;
@@ -28,6 +34,7 @@ export type CheckoutConfiguration = {
 
 /** @internal */
 export type CheckoutConfiguration$Outbound = {
+  add_addon_params?: AddAddonParams$Outbound | undefined;
   create_subscription_params?: CreateSubscriptionParams$Outbound | undefined;
   modify_subscription_params?: ModifySubscriptionParams$Outbound | undefined;
   wallet_topup_params?: WalletTopupParams$Outbound | undefined;
@@ -39,6 +46,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
   CheckoutConfiguration
 > = z.pipe(
   z.object({
+    addAddonParams: z.optional(AddAddonParams$outboundSchema),
     createSubscriptionParams: z.optional(
       CreateSubscriptionParams$outboundSchema,
     ),
@@ -49,6 +57,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      addAddonParams: "add_addon_params",
       createSubscriptionParams: "create_subscription_params",
       modifySubscriptionParams: "modify_subscription_params",
       walletTopupParams: "wallet_topup_params",

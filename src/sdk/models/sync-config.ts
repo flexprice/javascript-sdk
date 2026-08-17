@@ -33,6 +33,7 @@ export type SyncConfig = {
   invoiceSyncSettings?: InvoiceSyncSettings | undefined;
   payment?: EntitySyncConfig | undefined;
   plan?: EntitySyncConfig | undefined;
+  price?: EntitySyncConfig | undefined;
   quote?: EntitySyncConfig | undefined;
   s3?: S3ExportConfig | undefined;
   subscription?: EntitySyncConfig | undefined;
@@ -49,6 +50,7 @@ export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
       invoice_sync_settings: types.optional(InvoiceSyncSettings$inboundSchema),
       payment: types.optional(EntitySyncConfig$inboundSchema),
       plan: types.optional(EntitySyncConfig$inboundSchema),
+      price: types.optional(EntitySyncConfig$inboundSchema),
       quote: types.optional(EntitySyncConfig$inboundSchema),
       s3: types.optional(S3ExportConfig$inboundSchema),
       subscription: types.optional(EntitySyncConfig$inboundSchema),

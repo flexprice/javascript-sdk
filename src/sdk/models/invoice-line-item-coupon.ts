@@ -12,6 +12,7 @@ export type InvoiceLineItemCoupon = {
    * price_id used to match the line item
    */
   lineItemId: string;
+  subscriptionLineItemId?: string | undefined;
 };
 
 /** @internal */
@@ -19,6 +20,7 @@ export type InvoiceLineItemCoupon$Outbound = {
   coupon_association_id?: string | undefined;
   coupon_id: string;
   line_item_id: string;
+  subscription_line_item_id?: string | undefined;
 };
 
 /** @internal */
@@ -30,12 +32,14 @@ export const InvoiceLineItemCoupon$outboundSchema: z.ZodMiniType<
     couponAssociationId: z.optional(z.string()),
     couponId: z.string(),
     lineItemId: z.string(),
+    subscriptionLineItemId: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       couponAssociationId: "coupon_association_id",
       couponId: "coupon_id",
       lineItemId: "line_item_id",
+      subscriptionLineItemId: "subscription_line_item_id",
     });
   }),
 );

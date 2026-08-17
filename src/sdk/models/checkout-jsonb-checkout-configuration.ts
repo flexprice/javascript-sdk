@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AddAddonParams,
+  AddAddonParams$inboundSchema,
+} from "./add-addon-params.js";
+import {
   CreateSubscriptionParams,
   CreateSubscriptionParams$inboundSchema,
 } from "./create-subscription-params.js";
@@ -22,6 +26,7 @@ import {
 } from "./wallet-topup-params.js";
 
 export type CheckoutJSONBCheckoutConfiguration = {
+  addAddonParams?: AddAddonParams | undefined;
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
   walletTopupParams?: WalletTopupParams | undefined;
@@ -33,6 +38,7 @@ export const CheckoutJSONBCheckoutConfiguration$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    add_addon_params: types.optional(AddAddonParams$inboundSchema),
     create_subscription_params: types.optional(
       CreateSubscriptionParams$inboundSchema,
     ),
@@ -43,6 +49,7 @@ export const CheckoutJSONBCheckoutConfiguration$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "add_addon_params": "addAddonParams",
       "create_subscription_params": "createSubscriptionParams",
       "modify_subscription_params": "modifySubscriptionParams",
       "wallet_topup_params": "walletTopupParams",

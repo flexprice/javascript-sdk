@@ -30,7 +30,10 @@ import { Result } from "../types/fp.js";
  * Add addon to subscription
  *
  * @remarks
+ * Deprecated: use POST /subscriptions/{id}/modify/execute with type "addon" and action "add", which also supports previewing the proration charge first.
  * Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function subscriptionsAddSubscriptionAddon(
   client: FlexpriceCore,
@@ -38,7 +41,7 @@ export function subscriptionsAddSubscriptionAddon(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.AddonAssociationResponse,
+    models.AddAddonToSubscriptionResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -64,7 +67,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      models.AddonAssociationResponse,
+      models.AddAddonToSubscriptionResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -147,7 +150,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.AddonAssociationResponse,
+    models.AddAddonToSubscriptionResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -158,7 +161,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.AddonAssociationResponse$inboundSchema),
+    M.json(200, models.AddAddonToSubscriptionResponse$inboundSchema),
     M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

@@ -6,6 +6,11 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
+  CheckoutParams,
+  CheckoutParams$Outbound,
+  CheckoutParams$outboundSchema,
+} from "./checkout-params.js";
+import {
   LineItemCommitmentConfig,
   LineItemCommitmentConfig$Outbound,
   LineItemCommitmentConfig$outboundSchema,
@@ -23,6 +28,7 @@ import {
 export type AddAddonRequest = {
   addonId: string;
   cadence?: AddonCadence | undefined;
+  checkout?: CheckoutParams | undefined;
   /**
    * LineItemCommitments allows setting commitment configuration per addon line item (keyed by price_id)
    */
@@ -41,6 +47,7 @@ export type AddAddonRequest = {
 export type AddAddonRequest$Outbound = {
   addon_id: string;
   cadence?: string | undefined;
+  checkout?: CheckoutParams$Outbound | undefined;
   line_item_commitments?:
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
@@ -59,6 +66,7 @@ export const AddAddonRequest$outboundSchema: z.ZodMiniType<
   z.object({
     addonId: z.string(),
     cadence: z.optional(AddonCadence$outboundSchema),
+    checkout: z.optional(CheckoutParams$outboundSchema),
     lineItemCommitments: z.optional(
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),

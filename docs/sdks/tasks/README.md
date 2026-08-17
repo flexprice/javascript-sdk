@@ -5,7 +5,6 @@
 ### Available Operations
 
 * [listTasks](#listtasks) - List tasks
-* [createTask](#createtask) - Create a new task
 * [getTaskResult](#gettaskresult) - Get task processing result
 * [getTask](#gettask) - Get a task
 * [downloadTaskExport](#downloadtaskexport) - Download task export file
@@ -73,87 +72,6 @@ run();
 ### Response
 
 **Promise\<[models.ListTasksResponse](../../sdk/models/list-tasks-response.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 400                        | application/json           |
-| models.ErrorsErrorResponse | 500                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## createTask
-
-Use when submitting a file or job for async processing (e.g. export or import). Returns task ID to poll for status and result.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="createTask" method="post" path="/tasks" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.tasks.createTask({
-    entityType: "FEATURES",
-    fileType: "JSON",
-    fileUrl: "https://rural-typeface.org",
-    taskType: "IMPORT",
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { tasksCreateTask } from "@flexprice/sdk/funcs/tasks-create-task.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await tasksCreateTask(flexprice, {
-    entityType: "FEATURES",
-    fileType: "JSON",
-    fileUrl: "https://rural-typeface.org",
-    taskType: "IMPORT",
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("tasksCreateTask failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.CreateTaskRequest](../../sdk/models/create-task-request.md)                                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.TaskResponse](../../sdk/models/task-response.md)\>**
 
 ### Errors
 

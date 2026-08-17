@@ -5,11 +5,11 @@
 ```typescript
 import { SubscriptionModifyType } from "@flexprice/sdk/sdk/models";
 
-let value: SubscriptionModifyType = "tax";
+let value: SubscriptionModifyType = "addon";
 ```
 
 ## Values
 
 ```typescript
-"inheritance" | "quantity_change" | "grouped_invoicing" | "trial_end" | "coupon" | "tax"
+"inheritance" | "quantity_change" | "grouped_invoicing" | "trial_end" | "coupon" | "tax" | "addon"
 ```

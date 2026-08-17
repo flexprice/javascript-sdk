@@ -21,6 +21,10 @@ import {
   BillingPeriod$inboundSchema,
 } from "./billing-period.js";
 import {
+  CheckoutSessionResponse,
+  CheckoutSessionResponse$inboundSchema,
+} from "./checkout-session-response.js";
+import {
   CouponAssociationResponse,
   CouponAssociationResponse$inboundSchema,
 } from "./coupon-association-response.js";
@@ -109,6 +113,7 @@ export type SubscriptionResponse = {
    * CanceledAt is the date the subscription was canceled
    */
   cancelledAt?: Date | undefined;
+  checkoutSession?: CheckoutSessionResponse | undefined;
   /**
    * CollectionMethod determines how invoices are collected
    */
@@ -267,6 +272,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     cancel_at: types.optional(types.date()),
     cancel_at_period_end: types.optional(types.boolean()),
     cancelled_at: types.optional(types.date()),
+    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
     collection_method: types.optional(types.string()),
     commitment_amount: types.optional(types.string()),
     commitment_duration: types.optional(BillingPeriod$inboundSchema),
@@ -331,6 +337,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
       "cancel_at": "cancelAt",
       "cancel_at_period_end": "cancelAtPeriodEnd",
       "cancelled_at": "cancelledAt",
+      "checkout_session": "checkoutSession",
       "collection_method": "collectionMethod",
       "commitment_amount": "commitmentAmount",
       "commitment_duration": "commitmentDuration",

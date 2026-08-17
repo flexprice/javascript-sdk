@@ -10,6 +10,7 @@
 * [queryUser](#queryuser) - Query users
 * [updateServiceAccount](#updateserviceaccount) - Update service account
 * [deleteServiceAccount](#deleteserviceaccount) - Delete service account
+* [updateUserRoles](#updateuserroles) - Update user roles
 
 ## createUser
 
@@ -442,5 +443,77 @@ run();
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## updateUserRoles
+
+Update the roles of a user account (not service accounts — their roles are fixed at creation). Restricted to super_admin; a caller cannot update their own roles. Blocked with a 400 if the user has any active (published, unexpired) API key in any environment, since a key's permissions are snapshotted at creation time and would otherwise silently keep running on the old roles; the error lists the active keys grouped by environment ID so the caller can prompt to expire them first, then retry.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="updateUserRoles" method="put" path="/users/{id}/roles" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.users.updateUserRoles("<id>", {});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { usersUpdateUserRoles } from "@flexprice/sdk/funcs/users-update-user-roles.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await usersUpdateUserRoles(flexprice, "<id>", {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("usersUpdateUserRoles failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | User ID                                                                                                                                                                        |
+| `body`                                                                                                                                                                         | [models.UpdateUserRolesRequest](../../sdk/models/update-user-roles-request.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | Update user roles request                                                                                                                                                      |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.UpdateUserRolesResponse](../../sdk/models/update-user-roles-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 403, 404              | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |

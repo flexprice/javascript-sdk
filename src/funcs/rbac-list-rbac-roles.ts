@@ -4,9 +4,11 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -18,6 +20,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../sdk/models/http-client-errors.js";
+import * as models from "../sdk/models/index.js";
 import { ResponseValidationError } from "../sdk/models/response-validation-error.js";
 import { SDKValidationError } from "../sdk/models/sdk-validation-error.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -31,10 +34,12 @@ import { Result } from "../types/fp.js";
  */
 export function rbacListRBACRoles(
   client: FlexpriceCore,
+  userType?: models.ListRbacRolesUserType | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     { [k: string]: any },
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -47,17 +52,20 @@ export function rbacListRBACRoles(
 > {
   return new APIPromise($do(
     client,
+    userType,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
+  userType?: models.ListRbacRolesUserType | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       { [k: string]: any },
+      | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
       | ConnectionError
@@ -70,7 +78,27 @@ async function $do(
     APICall,
   ]
 > {
+  const input: models.ListRbacRolesRequest | undefined = {
+    userType: userType,
+  };
+
+  const parsed = safeParse(
+    input,
+    (value) =>
+      z.parse(z.optional(models.ListRbacRolesRequest$outboundSchema), value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return [parsed, { status: "invalid" }];
+  }
+  const payload = parsed.value;
+  const body = null;
+
   const path = pathToFunc("/rbac/roles")();
+
+  const query = encodeFormQuery({
+    "user_type": payload?.user_type,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -101,6 +129,8 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
+    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -121,8 +151,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     { [k: string]: any },
+    | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
     | ConnectionError
@@ -133,9 +168,11 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, z.record(z.string(), z.any())),
+    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
-    M.fail([500, "5XX"]),
-  )(response, req);
+    M.fail("5XX"),
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

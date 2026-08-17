@@ -7,6 +7,7 @@ import { usersDeleteServiceAccount } from "../funcs/users-delete-service-account
 import { usersGetUserInfo } from "../funcs/users-get-user-info.js";
 import { usersQueryUser } from "../funcs/users-query-user.js";
 import { usersUpdateServiceAccount } from "../funcs/users-update-service-account.js";
+import { usersUpdateUserRoles } from "../funcs/users-update-user-roles.js";
 import { usersUpdateUser } from "../funcs/users-update-user.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -111,6 +112,25 @@ export class Users extends ClientSDK {
     return unwrapAsync(usersDeleteServiceAccount(
       this,
       id,
+      options,
+    ));
+  }
+
+  /**
+   * Update user roles
+   *
+   * @remarks
+   * Update the roles of a user account (not service accounts — their roles are fixed at creation). Restricted to super_admin; a caller cannot update their own roles. Blocked with a 400 if the user has any active (published, unexpired) API key in any environment, since a key's permissions are snapshotted at creation time and would otherwise silently keep running on the old roles; the error lists the active keys grouped by environment ID so the caller can prompt to expire them first, then retry.
+   */
+  async updateUserRoles(
+    id: string,
+    body: models.UpdateUserRolesRequest,
+    options?: RequestOptions,
+  ): Promise<models.UpdateUserRolesResponse> {
+    return unwrapAsync(usersUpdateUserRoles(
+      this,
+      id,
+      body,
       options,
     ));
   }

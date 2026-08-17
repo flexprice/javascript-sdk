@@ -7,21 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  CustomerResponse,
-  CustomerResponse$inboundSchema,
-} from "./customer-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookDtoCustomer,
+  WebhookDtoCustomer$inboundSchema,
+} from "./webhook-dto-customer.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCustomerWebhookPayload = {
-  /**
-   * Customer response object containing all customer information
-   */
-  customer?: CustomerResponse | undefined;
+  customer?: WebhookDtoCustomer | undefined;
   eventType?: WebhookEventName | undefined;
 };
 
@@ -31,7 +28,7 @@ export const WebhookDtoCustomerWebhookPayload$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    customer: types.optional(CustomerResponse$inboundSchema),
+    customer: types.optional(WebhookDtoCustomer$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
   }),
   z.transform((v) => {

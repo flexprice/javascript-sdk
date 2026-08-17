@@ -15,6 +15,11 @@ import {
   BillingPeriod$outboundSchema,
 } from "./billing-period.js";
 import {
+  CheckoutParams,
+  CheckoutParams$Outbound,
+  CheckoutParams$outboundSchema,
+} from "./checkout-params.js";
+import {
   CollectionMethod,
   CollectionMethod$outboundSchema,
 } from "./collection-method.js";
@@ -96,6 +101,7 @@ export type CreateSubscriptionRequest = {
   billingCycle?: BillingCycle | undefined;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
+  checkout?: CheckoutParams | undefined;
   collectionMethod?: CollectionMethod | undefined;
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
@@ -164,6 +170,7 @@ export type CreateSubscriptionRequest$Outbound = {
   billing_cycle?: string | undefined;
   billing_period: string;
   billing_period_count?: number | undefined;
+  checkout?: CheckoutParams$Outbound | undefined;
   collection_method?: string | undefined;
   commitment_amount?: string | undefined;
   commitment_duration?: string | undefined;
@@ -215,6 +222,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     billingCycle: z.optional(BillingCycle$outboundSchema),
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
+    checkout: z.optional(CheckoutParams$outboundSchema),
     collectionMethod: z.optional(CollectionMethod$outboundSchema),
     commitmentAmount: z.optional(z.string()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),

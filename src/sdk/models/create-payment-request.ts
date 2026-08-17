@@ -9,6 +9,11 @@ import {
   PaymentDestinationType$outboundSchema,
 } from "./payment-destination-type.js";
 import {
+  PaymentGatewayOptions,
+  PaymentGatewayOptions$Outbound,
+  PaymentGatewayOptions$outboundSchema,
+} from "./payment-gateway-options.js";
+import {
   PaymentGatewayType,
   PaymentGatewayType$outboundSchema,
 } from "./payment-gateway-type.js";
@@ -23,6 +28,7 @@ export type CreatePaymentRequest = {
   currency: string;
   destinationId: string;
   destinationType: PaymentDestinationType;
+  gatewayOptions?: PaymentGatewayOptions | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   paymentGateway?: PaymentGatewayType | undefined;
@@ -40,6 +46,7 @@ export type CreatePaymentRequest$Outbound = {
   currency: string;
   destination_id: string;
   destination_type: string;
+  gateway_options?: PaymentGatewayOptions$Outbound | undefined;
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   payment_gateway?: string | undefined;
@@ -61,6 +68,7 @@ export const CreatePaymentRequest$outboundSchema: z.ZodMiniType<
     currency: z.string(),
     destinationId: z.string(),
     destinationType: PaymentDestinationType$outboundSchema,
+    gatewayOptions: z.optional(PaymentGatewayOptions$outboundSchema),
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     paymentGateway: z.optional(PaymentGatewayType$outboundSchema),
@@ -75,6 +83,7 @@ export const CreatePaymentRequest$outboundSchema: z.ZodMiniType<
       cancelUrl: "cancel_url",
       destinationId: "destination_id",
       destinationType: "destination_type",
+      gatewayOptions: "gateway_options",
       idempotencyKey: "idempotency_key",
       paymentGateway: "payment_gateway",
       paymentMethodId: "payment_method_id",

@@ -43,6 +43,7 @@ import { webhookEventsPostWebhookEventsSubscriptionPaused } from "../funcs/webho
 import { webhookEventsPostWebhookEventsSubscriptionPhaseCreated } from "../funcs/webhook-events-post-webhook-events-subscription-phase-created.js";
 import { webhookEventsPostWebhookEventsSubscriptionPhaseDeleted } from "../funcs/webhook-events-post-webhook-events-subscription-phase-deleted.js";
 import { webhookEventsPostWebhookEventsSubscriptionPhaseUpdated } from "../funcs/webhook-events-post-webhook-events-subscription-phase-updated.js";
+import { webhookEventsPostWebhookEventsSubscriptionPlanChanged } from "../funcs/webhook-events-post-webhook-events-subscription-plan-changed.js";
 import { webhookEventsPostWebhookEventsSubscriptionRenewalDue } from "../funcs/webhook-events-post-webhook-events-subscription-renewal-due.js";
 import { webhookEventsPostWebhookEventsSubscriptionResumed } from "../funcs/webhook-events-post-webhook-events-subscription-resumed.js";
 import { webhookEventsPostWebhookEventsSubscriptionSpendThresholdReached } from "../funcs/webhook-events-post-webhook-events-subscription-spend-threshold-reached.js";
@@ -683,6 +684,21 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoSubscriptionPhaseWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsSubscriptionPhaseUpdated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * subscription.plan_changed
+   *
+   * @remarks
+   * Fired when a subscription plan changes in place (id/anchor preserved; not cancelled+created). Doc-only for parsing.
+   */
+  async postWebhookEventsSubscriptionPlanChanged(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoSubscriptionWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsSubscriptionPlanChanged(
       this,
       options,
     ));

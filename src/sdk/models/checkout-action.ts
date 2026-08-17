@@ -10,6 +10,7 @@ export const CheckoutAction = {
   CreateSubscription: "create_subscription",
   ModifySubscription: "modify_subscription",
   WalletTopup: "wallet_topup",
+  AddAddon: "add_addon",
 } as const;
 export type CheckoutAction = OpenEnum<typeof CheckoutAction>;
 

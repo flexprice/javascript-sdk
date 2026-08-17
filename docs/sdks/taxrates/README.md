@@ -71,7 +71,7 @@ run();
 
 ### Response
 
-**Promise\<[models.TaxRateResponse[]](../../models/.md)\>**
+**Promise\<[models.ListTaxRatesResponse](../../sdk/models/list-tax-rates-response.md)\>**
 
 ### Errors
 

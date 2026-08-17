@@ -7,18 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  CheckoutSessionResponse,
-  CheckoutSessionResponse$inboundSchema,
-} from "./checkout-session-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookDtoCheckoutSession,
+  WebhookDtoCheckoutSession$inboundSchema,
+} from "./webhook-dto-checkout-session.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCheckoutSessionWebhookPayload = {
-  checkoutSession?: CheckoutSessionResponse | undefined;
+  checkoutSession?: WebhookDtoCheckoutSession | undefined;
   eventType?: WebhookEventName | undefined;
 };
 
@@ -26,7 +26,7 @@ export type WebhookDtoCheckoutSessionWebhookPayload = {
 export const WebhookDtoCheckoutSessionWebhookPayload$inboundSchema:
   z.ZodMiniType<WebhookDtoCheckoutSessionWebhookPayload, unknown> = z.pipe(
     z.object({
-      checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
+      checkout_session: types.optional(WebhookDtoCheckoutSession$inboundSchema),
       event_type: types.optional(WebhookEventName$inboundSchema),
     }),
     z.transform((v) => {

@@ -5,8 +5,8 @@
 ### Available Operations
 
 * [createSubscription](#createsubscription) - Create subscription
-* [addSubscriptionAddon](#addsubscriptionaddon) - Add addon to subscription
-* [removeSubscriptionAddon](#removesubscriptionaddon) - Remove addon from subscription
+* [~~addSubscriptionAddon~~](#addsubscriptionaddon) - Add addon to subscription :warning: **Deprecated**
+* [~~removeSubscriptionAddon~~](#removesubscriptionaddon) - Remove addon from subscription :warning: **Deprecated**
 * [querySubscriptionLineItems](#querysubscriptionlineitems) - Search subscription line items
 * [updateSubscriptionLineItem](#updatesubscriptionlineitem) - Update subscription line item
 * [deleteSubscriptionLineItem](#deletesubscriptionlineitem) - Delete subscription line item
@@ -19,6 +19,8 @@
 * [cancelSubscription](#cancelsubscription) - Cancel subscription
 * [executeSubscriptionChange](#executesubscriptionchange) - Execute subscription plan change
 * [previewSubscriptionChange](#previewsubscriptionchange) - Preview subscription plan change
+* [executeSubscriptionPlanChangeV2](#executesubscriptionplanchangev2) - Execute a plan change (v2, swap in place)
+* [previewSubscriptionPlanChangeV2](#previewsubscriptionplanchangev2) - Preview a plan change (v2, swap in place)
 * [getSubscriptionEntitlements](#getsubscriptionentitlements) - Get subscription entitlements
 * [getSubscriptionUpcomingGrants](#getsubscriptionupcominggrants) - Get upcoming credit grant applications
 * [createSubscriptionLineItem](#createsubscriptionlineitem) - Create subscription line item
@@ -109,9 +111,12 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## addSubscriptionAddon
+## ~~addSubscriptionAddon~~
 
+Deprecated: use POST /subscriptions/{id}/modify/execute with type "addon" and action "add", which also supports previewing the proration charge first.
 Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -176,7 +181,7 @@ run();
 
 ### Response
 
-**Promise\<[models.AddonAssociationResponse](../../sdk/models/addon-association-response.md)\>**
+**Promise\<[models.AddAddonToSubscriptionResponse](../../sdk/models/add-addon-to-subscription-response.md)\>**
 
 ### Errors
 
@@ -186,9 +191,12 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## removeSubscriptionAddon
+## ~~removeSubscriptionAddon~~
 
+Deprecated: use POST /subscriptions/{id}/modify/execute with type "addon" and action "remove", which also supports previewing the proration credit first.
 Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -1162,6 +1170,162 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## executeSubscriptionPlanChangeV2
+
+Change a subscription's plan in place. Subscription id, billing anchor and period bounds are preserved; line items are sliced and settled in one transaction.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="executeSubscriptionPlanChangeV2" method="post" path="/subscriptions/{id}/change/v2/execute" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.executeSubscriptionPlanChangeV2("<id>", {
+    prorationBehavior: "create_prorations",
+    targetPlanId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsExecuteSubscriptionPlanChangeV2 } from "@flexprice/sdk/funcs/subscriptions-execute-subscription-plan-change-v2.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsExecuteSubscriptionPlanChangeV2(flexprice, "<id>", {
+    prorationBehavior: "create_prorations",
+    targetPlanId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsExecuteSubscriptionPlanChangeV2 failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
+| `body`                                                                                                                                                                         | [models.SubscriptionChangeV2Request](../../sdk/models/subscription-change-v2-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Plan change request                                                                                                                                                            |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.SubscriptionChangeV2Response](../../sdk/models/subscription-change-v2-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## previewSubscriptionPlanChangeV2
+
+Preview a subscription plan change without writing. Swap-in-place: subscription id, billing anchor and period bounds are preserved.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="previewSubscriptionPlanChangeV2" method="post" path="/subscriptions/{id}/change/v2/preview" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.previewSubscriptionPlanChangeV2("<id>", {
+    prorationBehavior: "none",
+    targetPlanId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsPreviewSubscriptionPlanChangeV2 } from "@flexprice/sdk/funcs/subscriptions-preview-subscription-plan-change-v2.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsPreviewSubscriptionPlanChangeV2(flexprice, "<id>", {
+    prorationBehavior: "none",
+    targetPlanId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsPreviewSubscriptionPlanChangeV2 failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
+| `body`                                                                                                                                                                         | [models.SubscriptionChangeV2Request](../../sdk/models/subscription-change-v2-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Plan change request                                                                                                                                                            |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.SubscriptionChangeV2Response](../../sdk/models/subscription-change-v2-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
 ## getSubscriptionEntitlements
 
 Use when checking what features or limits a subscription has (e.g. entitlement checks or feature gating). Optional feature_ids to filter.
@@ -1379,7 +1543,7 @@ run();
 
 ## executeSubscriptionModify
 
-Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax).
+Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove).
 
 ### Example Usage
 
@@ -1455,7 +1619,7 @@ run();
 
 ## previewSubscriptionModify
 
-Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax) without committing changes.
+Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove) without committing changes.
 
 ### Example Usage
 
@@ -1469,7 +1633,7 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.subscriptions.previewSubscriptionModify("<id>", {
-    type: "coupon",
+    type: "tax",
   });
 
   console.log(result);
@@ -1494,7 +1658,7 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await subscriptionsPreviewSubscriptionModify(flexprice, "<id>", {
-    type: "coupon",
+    type: "tax",
   });
   if (res.ok) {
     const { value: result } = res;

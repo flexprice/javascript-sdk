@@ -22,6 +22,7 @@ export type CreateSubscriptionParams = {
   metadata?: { [k: string]: string } | undefined;
   planId?: string | undefined;
   startDate?: Date | undefined;
+  subscriptionId?: string | undefined;
 };
 
 /** @internal */
@@ -37,6 +38,7 @@ export const CreateSubscriptionParams$inboundSchema: z.ZodMiniType<
     metadata: types.optional(z.record(z.string(), types.string())),
     plan_id: types.optional(types.string()),
     start_date: types.optional(types.date()),
+    subscription_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -45,6 +47,7 @@ export const CreateSubscriptionParams$inboundSchema: z.ZodMiniType<
       "lookup_key": "lookupKey",
       "plan_id": "planId",
       "start_date": "startDate",
+      "subscription_id": "subscriptionId",
     });
   }),
 );
@@ -57,6 +60,7 @@ export type CreateSubscriptionParams$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   plan_id?: string | undefined;
   start_date?: string | undefined;
+  subscription_id?: string | undefined;
 };
 
 /** @internal */
@@ -72,6 +76,7 @@ export const CreateSubscriptionParams$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     planId: z.optional(z.string()),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionId: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -80,6 +85,7 @@ export const CreateSubscriptionParams$outboundSchema: z.ZodMiniType<
       lookupKey: "lookup_key",
       planId: "plan_id",
       startDate: "start_date",
+      subscriptionId: "subscription_id",
     });
   }),
 );

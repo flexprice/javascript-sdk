@@ -7,34 +7,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  AlertSettings,
-  AlertSettings$inboundSchema,
-} from "./alert-settings.js";
 import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
 import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
-import {
-  GroupResponse,
-  GroupResponse$inboundSchema,
-} from "./group-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
-  SubscriptionResponse,
-  SubscriptionResponse$inboundSchema,
-} from "./subscription-response.js";
-import {
-  SubscriptionSubscriptionLineItem,
-  SubscriptionSubscriptionLineItem$inboundSchema,
-} from "./subscription-subscription-line-item.js";
+  WebhookDtoSubscription,
+  WebhookDtoSubscription$inboundSchema,
+} from "./webhook-dto-subscription.js";
 
 export type WebhookDtoSpendAlertEvent = {
-  alertSettings?: AlertSettings | undefined;
   alertStatus?: AlertState | undefined;
   alertType?: AlertType | undefined;
   currentSpend?: string | undefined;
-  group?: GroupResponse | undefined;
-  subscription?: SubscriptionResponse | undefined;
-  subscriptionLineItem?: SubscriptionSubscriptionLineItem | undefined;
+  groupId?: string | undefined;
+  subscription?: WebhookDtoSubscription | undefined;
+  subscriptionLineItemId?: string | undefined;
+  threshold?: string | undefined;
   triggeredAt?: Date | undefined;
 };
 
@@ -44,24 +32,22 @@ export const WebhookDtoSpendAlertEvent$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    alert_settings: types.optional(AlertSettings$inboundSchema),
     alert_status: types.optional(AlertState$inboundSchema),
     alert_type: types.optional(AlertType$inboundSchema),
     current_spend: types.optional(types.string()),
-    group: types.optional(GroupResponse$inboundSchema),
-    subscription: types.optional(SubscriptionResponse$inboundSchema),
-    subscription_line_item: types.optional(
-      SubscriptionSubscriptionLineItem$inboundSchema,
-    ),
+    group_id: types.optional(types.string()),
+    subscription: types.optional(WebhookDtoSubscription$inboundSchema),
+    subscription_line_item_id: types.optional(types.string()),
+    threshold: types.optional(types.string()),
     triggered_at: types.optional(types.date()),
   }),
   z.transform((v) => {
     return remap$(v, {
-      "alert_settings": "alertSettings",
       "alert_status": "alertStatus",
       "alert_type": "alertType",
       "current_spend": "currentSpend",
-      "subscription_line_item": "subscriptionLineItem",
+      "group_id": "groupId",
+      "subscription_line_item_id": "subscriptionLineItemId",
       "triggered_at": "triggeredAt",
     });
   }),

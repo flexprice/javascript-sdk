@@ -9,19 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
 import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
-import {
-  CustomerResponse,
-  CustomerResponse$inboundSchema,
-} from "./customer-response.js";
-import {
-  FeatureResponse,
-  FeatureResponse$inboundSchema,
-} from "./feature-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import {
-  WalletResponse,
-  WalletResponse$inboundSchema,
-} from "./wallet-response.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -30,13 +18,12 @@ import {
 export type WebhookDtoAlertWebhookPayload = {
   alertStatus?: AlertState | undefined;
   alertType?: AlertType | undefined;
-  /**
-   * Customer response object containing all customer information
-   */
-  customer?: CustomerResponse | undefined;
+  creditBalance?: string | undefined;
+  currentBalance?: string | undefined;
+  customerId?: string | undefined;
   eventType?: WebhookEventName | undefined;
-  feature?: FeatureResponse | undefined;
-  wallet?: WalletResponse | undefined;
+  featureId?: string | undefined;
+  walletId?: string | undefined;
 };
 
 /** @internal */
@@ -47,16 +34,23 @@ export const WebhookDtoAlertWebhookPayload$inboundSchema: z.ZodMiniType<
   z.object({
     alert_status: types.optional(AlertState$inboundSchema),
     alert_type: types.optional(AlertType$inboundSchema),
-    customer: types.optional(CustomerResponse$inboundSchema),
+    credit_balance: types.optional(types.string()),
+    current_balance: types.optional(types.string()),
+    customer_id: types.optional(types.string()),
     event_type: types.optional(WebhookEventName$inboundSchema),
-    feature: types.optional(FeatureResponse$inboundSchema),
-    wallet: types.optional(WalletResponse$inboundSchema),
+    feature_id: types.optional(types.string()),
+    wallet_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       "alert_status": "alertStatus",
       "alert_type": "alertType",
+      "credit_balance": "creditBalance",
+      "current_balance": "currentBalance",
+      "customer_id": "customerId",
       "event_type": "eventType",
+      "feature_id": "featureId",
+      "wallet_id": "walletId",
     });
   }),
 );

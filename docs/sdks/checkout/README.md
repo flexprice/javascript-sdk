@@ -24,7 +24,7 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.checkout.createCheckoutSession({
-    action: "wallet_topup",
+    action: "add_addon",
     customerExternalId: "<id>",
     paymentProvider: "razorpay",
   });
@@ -51,7 +51,7 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await checkoutCreateCheckoutSession(flexprice, {
-    action: "wallet_topup",
+    action: "add_addon",
     customerExternalId: "<id>",
     paymentProvider: "razorpay",
   });

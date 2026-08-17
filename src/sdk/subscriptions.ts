@@ -11,6 +11,7 @@ import { subscriptionsCreateSubscription } from "../funcs/subscriptions-create-s
 import { subscriptionsDeleteSubscriptionLineItem } from "../funcs/subscriptions-delete-subscription-line-item.js";
 import { subscriptionsExecuteSubscriptionChange } from "../funcs/subscriptions-execute-subscription-change.js";
 import { subscriptionsExecuteSubscriptionModify } from "../funcs/subscriptions-execute-subscription-modify.js";
+import { subscriptionsExecuteSubscriptionPlanChangeV2 } from "../funcs/subscriptions-execute-subscription-plan-change-v2.js";
 import { subscriptionsGetSubscriptionAddonAssociations } from "../funcs/subscriptions-get-subscription-addon-associations.js";
 import { subscriptionsGetSubscriptionEntitlements } from "../funcs/subscriptions-get-subscription-entitlements.js";
 import { subscriptionsGetSubscriptionSchedule } from "../funcs/subscriptions-get-subscription-schedule.js";
@@ -22,6 +23,7 @@ import { subscriptionsListAllSubscriptionSchedules } from "../funcs/subscription
 import { subscriptionsListSubscriptionSchedules } from "../funcs/subscriptions-list-subscription-schedules.js";
 import { subscriptionsPreviewSubscriptionChange } from "../funcs/subscriptions-preview-subscription-change.js";
 import { subscriptionsPreviewSubscriptionModify } from "../funcs/subscriptions-preview-subscription-modify.js";
+import { subscriptionsPreviewSubscriptionPlanChangeV2 } from "../funcs/subscriptions-preview-subscription-plan-change-v2.js";
 import { subscriptionsQuerySubscriptionLineItems } from "../funcs/subscriptions-query-subscription-line-items.js";
 import { subscriptionsQuerySubscription } from "../funcs/subscriptions-query-subscription.js";
 import { subscriptionsRemoveSubscriptionAddon } from "../funcs/subscriptions-remove-subscription-addon.js";
@@ -53,12 +55,15 @@ export class Subscriptions extends ClientSDK {
    * Add addon to subscription
    *
    * @remarks
+   * Deprecated: use POST /subscriptions/{id}/modify/execute with type "addon" and action "add", which also supports previewing the proration charge first.
    * Use when adding an optional product or add-on to an existing subscription (e.g. extra storage or support tier).
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async addSubscriptionAddon(
     request: models.AddAddonRequest,
     options?: RequestOptions,
-  ): Promise<models.AddonAssociationResponse> {
+  ): Promise<models.AddAddonToSubscriptionResponse> {
     return unwrapAsync(subscriptionsAddSubscriptionAddon(
       this,
       request,
@@ -70,7 +75,10 @@ export class Subscriptions extends ClientSDK {
    * Remove addon from subscription
    *
    * @remarks
+   * Deprecated: use POST /subscriptions/{id}/modify/execute with type "addon" and action "remove", which also supports previewing the proration credit first.
    * Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async removeSubscriptionAddon(
     request: models.RemoveAddonRequest,
@@ -302,6 +310,44 @@ export class Subscriptions extends ClientSDK {
   }
 
   /**
+   * Execute a plan change (v2, swap in place)
+   *
+   * @remarks
+   * Change a subscription's plan in place. Subscription id, billing anchor and period bounds are preserved; line items are sliced and settled in one transaction.
+   */
+  async executeSubscriptionPlanChangeV2(
+    id: string,
+    body: models.SubscriptionChangeV2Request,
+    options?: RequestOptions,
+  ): Promise<models.SubscriptionChangeV2Response> {
+    return unwrapAsync(subscriptionsExecuteSubscriptionPlanChangeV2(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Preview a plan change (v2, swap in place)
+   *
+   * @remarks
+   * Preview a subscription plan change without writing. Swap-in-place: subscription id, billing anchor and period bounds are preserved.
+   */
+  async previewSubscriptionPlanChangeV2(
+    id: string,
+    body: models.SubscriptionChangeV2Request,
+    options?: RequestOptions,
+  ): Promise<models.SubscriptionChangeV2Response> {
+    return unwrapAsync(subscriptionsPreviewSubscriptionPlanChangeV2(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
    * Get subscription entitlements
    *
    * @remarks
@@ -360,7 +406,7 @@ export class Subscriptions extends ClientSDK {
    * Execute subscription modification
    *
    * @remarks
-   * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax).
+   * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove).
    */
   async executeSubscriptionModify(
     id: string,
@@ -379,7 +425,7 @@ export class Subscriptions extends ClientSDK {
    * Preview subscription modification
    *
    * @remarks
-   * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, or tax) without committing changes.
+   * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove) without committing changes.
    */
   async previewSubscriptionModify(
     id: string,

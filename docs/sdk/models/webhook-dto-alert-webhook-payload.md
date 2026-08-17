@@ -5,19 +5,7 @@
 ```typescript
 import { WebhookDtoAlertWebhookPayload } from "@flexprice/sdk/sdk/models";
 
-let value: WebhookDtoAlertWebhookPayload = {
-  feature: {
-    meter: {
-      createdAt: new Date("2024-03-20T15:04:05Z"),
-      eventName: "api_request",
-      id: "550e8400-e29b-41d4-a716-446655440000",
-      name: "API Usage Meter",
-      status: "published",
-      tenantId: "tenant123",
-      updatedAt: new Date("2024-03-20T15:04:05Z"),
-    },
-  },
-};
+let value: WebhookDtoAlertWebhookPayload = {};
 ```
 
 ## Fields
@@ -26,7 +14,9 @@ let value: WebhookDtoAlertWebhookPayload = {
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `alertStatus`                                                     | [models.AlertState](../../sdk/models/alert-state.md)              | :heavy_minus_sign:                                                | N/A                                                               |
 | `alertType`                                                       | [models.AlertType](../../sdk/models/alert-type.md)                | :heavy_minus_sign:                                                | N/A                                                               |
-| `customer`                                                        | [models.CustomerResponse](../../sdk/models/customer-response.md)  | :heavy_minus_sign:                                                | Customer response object containing all customer information      |
+| `creditBalance`                                                   | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |
+| `currentBalance`                                                  | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |
+| `customerId`                                                      | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |
 | `eventType`                                                       | [models.WebhookEventName](../../sdk/models/webhook-event-name.md) | :heavy_minus_sign:                                                | N/A                                                               |
-| `feature`                                                         | [models.FeatureResponse](../../sdk/models/feature-response.md)    | :heavy_minus_sign:                                                | N/A                                                               |
-| `wallet`                                                          | [models.WalletResponse](../../sdk/models/wallet-response.md)      | :heavy_minus_sign:                                                | N/A                                                               |
+| `featureId`                                                       | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |
+| `walletId`                                                        | *string*                                                          | :heavy_minus_sign:                                                | N/A                                                               |

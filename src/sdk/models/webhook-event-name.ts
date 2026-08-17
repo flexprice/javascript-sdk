@@ -14,6 +14,7 @@ export const WebhookEventName = {
   SubscriptionPaused: "subscription.paused",
   SubscriptionCancelled: "subscription.cancelled",
   SubscriptionResumed: "subscription.resumed",
+  SubscriptionPlanChanged: "subscription.plan_changed",
   SubscriptionPhaseCreated: "subscription.phase.created",
   SubscriptionPhaseUpdated: "subscription.phase.updated",
   SubscriptionPhaseDeleted: "subscription.phase.deleted",

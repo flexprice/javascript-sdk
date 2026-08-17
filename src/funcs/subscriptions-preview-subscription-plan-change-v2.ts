@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -27,18 +27,19 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a new task
+ * Preview a plan change (v2, swap in place)
  *
  * @remarks
- * Use when submitting a file or job for async processing (e.g. export or import). Returns task ID to poll for status and result.
+ * Preview a subscription plan change without writing. Swap-in-place: subscription id, billing anchor and period bounds are preserved.
  */
-export function tasksCreateTask(
+export function subscriptionsPreviewSubscriptionPlanChangeV2(
   client: FlexpriceCore,
-  request: models.CreateTaskRequest,
+  id: string,
+  body: models.SubscriptionChangeV2Request,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.TaskResponse,
+    models.SubscriptionChangeV2Response,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -52,19 +53,21 @@ export function tasksCreateTask(
 > {
   return new APIPromise($do(
     client,
-    request,
+    id,
+    body,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  request: models.CreateTaskRequest,
+  id: string,
+  body: models.SubscriptionChangeV2Request,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.TaskResponse,
+      models.SubscriptionChangeV2Response,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -78,18 +81,33 @@ async function $do(
     APICall,
   ]
 > {
+  const input: models.PreviewSubscriptionPlanChangeV2Request = {
+    id: id,
+    body: body,
+  };
+
   const parsed = safeParse(
-    request,
-    (value) => z.parse(models.CreateTaskRequest$outboundSchema, value),
+    input,
+    (value) =>
+      z.parse(
+        models.PreviewSubscriptionPlanChangeV2Request$outboundSchema,
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body$ = encodeJSON("body", payload.body, { explode: true });
 
-  const path = pathToFunc("/tasks")();
+  const pathParams = {
+    id: encodeSimple("id", payload.id, {
+      explode: false,
+      charEncoding: "percent",
+    }),
+  };
+  const path = pathToFunc("/subscriptions/{id}/change/v2/preview")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -103,7 +121,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "createTask",
+    operationID: "previewSubscriptionPlanChangeV2",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -121,7 +139,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    body: body,
+    body: body$,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -147,7 +165,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.TaskResponse,
+    models.SubscriptionChangeV2Response,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -158,8 +176,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(202, models.TaskResponse$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.json(200, models.SubscriptionChangeV2Response$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

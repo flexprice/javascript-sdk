@@ -10,7 +10,7 @@ let value: WebhookDtoCustomerWebhookPayload = {};
 
 ## Fields
 
-| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `customer`                                                        | [models.CustomerResponse](../../sdk/models/customer-response.md)  | :heavy_minus_sign:                                                | Customer response object containing all customer information      |
-| `eventType`                                                       | [models.WebhookEventName](../../sdk/models/webhook-event-name.md) | :heavy_minus_sign:                                                | N/A                                                               |
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `customer`                                                            | [models.WebhookDtoCustomer](../../sdk/models/webhook-dto-customer.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `eventType`                                                           | [models.WebhookEventName](../../sdk/models/webhook-event-name.md)     | :heavy_minus_sign:                                                    | N/A                                                                   |

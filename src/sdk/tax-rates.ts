@@ -21,7 +21,7 @@ export class TaxRates extends ClientSDK {
   async getTaxRates(
     request?: models.GetTaxRatesRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<models.TaxRateResponse>> {
+  ): Promise<models.ListTaxRatesResponse> {
     return unwrapAsync(taxRatesGetTaxRates(
       this,
       request,

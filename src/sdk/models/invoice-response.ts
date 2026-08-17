@@ -124,6 +124,13 @@ export type InvoiceResponse = {
   invoiceStatus?: InvoiceStatus | undefined;
   invoiceType?: InvoiceType | undefined;
   /**
+   * is_manually_edited is true once a user has manually added, edited, or removed a line item on this draft invoice.
+   *
+   * @remarks
+   * Once set, automated recomputation of this invoice's line items must no-op rather than overwrite the manual edit.
+   */
+  isManuallyEdited?: boolean | undefined;
+  /**
    * issue_date is the user-facing date of the invoice. Defaults to created_at if not set.
    */
   issueDate?: Date | undefined;
@@ -248,6 +255,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     invoice_pdf_url: types.optional(types.string()),
     invoice_status: types.optional(InvoiceStatus$inboundSchema),
     invoice_type: types.optional(InvoiceType$inboundSchema),
+    is_manually_edited: types.optional(types.boolean()),
     issue_date: types.optional(types.date()),
     last_computed_at: types.optional(types.date()),
     line_items: types.optional(z.array(InvoiceLineItemResponse$inboundSchema)),
@@ -298,6 +306,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "invoice_pdf_url": "invoicePdfUrl",
       "invoice_status": "invoiceStatus",
       "invoice_type": "invoiceType",
+      "is_manually_edited": "isManuallyEdited",
       "issue_date": "issueDate",
       "last_computed_at": "lastComputedAt",
       "line_items": "lineItems",

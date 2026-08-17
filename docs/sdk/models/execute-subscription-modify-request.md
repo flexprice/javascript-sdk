@@ -6,7 +6,7 @@
 import { ExecuteSubscriptionModifyRequest } from "@flexprice/sdk/sdk/models";
 
 let value: ExecuteSubscriptionModifyRequest = {
-  type: "coupon",
+  type: "tax",
 };
 ```
 
@@ -14,6 +14,7 @@ let value: ExecuteSubscriptionModifyRequest = {
 
 | Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `addonParams`                                                                                     | [models.SubModifyAddonParams](../../sdk/models/sub-modify-addon-params.md)                        | :heavy_minus_sign:                                                                                | N/A                                                                                               |
 | `checkout`                                                                                        | [models.CheckoutParams](../../sdk/models/checkout-params.md)                                      | :heavy_minus_sign:                                                                                | N/A                                                                                               |
 | `couponParams`                                                                                    | [models.SubModifyCouponParams](../../sdk/models/sub-modify-coupon-params.md)                      | :heavy_minus_sign:                                                                                | N/A                                                                                               |
 | `groupedInvoicingParams`                                                                          | [models.SubModifyGroupedInvoicingParams](../../sdk/models/sub-modify-grouped-invoicing-params.md) | :heavy_minus_sign:                                                                                | N/A                                                                                               |

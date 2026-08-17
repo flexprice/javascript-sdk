@@ -7,11 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  PaymentResponse,
-  PaymentResponse$inboundSchema,
-} from "./payment-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  WebhookDtoPayment,
+  WebhookDtoPayment$inboundSchema,
+} from "./webhook-dto-payment.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
@@ -19,7 +19,7 @@ import {
 
 export type WebhookDtoPaymentWebhookPayload = {
   eventType?: WebhookEventName | undefined;
-  payment?: PaymentResponse | undefined;
+  payment?: WebhookDtoPayment | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const WebhookDtoPaymentWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     event_type: types.optional(WebhookEventName$inboundSchema),
-    payment: types.optional(PaymentResponse$inboundSchema),
+    payment: types.optional(WebhookDtoPayment$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

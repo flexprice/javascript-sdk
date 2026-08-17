@@ -33,7 +33,7 @@ export type S3JobConfig = {
   compression?: S3CompressionType | undefined;
   encryption?: S3EncryptionType | undefined;
   /**
-   * Custom S3 endpoint URL (e.g., "http://minio:9000" for MinIO)
+   * Custom S3-compatible endpoint URL; must be https on a publicly routable host
    */
   endpointUrl?: string | undefined;
   /**
