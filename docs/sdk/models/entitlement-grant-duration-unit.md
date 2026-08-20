@@ -13,5 +13,5 @@ let value: EntitlementGrantDurationUnit = "day";
 ## Values
 
 ```typescript
-"hour" | "day" | "week" | Unrecognized<string>
+"hour" | "day" | "week" | "subscription_period" | Unrecognized<string>
 ```

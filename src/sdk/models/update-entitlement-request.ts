@@ -9,6 +9,10 @@ import {
   EntitlementAggregationMode$outboundSchema,
 } from "./entitlement-aggregation-mode.js";
 import {
+  EntitlementGrantAllocationBehavior,
+  EntitlementGrantAllocationBehavior$outboundSchema,
+} from "./entitlement-grant-allocation-behavior.js";
+import {
   EntitlementGrantDurationUnit,
   EntitlementGrantDurationUnit$outboundSchema,
 } from "./entitlement-grant-duration-unit.js";
@@ -31,6 +35,7 @@ export type UpdateEntitlementRequest = {
    */
   clearGrantConfig?: boolean | undefined;
   configValue?: { [k: string]: any } | undefined;
+  grantAllocationBehavior?: EntitlementGrantAllocationBehavior | undefined;
   grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
@@ -47,6 +52,7 @@ export type UpdateEntitlementRequest$Outbound = {
   aggregation_mode?: string | undefined;
   clear_grant_config?: boolean | undefined;
   config_value?: { [k: string]: any } | undefined;
+  grant_allocation_behavior?: string | undefined;
   grant_duration_unit?: string | undefined;
   grant_duration_value?: number | undefined;
   grant_measure?: string | undefined;
@@ -67,6 +73,9 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
     aggregationMode: z.optional(EntitlementAggregationMode$outboundSchema),
     clearGrantConfig: z.optional(z.boolean()),
     configValue: z.optional(z.record(z.string(), z.any())),
+    grantAllocationBehavior: z.optional(
+      EntitlementGrantAllocationBehavior$outboundSchema,
+    ),
     grantDurationUnit: z.optional(EntitlementGrantDurationUnit$outboundSchema),
     grantDurationValue: z.optional(z.int()),
     grantMeasure: z.optional(EntitlementGrantMeasure$outboundSchema),
@@ -82,6 +91,7 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
       aggregationMode: "aggregation_mode",
       clearGrantConfig: "clear_grant_config",
       configValue: "config_value",
+      grantAllocationBehavior: "grant_allocation_behavior",
       grantDurationUnit: "grant_duration_unit",
       grantDurationValue: "grant_duration_value",
       grantMeasure: "grant_measure",

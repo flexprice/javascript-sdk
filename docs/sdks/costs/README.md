@@ -7,7 +7,6 @@
 * [createCostsheet](#createcostsheet) - Create costsheet
 * [getActiveCostsheet](#getactivecostsheet) - Get active costsheet
 * [getDetailedCostAnalytics](#getdetailedcostanalytics) - Get combined revenue and cost analytics
-* [getDetailedCostAnalyticsV2](#getdetailedcostanalyticsv2) - Get combined revenue and cost analytics (V2)
 * [queryCostsheet](#querycostsheet) - Query costsheets
 * [getCostsheet](#getcostsheet) - Get costsheet
 * [updateCostsheet](#updatecostsheet) - Update costsheet
@@ -202,77 +201,6 @@ async function run() {
     console.log(result);
   } else {
     console.log("costsGetDetailedCostAnalytics failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.GetCostAnalyticsRequest](../../sdk/models/get-cost-analytics-request.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.GetDetailedCostAnalyticsResponse](../../sdk/models/get-detailed-cost-analytics-response.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 400                        | application/json           |
-| models.ErrorsErrorResponse | 500                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## getDetailedCostAnalyticsV2
-
-Use when you need the same revenue/cost/ROI analytics but computed from the costsheet usage-tracking pipeline (e.g. for consistency with usage-based cost data).
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="getDetailedCostAnalyticsV2" method="post" path="/costs/analytics-v2" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.costs.getDetailedCostAnalyticsV2({});
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { costsGetDetailedCostAnalyticsV2 } from "@flexprice/sdk/funcs/costs-get-detailed-cost-analytics-v2.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await costsGetDetailedCostAnalyticsV2(flexprice, {});
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("costsGetDetailedCostAnalyticsV2 failed:", res.error);
   }
 }
 

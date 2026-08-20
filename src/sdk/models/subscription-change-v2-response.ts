@@ -32,7 +32,16 @@ export type SubscriptionChangeV2Response = {
   effectiveAt?: Date | undefined;
   entityChanges?: Array<EntityChangeResult> | undefined;
   fromPlan?: PlanSummary | undefined;
+  /**
+   * IsScheduled is true when the change was deferred to the period end instead
+   *
+   * @remarks
+   * of being applied immediately.
+   */
+  isScheduled?: boolean | undefined;
   metadata?: { [k: string]: string } | undefined;
+  scheduleId?: string | undefined;
+  scheduledAt?: Date | undefined;
   subscription?: SubscriptionResponse | undefined;
   toPlan?: PlanSummary | undefined;
   warnings?: Array<string> | undefined;
@@ -49,7 +58,10 @@ export const SubscriptionChangeV2Response$inboundSchema: z.ZodMiniType<
     effective_at: types.optional(types.date()),
     entity_changes: types.optional(z.array(EntityChangeResult$inboundSchema)),
     from_plan: types.optional(PlanSummary$inboundSchema),
+    is_scheduled: types.optional(types.boolean()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    schedule_id: types.optional(types.string()),
+    scheduled_at: types.optional(types.date()),
     subscription: types.optional(SubscriptionResponse$inboundSchema),
     to_plan: types.optional(PlanSummary$inboundSchema),
     warnings: types.optional(z.array(types.string())),
@@ -61,6 +73,9 @@ export const SubscriptionChangeV2Response$inboundSchema: z.ZodMiniType<
       "effective_at": "effectiveAt",
       "entity_changes": "entityChanges",
       "from_plan": "fromPlan",
+      "is_scheduled": "isScheduled",
+      "schedule_id": "scheduleId",
+      "scheduled_at": "scheduledAt",
       "to_plan": "toPlan",
     });
   }),

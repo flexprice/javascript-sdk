@@ -7,7 +7,7 @@ import { CreateEntityIntegrationMappingRequest } from "@flexprice/sdk/sdk/models
 
 let value: CreateEntityIntegrationMappingRequest = {
   entityId: "<id>",
-  entityType: "credit_note",
+  entityType: "addon",
   providerEntityId: "<id>",
   providerType: "<value>",
 };

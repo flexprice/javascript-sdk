@@ -10,6 +10,7 @@ export const EntitlementGrantDurationUnit = {
   Hour: "hour",
   Day: "day",
   Week: "week",
+  SubscriptionPeriod: "subscription_period",
 } as const;
 export type EntitlementGrantDurationUnit = OpenEnum<
   typeof EntitlementGrantDurationUnit

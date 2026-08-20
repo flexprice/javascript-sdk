@@ -6,7 +6,6 @@ import { costsCreateCostsheet } from "../funcs/costs-create-costsheet.js";
 import { costsDeleteCostsheet } from "../funcs/costs-delete-costsheet.js";
 import { costsGetActiveCostsheet } from "../funcs/costs-get-active-costsheet.js";
 import { costsGetCostsheet } from "../funcs/costs-get-costsheet.js";
-import { costsGetDetailedCostAnalyticsV2 } from "../funcs/costs-get-detailed-cost-analytics-v2.js";
 import { costsGetDetailedCostAnalytics } from "../funcs/costs-get-detailed-cost-analytics.js";
 import { costsQueryCostsheet } from "../funcs/costs-query-costsheet.js";
 import { costsUpdateCostsheet } from "../funcs/costs-update-costsheet.js";
@@ -58,23 +57,6 @@ export class Costs extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.GetDetailedCostAnalyticsResponse> {
     return unwrapAsync(costsGetDetailedCostAnalytics(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get combined revenue and cost analytics (V2)
-   *
-   * @remarks
-   * Use when you need the same revenue/cost/ROI analytics but computed from the costsheet usage-tracking pipeline (e.g. for consistency with usage-based cost data).
-   */
-  async getDetailedCostAnalyticsV2(
-    request: models.GetCostAnalyticsRequest,
-    options?: RequestOptions,
-  ): Promise<models.GetDetailedCostAnalyticsResponse> {
-    return unwrapAsync(costsGetDetailedCostAnalyticsV2(
       this,
       request,
       options,

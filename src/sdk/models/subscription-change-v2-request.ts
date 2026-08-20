@@ -8,6 +8,7 @@ import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
+import { ScheduleType, ScheduleType$outboundSchema } from "./schedule-type.js";
 import {
   SubscriptionChangeEntityPolicies,
   SubscriptionChangeEntityPolicies$Outbound,
@@ -15,6 +16,7 @@ import {
 } from "./subscription-change-entity-policies.js";
 
 export type SubscriptionChangeV2Request = {
+  changeAt?: ScheduleType | undefined;
   entityPolicies?: SubscriptionChangeEntityPolicies | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -24,6 +26,7 @@ export type SubscriptionChangeV2Request = {
 
 /** @internal */
 export type SubscriptionChangeV2Request$Outbound = {
+  change_at?: string | undefined;
   entity_policies?: SubscriptionChangeEntityPolicies$Outbound | undefined;
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -37,6 +40,7 @@ export const SubscriptionChangeV2Request$outboundSchema: z.ZodMiniType<
   SubscriptionChangeV2Request
 > = z.pipe(
   z.object({
+    changeAt: z.optional(ScheduleType$outboundSchema),
     entityPolicies: z.optional(SubscriptionChangeEntityPolicies$outboundSchema),
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
@@ -45,6 +49,7 @@ export const SubscriptionChangeV2Request$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      changeAt: "change_at",
       entityPolicies: "entity_policies",
       idempotencyKey: "idempotency_key",
       prorationBehavior: "proration_behavior",

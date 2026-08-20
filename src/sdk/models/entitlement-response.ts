@@ -20,6 +20,10 @@ import {
   EntitlementEntityType$inboundSchema,
 } from "./entitlement-entity-type.js";
 import {
+  EntitlementGrantAllocationBehavior,
+  EntitlementGrantAllocationBehavior$inboundSchema,
+} from "./entitlement-grant-allocation-behavior.js";
+import {
   EntitlementGrantDurationUnit,
   EntitlementGrantDurationUnit$inboundSchema,
 } from "./entitlement-grant-duration-unit.js";
@@ -54,6 +58,7 @@ export type EntitlementResponse = {
   feature?: FeatureResponse | undefined;
   featureId?: string | undefined;
   featureType?: FeatureType | undefined;
+  grantAllocationBehavior?: EntitlementGrantAllocationBehavior | undefined;
   grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
@@ -96,6 +101,9 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
     feature: types.optional(FeatureResponse$inboundSchema),
     feature_id: types.optional(types.string()),
     feature_type: types.optional(FeatureType$inboundSchema),
+    grant_allocation_behavior: types.optional(
+      EntitlementGrantAllocationBehavior$inboundSchema,
+    ),
     grant_duration_unit: types.optional(
       EntitlementGrantDurationUnit$inboundSchema,
     ),
@@ -132,6 +140,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "feature_id": "featureId",
       "feature_type": "featureType",
+      "grant_allocation_behavior": "grantAllocationBehavior",
       "grant_duration_unit": "grantDurationUnit",
       "grant_duration_value": "grantDurationValue",
       "grant_measure": "grantMeasure",

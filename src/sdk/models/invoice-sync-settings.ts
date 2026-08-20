@@ -12,9 +12,14 @@ import {
   BillingPeriod$inboundSchema,
 } from "./billing-period.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  ServicePeriodCustomFields,
+  ServicePeriodCustomFields$inboundSchema,
+} from "./service-period-custom-fields.js";
 
 export type InvoiceSyncSettings = {
   normalizeFixedTo?: BillingPeriod | undefined;
+  servicePeriodCustomFields?: ServicePeriodCustomFields | undefined;
 };
 
 /** @internal */
@@ -24,10 +29,14 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     normalize_fixed_to: types.optional(BillingPeriod$inboundSchema),
+    service_period_custom_fields: types.optional(
+      ServicePeriodCustomFields$inboundSchema,
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
       "normalize_fixed_to": "normalizeFixedTo",
+      "service_period_custom_fields": "servicePeriodCustomFields",
     });
   }),
 );
