@@ -11,6 +11,10 @@ import {
   BillingPeriod,
   BillingPeriod$inboundSchema,
 } from "./billing-period.js";
+import {
+  MetadataCustomField,
+  MetadataCustomField$inboundSchema,
+} from "./metadata-custom-field.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   ServicePeriodCustomFields,
@@ -18,8 +22,24 @@ import {
 } from "./service-period-custom-fields.js";
 
 export type InvoiceSyncSettings = {
+  /**
+   * MetadataCustomFields copies metadata values onto Zoho invoice custom fields
+   *
+   * @remarks
+   * verbatim.
+   */
+  metadataCustomFields?: Array<MetadataCustomField> | undefined;
   normalizeFixedTo?: BillingPeriod | undefined;
   servicePeriodCustomFields?: ServicePeriodCustomFields | undefined;
+  /**
+   * SubmitForApproval submits the synced invoice into the merchant's Zoho Books approval
+   *
+   * @remarks
+   * flow before recording payment. Zoho rejects payments on draft invoices, and merchants
+   * configure a Zoho auto-approval rule for FlexPrice-sent invoices, so we submit, wait for
+   * that rule to fire, then pay.
+   */
+  submitForApproval?: boolean | undefined;
 };
 
 /** @internal */
@@ -28,15 +48,21 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    metadata_custom_fields: types.optional(
+      z.array(MetadataCustomField$inboundSchema),
+    ),
     normalize_fixed_to: types.optional(BillingPeriod$inboundSchema),
     service_period_custom_fields: types.optional(
       ServicePeriodCustomFields$inboundSchema,
     ),
+    submit_for_approval: types.optional(types.boolean()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "metadata_custom_fields": "metadataCustomFields",
       "normalize_fixed_to": "normalizeFixedTo",
       "service_period_custom_fields": "servicePeriodCustomFields",
+      "submit_for_approval": "submitForApproval",
     });
   }),
 );

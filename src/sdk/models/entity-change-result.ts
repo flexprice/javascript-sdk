@@ -13,14 +13,14 @@ import {
 } from "./entity-change-behaviour.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
-  SubscriptionLineItemEntityType,
-  SubscriptionLineItemEntityType$inboundSchema,
-} from "./subscription-line-item-entity-type.js";
+  SubscriptionChangeEntityType,
+  SubscriptionChangeEntityType$inboundSchema,
+} from "./subscription-change-entity-type.js";
 
 export type EntityChangeResult = {
   behaviour?: EntityChangeBehaviour | undefined;
   entityId?: string | undefined;
-  entityType?: SubscriptionLineItemEntityType | undefined;
+  entityType?: SubscriptionChangeEntityType | undefined;
   referenceId?: string | undefined;
 };
 
@@ -32,7 +32,7 @@ export const EntityChangeResult$inboundSchema: z.ZodMiniType<
   z.object({
     behaviour: types.optional(EntityChangeBehaviour$inboundSchema),
     entity_id: types.optional(types.string()),
-    entity_type: types.optional(SubscriptionLineItemEntityType$inboundSchema),
+    entity_type: types.optional(SubscriptionChangeEntityType$inboundSchema),
     reference_id: types.optional(types.string()),
   }),
   z.transform((v) => {

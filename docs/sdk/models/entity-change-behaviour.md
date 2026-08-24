@@ -5,7 +5,7 @@
 ```typescript
 import { EntityChangeBehaviour } from "@flexprice/sdk/sdk/models";
 
-let value: EntityChangeBehaviour = "carry";
+let value: EntityChangeBehaviour = "drop";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: EntityChangeBehaviour = "carry";
 ## Values
 
 ```typescript
-"carry" | "drop" | Unrecognized<string>
+"carry" | "drop" | "add" | Unrecognized<string>
 ```

@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const EntityChangeBehaviour = {
   Carry: "carry",
   Drop: "drop",
+  Add: "add",
 } as const;
 export type EntityChangeBehaviour = OpenEnum<typeof EntityChangeBehaviour>;
 

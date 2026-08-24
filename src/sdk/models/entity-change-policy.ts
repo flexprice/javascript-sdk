@@ -13,6 +13,9 @@ export type EntityChangePolicy = {
   defaultBehaviour?: EntityChangeBehaviour | undefined;
   /**
    * Overrides is keyed by addon_associations.id (instance), not catalogue addon_id.
+   *
+   * @remarks
+   * That is the id an EntityChangeResult reports as EntityID.
    */
   overrides?: { [k: string]: EntityChangeBehaviour } | undefined;
 };

@@ -16,6 +16,10 @@ import {
   EntitlementResponse$inboundSchema,
 } from "./entitlement-response.js";
 import {
+  PlanPriceSyncStatusResponse,
+  PlanPriceSyncStatusResponse$inboundSchema,
+} from "./plan-price-sync-status-response.js";
+import {
   PriceResponse,
   PriceResponse$inboundSchema,
 } from "./price-response.js";
@@ -34,6 +38,7 @@ export type PlanResponse = {
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
+  priceSyncStatus?: PlanPriceSyncStatusResponse | undefined;
   /**
    * TODO: Add inline addons
    */
@@ -61,6 +66,9 @@ export const PlanResponse$inboundSchema: z.ZodMiniType<PlanResponse, unknown> =
       lookup_key: types.optional(types.string()),
       metadata: types.optional(z.record(z.string(), types.string())),
       name: types.optional(types.string()),
+      price_sync_status: types.optional(
+        PlanPriceSyncStatusResponse$inboundSchema,
+      ),
       prices: types.optional(
         z.array(z.lazy(() => PriceResponse$inboundSchema)),
       ),
@@ -77,6 +85,7 @@ export const PlanResponse$inboundSchema: z.ZodMiniType<PlanResponse, unknown> =
         "display_order": "displayOrder",
         "environment_id": "environmentId",
         "lookup_key": "lookupKey",
+        "price_sync_status": "priceSyncStatus",
         "tenant_id": "tenantId",
         "updated_at": "updatedAt",
         "updated_by": "updatedBy",

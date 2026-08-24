@@ -33,6 +33,7 @@ import { Tasks } from "./tasks.js";
 import { TaxAssociations } from "./tax-associations.js";
 import { TaxRates } from "./tax-rates.js";
 import { Tenants } from "./tenants.js";
+import { UsageRecords } from "./usage-records.js";
 import { Users } from "./users.js";
 import { Wallets } from "./wallets.js";
 import { WebhookEvents } from "./webhook-events.js";
@@ -192,6 +193,11 @@ export class Flexprice extends ClientSDK {
   private _tenants?: Tenants;
   get tenants(): Tenants {
     return (this._tenants ??= new Tenants(this._options));
+  }
+
+  private _usageRecords?: UsageRecords;
+  get usageRecords(): UsageRecords {
+    return (this._usageRecords ??= new UsageRecords(this._options));
   }
 
   private _users?: Users;

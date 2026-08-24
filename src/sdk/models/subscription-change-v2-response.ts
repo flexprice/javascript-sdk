@@ -18,6 +18,10 @@ import {
 import { PlanSummary, PlanSummary$inboundSchema } from "./plan-summary.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
+  SubscriptionChangeBillingPeriodResult,
+  SubscriptionChangeBillingPeriodResult$inboundSchema,
+} from "./subscription-change-billing-period-result.js";
+import {
   SubscriptionChangeType,
   SubscriptionChangeType$inboundSchema,
 } from "./subscription-change-type.js";
@@ -27,6 +31,7 @@ import {
 } from "./subscription-response.js";
 
 export type SubscriptionChangeV2Response = {
+  billingPeriod?: SubscriptionChangeBillingPeriodResult | undefined;
   changeType?: SubscriptionChangeType | undefined;
   changedResources?: ChangedResources | undefined;
   effectiveAt?: Date | undefined;
@@ -43,6 +48,13 @@ export type SubscriptionChangeV2Response = {
   scheduleId?: string | undefined;
   scheduledAt?: Date | undefined;
   subscription?: SubscriptionResponse | undefined;
+  /**
+   * SupersededSchedules lists the plan-change schedules this request cancelled under
+   *
+   * @remarks
+   * on_conflict_policies.on_pending_schedule. Preview reports what execute would cancel.
+   */
+  supersededSchedules?: Array<string> | undefined;
   toPlan?: PlanSummary | undefined;
   warnings?: Array<string> | undefined;
 };
@@ -53,6 +65,9 @@ export const SubscriptionChangeV2Response$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    billing_period: types.optional(
+      SubscriptionChangeBillingPeriodResult$inboundSchema,
+    ),
     change_type: types.optional(SubscriptionChangeType$inboundSchema),
     changed_resources: types.optional(ChangedResources$inboundSchema),
     effective_at: types.optional(types.date()),
@@ -63,11 +78,13 @@ export const SubscriptionChangeV2Response$inboundSchema: z.ZodMiniType<
     schedule_id: types.optional(types.string()),
     scheduled_at: types.optional(types.date()),
     subscription: types.optional(SubscriptionResponse$inboundSchema),
+    superseded_schedules: types.optional(z.array(types.string())),
     to_plan: types.optional(PlanSummary$inboundSchema),
     warnings: types.optional(z.array(types.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "billing_period": "billingPeriod",
       "change_type": "changeType",
       "changed_resources": "changedResources",
       "effective_at": "effectiveAt",
@@ -76,6 +93,7 @@ export const SubscriptionChangeV2Response$inboundSchema: z.ZodMiniType<
       "is_scheduled": "isScheduled",
       "schedule_id": "scheduleId",
       "scheduled_at": "scheduledAt",
+      "superseded_schedules": "supersededSchedules",
       "to_plan": "toPlan",
     });
   }),

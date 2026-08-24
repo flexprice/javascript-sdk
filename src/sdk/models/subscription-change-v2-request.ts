@@ -5,10 +5,24 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  BillingPeriodBehaviour,
+  BillingPeriodBehaviour$outboundSchema,
+} from "./billing-period-behaviour.js";
+import {
+  BillingPeriodConfig,
+  BillingPeriodConfig$Outbound,
+  BillingPeriodConfig$outboundSchema,
+} from "./billing-period-config.js";
+import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import { ScheduleType, ScheduleType$outboundSchema } from "./schedule-type.js";
+import {
+  SubscriptionChangeConflictPolicies,
+  SubscriptionChangeConflictPolicies$Outbound,
+  SubscriptionChangeConflictPolicies$outboundSchema,
+} from "./subscription-change-conflict-policies.js";
 import {
   SubscriptionChangeEntityPolicies,
   SubscriptionChangeEntityPolicies$Outbound,
@@ -16,20 +30,28 @@ import {
 } from "./subscription-change-entity-policies.js";
 
 export type SubscriptionChangeV2Request = {
+  billingPeriodBehaviour?: BillingPeriodBehaviour | undefined;
+  billingPeriodConfig?: BillingPeriodConfig | undefined;
   changeAt?: ScheduleType | undefined;
   entityPolicies?: SubscriptionChangeEntityPolicies | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  onConflictPolicies?: SubscriptionChangeConflictPolicies | undefined;
   prorationBehavior: ProrationBehavior;
   targetPlanId: string;
 };
 
 /** @internal */
 export type SubscriptionChangeV2Request$Outbound = {
+  billing_period_behaviour?: string | undefined;
+  billing_period_config?: BillingPeriodConfig$Outbound | undefined;
   change_at?: string | undefined;
   entity_policies?: SubscriptionChangeEntityPolicies$Outbound | undefined;
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  on_conflict_policies?:
+    | SubscriptionChangeConflictPolicies$Outbound
+    | undefined;
   proration_behavior: string;
   target_plan_id: string;
 };
@@ -40,18 +62,26 @@ export const SubscriptionChangeV2Request$outboundSchema: z.ZodMiniType<
   SubscriptionChangeV2Request
 > = z.pipe(
   z.object({
+    billingPeriodBehaviour: z.optional(BillingPeriodBehaviour$outboundSchema),
+    billingPeriodConfig: z.optional(BillingPeriodConfig$outboundSchema),
     changeAt: z.optional(ScheduleType$outboundSchema),
     entityPolicies: z.optional(SubscriptionChangeEntityPolicies$outboundSchema),
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
+    onConflictPolicies: z.optional(
+      SubscriptionChangeConflictPolicies$outboundSchema,
+    ),
     prorationBehavior: ProrationBehavior$outboundSchema,
     targetPlanId: z.string(),
   }),
   z.transform((v) => {
     return remap$(v, {
+      billingPeriodBehaviour: "billing_period_behaviour",
+      billingPeriodConfig: "billing_period_config",
       changeAt: "change_at",
       entityPolicies: "entity_policies",
       idempotencyKey: "idempotency_key",
+      onConflictPolicies: "on_conflict_policies",
       prorationBehavior: "proration_behavior",
       targetPlanId: "target_plan_id",
     });

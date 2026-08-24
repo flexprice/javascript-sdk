@@ -39,6 +39,10 @@ import {
   PriceEntityType$inboundSchema,
 } from "./price-entity-type.js";
 import {
+  PriceFeatureResponse,
+  PriceFeatureResponse$inboundSchema,
+} from "./price-feature-response.js";
+import {
   PriceJSONBTransformQuantity,
   PriceJSONBTransformQuantity$inboundSchema,
 } from "./price-jsonb-transform-quantity.js";
@@ -116,6 +120,7 @@ export type PriceResponse = {
    * EnvironmentID is the environment identifier for the price
    */
   environmentId?: string | undefined;
+  feature?: PriceFeatureResponse | undefined;
   group?: GroupResponse | undefined;
   /**
    * GroupID references the group this price belongs to
@@ -217,6 +222,7 @@ export const PriceResponse$inboundSchema: z.ZodMiniType<
     entity_id: types.optional(types.string()),
     entity_type: types.optional(PriceEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
+    feature: types.optional(PriceFeatureResponse$inboundSchema),
     group: types.optional(GroupResponse$inboundSchema),
     group_id: types.optional(types.string()),
     id: types.optional(types.string()),

@@ -29,7 +29,7 @@ export type CreditGrantApplicationResponse = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   creditGrantId?: string | undefined;
-  credits?: number | undefined;
+  credits?: string | undefined;
   environmentId?: string | undefined;
   failureReason?: string | undefined;
   id?: string | undefined;
@@ -61,7 +61,7 @@ export const CreditGrantApplicationResponse$inboundSchema: z.ZodMiniType<
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     credit_grant_id: types.optional(types.string()),
-    credits: types.optional(types.number()),
+    credits: types.optional(types.string()),
     environment_id: types.optional(types.string()),
     failure_reason: types.optional(types.string()),
     id: types.optional(types.string()),
