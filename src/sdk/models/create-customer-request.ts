@@ -14,6 +14,7 @@ import {
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
 } from "./tax-rate-override.js";
+import { TaxTreatment, TaxTreatment$outboundSchema } from "./tax-treatment.js";
 
 /**
  * Request object for creating a new customer in the system
@@ -85,6 +86,7 @@ export type CreateCustomerRequest = {
    * tax_rate_overrides contains tax rate configurations to be linked to this customer
    */
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
+  taxTreatment?: TaxTreatment | undefined;
   /**
    * timezone is the customer's IANA timezone name (e.g. "Asia/Kolkata", "America/New_York")
    *
@@ -113,6 +115,7 @@ export type CreateCustomerRequest$Outbound = {
   onboarding_workflow_name?: string | undefined;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
+  tax_treatment?: string | undefined;
   timezone?: string | undefined;
 };
 
@@ -139,6 +142,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     onboardingWorkflowName: z.optional(z.string()),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
+    taxTreatment: z.optional(TaxTreatment$outboundSchema),
     timezone: z.optional(z.string()),
   }),
   z.transform((v) => {
@@ -154,6 +158,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       onboardingWorkflowName: "onboarding_workflow_name",
       skipOnboardingWorkflow: "skip_onboarding_workflow",
       taxRateOverrides: "tax_rate_overrides",
+      taxTreatment: "tax_treatment",
     });
   }),
 );

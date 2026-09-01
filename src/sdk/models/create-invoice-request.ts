@@ -37,11 +37,6 @@ import {
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
 } from "./tax-rate-override.js";
-import {
-  TaxRateResponse,
-  TaxRateResponse$Outbound,
-  TaxRateResponse$outboundSchema,
-} from "./tax-rate-response.js";
 
 export type CreateInvoiceRequest = {
   /**
@@ -130,10 +125,6 @@ export type CreateInvoiceRequest = {
    */
   periodStart?: Date | undefined;
   /**
-   * prepared_tax_rates contains the tax rates pre-resolved by the caller (e.g., billing service)
-   */
-  preparedTaxRates?: Array<TaxRateResponse> | undefined;
-  /**
    * subscription_id is the optional unique identifier of the subscription associated with this invoice
    */
   subscriptionId?: string | undefined;
@@ -184,7 +175,6 @@ export type CreateInvoiceRequest$Outbound = {
   payment_status?: string | undefined;
   period_end?: string | undefined;
   period_start?: string | undefined;
-  prepared_tax_rates?: Array<TaxRateResponse$Outbound> | undefined;
   subscription_id?: string | undefined;
   subtotal: string;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
@@ -224,7 +214,6 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
     periodStart: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
-    preparedTaxRates: z.optional(z.array(TaxRateResponse$outboundSchema)),
     subscriptionId: z.optional(z.string()),
     subtotal: z.string(),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
@@ -253,7 +242,6 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
       paymentStatus: "payment_status",
       periodEnd: "period_end",
       periodStart: "period_start",
-      preparedTaxRates: "prepared_tax_rates",
       subscriptionId: "subscription_id",
       taxRateOverrides: "tax_rate_overrides",
       taxRates: "tax_rates",

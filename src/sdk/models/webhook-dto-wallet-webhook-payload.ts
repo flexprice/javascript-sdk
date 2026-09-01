@@ -9,6 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
+  WebhookDtoCustomer,
+  WebhookDtoCustomer$inboundSchema,
+} from "./webhook-dto-customer.js";
+import {
   WebhookDtoWalletAlertInfo,
   WebhookDtoWalletAlertInfo$inboundSchema,
 } from "./webhook-dto-wallet-alert-info.js";
@@ -23,6 +27,7 @@ import {
 
 export type WebhookDtoWalletWebhookPayload = {
   alert?: WebhookDtoWalletAlertInfo | undefined;
+  customer?: WebhookDtoCustomer | undefined;
   eventType?: WebhookEventName | undefined;
   wallet?: WebhookDtoWallet | undefined;
 };
@@ -34,6 +39,7 @@ export const WebhookDtoWalletWebhookPayload$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     alert: types.optional(WebhookDtoWalletAlertInfo$inboundSchema),
+    customer: types.optional(WebhookDtoCustomer$inboundSchema),
     event_type: types.optional(WebhookEventName$inboundSchema),
     wallet: types.optional(WebhookDtoWallet$inboundSchema),
   }),

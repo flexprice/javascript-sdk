@@ -17,10 +17,6 @@ export type CreateTaxRateRequest = {
    */
   description?: string | undefined;
   /**
-   * fixed_value is the fixed monetary amount when tax_rate_type is "fixed"
-   */
-  fixedValue?: string | undefined;
-  /**
    * metadata contains additional key-value pairs for storing extra information
    */
   metadata?: { [k: string]: string } | undefined;
@@ -29,7 +25,7 @@ export type CreateTaxRateRequest = {
    */
   name: string;
   /**
-   * percentage_value is the percentage value (0-100) when tax_rate_type is "percentage"
+   * percentage_value is the percentage value (0-100)
    */
   percentageValue?: string | undefined;
   scope?: TaxRateScope | undefined;
@@ -40,7 +36,6 @@ export type CreateTaxRateRequest = {
 export type CreateTaxRateRequest$Outbound = {
   code: string;
   description?: string | undefined;
-  fixed_value?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name: string;
   percentage_value?: string | undefined;
@@ -56,7 +51,6 @@ export const CreateTaxRateRequest$outboundSchema: z.ZodMiniType<
   z.object({
     code: z.string(),
     description: z.optional(z.string()),
-    fixedValue: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.string(),
     percentageValue: z.optional(z.string()),
@@ -65,7 +59,6 @@ export const CreateTaxRateRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
-      fixedValue: "fixed_value",
       percentageValue: "percentage_value",
       taxRateType: "tax_rate_type",
     });

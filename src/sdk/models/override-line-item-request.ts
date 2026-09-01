@@ -16,6 +16,7 @@ import {
   PriceTransformQuantity$Outbound,
   PriceTransformQuantity$outboundSchema,
 } from "./price-transform-quantity.js";
+import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type OverrideLineItemRequest = {
   /**
@@ -23,6 +24,7 @@ export type OverrideLineItemRequest = {
    */
   amount?: string | undefined;
   billingModel?: BillingModel | undefined;
+  bucketSize?: WindowSize | undefined;
   /**
    * PriceID references the plan price to override
    */
@@ -51,6 +53,7 @@ export type OverrideLineItemRequest = {
 export type OverrideLineItemRequest$Outbound = {
   amount?: string | undefined;
   billing_model?: string | undefined;
+  bucket_size?: string | undefined;
   price_id: string;
   price_unit_amount?: string | undefined;
   price_unit_tiers?: Array<CreatePriceTier$Outbound> | undefined;
@@ -68,6 +71,7 @@ export const OverrideLineItemRequest$outboundSchema: z.ZodMiniType<
   z.object({
     amount: z.optional(z.string()),
     billingModel: z.optional(BillingModel$outboundSchema),
+    bucketSize: z.optional(WindowSize$outboundSchema),
     priceId: z.string(),
     priceUnitAmount: z.optional(z.string()),
     priceUnitTiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
@@ -79,6 +83,7 @@ export const OverrideLineItemRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       billingModel: "billing_model",
+      bucketSize: "bucket_size",
       priceId: "price_id",
       priceUnitAmount: "price_unit_amount",
       priceUnitTiers: "price_unit_tiers",

@@ -6,6 +6,7 @@ import { usersCreateUser } from "../funcs/users-create-user.js";
 import { usersDeleteServiceAccount } from "../funcs/users-delete-service-account.js";
 import { usersGetUserInfo } from "../funcs/users-get-user-info.js";
 import { usersQueryUser } from "../funcs/users-query-user.js";
+import { usersRemoveUser } from "../funcs/users-remove-user.js";
 import { usersUpdateServiceAccount } from "../funcs/users-update-service-account.js";
 import { usersUpdateUserRoles } from "../funcs/users-update-user-roles.js";
 import { usersUpdateUser } from "../funcs/users-update-user.js";
@@ -110,6 +111,23 @@ export class Users extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(usersDeleteServiceAccount(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Remove user from tenant
+   *
+   * @remarks
+   * Remove a human user (type=user) from the current tenant. Not supported for service accounts; use DELETE /users/{id} for those.
+   */
+  async removeUser(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(usersRemoveUser(
       this,
       id,
       options,

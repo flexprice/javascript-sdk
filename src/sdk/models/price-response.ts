@@ -61,6 +61,7 @@ import {
 } from "./price-unit-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
+import { WindowSize, WindowSize$inboundSchema } from "./window-size.js";
 
 export type PriceResponse = {
   addon?: AddonResponse | undefined;
@@ -78,6 +79,7 @@ export type PriceResponse = {
    * BillingPeriodCount is the count of the billing period ex 1, 3, 6, 12
    */
   billingPeriodCount?: number | undefined;
+  bucketSize?: WindowSize | undefined;
   /**
    * ConversionRate is the conversion rate of the price unit to the fiat currency
    */
@@ -210,6 +212,7 @@ export const PriceResponse$inboundSchema: z.ZodMiniType<
     billing_model: types.optional(BillingModel$inboundSchema),
     billing_period: types.optional(BillingPeriod$inboundSchema),
     billing_period_count: types.optional(types.number()),
+    bucket_size: types.optional(WindowSize$inboundSchema),
     conversion_rate: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -260,6 +263,7 @@ export const PriceResponse$inboundSchema: z.ZodMiniType<
       "billing_model": "billingModel",
       "billing_period": "billingPeriod",
       "billing_period_count": "billingPeriodCount",
+      "bucket_size": "bucketSize",
       "conversion_rate": "conversionRate",
       "created_at": "createdAt",
       "created_by": "createdBy",

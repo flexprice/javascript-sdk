@@ -38,6 +38,11 @@ import {
   TaxAppliedResponse,
   TaxAppliedResponse$inboundSchema,
 } from "./tax-applied-response.js";
+import {
+  TaxExemptionReasonCode,
+  TaxExemptionReasonCode$inboundSchema,
+} from "./tax-exemption-reason-code.js";
+import { TaxSummary, TaxSummary$inboundSchema } from "./tax-summary.js";
 
 export type InvoiceResponse = {
   /**
@@ -191,6 +196,8 @@ export type InvoiceResponse = {
    * subtotal is the sum of all line items before any taxes, discounts, or additional fees
    */
   subtotal?: string | undefined;
+  taxExemptionReasonCode?: TaxExemptionReasonCode | undefined;
+  taxSummary?: TaxSummary | undefined;
   /**
    * tax_applied_records contains the tax applied records associated with this invoice
    */
@@ -274,6 +281,10 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     subscription_customer_id: types.optional(types.string()),
     subscription_id: types.optional(types.string()),
     subtotal: types.optional(types.string()),
+    tax_exemption_reason_code: types.optional(
+      TaxExemptionReasonCode$inboundSchema,
+    ),
+    tax_summary: types.optional(TaxSummary$inboundSchema),
     taxes: types.optional(z.array(TaxAppliedResponse$inboundSchema)),
     tenant_id: types.optional(types.string()),
     total: types.optional(types.string()),
@@ -319,6 +330,8 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "refunded_amount": "refundedAmount",
       "subscription_customer_id": "subscriptionCustomerId",
       "subscription_id": "subscriptionId",
+      "tax_exemption_reason_code": "taxExemptionReasonCode",
+      "tax_summary": "taxSummary",
       "tenant_id": "tenantId",
       "total_discount": "totalDiscount",
       "total_prepaid_credits_applied": "totalPrepaidCreditsApplied",

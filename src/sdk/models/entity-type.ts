@@ -17,3 +17,6 @@ export type EntityType = OpenEnum<typeof EntityType>;
 /** @internal */
 export const EntityType$inboundSchema: z.ZodMiniType<EntityType, unknown> =
   openEnums.inboundSchema(EntityType);
+/** @internal */
+export const EntityType$outboundSchema: z.ZodMiniType<string, EntityType> =
+  openEnums.outboundSchema(EntityType);

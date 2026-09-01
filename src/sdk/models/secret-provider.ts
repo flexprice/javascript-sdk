@@ -10,6 +10,7 @@ export const SecretProvider = {
   Flexprice: "flexprice",
   Stripe: "stripe",
   S3: "s3",
+  Gcs: "gcs",
   Hubspot: "hubspot",
   Razorpay: "razorpay",
   Chargebee: "chargebee",

@@ -24,6 +24,11 @@ import {
   S3EncryptionType$outboundSchema,
 } from "./s3-encryption-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SecretProvider,
+  SecretProvider$inboundSchema,
+  SecretProvider$outboundSchema,
+} from "./secret-provider.js";
 
 export type S3JobConfig = {
   /**
@@ -44,6 +49,7 @@ export type S3JobConfig = {
    * Optional prefix for S3 keys (e.g., "flexprice-exports/")
    */
   keyPrefix?: string | undefined;
+  provider?: SecretProvider | undefined;
   /**
    * AWS region (e.g., "us-west-2")
    */
@@ -66,6 +72,7 @@ export const S3JobConfig$inboundSchema: z.ZodMiniType<S3JobConfig, unknown> = z
         z.array(ExportMetadataField$inboundSchema),
       ),
       key_prefix: types.optional(types.string()),
+      provider: types.optional(SecretProvider$inboundSchema),
       region: types.optional(types.string()),
       use_path_style: types.optional(types.boolean()),
     }),
@@ -86,6 +93,7 @@ export type S3JobConfig$Outbound = {
   endpoint_url?: string | undefined;
   export_metadata_fields?: Array<ExportMetadataField$Outbound> | undefined;
   key_prefix?: string | undefined;
+  provider?: string | undefined;
   region?: string | undefined;
   use_path_style?: boolean | undefined;
 };
@@ -104,6 +112,7 @@ export const S3JobConfig$outboundSchema: z.ZodMiniType<
       z.array(ExportMetadataField$outboundSchema),
     ),
     keyPrefix: z.optional(z.string()),
+    provider: z.optional(SecretProvider$outboundSchema),
     region: z.optional(z.string()),
     usePathStyle: z.optional(z.boolean()),
   }),

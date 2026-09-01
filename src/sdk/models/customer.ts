@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
+import { TaxTreatment, TaxTreatment$inboundSchema } from "./tax-treatment.js";
 
 export type Customer = {
   /**
@@ -66,6 +67,7 @@ export type Customer = {
    */
   name?: string | undefined;
   status?: Status | undefined;
+  taxTreatment?: TaxTreatment | undefined;
   tenantId?: string | undefined;
   /**
    * Timezone is the customer's IANA timezone name (e.g. "Asia/Kolkata").
@@ -97,6 +99,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
+    tax_treatment: types.optional(TaxTreatment$inboundSchema),
     tenant_id: types.optional(types.string()),
     timezone: types.optional(types.string()),
     updated_at: types.optional(types.date()),
@@ -114,6 +117,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
       "created_by": "createdBy",
       "environment_id": "environmentId",
       "external_id": "externalId",
+      "tax_treatment": "taxTreatment",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",

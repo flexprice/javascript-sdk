@@ -8,26 +8,13 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import {
-  Status,
-  Status$inboundSchema,
-  Status$outboundSchema,
-} from "./status.js";
-import {
-  TaxRateScope,
-  TaxRateScope$inboundSchema,
-  TaxRateScope$outboundSchema,
-} from "./tax-rate-scope.js";
+import { Status, Status$inboundSchema } from "./status.js";
+import { TaxRateScope, TaxRateScope$inboundSchema } from "./tax-rate-scope.js";
 import {
   TaxRateStatus,
   TaxRateStatus$inboundSchema,
-  TaxRateStatus$outboundSchema,
 } from "./tax-rate-status.js";
-import {
-  TaxRateType,
-  TaxRateType$inboundSchema,
-  TaxRateType$outboundSchema,
-} from "./tax-rate-type.js";
+import { TaxRateType, TaxRateType$inboundSchema } from "./tax-rate-type.js";
 
 export type TaxRateResponse = {
   code?: string | undefined;
@@ -35,7 +22,6 @@ export type TaxRateResponse = {
   createdBy?: string | undefined;
   description?: string | undefined;
   environmentId?: string | undefined;
-  fixedValue?: string | undefined;
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
@@ -60,7 +46,6 @@ export const TaxRateResponse$inboundSchema: z.ZodMiniType<
     created_by: types.optional(types.string()),
     description: types.optional(types.string()),
     environment_id: types.optional(types.string()),
-    fixed_value: types.optional(types.string()),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
@@ -78,7 +63,6 @@ export const TaxRateResponse$inboundSchema: z.ZodMiniType<
       "created_at": "createdAt",
       "created_by": "createdBy",
       "environment_id": "environmentId",
-      "fixed_value": "fixedValue",
       "percentage_value": "percentageValue",
       "tax_rate_status": "taxRateStatus",
       "tax_rate_type": "taxRateType",
@@ -88,72 +72,7 @@ export const TaxRateResponse$inboundSchema: z.ZodMiniType<
     });
   }),
 );
-/** @internal */
-export type TaxRateResponse$Outbound = {
-  code?: string | undefined;
-  created_at?: string | undefined;
-  created_by?: string | undefined;
-  description?: string | undefined;
-  environment_id?: string | undefined;
-  fixed_value?: string | undefined;
-  id?: string | undefined;
-  metadata?: { [k: string]: string } | undefined;
-  name?: string | undefined;
-  percentage_value?: string | undefined;
-  scope?: string | undefined;
-  status?: string | undefined;
-  tax_rate_status?: string | undefined;
-  tax_rate_type?: string | undefined;
-  tenant_id?: string | undefined;
-  updated_at?: string | undefined;
-  updated_by?: string | undefined;
-};
 
-/** @internal */
-export const TaxRateResponse$outboundSchema: z.ZodMiniType<
-  TaxRateResponse$Outbound,
-  TaxRateResponse
-> = z.pipe(
-  z.object({
-    code: z.optional(z.string()),
-    createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
-    createdBy: z.optional(z.string()),
-    description: z.optional(z.string()),
-    environmentId: z.optional(z.string()),
-    fixedValue: z.optional(z.string()),
-    id: z.optional(z.string()),
-    metadata: z.optional(z.record(z.string(), z.string())),
-    name: z.optional(z.string()),
-    percentageValue: z.optional(z.string()),
-    scope: z.optional(TaxRateScope$outboundSchema),
-    status: z.optional(Status$outboundSchema),
-    taxRateStatus: z.optional(TaxRateStatus$outboundSchema),
-    taxRateType: z.optional(TaxRateType$outboundSchema),
-    tenantId: z.optional(z.string()),
-    updatedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
-    updatedBy: z.optional(z.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      createdAt: "created_at",
-      createdBy: "created_by",
-      environmentId: "environment_id",
-      fixedValue: "fixed_value",
-      percentageValue: "percentage_value",
-      taxRateStatus: "tax_rate_status",
-      taxRateType: "tax_rate_type",
-      tenantId: "tenant_id",
-      updatedAt: "updated_at",
-      updatedBy: "updated_by",
-    });
-  }),
-);
-
-export function taxRateResponseToJSON(
-  taxRateResponse: TaxRateResponse,
-): string {
-  return JSON.stringify(TaxRateResponse$outboundSchema.parse(taxRateResponse));
-}
 export function taxRateResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxRateResponse, SDKValidationError> {

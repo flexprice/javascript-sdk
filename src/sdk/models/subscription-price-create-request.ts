@@ -34,12 +34,14 @@ import {
   PriceUnitType,
   PriceUnitType$outboundSchema,
 } from "./price-unit-type.js";
+import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type SubscriptionPriceCreateRequest = {
   amount?: string | undefined;
   billingModel: BillingModel;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
+  bucketSize?: WindowSize | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   endDate?: Date | undefined;
@@ -65,6 +67,7 @@ export type SubscriptionPriceCreateRequest$Outbound = {
   billing_model: string;
   billing_period: string;
   billing_period_count?: number | undefined;
+  bucket_size?: string | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   end_date?: string | undefined;
@@ -94,6 +97,7 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
     billingModel: BillingModel$outboundSchema,
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
+    bucketSize: z.optional(WindowSize$outboundSchema),
     description: z.optional(z.string()),
     displayName: z.optional(z.string()),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -117,6 +121,7 @@ export const SubscriptionPriceCreateRequest$outboundSchema: z.ZodMiniType<
       billingModel: "billing_model",
       billingPeriod: "billing_period",
       billingPeriodCount: "billing_period_count",
+      bucketSize: "bucket_size",
       displayName: "display_name",
       endDate: "end_date",
       filterValues: "filter_values",

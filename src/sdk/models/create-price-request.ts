@@ -38,12 +38,14 @@ import {
   PriceUnitType,
   PriceUnitType$outboundSchema,
 } from "./price-unit-type.js";
+import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type CreatePriceRequest = {
   amount?: string | undefined;
   billingModel: BillingModel;
   billingPeriod: BillingPeriod;
   billingPeriodCount?: number | undefined;
+  bucketSize?: WindowSize | undefined;
   currency: string;
   description?: string | undefined;
   displayName?: string | undefined;
@@ -79,6 +81,7 @@ export type CreatePriceRequest$Outbound = {
   billing_model: string;
   billing_period: string;
   billing_period_count?: number | undefined;
+  bucket_size?: string | undefined;
   currency: string;
   description?: string | undefined;
   display_name?: string | undefined;
@@ -112,6 +115,7 @@ export const CreatePriceRequest$outboundSchema: z.ZodMiniType<
     billingModel: BillingModel$outboundSchema,
     billingPeriod: BillingPeriod$outboundSchema,
     billingPeriodCount: z.optional(z.int()),
+    bucketSize: z.optional(WindowSize$outboundSchema),
     currency: z.string(),
     description: z.optional(z.string()),
     displayName: z.optional(z.string()),
@@ -139,6 +143,7 @@ export const CreatePriceRequest$outboundSchema: z.ZodMiniType<
       billingModel: "billing_model",
       billingPeriod: "billing_period",
       billingPeriodCount: "billing_period_count",
+      bucketSize: "bucket_size",
       displayName: "display_name",
       endDate: "end_date",
       entityId: "entity_id",

@@ -119,6 +119,20 @@ export type CreateSubscriptionRequest = {
   endDate?: Date | undefined;
   externalCustomerId?: string | undefined;
   gatewayPaymentMethodId?: string | undefined;
+  /**
+   * IncludePriceIDs selects which plan prices to attach. Nil/omitted attaches matching-cadence
+   *
+   * @remarks
+   * prices plus ONETIME; [] attaches none (LineItems extras still apply); a non-empty list
+   * attaches only those IDs. Each listed ID must belong to the plan, match the subscription
+   * currency, and have a cadence that equals or strictly divides the subscription cadence.
+   * Pointer-slice distinguishes nil from [].
+   * NOTE: no `dive,required` on this tag — swaggo misinterprets `required`
+   * inside `dive` as marking the whole field required, which then shows up
+   * in the OpenAPI schema and breaks callers that omit the field. Per-element
+   * non-emptiness is enforced explicitly in Validate() below.
+   */
+  includePriceIds?: Array<string> | undefined;
   inheritance?: SubscriptionInheritanceConfig | undefined;
   /**
    * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
@@ -182,6 +196,7 @@ export type CreateSubscriptionRequest$Outbound = {
   end_date?: string | undefined;
   external_customer_id?: string | undefined;
   gateway_payment_method_id?: string | undefined;
+  include_price_ids?: Array<string> | undefined;
   inheritance?: SubscriptionInheritanceConfig$Outbound | undefined;
   line_item_commitments?:
     | { [k: string]: LineItemCommitmentConfig$Outbound }
@@ -234,6 +249,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     externalCustomerId: z.optional(z.string()),
     gatewayPaymentMethodId: z.optional(z.string()),
+    includePriceIds: z.optional(z.array(z.string())),
     inheritance: z.optional(SubscriptionInheritanceConfig$outboundSchema),
     lineItemCommitments: z.optional(
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
@@ -281,6 +297,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       endDate: "end_date",
       externalCustomerId: "external_customer_id",
       gatewayPaymentMethodId: "gateway_payment_method_id",
+      includePriceIds: "include_price_ids",
       lineItemCommitments: "line_item_commitments",
       lineItemCoupons: "line_item_coupons",
       lineItems: "line_items",

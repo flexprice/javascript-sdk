@@ -9,6 +9,7 @@ import {
   CreateEntityIntegrationMappingRequest$Outbound,
   CreateEntityIntegrationMappingRequest$outboundSchema,
 } from "./create-entity-integration-mapping-request.js";
+import { TaxTreatment, TaxTreatment$outboundSchema } from "./tax-treatment.js";
 
 /**
  * Request object for updating an existing customer. All fields are optional - only provided fields will be updated
@@ -64,6 +65,7 @@ export type UpdateCustomerRequest = {
    * name is the updated name or company name for the customer
    */
   name?: string | undefined;
+  taxTreatment?: TaxTreatment | undefined;
   /**
    * timezone is the updated IANA timezone name for the customer (e.g. "Asia/Kolkata", "America/New_York")
    */
@@ -86,6 +88,7 @@ export type UpdateCustomerRequest$Outbound = {
     | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
+  tax_treatment?: string | undefined;
   timezone?: string | undefined;
 };
 
@@ -109,6 +112,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
+    taxTreatment: z.optional(TaxTreatment$outboundSchema),
     timezone: z.optional(z.string()),
   }),
   z.transform((v) => {
@@ -121,6 +125,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressState: "address_state",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
+      taxTreatment: "tax_treatment",
     });
   }),
 );

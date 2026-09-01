@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
+import { TaxBehavior, TaxBehavior$inboundSchema } from "./tax-behavior.js";
 import {
   TaxRateEntityType,
   TaxRateEntityType$inboundSchema,
@@ -32,6 +33,7 @@ export type TaxAppliedResponse = {
   status?: Status | undefined;
   taxAmount?: string | undefined;
   taxAssociationId?: string | undefined;
+  taxBehavior?: TaxBehavior | undefined;
   taxRate?: TaxRateResponse | undefined;
   taxRateId?: string | undefined;
   taxableAmount?: string | undefined;
@@ -59,6 +61,7 @@ export const TaxAppliedResponse$inboundSchema: z.ZodMiniType<
     status: types.optional(Status$inboundSchema),
     tax_amount: types.optional(types.string()),
     tax_association_id: types.optional(types.string()),
+    tax_behavior: types.optional(TaxBehavior$inboundSchema),
     tax_rate: types.optional(TaxRateResponse$inboundSchema),
     tax_rate_id: types.optional(types.string()),
     taxable_amount: types.optional(types.string()),
@@ -77,6 +80,7 @@ export const TaxAppliedResponse$inboundSchema: z.ZodMiniType<
       "idempotency_key": "idempotencyKey",
       "tax_amount": "taxAmount",
       "tax_association_id": "taxAssociationId",
+      "tax_behavior": "taxBehavior",
       "tax_rate": "taxRate",
       "tax_rate_id": "taxRateId",
       "taxable_amount": "taxableAmount",

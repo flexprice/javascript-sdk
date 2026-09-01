@@ -16,6 +16,7 @@ import {
   PriceTransformQuantity$Outbound,
   PriceTransformQuantity$outboundSchema,
 } from "./price-transform-quantity.js";
+import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type UpdatePriceRequest = {
   /**
@@ -23,6 +24,7 @@ export type UpdatePriceRequest = {
    */
   amount?: string | undefined;
   billingModel?: BillingModel | undefined;
+  bucketSize?: WindowSize | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   effectiveFrom?: string | undefined;
@@ -63,6 +65,7 @@ export type UpdatePriceRequest = {
 export type UpdatePriceRequest$Outbound = {
   amount?: string | undefined;
   billing_model?: string | undefined;
+  bucket_size?: string | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   effective_from?: string | undefined;
@@ -84,6 +87,7 @@ export const UpdatePriceRequest$outboundSchema: z.ZodMiniType<
   z.object({
     amount: z.optional(z.string()),
     billingModel: z.optional(BillingModel$outboundSchema),
+    bucketSize: z.optional(WindowSize$outboundSchema),
     description: z.optional(z.string()),
     displayName: z.optional(z.string()),
     effectiveFrom: z.optional(z.string()),
@@ -99,6 +103,7 @@ export const UpdatePriceRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       billingModel: "billing_model",
+      bucketSize: "bucket_size",
       displayName: "display_name",
       effectiveFrom: "effective_from",
       groupId: "group_id",

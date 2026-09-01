@@ -4,11 +4,13 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { TaxBehavior, TaxBehavior$outboundSchema } from "./tax-behavior.js";
 
 export type TaxAssociationUpdateRequest = {
   autoApply?: boolean | undefined;
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
+  taxBehavior?: TaxBehavior | undefined;
 };
 
 /** @internal */
@@ -16,6 +18,7 @@ export type TaxAssociationUpdateRequest$Outbound = {
   auto_apply?: boolean | undefined;
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
+  tax_behavior?: string | undefined;
 };
 
 /** @internal */
@@ -27,10 +30,12 @@ export const TaxAssociationUpdateRequest$outboundSchema: z.ZodMiniType<
     autoApply: z.optional(z.boolean()),
     metadata: z.optional(z.record(z.string(), z.string())),
     priority: z.optional(z.int()),
+    taxBehavior: z.optional(TaxBehavior$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       autoApply: "auto_apply",
+      taxBehavior: "tax_behavior",
     });
   }),
 );

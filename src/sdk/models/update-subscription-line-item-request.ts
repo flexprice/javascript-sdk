@@ -29,6 +29,7 @@ import {
   PriceTransformQuantity$Outbound,
   PriceTransformQuantity$outboundSchema,
 } from "./price-transform-quantity.js";
+import { WindowSize, WindowSize$outboundSchema } from "./window-size.js";
 
 export type UpdateSubscriptionLineItemRequest = {
   /**
@@ -36,6 +37,7 @@ export type UpdateSubscriptionLineItemRequest = {
    */
   amount?: string | undefined;
   billingModel?: BillingModel | undefined;
+  bucketSize?: WindowSize | undefined;
   /**
    * Commitment fields
    */
@@ -70,6 +72,7 @@ export type UpdateSubscriptionLineItemRequest = {
 export type UpdateSubscriptionLineItemRequest$Outbound = {
   amount?: string | undefined;
   billing_model?: string | undefined;
+  bucket_size?: string | undefined;
   commitment_amount?: number | undefined;
   commitment_duration?: string | undefined;
   commitment_overage_factor?: number | undefined;
@@ -93,6 +96,7 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
   z.object({
     amount: z.optional(z.string()),
     billingModel: z.optional(BillingModel$outboundSchema),
+    bucketSize: z.optional(WindowSize$outboundSchema),
     commitmentAmount: z.optional(z.number()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
     commitmentOverageFactor: z.optional(z.number()),
@@ -112,6 +116,7 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       billingModel: "billing_model",
+      bucketSize: "bucket_size",
       commitmentAmount: "commitment_amount",
       commitmentDuration: "commitment_duration",
       commitmentOverageFactor: "commitment_overage_factor",

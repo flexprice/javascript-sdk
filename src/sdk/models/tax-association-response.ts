@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
+import { TaxBehavior, TaxBehavior$inboundSchema } from "./tax-behavior.js";
 import {
   TaxRateEntityType,
   TaxRateEntityType$inboundSchema,
@@ -59,6 +60,7 @@ export type TaxAssociationResponse = {
    */
   startDate?: Date | undefined;
   status?: Status | undefined;
+  taxBehavior?: TaxBehavior | undefined;
   taxRate?: TaxRateResponse | undefined;
   /**
    * Reference to the TaxRate entity
@@ -88,6 +90,7 @@ export const TaxAssociationResponse$inboundSchema: z.ZodMiniType<
     priority: types.optional(types.number()),
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
+    tax_behavior: types.optional(TaxBehavior$inboundSchema),
     tax_rate: types.optional(TaxRateResponse$inboundSchema),
     tax_rate_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
@@ -104,6 +107,7 @@ export const TaxAssociationResponse$inboundSchema: z.ZodMiniType<
       "entity_type": "entityType",
       "environment_id": "environmentId",
       "start_date": "startDate",
+      "tax_behavior": "taxBehavior",
       "tax_rate": "taxRate",
       "tax_rate_id": "taxRateId",
       "tenant_id": "tenantId",

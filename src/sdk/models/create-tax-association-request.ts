@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { TaxBehavior, TaxBehavior$outboundSchema } from "./tax-behavior.js";
 import {
   TaxRateEntityType,
   TaxRateEntityType$outboundSchema,
@@ -25,6 +26,7 @@ export type CreateTaxAssociationRequest = {
    * StartDate sets when this association becomes active. Defaults to now if omitted.
    */
   startDate?: Date | undefined;
+  taxBehavior?: TaxBehavior | undefined;
   taxRateCode: string;
 };
 
@@ -39,6 +41,7 @@ export type CreateTaxAssociationRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   priority?: number | undefined;
   start_date?: string | undefined;
+  tax_behavior?: string | undefined;
   tax_rate_code: string;
 };
 
@@ -57,6 +60,7 @@ export const CreateTaxAssociationRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     priority: z.optional(z.int()),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    taxBehavior: z.optional(TaxBehavior$outboundSchema),
     taxRateCode: z.string(),
   }),
   z.transform((v) => {
@@ -67,6 +71,7 @@ export const CreateTaxAssociationRequest$outboundSchema: z.ZodMiniType<
       entityType: "entity_type",
       externalCustomerId: "external_customer_id",
       startDate: "start_date",
+      taxBehavior: "tax_behavior",
       taxRateCode: "tax_rate_code",
     });
   }),

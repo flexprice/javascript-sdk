@@ -3,18 +3,16 @@
  */
 
 import * as z from "zod/v4-mini";
-import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum } from "../../types/enums.js";
 
 export const TaxRateType = {
   Percentage: "percentage",
-  Fixed: "fixed",
 } as const;
-export type TaxRateType = OpenEnum<typeof TaxRateType>;
+export type TaxRateType = ClosedEnum<typeof TaxRateType>;
 
 /** @internal */
-export const TaxRateType$inboundSchema: z.ZodMiniType<TaxRateType, unknown> =
-  openEnums.inboundSchema(TaxRateType);
+export const TaxRateType$inboundSchema: z.ZodMiniEnum<typeof TaxRateType> = z
+  .enum(TaxRateType);
 /** @internal */
-export const TaxRateType$outboundSchema: z.ZodMiniType<string, TaxRateType> =
-  openEnums.outboundSchema(TaxRateType);
+export const TaxRateType$outboundSchema: z.ZodMiniEnum<typeof TaxRateType> =
+  TaxRateType$inboundSchema;
