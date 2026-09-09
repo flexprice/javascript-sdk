@@ -19,11 +19,11 @@ import {
   InvoiceSyncSettings,
   InvoiceSyncSettings$inboundSchema,
 } from "./invoice-sync-settings.js";
-import {
-  S3ExportConfig,
-  S3ExportConfig$inboundSchema,
-} from "./s3-export-config.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  StorageExportConfig,
+  StorageExportConfig$inboundSchema,
+} from "./storage-export-config.js";
 
 export type SyncConfig = {
   awsMarketplace?: AWSMarketplaceSyncConfig | undefined;
@@ -35,7 +35,7 @@ export type SyncConfig = {
   plan?: EntitySyncConfig | undefined;
   price?: EntitySyncConfig | undefined;
   quote?: EntitySyncConfig | undefined;
-  s3?: S3ExportConfig | undefined;
+  s3?: StorageExportConfig | undefined;
   subscription?: EntitySyncConfig | undefined;
 };
 
@@ -52,7 +52,7 @@ export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
       plan: types.optional(EntitySyncConfig$inboundSchema),
       price: types.optional(EntitySyncConfig$inboundSchema),
       quote: types.optional(EntitySyncConfig$inboundSchema),
-      s3: types.optional(S3ExportConfig$inboundSchema),
+      s3: types.optional(StorageExportConfig$inboundSchema),
       subscription: types.optional(EntitySyncConfig$inboundSchema),
     }),
     z.transform((v) => {

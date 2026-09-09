@@ -4,15 +4,10 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   BillingPeriod,
-  BillingPeriod$inboundSchema,
   BillingPeriod$outboundSchema,
 } from "./billing-period.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CreateSubscriptionParams = {
   billingPeriod?: BillingPeriod | undefined;
@@ -25,32 +20,6 @@ export type CreateSubscriptionParams = {
   subscriptionId?: string | undefined;
 };
 
-/** @internal */
-export const CreateSubscriptionParams$inboundSchema: z.ZodMiniType<
-  CreateSubscriptionParams,
-  unknown
-> = z.pipe(
-  z.object({
-    billing_period: types.optional(BillingPeriod$inboundSchema),
-    currency: types.optional(types.string()),
-    end_date: types.optional(types.date()),
-    lookup_key: types.optional(types.string()),
-    metadata: types.optional(z.record(z.string(), types.string())),
-    plan_id: types.optional(types.string()),
-    start_date: types.optional(types.date()),
-    subscription_id: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "billing_period": "billingPeriod",
-      "end_date": "endDate",
-      "lookup_key": "lookupKey",
-      "plan_id": "planId",
-      "start_date": "startDate",
-      "subscription_id": "subscriptionId",
-    });
-  }),
-);
 /** @internal */
 export type CreateSubscriptionParams$Outbound = {
   billing_period?: string | undefined;
@@ -95,14 +64,5 @@ export function createSubscriptionParamsToJSON(
 ): string {
   return JSON.stringify(
     CreateSubscriptionParams$outboundSchema.parse(createSubscriptionParams),
-  );
-}
-export function createSubscriptionParamsFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateSubscriptionParams, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateSubscriptionParams$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateSubscriptionParams' from JSON`,
   );
 }

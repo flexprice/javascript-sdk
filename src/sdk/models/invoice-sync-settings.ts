@@ -12,6 +12,10 @@ import {
   BillingPeriod$inboundSchema,
 } from "./billing-period.js";
 import {
+  GlobalCustomField,
+  GlobalCustomField$inboundSchema,
+} from "./global-custom-field.js";
+import {
   MetadataCustomField,
   MetadataCustomField$inboundSchema,
 } from "./metadata-custom-field.js";
@@ -23,21 +27,37 @@ import {
 
 export type InvoiceSyncSettings = {
   /**
-   * MetadataCustomFields copies metadata values onto Zoho invoice custom fields
+   * Zoho chart-of-accounts id ("Deposit To"). Empty omits account_id, leaving Zoho's
    *
    * @remarks
-   * verbatim.
+   * Undeposited Funds default.a
+   */
+  depositToAccountId?: string | undefined;
+  /**
+   * Fixed values written to Zoho invoice custom fields on every sync, independent of
+   *
+   * @remarks
+   * any metadata source.
+   */
+  globalCustomFields?: Array<GlobalCustomField> | undefined;
+  /**
+   * Copies metadata values onto Zoho invoice custom fields verbatim.
    */
   metadataCustomFields?: Array<MetadataCustomField> | undefined;
   normalizeFixedTo?: BillingPeriod | undefined;
-  servicePeriodCustomFields?: ServicePeriodCustomFields | undefined;
   /**
-   * SubmitForApproval submits the synced invoice into the merchant's Zoho Books approval
+   * Zoho payment modes are merchant-editable free strings with no id, so this is passed
    *
    * @remarks
-   * flow before recording payment. Zoho rejects payments on draft invoices, and merchants
-   * configure a Zoho auto-approval rule for FlexPrice-sent invoices, so we submit, wait for
-   * that rule to fire, then pay.
+   * through verbatim. Empty means DefaultZohoPaymentMode.
+   */
+  paymentMode?: string | undefined;
+  servicePeriodCustomFields?: ServicePeriodCustomFields | undefined;
+  /**
+   * Zoho rejects payments on draft invoices, and merchants configure a Zoho auto-approval
+   *
+   * @remarks
+   * rule for FlexPrice-sent invoices, so we submit, wait for that rule to fire, then pay.
    */
   submitForApproval?: boolean | undefined;
 };
@@ -48,10 +68,15 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    deposit_to_account_id: types.optional(types.string()),
+    global_custom_fields: types.optional(
+      z.array(GlobalCustomField$inboundSchema),
+    ),
     metadata_custom_fields: types.optional(
       z.array(MetadataCustomField$inboundSchema),
     ),
     normalize_fixed_to: types.optional(BillingPeriod$inboundSchema),
+    payment_mode: types.optional(types.string()),
     service_period_custom_fields: types.optional(
       ServicePeriodCustomFields$inboundSchema,
     ),
@@ -59,8 +84,11 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "deposit_to_account_id": "depositToAccountId",
+      "global_custom_fields": "globalCustomFields",
       "metadata_custom_fields": "metadataCustomFields",
       "normalize_fixed_to": "normalizeFixedTo",
+      "payment_mode": "paymentMode",
       "service_period_custom_fields": "servicePeriodCustomFields",
       "submit_for_approval": "submitForApproval",
     });

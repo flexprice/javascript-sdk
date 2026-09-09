@@ -26,6 +26,7 @@ import { Plans } from "./plans.js";
 import { PriceUnits } from "./price-units.js";
 import { Prices } from "./prices.js";
 import { Rbac } from "./rbac.js";
+import { Refunds } from "./refunds.js";
 import { ScheduledTasks } from "./scheduled-tasks.js";
 import { Secrets } from "./secrets.js";
 import { Subscriptions } from "./subscriptions.js";
@@ -158,6 +159,11 @@ export class Flexprice extends ClientSDK {
   private _rbac?: Rbac;
   get rbac(): Rbac {
     return (this._rbac ??= new Rbac(this._options));
+  }
+
+  private _refunds?: Refunds;
+  get refunds(): Refunds {
+    return (this._refunds ??= new Refunds(this._options));
   }
 
   private _secrets?: Secrets;

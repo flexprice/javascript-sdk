@@ -13,6 +13,7 @@ import {
   CreditNoteReason,
   CreditNoteReason$outboundSchema,
 } from "./credit-note-reason.js";
+import { RefundTarget, RefundTarget$outboundSchema } from "./refund-target.js";
 
 export type CreateCreditNoteRequest = {
   /**
@@ -41,6 +42,7 @@ export type CreateCreditNoteRequest = {
    */
   processCreditNote?: boolean | undefined;
   reason: CreditNoteReason;
+  refundTarget?: RefundTarget | undefined;
 };
 
 /** @internal */
@@ -53,6 +55,7 @@ export type CreateCreditNoteRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   process_credit_note: boolean;
   reason: string;
+  refund_target?: string | undefined;
 };
 
 /** @internal */
@@ -71,6 +74,7 @@ export const CreateCreditNoteRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     processCreditNote: z._default(z.boolean(), true),
     reason: CreditNoteReason$outboundSchema,
+    refundTarget: z.optional(RefundTarget$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -79,6 +83,7 @@ export const CreateCreditNoteRequest$outboundSchema: z.ZodMiniType<
       invoiceId: "invoice_id",
       lineItems: "line_items",
       processCreditNote: "process_credit_note",
+      refundTarget: "refund_target",
     });
   }),
 );

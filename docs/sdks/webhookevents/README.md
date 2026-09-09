@@ -33,6 +33,9 @@
 * [postWebhookEventsPaymentPending](#postwebhookeventspaymentpending) - payment.pending
 * [postWebhookEventsPaymentSuccess](#postwebhookeventspaymentsuccess) - payment.success
 * [postWebhookEventsPaymentUpdated](#postwebhookeventspaymentupdated) - payment.updated
+* [postWebhookEventsRefundCreated](#postwebhookeventsrefundcreated) - refund.created
+* [postWebhookEventsRefundFailed](#postwebhookeventsrefundfailed) - refund.failed
+* [postWebhookEventsRefundSucceeded](#postwebhookeventsrefundsucceeded) - refund.succeeded
 * [postWebhookEventsSubscriptionActivated](#postwebhookeventssubscriptionactivated) - subscription.activated
 * [postWebhookEventsSubscriptionCancelled](#postwebhookeventssubscriptioncancelled) - subscription.cancelled
 * [postWebhookEventsSubscriptionCreated](#postwebhookeventssubscriptioncreated) - subscription.created
@@ -1220,7 +1223,7 @@ run();
 
 ## postWebhookEventsInvoiceCommunicationTriggered
 
-Fired when an invoice communication (e.g. email notification) is triggered. Doc-only for parsing.
+Fired when an invoice communication (e.g. email notification) is triggered. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1288,7 +1291,7 @@ run();
 
 ## postWebhookEventsInvoiceCreateDrafted
 
-Fired when a new invoice is created in draft state. Doc-only for parsing.
+Fired when a new invoice is created in draft state. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1356,7 +1359,7 @@ run();
 
 ## postWebhookEventsInvoicePaymentOverdue
 
-Fired when an invoice payment is overdue past the due date. Doc-only for parsing.
+Fired when an invoice payment is overdue past the due date. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1424,7 +1427,7 @@ run();
 
 ## postWebhookEventsInvoiceUpdate
 
-Fired when an invoice is updated. Doc-only for parsing.
+Fired when an invoice is updated. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1492,7 +1495,7 @@ run();
 
 ## postWebhookEventsInvoiceUpdateFinalized
 
-Fired when an invoice is finalized and locked for payment. Doc-only for parsing.
+Fired when an invoice is finalized and locked for payment. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1560,7 +1563,7 @@ run();
 
 ## postWebhookEventsInvoiceUpdatePayment
 
-Fired when an invoice payment status changes. Doc-only for parsing.
+Fired when an invoice payment status changes. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -1628,7 +1631,7 @@ run();
 
 ## postWebhookEventsInvoiceUpdateVoided
 
-Fired when an invoice is voided (e.g. order cancelled or duplicate). Doc-only for parsing.
+Fired when an invoice is voided (e.g. order cancelled or duplicate). `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
 
 ### Example Usage
 
@@ -2027,6 +2030,210 @@ run();
 ### Response
 
 **Promise\<[models.WebhookDtoPaymentWebhookPayload](../../sdk/models/webhook-dto-payment-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsRefundCreated
+
+Fired when a refund is planned against an invoice, before the money moves. Doc-only for parsing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/refund.created" method="post" path="/webhook-events/refund.created" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsRefundCreated();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsRefundCreated } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-refund-created.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsRefundCreated(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsRefundCreated failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoRefundWebhookPayload](../../sdk/models/webhook-dto-refund-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsRefundFailed
+
+Fired when a refund fails. A gateway refund that fails is retried into the customer's wallet. Doc-only for parsing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/refund.failed" method="post" path="/webhook-events/refund.failed" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsRefundFailed();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsRefundFailed } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-refund-failed.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsRefundFailed(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsRefundFailed failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoRefundWebhookPayload](../../sdk/models/webhook-dto-refund-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsRefundSucceeded
+
+Fired when a refund settles, to the original payment gateway or to a wallet. Doc-only for parsing.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/refund.succeeded" method="post" path="/webhook-events/refund.succeeded" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsRefundSucceeded();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsRefundSucceeded } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-refund-succeeded.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsRefundSucceeded(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsRefundSucceeded failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoRefundWebhookPayload](../../sdk/models/webhook-dto-refund-webhook-payload.md)\>**
 
 ### Errors
 

@@ -17,6 +17,11 @@ import {
   PaymentStatus$inboundSchema,
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import { TaxSummary, TaxSummary$inboundSchema } from "./tax-summary.js";
+import {
+  WebhookDtoCouponApplication,
+  WebhookDtoCouponApplication$inboundSchema,
+} from "./webhook-dto-coupon-application.js";
 import {
   WebhookDtoCustomer,
   WebhookDtoCustomer$inboundSchema,
@@ -29,19 +34,29 @@ import {
   WebhookDtoSubscription,
   WebhookDtoSubscription$inboundSchema,
 } from "./webhook-dto-subscription.js";
+import {
+  WebhookDtoTaxApplied,
+  WebhookDtoTaxApplied$inboundSchema,
+} from "./webhook-dto-tax-applied.js";
 
 export type WebhookDtoInvoice = {
   amountDue?: string | undefined;
   amountPaid?: string | undefined;
   amountRemaining?: string | undefined;
+  billingPeriod?: string | undefined;
   billingReason?: string | undefined;
+  billingSequence?: number | undefined;
+  couponApplications?: Array<WebhookDtoCouponApplication> | undefined;
+  createdAt?: Date | undefined;
   currency?: string | undefined;
   customer?: WebhookDtoCustomer | undefined;
   customerId?: string | undefined;
+  description?: string | undefined;
   dueDate?: Date | undefined;
   environmentId?: string | undefined;
   finalizedAt?: Date | undefined;
   id?: string | undefined;
+  idempotencyKey?: string | undefined;
   invoiceNumber?: string | undefined;
   invoicePdfUrl?: string | undefined;
   invoiceStatus?: InvoiceStatus | undefined;
@@ -55,7 +70,13 @@ export type WebhookDtoInvoice = {
   subscription?: WebhookDtoSubscription | undefined;
   subscriptionId?: string | undefined;
   subtotal?: string | undefined;
+  taxSummary?: TaxSummary | undefined;
+  taxes?: Array<WebhookDtoTaxApplied> | undefined;
   total?: string | undefined;
+  totalDiscount?: string | undefined;
+  totalPrepaidCreditsApplied?: string | undefined;
+  totalTax?: string | undefined;
+  updatedAt?: Date | undefined;
   voidedAt?: Date | undefined;
 };
 
@@ -68,14 +89,22 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
     amount_due: types.optional(types.string()),
     amount_paid: types.optional(types.string()),
     amount_remaining: types.optional(types.string()),
+    billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
+    billing_sequence: types.optional(types.number()),
+    coupon_applications: types.optional(
+      z.array(WebhookDtoCouponApplication$inboundSchema),
+    ),
+    created_at: types.optional(types.date()),
     currency: types.optional(types.string()),
     customer: types.optional(WebhookDtoCustomer$inboundSchema),
     customer_id: types.optional(types.string()),
+    description: types.optional(types.string()),
     due_date: types.optional(types.date()),
     environment_id: types.optional(types.string()),
     finalized_at: types.optional(types.date()),
     id: types.optional(types.string()),
+    idempotency_key: types.optional(types.string()),
     invoice_number: types.optional(types.string()),
     invoice_pdf_url: types.optional(types.string()),
     invoice_status: types.optional(InvoiceStatus$inboundSchema),
@@ -91,7 +120,13 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
     subscription: types.optional(WebhookDtoSubscription$inboundSchema),
     subscription_id: types.optional(types.string()),
     subtotal: types.optional(types.string()),
+    tax_summary: types.optional(TaxSummary$inboundSchema),
+    taxes: types.optional(z.array(WebhookDtoTaxApplied$inboundSchema)),
     total: types.optional(types.string()),
+    total_discount: types.optional(types.string()),
+    total_prepaid_credits_applied: types.optional(types.string()),
+    total_tax: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
     voided_at: types.optional(types.date()),
   }),
   z.transform((v) => {
@@ -99,11 +134,16 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
       "amount_due": "amountDue",
       "amount_paid": "amountPaid",
       "amount_remaining": "amountRemaining",
+      "billing_period": "billingPeriod",
       "billing_reason": "billingReason",
+      "billing_sequence": "billingSequence",
+      "coupon_applications": "couponApplications",
+      "created_at": "createdAt",
       "customer_id": "customerId",
       "due_date": "dueDate",
       "environment_id": "environmentId",
       "finalized_at": "finalizedAt",
+      "idempotency_key": "idempotencyKey",
       "invoice_number": "invoiceNumber",
       "invoice_pdf_url": "invoicePdfUrl",
       "invoice_status": "invoiceStatus",
@@ -114,6 +154,11 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
       "period_end": "periodEnd",
       "period_start": "periodStart",
       "subscription_id": "subscriptionId",
+      "tax_summary": "taxSummary",
+      "total_discount": "totalDiscount",
+      "total_prepaid_credits_applied": "totalPrepaidCreditsApplied",
+      "total_tax": "totalTax",
+      "updated_at": "updatedAt",
       "voided_at": "voidedAt",
     });
   }),

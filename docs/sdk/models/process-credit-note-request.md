@@ -12,6 +12,7 @@ let value: ProcessCreditNoteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | Credit note ID     |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `id`                                                                                 | *string*                                                                             | :heavy_check_mark:                                                                   | Credit note ID                                                                       |
+| `body`                                                                               | [models.FinalizeCreditNoteRequest](../../sdk/models/finalize-credit-note-request.md) | :heavy_minus_sign:                                                                   | Finalize options                                                                     |

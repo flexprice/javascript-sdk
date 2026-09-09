@@ -1,7 +1,5 @@
 # ChangedInvoiceStatus
 
-preview | issued | INITIATED | PENDING | PROCESSING | SUCCEEDED | OVERPAID | FAILED | REFUNDED | PARTIALLY_REFUNDED
-
 ## Example Usage
 
 ```typescript

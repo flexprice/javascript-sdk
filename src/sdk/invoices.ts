@@ -4,6 +4,7 @@
 
 import { invoicesAttemptInvoicePayment } from "../funcs/invoices-attempt-invoice-payment.js";
 import { invoicesCreateInvoice } from "../funcs/invoices-create-invoice.js";
+import { invoicesExecuteInvoiceModify } from "../funcs/invoices-execute-invoice-modify.js";
 import { invoicesFinalizeInvoice } from "../funcs/invoices-finalize-invoice.js";
 import { invoicesGetCustomerInvoiceSummary } from "../funcs/invoices-get-customer-invoice-summary.js";
 import { invoicesGetInvoicePdf } from "../funcs/invoices-get-invoice-pdf.js";
@@ -161,6 +162,25 @@ export class Invoices extends ClientSDK {
     return unwrapAsync(invoicesFinalizeInvoice(
       this,
       id,
+      options,
+    ));
+  }
+
+  /**
+   * Execute invoice modification
+   *
+   * @remarks
+   * Execute a modification on a draft or finalized invoice. Supports line item changes: add (bulk), update (one line item per call; the edit is versioned, so the line item id changes), and remove (bulk, soft delete). Totals are recalculated from the remaining line items; a manual edit marks the invoice as manually edited, which disables recompute. Modifying a FINALIZED invoice voids it and recreates it as a draft copy carrying all current data (description, billing period, due date, metadata, line items); the modification lands on the copy and the response returns the new draft — chain subsequent calls to the returned invoice id; a call that still targets the voided original is rejected with an error naming the replacement.
+   */
+  async executeInvoiceModify(
+    id: string,
+    body: models.ExecuteInvoiceModifyRequest,
+    options?: RequestOptions,
+  ): Promise<models.InvoiceModifyResponse> {
+    return unwrapAsync(invoicesExecuteInvoiceModify(
+      this,
+      id,
+      body,
       options,
     ));
   }

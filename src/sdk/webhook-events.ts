@@ -31,6 +31,9 @@ import { webhookEventsPostWebhookEventsPaymentFailed } from "../funcs/webhook-ev
 import { webhookEventsPostWebhookEventsPaymentPending } from "../funcs/webhook-events-post-webhook-events-payment-pending.js";
 import { webhookEventsPostWebhookEventsPaymentSuccess } from "../funcs/webhook-events-post-webhook-events-payment-success.js";
 import { webhookEventsPostWebhookEventsPaymentUpdated } from "../funcs/webhook-events-post-webhook-events-payment-updated.js";
+import { webhookEventsPostWebhookEventsRefundCreated } from "../funcs/webhook-events-post-webhook-events-refund-created.js";
+import { webhookEventsPostWebhookEventsRefundFailed } from "../funcs/webhook-events-post-webhook-events-refund-failed.js";
+import { webhookEventsPostWebhookEventsRefundSucceeded } from "../funcs/webhook-events-post-webhook-events-refund-succeeded.js";
 import { webhookEventsPostWebhookEventsSubscriptionActivated } from "../funcs/webhook-events-post-webhook-events-subscription-activated.js";
 import { webhookEventsPostWebhookEventsSubscriptionCancelled } from "../funcs/webhook-events-post-webhook-events-subscription-cancelled.js";
 import { webhookEventsPostWebhookEventsSubscriptionCreated } from "../funcs/webhook-events-post-webhook-events-subscription-created.js";
@@ -323,7 +326,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.communication.triggered
    *
    * @remarks
-   * Fired when an invoice communication (e.g. email notification) is triggered. Doc-only for parsing.
+   * Fired when an invoice communication (e.g. email notification) is triggered. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceCommunicationTriggered(
     options?: RequestOptions,
@@ -340,7 +343,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.create.drafted
    *
    * @remarks
-   * Fired when a new invoice is created in draft state. Doc-only for parsing.
+   * Fired when a new invoice is created in draft state. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceCreateDrafted(
     options?: RequestOptions,
@@ -355,7 +358,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.payment.overdue
    *
    * @remarks
-   * Fired when an invoice payment is overdue past the due date. Doc-only for parsing.
+   * Fired when an invoice payment is overdue past the due date. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoicePaymentOverdue(
     options?: RequestOptions,
@@ -370,7 +373,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.update
    *
    * @remarks
-   * Fired when an invoice is updated. Doc-only for parsing.
+   * Fired when an invoice is updated. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceUpdate(
     options?: RequestOptions,
@@ -385,7 +388,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.update.finalized
    *
    * @remarks
-   * Fired when an invoice is finalized and locked for payment. Doc-only for parsing.
+   * Fired when an invoice is finalized and locked for payment. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceUpdateFinalized(
     options?: RequestOptions,
@@ -400,7 +403,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.update.payment
    *
    * @remarks
-   * Fired when an invoice payment status changes. Doc-only for parsing.
+   * Fired when an invoice payment status changes. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceUpdatePayment(
     options?: RequestOptions,
@@ -415,7 +418,7 @@ export class WebhookEvents extends ClientSDK {
    * invoice.update.voided
    *
    * @remarks
-   * Fired when an invoice is voided (e.g. order cancelled or duplicate). Doc-only for parsing.
+   * Fired when an invoice is voided (e.g. order cancelled or duplicate). `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
    */
   async postWebhookEventsInvoiceUpdateVoided(
     options?: RequestOptions,
@@ -496,6 +499,51 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoPaymentWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsPaymentUpdated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * refund.created
+   *
+   * @remarks
+   * Fired when a refund is planned against an invoice, before the money moves. Doc-only for parsing.
+   */
+  async postWebhookEventsRefundCreated(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoRefundWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsRefundCreated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * refund.failed
+   *
+   * @remarks
+   * Fired when a refund fails. A gateway refund that fails is retried into the customer's wallet. Doc-only for parsing.
+   */
+  async postWebhookEventsRefundFailed(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoRefundWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsRefundFailed(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * refund.succeeded
+   *
+   * @remarks
+   * Fired when a refund settles, to the original payment gateway or to a wallet. Doc-only for parsing.
+   */
+  async postWebhookEventsRefundSucceeded(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoRefundWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsRefundSucceeded(
       this,
       options,
     ));

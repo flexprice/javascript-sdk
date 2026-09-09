@@ -17,30 +17,30 @@ import {
 } from "./s3-encryption-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
-export type S3ExportConfig = {
+export type StorageExportConfig = {
   /**
-   * S3 bucket name
+   * Storage bucket name
    */
   bucket?: string | undefined;
   compression?: S3CompressionType | undefined;
   encryption?: S3EncryptionType | undefined;
   /**
-   * If true, use Flexprice-managed S3 credentials instead of user-provided
+   * If true, use Flexprice-managed storage credentials instead of user-provided
    */
   isFlexpriceManaged?: boolean | undefined;
   /**
-   * Optional prefix for S3 keys (e.g., "flexprice-exports/")
+   * Optional prefix for object keys (e.g., "flexprice-exports/")
    */
   keyPrefix?: string | undefined;
   /**
-   * AWS region (e.g., "us-west-2")
+   * Cloud region (e.g., "us-west-2"); unused for GCS
    */
   region?: string | undefined;
 };
 
 /** @internal */
-export const S3ExportConfig$inboundSchema: z.ZodMiniType<
-  S3ExportConfig,
+export const StorageExportConfig$inboundSchema: z.ZodMiniType<
+  StorageExportConfig,
   unknown
 > = z.pipe(
   z.object({
@@ -59,12 +59,12 @@ export const S3ExportConfig$inboundSchema: z.ZodMiniType<
   }),
 );
 
-export function s3ExportConfigFromJSON(
+export function storageExportConfigFromJSON(
   jsonString: string,
-): SafeParseResult<S3ExportConfig, SDKValidationError> {
+): SafeParseResult<StorageExportConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => S3ExportConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'S3ExportConfig' from JSON`,
+    (x) => StorageExportConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StorageExportConfig' from JSON`,
   );
 }

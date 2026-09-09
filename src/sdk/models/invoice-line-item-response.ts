@@ -11,6 +11,10 @@ import {
   CommitmentInfo,
   CommitmentInfo$inboundSchema,
 } from "./commitment-info.js";
+import {
+  CustomCurrencyLineItem,
+  CustomCurrencyLineItem$inboundSchema,
+} from "./custom-currency-line-item.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SourceUsageItem,
@@ -35,6 +39,7 @@ export type InvoiceLineItemResponse = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   currency?: string | undefined;
+  customCurrency?: CustomCurrencyLineItem | undefined;
   customerId?: string | undefined;
   displayName?: string | undefined;
   entityId?: string | undefined;
@@ -104,6 +109,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
+    custom_currency: types.optional(CustomCurrencyLineItem$inboundSchema),
     customer_id: types.optional(types.string()),
     display_name: types.optional(types.string()),
     entity_id: types.optional(types.string()),
@@ -142,6 +148,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
       "commitment_info": "commitmentInfo",
       "created_at": "createdAt",
       "created_by": "createdBy",
+      "custom_currency": "customCurrency",
       "customer_id": "customerId",
       "display_name": "displayName",
       "entity_id": "entityId",

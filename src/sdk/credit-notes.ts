@@ -53,11 +53,13 @@ export class CreditNotes extends ClientSDK {
    */
   async processCreditNote(
     id: string,
+    body?: models.FinalizeCreditNoteRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesProcessCreditNote(
       this,
       id,
+      body,
       options,
     ));
   }

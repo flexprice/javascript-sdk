@@ -3,17 +3,27 @@
  */
 
 import * as z from "zod/v4-mini";
+import {
+  FinalizeCreditNoteRequest,
+  FinalizeCreditNoteRequest$Outbound,
+  FinalizeCreditNoteRequest$outboundSchema,
+} from "./finalize-credit-note-request.js";
 
 export type ProcessCreditNoteRequest = {
   /**
    * Credit note ID
    */
   id: string;
+  /**
+   * Finalize options
+   */
+  body?: FinalizeCreditNoteRequest | undefined;
 };
 
 /** @internal */
 export type ProcessCreditNoteRequest$Outbound = {
   id: string;
+  body?: FinalizeCreditNoteRequest$Outbound | undefined;
 };
 
 /** @internal */
@@ -22,6 +32,7 @@ export const ProcessCreditNoteRequest$outboundSchema: z.ZodMiniType<
   ProcessCreditNoteRequest
 > = z.object({
   id: z.string(),
+  body: z.optional(FinalizeCreditNoteRequest$outboundSchema),
 });
 
 export function processCreditNoteRequestToJSON(

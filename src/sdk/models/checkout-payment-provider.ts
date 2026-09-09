@@ -3,20 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const CheckoutPaymentProvider = {
   Razorpay: "razorpay",
+  Chargebee: "chargebee",
 } as const;
-export type CheckoutPaymentProvider = ClosedEnum<
-  typeof CheckoutPaymentProvider
->;
+export type CheckoutPaymentProvider = OpenEnum<typeof CheckoutPaymentProvider>;
 
 /** @internal */
-export const CheckoutPaymentProvider$inboundSchema: z.ZodMiniEnum<
-  typeof CheckoutPaymentProvider
-> = z.enum(CheckoutPaymentProvider);
+export const CheckoutPaymentProvider$inboundSchema: z.ZodMiniType<
+  CheckoutPaymentProvider,
+  unknown
+> = openEnums.inboundSchema(CheckoutPaymentProvider);
 /** @internal */
-export const CheckoutPaymentProvider$outboundSchema: z.ZodMiniEnum<
-  typeof CheckoutPaymentProvider
-> = CheckoutPaymentProvider$inboundSchema;
+export const CheckoutPaymentProvider$outboundSchema: z.ZodMiniType<
+  string,
+  CheckoutPaymentProvider
+> = openEnums.outboundSchema(CheckoutPaymentProvider);

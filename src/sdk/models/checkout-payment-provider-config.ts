@@ -15,6 +15,14 @@ import {
 
 export type CheckoutPaymentProviderConfig = {
   collectionMethod?: CollectionMethod | undefined;
+  /**
+   * CustomerNotPresent is the unattended/MIT opt-in. Zero value (omitted) means
+   *
+   * @remarks
+   * the customer is present, so a missed auto-charge may fall back to a hosted
+   * authorization link. Set true only from merchant-initiated paths (auto top-up).
+   */
+  customerNotPresent?: boolean | undefined;
   maxMandateLimit?: string | undefined;
   paymentMethod?: PaymentMethodType | undefined;
 };
@@ -22,6 +30,7 @@ export type CheckoutPaymentProviderConfig = {
 /** @internal */
 export type CheckoutPaymentProviderConfig$Outbound = {
   collection_method?: string | undefined;
+  customer_not_present?: boolean | undefined;
   max_mandate_limit?: string | undefined;
   payment_method?: string | undefined;
 };
@@ -33,12 +42,14 @@ export const CheckoutPaymentProviderConfig$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     collectionMethod: z.optional(CollectionMethod$outboundSchema),
+    customerNotPresent: z.optional(z.boolean()),
     maxMandateLimit: z.optional(z.string()),
     paymentMethod: z.optional(PaymentMethodType$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       collectionMethod: "collection_method",
+      customerNotPresent: "customer_not_present",
       maxMandateLimit: "max_mandate_limit",
       paymentMethod: "payment_method",
     });

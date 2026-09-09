@@ -12,6 +12,7 @@
 * [updateInvoice](#updateinvoice) - Update invoice
 * [triggerInvoiceCommsWebhook](#triggerinvoicecommswebhook) - Trigger invoice communication webhook
 * [finalizeInvoice](#finalizeinvoice) - Finalize invoice
+* [executeInvoiceModify](#executeinvoicemodify) - Execute invoice modification
 * [updateInvoicePaymentStatus](#updateinvoicepaymentstatus) - Update invoice payment status
 * [attemptInvoicePayment](#attemptinvoicepayment) - Attempt invoice payment
 * [getInvoicePdf](#getinvoicepdf) - Get invoice PDF
@@ -604,6 +605,82 @@ run();
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## executeInvoiceModify
+
+Execute a modification on a draft or finalized invoice. Supports line item changes: add (bulk), update (one line item per call; the edit is versioned, so the line item id changes), and remove (bulk, soft delete). Totals are recalculated from the remaining line items; a manual edit marks the invoice as manually edited, which disables recompute. Modifying a FINALIZED invoice voids it and recreates it as a draft copy carrying all current data (description, billing period, due date, metadata, line items); the modification lands on the copy and the response returns the new draft — chain subsequent calls to the returned invoice id; a call that still targets the voided original is rejected with an error naming the replacement.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="executeInvoiceModify" method="post" path="/invoices/{id}/modify/execute" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.invoices.executeInvoiceModify("<id>", {
+    type: "line_item",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { invoicesExecuteInvoiceModify } from "@flexprice/sdk/funcs/invoices-execute-invoice-modify.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await invoicesExecuteInvoiceModify(flexprice, "<id>", {
+    type: "line_item",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("invoicesExecuteInvoiceModify failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Invoice ID                                                                                                                                                                     |
+| `body`                                                                                                                                                                         | [models.ExecuteInvoiceModifyRequest](../../sdk/models/execute-invoice-modify-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Modification request                                                                                                                                                           |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.InvoiceModifyResponse](../../sdk/models/invoice-modify-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 

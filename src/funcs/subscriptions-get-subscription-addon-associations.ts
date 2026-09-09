@@ -38,7 +38,7 @@ export function subscriptionsGetSubscriptionAddonAssociations(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<models.AddonAssociationResponse>,
+    models.ListAddonAssociationsResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -64,7 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<models.AddonAssociationResponse>,
+      models.ListAddonAssociationsResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -162,7 +162,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    Array<models.AddonAssociationResponse>,
+    models.ListAddonAssociationsResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -173,7 +173,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(models.AddonAssociationResponse$inboundSchema)),
+    M.json(200, models.ListAddonAssociationsResponse$inboundSchema),
     M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),

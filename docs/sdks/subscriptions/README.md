@@ -10,6 +10,9 @@
 * [querySubscriptionLineItems](#querysubscriptionlineitems) - Search subscription line items
 * [updateSubscriptionLineItem](#updatesubscriptionlineitem) - Update subscription line item
 * [deleteSubscriptionLineItem](#deletesubscriptionlineitem) - Delete subscription line item
+* [listAllSubscriptionSchedules](#listallsubscriptionschedules) - List all subscription schedules
+* [getSubscriptionSchedule](#getsubscriptionschedule) - Get subscription schedule
+* [cancelSubscriptionSchedule](#cancelsubscriptionschedule) - Cancel subscription schedule
 * [querySubscription](#querysubscription) - Query subscriptions
 * [getSubscriptionUsage](#getsubscriptionusage) - Get usage by subscription
 * [getSubscription](#getsubscription) - Get subscription
@@ -26,11 +29,8 @@
 * [createSubscriptionLineItem](#createsubscriptionlineitem) - Create subscription line item
 * [executeSubscriptionModify](#executesubscriptionmodify) - Execute subscription modification
 * [previewSubscriptionModify](#previewsubscriptionmodify) - Preview subscription modification
-* [getSubscriptionV2](#getsubscriptionv2) - Get subscription (V2)
-* [listAllSubscriptionSchedules](#listallsubscriptionschedules) - List all subscription schedules
-* [getSubscriptionSchedule](#getsubscriptionschedule) - Get subscription schedule
-* [cancelSubscriptionSchedule](#cancelsubscriptionschedule) - Cancel subscription schedule
 * [listSubscriptionSchedules](#listsubscriptionschedules) - List subscription schedules
+* [getSubscriptionV2](#getsubscriptionv2) - Get subscription (V2)
 
 ## createSubscription
 
@@ -484,6 +484,217 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## listAllSubscriptionSchedules
+
+Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="listAllSubscriptionSchedules" method="get" path="/subscriptions/schedules" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.listAllSubscriptionSchedules();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsListAllSubscriptionSchedules } from "@flexprice/sdk/funcs/subscriptions-list-all-subscription-schedules.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsListAllSubscriptionSchedules(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsListAllSubscriptionSchedules failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `pendingOnly`                                                                                                                                                                  | *boolean*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                             | Filter to pending schedules only                                                                                                                                               |
+| `subscriptionId`                                                                                                                                                               | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Filter by subscription ID                                                                                                                                                      |
+| `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Limit results                                                                                                                                                                  |
+| `offset`                                                                                                                                                                       | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Offset for pagination                                                                                                                                                          |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.GetPendingSchedulesResponse](../../sdk/models/get-pending-schedules-response.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getSubscriptionSchedule
+
+Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getSubscriptionSchedule" method="get" path="/subscriptions/schedules/{schedule_id}" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.getSubscriptionSchedule("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsGetSubscriptionSchedule } from "@flexprice/sdk/funcs/subscriptions-get-subscription-schedule.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsGetSubscriptionSchedule(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsGetSubscriptionSchedule failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `scheduleId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Schedule ID                                                                                                                                                                    |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.SubscriptionScheduleResponse](../../sdk/models/subscription-schedule-response.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## cancelSubscriptionSchedule
+
+Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="cancelSubscriptionSchedule" method="post" path="/subscriptions/schedules/{schedule_id}/cancel" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.cancelSubscriptionSchedule("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsCancelSubscriptionSchedule } from "@flexprice/sdk/funcs/subscriptions-cancel-subscription-schedule.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsCancelSubscriptionSchedule(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsCancelSubscriptionSchedule failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `scheduleId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Schedule ID (optional if using request body)                                                                                                                                   |
+| `body`                                                                                                                                                                         | [models.CancelScheduleRequest](../../sdk/models/cancel-schedule-request.md)                                                                                                    | :heavy_minus_sign:                                                                                                                                                             | Cancel request (optional if using path parameter)                                                                                                                              |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.CancelScheduleResponse](../../sdk/models/cancel-schedule-response.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## querySubscription
 
 Use when listing or searching subscriptions (e.g. admin view or customer subscription list). Returns a paginated list; supports filtering by customer, plan, status.
@@ -916,7 +1127,7 @@ run();
 
 ### Response
 
-**Promise\<[models.AddonAssociationResponse[]](../../models/.md)\>**
+**Promise\<[models.ListAddonAssociationsResponse](../../sdk/models/list-addon-associations-response.md)\>**
 
 ### Errors
 
@@ -1701,6 +1912,75 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## listSubscriptionSchedules
+
+Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="listSubscriptionSchedules" method="get" path="/subscriptions/{id}/schedules" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.subscriptions.listSubscriptionSchedules("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { subscriptionsListSubscriptionSchedules } from "@flexprice/sdk/funcs/subscriptions-list-subscription-schedules.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await subscriptionsListSubscriptionSchedules(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("subscriptionsListSubscriptionSchedules failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.GetPendingSchedulesResponse](../../sdk/models/get-pending-schedules-response.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## getSubscriptionV2
 
 Use when you need a subscription with related data (line items, prices, plan). Supports expand for detailed payloads without extra round-trips.
@@ -1772,283 +2052,3 @@ run();
 | models.ErrorsErrorResponse | 400                        | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
-## listAllSubscriptionSchedules
-
-Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="listAllSubscriptionSchedules" method="get" path="/v1/subscription-schedules" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.subscriptions.listAllSubscriptionSchedules();
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { subscriptionsListAllSubscriptionSchedules } from "@flexprice/sdk/funcs/subscriptions-list-all-subscription-schedules.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await subscriptionsListAllSubscriptionSchedules(flexprice);
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("subscriptionsListAllSubscriptionSchedules failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pendingOnly`                                                                                                                                                                  | *boolean*                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                             | Filter to pending schedules only                                                                                                                                               |
-| `subscriptionId`                                                                                                                                                               | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Filter by subscription ID                                                                                                                                                      |
-| `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Limit results                                                                                                                                                                  |
-| `offset`                                                                                                                                                                       | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Offset for pagination                                                                                                                                                          |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.GetPendingSchedulesResponse](../../sdk/models/get-pending-schedules-response.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
-
-## getSubscriptionSchedule
-
-Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="getSubscriptionSchedule" method="get" path="/v1/subscription-schedules/{id}" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.subscriptions.getSubscriptionSchedule("<id>");
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { subscriptionsGetSubscriptionSchedule } from "@flexprice/sdk/funcs/subscriptions-get-subscription-schedule.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await subscriptionsGetSubscriptionSchedule(flexprice, "<id>");
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("subscriptionsGetSubscriptionSchedule failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Schedule ID                                                                                                                                                                    |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.SubscriptionScheduleResponse](../../sdk/models/subscription-schedule-response.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
-
-## cancelSubscriptionSchedule
-
-Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="cancelSubscriptionSchedule" method="post" path="/v1/subscriptions/schedules/{schedule_id}/cancel" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.subscriptions.cancelSubscriptionSchedule("<id>");
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { subscriptionsCancelSubscriptionSchedule } from "@flexprice/sdk/funcs/subscriptions-cancel-subscription-schedule.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await subscriptionsCancelSubscriptionSchedule(flexprice, "<id>");
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("subscriptionsCancelSubscriptionSchedule failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `scheduleId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Schedule ID (optional if using request body)                                                                                                                                   |
-| `body`                                                                                                                                                                         | [models.CancelScheduleRequest](../../sdk/models/cancel-schedule-request.md)                                                                                                    | :heavy_minus_sign:                                                                                                                                                             | Cancel request (optional if using path parameter)                                                                                                                              |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.CancelScheduleResponse](../../sdk/models/cancel-schedule-response.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |
-
-## listSubscriptionSchedules
-
-Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="listSubscriptionSchedules" method="get" path="/v1/subscriptions/{subscription_id}/schedules" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.subscriptions.listSubscriptionSchedules("<id>");
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { subscriptionsListSubscriptionSchedules } from "@flexprice/sdk/funcs/subscriptions-list-subscription-schedules.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await subscriptionsListSubscriptionSchedules(flexprice, "<id>");
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("subscriptionsListSubscriptionSchedules failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `subscriptionId`                                                                                                                                                               | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.GetPendingSchedulesResponse](../../sdk/models/get-pending-schedules-response.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.SDKError | 4XX, 5XX        | \*/\*           |

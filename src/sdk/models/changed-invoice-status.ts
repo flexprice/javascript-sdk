@@ -6,16 +6,10 @@ import * as z from "zod/v4-mini";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
-/**
- * preview | issued | INITIATED | PENDING | PROCESSING | SUCCEEDED | OVERPAID | FAILED | REFUNDED | PARTIALLY_REFUNDED
- */
 export const ChangedInvoiceStatus = {
   Preview: "preview",
   Issued: "issued",
 } as const;
-/**
- * preview | issued | INITIATED | PENDING | PROCESSING | SUCCEEDED | OVERPAID | FAILED | REFUNDED | PARTIALLY_REFUNDED
- */
 export type ChangedInvoiceStatus = OpenEnum<typeof ChangedInvoiceStatus>;
 
 /** @internal */

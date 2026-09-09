@@ -3,34 +3,26 @@
  */
 
 import * as z from "zod/v4-mini";
-import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ListSubscriptionSchedulesRequest = {
   /**
    * Subscription ID
    */
-  subscriptionId: string;
+  id: string;
 };
 
 /** @internal */
 export type ListSubscriptionSchedulesRequest$Outbound = {
-  subscription_id: string;
+  id: string;
 };
 
 /** @internal */
 export const ListSubscriptionSchedulesRequest$outboundSchema: z.ZodMiniType<
   ListSubscriptionSchedulesRequest$Outbound,
   ListSubscriptionSchedulesRequest
-> = z.pipe(
-  z.object({
-    subscriptionId: z.string(),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      subscriptionId: "subscription_id",
-    });
-  }),
-);
+> = z.object({
+  id: z.string(),
+});
 
 export function listSubscriptionSchedulesRequestToJSON(
   listSubscriptionSchedulesRequest: ListSubscriptionSchedulesRequest,

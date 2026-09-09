@@ -4,20 +4,11 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
-import {
-  AddonCadence,
-  AddonCadence$inboundSchema,
-  AddonCadence$outboundSchema,
-} from "./addon-cadence.js";
+import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
   ProrationBehavior,
-  ProrationBehavior$inboundSchema,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AddAddonRef = {
   addonId?: string | undefined;
@@ -27,25 +18,6 @@ export type AddAddonRef = {
   startDate?: Date | undefined;
 };
 
-/** @internal */
-export const AddAddonRef$inboundSchema: z.ZodMiniType<AddAddonRef, unknown> = z
-  .pipe(
-    z.object({
-      addon_id: types.optional(types.string()),
-      association_id: types.optional(types.string()),
-      cadence: types.optional(AddonCadence$inboundSchema),
-      proration_behavior: types.optional(ProrationBehavior$inboundSchema),
-      start_date: types.optional(types.date()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "addon_id": "addonId",
-        "association_id": "associationId",
-        "proration_behavior": "prorationBehavior",
-        "start_date": "startDate",
-      });
-    }),
-  );
 /** @internal */
 export type AddAddonRef$Outbound = {
   addon_id?: string | undefined;
@@ -79,13 +51,4 @@ export const AddAddonRef$outboundSchema: z.ZodMiniType<
 
 export function addAddonRefToJSON(addAddonRef: AddAddonRef): string {
   return JSON.stringify(AddAddonRef$outboundSchema.parse(addAddonRef));
-}
-export function addAddonRefFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAddonRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAddonRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAddonRef' from JSON`,
-  );
 }

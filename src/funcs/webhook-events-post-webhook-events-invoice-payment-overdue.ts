@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * invoice.payment.overdue
  *
  * @remarks
- * Fired when an invoice payment is overdue past the due date. Doc-only for parsing.
+ * Fired when an invoice payment is overdue past the due date. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
  */
 export function webhookEventsPostWebhookEventsInvoicePaymentOverdue(
   client: FlexpriceCore,

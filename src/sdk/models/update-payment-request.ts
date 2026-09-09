@@ -9,6 +9,13 @@ export type UpdatePaymentRequest = {
   errorMessage?: string | undefined;
   failedAt?: Date | undefined;
   gatewayPaymentId?: string | undefined;
+  /**
+   * GatewayTrackingID is the pre-payment handle at the gateway — link, hosted page,
+   *
+   * @remarks
+   * invoice or order — recorded at checkout creation so the payment can be reconciled.
+   */
+  gatewayTrackingId?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   paymentGateway?: string | undefined;
   paymentMethodId?: string | undefined;
@@ -23,6 +30,7 @@ export type UpdatePaymentRequest$Outbound = {
   error_message?: string | undefined;
   failed_at?: string | undefined;
   gateway_payment_id?: string | undefined;
+  gateway_tracking_id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   payment_gateway?: string | undefined;
   payment_method_id?: string | undefined;
@@ -41,6 +49,7 @@ export const UpdatePaymentRequest$outboundSchema: z.ZodMiniType<
     errorMessage: z.optional(z.string()),
     failedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     gatewayPaymentId: z.optional(z.string()),
+    gatewayTrackingId: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
     paymentGateway: z.optional(z.string()),
     paymentMethodId: z.optional(z.string()),
@@ -56,6 +65,7 @@ export const UpdatePaymentRequest$outboundSchema: z.ZodMiniType<
       errorMessage: "error_message",
       failedAt: "failed_at",
       gatewayPaymentId: "gateway_payment_id",
+      gatewayTrackingId: "gateway_tracking_id",
       paymentGateway: "payment_gateway",
       paymentMethodId: "payment_method_id",
       paymentStatus: "payment_status",

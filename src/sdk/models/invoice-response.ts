@@ -12,6 +12,10 @@ import {
   CouponApplicationResponse$inboundSchema,
 } from "./coupon-application-response.js";
 import {
+  CustomCurrency,
+  CustomCurrency$inboundSchema,
+} from "./custom-currency.js";
+import {
   CustomerResponse,
   CustomerResponse$inboundSchema,
 } from "./customer-response.js";
@@ -86,6 +90,7 @@ export type InvoiceResponse = {
    * currency is the three-letter ISO currency code (e.g., USD, EUR, GBP) that applies to all monetary amounts on this invoice
    */
   currency?: string | undefined;
+  customCurrency?: CustomCurrency | undefined;
   /**
    * Customer response object containing all customer information
    */
@@ -250,6 +255,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
+    custom_currency: types.optional(CustomCurrency$inboundSchema),
     customer: types.optional(CustomerResponse$inboundSchema),
     customer_id: types.optional(types.string()),
     description: types.optional(types.string()),
@@ -308,6 +314,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "coupon_applications": "couponApplications",
       "created_at": "createdAt",
       "created_by": "createdBy",
+      "custom_currency": "customCurrency",
       "customer_id": "customerId",
       "due_date": "dueDate",
       "environment_id": "environmentId",

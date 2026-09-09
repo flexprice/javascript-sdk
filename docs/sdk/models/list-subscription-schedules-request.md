@@ -6,7 +6,7 @@
 import { ListSubscriptionSchedulesRequest } from "@flexprice/sdk/sdk/models";
 
 let value: ListSubscriptionSchedulesRequest = {
-  subscriptionId: "<id>",
+  id: "<id>",
 };
 ```
 
@@ -14,4 +14,4 @@ let value: ListSubscriptionSchedulesRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `subscriptionId`   | *string*           | :heavy_check_mark: | Subscription ID    |
+| `id`               | *string*           | :heavy_check_mark: | Subscription ID    |

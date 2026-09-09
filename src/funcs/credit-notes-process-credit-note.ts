@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -37,6 +37,7 @@ import { Result } from "../types/fp.js";
 export function creditNotesProcessCreditNote(
   client: FlexpriceCore,
   id: string,
+  body?: models.FinalizeCreditNoteRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -55,6 +56,7 @@ export function creditNotesProcessCreditNote(
   return new APIPromise($do(
     client,
     id,
+    body,
     options,
   ));
 }
@@ -62,6 +64,7 @@ export function creditNotesProcessCreditNote(
 async function $do(
   client: FlexpriceCore,
   id: string,
+  body?: models.FinalizeCreditNoteRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -82,6 +85,7 @@ async function $do(
 > {
   const input: models.ProcessCreditNoteRequest = {
     id: id,
+    body: body,
   };
 
   const parsed = safeParse(
@@ -93,7 +97,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = null;
+  const body$ = encodeJSON("body", payload.body, { explode: true });
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -104,6 +108,7 @@ async function $do(
   const path = pathToFunc("/creditnotes/{id}/finalize")(pathParams);
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -132,7 +137,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    body: body,
+    body: body$,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);

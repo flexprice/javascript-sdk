@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function subscriptionsGetSubscriptionSchedule(
   client: FlexpriceCore,
-  id: string,
+  scheduleId: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -51,14 +51,14 @@ export function subscriptionsGetSubscriptionSchedule(
 > {
   return new APIPromise($do(
     client,
-    id,
+    scheduleId,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  id: string,
+  scheduleId: string,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,7 +77,7 @@ async function $do(
   ]
 > {
   const input: models.GetSubscriptionScheduleRequest = {
-    id: id,
+    scheduleId: scheduleId,
   };
 
   const parsed = safeParse(
@@ -93,12 +93,12 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    schedule_id: encodeSimple("schedule_id", payload.schedule_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v1/subscription-schedules/{id}")(pathParams);
+  const path = pathToFunc("/subscriptions/schedules/{schedule_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

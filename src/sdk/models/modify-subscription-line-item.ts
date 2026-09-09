@@ -4,10 +4,6 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ModifySubscriptionLineItem = {
   effectiveDate?: Date | undefined;
@@ -15,23 +11,6 @@ export type ModifySubscriptionLineItem = {
   quantity?: string | undefined;
 };
 
-/** @internal */
-export const ModifySubscriptionLineItem$inboundSchema: z.ZodMiniType<
-  ModifySubscriptionLineItem,
-  unknown
-> = z.pipe(
-  z.object({
-    effective_date: types.optional(types.date()),
-    line_item_id: types.optional(types.string()),
-    quantity: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "effective_date": "effectiveDate",
-      "line_item_id": "lineItemId",
-    });
-  }),
-);
 /** @internal */
 export type ModifySubscriptionLineItem$Outbound = {
   effective_date?: string | undefined;
@@ -64,14 +43,5 @@ export function modifySubscriptionLineItemToJSON(
 ): string {
   return JSON.stringify(
     ModifySubscriptionLineItem$outboundSchema.parse(modifySubscriptionLineItem),
-  );
-}
-export function modifySubscriptionLineItemFromJSON(
-  jsonString: string,
-): SafeParseResult<ModifySubscriptionLineItem, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ModifySubscriptionLineItem$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ModifySubscriptionLineItem' from JSON`,
   );
 }

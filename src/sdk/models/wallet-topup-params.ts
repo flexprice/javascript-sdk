@@ -4,32 +4,12 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WalletTopupParams = {
   walletId: string;
   walletTransactionId?: string | undefined;
 };
 
-/** @internal */
-export const WalletTopupParams$inboundSchema: z.ZodMiniType<
-  WalletTopupParams,
-  unknown
-> = z.pipe(
-  z.object({
-    wallet_id: types.string(),
-    wallet_transaction_id: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "wallet_id": "walletId",
-      "wallet_transaction_id": "walletTransactionId",
-    });
-  }),
-);
 /** @internal */
 export type WalletTopupParams$Outbound = {
   wallet_id: string;
@@ -58,14 +38,5 @@ export function walletTopupParamsToJSON(
 ): string {
   return JSON.stringify(
     WalletTopupParams$outboundSchema.parse(walletTopupParams),
-  );
-}
-export function walletTopupParamsFromJSON(
-  jsonString: string,
-): SafeParseResult<WalletTopupParams, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => WalletTopupParams$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'WalletTopupParams' from JSON`,
   );
 }

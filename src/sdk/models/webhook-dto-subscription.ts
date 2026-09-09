@@ -26,9 +26,21 @@ import {
   SubscriptionType$inboundSchema,
 } from "./subscription-type.js";
 import {
+  WebhookDtoCouponAssociation,
+  WebhookDtoCouponAssociation$inboundSchema,
+} from "./webhook-dto-coupon-association.js";
+import {
   WebhookDtoCustomer,
   WebhookDtoCustomer$inboundSchema,
 } from "./webhook-dto-customer.js";
+import {
+  WebhookDtoPlan,
+  WebhookDtoPlan$inboundSchema,
+} from "./webhook-dto-plan.js";
+import {
+  WebhookDtoSubscriptionLineItem,
+  WebhookDtoSubscriptionLineItem$inboundSchema,
+} from "./webhook-dto-subscription-line-item.js";
 
 export type WebhookDtoSubscription = {
   billingCadence?: BillingCadence | undefined;
@@ -37,6 +49,7 @@ export type WebhookDtoSubscription = {
   cancelAt?: Date | undefined;
   cancelAtPeriodEnd?: boolean | undefined;
   cancelledAt?: Date | undefined;
+  couponAssociations?: Array<WebhookDtoCouponAssociation> | undefined;
   currency?: string | undefined;
   currentPeriodEnd?: Date | undefined;
   currentPeriodStart?: Date | undefined;
@@ -44,10 +57,13 @@ export type WebhookDtoSubscription = {
   customerId?: string | undefined;
   endDate?: Date | undefined;
   id?: string | undefined;
+  invoicingCustomerId?: string | undefined;
+  lineItems?: Array<WebhookDtoSubscriptionLineItem> | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   parentSubscriptionId?: string | undefined;
   pauseStatus?: PauseStatus | undefined;
+  plan?: WebhookDtoPlan | undefined;
   planId?: string | undefined;
   startDate?: Date | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
@@ -68,6 +84,9 @@ export const WebhookDtoSubscription$inboundSchema: z.ZodMiniType<
     cancel_at: types.optional(types.date()),
     cancel_at_period_end: types.optional(types.boolean()),
     cancelled_at: types.optional(types.date()),
+    coupon_associations: types.optional(
+      z.array(WebhookDtoCouponAssociation$inboundSchema),
+    ),
     currency: types.optional(types.string()),
     current_period_end: types.optional(types.date()),
     current_period_start: types.optional(types.date()),
@@ -75,10 +94,15 @@ export const WebhookDtoSubscription$inboundSchema: z.ZodMiniType<
     customer_id: types.optional(types.string()),
     end_date: types.optional(types.date()),
     id: types.optional(types.string()),
+    invoicing_customer_id: types.optional(types.string()),
+    line_items: types.optional(
+      z.array(WebhookDtoSubscriptionLineItem$inboundSchema),
+    ),
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     parent_subscription_id: types.optional(types.string()),
     pause_status: types.optional(PauseStatus$inboundSchema),
+    plan: types.optional(WebhookDtoPlan$inboundSchema),
     plan_id: types.optional(types.string()),
     start_date: types.optional(types.date()),
     subscription_status: types.optional(SubscriptionStatus$inboundSchema),
@@ -94,10 +118,13 @@ export const WebhookDtoSubscription$inboundSchema: z.ZodMiniType<
       "cancel_at": "cancelAt",
       "cancel_at_period_end": "cancelAtPeriodEnd",
       "cancelled_at": "cancelledAt",
+      "coupon_associations": "couponAssociations",
       "current_period_end": "currentPeriodEnd",
       "current_period_start": "currentPeriodStart",
       "customer_id": "customerId",
       "end_date": "endDate",
+      "invoicing_customer_id": "invoicingCustomerId",
+      "line_items": "lineItems",
       "lookup_key": "lookupKey",
       "parent_subscription_id": "parentSubscriptionId",
       "pause_status": "pauseStatus",

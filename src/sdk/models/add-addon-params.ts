@@ -4,37 +4,17 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import * as types from "../../types/primitives.js";
 import {
   AddAddonRef,
-  AddAddonRef$inboundSchema,
   AddAddonRef$Outbound,
   AddAddonRef$outboundSchema,
 } from "./add-addon-ref.js";
-import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AddAddonParams = {
   addons?: Array<AddAddonRef> | undefined;
   subscriptionId?: string | undefined;
 };
 
-/** @internal */
-export const AddAddonParams$inboundSchema: z.ZodMiniType<
-  AddAddonParams,
-  unknown
-> = z.pipe(
-  z.object({
-    addons: types.optional(z.array(AddAddonRef$inboundSchema)),
-    subscription_id: types.optional(types.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      "subscription_id": "subscriptionId",
-    });
-  }),
-);
 /** @internal */
 export type AddAddonParams$Outbound = {
   addons?: Array<AddAddonRef$Outbound> | undefined;
@@ -59,13 +39,4 @@ export const AddAddonParams$outboundSchema: z.ZodMiniType<
 
 export function addAddonParamsToJSON(addAddonParams: AddAddonParams): string {
   return JSON.stringify(AddAddonParams$outboundSchema.parse(addAddonParams));
-}
-export function addAddonParamsFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAddonParams, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAddonParams$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAddonParams' from JSON`,
-  );
 }

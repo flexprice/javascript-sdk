@@ -7,17 +7,36 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  CommitmentInfo,
+  CommitmentInfo$inboundSchema,
+} from "./commitment-info.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoInvoiceLineItem = {
+  adjustedEntitlementQuantity?: string | undefined;
   amount?: string | undefined;
+  commitmentInfo?: CommitmentInfo | undefined;
+  currency?: string | undefined;
   displayName?: string | undefined;
+  entityId?: string | undefined;
+  entityType?: string | undefined;
   id?: string | undefined;
+  invoiceLevelDiscount?: string | undefined;
+  lineItemDiscount?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  meterDisplayName?: string | undefined;
+  meterId?: string | undefined;
   periodEnd?: Date | undefined;
   periodStart?: Date | undefined;
   planDisplayName?: string | undefined;
+  prepaidCreditsApplied?: string | undefined;
   priceId?: string | undefined;
+  priceType?: string | undefined;
+  priceUnit?: string | undefined;
+  priceUnitAmount?: string | undefined;
   quantity?: string | undefined;
+  subscriptionLineItemId?: string | undefined;
 };
 
 /** @internal */
@@ -26,22 +45,50 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    adjusted_entitlement_quantity: types.optional(types.string()),
     amount: types.optional(types.string()),
+    commitment_info: types.optional(CommitmentInfo$inboundSchema),
+    currency: types.optional(types.string()),
     display_name: types.optional(types.string()),
+    entity_id: types.optional(types.string()),
+    entity_type: types.optional(types.string()),
     id: types.optional(types.string()),
+    invoice_level_discount: types.optional(types.string()),
+    line_item_discount: types.optional(types.string()),
+    metadata: types.optional(z.record(z.string(), types.string())),
+    meter_display_name: types.optional(types.string()),
+    meter_id: types.optional(types.string()),
     period_end: types.optional(types.date()),
     period_start: types.optional(types.date()),
     plan_display_name: types.optional(types.string()),
+    prepaid_credits_applied: types.optional(types.string()),
     price_id: types.optional(types.string()),
+    price_type: types.optional(types.string()),
+    price_unit: types.optional(types.string()),
+    price_unit_amount: types.optional(types.string()),
     quantity: types.optional(types.string()),
+    subscription_line_item_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "adjusted_entitlement_quantity": "adjustedEntitlementQuantity",
+      "commitment_info": "commitmentInfo",
       "display_name": "displayName",
+      "entity_id": "entityId",
+      "entity_type": "entityType",
+      "invoice_level_discount": "invoiceLevelDiscount",
+      "line_item_discount": "lineItemDiscount",
+      "meter_display_name": "meterDisplayName",
+      "meter_id": "meterId",
       "period_end": "periodEnd",
       "period_start": "periodStart",
       "plan_display_name": "planDisplayName",
+      "prepaid_credits_applied": "prepaidCreditsApplied",
       "price_id": "priceId",
+      "price_type": "priceType",
+      "price_unit": "priceUnit",
+      "price_unit_amount": "priceUnitAmount",
+      "subscription_line_item_id": "subscriptionLineItemId",
     });
   }),
 );

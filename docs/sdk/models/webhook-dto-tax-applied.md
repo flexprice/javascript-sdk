@@ -1,0 +1,23 @@
+# WebhookDtoTaxApplied
+
+## Example Usage
+
+```typescript
+import { WebhookDtoTaxApplied } from "@flexprice/sdk/sdk/models";
+
+let value: WebhookDtoTaxApplied = {};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `appliedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `currency`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `id`                                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `metadata`                                                                                    | Record<string, *string*>                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `taxAmount`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `taxBehavior`                                                                                 | [models.TaxBehavior](../../sdk/models/tax-behavior.md)                                        | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `taxRate`                                                                                     | [models.WebhookDtoTaxRate](../../sdk/models/webhook-dto-tax-rate.md)                          | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `taxRateId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `taxableAmount`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

@@ -147,6 +147,65 @@ export class Subscriptions extends ClientSDK {
   }
 
   /**
+   * List all subscription schedules
+   *
+   * @remarks
+   * Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
+   */
+  async listAllSubscriptionSchedules(
+    pendingOnly?: boolean | undefined,
+    subscriptionId?: string | undefined,
+    limit?: number | undefined,
+    offset?: number | undefined,
+    options?: RequestOptions,
+  ): Promise<models.GetPendingSchedulesResponse> {
+    return unwrapAsync(subscriptionsListAllSubscriptionSchedules(
+      this,
+      pendingOnly,
+      subscriptionId,
+      limit,
+      offset,
+      options,
+    ));
+  }
+
+  /**
+   * Get subscription schedule
+   *
+   * @remarks
+   * Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
+   */
+  async getSubscriptionSchedule(
+    scheduleId: string,
+    options?: RequestOptions,
+  ): Promise<models.SubscriptionScheduleResponse> {
+    return unwrapAsync(subscriptionsGetSubscriptionSchedule(
+      this,
+      scheduleId,
+      options,
+    ));
+  }
+
+  /**
+   * Cancel subscription schedule
+   *
+   * @remarks
+   * Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
+   */
+  async cancelSubscriptionSchedule(
+    scheduleId: string,
+    body?: models.CancelScheduleRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<models.CancelScheduleResponse> {
+    return unwrapAsync(subscriptionsCancelSubscriptionSchedule(
+      this,
+      scheduleId,
+      body,
+      options,
+    ));
+  }
+
+  /**
    * Query subscriptions
    *
    * @remarks
@@ -244,7 +303,7 @@ export class Subscriptions extends ClientSDK {
   async getSubscriptionAddonAssociations(
     id: string,
     options?: RequestOptions,
-  ): Promise<Array<models.AddonAssociationResponse>> {
+  ): Promise<models.ListAddonAssociationsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionAddonAssociations(
       this,
       id,
@@ -449,6 +508,23 @@ export class Subscriptions extends ClientSDK {
   }
 
   /**
+   * List subscription schedules
+   *
+   * @remarks
+   * Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
+   */
+  async listSubscriptionSchedules(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.GetPendingSchedulesResponse> {
+    return unwrapAsync(subscriptionsListSubscriptionSchedules(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
    * Get subscription (V2)
    *
    * @remarks
@@ -463,82 +539,6 @@ export class Subscriptions extends ClientSDK {
       this,
       id,
       expand,
-      options,
-    ));
-  }
-
-  /**
-   * List all subscription schedules
-   *
-   * @remarks
-   * Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
-   */
-  async listAllSubscriptionSchedules(
-    pendingOnly?: boolean | undefined,
-    subscriptionId?: string | undefined,
-    limit?: number | undefined,
-    offset?: number | undefined,
-    options?: RequestOptions,
-  ): Promise<models.GetPendingSchedulesResponse> {
-    return unwrapAsync(subscriptionsListAllSubscriptionSchedules(
-      this,
-      pendingOnly,
-      subscriptionId,
-      limit,
-      offset,
-      options,
-    ));
-  }
-
-  /**
-   * Get subscription schedule
-   *
-   * @remarks
-   * Use when you need to load a single scheduled change (e.g. to show when a plan change or renewal takes effect).
-   */
-  async getSubscriptionSchedule(
-    id: string,
-    options?: RequestOptions,
-  ): Promise<models.SubscriptionScheduleResponse> {
-    return unwrapAsync(subscriptionsGetSubscriptionSchedule(
-      this,
-      id,
-      options,
-    ));
-  }
-
-  /**
-   * Cancel subscription schedule
-   *
-   * @remarks
-   * Use when cancelling a scheduled change (e.g. customer changed mind). Identify by schedule ID in path or by subscription ID + schedule type in body.
-   */
-  async cancelSubscriptionSchedule(
-    scheduleId: string,
-    body?: models.CancelScheduleRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<models.CancelScheduleResponse> {
-    return unwrapAsync(subscriptionsCancelSubscriptionSchedule(
-      this,
-      scheduleId,
-      body,
-      options,
-    ));
-  }
-
-  /**
-   * List subscription schedules
-   *
-   * @remarks
-   * Use when listing scheduled changes for a subscription (e.g. upcoming plan change or renewal). Returns all schedules for that subscription.
-   */
-  async listSubscriptionSchedules(
-    subscriptionId: string,
-    options?: RequestOptions,
-  ): Promise<models.GetPendingSchedulesResponse> {
-    return unwrapAsync(subscriptionsListSubscriptionSchedules(
-      this,
-      subscriptionId,
       options,
     ));
   }

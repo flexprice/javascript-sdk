@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * invoice.create.drafted
  *
  * @remarks
- * Fired when a new invoice is created in draft state. Doc-only for parsing.
+ * Fired when a new invoice is created in draft state. `invoice.line_items` omits line items with neither an amount nor a quantity (period fan-out emits one per window whether or not usage landed in it), and `invoice.subscription.plan.prices` carries only the prices this invoice references, not the plan's full catalogue. Doc-only for parsing.
  */
 export function webhookEventsPostWebhookEventsInvoiceCreateDrafted(
   client: FlexpriceCore,

@@ -32,9 +32,6 @@ export type ChangedInvoice = {
   action?: ChangedInvoiceAction | undefined;
   id?: string | undefined;
   invoice?: InvoiceResponse | undefined;
-  /**
-   * preview | issued | INITIATED | PENDING | PROCESSING | SUCCEEDED | OVERPAID | FAILED | REFUNDED | PARTIALLY_REFUNDED
-   */
   status?: ChangedInvoiceStatus | undefined;
   walletTransaction?: WalletTransactionResponse | undefined;
 };

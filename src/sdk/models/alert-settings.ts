@@ -8,6 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AlertThresholdType,
+  AlertThresholdType$inboundSchema,
+  AlertThresholdType$outboundSchema,
+} from "./alert-threshold-type.js";
+import {
   AlertThreshold,
   AlertThreshold$inboundSchema,
   AlertThreshold$Outbound,
@@ -17,6 +22,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AlertSettings = {
   alertEnabled?: boolean | undefined;
+  alertThresholdType?: AlertThresholdType | undefined;
   critical?: AlertThreshold | undefined;
   info?: AlertThreshold | undefined;
   warning?: AlertThreshold | undefined;
@@ -29,6 +35,7 @@ export const AlertSettings$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     alert_enabled: types.optional(types.boolean()),
+    alert_threshold_type: types.optional(AlertThresholdType$inboundSchema),
     critical: types.optional(AlertThreshold$inboundSchema),
     info: types.optional(AlertThreshold$inboundSchema),
     warning: types.optional(AlertThreshold$inboundSchema),
@@ -36,12 +43,14 @@ export const AlertSettings$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "alert_enabled": "alertEnabled",
+      "alert_threshold_type": "alertThresholdType",
     });
   }),
 );
 /** @internal */
 export type AlertSettings$Outbound = {
   alert_enabled?: boolean | undefined;
+  alert_threshold_type?: string | undefined;
   critical?: AlertThreshold$Outbound | undefined;
   info?: AlertThreshold$Outbound | undefined;
   warning?: AlertThreshold$Outbound | undefined;
@@ -54,6 +63,7 @@ export const AlertSettings$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     alertEnabled: z.optional(z.boolean()),
+    alertThresholdType: z.optional(AlertThresholdType$outboundSchema),
     critical: z.optional(AlertThreshold$outboundSchema),
     info: z.optional(AlertThreshold$outboundSchema),
     warning: z.optional(AlertThreshold$outboundSchema),
@@ -61,6 +71,7 @@ export const AlertSettings$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       alertEnabled: "alert_enabled",
+      alertThresholdType: "alert_threshold_type",
     });
   }),
 );
