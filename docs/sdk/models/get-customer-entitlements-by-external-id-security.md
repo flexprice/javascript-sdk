@@ -1,0 +1,18 @@
+# GetCustomerEntitlementsByExternalIDSecurity
+
+## Example Usage
+
+```typescript
+import { GetCustomerEntitlementsByExternalIDSecurity } from "@flexprice/sdk/sdk/models";
+
+let value: GetCustomerEntitlementsByExternalIDSecurity = {};
+```
+
+## Fields
+
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `option1`                                                                                                                                  | [models.GetCustomerEntitlementsByExternalIDSecurityOption1](../../sdk/models/get-customer-entitlements-by-external-id-security-option1.md) | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |
+| `option2`                                                                                                                                  | [models.GetCustomerEntitlementsByExternalIDSecurityOption2](../../sdk/models/get-customer-entitlements-by-external-id-security-option2.md) | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |
+| `option3`                                                                                                                                  | [models.GetCustomerEntitlementsByExternalIDSecurityOption3](../../sdk/models/get-customer-entitlements-by-external-id-security-option3.md) | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |
+| `option4`                                                                                                                                  | [models.GetCustomerEntitlementsByExternalIDSecurityOption4](../../sdk/models/get-customer-entitlements-by-external-id-security-option4.md) | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |

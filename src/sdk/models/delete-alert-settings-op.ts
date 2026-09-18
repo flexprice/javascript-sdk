@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteAlertSettingsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteAlertSettingsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteAlertSettingsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteAlertSettingsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteAlertSettingsSecurity = {
+  option1?: DeleteAlertSettingsSecurityOption1 | undefined;
+  option2?: DeleteAlertSettingsSecurityOption2 | undefined;
+  option3?: DeleteAlertSettingsSecurityOption3 | undefined;
+  option4?: DeleteAlertSettingsSecurityOption4 | undefined;
+};
 
 export type DeleteAlertSettingsRequest = {
   /**
@@ -10,6 +35,176 @@ export type DeleteAlertSettingsRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteAlertSettingsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteAlertSettingsSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteAlertSettingsSecurityOption1$Outbound,
+  DeleteAlertSettingsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteAlertSettingsSecurityOption1ToJSON(
+  deleteAlertSettingsSecurityOption1: DeleteAlertSettingsSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteAlertSettingsSecurityOption1$outboundSchema.parse(
+      deleteAlertSettingsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteAlertSettingsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteAlertSettingsSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteAlertSettingsSecurityOption2$Outbound,
+  DeleteAlertSettingsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteAlertSettingsSecurityOption2ToJSON(
+  deleteAlertSettingsSecurityOption2: DeleteAlertSettingsSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteAlertSettingsSecurityOption2$outboundSchema.parse(
+      deleteAlertSettingsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteAlertSettingsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteAlertSettingsSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteAlertSettingsSecurityOption3$Outbound,
+  DeleteAlertSettingsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteAlertSettingsSecurityOption3ToJSON(
+  deleteAlertSettingsSecurityOption3: DeleteAlertSettingsSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteAlertSettingsSecurityOption3$outboundSchema.parse(
+      deleteAlertSettingsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteAlertSettingsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteAlertSettingsSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteAlertSettingsSecurityOption4$Outbound,
+  DeleteAlertSettingsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteAlertSettingsSecurityOption4ToJSON(
+  deleteAlertSettingsSecurityOption4: DeleteAlertSettingsSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteAlertSettingsSecurityOption4$outboundSchema.parse(
+      deleteAlertSettingsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteAlertSettingsSecurity$Outbound = {
+  Option1?: DeleteAlertSettingsSecurityOption1$Outbound | undefined;
+  Option2?: DeleteAlertSettingsSecurityOption2$Outbound | undefined;
+  Option3?: DeleteAlertSettingsSecurityOption3$Outbound | undefined;
+  Option4?: DeleteAlertSettingsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteAlertSettingsSecurity$outboundSchema: z.ZodMiniType<
+  DeleteAlertSettingsSecurity$Outbound,
+  DeleteAlertSettingsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteAlertSettingsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteAlertSettingsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteAlertSettingsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteAlertSettingsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteAlertSettingsSecurityToJSON(
+  deleteAlertSettingsSecurity: DeleteAlertSettingsSecurity,
+): string {
+  return JSON.stringify(
+    DeleteAlertSettingsSecurity$outboundSchema.parse(
+      deleteAlertSettingsSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type DeleteAlertSettingsRequest$Outbound = {

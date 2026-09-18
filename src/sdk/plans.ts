@@ -21,11 +21,13 @@ export class Plans extends ClientSDK {
    * Use when defining a new pricing plan (e.g. Free, Pro, Enterprise). Attach prices and entitlements; customers subscribe to plans.
    */
   async createPlan(
+    security: models.CreatePlanSecurity,
     request: models.CreatePlanRequest,
     options?: RequestOptions,
   ): Promise<models.PlanResponse> {
     return unwrapAsync(plansCreatePlan(
       this,
+      security,
       request,
       options,
     ));
@@ -38,11 +40,13 @@ export class Plans extends ClientSDK {
    * Use when listing or searching plans (e.g. plan picker or admin catalog). Returns a paginated list; supports filtering and sorting.
    */
   async queryPlan(
+    security: models.QueryPlanSecurity,
     request: models.PlanFilter,
     options?: RequestOptions,
   ): Promise<models.ListPlansResponse> {
     return unwrapAsync(plansQueryPlan(
       this,
+      security,
       request,
       options,
     ));
@@ -55,11 +59,13 @@ export class Plans extends ClientSDK {
    * Use when you need to load a single plan (e.g. for display or to create a subscription).
    */
   async getPlan(
+    security: models.GetPlanSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.PlanResponse> {
     return unwrapAsync(plansGetPlan(
       this,
+      security,
       id,
       options,
     ));
@@ -72,12 +78,14 @@ export class Plans extends ClientSDK {
    * Use when changing plan details (e.g. name, interval, or metadata). Partial update supported.
    */
   async updatePlan(
+    security: models.UpdatePlanSecurity,
     id: string,
     body: models.UpdatePlanRequest,
     options?: RequestOptions,
   ): Promise<models.PlanResponse> {
     return unwrapAsync(plansUpdatePlan(
       this,
+      security,
       id,
       body,
       options,
@@ -91,11 +99,13 @@ export class Plans extends ClientSDK {
    * Use when retiring a plan (e.g. end-of-life). Existing subscriptions may be affected. Returns 200 with success message.
    */
   async deletePlan(
+    security: models.DeletePlanSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(plansDeletePlan(
       this,
+      security,
       id,
       options,
     ));
@@ -108,12 +118,14 @@ export class Plans extends ClientSDK {
    * Clone an existing plan, copying its active prices, published entitlements, and published credit grants
    */
   async clonePlan(
+    security: models.ClonePlanSecurity,
     id: string,
     body: models.ClonePlanRequest,
     options?: RequestOptions,
   ): Promise<models.PlanResponse> {
     return unwrapAsync(plansClonePlan(
       this,
+      security,
       id,
       body,
       options,
@@ -127,11 +139,13 @@ export class Plans extends ClientSDK {
    * Use when you have changed plan prices and need to push them to all active subscriptions (e.g. global price update). Returns workflow ID.
    */
   async syncPlanPrices(
+    security: models.SyncPlanPricesSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(plansSyncPlanPrices(
       this,
+      security,
       id,
       options,
     ));

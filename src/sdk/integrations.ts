@@ -18,10 +18,12 @@ export class Integrations extends ClientSDK {
    * Returns the base capabilities and current sync configuration for all connected providers.
    */
   async getIntegrationConfig(
+    security: models.GetIntegrationConfigSecurity,
     options?: RequestOptions,
   ): Promise<models.IntegrationConfigResponse> {
     return unwrapAsync(integrationsGetIntegrationConfig(
       this,
+      security,
       options,
     ));
   }
@@ -33,11 +35,13 @@ export class Integrations extends ClientSDK {
    * Link a FlexPrice entity to provider entity with provider-specific side effects.
    */
   async linkIntegrationMapping(
+    security: models.LinkIntegrationMappingSecurity,
     request: models.LinkIntegrationMappingRequest,
     options?: RequestOptions,
   ): Promise<models.LinkIntegrationMappingResponse> {
     return unwrapAsync(integrationsLinkIntegrationMapping(
       this,
+      security,
       request,
       options,
     ));
@@ -50,11 +54,13 @@ export class Integrations extends ClientSDK {
    * Soft-delete (archive) the mapping between a FlexPrice entity and a provider entity.
    */
   async delinkIntegrationMapping(
+    security: models.DelinkIntegrationMappingSecurity,
     request: models.DelinkIntegrationMappingRequest,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(integrationsDelinkIntegrationMapping(
       this,
+      security,
       request,
       options,
     ));
@@ -67,12 +73,14 @@ export class Integrations extends ClientSDK {
    * Get integration mappings for a specific entity by entity type and entity ID.
    */
   async getEntityIntegrationMappings(
+    security: models.GetEntityIntegrationMappingsSecurity,
     entityType: string,
     entityId: string,
     options?: RequestOptions,
   ): Promise<models.ListEntityIntegrationMappingsResponse> {
     return unwrapAsync(integrationsGetEntityIntegrationMappings(
       this,
+      security,
       entityType,
       entityId,
       options,

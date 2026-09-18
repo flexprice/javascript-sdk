@@ -18,12 +18,14 @@ Use when showing the current tenant's billing usage (e.g. admin billing page or 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.tenants.getTenantBillingUsage();
+  const result = await flexprice.tenants.getTenantBillingUsage({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  });
 
   console.log(result);
 }
@@ -41,12 +43,14 @@ import { tenantsGetTenantBillingUsage } from "@flexprice/sdk/funcs/tenants-get-t
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await tenantsGetTenantBillingUsage(flexprice);
+  const res = await tenantsGetTenantBillingUsage(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -62,6 +66,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetTenantBillingUsageSecurity](../../sdk/models/get-tenant-billing-usage-security.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -88,12 +93,14 @@ Use when changing tenant details (e.g. name or billing info). Request body conta
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.tenants.updateTenant({});
+  const result = await flexprice.tenants.updateTenant({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
 
   console.log(result);
 }
@@ -111,12 +118,14 @@ import { tenantsUpdateTenant } from "@flexprice/sdk/funcs/tenants-update-tenant.
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await tenantsUpdateTenant(flexprice, {});
+  const res = await tenantsUpdateTenant(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -133,6 +142,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.UpdateTenantRequest](../../sdk/models/update-tenant-request.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.UpdateTenantSecurity](../../sdk/models/update-tenant-security.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -159,12 +169,14 @@ Get tenant by ID
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.tenants.getTenantById("<id>");
+  const result = await flexprice.tenants.getTenantById({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -182,12 +194,14 @@ import { tenantsGetTenantById } from "@flexprice/sdk/funcs/tenants-get-tenant-by
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await tenantsGetTenantById(flexprice, "<id>");
+  const res = await tenantsGetTenantById(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -203,6 +217,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetTenantByIdSecurity](../../sdk/models/get-tenant-by-id-security.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tenant ID                                                                                                                                                                      |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |

@@ -20,11 +20,13 @@ export class Coupons extends ClientSDK {
    * Use when creating a discount (e.g. promo code or referral). Ideal for percent or fixed value, with optional validity and usage limits.
    */
   async createCoupon(
+    security: models.CreateCouponSecurity,
     request: models.CreateCouponRequest,
     options?: RequestOptions,
   ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsCreateCoupon(
       this,
+      security,
       request,
       options,
     ));
@@ -37,11 +39,13 @@ export class Coupons extends ClientSDK {
    * Use when resolving a coupon by promo code (e.g. checkout or validation).
    */
   async getCouponByCode(
+    security: models.GetCouponByCodeSecurity,
     code: string,
     options?: RequestOptions,
   ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsGetCouponByCode(
       this,
+      security,
       code,
       options,
     ));
@@ -54,11 +58,13 @@ export class Coupons extends ClientSDK {
    * Use when listing or searching coupons (e.g. promo management). Returns a paginated list; supports filtering and sorting.
    */
   async queryCoupon(
+    security: models.QueryCouponSecurity,
     request: models.CouponFilter,
     options?: RequestOptions,
   ): Promise<models.ListCouponsResponse> {
     return unwrapAsync(couponsQueryCoupon(
       this,
+      security,
       request,
       options,
     ));
@@ -71,11 +77,13 @@ export class Coupons extends ClientSDK {
    * Use when you need to load a single coupon (e.g. for display or to validate a code).
    */
   async getCoupon(
+    security: models.GetCouponSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsGetCoupon(
       this,
+      security,
       id,
       options,
     ));
@@ -88,12 +96,14 @@ export class Coupons extends ClientSDK {
    * Use when changing coupon config (e.g. value, validity, or usage limits).
    */
   async updateCoupon(
+    security: models.UpdateCouponSecurity,
     id: string,
     body: models.UpdateCouponRequest,
     options?: RequestOptions,
   ): Promise<models.CouponResponse> {
     return unwrapAsync(couponsUpdateCoupon(
       this,
+      security,
       id,
       body,
       options,
@@ -107,11 +117,13 @@ export class Coupons extends ClientSDK {
    * Use when retiring a coupon (e.g. campaign ended). Returns 200 with success message.
    */
   async deleteCoupon(
+    security: models.DeleteCouponSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(couponsDeleteCoupon(
       this,
+      security,
       id,
       options,
     ));

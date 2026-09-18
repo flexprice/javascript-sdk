@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteAddonSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteAddonSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteAddonSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteAddonSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteAddonSecurity = {
+  option1?: DeleteAddonSecurityOption1 | undefined;
+  option2?: DeleteAddonSecurityOption2 | undefined;
+  option3?: DeleteAddonSecurityOption3 | undefined;
+  option4?: DeleteAddonSecurityOption4 | undefined;
+};
 
 export type DeleteAddonRequest = {
   /**
@@ -10,6 +35,166 @@ export type DeleteAddonRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteAddonSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteAddonSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteAddonSecurityOption1$Outbound,
+  DeleteAddonSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteAddonSecurityOption1ToJSON(
+  deleteAddonSecurityOption1: DeleteAddonSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteAddonSecurityOption1$outboundSchema.parse(deleteAddonSecurityOption1),
+  );
+}
+
+/** @internal */
+export type DeleteAddonSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteAddonSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteAddonSecurityOption2$Outbound,
+  DeleteAddonSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteAddonSecurityOption2ToJSON(
+  deleteAddonSecurityOption2: DeleteAddonSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteAddonSecurityOption2$outboundSchema.parse(deleteAddonSecurityOption2),
+  );
+}
+
+/** @internal */
+export type DeleteAddonSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteAddonSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteAddonSecurityOption3$Outbound,
+  DeleteAddonSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteAddonSecurityOption3ToJSON(
+  deleteAddonSecurityOption3: DeleteAddonSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteAddonSecurityOption3$outboundSchema.parse(deleteAddonSecurityOption3),
+  );
+}
+
+/** @internal */
+export type DeleteAddonSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteAddonSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteAddonSecurityOption4$Outbound,
+  DeleteAddonSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteAddonSecurityOption4ToJSON(
+  deleteAddonSecurityOption4: DeleteAddonSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteAddonSecurityOption4$outboundSchema.parse(deleteAddonSecurityOption4),
+  );
+}
+
+/** @internal */
+export type DeleteAddonSecurity$Outbound = {
+  Option1?: DeleteAddonSecurityOption1$Outbound | undefined;
+  Option2?: DeleteAddonSecurityOption2$Outbound | undefined;
+  Option3?: DeleteAddonSecurityOption3$Outbound | undefined;
+  Option4?: DeleteAddonSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteAddonSecurity$outboundSchema: z.ZodMiniType<
+  DeleteAddonSecurity$Outbound,
+  DeleteAddonSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteAddonSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteAddonSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteAddonSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteAddonSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteAddonSecurityToJSON(
+  deleteAddonSecurity: DeleteAddonSecurity,
+): string {
+  return JSON.stringify(
+    DeleteAddonSecurity$outboundSchema.parse(deleteAddonSecurity),
+  );
+}
 
 /** @internal */
 export type DeleteAddonRequest$Outbound = {

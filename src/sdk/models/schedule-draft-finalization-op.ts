@@ -3,14 +3,217 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+
+export type ScheduleDraftFinalizationSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ScheduleDraftFinalizationSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ScheduleDraftFinalizationSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ScheduleDraftFinalizationSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ScheduleDraftFinalizationSecurity = {
+  option1?: ScheduleDraftFinalizationSecurityOption1 | undefined;
+  option2?: ScheduleDraftFinalizationSecurityOption2 | undefined;
+  option3?: ScheduleDraftFinalizationSecurityOption3 | undefined;
+  option4?: ScheduleDraftFinalizationSecurityOption4 | undefined;
+};
 
 /**
  * OK
  */
 export type ScheduleDraftFinalizationResponse = {};
+
+/** @internal */
+export type ScheduleDraftFinalizationSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ScheduleDraftFinalizationSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    ScheduleDraftFinalizationSecurityOption1$Outbound,
+    ScheduleDraftFinalizationSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function scheduleDraftFinalizationSecurityOption1ToJSON(
+  scheduleDraftFinalizationSecurityOption1:
+    ScheduleDraftFinalizationSecurityOption1,
+): string {
+  return JSON.stringify(
+    ScheduleDraftFinalizationSecurityOption1$outboundSchema.parse(
+      scheduleDraftFinalizationSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ScheduleDraftFinalizationSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ScheduleDraftFinalizationSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    ScheduleDraftFinalizationSecurityOption2$Outbound,
+    ScheduleDraftFinalizationSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function scheduleDraftFinalizationSecurityOption2ToJSON(
+  scheduleDraftFinalizationSecurityOption2:
+    ScheduleDraftFinalizationSecurityOption2,
+): string {
+  return JSON.stringify(
+    ScheduleDraftFinalizationSecurityOption2$outboundSchema.parse(
+      scheduleDraftFinalizationSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ScheduleDraftFinalizationSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ScheduleDraftFinalizationSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    ScheduleDraftFinalizationSecurityOption3$Outbound,
+    ScheduleDraftFinalizationSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function scheduleDraftFinalizationSecurityOption3ToJSON(
+  scheduleDraftFinalizationSecurityOption3:
+    ScheduleDraftFinalizationSecurityOption3,
+): string {
+  return JSON.stringify(
+    ScheduleDraftFinalizationSecurityOption3$outboundSchema.parse(
+      scheduleDraftFinalizationSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ScheduleDraftFinalizationSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ScheduleDraftFinalizationSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    ScheduleDraftFinalizationSecurityOption4$Outbound,
+    ScheduleDraftFinalizationSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function scheduleDraftFinalizationSecurityOption4ToJSON(
+  scheduleDraftFinalizationSecurityOption4:
+    ScheduleDraftFinalizationSecurityOption4,
+): string {
+  return JSON.stringify(
+    ScheduleDraftFinalizationSecurityOption4$outboundSchema.parse(
+      scheduleDraftFinalizationSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ScheduleDraftFinalizationSecurity$Outbound = {
+  Option1?: ScheduleDraftFinalizationSecurityOption1$Outbound | undefined;
+  Option2?: ScheduleDraftFinalizationSecurityOption2$Outbound | undefined;
+  Option3?: ScheduleDraftFinalizationSecurityOption3$Outbound | undefined;
+  Option4?: ScheduleDraftFinalizationSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ScheduleDraftFinalizationSecurity$outboundSchema: z.ZodMiniType<
+  ScheduleDraftFinalizationSecurity$Outbound,
+  ScheduleDraftFinalizationSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ScheduleDraftFinalizationSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ScheduleDraftFinalizationSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ScheduleDraftFinalizationSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ScheduleDraftFinalizationSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function scheduleDraftFinalizationSecurityToJSON(
+  scheduleDraftFinalizationSecurity: ScheduleDraftFinalizationSecurity,
+): string {
+  return JSON.stringify(
+    ScheduleDraftFinalizationSecurity$outboundSchema.parse(
+      scheduleDraftFinalizationSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export const ScheduleDraftFinalizationResponse$inboundSchema: z.ZodMiniType<

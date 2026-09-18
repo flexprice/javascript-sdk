@@ -22,12 +22,14 @@ Use when adding a new price to a plan or catalog (e.g. per-seat, flat, or metere
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.prices.createPrice({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     billingModel: "FLAT_FEE",
     billingPeriod: "DAILY",
     currency: "Dong",
@@ -54,12 +56,14 @@ import { pricesCreatePrice } from "@flexprice/sdk/funcs/prices-create-price.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await pricesCreatePrice(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     billingModel: "FLAT_FEE",
     billingPeriod: "DAILY",
     currency: "Dong",
@@ -85,6 +89,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreatePriceRequest](../../sdk/models/create-price-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.CreatePriceSecurity](../../sdk/models/create-price-security.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -111,12 +116,14 @@ Use when creating many prices at once (e.g. importing a catalog or setting up a 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.prices.createPricesBulk({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     items: [],
   });
 
@@ -136,12 +143,14 @@ import { pricesCreatePricesBulk } from "@flexprice/sdk/funcs/prices-create-price
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await pricesCreatePricesBulk(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     items: [],
   });
   if (res.ok) {
@@ -160,6 +169,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateBulkPriceRequest](../../sdk/models/create-bulk-price-request.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.CreatePricesBulkSecurity](../../sdk/models/create-prices-bulk-security.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -186,12 +196,14 @@ Use when resolving a price by external id (e.g. from your catalog or CMS). Ideal
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.prices.getPriceByLookupKey("<value>");
+  const result = await flexprice.prices.getPriceByLookupKey({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<value>");
 
   console.log(result);
 }
@@ -209,12 +221,14 @@ import { pricesGetPriceByLookupKey } from "@flexprice/sdk/funcs/prices-get-price
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await pricesGetPriceByLookupKey(flexprice, "<value>");
+  const res = await pricesGetPriceByLookupKey(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<value>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -230,6 +244,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetPriceByLookupKeySecurity](../../sdk/models/get-price-by-lookup-key-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `lookupKey`                                                                                                                                                                    | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Lookup key                                                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -257,12 +272,14 @@ Use when listing or searching prices (e.g. plan builder or catalog). Returns a p
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.prices.queryPrice({});
+  const result = await flexprice.prices.queryPrice({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
 
   console.log(result);
 }
@@ -280,12 +297,14 @@ import { pricesQueryPrice } from "@flexprice/sdk/funcs/prices-query-price.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await pricesQueryPrice(flexprice, {});
+  const res = await pricesQueryPrice(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -302,6 +321,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.PriceFilter](../../sdk/models/price-filter.md)                                                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.QueryPriceSecurity](../../sdk/models/query-price-security.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -328,12 +348,14 @@ Use when you need to load a single price (e.g. for display or editing). Response
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.prices.getPrice("<id>");
+  const result = await flexprice.prices.getPrice({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -351,12 +373,14 @@ import { pricesGetPrice } from "@flexprice/sdk/funcs/prices-get-price.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await pricesGetPrice(flexprice, "<id>");
+  const res = await pricesGetPrice(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -372,6 +396,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetPriceSecurity](../../sdk/models/get-price-security.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Price ID                                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -399,12 +424,14 @@ Use when changing price configuration (e.g. amount, billing scheme, or metadata)
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.prices.updatePrice("<id>", {});
+  const result = await flexprice.prices.updatePrice({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -422,12 +449,14 @@ import { pricesUpdatePrice } from "@flexprice/sdk/funcs/prices-update-price.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await pricesUpdatePrice(flexprice, "<id>", {});
+  const res = await pricesUpdatePrice(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -443,6 +472,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.UpdatePriceSecurity](../../sdk/models/update-price-security.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Price ID                                                                                                                                                                       |
 | `body`                                                                                                                                                                         | [models.UpdatePriceRequest](../../sdk/models/update-price-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | Price configuration                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -471,12 +501,14 @@ Use when retiring a price (e.g. end-of-life or replacement). Optional effective 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.prices.deletePrice("<id>", {});
+  const result = await flexprice.prices.deletePrice({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -494,12 +526,14 @@ import { pricesDeletePrice } from "@flexprice/sdk/funcs/prices-delete-price.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await pricesDeletePrice(flexprice, "<id>", {});
+  const res = await pricesDeletePrice(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -515,6 +549,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.DeletePriceSecurity](../../sdk/models/delete-price-security.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Price ID                                                                                                                                                                       |
 | `body`                                                                                                                                                                         | [models.DeletePriceRequest](../../sdk/models/delete-price-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | Delete Price Request                                                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |

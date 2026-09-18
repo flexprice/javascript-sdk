@@ -20,11 +20,13 @@ export class Tasks extends ClientSDK {
    * Use when listing or searching async tasks (e.g. admin queue view). Returns list with optional filtering.
    */
   async listTasks(
+    security: models.ListTasksSecurity,
     request?: models.ListTasksRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListTasksResponse> {
     return unwrapAsync(tasksListTasks(
       this,
+      security,
       request,
       options,
     ));
@@ -37,11 +39,13 @@ export class Tasks extends ClientSDK {
    * Use to submit a CSV of usage events for async ingestion. The CSV must already have been uploaded to the Flexprice-managed imports bucket (currently via CSV Box) — pass the upload_id and the backend fetches the file from S3 and streams rows into ClickHouse. Returns the task ID and Temporal workflow IDs for polling.
    */
   async createTask(
+    security: models.CreateTaskSecurity,
     request: models.CreateTaskRequest,
     options?: RequestOptions,
   ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(tasksCreateTask(
       this,
+      security,
       request,
       options,
     ));
@@ -54,11 +58,13 @@ export class Tasks extends ClientSDK {
    * Use when fetching the outcome of a completed task (e.g. export URL or error message). Call after task status is complete.
    */
   async getTaskResult(
+    security: models.GetTaskResultSecurity,
     workflowId: string,
     options?: RequestOptions,
   ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(tasksGetTaskResult(
       this,
+      security,
       workflowId,
       options,
     ));
@@ -71,11 +77,13 @@ export class Tasks extends ClientSDK {
    * Use when checking task status or progress (e.g. polling after create). Returns task by ID.
    */
   async getTask(
+    security: models.GetTaskSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.TaskResponse> {
     return unwrapAsync(tasksGetTask(
       this,
+      security,
       id,
       options,
     ));
@@ -88,11 +96,13 @@ export class Tasks extends ClientSDK {
    * Use when letting a user download an exported file (e.g. report or data export). Returns a presigned URL; supports FlexPrice or customer-owned S3.
    */
   async downloadTaskExport(
+    security: models.DownloadTaskExportSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(tasksDownloadTaskExport(
       this,
+      security,
       id,
       options,
     ));
@@ -105,12 +115,14 @@ export class Tasks extends ClientSDK {
    * Use when updating task status (e.g. marking complete or failed from a worker). Typically called by backend processors.
    */
   async updateTaskStatus(
+    security: models.UpdateTaskStatusSecurity,
     id: string,
     body: models.UpdateTaskStatusRequest,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(tasksUpdateTaskStatus(
       this,
+      security,
       id,
       body,
       options,

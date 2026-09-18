@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateTaskStatusRequest,
   UpdateTaskStatusRequest$Outbound,
   UpdateTaskStatusRequest$outboundSchema,
 } from "./update-task-status-request.js";
+
+export type UpdateTaskStatusSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateTaskStatusSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateTaskStatusSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateTaskStatusSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateTaskStatusSecurity = {
+  option1?: UpdateTaskStatusSecurityOption1 | undefined;
+  option2?: UpdateTaskStatusSecurityOption2 | undefined;
+  option3?: UpdateTaskStatusSecurityOption3 | undefined;
+  option4?: UpdateTaskStatusSecurityOption4 | undefined;
+};
 
 export type UpdateTaskStatusRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdateTaskStatusRequestRequest = {
    */
   body: UpdateTaskStatusRequest;
 };
+
+/** @internal */
+export type UpdateTaskStatusSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateTaskStatusSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusSecurityOption1$Outbound,
+  UpdateTaskStatusSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateTaskStatusSecurityOption1ToJSON(
+  updateTaskStatusSecurityOption1: UpdateTaskStatusSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateTaskStatusSecurityOption1$outboundSchema.parse(
+      updateTaskStatusSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaskStatusSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateTaskStatusSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusSecurityOption2$Outbound,
+  UpdateTaskStatusSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateTaskStatusSecurityOption2ToJSON(
+  updateTaskStatusSecurityOption2: UpdateTaskStatusSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateTaskStatusSecurityOption2$outboundSchema.parse(
+      updateTaskStatusSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaskStatusSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateTaskStatusSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusSecurityOption3$Outbound,
+  UpdateTaskStatusSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateTaskStatusSecurityOption3ToJSON(
+  updateTaskStatusSecurityOption3: UpdateTaskStatusSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateTaskStatusSecurityOption3$outboundSchema.parse(
+      updateTaskStatusSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaskStatusSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateTaskStatusSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusSecurityOption4$Outbound,
+  UpdateTaskStatusSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateTaskStatusSecurityOption4ToJSON(
+  updateTaskStatusSecurityOption4: UpdateTaskStatusSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateTaskStatusSecurityOption4$outboundSchema.parse(
+      updateTaskStatusSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaskStatusSecurity$Outbound = {
+  Option1?: UpdateTaskStatusSecurityOption1$Outbound | undefined;
+  Option2?: UpdateTaskStatusSecurityOption2$Outbound | undefined;
+  Option3?: UpdateTaskStatusSecurityOption3$Outbound | undefined;
+  Option4?: UpdateTaskStatusSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateTaskStatusSecurity$outboundSchema: z.ZodMiniType<
+  UpdateTaskStatusSecurity$Outbound,
+  UpdateTaskStatusSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateTaskStatusSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateTaskStatusSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateTaskStatusSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateTaskStatusSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateTaskStatusSecurityToJSON(
+  updateTaskStatusSecurity: UpdateTaskStatusSecurity,
+): string {
+  return JSON.stringify(
+    UpdateTaskStatusSecurity$outboundSchema.parse(updateTaskStatusSecurity),
+  );
+}
 
 /** @internal */
 export type UpdateTaskStatusRequestRequest$Outbound = {

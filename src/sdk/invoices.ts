@@ -29,11 +29,13 @@ export class Invoices extends ClientSDK {
    * Use when showing a customer's invoice overview (e.g. billing portal or balance summary). Includes totals and multi-currency breakdown.
    */
   async getCustomerInvoiceSummary(
+    security: models.GetCustomerInvoiceSummarySecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CustomerMultiCurrencyInvoiceSummary> {
     return unwrapAsync(invoicesGetCustomerInvoiceSummary(
       this,
+      security,
       id,
       options,
     ));
@@ -44,13 +46,16 @@ export class Invoices extends ClientSDK {
    *
    * @remarks
    * Use when creating a manual or one-off invoice (e.g. custom charge or non-recurring billing). Invoice is created in draft; finalize when ready.
+   * Pass a `checkout` object to gate the invoice behind a hosted payment session: the invoice stays DRAFT with no invoice number, and the response carries `checkout_session.payment_action.url` for the customer to pay. It finalizes only when the payment webhook lands; if the session expires the invoice is voided and archived. Poll `GET /checkout/sessions/{id}` until `terminal` is true. One-off invoices only.
    */
   async createInvoice(
+    security: models.CreateInvoiceSecurity,
     request: models.CreateInvoiceRequest,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesCreateInvoice(
       this,
+      security,
       request,
       options,
     ));
@@ -63,11 +68,13 @@ export class Invoices extends ClientSDK {
    * Use when showing a customer what they will be charged (e.g. preview before checkout or plan change). No invoice is created.
    */
   async getInvoicePreview(
+    security: models.GetInvoicePreviewSecurity,
     request: models.GetPreviewInvoiceRequest,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesGetInvoicePreview(
       this,
+      security,
       request,
       options,
     ));
@@ -80,11 +87,13 @@ export class Invoices extends ClientSDK {
    * Use when listing or searching invoices (e.g. admin view or customer history). Returns a paginated list; supports filtering by customer, status, date range.
    */
   async queryInvoice(
+    security: models.QueryInvoiceSecurity,
     request: models.InvoiceFilter,
     options?: RequestOptions,
   ): Promise<models.ListInvoicesResponse> {
     return unwrapAsync(invoicesQueryInvoice(
       this,
+      security,
       request,
       options,
     ));
@@ -97,6 +106,7 @@ export class Invoices extends ClientSDK {
    * Use when loading an invoice for display or editing (e.g. portal or reconciliation). Supports group_by for usage breakdown and force_runtime_recalculation.
    */
   async getInvoice(
+    security: models.GetInvoiceSecurity,
     id: string,
     expandBySource?: boolean | undefined,
     groupBy?: Array<string> | undefined,
@@ -105,6 +115,7 @@ export class Invoices extends ClientSDK {
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesGetInvoice(
       this,
+      security,
       id,
       expandBySource,
       groupBy,
@@ -120,12 +131,14 @@ export class Invoices extends ClientSDK {
    * Use when updating invoice metadata or due date (e.g. PDF URL, net terms), or when recalculating this draft invoice's discount from its current standing coupon associations via apply_discount:true (idempotent, does not attach a new coupon). Allowed for invoices in draft or finalized status.
    */
   async updateInvoice(
+    security: models.UpdateInvoiceSecurity,
     id: string,
     body: models.UpdateInvoiceRequest,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesUpdateInvoice(
       this,
+      security,
       id,
       body,
       options,
@@ -139,11 +152,13 @@ export class Invoices extends ClientSDK {
    * Use when sending an invoice to the customer (e.g. trigger email or Slack). Payload includes full invoice details for your integration.
    */
   async triggerInvoiceCommsWebhook(
+    security: models.TriggerInvoiceCommsWebhookSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesTriggerInvoiceCommsWebhook(
       this,
+      security,
       id,
       options,
     ));
@@ -156,11 +171,13 @@ export class Invoices extends ClientSDK {
    * Use when locking an invoice for payment (e.g. after review). Once finalized, line items are locked; invoice can be paid or voided.
    */
   async finalizeInvoice(
+    security: models.FinalizeInvoiceSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesFinalizeInvoice(
       this,
+      security,
       id,
       options,
     ));
@@ -173,12 +190,14 @@ export class Invoices extends ClientSDK {
    * Execute a modification on a draft or finalized invoice. Supports line item changes: add (bulk), update (one line item per call; the edit is versioned, so the line item id changes), and remove (bulk, soft delete). Totals are recalculated from the remaining line items; a manual edit marks the invoice as manually edited, which disables recompute. Modifying a FINALIZED invoice voids it and recreates it as a draft copy carrying all current data (description, billing period, due date, metadata, line items); the modification lands on the copy and the response returns the new draft — chain subsequent calls to the returned invoice id; a call that still targets the voided original is rejected with an error naming the replacement.
    */
   async executeInvoiceModify(
+    security: models.ExecuteInvoiceModifySecurity,
     id: string,
     body: models.ExecuteInvoiceModifyRequest,
     options?: RequestOptions,
   ): Promise<models.InvoiceModifyResponse> {
     return unwrapAsync(invoicesExecuteInvoiceModify(
       this,
+      security,
       id,
       body,
       options,
@@ -192,12 +211,14 @@ export class Invoices extends ClientSDK {
    * Use when reconciling payment status from an external gateway or manual entry (e.g. mark paid after bank confirmation).
    */
   async updateInvoicePaymentStatus(
+    security: models.UpdateInvoicePaymentStatusSecurity,
     id: string,
     body: models.UpdatePaymentStatusRequest,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesUpdateInvoicePaymentStatus(
       this,
+      security,
       id,
       body,
       options,
@@ -211,11 +232,13 @@ export class Invoices extends ClientSDK {
    * Use when paying an invoice with the customer's wallet balance (e.g. prepaid credits or balance applied at checkout).
    */
   async attemptInvoicePayment(
+    security: models.AttemptInvoicePaymentSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesAttemptInvoicePayment(
       this,
+      security,
       id,
       options,
     ));
@@ -228,6 +251,7 @@ export class Invoices extends ClientSDK {
    * Use when delivering an invoice PDF to the customer (e.g. email attachment or download). Use url=true for a presigned URL instead of binary. Use force_generate=true to regenerate and re-upload the PDF even if one already exists in S3.
    */
   async getInvoicePdf(
+    security: models.GetInvoicePdfSecurity,
     id: string,
     url?: boolean | undefined,
     forceGenerate?: boolean | undefined,
@@ -235,6 +259,7 @@ export class Invoices extends ClientSDK {
   ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(invoicesGetInvoicePdf(
       this,
+      security,
       id,
       url,
       forceGenerate,
@@ -249,11 +274,13 @@ export class Invoices extends ClientSDK {
    * Starts an async workflow that creates a fresh replacement invoice for a voided SUBSCRIPTION invoice (same billing period). Returns workflow_id and run_id; poll workflow status or GET the new invoice via recalculated_invoice_id after completion.
    */
   async recalculateInvoice(
+    security: models.RecalculateInvoiceSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(invoicesRecalculateInvoice(
       this,
+      security,
       id,
       options,
     ));
@@ -266,12 +293,14 @@ export class Invoices extends ClientSDK {
    * Recalculates a draft SUBSCRIPTION invoice in-place (replaces line items, reapplies credits/coupons/taxes). Use when subscription or usage data changed before finalizing.
    */
   async recalculateInvoiceV2(
+    security: models.RecalculateInvoiceV2Security,
     id: string,
     finalize?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.InvoiceResponse> {
     return unwrapAsync(invoicesRecalculateInvoiceV2(
       this,
+      security,
       id,
       finalize,
       options,
@@ -285,11 +314,13 @@ export class Invoices extends ClientSDK {
    * Use when cancelling an invoice (e.g. order cancelled or duplicate). Only unpaid invoices can be voided.
    */
   async voidInvoice(
+    security: models.VoidInvoiceSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesVoidInvoice(
       this,
+      security,
       id,
       options,
     ));

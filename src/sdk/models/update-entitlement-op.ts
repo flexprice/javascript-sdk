@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateEntitlementRequest,
   UpdateEntitlementRequest$Outbound,
   UpdateEntitlementRequest$outboundSchema,
 } from "./update-entitlement-request.js";
+
+export type UpdateEntitlementSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateEntitlementSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateEntitlementSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateEntitlementSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateEntitlementSecurity = {
+  option1?: UpdateEntitlementSecurityOption1 | undefined;
+  option2?: UpdateEntitlementSecurityOption2 | undefined;
+  option3?: UpdateEntitlementSecurityOption3 | undefined;
+  option4?: UpdateEntitlementSecurityOption4 | undefined;
+};
 
 export type UpdateEntitlementRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdateEntitlementRequestRequest = {
    */
   body: UpdateEntitlementRequest;
 };
+
+/** @internal */
+export type UpdateEntitlementSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateEntitlementSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementSecurityOption1$Outbound,
+  UpdateEntitlementSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateEntitlementSecurityOption1ToJSON(
+  updateEntitlementSecurityOption1: UpdateEntitlementSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateEntitlementSecurityOption1$outboundSchema.parse(
+      updateEntitlementSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateEntitlementSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateEntitlementSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementSecurityOption2$Outbound,
+  UpdateEntitlementSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateEntitlementSecurityOption2ToJSON(
+  updateEntitlementSecurityOption2: UpdateEntitlementSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateEntitlementSecurityOption2$outboundSchema.parse(
+      updateEntitlementSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateEntitlementSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateEntitlementSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementSecurityOption3$Outbound,
+  UpdateEntitlementSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateEntitlementSecurityOption3ToJSON(
+  updateEntitlementSecurityOption3: UpdateEntitlementSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateEntitlementSecurityOption3$outboundSchema.parse(
+      updateEntitlementSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateEntitlementSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateEntitlementSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementSecurityOption4$Outbound,
+  UpdateEntitlementSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateEntitlementSecurityOption4ToJSON(
+  updateEntitlementSecurityOption4: UpdateEntitlementSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateEntitlementSecurityOption4$outboundSchema.parse(
+      updateEntitlementSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateEntitlementSecurity$Outbound = {
+  Option1?: UpdateEntitlementSecurityOption1$Outbound | undefined;
+  Option2?: UpdateEntitlementSecurityOption2$Outbound | undefined;
+  Option3?: UpdateEntitlementSecurityOption3$Outbound | undefined;
+  Option4?: UpdateEntitlementSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateEntitlementSecurity$outboundSchema: z.ZodMiniType<
+  UpdateEntitlementSecurity$Outbound,
+  UpdateEntitlementSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateEntitlementSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateEntitlementSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateEntitlementSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateEntitlementSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateEntitlementSecurityToJSON(
+  updateEntitlementSecurity: UpdateEntitlementSecurity,
+): string {
+  return JSON.stringify(
+    UpdateEntitlementSecurity$outboundSchema.parse(updateEntitlementSecurity),
+  );
+}
 
 /** @internal */
 export type UpdateEntitlementRequestRequest$Outbound = {

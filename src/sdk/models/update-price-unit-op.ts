@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdatePriceUnitRequest,
   UpdatePriceUnitRequest$Outbound,
   UpdatePriceUnitRequest$outboundSchema,
 } from "./update-price-unit-request.js";
+
+export type UpdatePriceUnitSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdatePriceUnitSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdatePriceUnitSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdatePriceUnitSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdatePriceUnitSecurity = {
+  option1?: UpdatePriceUnitSecurityOption1 | undefined;
+  option2?: UpdatePriceUnitSecurityOption2 | undefined;
+  option3?: UpdatePriceUnitSecurityOption3 | undefined;
+  option4?: UpdatePriceUnitSecurityOption4 | undefined;
+};
 
 export type UpdatePriceUnitRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdatePriceUnitRequestRequest = {
    */
   body: UpdatePriceUnitRequest;
 };
+
+/** @internal */
+export type UpdatePriceUnitSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdatePriceUnitSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdatePriceUnitSecurityOption1$Outbound,
+  UpdatePriceUnitSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updatePriceUnitSecurityOption1ToJSON(
+  updatePriceUnitSecurityOption1: UpdatePriceUnitSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdatePriceUnitSecurityOption1$outboundSchema.parse(
+      updatePriceUnitSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdatePriceUnitSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdatePriceUnitSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdatePriceUnitSecurityOption2$Outbound,
+  UpdatePriceUnitSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updatePriceUnitSecurityOption2ToJSON(
+  updatePriceUnitSecurityOption2: UpdatePriceUnitSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdatePriceUnitSecurityOption2$outboundSchema.parse(
+      updatePriceUnitSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdatePriceUnitSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdatePriceUnitSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdatePriceUnitSecurityOption3$Outbound,
+  UpdatePriceUnitSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updatePriceUnitSecurityOption3ToJSON(
+  updatePriceUnitSecurityOption3: UpdatePriceUnitSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdatePriceUnitSecurityOption3$outboundSchema.parse(
+      updatePriceUnitSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdatePriceUnitSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdatePriceUnitSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdatePriceUnitSecurityOption4$Outbound,
+  UpdatePriceUnitSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updatePriceUnitSecurityOption4ToJSON(
+  updatePriceUnitSecurityOption4: UpdatePriceUnitSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdatePriceUnitSecurityOption4$outboundSchema.parse(
+      updatePriceUnitSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdatePriceUnitSecurity$Outbound = {
+  Option1?: UpdatePriceUnitSecurityOption1$Outbound | undefined;
+  Option2?: UpdatePriceUnitSecurityOption2$Outbound | undefined;
+  Option3?: UpdatePriceUnitSecurityOption3$Outbound | undefined;
+  Option4?: UpdatePriceUnitSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdatePriceUnitSecurity$outboundSchema: z.ZodMiniType<
+  UpdatePriceUnitSecurity$Outbound,
+  UpdatePriceUnitSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdatePriceUnitSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdatePriceUnitSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdatePriceUnitSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdatePriceUnitSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updatePriceUnitSecurityToJSON(
+  updatePriceUnitSecurity: UpdatePriceUnitSecurity,
+): string {
+  return JSON.stringify(
+    UpdatePriceUnitSecurity$outboundSchema.parse(updatePriceUnitSecurity),
+  );
+}
 
 /** @internal */
 export type UpdatePriceUnitRequestRequest$Outbound = {

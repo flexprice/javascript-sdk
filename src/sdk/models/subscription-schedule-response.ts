@@ -18,16 +18,6 @@ import {
 } from "./subscription-schedule-change-type.js";
 
 /**
- * configuration contains type-specific configuration (e.g., target_plan_id for plan changes)
- */
-export type Configuration = {};
-
-/**
- * execution_result contains type-specific execution result
- */
-export type ExecutionResult = {};
-
-/**
  * Full details of a subscription schedule
  */
 export type SubscriptionScheduleResponse = {
@@ -42,7 +32,7 @@ export type SubscriptionScheduleResponse = {
   /**
    * configuration contains type-specific configuration (e.g., target_plan_id for plan changes)
    */
-  configuration?: Configuration | undefined;
+  configuration?: { [k: string]: any } | undefined;
   /**
    * created_at timestamp
    */
@@ -62,7 +52,7 @@ export type SubscriptionScheduleResponse = {
   /**
    * execution_result contains type-specific execution result
    */
-  executionResult?: ExecutionResult | undefined;
+  executionResult?: { [k: string]: any } | undefined;
   /**
    * id of the schedule
    */
@@ -88,38 +78,6 @@ export type SubscriptionScheduleResponse = {
 };
 
 /** @internal */
-export const Configuration$inboundSchema: z.ZodMiniType<
-  Configuration,
-  unknown
-> = z.object({});
-
-export function configurationFromJSON(
-  jsonString: string,
-): SafeParseResult<Configuration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Configuration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Configuration' from JSON`,
-  );
-}
-
-/** @internal */
-export const ExecutionResult$inboundSchema: z.ZodMiniType<
-  ExecutionResult,
-  unknown
-> = z.object({});
-
-export function executionResultFromJSON(
-  jsonString: string,
-): SafeParseResult<ExecutionResult, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ExecutionResult$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ExecutionResult' from JSON`,
-  );
-}
-
-/** @internal */
 export const SubscriptionScheduleResponse$inboundSchema: z.ZodMiniType<
   SubscriptionScheduleResponse,
   unknown
@@ -127,14 +85,12 @@ export const SubscriptionScheduleResponse$inboundSchema: z.ZodMiniType<
   z.object({
     can_be_cancelled: types.optional(types.boolean()),
     cancelled_at: types.optional(types.date()),
-    configuration: types.optional(z.lazy(() => Configuration$inboundSchema)),
+    configuration: types.optional(z.record(z.string(), z.any())),
     created_at: types.optional(types.date()),
     days_until_execution: types.optional(types.number()),
     error_message: types.optional(types.string()),
     executed_at: types.optional(types.date()),
-    execution_result: types.optional(
-      z.lazy(() => ExecutionResult$inboundSchema),
-    ),
+    execution_result: types.optional(z.record(z.string(), z.any())),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     schedule_type: types.optional(SubscriptionScheduleChangeType$inboundSchema),

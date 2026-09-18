@@ -5,6 +5,30 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type GetSubscriptionEntitlementsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetSubscriptionEntitlementsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetSubscriptionEntitlementsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetSubscriptionEntitlementsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetSubscriptionEntitlementsSecurity = {
+  option1?: GetSubscriptionEntitlementsSecurityOption1 | undefined;
+  option2?: GetSubscriptionEntitlementsSecurityOption2 | undefined;
+  option3?: GetSubscriptionEntitlementsSecurityOption3 | undefined;
+  option4?: GetSubscriptionEntitlementsSecurityOption4 | undefined;
+};
+
 export type GetSubscriptionEntitlementsRequest = {
   /**
    * Subscription ID
@@ -15,6 +39,184 @@ export type GetSubscriptionEntitlementsRequest = {
    */
   featureIds?: Array<string> | undefined;
 };
+
+/** @internal */
+export type GetSubscriptionEntitlementsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionEntitlementsSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionEntitlementsSecurityOption1$Outbound,
+    GetSubscriptionEntitlementsSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionEntitlementsSecurityOption1ToJSON(
+  getSubscriptionEntitlementsSecurityOption1:
+    GetSubscriptionEntitlementsSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetSubscriptionEntitlementsSecurityOption1$outboundSchema.parse(
+      getSubscriptionEntitlementsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionEntitlementsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionEntitlementsSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionEntitlementsSecurityOption2$Outbound,
+    GetSubscriptionEntitlementsSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionEntitlementsSecurityOption2ToJSON(
+  getSubscriptionEntitlementsSecurityOption2:
+    GetSubscriptionEntitlementsSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetSubscriptionEntitlementsSecurityOption2$outboundSchema.parse(
+      getSubscriptionEntitlementsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionEntitlementsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetSubscriptionEntitlementsSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionEntitlementsSecurityOption3$Outbound,
+    GetSubscriptionEntitlementsSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function getSubscriptionEntitlementsSecurityOption3ToJSON(
+  getSubscriptionEntitlementsSecurityOption3:
+    GetSubscriptionEntitlementsSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetSubscriptionEntitlementsSecurityOption3$outboundSchema.parse(
+      getSubscriptionEntitlementsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionEntitlementsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionEntitlementsSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionEntitlementsSecurityOption4$Outbound,
+    GetSubscriptionEntitlementsSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionEntitlementsSecurityOption4ToJSON(
+  getSubscriptionEntitlementsSecurityOption4:
+    GetSubscriptionEntitlementsSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetSubscriptionEntitlementsSecurityOption4$outboundSchema.parse(
+      getSubscriptionEntitlementsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionEntitlementsSecurity$Outbound = {
+  Option1?: GetSubscriptionEntitlementsSecurityOption1$Outbound | undefined;
+  Option2?: GetSubscriptionEntitlementsSecurityOption2$Outbound | undefined;
+  Option3?: GetSubscriptionEntitlementsSecurityOption3$Outbound | undefined;
+  Option4?: GetSubscriptionEntitlementsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetSubscriptionEntitlementsSecurity$outboundSchema: z.ZodMiniType<
+  GetSubscriptionEntitlementsSecurity$Outbound,
+  GetSubscriptionEntitlementsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetSubscriptionEntitlementsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetSubscriptionEntitlementsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetSubscriptionEntitlementsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetSubscriptionEntitlementsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getSubscriptionEntitlementsSecurityToJSON(
+  getSubscriptionEntitlementsSecurity: GetSubscriptionEntitlementsSecurity,
+): string {
+  return JSON.stringify(
+    GetSubscriptionEntitlementsSecurity$outboundSchema.parse(
+      getSubscriptionEntitlementsSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetSubscriptionEntitlementsRequest$Outbound = {

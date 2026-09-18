@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteTaxRateSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteTaxRateSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteTaxRateSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteTaxRateSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteTaxRateSecurity = {
+  option1?: DeleteTaxRateSecurityOption1 | undefined;
+  option2?: DeleteTaxRateSecurityOption2 | undefined;
+  option3?: DeleteTaxRateSecurityOption3 | undefined;
+  option4?: DeleteTaxRateSecurityOption4 | undefined;
+};
 
 export type DeleteTaxRateRequest = {
   /**
@@ -10,6 +35,174 @@ export type DeleteTaxRateRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteTaxRateSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteTaxRateSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteTaxRateSecurityOption1$Outbound,
+  DeleteTaxRateSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteTaxRateSecurityOption1ToJSON(
+  deleteTaxRateSecurityOption1: DeleteTaxRateSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteTaxRateSecurityOption1$outboundSchema.parse(
+      deleteTaxRateSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteTaxRateSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteTaxRateSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteTaxRateSecurityOption2$Outbound,
+  DeleteTaxRateSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteTaxRateSecurityOption2ToJSON(
+  deleteTaxRateSecurityOption2: DeleteTaxRateSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteTaxRateSecurityOption2$outboundSchema.parse(
+      deleteTaxRateSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteTaxRateSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteTaxRateSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteTaxRateSecurityOption3$Outbound,
+  DeleteTaxRateSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteTaxRateSecurityOption3ToJSON(
+  deleteTaxRateSecurityOption3: DeleteTaxRateSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteTaxRateSecurityOption3$outboundSchema.parse(
+      deleteTaxRateSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteTaxRateSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteTaxRateSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteTaxRateSecurityOption4$Outbound,
+  DeleteTaxRateSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteTaxRateSecurityOption4ToJSON(
+  deleteTaxRateSecurityOption4: DeleteTaxRateSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteTaxRateSecurityOption4$outboundSchema.parse(
+      deleteTaxRateSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteTaxRateSecurity$Outbound = {
+  Option1?: DeleteTaxRateSecurityOption1$Outbound | undefined;
+  Option2?: DeleteTaxRateSecurityOption2$Outbound | undefined;
+  Option3?: DeleteTaxRateSecurityOption3$Outbound | undefined;
+  Option4?: DeleteTaxRateSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteTaxRateSecurity$outboundSchema: z.ZodMiniType<
+  DeleteTaxRateSecurity$Outbound,
+  DeleteTaxRateSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteTaxRateSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteTaxRateSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteTaxRateSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteTaxRateSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteTaxRateSecurityToJSON(
+  deleteTaxRateSecurity: DeleteTaxRateSecurity,
+): string {
+  return JSON.stringify(
+    DeleteTaxRateSecurity$outboundSchema.parse(deleteTaxRateSecurity),
+  );
+}
 
 /** @internal */
 export type DeleteTaxRateRequest$Outbound = {

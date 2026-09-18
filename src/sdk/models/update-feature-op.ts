@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateFeatureRequest,
   UpdateFeatureRequest$Outbound,
   UpdateFeatureRequest$outboundSchema,
 } from "./update-feature-request.js";
+
+export type UpdateFeatureSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateFeatureSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateFeatureSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateFeatureSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateFeatureSecurity = {
+  option1?: UpdateFeatureSecurityOption1 | undefined;
+  option2?: UpdateFeatureSecurityOption2 | undefined;
+  option3?: UpdateFeatureSecurityOption3 | undefined;
+  option4?: UpdateFeatureSecurityOption4 | undefined;
+};
 
 export type UpdateFeatureRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdateFeatureRequestRequest = {
    */
   body: UpdateFeatureRequest;
 };
+
+/** @internal */
+export type UpdateFeatureSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateFeatureSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateFeatureSecurityOption1$Outbound,
+  UpdateFeatureSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateFeatureSecurityOption1ToJSON(
+  updateFeatureSecurityOption1: UpdateFeatureSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateFeatureSecurityOption1$outboundSchema.parse(
+      updateFeatureSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateFeatureSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateFeatureSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateFeatureSecurityOption2$Outbound,
+  UpdateFeatureSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateFeatureSecurityOption2ToJSON(
+  updateFeatureSecurityOption2: UpdateFeatureSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateFeatureSecurityOption2$outboundSchema.parse(
+      updateFeatureSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateFeatureSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateFeatureSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateFeatureSecurityOption3$Outbound,
+  UpdateFeatureSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateFeatureSecurityOption3ToJSON(
+  updateFeatureSecurityOption3: UpdateFeatureSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateFeatureSecurityOption3$outboundSchema.parse(
+      updateFeatureSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateFeatureSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateFeatureSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateFeatureSecurityOption4$Outbound,
+  UpdateFeatureSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateFeatureSecurityOption4ToJSON(
+  updateFeatureSecurityOption4: UpdateFeatureSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateFeatureSecurityOption4$outboundSchema.parse(
+      updateFeatureSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateFeatureSecurity$Outbound = {
+  Option1?: UpdateFeatureSecurityOption1$Outbound | undefined;
+  Option2?: UpdateFeatureSecurityOption2$Outbound | undefined;
+  Option3?: UpdateFeatureSecurityOption3$Outbound | undefined;
+  Option4?: UpdateFeatureSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateFeatureSecurity$outboundSchema: z.ZodMiniType<
+  UpdateFeatureSecurity$Outbound,
+  UpdateFeatureSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateFeatureSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateFeatureSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateFeatureSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateFeatureSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateFeatureSecurityToJSON(
+  updateFeatureSecurity: UpdateFeatureSecurity,
+): string {
+  return JSON.stringify(
+    UpdateFeatureSecurity$outboundSchema.parse(updateFeatureSecurity),
+  );
+}
 
 /** @internal */
 export type UpdateFeatureRequestRequest$Outbound = {

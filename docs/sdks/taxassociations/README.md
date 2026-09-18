@@ -20,12 +20,14 @@ Use when listing tax associations (e.g. tax config or audit). Returns list with 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.taxAssociations.listTaxAssociations();
+  const result = await flexprice.taxAssociations.listTaxAssociations({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  });
 
   console.log(result);
 }
@@ -43,12 +45,14 @@ import { taxAssociationsListTaxAssociations } from "@flexprice/sdk/funcs/tax-ass
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await taxAssociationsListTaxAssociations(flexprice);
+  const res = await taxAssociationsListTaxAssociations(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -64,6 +68,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.ListTaxAssociationsSecurity](../../sdk/models/list-tax-associations-security.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `entityType`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Entity Type                                                                                                                                                                    |
 | `entityId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Entity ID                                                                                                                                                                      |
 | `externalCustomerId`                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | External Customer ID                                                                                                                                                           |
@@ -94,12 +99,14 @@ Use when linking a tax rate to an entity (e.g. customer, product, or region) so 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.taxAssociations.createTaxAssociation({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     taxRateCode: "<value>",
   });
 
@@ -119,12 +126,14 @@ import { taxAssociationsCreateTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await taxAssociationsCreateTaxAssociation(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     taxRateCode: "<value>",
   });
   if (res.ok) {
@@ -143,6 +152,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateTaxAssociationRequest](../../sdk/models/create-tax-association-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.CreateTaxAssociationSecurity](../../sdk/models/create-tax-association-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -169,12 +179,14 @@ Use when you need to load a single tax association (e.g. for display or editing)
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.taxAssociations.getTaxAssociation("<id>");
+  const result = await flexprice.taxAssociations.getTaxAssociation({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -192,12 +204,14 @@ import { taxAssociationsGetTaxAssociation } from "@flexprice/sdk/funcs/tax-assoc
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await taxAssociationsGetTaxAssociation(flexprice, "<id>");
+  const res = await taxAssociationsGetTaxAssociation(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -213,6 +227,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetTaxAssociationSecurity](../../sdk/models/get-tax-association-security.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tax Config ID                                                                                                                                                                  |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -240,12 +255,14 @@ Use when changing a tax association (e.g. switch rate or entity). Request body c
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.taxAssociations.updateTaxAssociation("<id>", {});
+  const result = await flexprice.taxAssociations.updateTaxAssociation({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -263,12 +280,14 @@ import { taxAssociationsUpdateTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await taxAssociationsUpdateTaxAssociation(flexprice, "<id>", {});
+  const res = await taxAssociationsUpdateTaxAssociation(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -284,6 +303,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.UpdateTaxAssociationSecurity](../../sdk/models/update-tax-association-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tax Config ID                                                                                                                                                                  |
 | `body`                                                                                                                                                                         | [models.TaxAssociationUpdateRequest](../../sdk/models/tax-association-update-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tax Config Request                                                                                                                                                             |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -312,12 +332,14 @@ Use when removing a tax association (e.g. entity no longer subject to that rate)
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.taxAssociations.deleteTaxAssociation("<id>");
+  const result = await flexprice.taxAssociations.deleteTaxAssociation({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -335,12 +357,14 @@ import { taxAssociationsDeleteTaxAssociation } from "@flexprice/sdk/funcs/tax-as
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await taxAssociationsDeleteTaxAssociation(flexprice, "<id>");
+  const res = await taxAssociationsDeleteTaxAssociation(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -356,6 +380,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.DeleteTaxAssociationSecurity](../../sdk/models/delete-tax-association-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Tax Config ID                                                                                                                                                                  |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |

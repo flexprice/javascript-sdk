@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type TerminateWalletSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type TerminateWalletSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type TerminateWalletSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type TerminateWalletSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type TerminateWalletSecurity = {
+  option1?: TerminateWalletSecurityOption1 | undefined;
+  option2?: TerminateWalletSecurityOption2 | undefined;
+  option3?: TerminateWalletSecurityOption3 | undefined;
+  option4?: TerminateWalletSecurityOption4 | undefined;
+};
 
 export type TerminateWalletRequest = {
   /**
@@ -10,6 +35,174 @@ export type TerminateWalletRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type TerminateWalletSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const TerminateWalletSecurityOption1$outboundSchema: z.ZodMiniType<
+  TerminateWalletSecurityOption1$Outbound,
+  TerminateWalletSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function terminateWalletSecurityOption1ToJSON(
+  terminateWalletSecurityOption1: TerminateWalletSecurityOption1,
+): string {
+  return JSON.stringify(
+    TerminateWalletSecurityOption1$outboundSchema.parse(
+      terminateWalletSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type TerminateWalletSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const TerminateWalletSecurityOption2$outboundSchema: z.ZodMiniType<
+  TerminateWalletSecurityOption2$Outbound,
+  TerminateWalletSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function terminateWalletSecurityOption2ToJSON(
+  terminateWalletSecurityOption2: TerminateWalletSecurityOption2,
+): string {
+  return JSON.stringify(
+    TerminateWalletSecurityOption2$outboundSchema.parse(
+      terminateWalletSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type TerminateWalletSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const TerminateWalletSecurityOption3$outboundSchema: z.ZodMiniType<
+  TerminateWalletSecurityOption3$Outbound,
+  TerminateWalletSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function terminateWalletSecurityOption3ToJSON(
+  terminateWalletSecurityOption3: TerminateWalletSecurityOption3,
+): string {
+  return JSON.stringify(
+    TerminateWalletSecurityOption3$outboundSchema.parse(
+      terminateWalletSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type TerminateWalletSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const TerminateWalletSecurityOption4$outboundSchema: z.ZodMiniType<
+  TerminateWalletSecurityOption4$Outbound,
+  TerminateWalletSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function terminateWalletSecurityOption4ToJSON(
+  terminateWalletSecurityOption4: TerminateWalletSecurityOption4,
+): string {
+  return JSON.stringify(
+    TerminateWalletSecurityOption4$outboundSchema.parse(
+      terminateWalletSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type TerminateWalletSecurity$Outbound = {
+  Option1?: TerminateWalletSecurityOption1$Outbound | undefined;
+  Option2?: TerminateWalletSecurityOption2$Outbound | undefined;
+  Option3?: TerminateWalletSecurityOption3$Outbound | undefined;
+  Option4?: TerminateWalletSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const TerminateWalletSecurity$outboundSchema: z.ZodMiniType<
+  TerminateWalletSecurity$Outbound,
+  TerminateWalletSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => TerminateWalletSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => TerminateWalletSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => TerminateWalletSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => TerminateWalletSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function terminateWalletSecurityToJSON(
+  terminateWalletSecurity: TerminateWalletSecurity,
+): string {
+  return JSON.stringify(
+    TerminateWalletSecurity$outboundSchema.parse(terminateWalletSecurity),
+  );
+}
 
 /** @internal */
 export type TerminateWalletRequest$Outbound = {

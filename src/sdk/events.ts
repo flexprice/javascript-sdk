@@ -22,11 +22,13 @@ export class Events extends ClientSDK {
    * Use when sending a single usage event from your app (e.g. one API call or one GB stored). Events are processed asynchronously; returns 202 with event_id.
    */
   async ingestEvent(
+    security: models.IngestEventSecurity,
     request: models.IngestEventRequest,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(eventsIngestEvent(
       this,
+      security,
       request,
       options,
     ));
@@ -39,11 +41,13 @@ export class Events extends ClientSDK {
    * Use when building analytics views (e.g. usage by feature or customer over time). Supports filtering, grouping, and time-series breakdown.
    */
   async getUsageAnalytics(
+    security: models.GetUsageAnalyticsSecurity,
     request: models.GetUsageAnalyticsRequest,
     options?: RequestOptions,
   ): Promise<models.GetUsageAnalyticsResponse> {
     return unwrapAsync(eventsGetUsageAnalytics(
       this,
+      security,
       request,
       options,
     ));
@@ -56,11 +60,13 @@ export class Events extends ClientSDK {
    * Use when batching usage events (e.g. backfill or high-volume ingestion). More efficient than single event calls; returns 202 when accepted.
    */
   async ingestEventsBulk(
+    security: models.IngestEventsBulkSecurity,
     request: models.BulkIngestEventRequest,
     options?: RequestOptions,
   ): Promise<{ [k: string]: string }> {
     return unwrapAsync(eventsIngestEventsBulk(
       this,
+      security,
       request,
       options,
     ));
@@ -73,11 +79,13 @@ export class Events extends ClientSDK {
    * Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation). Reads the meter-usage pipeline.
    */
   async getHuggingfaceInferenceData(
+    security: models.GetHuggingfaceInferenceDataSecurity,
     request: models.GetHuggingFaceBillingDataRequest,
     options?: RequestOptions,
   ): Promise<models.GetHuggingFaceBillingDataResponse> {
     return unwrapAsync(eventsGetHuggingfaceInferenceData(
       this,
+      security,
       request,
       options,
     ));
@@ -90,11 +98,13 @@ export class Events extends ClientSDK {
    * Use when debugging a specific event (e.g. why it failed or how it was aggregated). Reads the meter-usage pipeline; includes processing status and step-by-step debug tracker when unprocessed. Uses ?id= query param because event IDs can contain "/".
    */
   async getEvent(
+    security: models.GetEventSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.GetEventByIDResponse> {
     return unwrapAsync(eventsGetEvent(
       this,
+      security,
       id,
       options,
     ));
@@ -107,11 +117,13 @@ export class Events extends ClientSDK {
    * Use when debugging ingestion or exporting raw event data (e.g. support or audit). Returns a paginated list; supports time range and sorting.
    */
   async listRawEvents(
+    security: models.ListRawEventsSecurity,
     request: models.GetEventsRequest,
     options?: RequestOptions,
   ): Promise<models.GetEventsResponse> {
     return unwrapAsync(eventsListRawEvents(
       this,
+      security,
       request,
       options,
     ));
@@ -124,11 +136,13 @@ export class Events extends ClientSDK {
    * Use when building usage reports or dashboards across events. Supports filters and grouping; defaults to last 7 days if no range provided.
    */
   async getUsageStatistics(
+    security: models.GetUsageStatisticsSecurity,
     request: models.GetUsageRequest,
     options?: RequestOptions,
   ): Promise<models.GetUsageResponse> {
     return unwrapAsync(eventsGetUsageStatistics(
       this,
+      security,
       request,
       options,
     ));
@@ -141,11 +155,13 @@ export class Events extends ClientSDK {
    * Use when showing usage for a specific meter (e.g. dashboard or overage check). Supports time range, filters, and grouping by customer or subscription.
    */
   async getUsageByMeter(
+    security: models.GetUsageByMeterSecurity,
     request: models.GetUsageByMeterRequest,
     options?: RequestOptions,
   ): Promise<models.GetUsageResponse> {
     return unwrapAsync(eventsGetUsageByMeter(
       this,
+      security,
       request,
       options,
     ));

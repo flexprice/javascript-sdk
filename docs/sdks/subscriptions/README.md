@@ -42,12 +42,14 @@ Use when onboarding a customer to a plan or starting a new subscription. Ideal f
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.subscriptions.createSubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     billingPeriod: "ONETIME",
     currency: "Kwacha",
     planId: "<id>",
@@ -69,12 +71,14 @@ import { subscriptionsCreateSubscription } from "@flexprice/sdk/funcs/subscripti
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await subscriptionsCreateSubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     billingPeriod: "ONETIME",
     currency: "Kwacha",
     planId: "<id>",
@@ -95,6 +99,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateSubscriptionRequest](../../sdk/models/create-subscription-request.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.CreateSubscriptionSecurity](../../sdk/models/create-subscription-security.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -124,12 +129,14 @@ Use when adding an optional product or add-on to an existing subscription (e.g. 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.subscriptions.addSubscriptionAddon({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     addonId: "<id>",
     subscriptionId: "<id>",
   });
@@ -150,12 +157,14 @@ import { subscriptionsAddSubscriptionAddon } from "@flexprice/sdk/funcs/subscrip
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await subscriptionsAddSubscriptionAddon(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     addonId: "<id>",
     subscriptionId: "<id>",
   });
@@ -175,6 +184,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.AddAddonRequest](../../sdk/models/add-addon-request.md)                                                                                                                | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.AddSubscriptionAddonSecurity](../../sdk/models/add-subscription-addon-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -204,12 +214,14 @@ Use when removing an add-on from a subscription (e.g. downgrade or opt-out).
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.subscriptions.removeSubscriptionAddon({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     addonAssociationId: "<id>",
   });
 
@@ -229,12 +241,14 @@ import { subscriptionsRemoveSubscriptionAddon } from "@flexprice/sdk/funcs/subsc
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await subscriptionsRemoveSubscriptionAddon(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     addonAssociationId: "<id>",
   });
   if (res.ok) {
@@ -253,6 +267,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.RemoveAddonRequest](../../sdk/models/remove-addon-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.RemoveSubscriptionAddonSecurity](../../sdk/models/remove-subscription-addon-security.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -279,12 +294,14 @@ List subscription line items with a JSON filter (subscription, customer, price, 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.querySubscriptionLineItems({});
+  const result = await flexprice.subscriptions.querySubscriptionLineItems({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
 
   console.log(result);
 }
@@ -302,12 +319,14 @@ import { subscriptionsQuerySubscriptionLineItems } from "@flexprice/sdk/funcs/su
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsQuerySubscriptionLineItems(flexprice, {});
+  const res = await subscriptionsQuerySubscriptionLineItems(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -324,6 +343,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.SubscriptionLineItemFilter](../../sdk/models/subscription-line-item-filter.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.QuerySubscriptionLineItemsSecurity](../../sdk/models/query-subscription-line-items-security.md)                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -350,12 +370,14 @@ Use when changing a subscription line item (e.g. quantity or price). Implemented
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.updateSubscriptionLineItem("<id>", {});
+  const result = await flexprice.subscriptions.updateSubscriptionLineItem({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -373,12 +395,14 @@ import { subscriptionsUpdateSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsUpdateSubscriptionLineItem(flexprice, "<id>", {});
+  const res = await subscriptionsUpdateSubscriptionLineItem(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -394,6 +418,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.UpdateSubscriptionLineItemSecurity](../../sdk/models/update-subscription-line-item-security.md)                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Line Item ID                                                                                                                                                                   |
 | `body`                                                                                                                                                                         | [models.UpdateSubscriptionLineItemRequest](../../sdk/models/update-subscription-line-item-request.md)                                                                          | :heavy_check_mark:                                                                                                                                                             | Update Line Item Request                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -422,12 +447,14 @@ Use when removing a charge or seat from a subscription (e.g. downgrade). Line it
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.deleteSubscriptionLineItem("<id>", {});
+  const result = await flexprice.subscriptions.deleteSubscriptionLineItem({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -445,12 +472,14 @@ import { subscriptionsDeleteSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsDeleteSubscriptionLineItem(flexprice, "<id>", {});
+  const res = await subscriptionsDeleteSubscriptionLineItem(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -466,6 +495,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.DeleteSubscriptionLineItemSecurity](../../sdk/models/delete-subscription-line-item-security.md)                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Line Item ID                                                                                                                                                                   |
 | `body`                                                                                                                                                                         | [models.DeleteSubscriptionLineItemRequest](../../sdk/models/delete-subscription-line-item-request.md)                                                                          | :heavy_check_mark:                                                                                                                                                             | Delete Line Item Request                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -705,12 +735,14 @@ Use when listing or searching subscriptions (e.g. admin view or customer subscri
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.querySubscription({});
+  const result = await flexprice.subscriptions.querySubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
 
   console.log(result);
 }
@@ -728,12 +760,14 @@ import { subscriptionsQuerySubscription } from "@flexprice/sdk/funcs/subscriptio
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsQuerySubscription(flexprice, {});
+  const res = await subscriptionsQuerySubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -750,6 +784,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.SubscriptionFilter](../../sdk/models/subscription-filter.md)                                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.QuerySubscriptionSecurity](../../sdk/models/query-subscription-security.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -776,12 +811,14 @@ Use when showing usage for a subscription (e.g. in a portal or for overage check
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.subscriptions.getSubscriptionUsage({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     endTime: new Date("2024-03-20T00:00:00Z"),
     lifetimeUsage: false,
     startTime: new Date("2024-03-13T00:00:00Z"),
@@ -804,12 +841,14 @@ import { subscriptionsGetSubscriptionUsage } from "@flexprice/sdk/funcs/subscrip
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await subscriptionsGetSubscriptionUsage(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     endTime: new Date("2024-03-20T00:00:00Z"),
     lifetimeUsage: false,
     startTime: new Date("2024-03-13T00:00:00Z"),
@@ -831,6 +870,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.GetUsageBySubscriptionRequest](../../sdk/models/get-usage-by-subscription-request.md)                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionUsageSecurity](../../sdk/models/get-subscription-usage-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -857,12 +897,14 @@ Use when you need to load a single subscription (e.g. for a billing portal or to
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.getSubscription("<id>");
+  const result = await flexprice.subscriptions.getSubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -880,12 +922,14 @@ import { subscriptionsGetSubscription } from "@flexprice/sdk/funcs/subscriptions
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsGetSubscription(flexprice, "<id>");
+  const res = await subscriptionsGetSubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -901,6 +945,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionSecurity](../../sdk/models/get-subscription-security.md)                                                                                                | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -928,12 +973,14 @@ Use when changing subscription details (e.g. quantity, billing anchor, or parent
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.updateSubscription("<id>", {});
+  const result = await flexprice.subscriptions.updateSubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -951,12 +998,14 @@ import { subscriptionsUpdateSubscription } from "@flexprice/sdk/funcs/subscripti
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsUpdateSubscription(flexprice, "<id>", {});
+  const res = await subscriptionsUpdateSubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -972,6 +1021,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.UpdateSubscriptionSecurity](../../sdk/models/update-subscription-security.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.UpdateSubscriptionRequest](../../sdk/models/update-subscription-request.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | Update Subscription Request                                                                                                                                                    |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1000,12 +1050,14 @@ Use when turning a draft subscription live (e.g. after collecting payment or com
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.activateSubscription("<id>", {
+  const result = await flexprice.subscriptions.activateSubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     startDate: new Date("2026-02-04T05:02:31.632Z"),
   });
 
@@ -1025,12 +1077,14 @@ import { subscriptionsActivateSubscription } from "@flexprice/sdk/funcs/subscrip
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsActivateSubscription(flexprice, "<id>", {
+  const res = await subscriptionsActivateSubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     startDate: new Date("2026-02-04T05:02:31.632Z"),
   });
   if (res.ok) {
@@ -1048,6 +1102,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.ActivateSubscriptionSecurity](../../sdk/models/activate-subscription-security.md)                                                                                      | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.ActivateDraftSubscriptionRequest](../../sdk/models/activate-draft-subscription-request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | Activate Draft Subscription Request                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1076,12 +1131,14 @@ Use when listing which add-ons are currently attached to a subscription (e.g. fo
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.getSubscriptionAddonAssociations("<id>");
+  const result = await flexprice.subscriptions.getSubscriptionAddonAssociations({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -1099,12 +1156,14 @@ import { subscriptionsGetSubscriptionAddonAssociations } from "@flexprice/sdk/fu
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsGetSubscriptionAddonAssociations(flexprice, "<id>");
+  const res = await subscriptionsGetSubscriptionAddonAssociations(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -1120,6 +1179,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionAddonAssociationsSecurity](../../sdk/models/get-subscription-addon-associations-security.md)                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -1147,12 +1207,14 @@ Use when a customer churns or downgrades. Supports immediate or end-of-period ca
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.cancelSubscription("<id>", {
+  const result = await flexprice.subscriptions.cancelSubscription({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     cancellationType: "immediate",
   });
 
@@ -1172,12 +1234,14 @@ import { subscriptionsCancelSubscription } from "@flexprice/sdk/funcs/subscripti
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsCancelSubscription(flexprice, "<id>", {
+  const res = await subscriptionsCancelSubscription(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     cancellationType: "immediate",
   });
   if (res.ok) {
@@ -1195,6 +1259,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.CancelSubscriptionSecurity](../../sdk/models/cancel-subscription-security.md)                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.CancelSubscriptionRequest](../../sdk/models/cancel-subscription-request.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | Cancel Subscription Request                                                                                                                                                    |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1223,12 +1288,14 @@ Use when applying a plan change (e.g. upgrade or downgrade). Executes proration 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.executeSubscriptionChange("<id>", {
+  const result = await flexprice.subscriptions.executeSubscriptionChange({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
     billingPeriod: "ANNUAL",
@@ -1252,12 +1319,14 @@ import { subscriptionsExecuteSubscriptionChange } from "@flexprice/sdk/funcs/sub
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsExecuteSubscriptionChange(flexprice, "<id>", {
+  const res = await subscriptionsExecuteSubscriptionChange(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
     billingPeriod: "ANNUAL",
@@ -1279,6 +1348,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.ExecuteSubscriptionChangeSecurity](../../sdk/models/execute-subscription-change-security.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.SubscriptionChangeRequest](../../sdk/models/subscription-change-request.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | Subscription change request                                                                                                                                                    |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1307,12 +1377,14 @@ Use when showing a customer the cost of a plan change before they confirm (e.g. 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.previewSubscriptionChange("<id>", {
+  const result = await flexprice.subscriptions.previewSubscriptionChange({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
     billingPeriod: "ONETIME",
@@ -1336,12 +1408,14 @@ import { subscriptionsPreviewSubscriptionChange } from "@flexprice/sdk/funcs/sub
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsPreviewSubscriptionChange(flexprice, "<id>", {
+  const res = await subscriptionsPreviewSubscriptionChange(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     billingCadence: "RECURRING",
     billingCycle: "anniversary",
     billingPeriod: "ONETIME",
@@ -1363,6 +1437,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.PreviewSubscriptionChangeSecurity](../../sdk/models/preview-subscription-change-security.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.SubscriptionChangeRequest](../../sdk/models/subscription-change-request.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | Subscription change preview request                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1399,12 +1474,14 @@ Set on_conflict_policies.on_pending_schedule to 'supersede' to replace the queue
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.executeSubscriptionPlanChangeV2("<id>", {
+  const result = await flexprice.subscriptions.executeSubscriptionPlanChangeV2({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     prorationBehavior: "create_prorations",
     targetPlanId: "<id>",
   });
@@ -1425,12 +1502,14 @@ import { subscriptionsExecuteSubscriptionPlanChangeV2 } from "@flexprice/sdk/fun
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsExecuteSubscriptionPlanChangeV2(flexprice, "<id>", {
+  const res = await subscriptionsExecuteSubscriptionPlanChangeV2(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     prorationBehavior: "create_prorations",
     targetPlanId: "<id>",
   });
@@ -1449,6 +1528,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.ExecuteSubscriptionPlanChangeV2Security](../../sdk/models/execute-subscription-plan-change-v2-security.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.SubscriptionChangeV2Request](../../sdk/models/subscription-change-v2-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Plan change request                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1477,12 +1557,14 @@ Preview a subscription plan change without writing. Swap-in-place: subscription 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.previewSubscriptionPlanChangeV2("<id>", {
+  const result = await flexprice.subscriptions.previewSubscriptionPlanChangeV2({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     prorationBehavior: "none",
     targetPlanId: "<id>",
   });
@@ -1503,12 +1585,14 @@ import { subscriptionsPreviewSubscriptionPlanChangeV2 } from "@flexprice/sdk/fun
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsPreviewSubscriptionPlanChangeV2(flexprice, "<id>", {
+  const res = await subscriptionsPreviewSubscriptionPlanChangeV2(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     prorationBehavior: "none",
     targetPlanId: "<id>",
   });
@@ -1527,6 +1611,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.PreviewSubscriptionPlanChangeV2Security](../../sdk/models/preview-subscription-plan-change-v2-security.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.SubscriptionChangeV2Request](../../sdk/models/subscription-change-v2-request.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | Plan change request                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1555,12 +1640,14 @@ Use when checking what features or limits a subscription has (e.g. entitlement c
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.getSubscriptionEntitlements("<id>");
+  const result = await flexprice.subscriptions.getSubscriptionEntitlements({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -1578,12 +1665,14 @@ import { subscriptionsGetSubscriptionEntitlements } from "@flexprice/sdk/funcs/s
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsGetSubscriptionEntitlements(flexprice, "<id>");
+  const res = await subscriptionsGetSubscriptionEntitlements(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -1599,6 +1688,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionEntitlementsSecurity](../../sdk/models/get-subscription-entitlements-security.md)                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `featureIds`                                                                                                                                                                   | *string*[]                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                             | Feature IDs to filter by                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1627,12 +1717,14 @@ Use when showing upcoming or pending credits for a subscription (e.g. in a porta
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.getSubscriptionUpcomingGrants("<id>");
+  const result = await flexprice.subscriptions.getSubscriptionUpcomingGrants({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -1650,12 +1742,14 @@ import { subscriptionsGetSubscriptionUpcomingGrants } from "@flexprice/sdk/funcs
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsGetSubscriptionUpcomingGrants(flexprice, "<id>");
+  const res = await subscriptionsGetSubscriptionUpcomingGrants(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -1671,6 +1765,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionUpcomingGrantsSecurity](../../sdk/models/get-subscription-upcoming-grants-security.md)                                                                  | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -1698,12 +1793,14 @@ Use when adding a new charge or seat to a subscription (e.g. extra seat or one-t
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.createSubscriptionLineItem("<id>", {});
+  const result = await flexprice.subscriptions.createSubscriptionLineItem({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -1721,12 +1818,14 @@ import { subscriptionsCreateSubscriptionLineItem } from "@flexprice/sdk/funcs/su
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsCreateSubscriptionLineItem(flexprice, "<id>", {});
+  const res = await subscriptionsCreateSubscriptionLineItem(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -1742,6 +1841,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.CreateSubscriptionLineItemSecurity](../../sdk/models/create-subscription-line-item-security.md)                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.CreateSubscriptionLineItemRequest](../../sdk/models/create-subscription-line-item-request.md)                                                                          | :heavy_check_mark:                                                                                                                                                             | Create Line Item Request                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1770,12 +1870,14 @@ Execute a mid-cycle subscription modification (inheritance, quantity change, gro
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.executeSubscriptionModify("<id>", {
+  const result = await flexprice.subscriptions.executeSubscriptionModify({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     type: "inheritance",
   });
 
@@ -1795,12 +1897,14 @@ import { subscriptionsExecuteSubscriptionModify } from "@flexprice/sdk/funcs/sub
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsExecuteSubscriptionModify(flexprice, "<id>", {
+  const res = await subscriptionsExecuteSubscriptionModify(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     type: "inheritance",
   });
   if (res.ok) {
@@ -1818,6 +1922,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.ExecuteSubscriptionModifySecurity](../../sdk/models/execute-subscription-modify-security.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.ExecuteSubscriptionModifyRequest](../../sdk/models/execute-subscription-modify-request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | Modification request                                                                                                                                                           |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1846,12 +1951,14 @@ Preview the impact of a mid-cycle subscription modification (inheritance, quanti
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.previewSubscriptionModify("<id>", {
+  const result = await flexprice.subscriptions.previewSubscriptionModify({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     type: "tax",
   });
 
@@ -1871,12 +1978,14 @@ import { subscriptionsPreviewSubscriptionModify } from "@flexprice/sdk/funcs/sub
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsPreviewSubscriptionModify(flexprice, "<id>", {
+  const res = await subscriptionsPreviewSubscriptionModify(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {
     type: "tax",
   });
   if (res.ok) {
@@ -1894,6 +2003,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.PreviewSubscriptionModifySecurity](../../sdk/models/preview-subscription-modify-security.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `body`                                                                                                                                                                         | [models.ExecuteSubscriptionModifyRequest](../../sdk/models/execute-subscription-modify-request.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | Modification preview request                                                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -1991,12 +2101,14 @@ Use when you need a subscription with related data (line items, prices, plan). S
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.subscriptions.getSubscriptionV2("<id>");
+  const result = await flexprice.subscriptions.getSubscriptionV2({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
 
   console.log(result);
 }
@@ -2014,12 +2126,14 @@ import { subscriptionsGetSubscriptionV2 } from "@flexprice/sdk/funcs/subscriptio
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await subscriptionsGetSubscriptionV2(flexprice, "<id>");
+  const res = await subscriptionsGetSubscriptionV2(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -2035,6 +2149,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.GetSubscriptionV2Security](../../sdk/models/get-subscription-v2-security.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Subscription ID                                                                                                                                                                |
 | `expand`                                                                                                                                                                       | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Comma-separated list of fields to expand (e.g., 'subscription_line_items,prices,plan')                                                                                         |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |

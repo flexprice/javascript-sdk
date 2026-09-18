@@ -22,11 +22,13 @@ export class Entitlements extends ClientSDK {
    * Use when checking what features or limits an addon grants (e.g. for display or entitlement logic).
    */
   async getAddonEntitlements(
+    security: models.GetAddonEntitlementsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsGetAddonEntitlements(
       this,
+      security,
       id,
       options,
     ));
@@ -39,11 +41,13 @@ export class Entitlements extends ClientSDK {
    * Use when attaching a feature (and its limit) to a plan or addon (e.g. "10 seats" or "1000 API calls"). Defines what the plan/addon includes.
    */
   async createEntitlement(
+    security: models.CreateEntitlementSecurity,
     request: models.CreateEntitlementRequest,
     options?: RequestOptions,
   ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsCreateEntitlement(
       this,
+      security,
       request,
       options,
     ));
@@ -56,11 +60,13 @@ export class Entitlements extends ClientSDK {
    * Use when attaching many features to a plan or addon at once (e.g. initial plan setup or import). Bulk version of create entitlement.
    */
   async createEntitlementsBulk(
+    security: models.CreateEntitlementsBulkSecurity,
     request: models.CreateBulkEntitlementRequest,
     options?: RequestOptions,
   ): Promise<models.CreateBulkEntitlementResponse> {
     return unwrapAsync(entitlementsCreateEntitlementsBulk(
       this,
+      security,
       request,
       options,
     ));
@@ -73,11 +79,13 @@ export class Entitlements extends ClientSDK {
    * Use when listing or searching entitlements (e.g. plan editor or audit). Returns a paginated list; supports filtering by plan, addon, feature.
    */
   async queryEntitlement(
+    security: models.QueryEntitlementSecurity,
     request: models.EntitlementFilter,
     options?: RequestOptions,
   ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsQueryEntitlement(
       this,
+      security,
       request,
       options,
     ));
@@ -90,11 +98,13 @@ export class Entitlements extends ClientSDK {
    * Use when you need to load a single entitlement (e.g. to display or edit a feature limit).
    */
   async getEntitlement(
+    security: models.GetEntitlementSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsGetEntitlement(
       this,
+      security,
       id,
       options,
     ));
@@ -107,12 +117,14 @@ export class Entitlements extends ClientSDK {
    * Use when changing an entitlement (e.g. increasing or decreasing a limit). Request body contains the fields to update.
    */
   async updateEntitlement(
+    security: models.UpdateEntitlementSecurity,
     id: string,
     body: models.UpdateEntitlementRequest,
     options?: RequestOptions,
   ): Promise<models.EntitlementResponse> {
     return unwrapAsync(entitlementsUpdateEntitlement(
       this,
+      security,
       id,
       body,
       options,
@@ -126,11 +138,13 @@ export class Entitlements extends ClientSDK {
    * Use when removing a feature from a plan or addon (e.g. deprecating a capability). Returns 200 with success message.
    */
   async deleteEntitlement(
+    security: models.DeleteEntitlementSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(entitlementsDeleteEntitlement(
       this,
+      security,
       id,
       options,
     ));
@@ -143,11 +157,13 @@ export class Entitlements extends ClientSDK {
    * Use when checking what a plan includes (e.g. feature list or limits for display or gating).
    */
   async getPlanEntitlements(
+    security: models.GetPlanEntitlementsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListEntitlementsResponse> {
     return unwrapAsync(entitlementsGetPlanEntitlements(
       this,
+      security,
       id,
       options,
     ));

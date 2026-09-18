@@ -5,6 +5,30 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type GetInvoicePdfSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetInvoicePdfSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetInvoicePdfSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetInvoicePdfSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetInvoicePdfSecurity = {
+  option1?: GetInvoicePdfSecurityOption1 | undefined;
+  option2?: GetInvoicePdfSecurityOption2 | undefined;
+  option3?: GetInvoicePdfSecurityOption3 | undefined;
+  option4?: GetInvoicePdfSecurityOption4 | undefined;
+};
+
 export type GetInvoicePdfRequest = {
   /**
    * Invoice ID
@@ -19,6 +43,174 @@ export type GetInvoicePdfRequest = {
    */
   forceGenerate?: boolean | undefined;
 };
+
+/** @internal */
+export type GetInvoicePdfSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetInvoicePdfSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetInvoicePdfSecurityOption1$Outbound,
+  GetInvoicePdfSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getInvoicePdfSecurityOption1ToJSON(
+  getInvoicePdfSecurityOption1: GetInvoicePdfSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetInvoicePdfSecurityOption1$outboundSchema.parse(
+      getInvoicePdfSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetInvoicePdfSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetInvoicePdfSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetInvoicePdfSecurityOption2$Outbound,
+  GetInvoicePdfSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getInvoicePdfSecurityOption2ToJSON(
+  getInvoicePdfSecurityOption2: GetInvoicePdfSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetInvoicePdfSecurityOption2$outboundSchema.parse(
+      getInvoicePdfSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetInvoicePdfSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetInvoicePdfSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetInvoicePdfSecurityOption3$Outbound,
+  GetInvoicePdfSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getInvoicePdfSecurityOption3ToJSON(
+  getInvoicePdfSecurityOption3: GetInvoicePdfSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetInvoicePdfSecurityOption3$outboundSchema.parse(
+      getInvoicePdfSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetInvoicePdfSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetInvoicePdfSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetInvoicePdfSecurityOption4$Outbound,
+  GetInvoicePdfSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getInvoicePdfSecurityOption4ToJSON(
+  getInvoicePdfSecurityOption4: GetInvoicePdfSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetInvoicePdfSecurityOption4$outboundSchema.parse(
+      getInvoicePdfSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetInvoicePdfSecurity$Outbound = {
+  Option1?: GetInvoicePdfSecurityOption1$Outbound | undefined;
+  Option2?: GetInvoicePdfSecurityOption2$Outbound | undefined;
+  Option3?: GetInvoicePdfSecurityOption3$Outbound | undefined;
+  Option4?: GetInvoicePdfSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetInvoicePdfSecurity$outboundSchema: z.ZodMiniType<
+  GetInvoicePdfSecurity$Outbound,
+  GetInvoicePdfSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetInvoicePdfSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetInvoicePdfSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetInvoicePdfSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetInvoicePdfSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getInvoicePdfSecurityToJSON(
+  getInvoicePdfSecurity: GetInvoicePdfSecurity,
+): string {
+  return JSON.stringify(
+    GetInvoicePdfSecurity$outboundSchema.parse(getInvoicePdfSecurity),
+  );
+}
 
 /** @internal */
 export type GetInvoicePdfRequest$Outbound = {

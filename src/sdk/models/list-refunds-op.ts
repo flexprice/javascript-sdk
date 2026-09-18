@@ -5,6 +5,30 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type ListRefundsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListRefundsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListRefundsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListRefundsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListRefundsSecurity = {
+  option1?: ListRefundsSecurityOption1 | undefined;
+  option2?: ListRefundsSecurityOption2 | undefined;
+  option3?: ListRefundsSecurityOption3 | undefined;
+  option4?: ListRefundsSecurityOption4 | undefined;
+};
+
 export type ListRefundsRequest = {
   /**
    * Filter by invoice IDs
@@ -43,6 +67,166 @@ export type ListRefundsRequest = {
    */
   offset?: number | undefined;
 };
+
+/** @internal */
+export type ListRefundsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListRefundsSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListRefundsSecurityOption1$Outbound,
+  ListRefundsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listRefundsSecurityOption1ToJSON(
+  listRefundsSecurityOption1: ListRefundsSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListRefundsSecurityOption1$outboundSchema.parse(listRefundsSecurityOption1),
+  );
+}
+
+/** @internal */
+export type ListRefundsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListRefundsSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListRefundsSecurityOption2$Outbound,
+  ListRefundsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listRefundsSecurityOption2ToJSON(
+  listRefundsSecurityOption2: ListRefundsSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListRefundsSecurityOption2$outboundSchema.parse(listRefundsSecurityOption2),
+  );
+}
+
+/** @internal */
+export type ListRefundsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListRefundsSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListRefundsSecurityOption3$Outbound,
+  ListRefundsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listRefundsSecurityOption3ToJSON(
+  listRefundsSecurityOption3: ListRefundsSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListRefundsSecurityOption3$outboundSchema.parse(listRefundsSecurityOption3),
+  );
+}
+
+/** @internal */
+export type ListRefundsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListRefundsSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListRefundsSecurityOption4$Outbound,
+  ListRefundsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listRefundsSecurityOption4ToJSON(
+  listRefundsSecurityOption4: ListRefundsSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListRefundsSecurityOption4$outboundSchema.parse(listRefundsSecurityOption4),
+  );
+}
+
+/** @internal */
+export type ListRefundsSecurity$Outbound = {
+  Option1?: ListRefundsSecurityOption1$Outbound | undefined;
+  Option2?: ListRefundsSecurityOption2$Outbound | undefined;
+  Option3?: ListRefundsSecurityOption3$Outbound | undefined;
+  Option4?: ListRefundsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListRefundsSecurity$outboundSchema: z.ZodMiniType<
+  ListRefundsSecurity$Outbound,
+  ListRefundsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListRefundsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListRefundsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListRefundsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListRefundsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listRefundsSecurityToJSON(
+  listRefundsSecurity: ListRefundsSecurity,
+): string {
+  return JSON.stringify(
+    ListRefundsSecurity$outboundSchema.parse(listRefundsSecurity),
+  );
+}
 
 /** @internal */
 export type ListRefundsRequest$Outbound = {

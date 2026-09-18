@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   DeleteCreditGrantRequest,
   DeleteCreditGrantRequest$Outbound,
   DeleteCreditGrantRequest$outboundSchema,
 } from "./delete-credit-grant-request.js";
+
+export type DeleteCreditGrantSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteCreditGrantSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteCreditGrantSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteCreditGrantSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteCreditGrantSecurity = {
+  option1?: DeleteCreditGrantSecurityOption1 | undefined;
+  option2?: DeleteCreditGrantSecurityOption2 | undefined;
+  option3?: DeleteCreditGrantSecurityOption3 | undefined;
+  option4?: DeleteCreditGrantSecurityOption4 | undefined;
+};
 
 export type DeleteCreditGrantRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type DeleteCreditGrantRequestRequest = {
    */
   body?: DeleteCreditGrantRequest | undefined;
 };
+
+/** @internal */
+export type DeleteCreditGrantSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteCreditGrantSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantSecurityOption1$Outbound,
+  DeleteCreditGrantSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteCreditGrantSecurityOption1ToJSON(
+  deleteCreditGrantSecurityOption1: DeleteCreditGrantSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteCreditGrantSecurityOption1$outboundSchema.parse(
+      deleteCreditGrantSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCreditGrantSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteCreditGrantSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantSecurityOption2$Outbound,
+  DeleteCreditGrantSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteCreditGrantSecurityOption2ToJSON(
+  deleteCreditGrantSecurityOption2: DeleteCreditGrantSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteCreditGrantSecurityOption2$outboundSchema.parse(
+      deleteCreditGrantSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCreditGrantSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteCreditGrantSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantSecurityOption3$Outbound,
+  DeleteCreditGrantSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteCreditGrantSecurityOption3ToJSON(
+  deleteCreditGrantSecurityOption3: DeleteCreditGrantSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteCreditGrantSecurityOption3$outboundSchema.parse(
+      deleteCreditGrantSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCreditGrantSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteCreditGrantSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantSecurityOption4$Outbound,
+  DeleteCreditGrantSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteCreditGrantSecurityOption4ToJSON(
+  deleteCreditGrantSecurityOption4: DeleteCreditGrantSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteCreditGrantSecurityOption4$outboundSchema.parse(
+      deleteCreditGrantSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCreditGrantSecurity$Outbound = {
+  Option1?: DeleteCreditGrantSecurityOption1$Outbound | undefined;
+  Option2?: DeleteCreditGrantSecurityOption2$Outbound | undefined;
+  Option3?: DeleteCreditGrantSecurityOption3$Outbound | undefined;
+  Option4?: DeleteCreditGrantSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteCreditGrantSecurity$outboundSchema: z.ZodMiniType<
+  DeleteCreditGrantSecurity$Outbound,
+  DeleteCreditGrantSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteCreditGrantSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteCreditGrantSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteCreditGrantSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteCreditGrantSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteCreditGrantSecurityToJSON(
+  deleteCreditGrantSecurity: DeleteCreditGrantSecurity,
+): string {
+  return JSON.stringify(
+    DeleteCreditGrantSecurity$outboundSchema.parse(deleteCreditGrantSecurity),
+  );
+}
 
 /** @internal */
 export type DeleteCreditGrantRequestRequest$Outbound = {

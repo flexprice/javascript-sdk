@@ -2,12 +2,14 @@
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
   const result = await flexprice.addons.createAddon({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     lookupKey: "<value>",
     name: "<value>",
   });

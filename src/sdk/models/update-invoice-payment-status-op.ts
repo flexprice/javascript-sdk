@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdatePaymentStatusRequest,
   UpdatePaymentStatusRequest$Outbound,
   UpdatePaymentStatusRequest$outboundSchema,
 } from "./update-payment-status-request.js";
+
+export type UpdateInvoicePaymentStatusSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateInvoicePaymentStatusSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateInvoicePaymentStatusSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateInvoicePaymentStatusSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateInvoicePaymentStatusSecurity = {
+  option1?: UpdateInvoicePaymentStatusSecurityOption1 | undefined;
+  option2?: UpdateInvoicePaymentStatusSecurityOption2 | undefined;
+  option3?: UpdateInvoicePaymentStatusSecurityOption3 | undefined;
+  option4?: UpdateInvoicePaymentStatusSecurityOption4 | undefined;
+};
 
 export type UpdateInvoicePaymentStatusRequest = {
   /**
@@ -19,6 +44,184 @@ export type UpdateInvoicePaymentStatusRequest = {
    */
   body: UpdatePaymentStatusRequest;
 };
+
+/** @internal */
+export type UpdateInvoicePaymentStatusSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateInvoicePaymentStatusSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    UpdateInvoicePaymentStatusSecurityOption1$Outbound,
+    UpdateInvoicePaymentStatusSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function updateInvoicePaymentStatusSecurityOption1ToJSON(
+  updateInvoicePaymentStatusSecurityOption1:
+    UpdateInvoicePaymentStatusSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateInvoicePaymentStatusSecurityOption1$outboundSchema.parse(
+      updateInvoicePaymentStatusSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateInvoicePaymentStatusSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateInvoicePaymentStatusSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    UpdateInvoicePaymentStatusSecurityOption2$Outbound,
+    UpdateInvoicePaymentStatusSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function updateInvoicePaymentStatusSecurityOption2ToJSON(
+  updateInvoicePaymentStatusSecurityOption2:
+    UpdateInvoicePaymentStatusSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateInvoicePaymentStatusSecurityOption2$outboundSchema.parse(
+      updateInvoicePaymentStatusSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateInvoicePaymentStatusSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateInvoicePaymentStatusSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    UpdateInvoicePaymentStatusSecurityOption3$Outbound,
+    UpdateInvoicePaymentStatusSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function updateInvoicePaymentStatusSecurityOption3ToJSON(
+  updateInvoicePaymentStatusSecurityOption3:
+    UpdateInvoicePaymentStatusSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateInvoicePaymentStatusSecurityOption3$outboundSchema.parse(
+      updateInvoicePaymentStatusSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateInvoicePaymentStatusSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateInvoicePaymentStatusSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    UpdateInvoicePaymentStatusSecurityOption4$Outbound,
+    UpdateInvoicePaymentStatusSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function updateInvoicePaymentStatusSecurityOption4ToJSON(
+  updateInvoicePaymentStatusSecurityOption4:
+    UpdateInvoicePaymentStatusSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateInvoicePaymentStatusSecurityOption4$outboundSchema.parse(
+      updateInvoicePaymentStatusSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateInvoicePaymentStatusSecurity$Outbound = {
+  Option1?: UpdateInvoicePaymentStatusSecurityOption1$Outbound | undefined;
+  Option2?: UpdateInvoicePaymentStatusSecurityOption2$Outbound | undefined;
+  Option3?: UpdateInvoicePaymentStatusSecurityOption3$Outbound | undefined;
+  Option4?: UpdateInvoicePaymentStatusSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateInvoicePaymentStatusSecurity$outboundSchema: z.ZodMiniType<
+  UpdateInvoicePaymentStatusSecurity$Outbound,
+  UpdateInvoicePaymentStatusSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateInvoicePaymentStatusSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateInvoicePaymentStatusSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateInvoicePaymentStatusSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateInvoicePaymentStatusSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateInvoicePaymentStatusSecurityToJSON(
+  updateInvoicePaymentStatusSecurity: UpdateInvoicePaymentStatusSecurity,
+): string {
+  return JSON.stringify(
+    UpdateInvoicePaymentStatusSecurity$outboundSchema.parse(
+      updateInvoicePaymentStatusSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type UpdateInvoicePaymentStatusRequest$Outbound = {

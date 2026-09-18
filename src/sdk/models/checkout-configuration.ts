@@ -20,6 +20,11 @@ import {
   ModifySubscriptionParams$outboundSchema,
 } from "./modify-subscription-params.js";
 import {
+  PayInvoiceParams,
+  PayInvoiceParams$Outbound,
+  PayInvoiceParams$outboundSchema,
+} from "./pay-invoice-params.js";
+import {
   WalletTopupParams,
   WalletTopupParams$Outbound,
   WalletTopupParams$outboundSchema,
@@ -29,6 +34,7 @@ export type CheckoutConfiguration = {
   addAddonParams?: AddAddonParams | undefined;
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
+  payInvoiceParams?: PayInvoiceParams | undefined;
   walletTopupParams?: WalletTopupParams | undefined;
 };
 
@@ -37,6 +43,7 @@ export type CheckoutConfiguration$Outbound = {
   add_addon_params?: AddAddonParams$Outbound | undefined;
   create_subscription_params?: CreateSubscriptionParams$Outbound | undefined;
   modify_subscription_params?: ModifySubscriptionParams$Outbound | undefined;
+  pay_invoice_params?: PayInvoiceParams$Outbound | undefined;
   wallet_topup_params?: WalletTopupParams$Outbound | undefined;
 };
 
@@ -53,6 +60,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
     modifySubscriptionParams: z.optional(
       ModifySubscriptionParams$outboundSchema,
     ),
+    payInvoiceParams: z.optional(PayInvoiceParams$outboundSchema),
     walletTopupParams: z.optional(WalletTopupParams$outboundSchema),
   }),
   z.transform((v) => {
@@ -60,6 +68,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
       addAddonParams: "add_addon_params",
       createSubscriptionParams: "create_subscription_params",
       modifySubscriptionParams: "modify_subscription_params",
+      payInvoiceParams: "pay_invoice_params",
       walletTopupParams: "wallet_topup_params",
     });
   }),

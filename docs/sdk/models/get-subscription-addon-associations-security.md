@@ -1,0 +1,18 @@
+# GetSubscriptionAddonAssociationsSecurity
+
+## Example Usage
+
+```typescript
+import { GetSubscriptionAddonAssociationsSecurity } from "@flexprice/sdk/sdk/models";
+
+let value: GetSubscriptionAddonAssociationsSecurity = {};
+```
+
+## Fields
+
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `option1`                                                                                                                          | [models.GetSubscriptionAddonAssociationsSecurityOption1](../../sdk/models/get-subscription-addon-associations-security-option1.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+| `option2`                                                                                                                          | [models.GetSubscriptionAddonAssociationsSecurityOption2](../../sdk/models/get-subscription-addon-associations-security-option2.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+| `option3`                                                                                                                          | [models.GetSubscriptionAddonAssociationsSecurityOption3](../../sdk/models/get-subscription-addon-associations-security-option3.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |
+| `option4`                                                                                                                          | [models.GetSubscriptionAddonAssociationsSecurityOption4](../../sdk/models/get-subscription-addon-associations-security-option4.md) | :heavy_minus_sign:                                                                                                                 | N/A                                                                                                                                |

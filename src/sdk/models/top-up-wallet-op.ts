@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   TopUpWalletRequest,
   TopUpWalletRequest$Outbound,
   TopUpWalletRequest$outboundSchema,
 } from "./top-up-wallet-request.js";
+
+export type TopUpWalletSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type TopUpWalletSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type TopUpWalletSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type TopUpWalletSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type TopUpWalletSecurity = {
+  option1?: TopUpWalletSecurityOption1 | undefined;
+  option2?: TopUpWalletSecurityOption2 | undefined;
+  option3?: TopUpWalletSecurityOption3 | undefined;
+  option4?: TopUpWalletSecurityOption4 | undefined;
+};
 
 export type TopUpWalletRequestRequest = {
   /**
@@ -19,6 +44,166 @@ export type TopUpWalletRequestRequest = {
    */
   body: TopUpWalletRequest;
 };
+
+/** @internal */
+export type TopUpWalletSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const TopUpWalletSecurityOption1$outboundSchema: z.ZodMiniType<
+  TopUpWalletSecurityOption1$Outbound,
+  TopUpWalletSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function topUpWalletSecurityOption1ToJSON(
+  topUpWalletSecurityOption1: TopUpWalletSecurityOption1,
+): string {
+  return JSON.stringify(
+    TopUpWalletSecurityOption1$outboundSchema.parse(topUpWalletSecurityOption1),
+  );
+}
+
+/** @internal */
+export type TopUpWalletSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const TopUpWalletSecurityOption2$outboundSchema: z.ZodMiniType<
+  TopUpWalletSecurityOption2$Outbound,
+  TopUpWalletSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function topUpWalletSecurityOption2ToJSON(
+  topUpWalletSecurityOption2: TopUpWalletSecurityOption2,
+): string {
+  return JSON.stringify(
+    TopUpWalletSecurityOption2$outboundSchema.parse(topUpWalletSecurityOption2),
+  );
+}
+
+/** @internal */
+export type TopUpWalletSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const TopUpWalletSecurityOption3$outboundSchema: z.ZodMiniType<
+  TopUpWalletSecurityOption3$Outbound,
+  TopUpWalletSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function topUpWalletSecurityOption3ToJSON(
+  topUpWalletSecurityOption3: TopUpWalletSecurityOption3,
+): string {
+  return JSON.stringify(
+    TopUpWalletSecurityOption3$outboundSchema.parse(topUpWalletSecurityOption3),
+  );
+}
+
+/** @internal */
+export type TopUpWalletSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const TopUpWalletSecurityOption4$outboundSchema: z.ZodMiniType<
+  TopUpWalletSecurityOption4$Outbound,
+  TopUpWalletSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function topUpWalletSecurityOption4ToJSON(
+  topUpWalletSecurityOption4: TopUpWalletSecurityOption4,
+): string {
+  return JSON.stringify(
+    TopUpWalletSecurityOption4$outboundSchema.parse(topUpWalletSecurityOption4),
+  );
+}
+
+/** @internal */
+export type TopUpWalletSecurity$Outbound = {
+  Option1?: TopUpWalletSecurityOption1$Outbound | undefined;
+  Option2?: TopUpWalletSecurityOption2$Outbound | undefined;
+  Option3?: TopUpWalletSecurityOption3$Outbound | undefined;
+  Option4?: TopUpWalletSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const TopUpWalletSecurity$outboundSchema: z.ZodMiniType<
+  TopUpWalletSecurity$Outbound,
+  TopUpWalletSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => TopUpWalletSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => TopUpWalletSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => TopUpWalletSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => TopUpWalletSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function topUpWalletSecurityToJSON(
+  topUpWalletSecurity: TopUpWalletSecurity,
+): string {
+  return JSON.stringify(
+    TopUpWalletSecurity$outboundSchema.parse(topUpWalletSecurity),
+  );
+}
 
 /** @internal */
 export type TopUpWalletRequestRequest$Outbound = {

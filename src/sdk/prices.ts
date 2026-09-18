@@ -21,11 +21,13 @@ export class Prices extends ClientSDK {
    * Use when adding a new price to a plan or catalog (e.g. per-seat, flat, or metered). Ideal for both simple and usage-based pricing.
    */
   async createPrice(
+    security: models.CreatePriceSecurity,
     request: models.CreatePriceRequest,
     options?: RequestOptions,
   ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesCreatePrice(
       this,
+      security,
       request,
       options,
     ));
@@ -38,11 +40,13 @@ export class Prices extends ClientSDK {
    * Use when creating many prices at once (e.g. importing a catalog or setting up a plan with multiple tiers).
    */
   async createPricesBulk(
+    security: models.CreatePricesBulkSecurity,
     request: models.CreateBulkPriceRequest,
     options?: RequestOptions,
   ): Promise<models.CreateBulkPriceResponse> {
     return unwrapAsync(pricesCreatePricesBulk(
       this,
+      security,
       request,
       options,
     ));
@@ -55,11 +59,13 @@ export class Prices extends ClientSDK {
    * Use when resolving a price by external id (e.g. from your catalog or CMS). Ideal for integrations.
    */
   async getPriceByLookupKey(
+    security: models.GetPriceByLookupKeySecurity,
     lookupKey: string,
     options?: RequestOptions,
   ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesGetPriceByLookupKey(
       this,
+      security,
       lookupKey,
       options,
     ));
@@ -72,11 +78,13 @@ export class Prices extends ClientSDK {
    * Use when listing or searching prices (e.g. plan builder or catalog). Returns a paginated list; supports filtering and sorting.
    */
   async queryPrice(
+    security: models.QueryPriceSecurity,
     request: models.PriceFilter,
     options?: RequestOptions,
   ): Promise<models.ListPricesResponse> {
     return unwrapAsync(pricesQueryPrice(
       this,
+      security,
       request,
       options,
     ));
@@ -89,11 +97,13 @@ export class Prices extends ClientSDK {
    * Use when you need to load a single price (e.g. for display or editing). Response includes expanded meter and price unit when applicable.
    */
   async getPrice(
+    security: models.GetPriceSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesGetPrice(
       this,
+      security,
       id,
       options,
     ));
@@ -106,12 +116,14 @@ export class Prices extends ClientSDK {
    * Use when changing price configuration (e.g. amount, billing scheme, or metadata).
    */
   async updatePrice(
+    security: models.UpdatePriceSecurity,
     id: string,
     body: models.UpdatePriceRequest,
     options?: RequestOptions,
   ): Promise<models.PriceResponse> {
     return unwrapAsync(pricesUpdatePrice(
       this,
+      security,
       id,
       body,
       options,
@@ -125,12 +137,14 @@ export class Prices extends ClientSDK {
    * Use when retiring a price (e.g. end-of-life or replacement). Optional effective date or cascade for subscriptions.
    */
   async deletePrice(
+    security: models.DeletePriceSecurity,
     id: string,
     body: models.DeletePriceRequest,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(pricesDeletePrice(
       this,
+      security,
       id,
       body,
       options,

@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   SubscriptionChangeV2Request,
   SubscriptionChangeV2Request$Outbound,
   SubscriptionChangeV2Request$outboundSchema,
 } from "./subscription-change-v2-request.js";
+
+export type ExecuteSubscriptionPlanChangeV2SecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ExecuteSubscriptionPlanChangeV2SecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ExecuteSubscriptionPlanChangeV2SecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ExecuteSubscriptionPlanChangeV2SecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ExecuteSubscriptionPlanChangeV2Security = {
+  option1?: ExecuteSubscriptionPlanChangeV2SecurityOption1 | undefined;
+  option2?: ExecuteSubscriptionPlanChangeV2SecurityOption2 | undefined;
+  option3?: ExecuteSubscriptionPlanChangeV2SecurityOption3 | undefined;
+  option4?: ExecuteSubscriptionPlanChangeV2SecurityOption4 | undefined;
+};
 
 export type ExecuteSubscriptionPlanChangeV2Request = {
   /**
@@ -19,6 +44,186 @@ export type ExecuteSubscriptionPlanChangeV2Request = {
    */
   body: SubscriptionChangeV2Request;
 };
+
+/** @internal */
+export type ExecuteSubscriptionPlanChangeV2SecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionPlanChangeV2SecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionPlanChangeV2SecurityOption1$Outbound,
+    ExecuteSubscriptionPlanChangeV2SecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionPlanChangeV2SecurityOption1ToJSON(
+  executeSubscriptionPlanChangeV2SecurityOption1:
+    ExecuteSubscriptionPlanChangeV2SecurityOption1,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionPlanChangeV2SecurityOption1$outboundSchema.parse(
+      executeSubscriptionPlanChangeV2SecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionPlanChangeV2SecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionPlanChangeV2SecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionPlanChangeV2SecurityOption2$Outbound,
+    ExecuteSubscriptionPlanChangeV2SecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionPlanChangeV2SecurityOption2ToJSON(
+  executeSubscriptionPlanChangeV2SecurityOption2:
+    ExecuteSubscriptionPlanChangeV2SecurityOption2,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionPlanChangeV2SecurityOption2$outboundSchema.parse(
+      executeSubscriptionPlanChangeV2SecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionPlanChangeV2SecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionPlanChangeV2SecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionPlanChangeV2SecurityOption3$Outbound,
+    ExecuteSubscriptionPlanChangeV2SecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function executeSubscriptionPlanChangeV2SecurityOption3ToJSON(
+  executeSubscriptionPlanChangeV2SecurityOption3:
+    ExecuteSubscriptionPlanChangeV2SecurityOption3,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionPlanChangeV2SecurityOption3$outboundSchema.parse(
+      executeSubscriptionPlanChangeV2SecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionPlanChangeV2SecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionPlanChangeV2SecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionPlanChangeV2SecurityOption4$Outbound,
+    ExecuteSubscriptionPlanChangeV2SecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionPlanChangeV2SecurityOption4ToJSON(
+  executeSubscriptionPlanChangeV2SecurityOption4:
+    ExecuteSubscriptionPlanChangeV2SecurityOption4,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionPlanChangeV2SecurityOption4$outboundSchema.parse(
+      executeSubscriptionPlanChangeV2SecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionPlanChangeV2Security$Outbound = {
+  Option1?: ExecuteSubscriptionPlanChangeV2SecurityOption1$Outbound | undefined;
+  Option2?: ExecuteSubscriptionPlanChangeV2SecurityOption2$Outbound | undefined;
+  Option3?: ExecuteSubscriptionPlanChangeV2SecurityOption3$Outbound | undefined;
+  Option4?: ExecuteSubscriptionPlanChangeV2SecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ExecuteSubscriptionPlanChangeV2Security$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionPlanChangeV2Security$Outbound,
+    ExecuteSubscriptionPlanChangeV2Security
+  > = z.pipe(
+    z.object({
+      option1: z.optional(z.lazy(() =>
+        ExecuteSubscriptionPlanChangeV2SecurityOption1$outboundSchema
+      )),
+      option2: z.optional(z.lazy(() =>
+        ExecuteSubscriptionPlanChangeV2SecurityOption2$outboundSchema
+      )),
+      option3: z.optional(z.lazy(() =>
+        ExecuteSubscriptionPlanChangeV2SecurityOption3$outboundSchema
+      )),
+      option4: z.optional(z.lazy(() =>
+        ExecuteSubscriptionPlanChangeV2SecurityOption4$outboundSchema
+      )),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        option1: "Option1",
+        option2: "Option2",
+        option3: "Option3",
+        option4: "Option4",
+      });
+    }),
+  );
+
+export function executeSubscriptionPlanChangeV2SecurityToJSON(
+  executeSubscriptionPlanChangeV2Security:
+    ExecuteSubscriptionPlanChangeV2Security,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionPlanChangeV2Security$outboundSchema.parse(
+      executeSubscriptionPlanChangeV2Security,
+    ),
+  );
+}
 
 /** @internal */
 export type ExecuteSubscriptionPlanChangeV2Request$Outbound = {

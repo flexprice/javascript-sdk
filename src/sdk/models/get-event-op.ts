@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetEventSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetEventSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetEventSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetEventSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetEventSecurity = {
+  option1?: GetEventSecurityOption1 | undefined;
+  option2?: GetEventSecurityOption2 | undefined;
+  option3?: GetEventSecurityOption3 | undefined;
+  option4?: GetEventSecurityOption4 | undefined;
+};
 
 export type GetEventRequest = {
   /**
@@ -10,6 +35,158 @@ export type GetEventRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetEventSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetEventSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetEventSecurityOption1$Outbound,
+  GetEventSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getEventSecurityOption1ToJSON(
+  getEventSecurityOption1: GetEventSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetEventSecurityOption1$outboundSchema.parse(getEventSecurityOption1),
+  );
+}
+
+/** @internal */
+export type GetEventSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetEventSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetEventSecurityOption2$Outbound,
+  GetEventSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getEventSecurityOption2ToJSON(
+  getEventSecurityOption2: GetEventSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetEventSecurityOption2$outboundSchema.parse(getEventSecurityOption2),
+  );
+}
+
+/** @internal */
+export type GetEventSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetEventSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetEventSecurityOption3$Outbound,
+  GetEventSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getEventSecurityOption3ToJSON(
+  getEventSecurityOption3: GetEventSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetEventSecurityOption3$outboundSchema.parse(getEventSecurityOption3),
+  );
+}
+
+/** @internal */
+export type GetEventSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetEventSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetEventSecurityOption4$Outbound,
+  GetEventSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getEventSecurityOption4ToJSON(
+  getEventSecurityOption4: GetEventSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetEventSecurityOption4$outboundSchema.parse(getEventSecurityOption4),
+  );
+}
+
+/** @internal */
+export type GetEventSecurity$Outbound = {
+  Option1?: GetEventSecurityOption1$Outbound | undefined;
+  Option2?: GetEventSecurityOption2$Outbound | undefined;
+  Option3?: GetEventSecurityOption3$Outbound | undefined;
+  Option4?: GetEventSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetEventSecurity$outboundSchema: z.ZodMiniType<
+  GetEventSecurity$Outbound,
+  GetEventSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(z.lazy(() => GetEventSecurityOption1$outboundSchema)),
+    option2: z.optional(z.lazy(() => GetEventSecurityOption2$outboundSchema)),
+    option3: z.optional(z.lazy(() => GetEventSecurityOption3$outboundSchema)),
+    option4: z.optional(z.lazy(() => GetEventSecurityOption4$outboundSchema)),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getEventSecurityToJSON(
+  getEventSecurity: GetEventSecurity,
+): string {
+  return JSON.stringify(
+    GetEventSecurity$outboundSchema.parse(getEventSecurity),
+  );
+}
 
 /** @internal */
 export type GetEventRequest$Outbound = {

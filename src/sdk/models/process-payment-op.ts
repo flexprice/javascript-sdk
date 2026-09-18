@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type ProcessPaymentSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ProcessPaymentSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ProcessPaymentSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ProcessPaymentSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ProcessPaymentSecurity = {
+  option1?: ProcessPaymentSecurityOption1 | undefined;
+  option2?: ProcessPaymentSecurityOption2 | undefined;
+  option3?: ProcessPaymentSecurityOption3 | undefined;
+  option4?: ProcessPaymentSecurityOption4 | undefined;
+};
 
 export type ProcessPaymentRequest = {
   /**
@@ -10,6 +35,174 @@ export type ProcessPaymentRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type ProcessPaymentSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ProcessPaymentSecurityOption1$outboundSchema: z.ZodMiniType<
+  ProcessPaymentSecurityOption1$Outbound,
+  ProcessPaymentSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function processPaymentSecurityOption1ToJSON(
+  processPaymentSecurityOption1: ProcessPaymentSecurityOption1,
+): string {
+  return JSON.stringify(
+    ProcessPaymentSecurityOption1$outboundSchema.parse(
+      processPaymentSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessPaymentSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ProcessPaymentSecurityOption2$outboundSchema: z.ZodMiniType<
+  ProcessPaymentSecurityOption2$Outbound,
+  ProcessPaymentSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function processPaymentSecurityOption2ToJSON(
+  processPaymentSecurityOption2: ProcessPaymentSecurityOption2,
+): string {
+  return JSON.stringify(
+    ProcessPaymentSecurityOption2$outboundSchema.parse(
+      processPaymentSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessPaymentSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ProcessPaymentSecurityOption3$outboundSchema: z.ZodMiniType<
+  ProcessPaymentSecurityOption3$Outbound,
+  ProcessPaymentSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function processPaymentSecurityOption3ToJSON(
+  processPaymentSecurityOption3: ProcessPaymentSecurityOption3,
+): string {
+  return JSON.stringify(
+    ProcessPaymentSecurityOption3$outboundSchema.parse(
+      processPaymentSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessPaymentSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ProcessPaymentSecurityOption4$outboundSchema: z.ZodMiniType<
+  ProcessPaymentSecurityOption4$Outbound,
+  ProcessPaymentSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function processPaymentSecurityOption4ToJSON(
+  processPaymentSecurityOption4: ProcessPaymentSecurityOption4,
+): string {
+  return JSON.stringify(
+    ProcessPaymentSecurityOption4$outboundSchema.parse(
+      processPaymentSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessPaymentSecurity$Outbound = {
+  Option1?: ProcessPaymentSecurityOption1$Outbound | undefined;
+  Option2?: ProcessPaymentSecurityOption2$Outbound | undefined;
+  Option3?: ProcessPaymentSecurityOption3$Outbound | undefined;
+  Option4?: ProcessPaymentSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ProcessPaymentSecurity$outboundSchema: z.ZodMiniType<
+  ProcessPaymentSecurity$Outbound,
+  ProcessPaymentSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ProcessPaymentSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ProcessPaymentSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ProcessPaymentSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ProcessPaymentSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function processPaymentSecurityToJSON(
+  processPaymentSecurity: ProcessPaymentSecurity,
+): string {
+  return JSON.stringify(
+    ProcessPaymentSecurity$outboundSchema.parse(processPaymentSecurity),
+  );
+}
 
 /** @internal */
 export type ProcessPaymentRequest$Outbound = {

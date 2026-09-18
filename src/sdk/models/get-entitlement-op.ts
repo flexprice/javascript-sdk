@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetEntitlementSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetEntitlementSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetEntitlementSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetEntitlementSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetEntitlementSecurity = {
+  option1?: GetEntitlementSecurityOption1 | undefined;
+  option2?: GetEntitlementSecurityOption2 | undefined;
+  option3?: GetEntitlementSecurityOption3 | undefined;
+  option4?: GetEntitlementSecurityOption4 | undefined;
+};
 
 export type GetEntitlementRequest = {
   /**
@@ -10,6 +35,174 @@ export type GetEntitlementRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetEntitlementSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetEntitlementSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetEntitlementSecurityOption1$Outbound,
+  GetEntitlementSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getEntitlementSecurityOption1ToJSON(
+  getEntitlementSecurityOption1: GetEntitlementSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurityOption1$outboundSchema.parse(
+      getEntitlementSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetEntitlementSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetEntitlementSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetEntitlementSecurityOption2$Outbound,
+  GetEntitlementSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getEntitlementSecurityOption2ToJSON(
+  getEntitlementSecurityOption2: GetEntitlementSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurityOption2$outboundSchema.parse(
+      getEntitlementSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetEntitlementSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetEntitlementSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetEntitlementSecurityOption3$Outbound,
+  GetEntitlementSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getEntitlementSecurityOption3ToJSON(
+  getEntitlementSecurityOption3: GetEntitlementSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurityOption3$outboundSchema.parse(
+      getEntitlementSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetEntitlementSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetEntitlementSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetEntitlementSecurityOption4$Outbound,
+  GetEntitlementSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getEntitlementSecurityOption4ToJSON(
+  getEntitlementSecurityOption4: GetEntitlementSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurityOption4$outboundSchema.parse(
+      getEntitlementSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetEntitlementSecurity$Outbound = {
+  Option1?: GetEntitlementSecurityOption1$Outbound | undefined;
+  Option2?: GetEntitlementSecurityOption2$Outbound | undefined;
+  Option3?: GetEntitlementSecurityOption3$Outbound | undefined;
+  Option4?: GetEntitlementSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetEntitlementSecurity$outboundSchema: z.ZodMiniType<
+  GetEntitlementSecurity$Outbound,
+  GetEntitlementSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetEntitlementSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetEntitlementSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetEntitlementSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetEntitlementSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getEntitlementSecurityToJSON(
+  getEntitlementSecurity: GetEntitlementSecurity,
+): string {
+  return JSON.stringify(
+    GetEntitlementSecurity$outboundSchema.parse(getEntitlementSecurity),
+  );
+}
 
 /** @internal */
 export type GetEntitlementRequest$Outbound = {

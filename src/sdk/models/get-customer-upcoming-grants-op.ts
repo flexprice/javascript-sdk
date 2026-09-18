@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetCustomerUpcomingGrantsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetCustomerUpcomingGrantsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetCustomerUpcomingGrantsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetCustomerUpcomingGrantsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetCustomerUpcomingGrantsSecurity = {
+  option1?: GetCustomerUpcomingGrantsSecurityOption1 | undefined;
+  option2?: GetCustomerUpcomingGrantsSecurityOption2 | undefined;
+  option3?: GetCustomerUpcomingGrantsSecurityOption3 | undefined;
+  option4?: GetCustomerUpcomingGrantsSecurityOption4 | undefined;
+};
 
 export type GetCustomerUpcomingGrantsRequest = {
   /**
@@ -10,6 +35,184 @@ export type GetCustomerUpcomingGrantsRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetCustomerUpcomingGrantsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCustomerUpcomingGrantsSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerUpcomingGrantsSecurityOption1$Outbound,
+    GetCustomerUpcomingGrantsSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getCustomerUpcomingGrantsSecurityOption1ToJSON(
+  getCustomerUpcomingGrantsSecurityOption1:
+    GetCustomerUpcomingGrantsSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetCustomerUpcomingGrantsSecurityOption1$outboundSchema.parse(
+      getCustomerUpcomingGrantsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerUpcomingGrantsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCustomerUpcomingGrantsSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerUpcomingGrantsSecurityOption2$Outbound,
+    GetCustomerUpcomingGrantsSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getCustomerUpcomingGrantsSecurityOption2ToJSON(
+  getCustomerUpcomingGrantsSecurityOption2:
+    GetCustomerUpcomingGrantsSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetCustomerUpcomingGrantsSecurityOption2$outboundSchema.parse(
+      getCustomerUpcomingGrantsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerUpcomingGrantsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetCustomerUpcomingGrantsSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerUpcomingGrantsSecurityOption3$Outbound,
+    GetCustomerUpcomingGrantsSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function getCustomerUpcomingGrantsSecurityOption3ToJSON(
+  getCustomerUpcomingGrantsSecurityOption3:
+    GetCustomerUpcomingGrantsSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetCustomerUpcomingGrantsSecurityOption3$outboundSchema.parse(
+      getCustomerUpcomingGrantsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerUpcomingGrantsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetCustomerUpcomingGrantsSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerUpcomingGrantsSecurityOption4$Outbound,
+    GetCustomerUpcomingGrantsSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function getCustomerUpcomingGrantsSecurityOption4ToJSON(
+  getCustomerUpcomingGrantsSecurityOption4:
+    GetCustomerUpcomingGrantsSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetCustomerUpcomingGrantsSecurityOption4$outboundSchema.parse(
+      getCustomerUpcomingGrantsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerUpcomingGrantsSecurity$Outbound = {
+  Option1?: GetCustomerUpcomingGrantsSecurityOption1$Outbound | undefined;
+  Option2?: GetCustomerUpcomingGrantsSecurityOption2$Outbound | undefined;
+  Option3?: GetCustomerUpcomingGrantsSecurityOption3$Outbound | undefined;
+  Option4?: GetCustomerUpcomingGrantsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetCustomerUpcomingGrantsSecurity$outboundSchema: z.ZodMiniType<
+  GetCustomerUpcomingGrantsSecurity$Outbound,
+  GetCustomerUpcomingGrantsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetCustomerUpcomingGrantsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetCustomerUpcomingGrantsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetCustomerUpcomingGrantsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetCustomerUpcomingGrantsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getCustomerUpcomingGrantsSecurityToJSON(
+  getCustomerUpcomingGrantsSecurity: GetCustomerUpcomingGrantsSecurity,
+): string {
+  return JSON.stringify(
+    GetCustomerUpcomingGrantsSecurity$outboundSchema.parse(
+      getCustomerUpcomingGrantsSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetCustomerUpcomingGrantsRequest$Outbound = {

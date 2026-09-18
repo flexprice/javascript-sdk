@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetTenantByIdSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetTenantByIdSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetTenantByIdSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetTenantByIdSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetTenantByIdSecurity = {
+  option1?: GetTenantByIdSecurityOption1 | undefined;
+  option2?: GetTenantByIdSecurityOption2 | undefined;
+  option3?: GetTenantByIdSecurityOption3 | undefined;
+  option4?: GetTenantByIdSecurityOption4 | undefined;
+};
 
 export type GetTenantByIdRequest = {
   /**
@@ -10,6 +35,174 @@ export type GetTenantByIdRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetTenantByIdSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTenantByIdSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetTenantByIdSecurityOption1$Outbound,
+  GetTenantByIdSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTenantByIdSecurityOption1ToJSON(
+  getTenantByIdSecurityOption1: GetTenantByIdSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetTenantByIdSecurityOption1$outboundSchema.parse(
+      getTenantByIdSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTenantByIdSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTenantByIdSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetTenantByIdSecurityOption2$Outbound,
+  GetTenantByIdSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTenantByIdSecurityOption2ToJSON(
+  getTenantByIdSecurityOption2: GetTenantByIdSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetTenantByIdSecurityOption2$outboundSchema.parse(
+      getTenantByIdSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTenantByIdSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetTenantByIdSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetTenantByIdSecurityOption3$Outbound,
+  GetTenantByIdSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getTenantByIdSecurityOption3ToJSON(
+  getTenantByIdSecurityOption3: GetTenantByIdSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetTenantByIdSecurityOption3$outboundSchema.parse(
+      getTenantByIdSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTenantByIdSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetTenantByIdSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetTenantByIdSecurityOption4$Outbound,
+  GetTenantByIdSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getTenantByIdSecurityOption4ToJSON(
+  getTenantByIdSecurityOption4: GetTenantByIdSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetTenantByIdSecurityOption4$outboundSchema.parse(
+      getTenantByIdSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTenantByIdSecurity$Outbound = {
+  Option1?: GetTenantByIdSecurityOption1$Outbound | undefined;
+  Option2?: GetTenantByIdSecurityOption2$Outbound | undefined;
+  Option3?: GetTenantByIdSecurityOption3$Outbound | undefined;
+  Option4?: GetTenantByIdSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetTenantByIdSecurity$outboundSchema: z.ZodMiniType<
+  GetTenantByIdSecurity$Outbound,
+  GetTenantByIdSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetTenantByIdSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetTenantByIdSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetTenantByIdSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetTenantByIdSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getTenantByIdSecurityToJSON(
+  getTenantByIdSecurity: GetTenantByIdSecurity,
+): string {
+  return JSON.stringify(
+    GetTenantByIdSecurity$outboundSchema.parse(getTenantByIdSecurity),
+  );
+}
 
 /** @internal */
 export type GetTenantByIdRequest$Outbound = {

@@ -20,11 +20,13 @@ export class Payments extends ClientSDK {
    * Use when listing or searching payments (e.g. reconciliation UI or customer payment history). Returns a paginated list; supports filtering by customer, invoice, status.
    */
   async listPayments(
+    security: models.ListPaymentsSecurity,
     request?: models.ListPaymentsRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListPaymentsResponse> {
     return unwrapAsync(paymentsListPayments(
       this,
+      security,
       request,
       options,
     ));
@@ -37,11 +39,13 @@ export class Payments extends ClientSDK {
    * Use when recording a payment against an invoice (e.g. after receiving funds via a gateway or manual entry).
    */
   async createPayment(
+    security: models.CreatePaymentSecurity,
     request: models.CreatePaymentRequest,
     options?: RequestOptions,
   ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsCreatePayment(
       this,
+      security,
       request,
       options,
     ));
@@ -54,11 +58,13 @@ export class Payments extends ClientSDK {
    * Use when you need to load a single payment (e.g. for a receipt view or reconciliation).
    */
   async getPayment(
+    security: models.GetPaymentSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsGetPayment(
       this,
+      security,
       id,
       options,
     ));
@@ -71,12 +77,14 @@ export class Payments extends ClientSDK {
    * Use when updating payment status or metadata (e.g. after reconciliation or adding a reference).
    */
   async updatePayment(
+    security: models.UpdatePaymentSecurity,
     id: string,
     body: models.UpdatePaymentRequest,
     options?: RequestOptions,
   ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsUpdatePayment(
       this,
+      security,
       id,
       body,
       options,
@@ -90,11 +98,13 @@ export class Payments extends ClientSDK {
    * Use when removing or voiding a payment record (e.g. correcting erroneous entries). Returns 200 with success message.
    */
   async deletePayment(
+    security: models.DeletePaymentSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(paymentsDeletePayment(
       this,
+      security,
       id,
       options,
     ));
@@ -107,11 +117,13 @@ export class Payments extends ClientSDK {
    * Use when you need to charge or process a payment (e.g. trigger the payment provider to capture funds). Returns updated payment with status.
    */
   async processPayment(
+    security: models.ProcessPaymentSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.PaymentResponse> {
     return unwrapAsync(paymentsProcessPayment(
       this,
+      security,
       id,
       options,
     ));

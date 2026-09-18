@@ -39,6 +39,10 @@ import {
   LineItemCommitmentConfig$outboundSchema,
 } from "./line-item-commitment-config.js";
 import {
+  LineItemGrouping,
+  LineItemGrouping$outboundSchema,
+} from "./line-item-grouping.js";
+import {
   OverrideEntitlementRequest,
   OverrideEntitlementRequest$Outbound,
   OverrideEntitlementRequest$outboundSchema,
@@ -142,6 +146,7 @@ export type CreateSubscriptionRequest = {
    * Deprecated: use SubscriptionCoupons instead.
    */
   lineItemCoupons?: { [k: string]: Array<string> } | undefined;
+  lineItemGrouping?: LineItemGrouping | undefined;
   /**
    * LineItems are extra (non-plan) line items added at creation.
    */
@@ -202,6 +207,7 @@ export type CreateSubscriptionRequest$Outbound = {
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
   line_item_coupons?: { [k: string]: Array<string> } | undefined;
+  line_item_grouping?: string | undefined;
   line_items?: Array<CreateSubscriptionLineItemRequest$Outbound> | undefined;
   lookup_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -255,6 +261,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),
     lineItemCoupons: z.optional(z.record(z.string(), z.array(z.string()))),
+    lineItemGrouping: z.optional(LineItemGrouping$outboundSchema),
     lineItems: z.optional(
       z.array(CreateSubscriptionLineItemRequest$outboundSchema),
     ),
@@ -300,6 +307,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       includePriceIds: "include_price_ids",
       lineItemCommitments: "line_item_commitments",
       lineItemCoupons: "line_item_coupons",
+      lineItemGrouping: "line_item_grouping",
       lineItems: "line_items",
       lookupKey: "lookup_key",
       overageFactor: "overage_factor",

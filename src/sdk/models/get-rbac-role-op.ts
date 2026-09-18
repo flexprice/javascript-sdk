@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetRbacRoleSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetRbacRoleSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetRbacRoleSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetRbacRoleSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetRbacRoleSecurity = {
+  option1?: GetRbacRoleSecurityOption1 | undefined;
+  option2?: GetRbacRoleSecurityOption2 | undefined;
+  option3?: GetRbacRoleSecurityOption3 | undefined;
+  option4?: GetRbacRoleSecurityOption4 | undefined;
+};
 
 export type GetRbacRoleRequest = {
   /**
@@ -10,6 +35,166 @@ export type GetRbacRoleRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetRbacRoleSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetRbacRoleSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetRbacRoleSecurityOption1$Outbound,
+  GetRbacRoleSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getRbacRoleSecurityOption1ToJSON(
+  getRbacRoleSecurityOption1: GetRbacRoleSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetRbacRoleSecurityOption1$outboundSchema.parse(getRbacRoleSecurityOption1),
+  );
+}
+
+/** @internal */
+export type GetRbacRoleSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetRbacRoleSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetRbacRoleSecurityOption2$Outbound,
+  GetRbacRoleSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getRbacRoleSecurityOption2ToJSON(
+  getRbacRoleSecurityOption2: GetRbacRoleSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetRbacRoleSecurityOption2$outboundSchema.parse(getRbacRoleSecurityOption2),
+  );
+}
+
+/** @internal */
+export type GetRbacRoleSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetRbacRoleSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetRbacRoleSecurityOption3$Outbound,
+  GetRbacRoleSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getRbacRoleSecurityOption3ToJSON(
+  getRbacRoleSecurityOption3: GetRbacRoleSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetRbacRoleSecurityOption3$outboundSchema.parse(getRbacRoleSecurityOption3),
+  );
+}
+
+/** @internal */
+export type GetRbacRoleSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetRbacRoleSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetRbacRoleSecurityOption4$Outbound,
+  GetRbacRoleSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getRbacRoleSecurityOption4ToJSON(
+  getRbacRoleSecurityOption4: GetRbacRoleSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetRbacRoleSecurityOption4$outboundSchema.parse(getRbacRoleSecurityOption4),
+  );
+}
+
+/** @internal */
+export type GetRbacRoleSecurity$Outbound = {
+  Option1?: GetRbacRoleSecurityOption1$Outbound | undefined;
+  Option2?: GetRbacRoleSecurityOption2$Outbound | undefined;
+  Option3?: GetRbacRoleSecurityOption3$Outbound | undefined;
+  Option4?: GetRbacRoleSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetRbacRoleSecurity$outboundSchema: z.ZodMiniType<
+  GetRbacRoleSecurity$Outbound,
+  GetRbacRoleSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetRbacRoleSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetRbacRoleSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetRbacRoleSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetRbacRoleSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getRbacRoleSecurityToJSON(
+  getRbacRoleSecurity: GetRbacRoleSecurity,
+): string {
+  return JSON.stringify(
+    GetRbacRoleSecurity$outboundSchema.parse(getRbacRoleSecurity),
+  );
+}
 
 /** @internal */
 export type GetRbacRoleRequest$Outbound = {

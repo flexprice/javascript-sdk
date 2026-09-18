@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateWalletRequest,
   UpdateWalletRequest$Outbound,
   UpdateWalletRequest$outboundSchema,
 } from "./update-wallet-request.js";
+
+export type UpdateWalletSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateWalletSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateWalletSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateWalletSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateWalletSecurity = {
+  option1?: UpdateWalletSecurityOption1 | undefined;
+  option2?: UpdateWalletSecurityOption2 | undefined;
+  option3?: UpdateWalletSecurityOption3 | undefined;
+  option4?: UpdateWalletSecurityOption4 | undefined;
+};
 
 export type UpdateWalletRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdateWalletRequestRequest = {
    */
   body: UpdateWalletRequest;
 };
+
+/** @internal */
+export type UpdateWalletSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateWalletSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateWalletSecurityOption1$Outbound,
+  UpdateWalletSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateWalletSecurityOption1ToJSON(
+  updateWalletSecurityOption1: UpdateWalletSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateWalletSecurityOption1$outboundSchema.parse(
+      updateWalletSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateWalletSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateWalletSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateWalletSecurityOption2$Outbound,
+  UpdateWalletSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateWalletSecurityOption2ToJSON(
+  updateWalletSecurityOption2: UpdateWalletSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateWalletSecurityOption2$outboundSchema.parse(
+      updateWalletSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateWalletSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateWalletSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateWalletSecurityOption3$Outbound,
+  UpdateWalletSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateWalletSecurityOption3ToJSON(
+  updateWalletSecurityOption3: UpdateWalletSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateWalletSecurityOption3$outboundSchema.parse(
+      updateWalletSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateWalletSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateWalletSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateWalletSecurityOption4$Outbound,
+  UpdateWalletSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateWalletSecurityOption4ToJSON(
+  updateWalletSecurityOption4: UpdateWalletSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateWalletSecurityOption4$outboundSchema.parse(
+      updateWalletSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateWalletSecurity$Outbound = {
+  Option1?: UpdateWalletSecurityOption1$Outbound | undefined;
+  Option2?: UpdateWalletSecurityOption2$Outbound | undefined;
+  Option3?: UpdateWalletSecurityOption3$Outbound | undefined;
+  Option4?: UpdateWalletSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateWalletSecurity$outboundSchema: z.ZodMiniType<
+  UpdateWalletSecurity$Outbound,
+  UpdateWalletSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateWalletSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateWalletSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateWalletSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateWalletSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateWalletSecurityToJSON(
+  updateWalletSecurity: UpdateWalletSecurity,
+): string {
+  return JSON.stringify(
+    UpdateWalletSecurity$outboundSchema.parse(updateWalletSecurity),
+  );
+}
 
 /** @internal */
 export type UpdateWalletRequestRequest$Outbound = {

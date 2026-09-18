@@ -19,11 +19,13 @@ export class AlertSettings extends ClientSDK {
    * Configure a subscription, line item, or group spend alert.
    */
   async createAlertSettings(
+    security: models.CreateAlertSettingsSecurity,
     request: models.CreateAlertSettingsRequest,
     options?: RequestOptions,
   ): Promise<models.AlertSettingsResponse> {
     return unwrapAsync(alertSettingsCreateAlertSettings(
       this,
+      security,
       request,
       options,
     ));
@@ -36,11 +38,13 @@ export class AlertSettings extends ClientSDK {
    * List or search alert settings. Returns a paginated list.
    */
   async queryAlertSettings(
+    security: models.QueryAlertSettingsSecurity,
     request: models.AlertSettingsFilter,
     options?: RequestOptions,
   ): Promise<models.ListAlertSettingsResponse> {
     return unwrapAsync(alertSettingsQueryAlertSettings(
       this,
+      security,
       request,
       options,
     ));
@@ -53,11 +57,13 @@ export class AlertSettings extends ClientSDK {
    * Fetch a single alert setting by id.
    */
   async getAlertSettings(
+    security: models.GetAlertSettingsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.AlertSettingsResponse> {
     return unwrapAsync(alertSettingsGetAlertSettings(
       this,
+      security,
       id,
       options,
     ));
@@ -70,12 +76,14 @@ export class AlertSettings extends ClientSDK {
    * Patch an alert setting's config; omitted fields keep their stored value.
    */
   async updateAlertSettings(
+    security: models.UpdateAlertSettingsSecurity,
     id: string,
     body: models.UpdateAlertSettingsRequest,
     options?: RequestOptions,
   ): Promise<models.AlertSettingsResponse> {
     return unwrapAsync(alertSettingsUpdateAlertSettings(
       this,
+      security,
       id,
       body,
       options,
@@ -89,11 +97,13 @@ export class AlertSettings extends ClientSDK {
    * Soft delete an alert setting.
    */
   async deleteAlertSettings(
+    security: models.DeleteAlertSettingsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(alertSettingsDeleteAlertSettings(
       this,
+      security,
       id,
       options,
     ));

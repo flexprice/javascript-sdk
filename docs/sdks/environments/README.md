@@ -16,12 +16,14 @@ Clone all published features and plans from the source environment into a target
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new Flexprice();
 
 async function run() {
-  const result = await flexprice.environments.cloneEnvironment("<id>", {});
+  const result = await flexprice.environments.cloneEnvironment({
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
 
   console.log(result);
 }
@@ -39,12 +41,14 @@ import { environmentsCloneEnvironment } from "@flexprice/sdk/funcs/environments-
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
-  const res = await environmentsCloneEnvironment(flexprice, "<id>", {});
+  const res = await environmentsCloneEnvironment(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -60,6 +64,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `security`                                                                                                                                                                     | [models.CloneEnvironmentSecurity](../../sdk/models/clone-environment-security.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Source Environment ID                                                                                                                                                          |
 | `body`                                                                                                                                                                         | [models.CloneEnvironmentRequest](../../sdk/models/clone-environment-request.md)                                                                                                | :heavy_check_mark:                                                                                                                                                             | Clone configuration                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |

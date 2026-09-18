@@ -17,6 +17,7 @@ export class Secrets extends ClientSDK {
    * Use when listing API keys (e.g. admin view or rotating keys). Returns a paginated list.
    */
   async listApiKeys(
+    security: models.ListApiKeysSecurity,
     limit?: number | undefined,
     offset?: number | undefined,
     status?: string | undefined,
@@ -24,6 +25,7 @@ export class Secrets extends ClientSDK {
   ): Promise<models.ListSecretsResponse> {
     return unwrapAsync(secretsListApiKeys(
       this,
+      security,
       limit,
       offset,
       status,
@@ -38,11 +40,13 @@ export class Secrets extends ClientSDK {
    * Use when issuing a new API key (e.g. for a service account or for the current user). Provide service_account_id to create for a service account.
    */
   async createApiKey(
+    security: models.CreateApiKeySecurity,
     request: models.CreateAPIKeyRequest,
     options?: RequestOptions,
   ): Promise<models.CreateAPIKeyResponse> {
     return unwrapAsync(secretsCreateApiKey(
       this,
+      security,
       request,
       options,
     ));
@@ -55,11 +59,13 @@ export class Secrets extends ClientSDK {
    * Use when revoking an API key (e.g. rotation or compromise). Permanently invalidates the key.
    */
   async deleteApiKey(
+    security: models.DeleteApiKeySecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(secretsDeleteApiKey(
       this,
+      security,
       id,
       options,
     ));

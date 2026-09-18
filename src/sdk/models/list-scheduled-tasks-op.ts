@@ -5,6 +5,30 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type ListScheduledTasksSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListScheduledTasksSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListScheduledTasksSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListScheduledTasksSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListScheduledTasksSecurity = {
+  option1?: ListScheduledTasksSecurityOption1 | undefined;
+  option2?: ListScheduledTasksSecurityOption2 | undefined;
+  option3?: ListScheduledTasksSecurityOption3 | undefined;
+  option4?: ListScheduledTasksSecurityOption4 | undefined;
+};
+
 export type ListScheduledTasksRequest = {
   /**
    * Limit
@@ -31,6 +55,174 @@ export type ListScheduledTasksRequest = {
    */
   enabled?: boolean | undefined;
 };
+
+/** @internal */
+export type ListScheduledTasksSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListScheduledTasksSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListScheduledTasksSecurityOption1$Outbound,
+  ListScheduledTasksSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listScheduledTasksSecurityOption1ToJSON(
+  listScheduledTasksSecurityOption1: ListScheduledTasksSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListScheduledTasksSecurityOption1$outboundSchema.parse(
+      listScheduledTasksSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ListScheduledTasksSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListScheduledTasksSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListScheduledTasksSecurityOption2$Outbound,
+  ListScheduledTasksSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listScheduledTasksSecurityOption2ToJSON(
+  listScheduledTasksSecurityOption2: ListScheduledTasksSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListScheduledTasksSecurityOption2$outboundSchema.parse(
+      listScheduledTasksSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ListScheduledTasksSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListScheduledTasksSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListScheduledTasksSecurityOption3$Outbound,
+  ListScheduledTasksSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listScheduledTasksSecurityOption3ToJSON(
+  listScheduledTasksSecurityOption3: ListScheduledTasksSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListScheduledTasksSecurityOption3$outboundSchema.parse(
+      listScheduledTasksSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ListScheduledTasksSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListScheduledTasksSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListScheduledTasksSecurityOption4$Outbound,
+  ListScheduledTasksSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listScheduledTasksSecurityOption4ToJSON(
+  listScheduledTasksSecurityOption4: ListScheduledTasksSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListScheduledTasksSecurityOption4$outboundSchema.parse(
+      listScheduledTasksSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ListScheduledTasksSecurity$Outbound = {
+  Option1?: ListScheduledTasksSecurityOption1$Outbound | undefined;
+  Option2?: ListScheduledTasksSecurityOption2$Outbound | undefined;
+  Option3?: ListScheduledTasksSecurityOption3$Outbound | undefined;
+  Option4?: ListScheduledTasksSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListScheduledTasksSecurity$outboundSchema: z.ZodMiniType<
+  ListScheduledTasksSecurity$Outbound,
+  ListScheduledTasksSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListScheduledTasksSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListScheduledTasksSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListScheduledTasksSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListScheduledTasksSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listScheduledTasksSecurityToJSON(
+  listScheduledTasksSecurity: ListScheduledTasksSecurity,
+): string {
+  return JSON.stringify(
+    ListScheduledTasksSecurity$outboundSchema.parse(listScheduledTasksSecurity),
+  );
+}
 
 /** @internal */
 export type ListScheduledTasksRequest$Outbound = {

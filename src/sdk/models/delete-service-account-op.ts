@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteServiceAccountSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteServiceAccountSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteServiceAccountSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteServiceAccountSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteServiceAccountSecurity = {
+  option1?: DeleteServiceAccountSecurityOption1 | undefined;
+  option2?: DeleteServiceAccountSecurityOption2 | undefined;
+  option3?: DeleteServiceAccountSecurityOption3 | undefined;
+  option4?: DeleteServiceAccountSecurityOption4 | undefined;
+};
 
 export type DeleteServiceAccountRequest = {
   /**
@@ -10,6 +35,176 @@ export type DeleteServiceAccountRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteServiceAccountSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteServiceAccountSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteServiceAccountSecurityOption1$Outbound,
+  DeleteServiceAccountSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteServiceAccountSecurityOption1ToJSON(
+  deleteServiceAccountSecurityOption1: DeleteServiceAccountSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteServiceAccountSecurityOption1$outboundSchema.parse(
+      deleteServiceAccountSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteServiceAccountSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteServiceAccountSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteServiceAccountSecurityOption2$Outbound,
+  DeleteServiceAccountSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteServiceAccountSecurityOption2ToJSON(
+  deleteServiceAccountSecurityOption2: DeleteServiceAccountSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteServiceAccountSecurityOption2$outboundSchema.parse(
+      deleteServiceAccountSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteServiceAccountSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteServiceAccountSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteServiceAccountSecurityOption3$Outbound,
+  DeleteServiceAccountSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteServiceAccountSecurityOption3ToJSON(
+  deleteServiceAccountSecurityOption3: DeleteServiceAccountSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteServiceAccountSecurityOption3$outboundSchema.parse(
+      deleteServiceAccountSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteServiceAccountSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteServiceAccountSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteServiceAccountSecurityOption4$Outbound,
+  DeleteServiceAccountSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteServiceAccountSecurityOption4ToJSON(
+  deleteServiceAccountSecurityOption4: DeleteServiceAccountSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteServiceAccountSecurityOption4$outboundSchema.parse(
+      deleteServiceAccountSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteServiceAccountSecurity$Outbound = {
+  Option1?: DeleteServiceAccountSecurityOption1$Outbound | undefined;
+  Option2?: DeleteServiceAccountSecurityOption2$Outbound | undefined;
+  Option3?: DeleteServiceAccountSecurityOption3$Outbound | undefined;
+  Option4?: DeleteServiceAccountSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteServiceAccountSecurity$outboundSchema: z.ZodMiniType<
+  DeleteServiceAccountSecurity$Outbound,
+  DeleteServiceAccountSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteServiceAccountSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteServiceAccountSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteServiceAccountSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteServiceAccountSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteServiceAccountSecurityToJSON(
+  deleteServiceAccountSecurity: DeleteServiceAccountSecurity,
+): string {
+  return JSON.stringify(
+    DeleteServiceAccountSecurity$outboundSchema.parse(
+      deleteServiceAccountSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type DeleteServiceAccountRequest$Outbound = {

@@ -41,11 +41,13 @@ export class Subscriptions extends ClientSDK {
    * Use when onboarding a customer to a plan or starting a new subscription. Ideal for draft subscriptions (activate later) or active from start.
    */
   async createSubscription(
+    security: models.CreateSubscriptionSecurity,
     request: models.CreateSubscriptionRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsCreateSubscription(
       this,
+      security,
       request,
       options,
     ));
@@ -61,11 +63,13 @@ export class Subscriptions extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async addSubscriptionAddon(
+    security: models.AddSubscriptionAddonSecurity,
     request: models.AddAddonRequest,
     options?: RequestOptions,
   ): Promise<models.AddAddonToSubscriptionResponse> {
     return unwrapAsync(subscriptionsAddSubscriptionAddon(
       this,
+      security,
       request,
       options,
     ));
@@ -81,11 +85,13 @@ export class Subscriptions extends ClientSDK {
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async removeSubscriptionAddon(
+    security: models.RemoveSubscriptionAddonSecurity,
     request: models.RemoveAddonRequest,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(subscriptionsRemoveSubscriptionAddon(
       this,
+      security,
       request,
       options,
     ));
@@ -98,11 +104,13 @@ export class Subscriptions extends ClientSDK {
    * List subscription line items with a JSON filter (subscription, customer, price, pagination, expand=prices, etc.).
    */
   async querySubscriptionLineItems(
+    security: models.QuerySubscriptionLineItemsSecurity,
     request: models.SubscriptionLineItemFilter,
     options?: RequestOptions,
   ): Promise<models.ListSubscriptionLineItemsResponse> {
     return unwrapAsync(subscriptionsQuerySubscriptionLineItems(
       this,
+      security,
       request,
       options,
     ));
@@ -115,12 +123,14 @@ export class Subscriptions extends ClientSDK {
    * Use when changing a subscription line item (e.g. quantity or price). Implemented by ending the current line and creating a new one for clean billing.
    */
   async updateSubscriptionLineItem(
+    security: models.UpdateSubscriptionLineItemSecurity,
     id: string,
     body: models.UpdateSubscriptionLineItemRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsUpdateSubscriptionLineItem(
       this,
+      security,
       id,
       body,
       options,
@@ -134,12 +144,14 @@ export class Subscriptions extends ClientSDK {
    * Use when removing a charge or seat from a subscription (e.g. downgrade). Line item ends; retained for history but no longer billed.
    */
   async deleteSubscriptionLineItem(
+    security: models.DeleteSubscriptionLineItemSecurity,
     id: string,
     body: models.DeleteSubscriptionLineItemRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsDeleteSubscriptionLineItem(
       this,
+      security,
       id,
       body,
       options,
@@ -212,11 +224,13 @@ export class Subscriptions extends ClientSDK {
    * Use when listing or searching subscriptions (e.g. admin view or customer subscription list). Returns a paginated list; supports filtering by customer, plan, status.
    */
   async querySubscription(
+    security: models.QuerySubscriptionSecurity,
     request: models.SubscriptionFilter,
     options?: RequestOptions,
   ): Promise<models.ListSubscriptionsResponse> {
     return unwrapAsync(subscriptionsQuerySubscription(
       this,
+      security,
       request,
       options,
     ));
@@ -229,11 +243,13 @@ export class Subscriptions extends ClientSDK {
    * Use when showing usage for a subscription (e.g. in a portal or for overage checks). Supports time range and filters.
    */
   async getSubscriptionUsage(
+    security: models.GetSubscriptionUsageSecurity,
     request: models.GetUsageBySubscriptionRequest,
     options?: RequestOptions,
   ): Promise<models.GetUsageBySubscriptionResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionUsage(
       this,
+      security,
       request,
       options,
     ));
@@ -246,11 +262,13 @@ export class Subscriptions extends ClientSDK {
    * Use when you need to load a single subscription (e.g. for a billing portal or to check status).
    */
   async getSubscription(
+    security: models.GetSubscriptionSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsGetSubscription(
       this,
+      security,
       id,
       options,
     ));
@@ -263,12 +281,14 @@ export class Subscriptions extends ClientSDK {
    * Use when changing subscription details (e.g. quantity, billing anchor, or parent). Supports partial update; send "" to clear parent_subscription_id.
    */
   async updateSubscription(
+    security: models.UpdateSubscriptionSecurity,
     id: string,
     body: models.UpdateSubscriptionRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsUpdateSubscription(
       this,
+      security,
       id,
       body,
       options,
@@ -282,12 +302,14 @@ export class Subscriptions extends ClientSDK {
    * Use when turning a draft subscription live (e.g. after collecting payment or completing setup). Once activated, billing and entitlements apply.
    */
   async activateSubscription(
+    security: models.ActivateSubscriptionSecurity,
     id: string,
     body: models.ActivateDraftSubscriptionRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionResponse> {
     return unwrapAsync(subscriptionsActivateSubscription(
       this,
+      security,
       id,
       body,
       options,
@@ -301,11 +323,13 @@ export class Subscriptions extends ClientSDK {
    * Use when listing which add-ons are currently attached to a subscription (e.g. for display or editing).
    */
   async getSubscriptionAddonAssociations(
+    security: models.GetSubscriptionAddonAssociationsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListAddonAssociationsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionAddonAssociations(
       this,
+      security,
       id,
       options,
     ));
@@ -318,12 +342,14 @@ export class Subscriptions extends ClientSDK {
    * Use when a customer churns or downgrades. Supports immediate or end-of-period cancellation and proration. Ideal for self-serve or support-driven cancellations.
    */
   async cancelSubscription(
+    security: models.CancelSubscriptionSecurity,
     id: string,
     body: models.CancelSubscriptionRequest,
     options?: RequestOptions,
   ): Promise<models.CancelSubscriptionResponse> {
     return unwrapAsync(subscriptionsCancelSubscription(
       this,
+      security,
       id,
       body,
       options,
@@ -337,12 +363,14 @@ export class Subscriptions extends ClientSDK {
    * Use when applying a plan change (e.g. upgrade or downgrade). Executes proration and generates invoice or credit as needed.
    */
   async executeSubscriptionChange(
+    security: models.ExecuteSubscriptionChangeSecurity,
     id: string,
     body: models.SubscriptionChangeRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionChangeExecuteResponse> {
     return unwrapAsync(subscriptionsExecuteSubscriptionChange(
       this,
+      security,
       id,
       body,
       options,
@@ -356,12 +384,14 @@ export class Subscriptions extends ClientSDK {
    * Use when showing a customer the cost of a plan change before they confirm (e.g. upgrade/downgrade preview with proration).
    */
   async previewSubscriptionChange(
+    security: models.PreviewSubscriptionChangeSecurity,
     id: string,
     body: models.SubscriptionChangeRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionChangePreviewResponse> {
     return unwrapAsync(subscriptionsPreviewSubscriptionChange(
       this,
+      security,
       id,
       body,
       options,
@@ -383,12 +413,14 @@ export class Subscriptions extends ClientSDK {
    * Set on_conflict_policies.on_pending_schedule to 'supersede' to replace the queued change instead: the pending schedule is cancelled and this request applied in the same transaction, so both land or neither does. The cancelled schedule ids are returned in superseded_schedules, and preview reports the same list without writing.
    */
   async executeSubscriptionPlanChangeV2(
+    security: models.ExecuteSubscriptionPlanChangeV2Security,
     id: string,
     body: models.SubscriptionChangeV2Request,
     options?: RequestOptions,
   ): Promise<models.SubscriptionChangeV2Response> {
     return unwrapAsync(subscriptionsExecuteSubscriptionPlanChangeV2(
       this,
+      security,
       id,
       body,
       options,
@@ -402,12 +434,14 @@ export class Subscriptions extends ClientSDK {
    * Preview a subscription plan change without writing. Swap-in-place: subscription id, billing anchor and period bounds are preserved.
    */
   async previewSubscriptionPlanChangeV2(
+    security: models.PreviewSubscriptionPlanChangeV2Security,
     id: string,
     body: models.SubscriptionChangeV2Request,
     options?: RequestOptions,
   ): Promise<models.SubscriptionChangeV2Response> {
     return unwrapAsync(subscriptionsPreviewSubscriptionPlanChangeV2(
       this,
+      security,
       id,
       body,
       options,
@@ -421,12 +455,14 @@ export class Subscriptions extends ClientSDK {
    * Use when checking what features or limits a subscription has (e.g. entitlement checks or feature gating). Optional feature_ids to filter.
    */
   async getSubscriptionEntitlements(
+    security: models.GetSubscriptionEntitlementsSecurity,
     id: string,
     featureIds?: Array<string> | undefined,
     options?: RequestOptions,
   ): Promise<models.SubscriptionEntitlementsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionEntitlements(
       this,
+      security,
       id,
       featureIds,
       options,
@@ -440,11 +476,13 @@ export class Subscriptions extends ClientSDK {
    * Use when showing upcoming or pending credits for a subscription (e.g. in a portal or for forecasting).
    */
   async getSubscriptionUpcomingGrants(
+    security: models.GetSubscriptionUpcomingGrantsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListCreditGrantApplicationsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionUpcomingGrants(
       this,
+      security,
       id,
       options,
     ));
@@ -457,12 +495,14 @@ export class Subscriptions extends ClientSDK {
    * Use when adding a new charge or seat to a subscription (e.g. extra seat or one-time add). Supports price_id or inline price.
    */
   async createSubscriptionLineItem(
+    security: models.CreateSubscriptionLineItemSecurity,
     id: string,
     body: models.CreateSubscriptionLineItemRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionLineItemResponse> {
     return unwrapAsync(subscriptionsCreateSubscriptionLineItem(
       this,
+      security,
       id,
       body,
       options,
@@ -476,12 +516,14 @@ export class Subscriptions extends ClientSDK {
    * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove).
    */
   async executeSubscriptionModify(
+    security: models.ExecuteSubscriptionModifySecurity,
     id: string,
     body: models.ExecuteSubscriptionModifyRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionModifyResponse> {
     return unwrapAsync(subscriptionsExecuteSubscriptionModify(
       this,
+      security,
       id,
       body,
       options,
@@ -495,12 +537,14 @@ export class Subscriptions extends ClientSDK {
    * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove) without committing changes.
    */
   async previewSubscriptionModify(
+    security: models.PreviewSubscriptionModifySecurity,
     id: string,
     body: models.ExecuteSubscriptionModifyRequest,
     options?: RequestOptions,
   ): Promise<models.SubscriptionModifyResponse> {
     return unwrapAsync(subscriptionsPreviewSubscriptionModify(
       this,
+      security,
       id,
       body,
       options,
@@ -531,12 +575,14 @@ export class Subscriptions extends ClientSDK {
    * Use when you need a subscription with related data (line items, prices, plan). Supports expand for detailed payloads without extra round-trips.
    */
   async getSubscriptionV2(
+    security: models.GetSubscriptionV2Security,
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.SubscriptionResponseV2> {
     return unwrapAsync(subscriptionsGetSubscriptionV2(
       this,
+      security,
       id,
       expand,
       options,

@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   TaxAssociationUpdateRequest,
   TaxAssociationUpdateRequest$Outbound,
   TaxAssociationUpdateRequest$outboundSchema,
 } from "./tax-association-update-request.js";
+
+export type UpdateTaxAssociationSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateTaxAssociationSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateTaxAssociationSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateTaxAssociationSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateTaxAssociationSecurity = {
+  option1?: UpdateTaxAssociationSecurityOption1 | undefined;
+  option2?: UpdateTaxAssociationSecurityOption2 | undefined;
+  option3?: UpdateTaxAssociationSecurityOption3 | undefined;
+  option4?: UpdateTaxAssociationSecurityOption4 | undefined;
+};
 
 export type UpdateTaxAssociationRequest = {
   /**
@@ -19,6 +44,176 @@ export type UpdateTaxAssociationRequest = {
    */
   body: TaxAssociationUpdateRequest;
 };
+
+/** @internal */
+export type UpdateTaxAssociationSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateTaxAssociationSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateTaxAssociationSecurityOption1$Outbound,
+  UpdateTaxAssociationSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateTaxAssociationSecurityOption1ToJSON(
+  updateTaxAssociationSecurityOption1: UpdateTaxAssociationSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateTaxAssociationSecurityOption1$outboundSchema.parse(
+      updateTaxAssociationSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaxAssociationSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateTaxAssociationSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateTaxAssociationSecurityOption2$Outbound,
+  UpdateTaxAssociationSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateTaxAssociationSecurityOption2ToJSON(
+  updateTaxAssociationSecurityOption2: UpdateTaxAssociationSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateTaxAssociationSecurityOption2$outboundSchema.parse(
+      updateTaxAssociationSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaxAssociationSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateTaxAssociationSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateTaxAssociationSecurityOption3$Outbound,
+  UpdateTaxAssociationSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateTaxAssociationSecurityOption3ToJSON(
+  updateTaxAssociationSecurityOption3: UpdateTaxAssociationSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateTaxAssociationSecurityOption3$outboundSchema.parse(
+      updateTaxAssociationSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaxAssociationSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateTaxAssociationSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateTaxAssociationSecurityOption4$Outbound,
+  UpdateTaxAssociationSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateTaxAssociationSecurityOption4ToJSON(
+  updateTaxAssociationSecurityOption4: UpdateTaxAssociationSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateTaxAssociationSecurityOption4$outboundSchema.parse(
+      updateTaxAssociationSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateTaxAssociationSecurity$Outbound = {
+  Option1?: UpdateTaxAssociationSecurityOption1$Outbound | undefined;
+  Option2?: UpdateTaxAssociationSecurityOption2$Outbound | undefined;
+  Option3?: UpdateTaxAssociationSecurityOption3$Outbound | undefined;
+  Option4?: UpdateTaxAssociationSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateTaxAssociationSecurity$outboundSchema: z.ZodMiniType<
+  UpdateTaxAssociationSecurity$Outbound,
+  UpdateTaxAssociationSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateTaxAssociationSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateTaxAssociationSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateTaxAssociationSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateTaxAssociationSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateTaxAssociationSecurityToJSON(
+  updateTaxAssociationSecurity: UpdateTaxAssociationSecurity,
+): string {
+  return JSON.stringify(
+    UpdateTaxAssociationSecurity$outboundSchema.parse(
+      updateTaxAssociationSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type UpdateTaxAssociationRequest$Outbound = {

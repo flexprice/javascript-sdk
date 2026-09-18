@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   CloneFeatureRequest,
   CloneFeatureRequest$Outbound,
   CloneFeatureRequest$outboundSchema,
 } from "./clone-feature-request.js";
+
+export type CloneFeatureSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type CloneFeatureSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type CloneFeatureSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type CloneFeatureSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type CloneFeatureSecurity = {
+  option1?: CloneFeatureSecurityOption1 | undefined;
+  option2?: CloneFeatureSecurityOption2 | undefined;
+  option3?: CloneFeatureSecurityOption3 | undefined;
+  option4?: CloneFeatureSecurityOption4 | undefined;
+};
 
 export type CloneFeatureRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type CloneFeatureRequestRequest = {
    */
   body: CloneFeatureRequest;
 };
+
+/** @internal */
+export type CloneFeatureSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const CloneFeatureSecurityOption1$outboundSchema: z.ZodMiniType<
+  CloneFeatureSecurityOption1$Outbound,
+  CloneFeatureSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function cloneFeatureSecurityOption1ToJSON(
+  cloneFeatureSecurityOption1: CloneFeatureSecurityOption1,
+): string {
+  return JSON.stringify(
+    CloneFeatureSecurityOption1$outboundSchema.parse(
+      cloneFeatureSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type CloneFeatureSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const CloneFeatureSecurityOption2$outboundSchema: z.ZodMiniType<
+  CloneFeatureSecurityOption2$Outbound,
+  CloneFeatureSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function cloneFeatureSecurityOption2ToJSON(
+  cloneFeatureSecurityOption2: CloneFeatureSecurityOption2,
+): string {
+  return JSON.stringify(
+    CloneFeatureSecurityOption2$outboundSchema.parse(
+      cloneFeatureSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type CloneFeatureSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const CloneFeatureSecurityOption3$outboundSchema: z.ZodMiniType<
+  CloneFeatureSecurityOption3$Outbound,
+  CloneFeatureSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function cloneFeatureSecurityOption3ToJSON(
+  cloneFeatureSecurityOption3: CloneFeatureSecurityOption3,
+): string {
+  return JSON.stringify(
+    CloneFeatureSecurityOption3$outboundSchema.parse(
+      cloneFeatureSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type CloneFeatureSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const CloneFeatureSecurityOption4$outboundSchema: z.ZodMiniType<
+  CloneFeatureSecurityOption4$Outbound,
+  CloneFeatureSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function cloneFeatureSecurityOption4ToJSON(
+  cloneFeatureSecurityOption4: CloneFeatureSecurityOption4,
+): string {
+  return JSON.stringify(
+    CloneFeatureSecurityOption4$outboundSchema.parse(
+      cloneFeatureSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type CloneFeatureSecurity$Outbound = {
+  Option1?: CloneFeatureSecurityOption1$Outbound | undefined;
+  Option2?: CloneFeatureSecurityOption2$Outbound | undefined;
+  Option3?: CloneFeatureSecurityOption3$Outbound | undefined;
+  Option4?: CloneFeatureSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const CloneFeatureSecurity$outboundSchema: z.ZodMiniType<
+  CloneFeatureSecurity$Outbound,
+  CloneFeatureSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => CloneFeatureSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => CloneFeatureSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => CloneFeatureSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => CloneFeatureSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function cloneFeatureSecurityToJSON(
+  cloneFeatureSecurity: CloneFeatureSecurity,
+): string {
+  return JSON.stringify(
+    CloneFeatureSecurity$outboundSchema.parse(cloneFeatureSecurity),
+  );
+}
 
 /** @internal */
 export type CloneFeatureRequestRequest$Outbound = {

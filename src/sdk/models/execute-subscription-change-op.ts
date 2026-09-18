@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   SubscriptionChangeRequest,
   SubscriptionChangeRequest$Outbound,
   SubscriptionChangeRequest$outboundSchema,
 } from "./subscription-change-request.js";
+
+export type ExecuteSubscriptionChangeSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ExecuteSubscriptionChangeSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ExecuteSubscriptionChangeSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ExecuteSubscriptionChangeSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ExecuteSubscriptionChangeSecurity = {
+  option1?: ExecuteSubscriptionChangeSecurityOption1 | undefined;
+  option2?: ExecuteSubscriptionChangeSecurityOption2 | undefined;
+  option3?: ExecuteSubscriptionChangeSecurityOption3 | undefined;
+  option4?: ExecuteSubscriptionChangeSecurityOption4 | undefined;
+};
 
 export type ExecuteSubscriptionChangeRequest = {
   /**
@@ -19,6 +44,184 @@ export type ExecuteSubscriptionChangeRequest = {
    */
   body: SubscriptionChangeRequest;
 };
+
+/** @internal */
+export type ExecuteSubscriptionChangeSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionChangeSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionChangeSecurityOption1$Outbound,
+    ExecuteSubscriptionChangeSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionChangeSecurityOption1ToJSON(
+  executeSubscriptionChangeSecurityOption1:
+    ExecuteSubscriptionChangeSecurityOption1,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionChangeSecurityOption1$outboundSchema.parse(
+      executeSubscriptionChangeSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionChangeSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionChangeSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionChangeSecurityOption2$Outbound,
+    ExecuteSubscriptionChangeSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionChangeSecurityOption2ToJSON(
+  executeSubscriptionChangeSecurityOption2:
+    ExecuteSubscriptionChangeSecurityOption2,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionChangeSecurityOption2$outboundSchema.parse(
+      executeSubscriptionChangeSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionChangeSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionChangeSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionChangeSecurityOption3$Outbound,
+    ExecuteSubscriptionChangeSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function executeSubscriptionChangeSecurityOption3ToJSON(
+  executeSubscriptionChangeSecurityOption3:
+    ExecuteSubscriptionChangeSecurityOption3,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionChangeSecurityOption3$outboundSchema.parse(
+      executeSubscriptionChangeSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionChangeSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ExecuteSubscriptionChangeSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    ExecuteSubscriptionChangeSecurityOption4$Outbound,
+    ExecuteSubscriptionChangeSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function executeSubscriptionChangeSecurityOption4ToJSON(
+  executeSubscriptionChangeSecurityOption4:
+    ExecuteSubscriptionChangeSecurityOption4,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionChangeSecurityOption4$outboundSchema.parse(
+      executeSubscriptionChangeSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ExecuteSubscriptionChangeSecurity$Outbound = {
+  Option1?: ExecuteSubscriptionChangeSecurityOption1$Outbound | undefined;
+  Option2?: ExecuteSubscriptionChangeSecurityOption2$Outbound | undefined;
+  Option3?: ExecuteSubscriptionChangeSecurityOption3$Outbound | undefined;
+  Option4?: ExecuteSubscriptionChangeSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ExecuteSubscriptionChangeSecurity$outboundSchema: z.ZodMiniType<
+  ExecuteSubscriptionChangeSecurity$Outbound,
+  ExecuteSubscriptionChangeSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ExecuteSubscriptionChangeSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ExecuteSubscriptionChangeSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ExecuteSubscriptionChangeSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ExecuteSubscriptionChangeSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function executeSubscriptionChangeSecurityToJSON(
+  executeSubscriptionChangeSecurity: ExecuteSubscriptionChangeSecurity,
+): string {
+  return JSON.stringify(
+    ExecuteSubscriptionChangeSecurity$outboundSchema.parse(
+      executeSubscriptionChangeSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type ExecuteSubscriptionChangeRequest$Outbound = {

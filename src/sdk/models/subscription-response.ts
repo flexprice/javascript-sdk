@@ -40,6 +40,10 @@ import {
   InvoiceResponse,
   InvoiceResponse$inboundSchema,
 } from "./invoice-response.js";
+import {
+  LineItemGrouping,
+  LineItemGrouping$inboundSchema,
+} from "./line-item-grouping.js";
 import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
 import { PaymentTerms, PaymentTerms$inboundSchema } from "./payment-terms.js";
 import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
@@ -192,6 +196,7 @@ export type SubscriptionResponse = {
    */
   invoicingCustomerId?: string | undefined;
   latestInvoice?: InvoiceResponse | undefined;
+  lineItemGrouping?: LineItemGrouping | undefined;
   lineItems?: Array<SubscriptionSubscriptionLineItem> | undefined;
   /**
    * LookupKey is the key used to lookup the subscription in our system
@@ -295,6 +300,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     id: types.optional(types.string()),
     invoicing_customer_id: types.optional(types.string()),
     latest_invoice: types.optional(z.lazy(() => InvoiceResponse$inboundSchema)),
+    line_item_grouping: types.optional(LineItemGrouping$inboundSchema),
     line_items: types.optional(
       z.array(SubscriptionSubscriptionLineItem$inboundSchema),
     ),
@@ -354,6 +360,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
       "gateway_payment_method_id": "gatewayPaymentMethodId",
       "invoicing_customer_id": "invoicingCustomerId",
       "latest_invoice": "latestInvoice",
+      "line_item_grouping": "lineItemGrouping",
       "line_items": "lineItems",
       "lookup_key": "lookupKey",
       "overage_factor": "overageFactor",

@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  CheckoutSessionResponse,
+  CheckoutSessionResponse$inboundSchema,
+} from "./checkout-session-response.js";
+import {
   CouponApplicationResponse,
   CouponApplicationResponse$inboundSchema,
 } from "./coupon-application-response.js";
@@ -23,6 +27,10 @@ import {
   InvoiceLineItemResponse,
   InvoiceLineItemResponse$inboundSchema,
 } from "./invoice-line-item-response.js";
+import {
+  InvoiceSourceType,
+  InvoiceSourceType$inboundSchema,
+} from "./invoice-source-type.js";
 import {
   InvoiceStatus,
   InvoiceStatus$inboundSchema,
@@ -80,6 +88,7 @@ export type InvoiceResponse = {
    * billing_sequence is the sequential number indicating the billing cycle for subscription invoices
    */
   billingSequence?: number | undefined;
+  checkoutSession?: CheckoutSessionResponse | undefined;
   /**
    * coupon_applications contains the coupon applications associated with this invoice (overrides embedded field)
    */
@@ -184,6 +193,7 @@ export type InvoiceResponse = {
    * These are actual refunds issued to the customer.
    */
   refundedAmount?: string | undefined;
+  sourceType?: InvoiceSourceType | undefined;
   status?: Status | undefined;
   subscription?: SubscriptionResponse | undefined;
   /**
@@ -249,6 +259,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
     billing_sequence: types.optional(types.number()),
+    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
     coupon_applications: types.optional(
       z.array(CouponApplicationResponse$inboundSchema),
     ),
@@ -280,6 +291,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     period_start: types.optional(types.date()),
     recalculated_invoice_id: types.optional(types.string()),
     refunded_amount: types.optional(types.string()),
+    source_type: types.optional(InvoiceSourceType$inboundSchema),
     status: types.optional(Status$inboundSchema),
     subscription: types.optional(
       z.lazy(() => SubscriptionResponse$inboundSchema),
@@ -311,6 +323,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "billing_period": "billingPeriod",
       "billing_reason": "billingReason",
       "billing_sequence": "billingSequence",
+      "checkout_session": "checkoutSession",
       "coupon_applications": "couponApplications",
       "created_at": "createdAt",
       "created_by": "createdBy",
@@ -335,6 +348,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "period_start": "periodStart",
       "recalculated_invoice_id": "recalculatedInvoiceId",
       "refunded_amount": "refundedAmount",
+      "source_type": "sourceType",
       "subscription_customer_id": "subscriptionCustomerId",
       "subscription_id": "subscriptionId",
       "tax_exemption_reason_code": "taxExemptionReasonCode",

@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetCustomerInvoiceSummarySecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetCustomerInvoiceSummarySecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetCustomerInvoiceSummarySecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetCustomerInvoiceSummarySecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetCustomerInvoiceSummarySecurity = {
+  option1?: GetCustomerInvoiceSummarySecurityOption1 | undefined;
+  option2?: GetCustomerInvoiceSummarySecurityOption2 | undefined;
+  option3?: GetCustomerInvoiceSummarySecurityOption3 | undefined;
+  option4?: GetCustomerInvoiceSummarySecurityOption4 | undefined;
+};
 
 export type GetCustomerInvoiceSummaryRequest = {
   /**
@@ -10,6 +35,184 @@ export type GetCustomerInvoiceSummaryRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetCustomerInvoiceSummarySecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCustomerInvoiceSummarySecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerInvoiceSummarySecurityOption1$Outbound,
+    GetCustomerInvoiceSummarySecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getCustomerInvoiceSummarySecurityOption1ToJSON(
+  getCustomerInvoiceSummarySecurityOption1:
+    GetCustomerInvoiceSummarySecurityOption1,
+): string {
+  return JSON.stringify(
+    GetCustomerInvoiceSummarySecurityOption1$outboundSchema.parse(
+      getCustomerInvoiceSummarySecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerInvoiceSummarySecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCustomerInvoiceSummarySecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerInvoiceSummarySecurityOption2$Outbound,
+    GetCustomerInvoiceSummarySecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getCustomerInvoiceSummarySecurityOption2ToJSON(
+  getCustomerInvoiceSummarySecurityOption2:
+    GetCustomerInvoiceSummarySecurityOption2,
+): string {
+  return JSON.stringify(
+    GetCustomerInvoiceSummarySecurityOption2$outboundSchema.parse(
+      getCustomerInvoiceSummarySecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerInvoiceSummarySecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetCustomerInvoiceSummarySecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerInvoiceSummarySecurityOption3$Outbound,
+    GetCustomerInvoiceSummarySecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function getCustomerInvoiceSummarySecurityOption3ToJSON(
+  getCustomerInvoiceSummarySecurityOption3:
+    GetCustomerInvoiceSummarySecurityOption3,
+): string {
+  return JSON.stringify(
+    GetCustomerInvoiceSummarySecurityOption3$outboundSchema.parse(
+      getCustomerInvoiceSummarySecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerInvoiceSummarySecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetCustomerInvoiceSummarySecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    GetCustomerInvoiceSummarySecurityOption4$Outbound,
+    GetCustomerInvoiceSummarySecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function getCustomerInvoiceSummarySecurityOption4ToJSON(
+  getCustomerInvoiceSummarySecurityOption4:
+    GetCustomerInvoiceSummarySecurityOption4,
+): string {
+  return JSON.stringify(
+    GetCustomerInvoiceSummarySecurityOption4$outboundSchema.parse(
+      getCustomerInvoiceSummarySecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCustomerInvoiceSummarySecurity$Outbound = {
+  Option1?: GetCustomerInvoiceSummarySecurityOption1$Outbound | undefined;
+  Option2?: GetCustomerInvoiceSummarySecurityOption2$Outbound | undefined;
+  Option3?: GetCustomerInvoiceSummarySecurityOption3$Outbound | undefined;
+  Option4?: GetCustomerInvoiceSummarySecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetCustomerInvoiceSummarySecurity$outboundSchema: z.ZodMiniType<
+  GetCustomerInvoiceSummarySecurity$Outbound,
+  GetCustomerInvoiceSummarySecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetCustomerInvoiceSummarySecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetCustomerInvoiceSummarySecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetCustomerInvoiceSummarySecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetCustomerInvoiceSummarySecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getCustomerInvoiceSummarySecurityToJSON(
+  getCustomerInvoiceSummarySecurity: GetCustomerInvoiceSummarySecurity,
+): string {
+  return JSON.stringify(
+    GetCustomerInvoiceSummarySecurity$outboundSchema.parse(
+      getCustomerInvoiceSummarySecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetCustomerInvoiceSummaryRequest$Outbound = {

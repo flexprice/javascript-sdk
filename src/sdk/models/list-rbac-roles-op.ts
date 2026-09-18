@@ -6,6 +6,30 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
+export type ListRbacRolesSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListRbacRolesSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListRbacRolesSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListRbacRolesSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListRbacRolesSecurity = {
+  option1?: ListRbacRolesSecurityOption1 | undefined;
+  option2?: ListRbacRolesSecurityOption2 | undefined;
+  option3?: ListRbacRolesSecurityOption3 | undefined;
+  option4?: ListRbacRolesSecurityOption4 | undefined;
+};
+
 /**
  * Filter by user type
  */
@@ -24,6 +48,174 @@ export type ListRbacRolesRequest = {
    */
   userType?: ListRbacRolesUserType | undefined;
 };
+
+/** @internal */
+export type ListRbacRolesSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListRbacRolesSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListRbacRolesSecurityOption1$Outbound,
+  ListRbacRolesSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listRbacRolesSecurityOption1ToJSON(
+  listRbacRolesSecurityOption1: ListRbacRolesSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListRbacRolesSecurityOption1$outboundSchema.parse(
+      listRbacRolesSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ListRbacRolesSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListRbacRolesSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListRbacRolesSecurityOption2$Outbound,
+  ListRbacRolesSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listRbacRolesSecurityOption2ToJSON(
+  listRbacRolesSecurityOption2: ListRbacRolesSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListRbacRolesSecurityOption2$outboundSchema.parse(
+      listRbacRolesSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ListRbacRolesSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListRbacRolesSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListRbacRolesSecurityOption3$Outbound,
+  ListRbacRolesSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listRbacRolesSecurityOption3ToJSON(
+  listRbacRolesSecurityOption3: ListRbacRolesSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListRbacRolesSecurityOption3$outboundSchema.parse(
+      listRbacRolesSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ListRbacRolesSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListRbacRolesSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListRbacRolesSecurityOption4$Outbound,
+  ListRbacRolesSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listRbacRolesSecurityOption4ToJSON(
+  listRbacRolesSecurityOption4: ListRbacRolesSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListRbacRolesSecurityOption4$outboundSchema.parse(
+      listRbacRolesSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ListRbacRolesSecurity$Outbound = {
+  Option1?: ListRbacRolesSecurityOption1$Outbound | undefined;
+  Option2?: ListRbacRolesSecurityOption2$Outbound | undefined;
+  Option3?: ListRbacRolesSecurityOption3$Outbound | undefined;
+  Option4?: ListRbacRolesSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListRbacRolesSecurity$outboundSchema: z.ZodMiniType<
+  ListRbacRolesSecurity$Outbound,
+  ListRbacRolesSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListRbacRolesSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListRbacRolesSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListRbacRolesSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListRbacRolesSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listRbacRolesSecurityToJSON(
+  listRbacRolesSecurity: ListRbacRolesSecurity,
+): string {
+  return JSON.stringify(
+    ListRbacRolesSecurity$outboundSchema.parse(listRbacRolesSecurity),
+  );
+}
 
 /** @internal */
 export const ListRbacRolesUserType$outboundSchema: z.ZodMiniEnum<

@@ -6,6 +6,30 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
+export type GetTaxRatesSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetTaxRatesSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetTaxRatesSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetTaxRatesSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetTaxRatesSecurity = {
+  option1?: GetTaxRatesSecurityOption1 | undefined;
+  option2?: GetTaxRatesSecurityOption2 | undefined;
+  option3?: GetTaxRatesSecurityOption3 | undefined;
+  option4?: GetTaxRatesSecurityOption4 | undefined;
+};
+
 export const GetTaxRatesOrder = {
   Asc: "asc",
   Desc: "desc",
@@ -38,6 +62,166 @@ export type GetTaxRatesRequest = {
   taxrateCodes?: Array<string> | undefined;
   taxrateIds?: Array<string> | undefined;
 };
+
+/** @internal */
+export type GetTaxRatesSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTaxRatesSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetTaxRatesSecurityOption1$Outbound,
+  GetTaxRatesSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTaxRatesSecurityOption1ToJSON(
+  getTaxRatesSecurityOption1: GetTaxRatesSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetTaxRatesSecurityOption1$outboundSchema.parse(getTaxRatesSecurityOption1),
+  );
+}
+
+/** @internal */
+export type GetTaxRatesSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTaxRatesSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetTaxRatesSecurityOption2$Outbound,
+  GetTaxRatesSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTaxRatesSecurityOption2ToJSON(
+  getTaxRatesSecurityOption2: GetTaxRatesSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetTaxRatesSecurityOption2$outboundSchema.parse(getTaxRatesSecurityOption2),
+  );
+}
+
+/** @internal */
+export type GetTaxRatesSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetTaxRatesSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetTaxRatesSecurityOption3$Outbound,
+  GetTaxRatesSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getTaxRatesSecurityOption3ToJSON(
+  getTaxRatesSecurityOption3: GetTaxRatesSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetTaxRatesSecurityOption3$outboundSchema.parse(getTaxRatesSecurityOption3),
+  );
+}
+
+/** @internal */
+export type GetTaxRatesSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetTaxRatesSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetTaxRatesSecurityOption4$Outbound,
+  GetTaxRatesSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getTaxRatesSecurityOption4ToJSON(
+  getTaxRatesSecurityOption4: GetTaxRatesSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetTaxRatesSecurityOption4$outboundSchema.parse(getTaxRatesSecurityOption4),
+  );
+}
+
+/** @internal */
+export type GetTaxRatesSecurity$Outbound = {
+  Option1?: GetTaxRatesSecurityOption1$Outbound | undefined;
+  Option2?: GetTaxRatesSecurityOption2$Outbound | undefined;
+  Option3?: GetTaxRatesSecurityOption3$Outbound | undefined;
+  Option4?: GetTaxRatesSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetTaxRatesSecurity$outboundSchema: z.ZodMiniType<
+  GetTaxRatesSecurity$Outbound,
+  GetTaxRatesSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetTaxRatesSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetTaxRatesSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetTaxRatesSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetTaxRatesSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getTaxRatesSecurityToJSON(
+  getTaxRatesSecurity: GetTaxRatesSecurity,
+): string {
+  return JSON.stringify(
+    GetTaxRatesSecurity$outboundSchema.parse(getTaxRatesSecurity),
+  );
+}
 
 /** @internal */
 export const GetTaxRatesOrder$outboundSchema: z.ZodMiniEnum<

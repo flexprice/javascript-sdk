@@ -15,6 +15,7 @@ export type Event = {
   eventName?: string | undefined;
   externalCustomerId?: string | undefined;
   id?: string | undefined;
+  ingestedAt?: Date | undefined;
   properties?: { [k: string]: any } | undefined;
   source?: string | undefined;
   timestamp?: string | undefined;
@@ -28,6 +29,7 @@ export const Event$inboundSchema: z.ZodMiniType<Event, unknown> = z.pipe(
     event_name: types.optional(types.string()),
     external_customer_id: types.optional(types.string()),
     id: types.optional(types.string()),
+    ingested_at: types.optional(types.date()),
     properties: types.optional(z.record(z.string(), z.any())),
     source: types.optional(types.string()),
     timestamp: types.optional(types.string()),
@@ -38,6 +40,7 @@ export const Event$inboundSchema: z.ZodMiniType<Event, unknown> = z.pipe(
       "environment_id": "environmentId",
       "event_name": "eventName",
       "external_customer_id": "externalCustomerId",
+      "ingested_at": "ingestedAt",
     });
   }),
 );

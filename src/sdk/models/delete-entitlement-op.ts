@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteEntitlementSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteEntitlementSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteEntitlementSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteEntitlementSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteEntitlementSecurity = {
+  option1?: DeleteEntitlementSecurityOption1 | undefined;
+  option2?: DeleteEntitlementSecurityOption2 | undefined;
+  option3?: DeleteEntitlementSecurityOption3 | undefined;
+  option4?: DeleteEntitlementSecurityOption4 | undefined;
+};
 
 export type DeleteEntitlementRequest = {
   /**
@@ -10,6 +35,174 @@ export type DeleteEntitlementRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteEntitlementSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteEntitlementSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteEntitlementSecurityOption1$Outbound,
+  DeleteEntitlementSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteEntitlementSecurityOption1ToJSON(
+  deleteEntitlementSecurityOption1: DeleteEntitlementSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurityOption1$outboundSchema.parse(
+      deleteEntitlementSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteEntitlementSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteEntitlementSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteEntitlementSecurityOption2$Outbound,
+  DeleteEntitlementSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteEntitlementSecurityOption2ToJSON(
+  deleteEntitlementSecurityOption2: DeleteEntitlementSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurityOption2$outboundSchema.parse(
+      deleteEntitlementSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteEntitlementSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteEntitlementSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteEntitlementSecurityOption3$Outbound,
+  DeleteEntitlementSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteEntitlementSecurityOption3ToJSON(
+  deleteEntitlementSecurityOption3: DeleteEntitlementSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurityOption3$outboundSchema.parse(
+      deleteEntitlementSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteEntitlementSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteEntitlementSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteEntitlementSecurityOption4$Outbound,
+  DeleteEntitlementSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteEntitlementSecurityOption4ToJSON(
+  deleteEntitlementSecurityOption4: DeleteEntitlementSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurityOption4$outboundSchema.parse(
+      deleteEntitlementSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteEntitlementSecurity$Outbound = {
+  Option1?: DeleteEntitlementSecurityOption1$Outbound | undefined;
+  Option2?: DeleteEntitlementSecurityOption2$Outbound | undefined;
+  Option3?: DeleteEntitlementSecurityOption3$Outbound | undefined;
+  Option4?: DeleteEntitlementSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteEntitlementSecurity$outboundSchema: z.ZodMiniType<
+  DeleteEntitlementSecurity$Outbound,
+  DeleteEntitlementSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteEntitlementSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteEntitlementSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteEntitlementSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteEntitlementSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteEntitlementSecurityToJSON(
+  deleteEntitlementSecurity: DeleteEntitlementSecurity,
+): string {
+  return JSON.stringify(
+    DeleteEntitlementSecurity$outboundSchema.parse(deleteEntitlementSecurity),
+  );
+}
 
 /** @internal */
 export type DeleteEntitlementRequest$Outbound = {

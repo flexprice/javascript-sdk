@@ -18,11 +18,13 @@ export class Groups extends ClientSDK {
    * Use when organizing entities into a group (e.g. for filtering prices or plans by product line or region).
    */
   async createGroup(
+    security: models.CreateGroupSecurity,
     request: models.CreateGroupRequest,
     options?: RequestOptions,
   ): Promise<models.GroupResponse> {
     return unwrapAsync(groupsCreateGroup(
       this,
+      security,
       request,
       options,
     ));
@@ -35,11 +37,13 @@ export class Groups extends ClientSDK {
    * Use when listing or searching groups (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
    */
   async queryGroup(
+    security: models.QueryGroupSecurity,
     request: models.GroupFilter,
     options?: RequestOptions,
   ): Promise<models.ListGroupsResponse> {
     return unwrapAsync(groupsQueryGroup(
       this,
+      security,
       request,
       options,
     ));
@@ -52,11 +56,13 @@ export class Groups extends ClientSDK {
    * Use when you need to load a single group (e.g. for display or to assign entities).
    */
   async getGroup(
+    security: models.GetGroupSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.GroupResponse> {
     return unwrapAsync(groupsGetGroup(
       this,
+      security,
       id,
       options,
     ));
@@ -69,11 +75,13 @@ export class Groups extends ClientSDK {
    * Use when removing a group and clearing its entity associations (e.g. retiring a product line). Returns 204 or 200 on success.
    */
   async deleteGroup(
+    security: models.DeleteGroupSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(groupsDeleteGroup(
       this,
+      security,
       id,
       options,
     ));

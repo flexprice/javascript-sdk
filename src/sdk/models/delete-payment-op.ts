@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeletePaymentSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeletePaymentSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeletePaymentSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeletePaymentSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeletePaymentSecurity = {
+  option1?: DeletePaymentSecurityOption1 | undefined;
+  option2?: DeletePaymentSecurityOption2 | undefined;
+  option3?: DeletePaymentSecurityOption3 | undefined;
+  option4?: DeletePaymentSecurityOption4 | undefined;
+};
 
 export type DeletePaymentRequest = {
   /**
@@ -10,6 +35,174 @@ export type DeletePaymentRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeletePaymentSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeletePaymentSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeletePaymentSecurityOption1$Outbound,
+  DeletePaymentSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deletePaymentSecurityOption1ToJSON(
+  deletePaymentSecurityOption1: DeletePaymentSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeletePaymentSecurityOption1$outboundSchema.parse(
+      deletePaymentSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeletePaymentSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeletePaymentSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeletePaymentSecurityOption2$Outbound,
+  DeletePaymentSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deletePaymentSecurityOption2ToJSON(
+  deletePaymentSecurityOption2: DeletePaymentSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeletePaymentSecurityOption2$outboundSchema.parse(
+      deletePaymentSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeletePaymentSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeletePaymentSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeletePaymentSecurityOption3$Outbound,
+  DeletePaymentSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deletePaymentSecurityOption3ToJSON(
+  deletePaymentSecurityOption3: DeletePaymentSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeletePaymentSecurityOption3$outboundSchema.parse(
+      deletePaymentSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeletePaymentSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeletePaymentSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeletePaymentSecurityOption4$Outbound,
+  DeletePaymentSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deletePaymentSecurityOption4ToJSON(
+  deletePaymentSecurityOption4: DeletePaymentSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeletePaymentSecurityOption4$outboundSchema.parse(
+      deletePaymentSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeletePaymentSecurity$Outbound = {
+  Option1?: DeletePaymentSecurityOption1$Outbound | undefined;
+  Option2?: DeletePaymentSecurityOption2$Outbound | undefined;
+  Option3?: DeletePaymentSecurityOption3$Outbound | undefined;
+  Option4?: DeletePaymentSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeletePaymentSecurity$outboundSchema: z.ZodMiniType<
+  DeletePaymentSecurity$Outbound,
+  DeletePaymentSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeletePaymentSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeletePaymentSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeletePaymentSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeletePaymentSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deletePaymentSecurityToJSON(
+  deletePaymentSecurity: DeletePaymentSecurity,
+): string {
+  return JSON.stringify(
+    DeletePaymentSecurity$outboundSchema.parse(deletePaymentSecurity),
+  );
+}
 
 /** @internal */
 export type DeletePaymentRequest$Outbound = {

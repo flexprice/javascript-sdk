@@ -15,11 +15,13 @@ export class Workflows extends ClientSDK {
    * Use when listing or auditing workflow runs (e.g. ops dashboard or debugging). Returns a paginated list; supports filtering by workflow type and status.
    */
   async queryWorkflow(
+    security: models.QueryWorkflowSecurity,
     request: models.WorkflowExecutionFilter,
     options?: RequestOptions,
   ): Promise<models.ListWorkflowsResponse> {
     return unwrapAsync(workflowsQueryWorkflow(
       this,
+      security,
       request,
       options,
     ));

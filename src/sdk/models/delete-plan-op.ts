@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeletePlanSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeletePlanSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeletePlanSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeletePlanSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeletePlanSecurity = {
+  option1?: DeletePlanSecurityOption1 | undefined;
+  option2?: DeletePlanSecurityOption2 | undefined;
+  option3?: DeletePlanSecurityOption3 | undefined;
+  option4?: DeletePlanSecurityOption4 | undefined;
+};
 
 export type DeletePlanRequest = {
   /**
@@ -10,6 +35,158 @@ export type DeletePlanRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeletePlanSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeletePlanSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeletePlanSecurityOption1$Outbound,
+  DeletePlanSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deletePlanSecurityOption1ToJSON(
+  deletePlanSecurityOption1: DeletePlanSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeletePlanSecurityOption1$outboundSchema.parse(deletePlanSecurityOption1),
+  );
+}
+
+/** @internal */
+export type DeletePlanSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeletePlanSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeletePlanSecurityOption2$Outbound,
+  DeletePlanSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deletePlanSecurityOption2ToJSON(
+  deletePlanSecurityOption2: DeletePlanSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeletePlanSecurityOption2$outboundSchema.parse(deletePlanSecurityOption2),
+  );
+}
+
+/** @internal */
+export type DeletePlanSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeletePlanSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeletePlanSecurityOption3$Outbound,
+  DeletePlanSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deletePlanSecurityOption3ToJSON(
+  deletePlanSecurityOption3: DeletePlanSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeletePlanSecurityOption3$outboundSchema.parse(deletePlanSecurityOption3),
+  );
+}
+
+/** @internal */
+export type DeletePlanSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeletePlanSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeletePlanSecurityOption4$Outbound,
+  DeletePlanSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deletePlanSecurityOption4ToJSON(
+  deletePlanSecurityOption4: DeletePlanSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeletePlanSecurityOption4$outboundSchema.parse(deletePlanSecurityOption4),
+  );
+}
+
+/** @internal */
+export type DeletePlanSecurity$Outbound = {
+  Option1?: DeletePlanSecurityOption1$Outbound | undefined;
+  Option2?: DeletePlanSecurityOption2$Outbound | undefined;
+  Option3?: DeletePlanSecurityOption3$Outbound | undefined;
+  Option4?: DeletePlanSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeletePlanSecurity$outboundSchema: z.ZodMiniType<
+  DeletePlanSecurity$Outbound,
+  DeletePlanSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(z.lazy(() => DeletePlanSecurityOption1$outboundSchema)),
+    option2: z.optional(z.lazy(() => DeletePlanSecurityOption2$outboundSchema)),
+    option3: z.optional(z.lazy(() => DeletePlanSecurityOption3$outboundSchema)),
+    option4: z.optional(z.lazy(() => DeletePlanSecurityOption4$outboundSchema)),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deletePlanSecurityToJSON(
+  deletePlanSecurity: DeletePlanSecurity,
+): string {
+  return JSON.stringify(
+    DeletePlanSecurity$outboundSchema.parse(deletePlanSecurity),
+  );
+}
 
 /** @internal */
 export type DeletePlanRequest$Outbound = {

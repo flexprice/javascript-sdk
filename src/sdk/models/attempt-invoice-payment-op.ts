@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type AttemptInvoicePaymentSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type AttemptInvoicePaymentSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type AttemptInvoicePaymentSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type AttemptInvoicePaymentSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type AttemptInvoicePaymentSecurity = {
+  option1?: AttemptInvoicePaymentSecurityOption1 | undefined;
+  option2?: AttemptInvoicePaymentSecurityOption2 | undefined;
+  option3?: AttemptInvoicePaymentSecurityOption3 | undefined;
+  option4?: AttemptInvoicePaymentSecurityOption4 | undefined;
+};
 
 export type AttemptInvoicePaymentRequest = {
   /**
@@ -10,6 +35,176 @@ export type AttemptInvoicePaymentRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type AttemptInvoicePaymentSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const AttemptInvoicePaymentSecurityOption1$outboundSchema: z.ZodMiniType<
+  AttemptInvoicePaymentSecurityOption1$Outbound,
+  AttemptInvoicePaymentSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function attemptInvoicePaymentSecurityOption1ToJSON(
+  attemptInvoicePaymentSecurityOption1: AttemptInvoicePaymentSecurityOption1,
+): string {
+  return JSON.stringify(
+    AttemptInvoicePaymentSecurityOption1$outboundSchema.parse(
+      attemptInvoicePaymentSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type AttemptInvoicePaymentSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const AttemptInvoicePaymentSecurityOption2$outboundSchema: z.ZodMiniType<
+  AttemptInvoicePaymentSecurityOption2$Outbound,
+  AttemptInvoicePaymentSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function attemptInvoicePaymentSecurityOption2ToJSON(
+  attemptInvoicePaymentSecurityOption2: AttemptInvoicePaymentSecurityOption2,
+): string {
+  return JSON.stringify(
+    AttemptInvoicePaymentSecurityOption2$outboundSchema.parse(
+      attemptInvoicePaymentSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type AttemptInvoicePaymentSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const AttemptInvoicePaymentSecurityOption3$outboundSchema: z.ZodMiniType<
+  AttemptInvoicePaymentSecurityOption3$Outbound,
+  AttemptInvoicePaymentSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function attemptInvoicePaymentSecurityOption3ToJSON(
+  attemptInvoicePaymentSecurityOption3: AttemptInvoicePaymentSecurityOption3,
+): string {
+  return JSON.stringify(
+    AttemptInvoicePaymentSecurityOption3$outboundSchema.parse(
+      attemptInvoicePaymentSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type AttemptInvoicePaymentSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const AttemptInvoicePaymentSecurityOption4$outboundSchema: z.ZodMiniType<
+  AttemptInvoicePaymentSecurityOption4$Outbound,
+  AttemptInvoicePaymentSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function attemptInvoicePaymentSecurityOption4ToJSON(
+  attemptInvoicePaymentSecurityOption4: AttemptInvoicePaymentSecurityOption4,
+): string {
+  return JSON.stringify(
+    AttemptInvoicePaymentSecurityOption4$outboundSchema.parse(
+      attemptInvoicePaymentSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type AttemptInvoicePaymentSecurity$Outbound = {
+  Option1?: AttemptInvoicePaymentSecurityOption1$Outbound | undefined;
+  Option2?: AttemptInvoicePaymentSecurityOption2$Outbound | undefined;
+  Option3?: AttemptInvoicePaymentSecurityOption3$Outbound | undefined;
+  Option4?: AttemptInvoicePaymentSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const AttemptInvoicePaymentSecurity$outboundSchema: z.ZodMiniType<
+  AttemptInvoicePaymentSecurity$Outbound,
+  AttemptInvoicePaymentSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => AttemptInvoicePaymentSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => AttemptInvoicePaymentSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => AttemptInvoicePaymentSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => AttemptInvoicePaymentSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function attemptInvoicePaymentSecurityToJSON(
+  attemptInvoicePaymentSecurity: AttemptInvoicePaymentSecurity,
+): string {
+  return JSON.stringify(
+    AttemptInvoicePaymentSecurity$outboundSchema.parse(
+      attemptInvoicePaymentSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type AttemptInvoicePaymentRequest$Outbound = {

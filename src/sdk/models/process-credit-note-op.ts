@@ -3,11 +3,41 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   FinalizeCreditNoteRequest,
   FinalizeCreditNoteRequest$Outbound,
   FinalizeCreditNoteRequest$outboundSchema,
 } from "./finalize-credit-note-request.js";
+
+export type ProcessCreditNoteSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ProcessCreditNoteSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ProcessCreditNoteSecurityOption3 = {
+  apiKeyAuth: string;
+};
+
+export type ProcessCreditNoteSecurityOption4 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ProcessCreditNoteSecurityOption5 = {
+  bearerAuth: string;
+};
+
+export type ProcessCreditNoteSecurity = {
+  option1?: ProcessCreditNoteSecurityOption1 | undefined;
+  option2?: ProcessCreditNoteSecurityOption2 | undefined;
+  option3?: ProcessCreditNoteSecurityOption3 | undefined;
+  option4?: ProcessCreditNoteSecurityOption4 | undefined;
+  option5?: ProcessCreditNoteSecurityOption5 | undefined;
+};
 
 export type ProcessCreditNoteRequest = {
   /**
@@ -19,6 +49,209 @@ export type ProcessCreditNoteRequest = {
    */
   body?: FinalizeCreditNoteRequest | undefined;
 };
+
+/** @internal */
+export type ProcessCreditNoteSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurityOption1$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurityOption1$Outbound,
+  ProcessCreditNoteSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityOption1ToJSON(
+  processCreditNoteSecurityOption1: ProcessCreditNoteSecurityOption1,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurityOption1$outboundSchema.parse(
+      processCreditNoteSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessCreditNoteSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurityOption2$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurityOption2$Outbound,
+  ProcessCreditNoteSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityOption2ToJSON(
+  processCreditNoteSecurityOption2: ProcessCreditNoteSecurityOption2,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurityOption2$outboundSchema.parse(
+      processCreditNoteSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessCreditNoteSecurityOption3$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurityOption3$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurityOption3$Outbound,
+  ProcessCreditNoteSecurityOption3
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityOption3ToJSON(
+  processCreditNoteSecurityOption3: ProcessCreditNoteSecurityOption3,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurityOption3$outboundSchema.parse(
+      processCreditNoteSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessCreditNoteSecurityOption4$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurityOption4$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurityOption4$Outbound,
+  ProcessCreditNoteSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityOption4ToJSON(
+  processCreditNoteSecurityOption4: ProcessCreditNoteSecurityOption4,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurityOption4$outboundSchema.parse(
+      processCreditNoteSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessCreditNoteSecurityOption5$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurityOption5$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurityOption5$Outbound,
+  ProcessCreditNoteSecurityOption5
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityOption5ToJSON(
+  processCreditNoteSecurityOption5: ProcessCreditNoteSecurityOption5,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurityOption5$outboundSchema.parse(
+      processCreditNoteSecurityOption5,
+    ),
+  );
+}
+
+/** @internal */
+export type ProcessCreditNoteSecurity$Outbound = {
+  Option1?: ProcessCreditNoteSecurityOption1$Outbound | undefined;
+  Option2?: ProcessCreditNoteSecurityOption2$Outbound | undefined;
+  Option3?: ProcessCreditNoteSecurityOption3$Outbound | undefined;
+  Option4?: ProcessCreditNoteSecurityOption4$Outbound | undefined;
+  Option5?: ProcessCreditNoteSecurityOption5$Outbound | undefined;
+};
+
+/** @internal */
+export const ProcessCreditNoteSecurity$outboundSchema: z.ZodMiniType<
+  ProcessCreditNoteSecurity$Outbound,
+  ProcessCreditNoteSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ProcessCreditNoteSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ProcessCreditNoteSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ProcessCreditNoteSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ProcessCreditNoteSecurityOption4$outboundSchema),
+    ),
+    option5: z.optional(
+      z.lazy(() => ProcessCreditNoteSecurityOption5$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+      option5: "Option5",
+    });
+  }),
+);
+
+export function processCreditNoteSecurityToJSON(
+  processCreditNoteSecurity: ProcessCreditNoteSecurity,
+): string {
+  return JSON.stringify(
+    ProcessCreditNoteSecurity$outboundSchema.parse(processCreditNoteSecurity),
+  );
+}
 
 /** @internal */
 export type ProcessCreditNoteRequest$Outbound = {

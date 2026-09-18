@@ -21,11 +21,13 @@ export class PriceUnits extends ClientSDK {
    * Use when listing price units (e.g. in a catalog or when creating prices). Returns a paginated list; supports status, sort, and pagination.
    */
   async listPriceUnits(
+    security: models.ListPriceUnitsSecurity,
     request?: models.ListPriceUnitsRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListPriceUnitsResponse> {
     return unwrapAsync(priceUnitsListPriceUnits(
       this,
+      security,
       request,
       options,
     ));
@@ -38,11 +40,13 @@ export class PriceUnits extends ClientSDK {
    * Use when defining a new unit of measure for pricing (e.g. GB, API call, seat). Ideal for metered or usage-based prices.
    */
   async createPriceUnit(
+    security: models.CreatePriceUnitSecurity,
     request: models.CreatePriceUnitRequest,
     options?: RequestOptions,
   ): Promise<models.CreatePriceUnitResponse> {
     return unwrapAsync(priceUnitsCreatePriceUnit(
       this,
+      security,
       request,
       options,
     ));
@@ -55,11 +59,13 @@ export class PriceUnits extends ClientSDK {
    * Use when resolving a price unit by code (e.g. from an external catalog or config). Ideal for integrations.
    */
   async getPriceUnitByCode(
+    security: models.GetPriceUnitByCodeSecurity,
     code: string,
     options?: RequestOptions,
   ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsGetPriceUnitByCode(
       this,
+      security,
       code,
       options,
     ));
@@ -72,11 +78,13 @@ export class PriceUnits extends ClientSDK {
    * Use when searching or listing price units (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
    */
   async queryPriceUnit(
+    security: models.QueryPriceUnitSecurity,
     request: models.PriceUnitFilter,
     options?: RequestOptions,
   ): Promise<models.ListPriceUnitsResponse> {
     return unwrapAsync(priceUnitsQueryPriceUnit(
       this,
+      security,
       request,
       options,
     ));
@@ -89,11 +97,13 @@ export class PriceUnits extends ClientSDK {
    * Use when you need to load a single price unit (e.g. for display or when creating a price).
    */
   async getPriceUnit(
+    security: models.GetPriceUnitSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsGetPriceUnit(
       this,
+      security,
       id,
       options,
     ));
@@ -106,12 +116,14 @@ export class PriceUnits extends ClientSDK {
    * Use when renaming or updating metadata for a price unit. Code is immutable once created.
    */
   async updatePriceUnit(
+    security: models.UpdatePriceUnitSecurity,
     id: string,
     body: models.UpdatePriceUnitRequest,
     options?: RequestOptions,
   ): Promise<models.PriceUnitResponse> {
     return unwrapAsync(priceUnitsUpdatePriceUnit(
       this,
+      security,
       id,
       body,
       options,
@@ -125,11 +137,13 @@ export class PriceUnits extends ClientSDK {
    * Use when removing a price unit that is no longer needed. Fails if any price references this unit.
    */
   async deletePriceUnit(
+    security: models.DeletePriceUnitSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(priceUnitsDeletePriceUnit(
       this,
+      security,
       id,
       options,
     ));

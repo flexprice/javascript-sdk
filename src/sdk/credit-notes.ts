@@ -18,11 +18,13 @@ export class CreditNotes extends ClientSDK {
    * Use when issuing a refund or adjustment (e.g. customer dispute or proration). Links to an invoice; create as draft then finalize.
    */
   async createCreditNote(
+    security: models.CreateCreditNoteSecurity,
     request: models.CreateCreditNoteRequest,
     options?: RequestOptions,
   ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesCreateCreditNote(
       this,
+      security,
       request,
       options,
     ));
@@ -35,11 +37,13 @@ export class CreditNotes extends ClientSDK {
    * Use when you need to load a single credit note (e.g. for display or reconciliation).
    */
   async getCreditNote(
+    security: models.GetCreditNoteSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesGetCreditNote(
       this,
+      security,
       id,
       options,
     ));
@@ -52,12 +56,14 @@ export class CreditNotes extends ClientSDK {
    * Use when locking a draft credit note and applying the credit (e.g. after approval). Once finalized, applied per billing provider.
    */
   async processCreditNote(
+    security: models.ProcessCreditNoteSecurity,
     id: string,
     body?: models.FinalizeCreditNoteRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesProcessCreditNote(
       this,
+      security,
       id,
       body,
       options,
@@ -71,11 +77,13 @@ export class CreditNotes extends ClientSDK {
    * Use when cancelling a draft credit note (e.g. created by mistake). Only draft credit notes can be voided.
    */
   async voidCreditNote(
+    security: models.VoidCreditNoteSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CreditNoteResponse> {
     return unwrapAsync(creditNotesVoidCreditNote(
       this,
+      security,
       id,
       options,
     ));

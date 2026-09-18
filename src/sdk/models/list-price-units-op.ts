@@ -3,7 +3,32 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
+
+export type ListPriceUnitsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListPriceUnitsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListPriceUnitsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListPriceUnitsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListPriceUnitsSecurity = {
+  option1?: ListPriceUnitsSecurityOption1 | undefined;
+  option2?: ListPriceUnitsSecurityOption2 | undefined;
+  option3?: ListPriceUnitsSecurityOption3 | undefined;
+  option4?: ListPriceUnitsSecurityOption4 | undefined;
+};
 
 /**
  * Sort order
@@ -39,6 +64,174 @@ export type ListPriceUnitsRequest = {
    */
   order?: ListPriceUnitsOrder | undefined;
 };
+
+/** @internal */
+export type ListPriceUnitsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListPriceUnitsSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListPriceUnitsSecurityOption1$Outbound,
+  ListPriceUnitsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listPriceUnitsSecurityOption1ToJSON(
+  listPriceUnitsSecurityOption1: ListPriceUnitsSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListPriceUnitsSecurityOption1$outboundSchema.parse(
+      listPriceUnitsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPriceUnitsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListPriceUnitsSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListPriceUnitsSecurityOption2$Outbound,
+  ListPriceUnitsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listPriceUnitsSecurityOption2ToJSON(
+  listPriceUnitsSecurityOption2: ListPriceUnitsSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListPriceUnitsSecurityOption2$outboundSchema.parse(
+      listPriceUnitsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPriceUnitsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListPriceUnitsSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListPriceUnitsSecurityOption3$Outbound,
+  ListPriceUnitsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listPriceUnitsSecurityOption3ToJSON(
+  listPriceUnitsSecurityOption3: ListPriceUnitsSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListPriceUnitsSecurityOption3$outboundSchema.parse(
+      listPriceUnitsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPriceUnitsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListPriceUnitsSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListPriceUnitsSecurityOption4$Outbound,
+  ListPriceUnitsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listPriceUnitsSecurityOption4ToJSON(
+  listPriceUnitsSecurityOption4: ListPriceUnitsSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListPriceUnitsSecurityOption4$outboundSchema.parse(
+      listPriceUnitsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPriceUnitsSecurity$Outbound = {
+  Option1?: ListPriceUnitsSecurityOption1$Outbound | undefined;
+  Option2?: ListPriceUnitsSecurityOption2$Outbound | undefined;
+  Option3?: ListPriceUnitsSecurityOption3$Outbound | undefined;
+  Option4?: ListPriceUnitsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListPriceUnitsSecurity$outboundSchema: z.ZodMiniType<
+  ListPriceUnitsSecurity$Outbound,
+  ListPriceUnitsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListPriceUnitsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListPriceUnitsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListPriceUnitsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListPriceUnitsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listPriceUnitsSecurityToJSON(
+  listPriceUnitsSecurity: ListPriceUnitsSecurity,
+): string {
+  return JSON.stringify(
+    ListPriceUnitsSecurity$outboundSchema.parse(listPriceUnitsSecurity),
+  );
+}
 
 /** @internal */
 export const ListPriceUnitsOrder$outboundSchema: z.ZodMiniEnum<

@@ -1,0 +1,18 @@
+# PreviewSubscriptionPlanChangeV2Security
+
+## Example Usage
+
+```typescript
+import { PreviewSubscriptionPlanChangeV2Security } from "@flexprice/sdk/sdk/models";
+
+let value: PreviewSubscriptionPlanChangeV2Security = {};
+```
+
+## Fields
+
+| Field                                                                                                                             | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `option1`                                                                                                                         | [models.PreviewSubscriptionPlanChangeV2SecurityOption1](../../sdk/models/preview-subscription-plan-change-v2-security-option1.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option2`                                                                                                                         | [models.PreviewSubscriptionPlanChangeV2SecurityOption2](../../sdk/models/preview-subscription-plan-change-v2-security-option2.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option3`                                                                                                                         | [models.PreviewSubscriptionPlanChangeV2SecurityOption3](../../sdk/models/preview-subscription-plan-change-v2-security-option3.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option4`                                                                                                                         | [models.PreviewSubscriptionPlanChangeV2SecurityOption4](../../sdk/models/preview-subscription-plan-change-v2-security-option4.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |

@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetCreditNoteSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetCreditNoteSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetCreditNoteSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetCreditNoteSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetCreditNoteSecurity = {
+  option1?: GetCreditNoteSecurityOption1 | undefined;
+  option2?: GetCreditNoteSecurityOption2 | undefined;
+  option3?: GetCreditNoteSecurityOption3 | undefined;
+  option4?: GetCreditNoteSecurityOption4 | undefined;
+};
 
 export type GetCreditNoteRequest = {
   /**
@@ -10,6 +35,174 @@ export type GetCreditNoteRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetCreditNoteSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCreditNoteSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetCreditNoteSecurityOption1$Outbound,
+  GetCreditNoteSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getCreditNoteSecurityOption1ToJSON(
+  getCreditNoteSecurityOption1: GetCreditNoteSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetCreditNoteSecurityOption1$outboundSchema.parse(
+      getCreditNoteSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCreditNoteSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCreditNoteSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetCreditNoteSecurityOption2$Outbound,
+  GetCreditNoteSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getCreditNoteSecurityOption2ToJSON(
+  getCreditNoteSecurityOption2: GetCreditNoteSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetCreditNoteSecurityOption2$outboundSchema.parse(
+      getCreditNoteSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCreditNoteSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetCreditNoteSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetCreditNoteSecurityOption3$Outbound,
+  GetCreditNoteSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getCreditNoteSecurityOption3ToJSON(
+  getCreditNoteSecurityOption3: GetCreditNoteSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetCreditNoteSecurityOption3$outboundSchema.parse(
+      getCreditNoteSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCreditNoteSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetCreditNoteSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetCreditNoteSecurityOption4$Outbound,
+  GetCreditNoteSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getCreditNoteSecurityOption4ToJSON(
+  getCreditNoteSecurityOption4: GetCreditNoteSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetCreditNoteSecurityOption4$outboundSchema.parse(
+      getCreditNoteSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetCreditNoteSecurity$Outbound = {
+  Option1?: GetCreditNoteSecurityOption1$Outbound | undefined;
+  Option2?: GetCreditNoteSecurityOption2$Outbound | undefined;
+  Option3?: GetCreditNoteSecurityOption3$Outbound | undefined;
+  Option4?: GetCreditNoteSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetCreditNoteSecurity$outboundSchema: z.ZodMiniType<
+  GetCreditNoteSecurity$Outbound,
+  GetCreditNoteSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetCreditNoteSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetCreditNoteSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetCreditNoteSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetCreditNoteSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getCreditNoteSecurityToJSON(
+  getCreditNoteSecurity: GetCreditNoteSecurity,
+): string {
+  return JSON.stringify(
+    GetCreditNoteSecurity$outboundSchema.parse(getCreditNoteSecurity),
+  );
+}
 
 /** @internal */
 export type GetCreditNoteRequest$Outbound = {

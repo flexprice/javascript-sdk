@@ -5,12 +5,206 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type GetPriceByLookupKeySecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetPriceByLookupKeySecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetPriceByLookupKeySecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetPriceByLookupKeySecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetPriceByLookupKeySecurity = {
+  option1?: GetPriceByLookupKeySecurityOption1 | undefined;
+  option2?: GetPriceByLookupKeySecurityOption2 | undefined;
+  option3?: GetPriceByLookupKeySecurityOption3 | undefined;
+  option4?: GetPriceByLookupKeySecurityOption4 | undefined;
+};
+
 export type GetPriceByLookupKeyRequest = {
   /**
    * Lookup key
    */
   lookupKey: string;
 };
+
+/** @internal */
+export type GetPriceByLookupKeySecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetPriceByLookupKeySecurityOption1$outboundSchema: z.ZodMiniType<
+  GetPriceByLookupKeySecurityOption1$Outbound,
+  GetPriceByLookupKeySecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getPriceByLookupKeySecurityOption1ToJSON(
+  getPriceByLookupKeySecurityOption1: GetPriceByLookupKeySecurityOption1,
+): string {
+  return JSON.stringify(
+    GetPriceByLookupKeySecurityOption1$outboundSchema.parse(
+      getPriceByLookupKeySecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetPriceByLookupKeySecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetPriceByLookupKeySecurityOption2$outboundSchema: z.ZodMiniType<
+  GetPriceByLookupKeySecurityOption2$Outbound,
+  GetPriceByLookupKeySecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getPriceByLookupKeySecurityOption2ToJSON(
+  getPriceByLookupKeySecurityOption2: GetPriceByLookupKeySecurityOption2,
+): string {
+  return JSON.stringify(
+    GetPriceByLookupKeySecurityOption2$outboundSchema.parse(
+      getPriceByLookupKeySecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetPriceByLookupKeySecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetPriceByLookupKeySecurityOption3$outboundSchema: z.ZodMiniType<
+  GetPriceByLookupKeySecurityOption3$Outbound,
+  GetPriceByLookupKeySecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getPriceByLookupKeySecurityOption3ToJSON(
+  getPriceByLookupKeySecurityOption3: GetPriceByLookupKeySecurityOption3,
+): string {
+  return JSON.stringify(
+    GetPriceByLookupKeySecurityOption3$outboundSchema.parse(
+      getPriceByLookupKeySecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetPriceByLookupKeySecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetPriceByLookupKeySecurityOption4$outboundSchema: z.ZodMiniType<
+  GetPriceByLookupKeySecurityOption4$Outbound,
+  GetPriceByLookupKeySecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getPriceByLookupKeySecurityOption4ToJSON(
+  getPriceByLookupKeySecurityOption4: GetPriceByLookupKeySecurityOption4,
+): string {
+  return JSON.stringify(
+    GetPriceByLookupKeySecurityOption4$outboundSchema.parse(
+      getPriceByLookupKeySecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetPriceByLookupKeySecurity$Outbound = {
+  Option1?: GetPriceByLookupKeySecurityOption1$Outbound | undefined;
+  Option2?: GetPriceByLookupKeySecurityOption2$Outbound | undefined;
+  Option3?: GetPriceByLookupKeySecurityOption3$Outbound | undefined;
+  Option4?: GetPriceByLookupKeySecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetPriceByLookupKeySecurity$outboundSchema: z.ZodMiniType<
+  GetPriceByLookupKeySecurity$Outbound,
+  GetPriceByLookupKeySecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetPriceByLookupKeySecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetPriceByLookupKeySecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetPriceByLookupKeySecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetPriceByLookupKeySecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getPriceByLookupKeySecurityToJSON(
+  getPriceByLookupKeySecurity: GetPriceByLookupKeySecurity,
+): string {
+  return JSON.stringify(
+    GetPriceByLookupKeySecurity$outboundSchema.parse(
+      getPriceByLookupKeySecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetPriceByLookupKeyRequest$Outbound = {

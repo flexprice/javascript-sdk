@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetAddonSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetAddonSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetAddonSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetAddonSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetAddonSecurity = {
+  option1?: GetAddonSecurityOption1 | undefined;
+  option2?: GetAddonSecurityOption2 | undefined;
+  option3?: GetAddonSecurityOption3 | undefined;
+  option4?: GetAddonSecurityOption4 | undefined;
+};
 
 export type GetAddonRequest = {
   /**
@@ -10,6 +35,158 @@ export type GetAddonRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetAddonSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAddonSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetAddonSecurityOption1$Outbound,
+  GetAddonSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAddonSecurityOption1ToJSON(
+  getAddonSecurityOption1: GetAddonSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetAddonSecurityOption1$outboundSchema.parse(getAddonSecurityOption1),
+  );
+}
+
+/** @internal */
+export type GetAddonSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAddonSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetAddonSecurityOption2$Outbound,
+  GetAddonSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAddonSecurityOption2ToJSON(
+  getAddonSecurityOption2: GetAddonSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetAddonSecurityOption2$outboundSchema.parse(getAddonSecurityOption2),
+  );
+}
+
+/** @internal */
+export type GetAddonSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetAddonSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetAddonSecurityOption3$Outbound,
+  GetAddonSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getAddonSecurityOption3ToJSON(
+  getAddonSecurityOption3: GetAddonSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetAddonSecurityOption3$outboundSchema.parse(getAddonSecurityOption3),
+  );
+}
+
+/** @internal */
+export type GetAddonSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetAddonSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetAddonSecurityOption4$Outbound,
+  GetAddonSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getAddonSecurityOption4ToJSON(
+  getAddonSecurityOption4: GetAddonSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetAddonSecurityOption4$outboundSchema.parse(getAddonSecurityOption4),
+  );
+}
+
+/** @internal */
+export type GetAddonSecurity$Outbound = {
+  Option1?: GetAddonSecurityOption1$Outbound | undefined;
+  Option2?: GetAddonSecurityOption2$Outbound | undefined;
+  Option3?: GetAddonSecurityOption3$Outbound | undefined;
+  Option4?: GetAddonSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetAddonSecurity$outboundSchema: z.ZodMiniType<
+  GetAddonSecurity$Outbound,
+  GetAddonSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(z.lazy(() => GetAddonSecurityOption1$outboundSchema)),
+    option2: z.optional(z.lazy(() => GetAddonSecurityOption2$outboundSchema)),
+    option3: z.optional(z.lazy(() => GetAddonSecurityOption3$outboundSchema)),
+    option4: z.optional(z.lazy(() => GetAddonSecurityOption4$outboundSchema)),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getAddonSecurityToJSON(
+  getAddonSecurity: GetAddonSecurity,
+): string {
+  return JSON.stringify(
+    GetAddonSecurity$outboundSchema.parse(getAddonSecurity),
+  );
+}
 
 /** @internal */
 export type GetAddonRequest$Outbound = {

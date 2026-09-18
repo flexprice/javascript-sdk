@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetAddonCreditGrantsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetAddonCreditGrantsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetAddonCreditGrantsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetAddonCreditGrantsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetAddonCreditGrantsSecurity = {
+  option1?: GetAddonCreditGrantsSecurityOption1 | undefined;
+  option2?: GetAddonCreditGrantsSecurityOption2 | undefined;
+  option3?: GetAddonCreditGrantsSecurityOption3 | undefined;
+  option4?: GetAddonCreditGrantsSecurityOption4 | undefined;
+};
 
 export type GetAddonCreditGrantsRequest = {
   /**
@@ -10,6 +35,176 @@ export type GetAddonCreditGrantsRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetAddonCreditGrantsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAddonCreditGrantsSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetAddonCreditGrantsSecurityOption1$Outbound,
+  GetAddonCreditGrantsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAddonCreditGrantsSecurityOption1ToJSON(
+  getAddonCreditGrantsSecurityOption1: GetAddonCreditGrantsSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetAddonCreditGrantsSecurityOption1$outboundSchema.parse(
+      getAddonCreditGrantsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAddonCreditGrantsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAddonCreditGrantsSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetAddonCreditGrantsSecurityOption2$Outbound,
+  GetAddonCreditGrantsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAddonCreditGrantsSecurityOption2ToJSON(
+  getAddonCreditGrantsSecurityOption2: GetAddonCreditGrantsSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetAddonCreditGrantsSecurityOption2$outboundSchema.parse(
+      getAddonCreditGrantsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAddonCreditGrantsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetAddonCreditGrantsSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetAddonCreditGrantsSecurityOption3$Outbound,
+  GetAddonCreditGrantsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getAddonCreditGrantsSecurityOption3ToJSON(
+  getAddonCreditGrantsSecurityOption3: GetAddonCreditGrantsSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetAddonCreditGrantsSecurityOption3$outboundSchema.parse(
+      getAddonCreditGrantsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAddonCreditGrantsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetAddonCreditGrantsSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetAddonCreditGrantsSecurityOption4$Outbound,
+  GetAddonCreditGrantsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getAddonCreditGrantsSecurityOption4ToJSON(
+  getAddonCreditGrantsSecurityOption4: GetAddonCreditGrantsSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetAddonCreditGrantsSecurityOption4$outboundSchema.parse(
+      getAddonCreditGrantsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAddonCreditGrantsSecurity$Outbound = {
+  Option1?: GetAddonCreditGrantsSecurityOption1$Outbound | undefined;
+  Option2?: GetAddonCreditGrantsSecurityOption2$Outbound | undefined;
+  Option3?: GetAddonCreditGrantsSecurityOption3$Outbound | undefined;
+  Option4?: GetAddonCreditGrantsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetAddonCreditGrantsSecurity$outboundSchema: z.ZodMiniType<
+  GetAddonCreditGrantsSecurity$Outbound,
+  GetAddonCreditGrantsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetAddonCreditGrantsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetAddonCreditGrantsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetAddonCreditGrantsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetAddonCreditGrantsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getAddonCreditGrantsSecurityToJSON(
+  getAddonCreditGrantsSecurity: GetAddonCreditGrantsSecurity,
+): string {
+  return JSON.stringify(
+    GetAddonCreditGrantsSecurity$outboundSchema.parse(
+      getAddonCreditGrantsSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetAddonCreditGrantsRequest$Outbound = {

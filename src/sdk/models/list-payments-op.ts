@@ -6,6 +6,30 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { ClosedEnum } from "../../types/enums.js";
 
+export type ListPaymentsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListPaymentsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListPaymentsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListPaymentsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListPaymentsSecurity = {
+  option1?: ListPaymentsSecurityOption1 | undefined;
+  option2?: ListPaymentsSecurityOption2 | undefined;
+  option3?: ListPaymentsSecurityOption3 | undefined;
+  option4?: ListPaymentsSecurityOption4 | undefined;
+};
+
 export const ListPaymentsOrder = {
   Asc: "asc",
   Desc: "desc",
@@ -41,6 +65,174 @@ export type ListPaymentsRequest = {
   startTime?: string | undefined;
   status?: ListPaymentsStatus | undefined;
 };
+
+/** @internal */
+export type ListPaymentsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListPaymentsSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListPaymentsSecurityOption1$Outbound,
+  ListPaymentsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listPaymentsSecurityOption1ToJSON(
+  listPaymentsSecurityOption1: ListPaymentsSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListPaymentsSecurityOption1$outboundSchema.parse(
+      listPaymentsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPaymentsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListPaymentsSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListPaymentsSecurityOption2$Outbound,
+  ListPaymentsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listPaymentsSecurityOption2ToJSON(
+  listPaymentsSecurityOption2: ListPaymentsSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListPaymentsSecurityOption2$outboundSchema.parse(
+      listPaymentsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPaymentsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListPaymentsSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListPaymentsSecurityOption3$Outbound,
+  ListPaymentsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listPaymentsSecurityOption3ToJSON(
+  listPaymentsSecurityOption3: ListPaymentsSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListPaymentsSecurityOption3$outboundSchema.parse(
+      listPaymentsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPaymentsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListPaymentsSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListPaymentsSecurityOption4$Outbound,
+  ListPaymentsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listPaymentsSecurityOption4ToJSON(
+  listPaymentsSecurityOption4: ListPaymentsSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListPaymentsSecurityOption4$outboundSchema.parse(
+      listPaymentsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type ListPaymentsSecurity$Outbound = {
+  Option1?: ListPaymentsSecurityOption1$Outbound | undefined;
+  Option2?: ListPaymentsSecurityOption2$Outbound | undefined;
+  Option3?: ListPaymentsSecurityOption3$Outbound | undefined;
+  Option4?: ListPaymentsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListPaymentsSecurity$outboundSchema: z.ZodMiniType<
+  ListPaymentsSecurity$Outbound,
+  ListPaymentsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListPaymentsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListPaymentsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListPaymentsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListPaymentsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listPaymentsSecurityToJSON(
+  listPaymentsSecurity: ListPaymentsSecurity,
+): string {
+  return JSON.stringify(
+    ListPaymentsSecurity$outboundSchema.parse(listPaymentsSecurity),
+  );
+}
 
 /** @internal */
 export const ListPaymentsOrder$outboundSchema: z.ZodMiniEnum<

@@ -1,0 +1,18 @@
+# ExecuteSubscriptionPlanChangeV2Security
+
+## Example Usage
+
+```typescript
+import { ExecuteSubscriptionPlanChangeV2Security } from "@flexprice/sdk/sdk/models";
+
+let value: ExecuteSubscriptionPlanChangeV2Security = {};
+```
+
+## Fields
+
+| Field                                                                                                                             | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `option1`                                                                                                                         | [models.ExecuteSubscriptionPlanChangeV2SecurityOption1](../../sdk/models/execute-subscription-plan-change-v2-security-option1.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option2`                                                                                                                         | [models.ExecuteSubscriptionPlanChangeV2SecurityOption2](../../sdk/models/execute-subscription-plan-change-v2-security-option2.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option3`                                                                                                                         | [models.ExecuteSubscriptionPlanChangeV2SecurityOption3](../../sdk/models/execute-subscription-plan-change-v2-security-option3.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |
+| `option4`                                                                                                                         | [models.ExecuteSubscriptionPlanChangeV2SecurityOption4](../../sdk/models/execute-subscription-plan-change-v2-security-option4.md) | :heavy_minus_sign:                                                                                                                | N/A                                                                                                                               |

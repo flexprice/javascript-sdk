@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetAlertSettingsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetAlertSettingsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetAlertSettingsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetAlertSettingsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetAlertSettingsSecurity = {
+  option1?: GetAlertSettingsSecurityOption1 | undefined;
+  option2?: GetAlertSettingsSecurityOption2 | undefined;
+  option3?: GetAlertSettingsSecurityOption3 | undefined;
+  option4?: GetAlertSettingsSecurityOption4 | undefined;
+};
 
 export type GetAlertSettingsRequest = {
   /**
@@ -10,6 +35,174 @@ export type GetAlertSettingsRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetAlertSettingsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAlertSettingsSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetAlertSettingsSecurityOption1$Outbound,
+  GetAlertSettingsSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAlertSettingsSecurityOption1ToJSON(
+  getAlertSettingsSecurityOption1: GetAlertSettingsSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetAlertSettingsSecurityOption1$outboundSchema.parse(
+      getAlertSettingsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAlertSettingsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetAlertSettingsSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetAlertSettingsSecurityOption2$Outbound,
+  GetAlertSettingsSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getAlertSettingsSecurityOption2ToJSON(
+  getAlertSettingsSecurityOption2: GetAlertSettingsSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetAlertSettingsSecurityOption2$outboundSchema.parse(
+      getAlertSettingsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAlertSettingsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetAlertSettingsSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetAlertSettingsSecurityOption3$Outbound,
+  GetAlertSettingsSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getAlertSettingsSecurityOption3ToJSON(
+  getAlertSettingsSecurityOption3: GetAlertSettingsSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetAlertSettingsSecurityOption3$outboundSchema.parse(
+      getAlertSettingsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAlertSettingsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetAlertSettingsSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetAlertSettingsSecurityOption4$Outbound,
+  GetAlertSettingsSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getAlertSettingsSecurityOption4ToJSON(
+  getAlertSettingsSecurityOption4: GetAlertSettingsSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetAlertSettingsSecurityOption4$outboundSchema.parse(
+      getAlertSettingsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetAlertSettingsSecurity$Outbound = {
+  Option1?: GetAlertSettingsSecurityOption1$Outbound | undefined;
+  Option2?: GetAlertSettingsSecurityOption2$Outbound | undefined;
+  Option3?: GetAlertSettingsSecurityOption3$Outbound | undefined;
+  Option4?: GetAlertSettingsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetAlertSettingsSecurity$outboundSchema: z.ZodMiniType<
+  GetAlertSettingsSecurity$Outbound,
+  GetAlertSettingsSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetAlertSettingsSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetAlertSettingsSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetAlertSettingsSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetAlertSettingsSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getAlertSettingsSecurityToJSON(
+  getAlertSettingsSecurity: GetAlertSettingsSecurity,
+): string {
+  return JSON.stringify(
+    GetAlertSettingsSecurity$outboundSchema.parse(getAlertSettingsSecurity),
+  );
+}
 
 /** @internal */
 export type GetAlertSettingsRequest$Outbound = {

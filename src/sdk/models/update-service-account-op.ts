@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateServiceAccountRequest,
   UpdateServiceAccountRequest$Outbound,
   UpdateServiceAccountRequest$outboundSchema,
 } from "./update-service-account-request.js";
+
+export type UpdateServiceAccountSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateServiceAccountSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateServiceAccountSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateServiceAccountSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateServiceAccountSecurity = {
+  option1?: UpdateServiceAccountSecurityOption1 | undefined;
+  option2?: UpdateServiceAccountSecurityOption2 | undefined;
+  option3?: UpdateServiceAccountSecurityOption3 | undefined;
+  option4?: UpdateServiceAccountSecurityOption4 | undefined;
+};
 
 export type UpdateServiceAccountRequestRequest = {
   /**
@@ -19,6 +44,176 @@ export type UpdateServiceAccountRequestRequest = {
    */
   body: UpdateServiceAccountRequest;
 };
+
+/** @internal */
+export type UpdateServiceAccountSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateServiceAccountSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateServiceAccountSecurityOption1$Outbound,
+  UpdateServiceAccountSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateServiceAccountSecurityOption1ToJSON(
+  updateServiceAccountSecurityOption1: UpdateServiceAccountSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateServiceAccountSecurityOption1$outboundSchema.parse(
+      updateServiceAccountSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateServiceAccountSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateServiceAccountSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateServiceAccountSecurityOption2$Outbound,
+  UpdateServiceAccountSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateServiceAccountSecurityOption2ToJSON(
+  updateServiceAccountSecurityOption2: UpdateServiceAccountSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateServiceAccountSecurityOption2$outboundSchema.parse(
+      updateServiceAccountSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateServiceAccountSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateServiceAccountSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateServiceAccountSecurityOption3$Outbound,
+  UpdateServiceAccountSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateServiceAccountSecurityOption3ToJSON(
+  updateServiceAccountSecurityOption3: UpdateServiceAccountSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateServiceAccountSecurityOption3$outboundSchema.parse(
+      updateServiceAccountSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateServiceAccountSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateServiceAccountSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateServiceAccountSecurityOption4$Outbound,
+  UpdateServiceAccountSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateServiceAccountSecurityOption4ToJSON(
+  updateServiceAccountSecurityOption4: UpdateServiceAccountSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateServiceAccountSecurityOption4$outboundSchema.parse(
+      updateServiceAccountSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateServiceAccountSecurity$Outbound = {
+  Option1?: UpdateServiceAccountSecurityOption1$Outbound | undefined;
+  Option2?: UpdateServiceAccountSecurityOption2$Outbound | undefined;
+  Option3?: UpdateServiceAccountSecurityOption3$Outbound | undefined;
+  Option4?: UpdateServiceAccountSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateServiceAccountSecurity$outboundSchema: z.ZodMiniType<
+  UpdateServiceAccountSecurity$Outbound,
+  UpdateServiceAccountSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateServiceAccountSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateServiceAccountSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateServiceAccountSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateServiceAccountSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateServiceAccountSecurityToJSON(
+  updateServiceAccountSecurity: UpdateServiceAccountSecurity,
+): string {
+  return JSON.stringify(
+    UpdateServiceAccountSecurity$outboundSchema.parse(
+      updateServiceAccountSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type UpdateServiceAccountRequestRequest$Outbound = {

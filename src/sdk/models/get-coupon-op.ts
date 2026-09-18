@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetCouponSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetCouponSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetCouponSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetCouponSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetCouponSecurity = {
+  option1?: GetCouponSecurityOption1 | undefined;
+  option2?: GetCouponSecurityOption2 | undefined;
+  option3?: GetCouponSecurityOption3 | undefined;
+  option4?: GetCouponSecurityOption4 | undefined;
+};
 
 export type GetCouponRequest = {
   /**
@@ -10,6 +35,158 @@ export type GetCouponRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetCouponSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCouponSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetCouponSecurityOption1$Outbound,
+  GetCouponSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getCouponSecurityOption1ToJSON(
+  getCouponSecurityOption1: GetCouponSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetCouponSecurityOption1$outboundSchema.parse(getCouponSecurityOption1),
+  );
+}
+
+/** @internal */
+export type GetCouponSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetCouponSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetCouponSecurityOption2$Outbound,
+  GetCouponSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getCouponSecurityOption2ToJSON(
+  getCouponSecurityOption2: GetCouponSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetCouponSecurityOption2$outboundSchema.parse(getCouponSecurityOption2),
+  );
+}
+
+/** @internal */
+export type GetCouponSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetCouponSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetCouponSecurityOption3$Outbound,
+  GetCouponSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getCouponSecurityOption3ToJSON(
+  getCouponSecurityOption3: GetCouponSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetCouponSecurityOption3$outboundSchema.parse(getCouponSecurityOption3),
+  );
+}
+
+/** @internal */
+export type GetCouponSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetCouponSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetCouponSecurityOption4$Outbound,
+  GetCouponSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getCouponSecurityOption4ToJSON(
+  getCouponSecurityOption4: GetCouponSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetCouponSecurityOption4$outboundSchema.parse(getCouponSecurityOption4),
+  );
+}
+
+/** @internal */
+export type GetCouponSecurity$Outbound = {
+  Option1?: GetCouponSecurityOption1$Outbound | undefined;
+  Option2?: GetCouponSecurityOption2$Outbound | undefined;
+  Option3?: GetCouponSecurityOption3$Outbound | undefined;
+  Option4?: GetCouponSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetCouponSecurity$outboundSchema: z.ZodMiniType<
+  GetCouponSecurity$Outbound,
+  GetCouponSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(z.lazy(() => GetCouponSecurityOption1$outboundSchema)),
+    option2: z.optional(z.lazy(() => GetCouponSecurityOption2$outboundSchema)),
+    option3: z.optional(z.lazy(() => GetCouponSecurityOption3$outboundSchema)),
+    option4: z.optional(z.lazy(() => GetCouponSecurityOption4$outboundSchema)),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getCouponSecurityToJSON(
+  getCouponSecurity: GetCouponSecurity,
+): string {
+  return JSON.stringify(
+    GetCouponSecurity$outboundSchema.parse(getCouponSecurity),
+  );
+}
 
 /** @internal */
 export type GetCouponRequest$Outbound = {

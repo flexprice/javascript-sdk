@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DownloadTaskExportSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DownloadTaskExportSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DownloadTaskExportSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DownloadTaskExportSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DownloadTaskExportSecurity = {
+  option1?: DownloadTaskExportSecurityOption1 | undefined;
+  option2?: DownloadTaskExportSecurityOption2 | undefined;
+  option3?: DownloadTaskExportSecurityOption3 | undefined;
+  option4?: DownloadTaskExportSecurityOption4 | undefined;
+};
 
 export type DownloadTaskExportRequest = {
   /**
@@ -10,6 +35,174 @@ export type DownloadTaskExportRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DownloadTaskExportSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DownloadTaskExportSecurityOption1$outboundSchema: z.ZodMiniType<
+  DownloadTaskExportSecurityOption1$Outbound,
+  DownloadTaskExportSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function downloadTaskExportSecurityOption1ToJSON(
+  downloadTaskExportSecurityOption1: DownloadTaskExportSecurityOption1,
+): string {
+  return JSON.stringify(
+    DownloadTaskExportSecurityOption1$outboundSchema.parse(
+      downloadTaskExportSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DownloadTaskExportSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DownloadTaskExportSecurityOption2$outboundSchema: z.ZodMiniType<
+  DownloadTaskExportSecurityOption2$Outbound,
+  DownloadTaskExportSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function downloadTaskExportSecurityOption2ToJSON(
+  downloadTaskExportSecurityOption2: DownloadTaskExportSecurityOption2,
+): string {
+  return JSON.stringify(
+    DownloadTaskExportSecurityOption2$outboundSchema.parse(
+      downloadTaskExportSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DownloadTaskExportSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DownloadTaskExportSecurityOption3$outboundSchema: z.ZodMiniType<
+  DownloadTaskExportSecurityOption3$Outbound,
+  DownloadTaskExportSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function downloadTaskExportSecurityOption3ToJSON(
+  downloadTaskExportSecurityOption3: DownloadTaskExportSecurityOption3,
+): string {
+  return JSON.stringify(
+    DownloadTaskExportSecurityOption3$outboundSchema.parse(
+      downloadTaskExportSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DownloadTaskExportSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DownloadTaskExportSecurityOption4$outboundSchema: z.ZodMiniType<
+  DownloadTaskExportSecurityOption4$Outbound,
+  DownloadTaskExportSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function downloadTaskExportSecurityOption4ToJSON(
+  downloadTaskExportSecurityOption4: DownloadTaskExportSecurityOption4,
+): string {
+  return JSON.stringify(
+    DownloadTaskExportSecurityOption4$outboundSchema.parse(
+      downloadTaskExportSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DownloadTaskExportSecurity$Outbound = {
+  Option1?: DownloadTaskExportSecurityOption1$Outbound | undefined;
+  Option2?: DownloadTaskExportSecurityOption2$Outbound | undefined;
+  Option3?: DownloadTaskExportSecurityOption3$Outbound | undefined;
+  Option4?: DownloadTaskExportSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DownloadTaskExportSecurity$outboundSchema: z.ZodMiniType<
+  DownloadTaskExportSecurity$Outbound,
+  DownloadTaskExportSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DownloadTaskExportSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DownloadTaskExportSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DownloadTaskExportSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DownloadTaskExportSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function downloadTaskExportSecurityToJSON(
+  downloadTaskExportSecurity: DownloadTaskExportSecurity,
+): string {
+  return JSON.stringify(
+    DownloadTaskExportSecurity$outboundSchema.parse(downloadTaskExportSecurity),
+  );
+}
 
 /** @internal */
 export type DownloadTaskExportRequest$Outbound = {

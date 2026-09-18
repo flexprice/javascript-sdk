@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteCheckoutSessionSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteCheckoutSessionSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteCheckoutSessionSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteCheckoutSessionSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteCheckoutSessionSecurity = {
+  option1?: DeleteCheckoutSessionSecurityOption1 | undefined;
+  option2?: DeleteCheckoutSessionSecurityOption2 | undefined;
+  option3?: DeleteCheckoutSessionSecurityOption3 | undefined;
+  option4?: DeleteCheckoutSessionSecurityOption4 | undefined;
+};
 
 export type DeleteCheckoutSessionRequest = {
   /**
@@ -10,6 +35,176 @@ export type DeleteCheckoutSessionRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteCheckoutSessionSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteCheckoutSessionSecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteCheckoutSessionSecurityOption1$Outbound,
+  DeleteCheckoutSessionSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteCheckoutSessionSecurityOption1ToJSON(
+  deleteCheckoutSessionSecurityOption1: DeleteCheckoutSessionSecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteCheckoutSessionSecurityOption1$outboundSchema.parse(
+      deleteCheckoutSessionSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCheckoutSessionSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteCheckoutSessionSecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteCheckoutSessionSecurityOption2$Outbound,
+  DeleteCheckoutSessionSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteCheckoutSessionSecurityOption2ToJSON(
+  deleteCheckoutSessionSecurityOption2: DeleteCheckoutSessionSecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteCheckoutSessionSecurityOption2$outboundSchema.parse(
+      deleteCheckoutSessionSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCheckoutSessionSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteCheckoutSessionSecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteCheckoutSessionSecurityOption3$Outbound,
+  DeleteCheckoutSessionSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteCheckoutSessionSecurityOption3ToJSON(
+  deleteCheckoutSessionSecurityOption3: DeleteCheckoutSessionSecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteCheckoutSessionSecurityOption3$outboundSchema.parse(
+      deleteCheckoutSessionSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCheckoutSessionSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteCheckoutSessionSecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteCheckoutSessionSecurityOption4$Outbound,
+  DeleteCheckoutSessionSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteCheckoutSessionSecurityOption4ToJSON(
+  deleteCheckoutSessionSecurityOption4: DeleteCheckoutSessionSecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteCheckoutSessionSecurityOption4$outboundSchema.parse(
+      deleteCheckoutSessionSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteCheckoutSessionSecurity$Outbound = {
+  Option1?: DeleteCheckoutSessionSecurityOption1$Outbound | undefined;
+  Option2?: DeleteCheckoutSessionSecurityOption2$Outbound | undefined;
+  Option3?: DeleteCheckoutSessionSecurityOption3$Outbound | undefined;
+  Option4?: DeleteCheckoutSessionSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteCheckoutSessionSecurity$outboundSchema: z.ZodMiniType<
+  DeleteCheckoutSessionSecurity$Outbound,
+  DeleteCheckoutSessionSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteCheckoutSessionSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteCheckoutSessionSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteCheckoutSessionSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteCheckoutSessionSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteCheckoutSessionSecurityToJSON(
+  deleteCheckoutSessionSecurity: DeleteCheckoutSessionSecurity,
+): string {
+  return JSON.stringify(
+    DeleteCheckoutSessionSecurity$outboundSchema.parse(
+      deleteCheckoutSessionSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type DeleteCheckoutSessionRequest$Outbound = {

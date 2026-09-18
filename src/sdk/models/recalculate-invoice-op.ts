@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type RecalculateInvoiceSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type RecalculateInvoiceSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type RecalculateInvoiceSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type RecalculateInvoiceSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type RecalculateInvoiceSecurity = {
+  option1?: RecalculateInvoiceSecurityOption1 | undefined;
+  option2?: RecalculateInvoiceSecurityOption2 | undefined;
+  option3?: RecalculateInvoiceSecurityOption3 | undefined;
+  option4?: RecalculateInvoiceSecurityOption4 | undefined;
+};
 
 export type RecalculateInvoiceRequest = {
   /**
@@ -10,6 +35,174 @@ export type RecalculateInvoiceRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type RecalculateInvoiceSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const RecalculateInvoiceSecurityOption1$outboundSchema: z.ZodMiniType<
+  RecalculateInvoiceSecurityOption1$Outbound,
+  RecalculateInvoiceSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function recalculateInvoiceSecurityOption1ToJSON(
+  recalculateInvoiceSecurityOption1: RecalculateInvoiceSecurityOption1,
+): string {
+  return JSON.stringify(
+    RecalculateInvoiceSecurityOption1$outboundSchema.parse(
+      recalculateInvoiceSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type RecalculateInvoiceSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const RecalculateInvoiceSecurityOption2$outboundSchema: z.ZodMiniType<
+  RecalculateInvoiceSecurityOption2$Outbound,
+  RecalculateInvoiceSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function recalculateInvoiceSecurityOption2ToJSON(
+  recalculateInvoiceSecurityOption2: RecalculateInvoiceSecurityOption2,
+): string {
+  return JSON.stringify(
+    RecalculateInvoiceSecurityOption2$outboundSchema.parse(
+      recalculateInvoiceSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type RecalculateInvoiceSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const RecalculateInvoiceSecurityOption3$outboundSchema: z.ZodMiniType<
+  RecalculateInvoiceSecurityOption3$Outbound,
+  RecalculateInvoiceSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function recalculateInvoiceSecurityOption3ToJSON(
+  recalculateInvoiceSecurityOption3: RecalculateInvoiceSecurityOption3,
+): string {
+  return JSON.stringify(
+    RecalculateInvoiceSecurityOption3$outboundSchema.parse(
+      recalculateInvoiceSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type RecalculateInvoiceSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const RecalculateInvoiceSecurityOption4$outboundSchema: z.ZodMiniType<
+  RecalculateInvoiceSecurityOption4$Outbound,
+  RecalculateInvoiceSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function recalculateInvoiceSecurityOption4ToJSON(
+  recalculateInvoiceSecurityOption4: RecalculateInvoiceSecurityOption4,
+): string {
+  return JSON.stringify(
+    RecalculateInvoiceSecurityOption4$outboundSchema.parse(
+      recalculateInvoiceSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type RecalculateInvoiceSecurity$Outbound = {
+  Option1?: RecalculateInvoiceSecurityOption1$Outbound | undefined;
+  Option2?: RecalculateInvoiceSecurityOption2$Outbound | undefined;
+  Option3?: RecalculateInvoiceSecurityOption3$Outbound | undefined;
+  Option4?: RecalculateInvoiceSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const RecalculateInvoiceSecurity$outboundSchema: z.ZodMiniType<
+  RecalculateInvoiceSecurity$Outbound,
+  RecalculateInvoiceSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => RecalculateInvoiceSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => RecalculateInvoiceSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => RecalculateInvoiceSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => RecalculateInvoiceSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function recalculateInvoiceSecurityToJSON(
+  recalculateInvoiceSecurity: RecalculateInvoiceSecurity,
+): string {
+  return JSON.stringify(
+    RecalculateInvoiceSecurity$outboundSchema.parse(recalculateInvoiceSecurity),
+  );
+}
 
 /** @internal */
 export type RecalculateInvoiceRequest$Outbound = {

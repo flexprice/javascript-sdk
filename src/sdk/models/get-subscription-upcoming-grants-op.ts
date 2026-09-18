@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type GetSubscriptionUpcomingGrantsSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetSubscriptionUpcomingGrantsSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetSubscriptionUpcomingGrantsSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetSubscriptionUpcomingGrantsSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetSubscriptionUpcomingGrantsSecurity = {
+  option1?: GetSubscriptionUpcomingGrantsSecurityOption1 | undefined;
+  option2?: GetSubscriptionUpcomingGrantsSecurityOption2 | undefined;
+  option3?: GetSubscriptionUpcomingGrantsSecurityOption3 | undefined;
+  option4?: GetSubscriptionUpcomingGrantsSecurityOption4 | undefined;
+};
 
 export type GetSubscriptionUpcomingGrantsRequest = {
   /**
@@ -10,6 +35,193 @@ export type GetSubscriptionUpcomingGrantsRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type GetSubscriptionUpcomingGrantsSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionUpcomingGrantsSecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionUpcomingGrantsSecurityOption1$Outbound,
+    GetSubscriptionUpcomingGrantsSecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionUpcomingGrantsSecurityOption1ToJSON(
+  getSubscriptionUpcomingGrantsSecurityOption1:
+    GetSubscriptionUpcomingGrantsSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetSubscriptionUpcomingGrantsSecurityOption1$outboundSchema.parse(
+      getSubscriptionUpcomingGrantsSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionUpcomingGrantsSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionUpcomingGrantsSecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionUpcomingGrantsSecurityOption2$Outbound,
+    GetSubscriptionUpcomingGrantsSecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionUpcomingGrantsSecurityOption2ToJSON(
+  getSubscriptionUpcomingGrantsSecurityOption2:
+    GetSubscriptionUpcomingGrantsSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetSubscriptionUpcomingGrantsSecurityOption2$outboundSchema.parse(
+      getSubscriptionUpcomingGrantsSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionUpcomingGrantsSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetSubscriptionUpcomingGrantsSecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionUpcomingGrantsSecurityOption3$Outbound,
+    GetSubscriptionUpcomingGrantsSecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function getSubscriptionUpcomingGrantsSecurityOption3ToJSON(
+  getSubscriptionUpcomingGrantsSecurityOption3:
+    GetSubscriptionUpcomingGrantsSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetSubscriptionUpcomingGrantsSecurityOption3$outboundSchema.parse(
+      getSubscriptionUpcomingGrantsSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionUpcomingGrantsSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetSubscriptionUpcomingGrantsSecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionUpcomingGrantsSecurityOption4$Outbound,
+    GetSubscriptionUpcomingGrantsSecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function getSubscriptionUpcomingGrantsSecurityOption4ToJSON(
+  getSubscriptionUpcomingGrantsSecurityOption4:
+    GetSubscriptionUpcomingGrantsSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetSubscriptionUpcomingGrantsSecurityOption4$outboundSchema.parse(
+      getSubscriptionUpcomingGrantsSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetSubscriptionUpcomingGrantsSecurity$Outbound = {
+  Option1?: GetSubscriptionUpcomingGrantsSecurityOption1$Outbound | undefined;
+  Option2?: GetSubscriptionUpcomingGrantsSecurityOption2$Outbound | undefined;
+  Option3?: GetSubscriptionUpcomingGrantsSecurityOption3$Outbound | undefined;
+  Option4?: GetSubscriptionUpcomingGrantsSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetSubscriptionUpcomingGrantsSecurity$outboundSchema:
+  z.ZodMiniType<
+    GetSubscriptionUpcomingGrantsSecurity$Outbound,
+    GetSubscriptionUpcomingGrantsSecurity
+  > = z.pipe(
+    z.object({
+      option1: z.optional(
+        z.lazy(() =>
+          GetSubscriptionUpcomingGrantsSecurityOption1$outboundSchema
+        ),
+      ),
+      option2: z.optional(
+        z.lazy(() =>
+          GetSubscriptionUpcomingGrantsSecurityOption2$outboundSchema
+        ),
+      ),
+      option3: z.optional(
+        z.lazy(() =>
+          GetSubscriptionUpcomingGrantsSecurityOption3$outboundSchema
+        ),
+      ),
+      option4: z.optional(
+        z.lazy(() =>
+          GetSubscriptionUpcomingGrantsSecurityOption4$outboundSchema
+        ),
+      ),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        option1: "Option1",
+        option2: "Option2",
+        option3: "Option3",
+        option4: "Option4",
+      });
+    }),
+  );
+
+export function getSubscriptionUpcomingGrantsSecurityToJSON(
+  getSubscriptionUpcomingGrantsSecurity: GetSubscriptionUpcomingGrantsSecurity,
+): string {
+  return JSON.stringify(
+    GetSubscriptionUpcomingGrantsSecurity$outboundSchema.parse(
+      getSubscriptionUpcomingGrantsSecurity,
+    ),
+  );
+}
 
 /** @internal */
 export type GetSubscriptionUpcomingGrantsRequest$Outbound = {

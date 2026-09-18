@@ -24,12 +24,14 @@ import { addonsCreateAddon } from "@flexprice/sdk/funcs/addons-create-addon.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
+const flexprice = new FlexpriceCore();
 
 async function run() {
   const res = await addonsCreateAddon(flexprice, {
+    option1: {
+      apiKeyAuth: "<YOUR_API_KEY_HERE>",
+    },
+  }, {
     lookupKey: "<value>",
     name: "<value>",
   });

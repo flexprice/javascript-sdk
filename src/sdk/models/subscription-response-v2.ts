@@ -28,6 +28,10 @@ import {
   CustomerResponse,
   CustomerResponse$inboundSchema,
 } from "./customer-response.js";
+import {
+  LineItemGrouping,
+  LineItemGrouping$inboundSchema,
+} from "./line-item-grouping.js";
 import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
 import { PaymentTerms, PaymentTerms$inboundSchema } from "./payment-terms.js";
 import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
@@ -170,6 +174,7 @@ export type SubscriptionResponseV2 = {
    * This can differ from the subscription customer (e.g., parent company invoicing for child company)
    */
   invoicingCustomerId?: string | undefined;
+  lineItemGrouping?: LineItemGrouping | undefined;
   /**
    * LineItems is expanded only if "subscription_line_items" is in expand parameter
    *
@@ -287,6 +292,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     gateway_payment_method_id: types.optional(types.string()),
     id: types.optional(types.string()),
     invoicing_customer_id: types.optional(types.string()),
+    line_item_grouping: types.optional(LineItemGrouping$inboundSchema),
     line_items: types.optional(
       z.array(SubscriptionLineItemResponse$inboundSchema),
     ),
@@ -345,6 +351,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "gateway_payment_method_id": "gatewayPaymentMethodId",
       "invoicing_customer_id": "invoicingCustomerId",
+      "line_item_grouping": "lineItemGrouping",
       "line_items": "lineItems",
       "lookup_key": "lookupKey",
       "overage_factor": "overageFactor",

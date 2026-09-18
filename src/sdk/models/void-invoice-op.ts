@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type VoidInvoiceSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type VoidInvoiceSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type VoidInvoiceSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type VoidInvoiceSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type VoidInvoiceSecurity = {
+  option1?: VoidInvoiceSecurityOption1 | undefined;
+  option2?: VoidInvoiceSecurityOption2 | undefined;
+  option3?: VoidInvoiceSecurityOption3 | undefined;
+  option4?: VoidInvoiceSecurityOption4 | undefined;
+};
 
 export type VoidInvoiceRequest = {
   /**
@@ -10,6 +35,166 @@ export type VoidInvoiceRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type VoidInvoiceSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const VoidInvoiceSecurityOption1$outboundSchema: z.ZodMiniType<
+  VoidInvoiceSecurityOption1$Outbound,
+  VoidInvoiceSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function voidInvoiceSecurityOption1ToJSON(
+  voidInvoiceSecurityOption1: VoidInvoiceSecurityOption1,
+): string {
+  return JSON.stringify(
+    VoidInvoiceSecurityOption1$outboundSchema.parse(voidInvoiceSecurityOption1),
+  );
+}
+
+/** @internal */
+export type VoidInvoiceSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const VoidInvoiceSecurityOption2$outboundSchema: z.ZodMiniType<
+  VoidInvoiceSecurityOption2$Outbound,
+  VoidInvoiceSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function voidInvoiceSecurityOption2ToJSON(
+  voidInvoiceSecurityOption2: VoidInvoiceSecurityOption2,
+): string {
+  return JSON.stringify(
+    VoidInvoiceSecurityOption2$outboundSchema.parse(voidInvoiceSecurityOption2),
+  );
+}
+
+/** @internal */
+export type VoidInvoiceSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const VoidInvoiceSecurityOption3$outboundSchema: z.ZodMiniType<
+  VoidInvoiceSecurityOption3$Outbound,
+  VoidInvoiceSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function voidInvoiceSecurityOption3ToJSON(
+  voidInvoiceSecurityOption3: VoidInvoiceSecurityOption3,
+): string {
+  return JSON.stringify(
+    VoidInvoiceSecurityOption3$outboundSchema.parse(voidInvoiceSecurityOption3),
+  );
+}
+
+/** @internal */
+export type VoidInvoiceSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const VoidInvoiceSecurityOption4$outboundSchema: z.ZodMiniType<
+  VoidInvoiceSecurityOption4$Outbound,
+  VoidInvoiceSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function voidInvoiceSecurityOption4ToJSON(
+  voidInvoiceSecurityOption4: VoidInvoiceSecurityOption4,
+): string {
+  return JSON.stringify(
+    VoidInvoiceSecurityOption4$outboundSchema.parse(voidInvoiceSecurityOption4),
+  );
+}
+
+/** @internal */
+export type VoidInvoiceSecurity$Outbound = {
+  Option1?: VoidInvoiceSecurityOption1$Outbound | undefined;
+  Option2?: VoidInvoiceSecurityOption2$Outbound | undefined;
+  Option3?: VoidInvoiceSecurityOption3$Outbound | undefined;
+  Option4?: VoidInvoiceSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const VoidInvoiceSecurity$outboundSchema: z.ZodMiniType<
+  VoidInvoiceSecurity$Outbound,
+  VoidInvoiceSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => VoidInvoiceSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => VoidInvoiceSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => VoidInvoiceSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => VoidInvoiceSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function voidInvoiceSecurityToJSON(
+  voidInvoiceSecurity: VoidInvoiceSecurity,
+): string {
+  return JSON.stringify(
+    VoidInvoiceSecurity$outboundSchema.parse(voidInvoiceSecurity),
+  );
+}
 
 /** @internal */
 export type VoidInvoiceRequest$Outbound = {

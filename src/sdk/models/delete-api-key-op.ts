@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type DeleteApiKeySecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteApiKeySecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type DeleteApiKeySecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type DeleteApiKeySecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type DeleteApiKeySecurity = {
+  option1?: DeleteApiKeySecurityOption1 | undefined;
+  option2?: DeleteApiKeySecurityOption2 | undefined;
+  option3?: DeleteApiKeySecurityOption3 | undefined;
+  option4?: DeleteApiKeySecurityOption4 | undefined;
+};
 
 export type DeleteApiKeyRequest = {
   /**
@@ -10,6 +35,174 @@ export type DeleteApiKeyRequest = {
    */
   id: string;
 };
+
+/** @internal */
+export type DeleteApiKeySecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteApiKeySecurityOption1$outboundSchema: z.ZodMiniType<
+  DeleteApiKeySecurityOption1$Outbound,
+  DeleteApiKeySecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteApiKeySecurityOption1ToJSON(
+  deleteApiKeySecurityOption1: DeleteApiKeySecurityOption1,
+): string {
+  return JSON.stringify(
+    DeleteApiKeySecurityOption1$outboundSchema.parse(
+      deleteApiKeySecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteApiKeySecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const DeleteApiKeySecurityOption2$outboundSchema: z.ZodMiniType<
+  DeleteApiKeySecurityOption2$Outbound,
+  DeleteApiKeySecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function deleteApiKeySecurityOption2ToJSON(
+  deleteApiKeySecurityOption2: DeleteApiKeySecurityOption2,
+): string {
+  return JSON.stringify(
+    DeleteApiKeySecurityOption2$outboundSchema.parse(
+      deleteApiKeySecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteApiKeySecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const DeleteApiKeySecurityOption3$outboundSchema: z.ZodMiniType<
+  DeleteApiKeySecurityOption3$Outbound,
+  DeleteApiKeySecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function deleteApiKeySecurityOption3ToJSON(
+  deleteApiKeySecurityOption3: DeleteApiKeySecurityOption3,
+): string {
+  return JSON.stringify(
+    DeleteApiKeySecurityOption3$outboundSchema.parse(
+      deleteApiKeySecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteApiKeySecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const DeleteApiKeySecurityOption4$outboundSchema: z.ZodMiniType<
+  DeleteApiKeySecurityOption4$Outbound,
+  DeleteApiKeySecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function deleteApiKeySecurityOption4ToJSON(
+  deleteApiKeySecurityOption4: DeleteApiKeySecurityOption4,
+): string {
+  return JSON.stringify(
+    DeleteApiKeySecurityOption4$outboundSchema.parse(
+      deleteApiKeySecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type DeleteApiKeySecurity$Outbound = {
+  Option1?: DeleteApiKeySecurityOption1$Outbound | undefined;
+  Option2?: DeleteApiKeySecurityOption2$Outbound | undefined;
+  Option3?: DeleteApiKeySecurityOption3$Outbound | undefined;
+  Option4?: DeleteApiKeySecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const DeleteApiKeySecurity$outboundSchema: z.ZodMiniType<
+  DeleteApiKeySecurity$Outbound,
+  DeleteApiKeySecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => DeleteApiKeySecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => DeleteApiKeySecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => DeleteApiKeySecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => DeleteApiKeySecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function deleteApiKeySecurityToJSON(
+  deleteApiKeySecurity: DeleteApiKeySecurity,
+): string {
+  return JSON.stringify(
+    DeleteApiKeySecurity$outboundSchema.parse(deleteApiKeySecurity),
+  );
+}
 
 /** @internal */
 export type DeleteApiKeyRequest$Outbound = {

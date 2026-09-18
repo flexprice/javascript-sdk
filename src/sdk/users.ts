@@ -22,11 +22,13 @@ export class Users extends ClientSDK {
    * Create a user account (type=user, email required; returns user + password for login) or a service account (type=service_account, roles required) for API/automation access.
    */
   async createUser(
+    security: models.CreateUserSecurity,
     request: models.CreateUserRequest,
     options?: RequestOptions,
   ): Promise<models.CreateUserResponse> {
     return unwrapAsync(usersCreateUser(
       this,
+      security,
       request,
       options,
     ));
@@ -39,10 +41,12 @@ export class Users extends ClientSDK {
    * Use to show the logged-in user's profile in the UI or to check permissions and roles for the current session.
    */
   async getUserInfo(
+    security: models.GetUserInfoSecurity,
     options?: RequestOptions,
   ): Promise<models.UserResponse> {
     return unwrapAsync(usersGetUserInfo(
       this,
+      security,
       options,
     ));
   }
@@ -54,11 +58,13 @@ export class Users extends ClientSDK {
    * Update the current authenticated user. Supports name and metadata updates.
    */
   async updateUser(
+    security: models.UpdateUserSecurity,
     request: models.UpdateUserRequest,
     options?: RequestOptions,
   ): Promise<models.UpdateUserResponse> {
     return unwrapAsync(usersUpdateUser(
       this,
+      security,
       request,
       options,
     ));
@@ -71,11 +77,13 @@ export class Users extends ClientSDK {
    * Use when listing or searching service accounts in an admin UI, or when auditing who has API access and which roles they have.
    */
   async queryUser(
+    security: models.QueryUserSecurity,
     request: models.UserFilter,
     options?: RequestOptions,
   ): Promise<models.ListUsersResponse> {
     return unwrapAsync(usersQueryUser(
       this,
+      security,
       request,
       options,
     ));
@@ -88,12 +96,14 @@ export class Users extends ClientSDK {
    * Update a service account by ID (name only).
    */
   async updateServiceAccount(
+    security: models.UpdateServiceAccountSecurity,
     id: string,
     body: models.UpdateServiceAccountRequest,
     options?: RequestOptions,
   ): Promise<models.UpdateServiceAccountResponse> {
     return unwrapAsync(usersUpdateServiceAccount(
       this,
+      security,
       id,
       body,
       options,
@@ -107,11 +117,13 @@ export class Users extends ClientSDK {
    * Soft-delete (archive) a service account by ID.
    */
   async deleteServiceAccount(
+    security: models.DeleteServiceAccountSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(usersDeleteServiceAccount(
       this,
+      security,
       id,
       options,
     ));
@@ -124,11 +136,13 @@ export class Users extends ClientSDK {
    * Remove a human user (type=user) from the current tenant. Not supported for service accounts; use DELETE /users/{id} for those.
    */
   async removeUser(
+    security: models.RemoveUserSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(usersRemoveUser(
       this,
+      security,
       id,
       options,
     ));
@@ -141,12 +155,14 @@ export class Users extends ClientSDK {
    * Update the roles of a user account (not service accounts — their roles are fixed at creation). Restricted to super_admin; a caller cannot update their own roles. Blocked with a 400 if the user has any active (published, unexpired) API key in any environment, since a key's permissions are snapshotted at creation time and would otherwise silently keep running on the old roles; the error lists the active keys grouped by environment ID so the caller can prompt to expire them first, then retry.
    */
   async updateUserRoles(
+    security: models.UpdateUserRolesSecurity,
     id: string,
     body: models.UpdateUserRolesRequest,
     options?: RequestOptions,
   ): Promise<models.UpdateUserRolesResponse> {
     return unwrapAsync(usersUpdateUserRoles(
       this,
+      security,
       id,
       body,
       options,

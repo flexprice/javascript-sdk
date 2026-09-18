@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   SubscriptionChangeV2Request,
   SubscriptionChangeV2Request$Outbound,
   SubscriptionChangeV2Request$outboundSchema,
 } from "./subscription-change-v2-request.js";
+
+export type PreviewSubscriptionPlanChangeV2SecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type PreviewSubscriptionPlanChangeV2SecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type PreviewSubscriptionPlanChangeV2SecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type PreviewSubscriptionPlanChangeV2SecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type PreviewSubscriptionPlanChangeV2Security = {
+  option1?: PreviewSubscriptionPlanChangeV2SecurityOption1 | undefined;
+  option2?: PreviewSubscriptionPlanChangeV2SecurityOption2 | undefined;
+  option3?: PreviewSubscriptionPlanChangeV2SecurityOption3 | undefined;
+  option4?: PreviewSubscriptionPlanChangeV2SecurityOption4 | undefined;
+};
 
 export type PreviewSubscriptionPlanChangeV2Request = {
   /**
@@ -19,6 +44,186 @@ export type PreviewSubscriptionPlanChangeV2Request = {
    */
   body: SubscriptionChangeV2Request;
 };
+
+/** @internal */
+export type PreviewSubscriptionPlanChangeV2SecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const PreviewSubscriptionPlanChangeV2SecurityOption1$outboundSchema:
+  z.ZodMiniType<
+    PreviewSubscriptionPlanChangeV2SecurityOption1$Outbound,
+    PreviewSubscriptionPlanChangeV2SecurityOption1
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function previewSubscriptionPlanChangeV2SecurityOption1ToJSON(
+  previewSubscriptionPlanChangeV2SecurityOption1:
+    PreviewSubscriptionPlanChangeV2SecurityOption1,
+): string {
+  return JSON.stringify(
+    PreviewSubscriptionPlanChangeV2SecurityOption1$outboundSchema.parse(
+      previewSubscriptionPlanChangeV2SecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type PreviewSubscriptionPlanChangeV2SecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const PreviewSubscriptionPlanChangeV2SecurityOption2$outboundSchema:
+  z.ZodMiniType<
+    PreviewSubscriptionPlanChangeV2SecurityOption2$Outbound,
+    PreviewSubscriptionPlanChangeV2SecurityOption2
+  > = z.pipe(
+    z.object({
+      apiKeyAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        apiKeyAuth: "ApiKeyAuth",
+      });
+    }),
+  );
+
+export function previewSubscriptionPlanChangeV2SecurityOption2ToJSON(
+  previewSubscriptionPlanChangeV2SecurityOption2:
+    PreviewSubscriptionPlanChangeV2SecurityOption2,
+): string {
+  return JSON.stringify(
+    PreviewSubscriptionPlanChangeV2SecurityOption2$outboundSchema.parse(
+      previewSubscriptionPlanChangeV2SecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type PreviewSubscriptionPlanChangeV2SecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const PreviewSubscriptionPlanChangeV2SecurityOption3$outboundSchema:
+  z.ZodMiniType<
+    PreviewSubscriptionPlanChangeV2SecurityOption3$Outbound,
+    PreviewSubscriptionPlanChangeV2SecurityOption3
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+      environmentId: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+        environmentId: "EnvironmentId",
+      });
+    }),
+  );
+
+export function previewSubscriptionPlanChangeV2SecurityOption3ToJSON(
+  previewSubscriptionPlanChangeV2SecurityOption3:
+    PreviewSubscriptionPlanChangeV2SecurityOption3,
+): string {
+  return JSON.stringify(
+    PreviewSubscriptionPlanChangeV2SecurityOption3$outboundSchema.parse(
+      previewSubscriptionPlanChangeV2SecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type PreviewSubscriptionPlanChangeV2SecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const PreviewSubscriptionPlanChangeV2SecurityOption4$outboundSchema:
+  z.ZodMiniType<
+    PreviewSubscriptionPlanChangeV2SecurityOption4$Outbound,
+    PreviewSubscriptionPlanChangeV2SecurityOption4
+  > = z.pipe(
+    z.object({
+      bearerAuth: z.string(),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        bearerAuth: "BearerAuth",
+      });
+    }),
+  );
+
+export function previewSubscriptionPlanChangeV2SecurityOption4ToJSON(
+  previewSubscriptionPlanChangeV2SecurityOption4:
+    PreviewSubscriptionPlanChangeV2SecurityOption4,
+): string {
+  return JSON.stringify(
+    PreviewSubscriptionPlanChangeV2SecurityOption4$outboundSchema.parse(
+      previewSubscriptionPlanChangeV2SecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type PreviewSubscriptionPlanChangeV2Security$Outbound = {
+  Option1?: PreviewSubscriptionPlanChangeV2SecurityOption1$Outbound | undefined;
+  Option2?: PreviewSubscriptionPlanChangeV2SecurityOption2$Outbound | undefined;
+  Option3?: PreviewSubscriptionPlanChangeV2SecurityOption3$Outbound | undefined;
+  Option4?: PreviewSubscriptionPlanChangeV2SecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const PreviewSubscriptionPlanChangeV2Security$outboundSchema:
+  z.ZodMiniType<
+    PreviewSubscriptionPlanChangeV2Security$Outbound,
+    PreviewSubscriptionPlanChangeV2Security
+  > = z.pipe(
+    z.object({
+      option1: z.optional(z.lazy(() =>
+        PreviewSubscriptionPlanChangeV2SecurityOption1$outboundSchema
+      )),
+      option2: z.optional(z.lazy(() =>
+        PreviewSubscriptionPlanChangeV2SecurityOption2$outboundSchema
+      )),
+      option3: z.optional(z.lazy(() =>
+        PreviewSubscriptionPlanChangeV2SecurityOption3$outboundSchema
+      )),
+      option4: z.optional(z.lazy(() =>
+        PreviewSubscriptionPlanChangeV2SecurityOption4$outboundSchema
+      )),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        option1: "Option1",
+        option2: "Option2",
+        option3: "Option3",
+        option4: "Option4",
+      });
+    }),
+  );
+
+export function previewSubscriptionPlanChangeV2SecurityToJSON(
+  previewSubscriptionPlanChangeV2Security:
+    PreviewSubscriptionPlanChangeV2Security,
+): string {
+  return JSON.stringify(
+    PreviewSubscriptionPlanChangeV2Security$outboundSchema.parse(
+      previewSubscriptionPlanChangeV2Security,
+    ),
+  );
+}
 
 /** @internal */
 export type PreviewSubscriptionPlanChangeV2Request$Outbound = {

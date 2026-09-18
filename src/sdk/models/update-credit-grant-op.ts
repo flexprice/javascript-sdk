@@ -3,11 +3,36 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   UpdateCreditGrantRequest,
   UpdateCreditGrantRequest$Outbound,
   UpdateCreditGrantRequest$outboundSchema,
 } from "./update-credit-grant-request.js";
+
+export type UpdateCreditGrantSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateCreditGrantSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type UpdateCreditGrantSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type UpdateCreditGrantSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type UpdateCreditGrantSecurity = {
+  option1?: UpdateCreditGrantSecurityOption1 | undefined;
+  option2?: UpdateCreditGrantSecurityOption2 | undefined;
+  option3?: UpdateCreditGrantSecurityOption3 | undefined;
+  option4?: UpdateCreditGrantSecurityOption4 | undefined;
+};
 
 export type UpdateCreditGrantRequestRequest = {
   /**
@@ -19,6 +44,174 @@ export type UpdateCreditGrantRequestRequest = {
    */
   body: UpdateCreditGrantRequest;
 };
+
+/** @internal */
+export type UpdateCreditGrantSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateCreditGrantSecurityOption1$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantSecurityOption1$Outbound,
+  UpdateCreditGrantSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateCreditGrantSecurityOption1ToJSON(
+  updateCreditGrantSecurityOption1: UpdateCreditGrantSecurityOption1,
+): string {
+  return JSON.stringify(
+    UpdateCreditGrantSecurityOption1$outboundSchema.parse(
+      updateCreditGrantSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateCreditGrantSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const UpdateCreditGrantSecurityOption2$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantSecurityOption2$Outbound,
+  UpdateCreditGrantSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function updateCreditGrantSecurityOption2ToJSON(
+  updateCreditGrantSecurityOption2: UpdateCreditGrantSecurityOption2,
+): string {
+  return JSON.stringify(
+    UpdateCreditGrantSecurityOption2$outboundSchema.parse(
+      updateCreditGrantSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateCreditGrantSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const UpdateCreditGrantSecurityOption3$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantSecurityOption3$Outbound,
+  UpdateCreditGrantSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function updateCreditGrantSecurityOption3ToJSON(
+  updateCreditGrantSecurityOption3: UpdateCreditGrantSecurityOption3,
+): string {
+  return JSON.stringify(
+    UpdateCreditGrantSecurityOption3$outboundSchema.parse(
+      updateCreditGrantSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateCreditGrantSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const UpdateCreditGrantSecurityOption4$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantSecurityOption4$Outbound,
+  UpdateCreditGrantSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function updateCreditGrantSecurityOption4ToJSON(
+  updateCreditGrantSecurityOption4: UpdateCreditGrantSecurityOption4,
+): string {
+  return JSON.stringify(
+    UpdateCreditGrantSecurityOption4$outboundSchema.parse(
+      updateCreditGrantSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateCreditGrantSecurity$Outbound = {
+  Option1?: UpdateCreditGrantSecurityOption1$Outbound | undefined;
+  Option2?: UpdateCreditGrantSecurityOption2$Outbound | undefined;
+  Option3?: UpdateCreditGrantSecurityOption3$Outbound | undefined;
+  Option4?: UpdateCreditGrantSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateCreditGrantSecurity$outboundSchema: z.ZodMiniType<
+  UpdateCreditGrantSecurity$Outbound,
+  UpdateCreditGrantSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => UpdateCreditGrantSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => UpdateCreditGrantSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => UpdateCreditGrantSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => UpdateCreditGrantSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function updateCreditGrantSecurityToJSON(
+  updateCreditGrantSecurity: UpdateCreditGrantSecurity,
+): string {
+  return JSON.stringify(
+    UpdateCreditGrantSecurity$outboundSchema.parse(updateCreditGrantSecurity),
+  );
+}
 
 /** @internal */
 export type UpdateCreditGrantRequestRequest$Outbound = {

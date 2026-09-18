@@ -16,11 +16,13 @@ export class CouponAssociations extends ClientSDK {
    * List coupon associations with optional filters. Coupon associations are created and removed via the subscription modify API.
    */
   async listCouponAssociations(
+    security: models.ListCouponAssociationsSecurity,
     request?: models.ListCouponAssociationsRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListCouponAssociationsResponse> {
     return unwrapAsync(couponAssociationsListCouponAssociations(
       this,
+      security,
       request,
       options,
     ));
@@ -33,11 +35,13 @@ export class CouponAssociations extends ClientSDK {
    * Get a single coupon association by ID. Coupon associations are created and removed via the subscription modify API.
    */
   async getCouponAssociation(
+    security: models.GetCouponAssociationSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CouponAssociationResponse> {
     return unwrapAsync(couponAssociationsGetCouponAssociation(
       this,
+      security,
       id,
       options,
     ));

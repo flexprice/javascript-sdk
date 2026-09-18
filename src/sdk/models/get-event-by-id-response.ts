@@ -22,6 +22,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type GetEventByIDResponse = {
   debugTracker?: DebugTracker | undefined;
   event?: Event | undefined;
+  events?: Array<Event> | undefined;
   processedEvents?: Array<FeatureUsageInfo> | undefined;
   status?: EventProcessingStatusType | undefined;
 };
@@ -34,6 +35,7 @@ export const GetEventByIDResponse$inboundSchema: z.ZodMiniType<
   z.object({
     debug_tracker: types.optional(DebugTracker$inboundSchema),
     event: types.optional(Event$inboundSchema),
+    events: types.optional(z.array(Event$inboundSchema)),
     processed_events: types.optional(z.array(FeatureUsageInfo$inboundSchema)),
     status: types.optional(EventProcessingStatusType$inboundSchema),
   }),

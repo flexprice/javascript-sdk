@@ -5,6 +5,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  CheckoutParams,
+  CheckoutParams$Outbound,
+  CheckoutParams$outboundSchema,
+} from "./checkout-params.js";
+import {
   CreateInvoiceLineItemRequest,
   CreateInvoiceLineItemRequest$Outbound,
   CreateInvoiceLineItemRequest$outboundSchema,
@@ -52,6 +57,7 @@ export type CreateInvoiceRequest = {
    */
   billingPeriod?: string | undefined;
   billingReason?: InvoiceBillingReason | undefined;
+  checkout?: CheckoutParams | undefined;
   /**
    * coupons
    */
@@ -156,6 +162,7 @@ export type CreateInvoiceRequest$Outbound = {
   amount_paid?: string | undefined;
   billing_period?: string | undefined;
   billing_reason?: string | undefined;
+  checkout?: CheckoutParams$Outbound | undefined;
   coupons?: Array<string> | undefined;
   currency: string;
   customer_id: string;
@@ -193,6 +200,7 @@ export const CreateInvoiceRequest$outboundSchema: z.ZodMiniType<
     amountPaid: z.optional(z.string()),
     billingPeriod: z.optional(z.string()),
     billingReason: z.optional(InvoiceBillingReason$outboundSchema),
+    checkout: z.optional(CheckoutParams$outboundSchema),
     coupons: z.optional(z.array(z.string())),
     currency: z.string(),
     customerId: z.string(),

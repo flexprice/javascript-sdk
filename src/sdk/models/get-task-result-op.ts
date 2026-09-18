@@ -5,12 +5,204 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+export type GetTaskResultSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type GetTaskResultSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type GetTaskResultSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type GetTaskResultSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type GetTaskResultSecurity = {
+  option1?: GetTaskResultSecurityOption1 | undefined;
+  option2?: GetTaskResultSecurityOption2 | undefined;
+  option3?: GetTaskResultSecurityOption3 | undefined;
+  option4?: GetTaskResultSecurityOption4 | undefined;
+};
+
 export type GetTaskResultRequest = {
   /**
    * Workflow ID
    */
   workflowId: string;
 };
+
+/** @internal */
+export type GetTaskResultSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTaskResultSecurityOption1$outboundSchema: z.ZodMiniType<
+  GetTaskResultSecurityOption1$Outbound,
+  GetTaskResultSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTaskResultSecurityOption1ToJSON(
+  getTaskResultSecurityOption1: GetTaskResultSecurityOption1,
+): string {
+  return JSON.stringify(
+    GetTaskResultSecurityOption1$outboundSchema.parse(
+      getTaskResultSecurityOption1,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTaskResultSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const GetTaskResultSecurityOption2$outboundSchema: z.ZodMiniType<
+  GetTaskResultSecurityOption2$Outbound,
+  GetTaskResultSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function getTaskResultSecurityOption2ToJSON(
+  getTaskResultSecurityOption2: GetTaskResultSecurityOption2,
+): string {
+  return JSON.stringify(
+    GetTaskResultSecurityOption2$outboundSchema.parse(
+      getTaskResultSecurityOption2,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTaskResultSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const GetTaskResultSecurityOption3$outboundSchema: z.ZodMiniType<
+  GetTaskResultSecurityOption3$Outbound,
+  GetTaskResultSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function getTaskResultSecurityOption3ToJSON(
+  getTaskResultSecurityOption3: GetTaskResultSecurityOption3,
+): string {
+  return JSON.stringify(
+    GetTaskResultSecurityOption3$outboundSchema.parse(
+      getTaskResultSecurityOption3,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTaskResultSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const GetTaskResultSecurityOption4$outboundSchema: z.ZodMiniType<
+  GetTaskResultSecurityOption4$Outbound,
+  GetTaskResultSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function getTaskResultSecurityOption4ToJSON(
+  getTaskResultSecurityOption4: GetTaskResultSecurityOption4,
+): string {
+  return JSON.stringify(
+    GetTaskResultSecurityOption4$outboundSchema.parse(
+      getTaskResultSecurityOption4,
+    ),
+  );
+}
+
+/** @internal */
+export type GetTaskResultSecurity$Outbound = {
+  Option1?: GetTaskResultSecurityOption1$Outbound | undefined;
+  Option2?: GetTaskResultSecurityOption2$Outbound | undefined;
+  Option3?: GetTaskResultSecurityOption3$Outbound | undefined;
+  Option4?: GetTaskResultSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const GetTaskResultSecurity$outboundSchema: z.ZodMiniType<
+  GetTaskResultSecurity$Outbound,
+  GetTaskResultSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => GetTaskResultSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => GetTaskResultSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => GetTaskResultSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => GetTaskResultSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function getTaskResultSecurityToJSON(
+  getTaskResultSecurity: GetTaskResultSecurity,
+): string {
+  return JSON.stringify(
+    GetTaskResultSecurity$outboundSchema.parse(getTaskResultSecurity),
+  );
+}
 
 /** @internal */
 export type GetTaskResultRequest$Outbound = {

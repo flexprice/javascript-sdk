@@ -3,6 +3,31 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
+
+export type ListApiKeysSecurityOption1 = {
+  apiKeyAuth: string;
+};
+
+export type ListApiKeysSecurityOption2 = {
+  apiKeyAuth: string;
+};
+
+export type ListApiKeysSecurityOption3 = {
+  bearerAuth: string;
+  environmentId: string;
+};
+
+export type ListApiKeysSecurityOption4 = {
+  bearerAuth: string;
+};
+
+export type ListApiKeysSecurity = {
+  option1?: ListApiKeysSecurityOption1 | undefined;
+  option2?: ListApiKeysSecurityOption2 | undefined;
+  option3?: ListApiKeysSecurityOption3 | undefined;
+  option4?: ListApiKeysSecurityOption4 | undefined;
+};
 
 export type ListApiKeysRequest = {
   /**
@@ -18,6 +43,166 @@ export type ListApiKeysRequest = {
    */
   status?: string | undefined;
 };
+
+/** @internal */
+export type ListApiKeysSecurityOption1$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListApiKeysSecurityOption1$outboundSchema: z.ZodMiniType<
+  ListApiKeysSecurityOption1$Outbound,
+  ListApiKeysSecurityOption1
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listApiKeysSecurityOption1ToJSON(
+  listApiKeysSecurityOption1: ListApiKeysSecurityOption1,
+): string {
+  return JSON.stringify(
+    ListApiKeysSecurityOption1$outboundSchema.parse(listApiKeysSecurityOption1),
+  );
+}
+
+/** @internal */
+export type ListApiKeysSecurityOption2$Outbound = {
+  ApiKeyAuth: string;
+};
+
+/** @internal */
+export const ListApiKeysSecurityOption2$outboundSchema: z.ZodMiniType<
+  ListApiKeysSecurityOption2$Outbound,
+  ListApiKeysSecurityOption2
+> = z.pipe(
+  z.object({
+    apiKeyAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      apiKeyAuth: "ApiKeyAuth",
+    });
+  }),
+);
+
+export function listApiKeysSecurityOption2ToJSON(
+  listApiKeysSecurityOption2: ListApiKeysSecurityOption2,
+): string {
+  return JSON.stringify(
+    ListApiKeysSecurityOption2$outboundSchema.parse(listApiKeysSecurityOption2),
+  );
+}
+
+/** @internal */
+export type ListApiKeysSecurityOption3$Outbound = {
+  BearerAuth: string;
+  EnvironmentId: string;
+};
+
+/** @internal */
+export const ListApiKeysSecurityOption3$outboundSchema: z.ZodMiniType<
+  ListApiKeysSecurityOption3$Outbound,
+  ListApiKeysSecurityOption3
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+    environmentId: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+      environmentId: "EnvironmentId",
+    });
+  }),
+);
+
+export function listApiKeysSecurityOption3ToJSON(
+  listApiKeysSecurityOption3: ListApiKeysSecurityOption3,
+): string {
+  return JSON.stringify(
+    ListApiKeysSecurityOption3$outboundSchema.parse(listApiKeysSecurityOption3),
+  );
+}
+
+/** @internal */
+export type ListApiKeysSecurityOption4$Outbound = {
+  BearerAuth: string;
+};
+
+/** @internal */
+export const ListApiKeysSecurityOption4$outboundSchema: z.ZodMiniType<
+  ListApiKeysSecurityOption4$Outbound,
+  ListApiKeysSecurityOption4
+> = z.pipe(
+  z.object({
+    bearerAuth: z.string(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      bearerAuth: "BearerAuth",
+    });
+  }),
+);
+
+export function listApiKeysSecurityOption4ToJSON(
+  listApiKeysSecurityOption4: ListApiKeysSecurityOption4,
+): string {
+  return JSON.stringify(
+    ListApiKeysSecurityOption4$outboundSchema.parse(listApiKeysSecurityOption4),
+  );
+}
+
+/** @internal */
+export type ListApiKeysSecurity$Outbound = {
+  Option1?: ListApiKeysSecurityOption1$Outbound | undefined;
+  Option2?: ListApiKeysSecurityOption2$Outbound | undefined;
+  Option3?: ListApiKeysSecurityOption3$Outbound | undefined;
+  Option4?: ListApiKeysSecurityOption4$Outbound | undefined;
+};
+
+/** @internal */
+export const ListApiKeysSecurity$outboundSchema: z.ZodMiniType<
+  ListApiKeysSecurity$Outbound,
+  ListApiKeysSecurity
+> = z.pipe(
+  z.object({
+    option1: z.optional(
+      z.lazy(() => ListApiKeysSecurityOption1$outboundSchema),
+    ),
+    option2: z.optional(
+      z.lazy(() => ListApiKeysSecurityOption2$outboundSchema),
+    ),
+    option3: z.optional(
+      z.lazy(() => ListApiKeysSecurityOption3$outboundSchema),
+    ),
+    option4: z.optional(
+      z.lazy(() => ListApiKeysSecurityOption4$outboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      option1: "Option1",
+      option2: "Option2",
+      option3: "Option3",
+      option4: "Option4",
+    });
+  }),
+);
+
+export function listApiKeysSecurityToJSON(
+  listApiKeysSecurity: ListApiKeysSecurity,
+): string {
+  return JSON.stringify(
+    ListApiKeysSecurity$outboundSchema.parse(listApiKeysSecurity),
+  );
+}
 
 /** @internal */
 export type ListApiKeysRequest$Outbound = {

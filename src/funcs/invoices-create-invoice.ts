@@ -10,7 +10,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
+import { resolveSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { FlexPriceError } from "../sdk/models/flex-price-error.js";
 import {
@@ -31,9 +31,11 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when creating a manual or one-off invoice (e.g. custom charge or non-recurring billing). Invoice is created in draft; finalize when ready.
+ * Pass a `checkout` object to gate the invoice behind a hosted payment session: the invoice stays DRAFT with no invoice number, and the response carries `checkout_session.payment_action.url` for the customer to pay. It finalizes only when the payment webhook lands; if the session expires the invoice is voided and archived. Poll `GET /checkout/sessions/{id}` until `terminal` is true. One-off invoices only.
  */
 export function invoicesCreateInvoice(
   client: FlexpriceCore,
+  security: models.CreateInvoiceSecurity,
   request: models.CreateInvoiceRequest,
   options?: RequestOptions,
 ): APIPromise<
@@ -52,6 +54,7 @@ export function invoicesCreateInvoice(
 > {
   return new APIPromise($do(
     client,
+    security,
     request,
     options,
   ));
@@ -59,6 +62,7 @@ export function invoicesCreateInvoice(
 
 async function $do(
   client: FlexpriceCore,
+  security: models.CreateInvoiceSecurity,
   request: models.CreateInvoiceRequest,
   options?: RequestOptions,
 ): Promise<
@@ -96,9 +100,41 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const secConfig = await extractSecurity(client._options.apiKeyAuth);
-  const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
+  const requestSecurity = resolveSecurity(
+    [
+      {
+        fieldName: "x-api-key",
+        type: "apiKey:header",
+        value: security?.option1?.apiKeyAuth,
+      },
+    ],
+    [
+      {
+        fieldName: "x-api-key",
+        type: "apiKey:header",
+        value: security?.option2?.apiKeyAuth,
+      },
+    ],
+    [
+      {
+        fieldName: "Authorization",
+        type: "http:bearer",
+        value: security?.option3?.bearerAuth,
+      },
+      {
+        fieldName: "X-Environment-ID",
+        type: "apiKey:header",
+        value: security?.option3?.environmentId,
+      },
+    ],
+    [
+      {
+        fieldName: "Authorization",
+        type: "http:bearer",
+        value: security?.option4?.bearerAuth,
+      },
+    ],
+  );
 
   const context = {
     options: client._options,
@@ -108,7 +144,7 @@ async function $do(
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: client._options.apiKeyAuth,
+    securitySource: security,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
