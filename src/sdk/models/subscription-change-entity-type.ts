@@ -8,7 +8,7 @@ import { OpenEnum } from "../../types/enums.js";
 
 export const SubscriptionChangeEntityType = {
   Plan: "plan",
-  Addon: "addon",
+  AddonAssociation: "addon_association",
   CreditGrant: "credit_grant",
   Entitlement: "entitlement",
   EntitlementGrant: "entitlement_grant",

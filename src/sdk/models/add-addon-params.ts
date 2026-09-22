@@ -9,15 +9,22 @@ import {
   AddAddonRef$Outbound,
   AddAddonRef$outboundSchema,
 } from "./add-addon-ref.js";
+import {
+  RemoveAddonRef,
+  RemoveAddonRef$Outbound,
+  RemoveAddonRef$outboundSchema,
+} from "./remove-addon-ref.js";
 
 export type AddAddonParams = {
   addons?: Array<AddAddonRef> | undefined;
+  removes?: Array<RemoveAddonRef> | undefined;
   subscriptionId?: string | undefined;
 };
 
 /** @internal */
 export type AddAddonParams$Outbound = {
   addons?: Array<AddAddonRef$Outbound> | undefined;
+  removes?: Array<RemoveAddonRef$Outbound> | undefined;
   subscription_id?: string | undefined;
 };
 
@@ -28,6 +35,7 @@ export const AddAddonParams$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addons: z.optional(z.array(AddAddonRef$outboundSchema)),
+    removes: z.optional(z.array(RemoveAddonRef$outboundSchema)),
     subscriptionId: z.optional(z.string()),
   }),
   z.transform((v) => {

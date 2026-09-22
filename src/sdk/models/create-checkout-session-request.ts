@@ -22,12 +22,18 @@ import {
   CheckoutPaymentProvider,
   CheckoutPaymentProvider$outboundSchema,
 } from "./checkout-payment-provider.js";
+import {
+  EntityCreationOptions,
+  EntityCreationOptions$Outbound,
+  EntityCreationOptions$outboundSchema,
+} from "./entity-creation-options.js";
 
 export type CreateCheckoutSessionRequest = {
   action: CheckoutAction;
   cancelUrl?: string | undefined;
   configuration?: CheckoutConfiguration | undefined;
   customerExternalId: string;
+  entityCreationOptions?: EntityCreationOptions | undefined;
   failureUrl?: string | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -42,6 +48,7 @@ export type CreateCheckoutSessionRequest$Outbound = {
   cancel_url?: string | undefined;
   configuration?: CheckoutConfiguration$Outbound | undefined;
   customer_external_id: string;
+  entity_creation_options?: EntityCreationOptions$Outbound | undefined;
   failure_url?: string | undefined;
   idempotency_key?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -60,6 +67,7 @@ export const CreateCheckoutSessionRequest$outboundSchema: z.ZodMiniType<
     cancelUrl: z.optional(z.string()),
     configuration: z.optional(CheckoutConfiguration$outboundSchema),
     customerExternalId: z.string(),
+    entityCreationOptions: z.optional(EntityCreationOptions$outboundSchema),
     failureUrl: z.optional(z.string()),
     idempotencyKey: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
@@ -73,6 +81,7 @@ export const CreateCheckoutSessionRequest$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       cancelUrl: "cancel_url",
       customerExternalId: "customer_external_id",
+      entityCreationOptions: "entity_creation_options",
       failureUrl: "failure_url",
       idempotencyKey: "idempotency_key",
       paymentProvider: "payment_provider",

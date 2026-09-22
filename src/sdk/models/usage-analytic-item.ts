@@ -61,6 +61,10 @@ export type UsageAnalyticItem = {
    */
   eventCount?: number | undefined;
   eventName?: string | undefined;
+  /**
+   * Populated only when "external_customer_id" is a group_by dimension
+   */
+  externalCustomerId?: string | undefined;
   feature?: Feature | undefined;
   featureId?: string | undefined;
   group?: GroupGroup | undefined;
@@ -127,6 +131,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     event_count: types.optional(types.number()),
     event_name: types.optional(types.string()),
+    external_customer_id: types.optional(types.string()),
     feature: types.optional(Feature$inboundSchema),
     feature_id: types.optional(types.string()),
     group: types.optional(GroupGroup$inboundSchema),
@@ -164,6 +169,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
       "commitment_info": "commitmentInfo",
       "event_count": "eventCount",
       "event_name": "eventName",
+      "external_customer_id": "externalCustomerId",
       "feature_id": "featureId",
       "meter_id": "meterId",
       "plan_id": "planId",

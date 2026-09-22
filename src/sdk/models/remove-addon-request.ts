@@ -8,9 +8,11 @@ import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
+import { ScheduleType, ScheduleType$outboundSchema } from "./schedule-type.js";
 
 export type RemoveAddonRequest = {
   addonAssociationId: string;
+  changeAt?: ScheduleType | undefined;
   /**
    * EffectiveDate defaults to period end when nil; mid-period with create_prorations issues a wallet credit.
    */
@@ -22,6 +24,7 @@ export type RemoveAddonRequest = {
 /** @internal */
 export type RemoveAddonRequest$Outbound = {
   addon_association_id: string;
+  change_at?: string | undefined;
   effective_date?: string | undefined;
   proration_behavior?: string | undefined;
   reason?: string | undefined;
@@ -34,6 +37,7 @@ export const RemoveAddonRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     addonAssociationId: z.string(),
+    changeAt: z.optional(ScheduleType$outboundSchema),
     effectiveDate: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
@@ -43,6 +47,7 @@ export const RemoveAddonRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       addonAssociationId: "addon_association_id",
+      changeAt: "change_at",
       effectiveDate: "effective_date",
       prorationBehavior: "proration_behavior",
     });

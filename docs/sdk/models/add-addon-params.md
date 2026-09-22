@@ -10,7 +10,8 @@ let value: AddAddonParams = {};
 
 ## Fields
 
-| Field                                                     | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `addons`                                                  | [models.AddAddonRef](../../sdk/models/add-addon-ref.md)[] | :heavy_minus_sign:                                        | N/A                                                       |
-| `subscriptionId`                                          | *string*                                                  | :heavy_minus_sign:                                        | N/A                                                       |
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `addons`                                                        | [models.AddAddonRef](../../sdk/models/add-addon-ref.md)[]       | :heavy_minus_sign:                                              | N/A                                                             |
+| `removes`                                                       | [models.RemoveAddonRef](../../sdk/models/remove-addon-ref.md)[] | :heavy_minus_sign:                                              | N/A                                                             |
+| `subscriptionId`                                                | *string*                                                        | :heavy_minus_sign:                                              | N/A                                                             |

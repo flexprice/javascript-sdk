@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Addons } from "./addons.js";
 import { AlertSettings } from "./alert-settings.js";
 import { Alerts } from "./alerts.js";
+import { Analytics } from "./analytics.js";
 import { Checkout } from "./checkout.js";
 import { Costs } from "./costs.js";
 import { CouponAssociations } from "./coupon-associations.js";
@@ -64,6 +65,11 @@ export class Flexprice extends ClientSDK {
   private _alertSettings?: AlertSettings;
   get alertSettings(): AlertSettings {
     return (this._alertSettings ??= new AlertSettings(this._options));
+  }
+
+  private _analytics?: Analytics;
+  get analytics(): Analytics {
+    return (this._analytics ??= new Analytics(this._options));
   }
 
   private _checkout?: Checkout;

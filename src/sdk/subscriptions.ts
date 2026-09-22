@@ -513,7 +513,7 @@ export class Subscriptions extends ClientSDK {
    * Execute subscription modification
    *
    * @remarks
-   * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove).
+   * Execute a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, a single addon add/remove, or a batch of addon adds and removes settled as one netted document).
    */
   async executeSubscriptionModify(
     security: models.ExecuteSubscriptionModifySecurity,
@@ -534,7 +534,7 @@ export class Subscriptions extends ClientSDK {
    * Preview subscription modification
    *
    * @remarks
-   * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, or addon add/remove) without committing changes.
+   * Preview the impact of a mid-cycle subscription modification (inheritance, quantity change, grouped invoicing, trial end, coupon, tax, a single addon add/remove, or a batch of addon adds and removes) without committing changes.
    */
   async previewSubscriptionModify(
     security: models.PreviewSubscriptionModifySecurity,

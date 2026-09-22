@@ -3,14 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const SortDirection = {
   Asc: "asc",
   Desc: "desc",
 } as const;
-export type SortDirection = ClosedEnum<typeof SortDirection>;
+export type SortDirection = OpenEnum<typeof SortDirection>;
 
 /** @internal */
-export const SortDirection$outboundSchema: z.ZodMiniEnum<typeof SortDirection> =
-  z.enum(SortDirection);
+export const SortDirection$inboundSchema: z.ZodMiniType<
+  SortDirection,
+  unknown
+> = openEnums.inboundSchema(SortDirection);
+/** @internal */
+export const SortDirection$outboundSchema: z.ZodMiniType<
+  string,
+  SortDirection
+> = openEnums.outboundSchema(SortDirection);

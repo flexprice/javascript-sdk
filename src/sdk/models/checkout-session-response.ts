@@ -24,6 +24,10 @@ import {
   CheckoutStatus$inboundSchema,
 } from "./checkout-status.js";
 import {
+  EntityCreationResult,
+  EntityCreationResult$inboundSchema,
+} from "./entity-creation-result.js";
+import {
   PaymentAction,
   PaymentAction$inboundSchema,
 } from "./payment-action.js";
@@ -39,6 +43,7 @@ export type CheckoutSessionResponse = {
   completedAt?: Date | undefined;
   createdAt?: Date | undefined;
   customerId?: string | undefined;
+  entityCreationResult?: EntityCreationResult | undefined;
   expiresAt?: Date | undefined;
   failureReason?: string | undefined;
   failureUrl?: string | undefined;
@@ -92,6 +97,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
     completed_at: types.optional(types.date()),
     created_at: types.optional(types.date()),
     customer_id: types.optional(types.string()),
+    entity_creation_result: types.optional(EntityCreationResult$inboundSchema),
     expires_at: types.optional(types.date()),
     failure_reason: types.optional(types.string()),
     failure_url: types.optional(types.string()),
@@ -117,6 +123,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
       "completed_at": "completedAt",
       "created_at": "createdAt",
       "customer_id": "customerId",
+      "entity_creation_result": "entityCreationResult",
       "expires_at": "expiresAt",
       "failure_reason": "failureReason",
       "failure_url": "failureUrl",

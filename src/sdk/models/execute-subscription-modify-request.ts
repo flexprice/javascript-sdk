@@ -15,6 +15,11 @@ import {
   SubModifyAddonParams$outboundSchema,
 } from "./sub-modify-addon-params.js";
 import {
+  SubModifyBulkAddonParams,
+  SubModifyBulkAddonParams$Outbound,
+  SubModifyBulkAddonParams$outboundSchema,
+} from "./sub-modify-bulk-addon-params.js";
+import {
   SubModifyCouponParams,
   SubModifyCouponParams$Outbound,
   SubModifyCouponParams$outboundSchema,
@@ -50,6 +55,7 @@ import {
 } from "./subscription-modify-type.js";
 
 export type ExecuteSubscriptionModifyRequest = {
+  addonBulkParams?: SubModifyBulkAddonParams | undefined;
   addonParams?: SubModifyAddonParams | undefined;
   checkout?: CheckoutParams | undefined;
   couponParams?: SubModifyCouponParams | undefined;
@@ -63,6 +69,7 @@ export type ExecuteSubscriptionModifyRequest = {
 
 /** @internal */
 export type ExecuteSubscriptionModifyRequest$Outbound = {
+  addon_bulk_params?: SubModifyBulkAddonParams$Outbound | undefined;
   addon_params?: SubModifyAddonParams$Outbound | undefined;
   checkout?: CheckoutParams$Outbound | undefined;
   coupon_params?: SubModifyCouponParams$Outbound | undefined;
@@ -82,6 +89,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   ExecuteSubscriptionModifyRequest
 > = z.pipe(
   z.object({
+    addonBulkParams: z.optional(SubModifyBulkAddonParams$outboundSchema),
     addonParams: z.optional(SubModifyAddonParams$outboundSchema),
     checkout: z.optional(CheckoutParams$outboundSchema),
     couponParams: z.optional(SubModifyCouponParams$outboundSchema),
@@ -98,6 +106,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      addonBulkParams: "addon_bulk_params",
       addonParams: "addon_params",
       couponParams: "coupon_params",
       groupedInvoicingParams: "grouped_invoicing_params",
