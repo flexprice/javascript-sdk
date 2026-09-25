@@ -23,6 +23,7 @@ export type AggregatedEntitlementBucket = {
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
   grantQuota?: string | undefined;
+  grantUnlimited?: boolean | undefined;
   sourceEntityId?: string | undefined;
   usageLimit?: number | undefined;
 };
@@ -40,6 +41,7 @@ export const AggregatedEntitlementBucket$inboundSchema: z.ZodMiniType<
     grant_duration_value: types.optional(types.number()),
     grant_measure: types.optional(EntitlementGrantMeasure$inboundSchema),
     grant_quota: types.optional(types.string()),
+    grant_unlimited: types.optional(types.boolean()),
     source_entity_id: types.optional(types.string()),
     usage_limit: types.optional(types.number()),
   }),
@@ -50,6 +52,7 @@ export const AggregatedEntitlementBucket$inboundSchema: z.ZodMiniType<
       "grant_duration_value": "grantDurationValue",
       "grant_measure": "grantMeasure",
       "grant_quota": "grantQuota",
+      "grant_unlimited": "grantUnlimited",
       "source_entity_id": "sourceEntityId",
       "usage_limit": "usageLimit",
     });

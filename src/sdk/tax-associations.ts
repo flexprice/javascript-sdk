@@ -19,7 +19,6 @@ export class TaxAssociations extends ClientSDK {
    * Use when listing tax associations (e.g. tax config or audit). Returns list with optional filtering.
    */
   async listTaxAssociations(
-    security: models.ListTaxAssociationsSecurity,
     entityType?: string | undefined,
     entityId?: string | undefined,
     externalCustomerId?: string | undefined,
@@ -28,7 +27,6 @@ export class TaxAssociations extends ClientSDK {
   ): Promise<models.ListTaxAssociationsResponse> {
     return unwrapAsync(taxAssociationsListTaxAssociations(
       this,
-      security,
       entityType,
       entityId,
       externalCustomerId,
@@ -44,13 +42,11 @@ export class TaxAssociations extends ClientSDK {
    * Use when linking a tax rate to an entity (e.g. customer, product, or region) so that rate applies on invoices.
    */
   async createTaxAssociation(
-    security: models.CreateTaxAssociationSecurity,
     request: models.CreateTaxAssociationRequest,
     options?: RequestOptions,
   ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsCreateTaxAssociation(
       this,
-      security,
       request,
       options,
     ));
@@ -63,13 +59,11 @@ export class TaxAssociations extends ClientSDK {
    * Use when you need to load a single tax association (e.g. for display or editing).
    */
   async getTaxAssociation(
-    security: models.GetTaxAssociationSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsGetTaxAssociation(
       this,
-      security,
       id,
       options,
     ));
@@ -82,14 +76,12 @@ export class TaxAssociations extends ClientSDK {
    * Use when changing a tax association (e.g. switch rate or entity). Request body contains the fields to update.
    */
   async updateTaxAssociation(
-    security: models.UpdateTaxAssociationSecurity,
     id: string,
     body: models.TaxAssociationUpdateRequest,
     options?: RequestOptions,
   ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsUpdateTaxAssociation(
       this,
-      security,
       id,
       body,
       options,
@@ -103,13 +95,11 @@ export class TaxAssociations extends ClientSDK {
    * Use when removing a tax association (e.g. entity no longer subject to that rate).
    */
   async deleteTaxAssociation(
-    security: models.DeleteTaxAssociationSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.TaxAssociationResponse> {
     return unwrapAsync(taxAssociationsDeleteTaxAssociation(
       this,
-      security,
       id,
       options,
     ));

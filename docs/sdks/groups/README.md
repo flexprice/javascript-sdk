@@ -19,14 +19,12 @@ Use when organizing entities into a group (e.g. for filtering prices or plans by
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.groups.createGroup({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     entityType: "<value>",
     lookupKey: "<value>",
     name: "<value>",
@@ -48,14 +46,12 @@ import { groupsCreateGroup } from "@flexprice/sdk/funcs/groups-create-group.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await groupsCreateGroup(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     entityType: "<value>",
     lookupKey: "<value>",
     name: "<value>",
@@ -76,7 +72,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateGroupRequest](../../sdk/models/create-group-request.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateGroupSecurity](../../sdk/models/create-group-security.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -103,14 +98,12 @@ Use when listing or searching groups (e.g. admin catalog). Returns a paginated l
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.groups.queryGroup({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const result = await flexprice.groups.queryGroup({});
 
   console.log(result);
 }
@@ -128,14 +121,12 @@ import { groupsQueryGroup } from "@flexprice/sdk/funcs/groups-query-group.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await groupsQueryGroup(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const res = await groupsQueryGroup(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -152,7 +143,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.GroupFilter](../../sdk/models/group-filter.md)                                                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.QueryGroupSecurity](../../sdk/models/query-group-security.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -179,14 +169,12 @@ Use when you need to load a single group (e.g. for display or to assign entities
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.groups.getGroup({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.groups.getGroup("<id>");
 
   console.log(result);
 }
@@ -204,14 +192,12 @@ import { groupsGetGroup } from "@flexprice/sdk/funcs/groups-get-group.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await groupsGetGroup(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await groupsGetGroup(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -227,7 +213,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetGroupSecurity](../../sdk/models/get-group-security.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Group ID                                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -255,14 +240,12 @@ Use when removing a group and clearing its entity associations (e.g. retiring a 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  await flexprice.groups.deleteGroup({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  await flexprice.groups.deleteGroup("<id>");
 
 
 }
@@ -280,14 +263,12 @@ import { groupsDeleteGroup } from "@flexprice/sdk/funcs/groups-delete-group.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await groupsDeleteGroup(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await groupsDeleteGroup(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     
@@ -303,7 +284,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.DeleteGroupSecurity](../../sdk/models/delete-group-security.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Group ID                                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |

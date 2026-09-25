@@ -20,14 +20,12 @@ Use when defining a new feature or capability to gate or meter (e.g. feature fla
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.features.createFeature({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     meter: {
       aggregation: {},
       eventName: "api_request",
@@ -54,14 +52,12 @@ import { featuresCreateFeature } from "@flexprice/sdk/funcs/features-create-feat
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await featuresCreateFeature(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     meter: {
       aggregation: {},
       eventName: "api_request",
@@ -87,7 +83,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateFeatureRequest](../../sdk/models/create-feature-request.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateFeatureSecurity](../../sdk/models/create-feature-security.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -114,14 +109,12 @@ Use when listing or searching features (e.g. catalog or entitlement setup). Retu
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.features.queryFeature({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const result = await flexprice.features.queryFeature({});
 
   console.log(result);
 }
@@ -139,14 +132,12 @@ import { featuresQueryFeature } from "@flexprice/sdk/funcs/features-query-featur
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await featuresQueryFeature(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const res = await featuresQueryFeature(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -163,7 +154,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.FeatureFilter](../../sdk/models/feature-filter.md)                                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.QueryFeatureSecurity](../../sdk/models/query-feature-security.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -190,14 +180,12 @@ Use when changing feature definition (e.g. name, type, or meter). Request body c
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.features.updateFeature({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const result = await flexprice.features.updateFeature("<id>", {});
 
   console.log(result);
 }
@@ -215,14 +203,12 @@ import { featuresUpdateFeature } from "@flexprice/sdk/funcs/features-update-feat
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await featuresUpdateFeature(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const res = await featuresUpdateFeature(flexprice, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -238,7 +224,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.UpdateFeatureSecurity](../../sdk/models/update-feature-security.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Feature ID                                                                                                                                                                     |
 | `body`                                                                                                                                                                         | [models.UpdateFeatureRequest](../../sdk/models/update-feature-request.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | Feature update data                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -267,14 +252,12 @@ Use when retiring a feature (e.g. deprecated capability). Returns 200 with succe
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.features.deleteFeature({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.features.deleteFeature("<id>");
 
   console.log(result);
 }
@@ -292,14 +275,12 @@ import { featuresDeleteFeature } from "@flexprice/sdk/funcs/features-delete-feat
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await featuresDeleteFeature(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await featuresDeleteFeature(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -315,7 +296,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.DeleteFeatureSecurity](../../sdk/models/delete-feature-security.md)                                                                                                    | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Feature ID                                                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -343,14 +323,12 @@ Clone an existing feature
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.features.cloneFeature({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const result = await flexprice.features.cloneFeature("<id>", {});
 
   console.log(result);
 }
@@ -368,14 +346,12 @@ import { featuresCloneFeature } from "@flexprice/sdk/funcs/features-clone-featur
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await featuresCloneFeature(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const res = await featuresCloneFeature(flexprice, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -391,7 +367,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.CloneFeatureSecurity](../../sdk/models/clone-feature-security.md)                                                                                                      | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Source Feature ID                                                                                                                                                              |
 | `body`                                                                                                                                                                         | [models.CloneFeatureRequest](../../sdk/models/clone-feature-request.md)                                                                                                        | :heavy_check_mark:                                                                                                                                                             | Clone configuration                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |

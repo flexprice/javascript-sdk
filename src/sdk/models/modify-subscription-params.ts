@@ -9,9 +9,14 @@ import {
   ModifySubscriptionLineItem$Outbound,
   ModifySubscriptionLineItem$outboundSchema,
 } from "./modify-subscription-line-item.js";
+import {
+  ModifySubscriptionType,
+  ModifySubscriptionType$outboundSchema,
+} from "./modify-subscription-type.js";
 
 export type ModifySubscriptionParams = {
   lineItemModifications?: Array<ModifySubscriptionLineItem> | undefined;
+  modifyType?: ModifySubscriptionType | undefined;
   subscriptionId?: string | undefined;
 };
 
@@ -20,6 +25,7 @@ export type ModifySubscriptionParams$Outbound = {
   line_item_modifications?:
     | Array<ModifySubscriptionLineItem$Outbound>
     | undefined;
+  modify_type?: string | undefined;
   subscription_id?: string | undefined;
 };
 
@@ -32,11 +38,13 @@ export const ModifySubscriptionParams$outboundSchema: z.ZodMiniType<
     lineItemModifications: z.optional(
       z.array(ModifySubscriptionLineItem$outboundSchema),
     ),
+    modifyType: z.optional(ModifySubscriptionType$outboundSchema),
     subscriptionId: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       lineItemModifications: "line_item_modifications",
+      modifyType: "modify_type",
       subscriptionId: "subscription_id",
     });
   }),

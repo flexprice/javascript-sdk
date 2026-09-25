@@ -12,6 +12,7 @@ export const ScheduledTaskEntityType = {
   CreditTopups: "credit_topups",
   CreditUsage: "credit_usage",
   UsageAnalytics: "usage_analytics",
+  RevenueFacts: "revenue_facts",
 } as const;
 export type ScheduledTaskEntityType = OpenEnum<typeof ScheduledTaskEntityType>;
 

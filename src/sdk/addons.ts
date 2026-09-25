@@ -20,13 +20,11 @@ export class Addons extends ClientSDK {
    * Use when defining an optional purchasable item (e.g. extra storage or support tier). Ideal for add-ons that customers can attach to a subscription.
    */
   async createAddon(
-    security: models.CreateAddonSecurity,
     request: models.CreateAddonRequest,
     options?: RequestOptions,
   ): Promise<models.CreateAddonResponse> {
     return unwrapAsync(addonsCreateAddon(
       this,
-      security,
       request,
       options,
     ));
@@ -39,13 +37,11 @@ export class Addons extends ClientSDK {
    * Use when resolving an addon by external id (e.g. from your product catalog). Ideal for integrations.
    */
   async getAddonByLookupKey(
-    security: models.GetAddonByLookupKeySecurity,
     lookupKey: string,
     options?: RequestOptions,
   ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsGetAddonByLookupKey(
       this,
-      security,
       lookupKey,
       options,
     ));
@@ -58,13 +54,11 @@ export class Addons extends ClientSDK {
    * Use when listing or searching addons (e.g. catalog or subscription builder). Returns a paginated list; supports filtering and sorting.
    */
   async queryAddon(
-    security: models.QueryAddonSecurity,
     request: models.AddonFilter,
     options?: RequestOptions,
   ): Promise<models.ListAddonsResponse> {
     return unwrapAsync(addonsQueryAddon(
       this,
-      security,
       request,
       options,
     ));
@@ -77,13 +71,11 @@ export class Addons extends ClientSDK {
    * Use when you need to load a single addon (e.g. for display or to attach to a subscription).
    */
   async getAddon(
-    security: models.GetAddonSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsGetAddon(
       this,
-      security,
       id,
       options,
     ));
@@ -96,14 +88,12 @@ export class Addons extends ClientSDK {
    * Use when changing addon details (e.g. name, pricing, or metadata).
    */
   async updateAddon(
-    security: models.UpdateAddonSecurity,
     id: string,
     body: models.UpdateAddonRequest,
     options?: RequestOptions,
   ): Promise<models.AddonResponse> {
     return unwrapAsync(addonsUpdateAddon(
       this,
-      security,
       id,
       body,
       options,
@@ -117,13 +107,11 @@ export class Addons extends ClientSDK {
    * Use when retiring an addon (e.g. end-of-life). Returns 200 with success message.
    */
   async deleteAddon(
-    security: models.DeleteAddonSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(addonsDeleteAddon(
       this,
-      security,
       id,
       options,
     ));

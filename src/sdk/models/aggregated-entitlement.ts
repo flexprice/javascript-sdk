@@ -16,9 +16,18 @@ import {
   EntitlementAggregationMode$inboundSchema,
 } from "./entitlement-aggregation-mode.js";
 import {
+  EntitlementGrantDurationUnit,
+  EntitlementGrantDurationUnit$inboundSchema,
+} from "./entitlement-grant-duration-unit.js";
+import {
+  EntitlementGrantMeasure,
+  EntitlementGrantMeasure$inboundSchema,
+} from "./entitlement-grant-measure.js";
+import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
 } from "./entitlement-usage-reset-period.js";
+import { GrantState, GrantState$inboundSchema } from "./grant-state.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ConfigValue = {};
@@ -27,6 +36,12 @@ export type AggregatedEntitlement = {
   aggregationMode?: EntitlementAggregationMode | undefined;
   buckets?: Array<AggregatedEntitlementBucket> | undefined;
   configValues?: Array<{ [k: string]: ConfigValue }> | undefined;
+  grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
+  grantDurationValue?: number | undefined;
+  grantMeasure?: EntitlementGrantMeasure | undefined;
+  grantQuota?: string | undefined;
+  grantState?: GrantState | undefined;
+  grantUnlimited?: boolean | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   staticValues?: Array<string> | undefined;
@@ -59,6 +74,14 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
     config_values: types.optional(
       z.array(z.record(z.string(), z.lazy(() => ConfigValue$inboundSchema))),
     ),
+    grant_duration_unit: types.optional(
+      EntitlementGrantDurationUnit$inboundSchema,
+    ),
+    grant_duration_value: types.optional(types.number()),
+    grant_measure: types.optional(EntitlementGrantMeasure$inboundSchema),
+    grant_quota: types.optional(types.string()),
+    grant_state: types.optional(GrantState$inboundSchema),
+    grant_unlimited: types.optional(types.boolean()),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
     static_values: types.optional(z.array(types.string())),
@@ -71,6 +94,12 @@ export const AggregatedEntitlement$inboundSchema: z.ZodMiniType<
     return remap$(v, {
       "aggregation_mode": "aggregationMode",
       "config_values": "configValues",
+      "grant_duration_unit": "grantDurationUnit",
+      "grant_duration_value": "grantDurationValue",
+      "grant_measure": "grantMeasure",
+      "grant_quota": "grantQuota",
+      "grant_state": "grantState",
+      "grant_unlimited": "grantUnlimited",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",
       "static_values": "staticValues",

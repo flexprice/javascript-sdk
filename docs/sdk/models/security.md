@@ -5,11 +5,13 @@
 ```typescript
 import { Security } from "@flexprice/sdk/sdk/models";
 
-let value: Security = {};
+let value: Security = {
+  apiKeyAuth: "<value>",
+};
 ```
 
 ## Fields
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `apiKeyAuth`       | *string*           | :heavy_minus_sign: | N/A                |
+| `apiKeyAuth`       | *string*           | :heavy_check_mark: | N/A                |

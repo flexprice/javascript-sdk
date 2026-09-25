@@ -19,13 +19,11 @@ export class Features extends ClientSDK {
    * Use when defining a new feature or capability to gate or meter (e.g. feature flags or usage-based limits). Ideal for boolean or usage features.
    */
   async createFeature(
-    security: models.CreateFeatureSecurity,
     request: models.CreateFeatureRequest,
     options?: RequestOptions,
   ): Promise<models.FeatureResponse> {
     return unwrapAsync(featuresCreateFeature(
       this,
-      security,
       request,
       options,
     ));
@@ -38,13 +36,11 @@ export class Features extends ClientSDK {
    * Use when listing or searching features (e.g. catalog or entitlement setup). Returns a paginated list; supports filtering and sorting.
    */
   async queryFeature(
-    security: models.QueryFeatureSecurity,
     request: models.FeatureFilter,
     options?: RequestOptions,
   ): Promise<models.ListFeaturesResponse> {
     return unwrapAsync(featuresQueryFeature(
       this,
-      security,
       request,
       options,
     ));
@@ -57,14 +53,12 @@ export class Features extends ClientSDK {
    * Use when changing feature definition (e.g. name, type, or meter). Request body contains the fields to update.
    */
   async updateFeature(
-    security: models.UpdateFeatureSecurity,
     id: string,
     body: models.UpdateFeatureRequest,
     options?: RequestOptions,
   ): Promise<models.FeatureResponse> {
     return unwrapAsync(featuresUpdateFeature(
       this,
-      security,
       id,
       body,
       options,
@@ -78,13 +72,11 @@ export class Features extends ClientSDK {
    * Use when retiring a feature (e.g. deprecated capability). Returns 200 with success message.
    */
   async deleteFeature(
-    security: models.DeleteFeatureSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(featuresDeleteFeature(
       this,
-      security,
       id,
       options,
     ));
@@ -97,14 +89,12 @@ export class Features extends ClientSDK {
    * Clone an existing feature
    */
   async cloneFeature(
-    security: models.CloneFeatureSecurity,
     id: string,
     body: models.CloneFeatureRequest,
     options?: RequestOptions,
   ): Promise<models.FeatureResponse> {
     return unwrapAsync(featuresCloneFeature(
       this,
-      security,
       id,
       body,
       options,

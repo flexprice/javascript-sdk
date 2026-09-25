@@ -18,14 +18,12 @@ Use when listing API keys (e.g. admin view or rotating keys). Returns a paginate
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.secrets.listApiKeys({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const result = await flexprice.secrets.listApiKeys();
 
   console.log(result);
 }
@@ -43,14 +41,12 @@ import { secretsListApiKeys } from "@flexprice/sdk/funcs/secrets-list-api-keys.j
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await secretsListApiKeys(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const res = await secretsListApiKeys(flexprice);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -66,7 +62,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.ListApiKeysSecurity](../../sdk/models/list-api-keys-security.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Limit                                                                                                                                                                          |
 | `offset`                                                                                                                                                                       | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Offset                                                                                                                                                                         |
 | `status`                                                                                                                                                                       | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Status (published/archived)                                                                                                                                                    |
@@ -96,14 +91,12 @@ Use when issuing a new API key (e.g. for a service account or for the current us
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.secrets.createApiKey({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     name: "<value>",
     type: "publishable_key",
   });
@@ -124,14 +117,12 @@ import { secretsCreateApiKey } from "@flexprice/sdk/funcs/secrets-create-api-key
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await secretsCreateApiKey(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     name: "<value>",
     type: "publishable_key",
   });
@@ -151,7 +142,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateAPIKeyRequest](../../sdk/models/create-api-key-request.md)                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateApiKeySecurity](../../sdk/models/create-api-key-security.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -178,14 +168,12 @@ Use when revoking an API key (e.g. rotation or compromise). Permanently invalida
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  await flexprice.secrets.deleteApiKey({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  await flexprice.secrets.deleteApiKey("<id>");
 
 
 }
@@ -203,14 +191,12 @@ import { secretsDeleteApiKey } from "@flexprice/sdk/funcs/secrets-delete-api-key
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await secretsDeleteApiKey(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await secretsDeleteApiKey(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     
@@ -226,7 +212,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.DeleteApiKeySecurity](../../sdk/models/delete-api-key-security.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | API key ID                                                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |

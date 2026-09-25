@@ -23,14 +23,12 @@ Use when checking what features or limits an addon grants (e.g. for display or e
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.getAddonEntitlements({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.entitlements.getAddonEntitlements("<id>");
 
   console.log(result);
 }
@@ -48,14 +46,12 @@ import { entitlementsGetAddonEntitlements } from "@flexprice/sdk/funcs/entitleme
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsGetAddonEntitlements(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await entitlementsGetAddonEntitlements(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -71,7 +67,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetAddonEntitlementsSecurity](../../sdk/models/get-addon-entitlements-security.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Addon ID                                                                                                                                                                       |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -99,14 +94,12 @@ Use when attaching a feature (and its limit) to a plan or addon (e.g. "10 seats"
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.entitlements.createEntitlement({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     featureId: "<id>",
     featureType: "metered",
   });
@@ -127,14 +120,12 @@ import { entitlementsCreateEntitlement } from "@flexprice/sdk/funcs/entitlements
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await entitlementsCreateEntitlement(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     featureId: "<id>",
     featureType: "metered",
   });
@@ -154,7 +145,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateEntitlementRequest](../../sdk/models/create-entitlement-request.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateEntitlementSecurity](../../sdk/models/create-entitlement-security.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -181,14 +171,12 @@ Use when attaching many features to a plan or addon at once (e.g. initial plan s
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.entitlements.createEntitlementsBulk({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     items: [
       {
         featureId: "<id>",
@@ -213,14 +201,12 @@ import { entitlementsCreateEntitlementsBulk } from "@flexprice/sdk/funcs/entitle
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await entitlementsCreateEntitlementsBulk(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     items: [
       {
         featureId: "<id>",
@@ -244,7 +230,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateBulkEntitlementRequest](../../sdk/models/create-bulk-entitlement-request.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateEntitlementsBulkSecurity](../../sdk/models/create-entitlements-bulk-security.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -271,14 +256,12 @@ Use when listing or searching entitlements (e.g. plan editor or audit). Returns 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.queryEntitlement({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const result = await flexprice.entitlements.queryEntitlement({});
 
   console.log(result);
 }
@@ -296,14 +279,12 @@ import { entitlementsQueryEntitlement } from "@flexprice/sdk/funcs/entitlements-
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsQueryEntitlement(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {});
+  const res = await entitlementsQueryEntitlement(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -320,7 +301,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.EntitlementFilter](../../sdk/models/entitlement-filter.md)                                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.QueryEntitlementSecurity](../../sdk/models/query-entitlement-security.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -347,14 +327,12 @@ Use when you need to load a single entitlement (e.g. to display or edit a featur
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.getEntitlement({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.entitlements.getEntitlement("<id>");
 
   console.log(result);
 }
@@ -372,14 +350,12 @@ import { entitlementsGetEntitlement } from "@flexprice/sdk/funcs/entitlements-ge
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsGetEntitlement(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await entitlementsGetEntitlement(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -395,7 +371,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetEntitlementSecurity](../../sdk/models/get-entitlement-security.md)                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Entitlement ID                                                                                                                                                                 |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -423,14 +398,12 @@ Use when changing an entitlement (e.g. increasing or decreasing a limit). Reques
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.updateEntitlement({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const result = await flexprice.entitlements.updateEntitlement("<id>", {});
 
   console.log(result);
 }
@@ -448,14 +421,12 @@ import { entitlementsUpdateEntitlement } from "@flexprice/sdk/funcs/entitlements
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsUpdateEntitlement(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {});
+  const res = await entitlementsUpdateEntitlement(flexprice, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -471,7 +442,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.UpdateEntitlementSecurity](../../sdk/models/update-entitlement-security.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Entitlement ID                                                                                                                                                                 |
 | `body`                                                                                                                                                                         | [models.UpdateEntitlementRequest](../../sdk/models/update-entitlement-request.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | Entitlement configuration                                                                                                                                                      |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
@@ -500,14 +470,12 @@ Use when removing a feature from a plan or addon (e.g. deprecating a capability)
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.deleteEntitlement({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.entitlements.deleteEntitlement("<id>");
 
   console.log(result);
 }
@@ -525,14 +493,12 @@ import { entitlementsDeleteEntitlement } from "@flexprice/sdk/funcs/entitlements
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsDeleteEntitlement(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await entitlementsDeleteEntitlement(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -548,7 +514,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.DeleteEntitlementSecurity](../../sdk/models/delete-entitlement-security.md)                                                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Entitlement ID                                                                                                                                                                 |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -576,14 +541,12 @@ Use when checking what a plan includes (e.g. feature list or limits for display 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.entitlements.getPlanEntitlements({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.entitlements.getPlanEntitlements("<id>");
 
   console.log(result);
 }
@@ -601,14 +564,12 @@ import { entitlementsGetPlanEntitlements } from "@flexprice/sdk/funcs/entitlemen
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await entitlementsGetPlanEntitlements(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await entitlementsGetPlanEntitlements(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -624,7 +585,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetPlanEntitlementsSecurity](../../sdk/models/get-plan-entitlements-security.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Plan ID                                                                                                                                                                        |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |

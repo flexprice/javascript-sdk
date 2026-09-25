@@ -21,14 +21,12 @@ Use when listing or searching async tasks (e.g. admin queue view). Returns list 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.tasks.listTasks({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const result = await flexprice.tasks.listTasks();
 
   console.log(result);
 }
@@ -46,14 +44,12 @@ import { tasksListTasks } from "@flexprice/sdk/funcs/tasks-list-tasks.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await tasksListTasks(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const res = await tasksListTasks(flexprice);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -70,7 +66,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.ListTasksRequest](../../sdk/models/list-tasks-request.md)                                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.ListTasksSecurity](../../sdk/models/list-tasks-security.md)                                                                                                            | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -97,14 +92,12 @@ Use to submit a CSV of usage events for async ingestion. The CSV must already ha
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const result = await flexprice.tasks.createTask({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     entityType: "FEATURES",
     fileProvider: "<value>",
     fileType: "JSON",
@@ -128,14 +121,12 @@ import { tasksCreateTask } from "@flexprice/sdk/funcs/tasks-create-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
   const res = await tasksCreateTask(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, {
     entityType: "FEATURES",
     fileProvider: "<value>",
     fileType: "JSON",
@@ -158,7 +149,6 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [models.CreateTaskRequest](../../sdk/models/create-task-request.md)                                                                                                            | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `security`                                                                                                                                                                     | [models.CreateTaskSecurity](../../sdk/models/create-task-security.md)                                                                                                          | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -185,14 +175,12 @@ Use when fetching the outcome of a completed task (e.g. export URL or error mess
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.tasks.getTaskResult({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.tasks.getTaskResult("<id>");
 
   console.log(result);
 }
@@ -210,14 +198,12 @@ import { tasksGetTaskResult } from "@flexprice/sdk/funcs/tasks-get-task-result.j
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await tasksGetTaskResult(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await tasksGetTaskResult(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -233,7 +219,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetTaskResultSecurity](../../sdk/models/get-task-result-security.md)                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `workflowId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Workflow ID                                                                                                                                                                    |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -261,14 +246,12 @@ Use when checking task status or progress (e.g. polling after create). Returns t
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.tasks.getTask({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.tasks.getTask("<id>");
 
   console.log(result);
 }
@@ -286,14 +269,12 @@ import { tasksGetTask } from "@flexprice/sdk/funcs/tasks-get-task.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await tasksGetTask(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await tasksGetTask(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -309,7 +290,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.GetTaskSecurity](../../sdk/models/get-task-security.md)                                                                                                                | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Task ID                                                                                                                                                                        |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -337,14 +317,12 @@ Use when letting a user download an exported file (e.g. report or data export). 
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.tasks.downloadTaskExport({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const result = await flexprice.tasks.downloadTaskExport("<id>");
 
   console.log(result);
 }
@@ -362,14 +340,12 @@ import { tasksDownloadTaskExport } from "@flexprice/sdk/funcs/tasks-download-tas
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await tasksDownloadTaskExport(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>");
+  const res = await tasksDownloadTaskExport(flexprice, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -385,7 +361,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.DownloadTaskExportSecurity](../../sdk/models/download-task-export-security.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Task ID                                                                                                                                                                        |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
@@ -413,14 +388,12 @@ Use when updating task status (e.g. marking complete or failed from a worker). T
 ```typescript
 import { Flexprice } from "@flexprice/sdk";
 
-const flexprice = new Flexprice();
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const result = await flexprice.tasks.updateTaskStatus({
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {
+  const result = await flexprice.tasks.updateTaskStatus("<id>", {
     taskStatus: "PROCESSING",
   });
 
@@ -440,14 +413,12 @@ import { tasksUpdateTaskStatus } from "@flexprice/sdk/funcs/tasks-update-task-st
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore();
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
 
 async function run() {
-  const res = await tasksUpdateTaskStatus(flexprice, {
-    option1: {
-      apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    },
-  }, "<id>", {
+  const res = await tasksUpdateTaskStatus(flexprice, "<id>", {
     taskStatus: "PROCESSING",
   });
   if (res.ok) {
@@ -465,7 +436,6 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                                                                     | [models.UpdateTaskStatusSecurity](../../sdk/models/update-task-status-security.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The security requirements to use for the request.                                                                                                                              |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Task ID                                                                                                                                                                        |
 | `body`                                                                                                                                                                         | [models.UpdateTaskStatusRequest](../../sdk/models/update-task-status-request.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | Status update                                                                                                                                                                  |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |

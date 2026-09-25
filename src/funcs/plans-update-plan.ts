@@ -10,7 +10,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { resolveSecurity } from "../lib/security.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { FlexPriceError } from "../sdk/models/flex-price-error.js";
 import {
@@ -34,7 +34,6 @@ import { Result } from "../types/fp.js";
  */
 export function plansUpdatePlan(
   client: FlexpriceCore,
-  security: models.UpdatePlanSecurity,
   id: string,
   body: models.UpdatePlanRequest,
   options?: RequestOptions,
@@ -54,7 +53,6 @@ export function plansUpdatePlan(
 > {
   return new APIPromise($do(
     client,
-    security,
     id,
     body,
     options,
@@ -63,7 +61,6 @@ export function plansUpdatePlan(
 
 async function $do(
   client: FlexpriceCore,
-  security: models.UpdatePlanSecurity,
   id: string,
   body: models.UpdatePlanRequest,
   options?: RequestOptions,
@@ -113,41 +110,9 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const requestSecurity = resolveSecurity(
-    [
-      {
-        fieldName: "x-api-key",
-        type: "apiKey:header",
-        value: security?.option1?.apiKeyAuth,
-      },
-    ],
-    [
-      {
-        fieldName: "x-api-key",
-        type: "apiKey:header",
-        value: security?.option2?.apiKeyAuth,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.option3?.bearerAuth,
-      },
-      {
-        fieldName: "X-Environment-ID",
-        type: "apiKey:header",
-        value: security?.option3?.environmentId,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.option4?.bearerAuth,
-      },
-    ],
-  );
+  const secConfig = await extractSecurity(client._options.apiKeyAuth);
+  const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,
@@ -157,7 +122,7 @@ async function $do(
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: security,
+    securitySource: client._options.apiKeyAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },

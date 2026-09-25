@@ -43,7 +43,6 @@ export type AnalyticsViewDefinition = {
   filters?: Array<AnalyticsFilter> | undefined;
   limit?: number | undefined;
   metrics: Array<Metric>;
-  name?: string | undefined;
   shape: Shape;
   sort?: Array<AnalyticsSortSpec> | undefined;
   time?: AnalyticsTimeSpecRaw | undefined;
@@ -59,7 +58,6 @@ export const AnalyticsViewDefinition$inboundSchema: z.ZodMiniType<
   filters: types.optional(z.array(AnalyticsFilter$inboundSchema)),
   limit: types.optional(types.number()),
   metrics: z.array(Metric$inboundSchema),
-  name: types.optional(types.string()),
   shape: Shape$inboundSchema,
   sort: types.optional(z.array(AnalyticsSortSpec$inboundSchema)),
   time: types.optional(AnalyticsTimeSpecRaw$inboundSchema),
@@ -71,7 +69,6 @@ export type AnalyticsViewDefinition$Outbound = {
   filters?: Array<AnalyticsFilter$Outbound> | undefined;
   limit?: number | undefined;
   metrics: Array<string>;
-  name?: string | undefined;
   shape: string;
   sort?: Array<AnalyticsSortSpec$Outbound> | undefined;
   time?: AnalyticsTimeSpecRaw$Outbound | undefined;
@@ -87,7 +84,6 @@ export const AnalyticsViewDefinition$outboundSchema: z.ZodMiniType<
   filters: z.optional(z.array(AnalyticsFilter$outboundSchema)),
   limit: z.optional(z.int()),
   metrics: z.array(Metric$outboundSchema),
-  name: z.optional(z.string()),
   shape: Shape$outboundSchema,
   sort: z.optional(z.array(AnalyticsSortSpec$outboundSchema)),
   time: z.optional(AnalyticsTimeSpecRaw$outboundSchema),

@@ -17,12 +17,10 @@ export class Tenants extends ClientSDK {
    * Use when showing the current tenant's billing usage (e.g. admin billing page or usage caps). Returns subscription and usage for the tenant.
    */
   async getTenantBillingUsage(
-    security: models.GetTenantBillingUsageSecurity,
     options?: RequestOptions,
   ): Promise<models.TenantBillingUsage> {
     return unwrapAsync(tenantsGetTenantBillingUsage(
       this,
-      security,
       options,
     ));
   }
@@ -34,13 +32,11 @@ export class Tenants extends ClientSDK {
    * Use when changing tenant details (e.g. name or billing info). Request body contains the fields to update.
    */
   async updateTenant(
-    security: models.UpdateTenantSecurity,
     request: models.UpdateTenantRequest,
     options?: RequestOptions,
   ): Promise<models.TenantResponse> {
     return unwrapAsync(tenantsUpdateTenant(
       this,
-      security,
       request,
       options,
     ));
@@ -53,13 +49,11 @@ export class Tenants extends ClientSDK {
    * Get tenant by ID
    */
   async getTenantById(
-    security: models.GetTenantByIdSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.TenantResponse> {
     return unwrapAsync(tenantsGetTenantById(
       this,
-      security,
       id,
       options,
     ));

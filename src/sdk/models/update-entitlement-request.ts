@@ -27,19 +27,13 @@ import {
 
 export type UpdateEntitlementRequest = {
   aggregationMode?: EntitlementAggregationMode | undefined;
-  /**
-   * Grant config — nil fields leave the current value alone.
-   *
-   * @remarks
-   * ClearGrantConfig=true wipes the whole grant config (back to a legacy entitlement).
-   */
-  clearGrantConfig?: boolean | undefined;
   configValue?: { [k: string]: any } | undefined;
   grantAllocationBehavior?: EntitlementGrantAllocationBehavior | undefined;
   grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
   grantQuota?: string | undefined;
+  grantUnlimited?: boolean | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   staticValue?: string | undefined;
@@ -50,13 +44,13 @@ export type UpdateEntitlementRequest = {
 /** @internal */
 export type UpdateEntitlementRequest$Outbound = {
   aggregation_mode?: string | undefined;
-  clear_grant_config?: boolean | undefined;
   config_value?: { [k: string]: any } | undefined;
   grant_allocation_behavior?: string | undefined;
   grant_duration_unit?: string | undefined;
   grant_duration_value?: number | undefined;
   grant_measure?: string | undefined;
   grant_quota?: string | undefined;
+  grant_unlimited?: boolean | undefined;
   is_enabled?: boolean | undefined;
   is_soft_limit?: boolean | undefined;
   static_value?: string | undefined;
@@ -71,7 +65,6 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     aggregationMode: z.optional(EntitlementAggregationMode$outboundSchema),
-    clearGrantConfig: z.optional(z.boolean()),
     configValue: z.optional(z.record(z.string(), z.any())),
     grantAllocationBehavior: z.optional(
       EntitlementGrantAllocationBehavior$outboundSchema,
@@ -80,6 +73,7 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
     grantDurationValue: z.optional(z.int()),
     grantMeasure: z.optional(EntitlementGrantMeasure$outboundSchema),
     grantQuota: z.optional(z.string()),
+    grantUnlimited: z.optional(z.boolean()),
     isEnabled: z.optional(z.boolean()),
     isSoftLimit: z.optional(z.boolean()),
     staticValue: z.optional(z.string()),
@@ -89,13 +83,13 @@ export const UpdateEntitlementRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       aggregationMode: "aggregation_mode",
-      clearGrantConfig: "clear_grant_config",
       configValue: "config_value",
       grantAllocationBehavior: "grant_allocation_behavior",
       grantDurationUnit: "grant_duration_unit",
       grantDurationValue: "grant_duration_value",
       grantMeasure: "grant_measure",
       grantQuota: "grant_quota",
+      grantUnlimited: "grant_unlimited",
       isEnabled: "is_enabled",
       isSoftLimit: "is_soft_limit",
       staticValue: "static_value",

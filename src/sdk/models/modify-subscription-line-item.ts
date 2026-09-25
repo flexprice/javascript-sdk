@@ -6,6 +6,7 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ModifySubscriptionLineItem = {
+  amount?: string | undefined;
   effectiveDate?: Date | undefined;
   lineItemId?: string | undefined;
   quantity?: string | undefined;
@@ -13,6 +14,7 @@ export type ModifySubscriptionLineItem = {
 
 /** @internal */
 export type ModifySubscriptionLineItem$Outbound = {
+  amount?: string | undefined;
   effective_date?: string | undefined;
   line_item_id?: string | undefined;
   quantity?: string | undefined;
@@ -24,6 +26,7 @@ export const ModifySubscriptionLineItem$outboundSchema: z.ZodMiniType<
   ModifySubscriptionLineItem
 > = z.pipe(
   z.object({
+    amount: z.optional(z.string()),
     effectiveDate: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),

@@ -13,6 +13,7 @@ export const SubscriptionModifyType = {
   Coupon: "coupon",
   Tax: "tax",
   Addon: "addon",
+  LineItemChange: "line_item_change",
 } as const;
 export type SubscriptionModifyType = ClosedEnum<typeof SubscriptionModifyType>;
 

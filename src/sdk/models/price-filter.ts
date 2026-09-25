@@ -52,6 +52,14 @@ export type PriceFilter = {
   startTime?: Date | undefined;
   status?: Status | undefined;
   subscriptionId?: string | undefined;
+  /**
+   * UpdatedAfter matches prices edited since the given time. TimeRangeFilter
+   *
+   * @remarks
+   * above filters on created_at, so it cannot see an edit to an existing
+   * price.
+   */
+  updatedAfter?: string | undefined;
 };
 
 /** @internal */
@@ -80,6 +88,7 @@ export type PriceFilter$Outbound = {
   start_time?: string | undefined;
   status?: string | undefined;
   subscription_id?: string | undefined;
+  updated_after?: string | undefined;
 };
 
 /** @internal */
@@ -107,6 +116,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     status: z.optional(Status$outboundSchema),
     subscriptionId: z.optional(z.string()),
+    updatedAfter: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -122,6 +132,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
       startDateLt: "start_date_lt",
       startTime: "start_time",
       subscriptionId: "subscription_id",
+      updatedAfter: "updated_after",
     });
   }),
 );

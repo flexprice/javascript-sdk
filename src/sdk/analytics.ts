@@ -3,6 +3,7 @@
  */
 
 import { analyticsCreateAnalyticsView } from "../funcs/analytics-create-analytics-view.js";
+import { analyticsGetRevenueAnalytics } from "../funcs/analytics-get-revenue-analytics.js";
 import { analyticsQueryAnalyticsView } from "../funcs/analytics-query-analytics-view.js";
 import { analyticsQueryAnalytics } from "../funcs/analytics-query-analytics.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -17,13 +18,28 @@ export class Analytics extends ClientSDK {
    * Resolves the given view definition against the supplied variables and executes it.
    */
   async queryAnalytics(
-    security: models.QueryAnalyticsSecurity,
     request: models.AnalyticsQueryRequest,
     options?: RequestOptions,
   ): Promise<models.AnalyticsQueryResult> {
     return unwrapAsync(analyticsQueryAnalytics(
       this,
-      security,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Query revenue analytics
+   *
+   * @remarks
+   * Aggregates revenue_facts by the requested dimensions at day/period/total granularity. allocation_policy places whole-period charges on their booked day (billed) or spreads them across the period (amortized); include_adjustments breaks out true-up/overage/revert amounts as labeled rows. Requires the tenant's revenue analytics setting.
+   */
+  async getRevenueAnalytics(
+    request: models.RevenueAnalyticsRequest,
+    options?: RequestOptions,
+  ): Promise<models.RevenueAnalyticsResponse> {
+    return unwrapAsync(analyticsGetRevenueAnalytics(
+      this,
       request,
       options,
     ));
@@ -36,13 +52,11 @@ export class Analytics extends ClientSDK {
    * Persists a named view definition that can later be queried by ID.
    */
   async createAnalyticsView(
-    security: models.CreateAnalyticsViewSecurity,
     request: models.CreateViewRequest,
     options?: RequestOptions,
   ): Promise<models.ViewResponse> {
     return unwrapAsync(analyticsCreateAnalyticsView(
       this,
-      security,
       request,
       options,
     ));
@@ -55,14 +69,12 @@ export class Analytics extends ClientSDK {
    * Resolves the view's definition against the supplied variables and executes it.
    */
   async queryAnalyticsView(
-    security: models.QueryAnalyticsViewSecurity,
     id: string,
     body: models.ViewQueryRequest,
     options?: RequestOptions,
   ): Promise<models.AnalyticsQueryResult> {
     return unwrapAsync(analyticsQueryAnalyticsView(
       this,
-      security,
       id,
       body,
       options,

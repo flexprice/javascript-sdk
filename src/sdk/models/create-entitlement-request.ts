@@ -43,6 +43,7 @@ export type CreateEntitlementRequest = {
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
   grantQuota?: string | undefined;
+  grantUnlimited?: boolean | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   parentEntitlementId?: string | undefined;
@@ -67,6 +68,7 @@ export type CreateEntitlementRequest$Outbound = {
   grant_duration_value?: number | undefined;
   grant_measure?: string | undefined;
   grant_quota?: string | undefined;
+  grant_unlimited?: boolean | undefined;
   is_enabled?: boolean | undefined;
   is_soft_limit?: boolean | undefined;
   parent_entitlement_id?: string | undefined;
@@ -97,6 +99,7 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
     grantDurationValue: z.optional(z.int()),
     grantMeasure: z.optional(EntitlementGrantMeasure$outboundSchema),
     grantQuota: z.optional(z.string()),
+    grantUnlimited: z.optional(z.boolean()),
     isEnabled: z.optional(z.boolean()),
     isSoftLimit: z.optional(z.boolean()),
     parentEntitlementId: z.optional(z.string()),
@@ -120,6 +123,7 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
       grantDurationValue: "grant_duration_value",
       grantMeasure: "grant_measure",
       grantQuota: "grant_quota",
+      grantUnlimited: "grant_unlimited",
       isEnabled: "is_enabled",
       isSoftLimit: "is_soft_limit",
       parentEntitlementId: "parent_entitlement_id",

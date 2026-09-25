@@ -10,7 +10,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
-import { resolveSecurity } from "../lib/security.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { FlexPriceError } from "../sdk/models/flex-price-error.js";
 import {
@@ -31,10 +31,11 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Use when changing coupon config (e.g. value, validity, or usage limits).
+ *
+ * This operation requires either {@link Security.apiKeyAuth} or {@link Security.apiKeyAuth} to be set on the `security` parameter when initializing the SDK.
  */
 export function couponsUpdateCoupon(
   client: FlexpriceCore,
-  security: models.UpdateCouponSecurity,
   id: string,
   body: models.UpdateCouponRequest,
   options?: RequestOptions,
@@ -54,7 +55,6 @@ export function couponsUpdateCoupon(
 > {
   return new APIPromise($do(
     client,
-    security,
     id,
     body,
     options,
@@ -63,7 +63,6 @@ export function couponsUpdateCoupon(
 
 async function $do(
   client: FlexpriceCore,
-  security: models.UpdateCouponSecurity,
   id: string,
   body: models.UpdateCouponRequest,
   options?: RequestOptions,
@@ -113,48 +112,9 @@ async function $do(
     Accept: "application/json",
   }));
 
-  const requestSecurity = resolveSecurity(
-    [
-      {
-        fieldName: "x-api-key",
-        type: "apiKey:header",
-        value: security?.option1?.apiKeyAuth,
-      },
-    ],
-    [
-      {
-        fieldName: "x-api-key",
-        type: "apiKey:header",
-        value: security?.option2?.apiKeyAuth,
-      },
-    ],
-    [
-      {
-        fieldName: "x-api-key",
-        type: "apiKey:header",
-        value: security?.option3?.apiKeyAuth,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.option4?.bearerAuth,
-      },
-      {
-        fieldName: "X-Environment-ID",
-        type: "apiKey:header",
-        value: security?.option4?.environmentId,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.option5?.bearerAuth,
-      },
-    ],
-  );
+  const secConfig = await extractSecurity(client._options.apiKeyAuth);
+  const securityInput = secConfig == null ? {} : { apiKeyAuth: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput, [0]);
 
   const context = {
     options: client._options,
@@ -164,7 +124,7 @@ async function $do(
 
     resolvedSecurity: requestSecurity,
 
-    securitySource: security,
+    securitySource: client._options.apiKeyAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },

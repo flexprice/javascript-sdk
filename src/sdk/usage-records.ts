@@ -15,13 +15,11 @@ export class UsageRecords extends ClientSDK {
    * Lists usage records. Also accepts filters/sort for a filtered query.
    */
   async postUsageRecordsSearch(
-    security: models.PostUsageRecordsSearchSecurity,
     request: models.UsageRecordFilter,
     options?: RequestOptions,
   ): Promise<models.ListUsageRecordsResponse> {
     return unwrapAsync(usageRecordsPostUsageRecordsSearch(
       this,
-      security,
       request,
       options,
     ));

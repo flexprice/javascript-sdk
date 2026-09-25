@@ -25,7 +25,6 @@ export class Customers extends ClientSDK {
    * Use when updating customer details (e.g. name, email, or metadata). Identify by id or external_customer_id.
    */
   async updateCustomer(
-    security: models.UpdateCustomerSecurity,
     body: models.UpdateCustomerRequest,
     id?: string | undefined,
     externalCustomerId?: string | undefined,
@@ -33,7 +32,6 @@ export class Customers extends ClientSDK {
   ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersUpdateCustomer(
       this,
-      security,
       body,
       id,
       externalCustomerId,
@@ -48,13 +46,11 @@ export class Customers extends ClientSDK {
    * Use when onboarding a new billing customer (e.g. sign-up or CRM sync). Ideal for linking via external_customer_id to your app's user id.
    */
   async createCustomer(
-    security: models.CreateCustomerSecurity,
     request: models.CreateCustomerRequest,
     options?: RequestOptions,
   ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersCreateCustomer(
       this,
-      security,
       request,
       options,
     ));
@@ -67,13 +63,11 @@ export class Customers extends ClientSDK {
    * Use when resolving a customer by your app's id (e.g. from your user table). Ideal for integrations that key by external id.
    */
   async getCustomerByExternalId(
-    security: models.GetCustomerByExternalIdSecurity,
     externalId: string,
     options?: RequestOptions,
   ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersGetCustomerByExternalId(
       this,
-      security,
       externalId,
       options,
     ));
@@ -86,13 +80,11 @@ export class Customers extends ClientSDK {
    * Use when checking entitlements by your app's customer id (e.g. feature gating at the edge). Supports optional filters (feature_ids, subscription_ids).
    */
   async getCustomerEntitlementsByExternalID(
-    security: models.GetCustomerEntitlementsByExternalIDSecurity,
     externalId: string,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlementsByExternalID(
       this,
-      security,
       externalId,
       options,
     ));
@@ -105,14 +97,12 @@ export class Customers extends ClientSDK {
    * Returns all subscriptions for a customer looked up by external_id, with line-item meters and entitlements attached (no pagination).
    */
   async getSubscriptionsForCustomer(
-    security: models.GetSubscriptionsForCustomerSecurity,
     externalId: string,
     expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.ListSubscriptionsResponse> {
     return unwrapAsync(customersGetSubscriptionsForCustomer(
       this,
-      security,
       externalId,
       expand,
       options,
@@ -126,13 +116,11 @@ export class Customers extends ClientSDK {
    * Use when listing or searching customers (e.g. admin CRM or reporting). Returns a paginated list; supports filtering and sorting.
    */
   async queryCustomer(
-    security: models.QueryCustomerSecurity,
     request: models.CustomerFilter,
     options?: RequestOptions,
   ): Promise<models.ListCustomersResponse> {
     return unwrapAsync(customersQueryCustomer(
       this,
-      security,
       request,
       options,
     ));
@@ -145,13 +133,11 @@ export class Customers extends ClientSDK {
    * Use when showing a customer's usage (e.g. portal or overage alerts). Identify by customer_id or customer_lookup_key; supports filters.
    */
   async getCustomerUsageSummary(
-    security: models.GetCustomerUsageSummarySecurity,
     request?: models.GetCustomerUsageSummaryRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.CustomerUsageSummaryResponse> {
     return unwrapAsync(customersGetCustomerUsageSummary(
       this,
-      security,
       request,
       options,
     ));
@@ -164,13 +150,11 @@ export class Customers extends ClientSDK {
    * Use when you need to load a single customer (e.g. for a billing portal or to attach a subscription).
    */
   async getCustomer(
-    security: models.GetCustomerSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CustomerResponse> {
     return unwrapAsync(customersGetCustomer(
       this,
-      security,
       id,
       options,
     ));
@@ -183,13 +167,11 @@ export class Customers extends ClientSDK {
    * Use when removing a customer (e.g. GDPR or churn). Returns 204 No Content on success.
    */
   async deleteCustomer(
-    security: models.DeleteCustomerSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(customersDeleteCustomer(
       this,
-      security,
       id,
       options,
     ));
@@ -202,13 +184,11 @@ export class Customers extends ClientSDK {
    * Use when checking what a customer can access (e.g. feature gating or usage limits). Supports optional filters (feature_ids, subscription_ids).
    */
   async getCustomerEntitlements(
-    security: models.GetCustomerEntitlementsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlements(
       this,
-      security,
       id,
       options,
     ));
@@ -221,13 +201,11 @@ export class Customers extends ClientSDK {
    * Use when showing upcoming or pending credits for a customer (e.g. in a portal or for forecasting).
    */
   async getCustomerUpcomingGrants(
-    security: models.GetCustomerUpcomingGrantsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListCreditGrantApplicationsResponse> {
     return unwrapAsync(customersGetCustomerUpcomingGrants(
       this,
-      security,
       id,
       options,
     ));

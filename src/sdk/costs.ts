@@ -21,13 +21,11 @@ export class Costs extends ClientSDK {
    * Use when setting up a new pricing configuration (e.g. a new product or region). Costsheets group prices and define the default for the environment.
    */
   async createCostsheet(
-    security: models.CreateCostsheetSecurity,
     request: models.CreateCostsheetRequest,
     options?: RequestOptions,
   ): Promise<models.CreateCostsheetResponse> {
     return unwrapAsync(costsCreateCostsheet(
       this,
-      security,
       request,
       options,
     ));
@@ -40,12 +38,10 @@ export class Costs extends ClientSDK {
    * Use when you need the tenant's default pricing configuration (e.g. for checkout or plan display). Returns the active costsheet for the environment.
    */
   async getActiveCostsheet(
-    security: models.GetActiveCostsheetSecurity,
     options?: RequestOptions,
   ): Promise<models.CostsheetResponse> {
     return unwrapAsync(costsGetActiveCostsheet(
       this,
-      security,
       options,
     ));
   }
@@ -57,13 +53,11 @@ export class Costs extends ClientSDK {
    * Use when building dashboards or reports that need revenue vs cost, ROI, and margin over a time period (e.g. finance views or executive summaries).
    */
   async getDetailedCostAnalytics(
-    security: models.GetDetailedCostAnalyticsSecurity,
     request: models.GetCostAnalyticsRequest,
     options?: RequestOptions,
   ): Promise<models.GetDetailedCostAnalyticsResponse> {
     return unwrapAsync(costsGetDetailedCostAnalytics(
       this,
-      security,
       request,
       options,
     ));
@@ -76,13 +70,11 @@ export class Costs extends ClientSDK {
    * Use when listing or searching costsheets (e.g. admin catalog). Returns a paginated list; supports filtering and sorting.
    */
   async queryCostsheet(
-    security: models.QueryCostsheetSecurity,
     request: models.CostsheetFilter,
     options?: RequestOptions,
   ): Promise<models.ListCostsheetResponse> {
     return unwrapAsync(costsQueryCostsheet(
       this,
-      security,
       request,
       options,
     ));
@@ -95,14 +87,12 @@ export class Costs extends ClientSDK {
    * Use when you need to load a single costsheet (e.g. for editing or display). Supports optional expand for related prices.
    */
   async getCostsheet(
-    security: models.GetCostsheetSecurity,
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.GetCostsheetResponse> {
     return unwrapAsync(costsGetCostsheet(
       this,
-      security,
       id,
       expand,
       options,
@@ -116,14 +106,12 @@ export class Costs extends ClientSDK {
    * Use when changing costsheet name or metadata.
    */
   async updateCostsheet(
-    security: models.UpdateCostsheetSecurity,
     id: string,
     body: models.UpdateCostsheetRequest,
     options?: RequestOptions,
   ): Promise<models.UpdateCostsheetResponse> {
     return unwrapAsync(costsUpdateCostsheet(
       this,
-      security,
       id,
       body,
       options,
@@ -137,13 +125,11 @@ export class Costs extends ClientSDK {
    * Use when retiring a costsheet (e.g. end-of-life product). Soft-deletes; status set to deleted.
    */
   async deleteCostsheet(
-    security: models.DeleteCostsheetSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.DeleteCostsheetResponse> {
     return unwrapAsync(costsDeleteCostsheet(
       this,
-      security,
       id,
       options,
     ));

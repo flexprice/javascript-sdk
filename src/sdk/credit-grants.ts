@@ -20,13 +20,11 @@ export class CreditGrants extends ClientSDK {
    * Use when listing credits attached to an addon (e.g. included prepaid or promo credits).
    */
   async getAddonCreditGrants(
-    security: models.GetAddonCreditGrantsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListCreditGrantsResponse> {
     return unwrapAsync(creditGrantsGetAddonCreditGrants(
       this,
-      security,
       id,
       options,
     ));
@@ -39,13 +37,11 @@ export class CreditGrants extends ClientSDK {
    * Use when giving a customer or plan credits (e.g. prepaid balance or promotional credits). Scope can be plan or subscription; supports start/end dates.
    */
   async createCreditGrant(
-    security: models.CreateCreditGrantSecurity,
     request: models.CreateCreditGrantRequest,
     options?: RequestOptions,
   ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsCreateCreditGrant(
       this,
-      security,
       request,
       options,
     ));
@@ -58,13 +54,11 @@ export class CreditGrants extends ClientSDK {
    * Use when you need to load a single credit grant (e.g. for display or to check balance).
    */
   async getCreditGrant(
-    security: models.GetCreditGrantSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsGetCreditGrant(
       this,
-      security,
       id,
       options,
     ));
@@ -77,14 +71,12 @@ export class CreditGrants extends ClientSDK {
    * Use when changing a credit grant (e.g. amount or end date). Request body contains the fields to update.
    */
   async updateCreditGrant(
-    security: models.UpdateCreditGrantSecurity,
     id: string,
     body: models.UpdateCreditGrantRequest,
     options?: RequestOptions,
   ): Promise<models.CreditGrantResponse> {
     return unwrapAsync(creditGrantsUpdateCreditGrant(
       this,
-      security,
       id,
       body,
       options,
@@ -98,14 +90,12 @@ export class CreditGrants extends ClientSDK {
    * Use when removing or ending a credit grant (e.g. revoke promo or close prepaid). Plan-scoped grants are archived; subscription-scoped supports optional effective_date in body.
    */
   async deleteCreditGrant(
-    security: models.DeleteCreditGrantSecurity,
     id: string,
     body?: models.DeleteCreditGrantRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(creditGrantsDeleteCreditGrant(
       this,
-      security,
       id,
       body,
       options,
@@ -119,13 +109,11 @@ export class CreditGrants extends ClientSDK {
    * Use when listing credits attached to a plan (e.g. included prepaid or promo credits).
    */
   async getPlanCreditGrants(
-    security: models.GetPlanCreditGrantsSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ListCreditGrantsResponse> {
     return unwrapAsync(creditGrantsGetPlanCreditGrants(
       this,
-      security,
       id,
       options,
     ));

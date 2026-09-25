@@ -25,13 +25,11 @@ export class Wallets extends ClientSDK {
    * Use when resolving wallets by external customer id or lookup key (e.g. from your app's user id). Supports optional real-time balance and expand.
    */
   async getCustomerWallets(
-    security: models.GetCustomerWalletsSecurity,
     request?: models.GetCustomerWalletsRequest | undefined,
     options?: RequestOptions,
   ): Promise<Array<models.WalletResponse>> {
     return unwrapAsync(walletsGetCustomerWallets(
       this,
-      security,
       request,
       options,
     ));
@@ -44,13 +42,11 @@ export class Wallets extends ClientSDK {
    * Use when showing a customer's wallets (e.g. balance overview by currency or in a billing portal). Supports optional expand for balance breakdown.
    */
   async getWalletsByCustomerId(
-    security: models.GetWalletsByCustomerIdSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<Array<models.WalletResponse>> {
     return unwrapAsync(walletsGetWalletsByCustomerId(
       this,
-      security,
       id,
       options,
     ));
@@ -63,13 +59,11 @@ export class Wallets extends ClientSDK {
    * Use when giving a customer a prepaid or credit balance (e.g. prepaid plans or promotional credits).
    */
   async createWallet(
-    security: models.CreateWalletSecurity,
     request: models.CreateWalletRequest,
     options?: RequestOptions,
   ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsCreateWallet(
       this,
-      security,
       request,
       options,
     ));
@@ -82,13 +76,11 @@ export class Wallets extends ClientSDK {
    * Use when listing or searching wallets (e.g. admin view or reporting). Returns a paginated list; supports filtering by customer and status.
    */
   async queryWallet(
-    security: models.QueryWalletSecurity,
     request: models.WalletFilter,
     options?: RequestOptions,
   ): Promise<models.ListResponseDtoWalletResponse> {
     return unwrapAsync(walletsQueryWallet(
       this,
-      security,
       request,
       options,
     ));
@@ -101,13 +93,11 @@ export class Wallets extends ClientSDK {
    * Use when searching or reporting on wallet transactions (e.g. cross-wallet history or reconciliation). Returns a paginated list; supports filtering by wallet, customer, type, date range.
    */
   async queryWalletTransaction(
-    security: models.QueryWalletTransactionSecurity,
     request: models.WalletTransactionFilter,
     options?: RequestOptions,
   ): Promise<models.ListWalletTransactionsResponse> {
     return unwrapAsync(walletsQueryWalletTransaction(
       this,
-      security,
       request,
       options,
     ));
@@ -120,13 +110,11 @@ export class Wallets extends ClientSDK {
    * Use when you need to load a single wallet (e.g. for a balance or settings view).
    */
   async getWallet(
-    security: models.GetWalletSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsGetWallet(
       this,
-      security,
       id,
       options,
     ));
@@ -139,14 +127,12 @@ export class Wallets extends ClientSDK {
    * Use when changing wallet settings (e.g. enabling or updating auto top-up thresholds).
    */
   async updateWallet(
-    security: models.UpdateWalletSecurity,
     id: string,
     body: models.UpdateWalletRequest,
     options?: RequestOptions,
   ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsUpdateWallet(
       this,
-      security,
       id,
       body,
       options,
@@ -160,14 +146,12 @@ export class Wallets extends ClientSDK {
    * Use when displaying or checking current wallet balance (e.g. before charging or in a portal). Supports optional expand for credits breakdown and from_cache.
    */
   async getWalletBalance(
-    security: models.GetWalletBalanceSecurity,
     id: string,
     expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.WalletBalanceResponse> {
     return unwrapAsync(walletsGetWalletBalance(
       this,
-      security,
       id,
       expand,
       options,
@@ -181,13 +165,11 @@ export class Wallets extends ClientSDK {
    * Use when closing a customer wallet (e.g. churn or migration). Closes the wallet and applies remaining balance per policy (refund or forfeit).
    */
   async terminateWallet(
-    security: models.TerminateWalletSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.WalletResponse> {
     return unwrapAsync(walletsTerminateWallet(
       this,
-      security,
       id,
       options,
     ));
@@ -200,14 +182,12 @@ export class Wallets extends ClientSDK {
    * Use when adding funds to a wallet (e.g. top-up, refund, or manual credit). Supports optional idempotency via reference.
    */
   async topUpWallet(
-    security: models.TopUpWalletSecurity,
     id: string,
     body: models.TopUpWalletRequest,
     options?: RequestOptions,
   ): Promise<models.TopUpWalletResponse> {
     return unwrapAsync(walletsTopUpWallet(
       this,
-      security,
       id,
       body,
       options,
@@ -221,13 +201,11 @@ export class Wallets extends ClientSDK {
    * Use when showing transaction history for a wallet (e.g. credit/debit log or audit). Returns a paginated list; supports limit, offset, and filters.
    */
   async getWalletTransactions(
-    security: models.GetWalletTransactionsSecurity,
     request: models.GetWalletTransactionsRequest,
     options?: RequestOptions,
   ): Promise<models.ListWalletTransactionsResponse> {
     return unwrapAsync(walletsGetWalletTransactions(
       this,
-      security,
       request,
       options,
     ));

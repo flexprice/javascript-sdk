@@ -35,6 +35,11 @@ import {
   SubModifyInheritanceRequest$outboundSchema,
 } from "./sub-modify-inheritance-request.js";
 import {
+  SubModifyLineItemChangeRequest,
+  SubModifyLineItemChangeRequest$Outbound,
+  SubModifyLineItemChangeRequest$outboundSchema,
+} from "./sub-modify-line-item-change-request.js";
+import {
   SubModifyQuantityChangeRequest,
   SubModifyQuantityChangeRequest$Outbound,
   SubModifyQuantityChangeRequest$outboundSchema,
@@ -61,6 +66,7 @@ export type ExecuteSubscriptionModifyRequest = {
   couponParams?: SubModifyCouponParams | undefined;
   groupedInvoicingParams?: SubModifyGroupedInvoicingParams | undefined;
   inheritanceParams?: SubModifyInheritanceRequest | undefined;
+  lineItemChangeParams?: SubModifyLineItemChangeRequest | undefined;
   quantityChangeParams?: SubModifyQuantityChangeRequest | undefined;
   taxParams?: SubModifyTaxParams | undefined;
   trialEndParams?: SubModifyTrialEndRequest | undefined;
@@ -77,6 +83,7 @@ export type ExecuteSubscriptionModifyRequest$Outbound = {
     | SubModifyGroupedInvoicingParams$Outbound
     | undefined;
   inheritance_params?: SubModifyInheritanceRequest$Outbound | undefined;
+  line_item_change_params?: SubModifyLineItemChangeRequest$Outbound | undefined;
   quantity_change_params?: SubModifyQuantityChangeRequest$Outbound | undefined;
   tax_params?: SubModifyTaxParams$Outbound | undefined;
   trial_end_params?: SubModifyTrialEndRequest$Outbound | undefined;
@@ -97,6 +104,9 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
       SubModifyGroupedInvoicingParams$outboundSchema,
     ),
     inheritanceParams: z.optional(SubModifyInheritanceRequest$outboundSchema),
+    lineItemChangeParams: z.optional(
+      SubModifyLineItemChangeRequest$outboundSchema,
+    ),
     quantityChangeParams: z.optional(
       SubModifyQuantityChangeRequest$outboundSchema,
     ),
@@ -111,6 +121,7 @@ export const ExecuteSubscriptionModifyRequest$outboundSchema: z.ZodMiniType<
       couponParams: "coupon_params",
       groupedInvoicingParams: "grouped_invoicing_params",
       inheritanceParams: "inheritance_params",
+      lineItemChangeParams: "line_item_change_params",
       quantityChangeParams: "quantity_change_params",
       taxParams: "tax_params",
       trialEndParams: "trial_end_params",

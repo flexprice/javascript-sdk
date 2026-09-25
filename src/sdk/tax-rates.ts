@@ -19,13 +19,11 @@ export class TaxRates extends ClientSDK {
    * Use when listing tax rates (e.g. tax config UI). Returns tax rates with optional filters.
    */
   async getTaxRates(
-    security: models.GetTaxRatesSecurity,
     request?: models.GetTaxRatesRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListTaxRatesResponse> {
     return unwrapAsync(taxRatesGetTaxRates(
       this,
-      security,
       request,
       options,
     ));
@@ -38,13 +36,11 @@ export class TaxRates extends ClientSDK {
    * Use when defining a new tax rate (e.g. VAT or sales tax) for use in invoices. Attach to customers or products via tax associations.
    */
   async createTaxRate(
-    security: models.CreateTaxRateSecurity,
     request: models.CreateTaxRateRequest,
     options?: RequestOptions,
   ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesCreateTaxRate(
       this,
-      security,
       request,
       options,
     ));
@@ -57,13 +53,11 @@ export class TaxRates extends ClientSDK {
    * Use when you need to load a single tax rate (e.g. for display or when creating an association).
    */
   async getTaxRate(
-    security: models.GetTaxRateSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesGetTaxRate(
       this,
-      security,
       id,
       options,
     ));
@@ -76,14 +70,12 @@ export class TaxRates extends ClientSDK {
    * Use when changing a tax rate (e.g. rate value or name). Request body contains the fields to update.
    */
   async updateTaxRate(
-    security: models.UpdateTaxRateSecurity,
     id: string,
     body: models.UpdateTaxRateRequest,
     options?: RequestOptions,
   ): Promise<models.TaxRateResponse> {
     return unwrapAsync(taxRatesUpdateTaxRate(
       this,
-      security,
       id,
       body,
       options,
@@ -97,13 +89,11 @@ export class TaxRates extends ClientSDK {
    * Use when retiring a tax rate (e.g. no longer applicable). Fails if still referenced by associations.
    */
   async deleteTaxRate(
-    security: models.DeleteTaxRateSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(taxRatesDeleteTaxRate(
       this,
-      security,
       id,
       options,
     ));

@@ -8,6 +8,18 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AggregatedEntitlementBucket,
+  AggregatedEntitlementBucket$inboundSchema,
+} from "./aggregated-entitlement-bucket.js";
+import {
+  EntitlementGrantDurationUnit,
+  EntitlementGrantDurationUnit$inboundSchema,
+} from "./entitlement-grant-duration-unit.js";
+import {
+  EntitlementGrantMeasure,
+  EntitlementGrantMeasure$inboundSchema,
+} from "./entitlement-grant-measure.js";
+import {
   EntitlementSource,
   EntitlementSource$inboundSchema,
 } from "./entitlement-source.js";
@@ -15,11 +27,27 @@ import {
   FeatureResponse,
   FeatureResponse$inboundSchema,
 } from "./feature-response.js";
+import { GrantState, GrantState$inboundSchema } from "./grant-state.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type FeatureUsageSummary = {
+  /**
+   * Buckets is one entry per independent budget on a parallel feature. The scalar
+   *
+   * @remarks
+   * figures above cannot describe several budgets at once — a sum is not spendable
+   * from any one of them — so a client showing a parallel feature reads these instead.
+   * Empty for additive features, where the scalars are the whole truth.
+   */
+  buckets?: Array<AggregatedEntitlementBucket> | undefined;
   currentUsage?: string | undefined;
   feature?: FeatureResponse | undefined;
+  grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
+  grantDurationValue?: number | undefined;
+  grantMeasure?: EntitlementGrantMeasure | undefined;
+  grantQuota?: string | undefined;
+  grantState?: GrantState | undefined;
+  grantUnlimited?: boolean | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   isUnlimited?: boolean | undefined;
@@ -35,8 +63,17 @@ export const FeatureUsageSummary$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    buckets: types.optional(z.array(AggregatedEntitlementBucket$inboundSchema)),
     current_usage: types.optional(types.string()),
     feature: types.optional(FeatureResponse$inboundSchema),
+    grant_duration_unit: types.optional(
+      EntitlementGrantDurationUnit$inboundSchema,
+    ),
+    grant_duration_value: types.optional(types.number()),
+    grant_measure: types.optional(EntitlementGrantMeasure$inboundSchema),
+    grant_quota: types.optional(types.string()),
+    grant_state: types.optional(GrantState$inboundSchema),
+    grant_unlimited: types.optional(types.boolean()),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
     is_unlimited: types.optional(types.boolean()),
@@ -48,6 +85,12 @@ export const FeatureUsageSummary$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "current_usage": "currentUsage",
+      "grant_duration_unit": "grantDurationUnit",
+      "grant_duration_value": "grantDurationValue",
+      "grant_measure": "grantMeasure",
+      "grant_quota": "grantQuota",
+      "grant_state": "grantState",
+      "grant_unlimited": "grantUnlimited",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",
       "is_unlimited": "isUnlimited",

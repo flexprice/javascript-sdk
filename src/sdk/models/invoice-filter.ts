@@ -77,6 +77,10 @@ export type InvoiceFilter = {
   externalCustomerId?: string | undefined;
   filters?: Array<FilterCondition> | undefined;
   /**
+   * finalized_at_gte filters invoices finalized at or after the given instant
+   */
+  finalizedAtGte?: Date | undefined;
+  /**
    * invoice_ids restricts results to invoices with the specified IDs
    *
    * @remarks
@@ -135,6 +139,10 @@ export type InvoiceFilter = {
    * Only returns invoices that were created as part of the specified subscription's billing
    */
   subscriptionId?: string | undefined;
+  /**
+   * voided_at_gte filters invoices voided at or after the given instant
+   */
+  voidedAtGte?: Date | undefined;
 };
 
 /** @internal */
@@ -153,6 +161,7 @@ export type InvoiceFilter$Outbound = {
   expand?: string | undefined;
   external_customer_id?: string | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
+  finalized_at_gte?: string | undefined;
   invoice_ids?: Array<string> | undefined;
   invoice_status?: Array<string> | undefined;
   invoice_type?: string | undefined;
@@ -170,6 +179,7 @@ export type InvoiceFilter$Outbound = {
   status?: string | undefined;
   subscription_customer_id?: Array<string> | undefined;
   subscription_id?: string | undefined;
+  voided_at_gte?: string | undefined;
 };
 
 /** @internal */
@@ -187,6 +197,9 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     expand: z.optional(z.string()),
     externalCustomerId: z.optional(z.string()),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
+    finalizedAtGte: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     invoiceIds: z.optional(z.array(z.string())),
     invoiceStatus: z.optional(z.array(InvoiceStatus$outboundSchema)),
     invoiceType: z.optional(InvoiceType$outboundSchema),
@@ -204,6 +217,9 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     status: z.optional(Status$outboundSchema),
     subscriptionCustomerId: z.optional(z.array(z.string())),
     subscriptionId: z.optional(z.string()),
+    voidedAtGte: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -213,6 +229,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
       customerId: "customer_id",
       endTime: "end_time",
       externalCustomerId: "external_customer_id",
+      finalizedAtGte: "finalized_at_gte",
       invoiceIds: "invoice_ids",
       invoiceStatus: "invoice_status",
       invoiceType: "invoice_type",
@@ -225,6 +242,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
       startTime: "start_time",
       subscriptionCustomerId: "subscription_customer_id",
       subscriptionId: "subscription_id",
+      voidedAtGte: "voided_at_gte",
     });
   }),
 );

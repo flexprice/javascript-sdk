@@ -15,13 +15,11 @@ export class Checkout extends ClientSDK {
    * Create checkout session
    */
   async createCheckoutSession(
-    security: models.CreateCheckoutSessionSecurity,
     request: models.CreateCheckoutSessionRequest,
     options?: RequestOptions,
   ): Promise<models.CheckoutSessionResponse> {
     return unwrapAsync(checkoutCreateCheckoutSession(
       this,
-      security,
       request,
       options,
     ));
@@ -31,13 +29,11 @@ export class Checkout extends ClientSDK {
    * Get checkout session
    */
   async getCheckoutSession(
-    security: models.GetCheckoutSessionSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CheckoutSessionResponse> {
     return unwrapAsync(checkoutGetCheckoutSession(
       this,
-      security,
       id,
       options,
     ));
@@ -47,13 +43,11 @@ export class Checkout extends ClientSDK {
    * Delete checkout session
    */
   async deleteCheckoutSession(
-    security: models.DeleteCheckoutSessionSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(checkoutDeleteCheckoutSession(
       this,
-      security,
       id,
       options,
     ));
@@ -63,13 +57,11 @@ export class Checkout extends ClientSDK {
    * Cancel checkout session
    */
   async cancelCheckoutSession(
-    security: models.CancelCheckoutSessionSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.CheckoutSessionResponse> {
     return unwrapAsync(checkoutCancelCheckoutSession(
       this,
-      security,
       id,
       options,
     ));

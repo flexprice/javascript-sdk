@@ -22,13 +22,11 @@ export class ScheduledTasks extends ClientSDK {
    * Use when listing or managing scheduled tasks in an admin UI. Returns a list; supports filtering by status, type, and pagination.
    */
   async listScheduledTasks(
-    security: models.ListScheduledTasksSecurity,
     request?: models.ListScheduledTasksRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListScheduledTasksResponse> {
     return unwrapAsync(scheduledTasksListScheduledTasks(
       this,
-      security,
       request,
       options,
     ));
@@ -41,13 +39,11 @@ export class ScheduledTasks extends ClientSDK {
    * Use when setting up recurring data exports or other scheduled jobs. Ideal for report generation or syncing data on a schedule.
    */
   async createScheduledTask(
-    security: models.CreateScheduledTaskSecurity,
     request: models.CreateScheduledTaskRequest,
     options?: RequestOptions,
   ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksCreateScheduledTask(
       this,
-      security,
       request,
       options,
     ));
@@ -60,12 +56,10 @@ export class ScheduledTasks extends ClientSDK {
    * Triggers the draft invoice finalization workflow that scans computed draft invoices whose finalization delay has elapsed and finalizes them (assign invoice number, sync to vendors, attempt payment).
    */
   async scheduleDraftFinalization(
-    security: models.ScheduleDraftFinalizationSecurity,
     options?: RequestOptions,
   ): Promise<models.ScheduleDraftFinalizationResponse> {
     return unwrapAsync(scheduledTasksScheduleDraftFinalization(
       this,
-      security,
       options,
     ));
   }
@@ -77,13 +71,11 @@ export class ScheduledTasks extends ClientSDK {
    * Use when you need to trigger a billing-period update workflow (e.g. to recalculate or sync billing windows).
    */
   async scheduleUpdateBillingPeriod(
-    security: models.ScheduleUpdateBillingPeriodSecurity,
     request: models.ScheduleUpdateBillingPeriodRequest,
     options?: RequestOptions,
   ): Promise<models.ScheduleUpdateBillingPeriodResponse> {
     return unwrapAsync(scheduledTasksScheduleUpdateBillingPeriod(
       this,
-      security,
       request,
       options,
     ));
@@ -96,13 +88,11 @@ export class ScheduledTasks extends ClientSDK {
    * Use when you need to load a single scheduled task (e.g. to show details in a UI or check its configuration).
    */
   async getScheduledTask(
-    security: models.GetScheduledTaskSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksGetScheduledTask(
       this,
-      security,
       id,
       options,
     ));
@@ -115,14 +105,12 @@ export class ScheduledTasks extends ClientSDK {
    * Use when pausing or resuming a scheduled task. Only the enabled field can be changed.
    */
   async updateScheduledTask(
-    security: models.UpdateScheduledTaskSecurity,
     id: string,
     body: models.UpdateScheduledTaskRequest,
     options?: RequestOptions,
   ): Promise<models.ScheduledTaskResponse> {
     return unwrapAsync(scheduledTasksUpdateScheduledTask(
       this,
-      security,
       id,
       body,
       options,
@@ -136,13 +124,11 @@ export class ScheduledTasks extends ClientSDK {
    * Use when removing a scheduled task from the active roster. Archives the task and removes it from the scheduler (soft delete).
    */
   async deleteScheduledTask(
-    security: models.DeleteScheduledTaskSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(scheduledTasksDeleteScheduledTask(
       this,
-      security,
       id,
       options,
     ));
@@ -155,14 +141,12 @@ export class ScheduledTasks extends ClientSDK {
    * Use when you need to run a scheduled export immediately (e.g. on-demand report or catch-up). Supports optional custom time range.
    */
   async triggerScheduledTaskRun(
-    security: models.TriggerScheduledTaskRunSecurity,
     id: string,
     body?: models.TriggerForceRunRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.TriggerForceRunResponse> {
     return unwrapAsync(scheduledTasksTriggerScheduledTaskRun(
       this,
-      security,
       id,
       body,
       options,

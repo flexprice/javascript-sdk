@@ -16,13 +16,11 @@ export class Rbac extends ClientSDK {
    * Use when building role pickers or permission UIs. Returns all roles with permissions and descriptions.
    */
   async listRbacRoles(
-    security: models.ListRbacRolesSecurity,
     userType?: models.ListRbacRolesUserType | undefined,
     options?: RequestOptions,
   ): Promise<{ [k: string]: any }> {
     return unwrapAsync(rbacListRBACRoles(
       this,
-      security,
       userType,
       options,
     ));
@@ -35,13 +33,11 @@ export class Rbac extends ClientSDK {
    * Use when you need to show or edit a single role (e.g. role detail page). Includes permissions, name, and description.
    */
   async getRbacRole(
-    security: models.GetRbacRoleSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<{ [k: string]: any }> {
     return unwrapAsync(rbacGetRBACRole(
       this,
-      security,
       id,
       options,
     ));

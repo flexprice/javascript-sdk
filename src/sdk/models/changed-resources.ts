@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  ChangedAddonAssociation,
+  ChangedAddonAssociation$inboundSchema,
+} from "./changed-addon-association.js";
+import {
   ChangedInvoice,
   ChangedInvoice$inboundSchema,
 } from "./changed-invoice.js";
@@ -22,6 +26,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ChangedResources = {
+  addonAssociations?: Array<ChangedAddonAssociation> | undefined;
   invoices?: Array<ChangedInvoice> | undefined;
   lineItems?: Array<ChangedLineItem> | undefined;
   subscriptions?: Array<ChangedSubscription> | undefined;
@@ -33,12 +38,16 @@ export const ChangedResources$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    addon_associations: types.optional(
+      z.array(ChangedAddonAssociation$inboundSchema),
+    ),
     invoices: types.optional(z.array(ChangedInvoice$inboundSchema)),
     line_items: types.optional(z.array(ChangedLineItem$inboundSchema)),
     subscriptions: types.optional(z.array(ChangedSubscription$inboundSchema)),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "addon_associations": "addonAssociations",
       "line_items": "lineItems",
     });
   }),

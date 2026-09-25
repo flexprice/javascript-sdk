@@ -4,8 +4,25 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  EntitlementAggregationMode,
+  EntitlementAggregationMode$outboundSchema,
+} from "./entitlement-aggregation-mode.js";
+import {
+  EntitlementGrantAllocationBehavior,
+  EntitlementGrantAllocationBehavior$outboundSchema,
+} from "./entitlement-grant-allocation-behavior.js";
+import {
+  EntitlementGrantDurationUnit,
+  EntitlementGrantDurationUnit$outboundSchema,
+} from "./entitlement-grant-duration-unit.js";
+import {
+  EntitlementGrantMeasure,
+  EntitlementGrantMeasure$outboundSchema,
+} from "./entitlement-grant-measure.js";
 
 export type OverrideEntitlementRequest = {
+  aggregationMode?: EntitlementAggregationMode | undefined;
   /**
    * ConfigValue is the config value for config features
    */
@@ -14,6 +31,12 @@ export type OverrideEntitlementRequest = {
    * EntitlementID references the plan/addon entitlement to override
    */
   entitlementId: string;
+  grantAllocationBehavior?: EntitlementGrantAllocationBehavior | undefined;
+  grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
+  grantDurationValue?: number | undefined;
+  grantMeasure?: EntitlementGrantMeasure | undefined;
+  grantQuota?: string | undefined;
+  grantUnlimited?: boolean | undefined;
   /**
    * IsEnabled determines if the entitlement is enabled or disabled
    */
@@ -33,8 +56,15 @@ export type OverrideEntitlementRequest = {
 
 /** @internal */
 export type OverrideEntitlementRequest$Outbound = {
+  aggregation_mode?: string | undefined;
   config_value?: { [k: string]: any } | undefined;
   entitlement_id: string;
+  grant_allocation_behavior?: string | undefined;
+  grant_duration_unit?: string | undefined;
+  grant_duration_value?: number | undefined;
+  grant_measure?: string | undefined;
+  grant_quota?: string | undefined;
+  grant_unlimited?: boolean | undefined;
   is_enabled?: boolean | undefined;
   static_value?: string | undefined;
   usage_limit?: number | undefined;
@@ -46,16 +76,32 @@ export const OverrideEntitlementRequest$outboundSchema: z.ZodMiniType<
   OverrideEntitlementRequest
 > = z.pipe(
   z.object({
+    aggregationMode: z.optional(EntitlementAggregationMode$outboundSchema),
     configValue: z.optional(z.record(z.string(), z.any())),
     entitlementId: z.string(),
+    grantAllocationBehavior: z.optional(
+      EntitlementGrantAllocationBehavior$outboundSchema,
+    ),
+    grantDurationUnit: z.optional(EntitlementGrantDurationUnit$outboundSchema),
+    grantDurationValue: z.optional(z.int()),
+    grantMeasure: z.optional(EntitlementGrantMeasure$outboundSchema),
+    grantQuota: z.optional(z.string()),
+    grantUnlimited: z.optional(z.boolean()),
     isEnabled: z.optional(z.boolean()),
     staticValue: z.optional(z.string()),
     usageLimit: z.optional(z.int()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      aggregationMode: "aggregation_mode",
       configValue: "config_value",
       entitlementId: "entitlement_id",
+      grantAllocationBehavior: "grant_allocation_behavior",
+      grantDurationUnit: "grant_duration_unit",
+      grantDurationValue: "grant_duration_value",
+      grantMeasure: "grant_measure",
+      grantQuota: "grant_quota",
+      grantUnlimited: "grant_unlimited",
       isEnabled: "is_enabled",
       staticValue: "static_value",
       usageLimit: "usage_limit",

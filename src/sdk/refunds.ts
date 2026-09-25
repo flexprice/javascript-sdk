@@ -17,13 +17,11 @@ export class Refunds extends ClientSDK {
    * Use to see where refunded money actually went and whether it has settled. Filter by invoice_ids to get every settlement row for one invoice.
    */
   async listRefunds(
-    security: models.ListRefundsSecurity,
     request?: models.ListRefundsRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.ListRefundsResponse> {
     return unwrapAsync(refundsListRefunds(
       this,
-      security,
       request,
       options,
     ));
@@ -36,13 +34,11 @@ export class Refunds extends ClientSDK {
    * Use to inspect a single refund: its destination, settled amount and failure reason.
    */
   async getRefund(
-    security: models.GetRefundSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.RefundResponse> {
     return unwrapAsync(refundsGetRefund(
       this,
-      security,
       id,
       options,
     ));
@@ -55,13 +51,11 @@ export class Refunds extends ClientSDK {
    * Use when a refund failed or is stuck pending. A failed gateway refund is retried into the customer's wallet; an already-settled refund is rejected.
    */
   async retryRefund(
-    security: models.RetryRefundSecurity,
     id: string,
     options?: RequestOptions,
   ): Promise<models.RefundResponse> {
     return unwrapAsync(refundsRetryRefund(
       this,
-      security,
       id,
       options,
     ));

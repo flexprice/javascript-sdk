@@ -15,14 +15,12 @@ export class Environments extends ClientSDK {
    * Clone all published features and plans from the source environment into a target environment. If target_environment_id is provided, entities are cloned into that existing environment. Otherwise a new environment is created from name and type first.
    */
   async cloneEnvironment(
-    security: models.CloneEnvironmentSecurity,
     id: string,
     body: models.CloneEnvironmentRequest,
     options?: RequestOptions,
   ): Promise<models.ModelsTemporalWorkflowResult> {
     return unwrapAsync(environmentsCloneEnvironment(
       this,
-      security,
       id,
       body,
       options,
