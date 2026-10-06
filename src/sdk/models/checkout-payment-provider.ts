@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const CheckoutPaymentProvider = {
   Razorpay: "razorpay",
   Chargebee: "chargebee",
+  Stripe: "stripe",
 } as const;
 export type CheckoutPaymentProvider = OpenEnum<typeof CheckoutPaymentProvider>;
 

@@ -3,7 +3,6 @@
  */
 
 import { eventsGetEvent } from "../funcs/events-get-event.js";
-import { eventsGetHuggingfaceInferenceData } from "../funcs/events-get-huggingface-inference-data.js";
 import { eventsGetUsageAnalytics } from "../funcs/events-get-usage-analytics.js";
 import { eventsGetUsageByMeter } from "../funcs/events-get-usage-by-meter.js";
 import { eventsGetUsageStatistics } from "../funcs/events-get-usage-statistics.js";
@@ -67,23 +66,6 @@ export class Events extends ClientSDK {
   }
 
   /**
-   * Get Hugging Face inference data
-   *
-   * @remarks
-   * Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation). Reads the meter-usage pipeline.
-   */
-  async getHuggingfaceInferenceData(
-    request: models.GetHuggingFaceBillingDataRequest,
-    options?: RequestOptions,
-  ): Promise<models.GetHuggingFaceBillingDataResponse> {
-    return unwrapAsync(eventsGetHuggingfaceInferenceData(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Get event
    *
    * @remarks
@@ -91,11 +73,17 @@ export class Events extends ClientSDK {
    */
   async getEvent(
     id: string,
+    externalCustomerId: string,
+    startTime?: string | undefined,
+    endTime?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.GetEventByIDResponse> {
     return unwrapAsync(eventsGetEvent(
       this,
       id,
+      externalCustomerId,
+      startTime,
+      endTime,
       options,
     ));
   }

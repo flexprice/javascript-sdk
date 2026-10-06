@@ -4,6 +4,26 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+export const ListAllSubscriptionSchedulesScheduleType = {
+  PlanChange: "plan_change",
+  Cancellation: "cancellation",
+} as const;
+export type ListAllSubscriptionSchedulesScheduleType = ClosedEnum<
+  typeof ListAllSubscriptionSchedulesScheduleType
+>;
+
+export const ListAllSubscriptionSchedulesScheduleStatus = {
+  Pending: "pending",
+  Executing: "executing",
+  Executed: "executed",
+  Cancelled: "cancelled",
+  Failed: "failed",
+} as const;
+export type ListAllSubscriptionSchedulesScheduleStatus = ClosedEnum<
+  typeof ListAllSubscriptionSchedulesScheduleStatus
+>;
 
 export type ListAllSubscriptionSchedulesRequest = {
   /**
@@ -15,6 +35,20 @@ export type ListAllSubscriptionSchedulesRequest = {
    */
   subscriptionId?: string | undefined;
   /**
+   * Filter by subscription IDs
+   */
+  subscriptionIds?: Array<string> | undefined;
+  /**
+   * Filter by schedule type
+   */
+  scheduleType?: Array<ListAllSubscriptionSchedulesScheduleType> | undefined;
+  /**
+   * Filter by schedule status
+   */
+  scheduleStatus?:
+    | Array<ListAllSubscriptionSchedulesScheduleStatus>
+    | undefined;
+  /**
    * Limit results
    */
   limit?: number | undefined;
@@ -25,9 +59,24 @@ export type ListAllSubscriptionSchedulesRequest = {
 };
 
 /** @internal */
+export const ListAllSubscriptionSchedulesScheduleType$outboundSchema:
+  z.ZodMiniEnum<typeof ListAllSubscriptionSchedulesScheduleType> = z.enum(
+    ListAllSubscriptionSchedulesScheduleType,
+  );
+
+/** @internal */
+export const ListAllSubscriptionSchedulesScheduleStatus$outboundSchema:
+  z.ZodMiniEnum<typeof ListAllSubscriptionSchedulesScheduleStatus> = z.enum(
+    ListAllSubscriptionSchedulesScheduleStatus,
+  );
+
+/** @internal */
 export type ListAllSubscriptionSchedulesRequest$Outbound = {
   pending_only?: boolean | undefined;
   subscription_id?: string | undefined;
+  subscription_ids?: Array<string> | undefined;
+  schedule_type?: Array<string> | undefined;
+  schedule_status?: Array<string> | undefined;
   limit?: number | undefined;
   offset?: number | undefined;
 };
@@ -40,6 +89,13 @@ export const ListAllSubscriptionSchedulesRequest$outboundSchema: z.ZodMiniType<
   z.object({
     pendingOnly: z.optional(z.boolean()),
     subscriptionId: z.optional(z.string()),
+    subscriptionIds: z.optional(z.array(z.string())),
+    scheduleType: z.optional(
+      z.array(ListAllSubscriptionSchedulesScheduleType$outboundSchema),
+    ),
+    scheduleStatus: z.optional(
+      z.array(ListAllSubscriptionSchedulesScheduleStatus$outboundSchema),
+    ),
     limit: z.optional(z.int()),
     offset: z.optional(z.int()),
   }),
@@ -47,6 +103,9 @@ export const ListAllSubscriptionSchedulesRequest$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       pendingOnly: "pending_only",
       subscriptionId: "subscription_id",
+      subscriptionIds: "subscription_ids",
+      scheduleType: "schedule_type",
+      scheduleStatus: "schedule_status",
     });
   }),
 );

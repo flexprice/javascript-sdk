@@ -3,16 +3,28 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   EntityChangePolicy,
+  EntityChangePolicy$inboundSchema,
   EntityChangePolicy$Outbound,
   EntityChangePolicy$outboundSchema,
 } from "./entity-change-policy.js";
+import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type SubscriptionChangeEntityPolicies = {
   addons?: EntityChangePolicy | undefined;
 };
 
+/** @internal */
+export const SubscriptionChangeEntityPolicies$inboundSchema: z.ZodMiniType<
+  SubscriptionChangeEntityPolicies,
+  unknown
+> = z.object({
+  addons: types.optional(EntityChangePolicy$inboundSchema),
+});
 /** @internal */
 export type SubscriptionChangeEntityPolicies$Outbound = {
   addons?: EntityChangePolicy$Outbound | undefined;
@@ -33,5 +45,14 @@ export function subscriptionChangeEntityPoliciesToJSON(
     SubscriptionChangeEntityPolicies$outboundSchema.parse(
       subscriptionChangeEntityPolicies,
     ),
+  );
+}
+export function subscriptionChangeEntityPoliciesFromJSON(
+  jsonString: string,
+): SafeParseResult<SubscriptionChangeEntityPolicies, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SubscriptionChangeEntityPolicies$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SubscriptionChangeEntityPolicies' from JSON`,
   );
 }

@@ -7,7 +7,6 @@
 * [ingestEvent](#ingestevent) - Ingest event
 * [getUsageAnalytics](#getusageanalytics) - Get usage analytics
 * [ingestEventsBulk](#ingesteventsbulk) - Bulk ingest events
-* [getHuggingfaceInferenceData](#gethuggingfaceinferencedata) - Get Hugging Face inference data
 * [getEvent](#getevent) - Get event
 * [listRawEvents](#listrawevents) - List raw events
 * [getUsageStatistics](#getusagestatistics) - Get usage statistics
@@ -252,86 +251,6 @@ run();
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
-## getHuggingfaceInferenceData
-
-Use when fetching Hugging Face inference usage or billing data (e.g. for HF-specific reporting or reconciliation). Reads the meter-usage pipeline.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="getHuggingfaceInferenceData" method="post" path="/events/huggingface-inference" -->
-```typescript
-import { Flexprice } from "@flexprice/sdk";
-
-const flexprice = new Flexprice({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const result = await flexprice.events.getHuggingfaceInferenceData({
-    requestIds: [
-      "<value 1>",
-      "<value 2>",
-    ],
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { eventsGetHuggingfaceInferenceData } from "@flexprice/sdk/funcs/events-get-huggingface-inference-data.js";
-
-// Use `FlexpriceCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const flexprice = new FlexpriceCore({
-  apiKeyAuth: "<YOUR_API_KEY_HERE>",
-});
-
-async function run() {
-  const res = await eventsGetHuggingfaceInferenceData(flexprice, {
-    requestIds: [
-      "<value 1>",
-      "<value 2>",
-    ],
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("eventsGetHuggingfaceInferenceData failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [models.GetHuggingFaceBillingDataRequest](../../sdk/models/get-hugging-face-billing-data-request.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[models.GetHuggingFaceBillingDataResponse](../../sdk/models/get-hugging-face-billing-data-response.md)\>**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 500                        | application/json           |
-| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
-
 ## getEvent
 
 Use when debugging a specific event (e.g. why it failed or how it was aggregated). Reads the meter-usage pipeline; includes processing status and step-by-step debug tracker when unprocessed. Uses ?id= query param because event IDs can contain "/".
@@ -347,7 +266,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.events.getEvent("<id>");
+  const result = await flexprice.events.getEvent("<id>", "<id>");
 
   console.log(result);
 }
@@ -370,7 +289,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await eventsGetEvent(flexprice, "<id>");
+  const res = await eventsGetEvent(flexprice, "<id>", "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -387,6 +306,9 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Event ID                                                                                                                                                                       |
+| `externalCustomerId`                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | External customer ID the event was ingested with                                                                                                                               |
+| `startTime`                                                                                                                                                                    | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Start of the event timestamp window (RFC3339); defaults to 14 days before end_time                                                                                             |
+| `endTime`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | End of the event timestamp window (RFC3339); defaults to now                                                                                                                   |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -399,7 +321,7 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 404                        | application/json           |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 

@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { CostPoint, CostPoint$inboundSchema } from "./cost-point.js";
-import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
+import { Meter, Meter$inboundSchema } from "./meter.js";
 import { PricePrice, PricePrice$inboundSchema } from "./price-price.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -24,7 +24,7 @@ export type CostAnalyticItem = {
   currency?: string | undefined;
   customerId?: string | undefined;
   externalCustomerId?: string | undefined;
-  meter?: MeterMeter | undefined;
+  meter?: Meter | undefined;
   meterId?: string | undefined;
   meterName?: string | undefined;
   price?: PricePrice | undefined;
@@ -50,7 +50,7 @@ export const CostAnalyticItem$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     customer_id: types.optional(types.string()),
     external_customer_id: types.optional(types.string()),
-    meter: types.optional(MeterMeter$inboundSchema),
+    meter: types.optional(Meter$inboundSchema),
     meter_id: types.optional(types.string()),
     meter_name: types.optional(types.string()),
     price: types.optional(PricePrice$inboundSchema),

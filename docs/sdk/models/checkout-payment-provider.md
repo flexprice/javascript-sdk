@@ -13,5 +13,5 @@ let value: CheckoutPaymentProvider = "razorpay";
 ## Values
 
 ```typescript
-"razorpay" | "chargebee" | Unrecognized<string>
+"razorpay" | "chargebee" | "stripe" | Unrecognized<string>
 ```

@@ -22,7 +22,7 @@ import {
 } from "./commitment-info.js";
 import { Feature, Feature$inboundSchema } from "./feature.js";
 import { GroupGroup, GroupGroup$inboundSchema } from "./group-group.js";
-import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
+import { Meter, Meter$inboundSchema } from "./meter.js";
 import { Plan, Plan$inboundSchema } from "./plan.js";
 import {
   PriceResponse,
@@ -68,7 +68,7 @@ export type UsageAnalyticItem = {
   feature?: Feature | undefined;
   featureId?: string | undefined;
   group?: GroupGroup | undefined;
-  meter?: MeterMeter | undefined;
+  meter?: Meter | undefined;
   /**
    * Meter ID
    */
@@ -135,7 +135,7 @@ export const UsageAnalyticItem$inboundSchema: z.ZodMiniType<
     feature: types.optional(Feature$inboundSchema),
     feature_id: types.optional(types.string()),
     group: types.optional(GroupGroup$inboundSchema),
-    meter: types.optional(MeterMeter$inboundSchema),
+    meter: types.optional(Meter$inboundSchema),
     meter_id: types.optional(types.string()),
     name: types.optional(types.string()),
     plan: types.optional(Plan$inboundSchema),

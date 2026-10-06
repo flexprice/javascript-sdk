@@ -16,7 +16,7 @@ import { ResetUsage, ResetUsage$inboundSchema } from "./reset-usage.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
-export type MeterMeter = {
+export type Meter = {
   aggregation?: MeterAggregation | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
@@ -55,43 +55,42 @@ export type MeterMeter = {
 };
 
 /** @internal */
-export const MeterMeter$inboundSchema: z.ZodMiniType<MeterMeter, unknown> = z
-  .pipe(
-    z.object({
-      aggregation: types.optional(MeterAggregation$inboundSchema),
-      created_at: types.optional(types.date()),
-      created_by: types.optional(types.string()),
-      environment_id: types.optional(types.string()),
-      event_name: types.optional(types.string()),
-      filters: types.optional(z.array(MeterFilter$inboundSchema)),
-      id: types.optional(types.string()),
-      name: types.optional(types.string()),
-      reset_usage: types.optional(ResetUsage$inboundSchema),
-      status: types.optional(Status$inboundSchema),
-      tenant_id: types.optional(types.string()),
-      updated_at: types.optional(types.date()),
-      updated_by: types.optional(types.string()),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "created_at": "createdAt",
-        "created_by": "createdBy",
-        "environment_id": "environmentId",
-        "event_name": "eventName",
-        "reset_usage": "resetUsage",
-        "tenant_id": "tenantId",
-        "updated_at": "updatedAt",
-        "updated_by": "updatedBy",
-      });
-    }),
-  );
+export const Meter$inboundSchema: z.ZodMiniType<Meter, unknown> = z.pipe(
+  z.object({
+    aggregation: types.optional(MeterAggregation$inboundSchema),
+    created_at: types.optional(types.date()),
+    created_by: types.optional(types.string()),
+    environment_id: types.optional(types.string()),
+    event_name: types.optional(types.string()),
+    filters: types.optional(z.array(MeterFilter$inboundSchema)),
+    id: types.optional(types.string()),
+    name: types.optional(types.string()),
+    reset_usage: types.optional(ResetUsage$inboundSchema),
+    status: types.optional(Status$inboundSchema),
+    tenant_id: types.optional(types.string()),
+    updated_at: types.optional(types.date()),
+    updated_by: types.optional(types.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "environment_id": "environmentId",
+      "event_name": "eventName",
+      "reset_usage": "resetUsage",
+      "tenant_id": "tenantId",
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+    });
+  }),
+);
 
-export function meterMeterFromJSON(
+export function meterFromJSON(
   jsonString: string,
-): SafeParseResult<MeterMeter, SDKValidationError> {
+): SafeParseResult<Meter, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MeterMeter$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MeterMeter' from JSON`,
+    (x) => Meter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Meter' from JSON`,
   );
 }

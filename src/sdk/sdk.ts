@@ -18,6 +18,7 @@ import { Entitlements } from "./entitlements.js";
 import { Environments } from "./environments.js";
 import { Events } from "./events.js";
 import { Features } from "./features.js";
+import { FXRates } from "./fx-rates.js";
 import { Groups } from "./groups.js";
 import { Integrations } from "./integrations.js";
 import { Invoices } from "./invoices.js";
@@ -125,6 +126,11 @@ export class Flexprice extends ClientSDK {
   private _features?: Features;
   get features(): Features {
     return (this._features ??= new Features(this._options));
+  }
+
+  private _fxRates?: FXRates;
+  get fxRates(): FXRates {
+    return (this._fxRates ??= new FXRates(this._options));
   }
 
   private _groups?: Groups;

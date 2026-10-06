@@ -22,6 +22,8 @@ import { webhookEventsPostWebhookEventsFeatureWalletBalanceAlert } from "../func
 import { webhookEventsPostWebhookEventsInvoiceCommunicationTriggered } from "../funcs/webhook-events-post-webhook-events-invoice-communication-triggered.js";
 import { webhookEventsPostWebhookEventsInvoiceCreateDrafted } from "../funcs/webhook-events-post-webhook-events-invoice-create-drafted.js";
 import { webhookEventsPostWebhookEventsInvoicePaymentOverdue } from "../funcs/webhook-events-post-webhook-events-invoice-payment-overdue.js";
+import { webhookEventsPostWebhookEventsInvoiceSyncFailed } from "../funcs/webhook-events-post-webhook-events-invoice-sync-failed.js";
+import { webhookEventsPostWebhookEventsInvoiceSyncSuccess } from "../funcs/webhook-events-post-webhook-events-invoice-sync-success.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdateFinalized } from "../funcs/webhook-events-post-webhook-events-invoice-update-finalized.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdatePayment } from "../funcs/webhook-events-post-webhook-events-invoice-update-payment.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdateVoided } from "../funcs/webhook-events-post-webhook-events-invoice-update-voided.js";
@@ -364,6 +366,36 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoInvoiceWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsInvoicePaymentOverdue(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * invoice.sync.failed
+   *
+   * @remarks
+   * Fired once per provider when an invoice sync fails after its last retry.
+   */
+  async postWebhookEventsInvoiceSyncFailed(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoInvoiceSyncWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsInvoiceSyncFailed(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * invoice.sync.success
+   *
+   * @remarks
+   * Fired once per provider when an invoice is synced to that provider.
+   */
+  async postWebhookEventsInvoiceSyncSuccess(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoInvoiceSyncWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsInvoiceSyncSuccess(
       this,
       options,
     ));

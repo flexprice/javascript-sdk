@@ -4,10 +4,15 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import {
   EntityChangeBehaviour,
+  EntityChangeBehaviour$inboundSchema,
   EntityChangeBehaviour$outboundSchema,
 } from "./entity-change-behaviour.js";
+import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type EntityChangePolicy = {
   defaultBehaviour?: EntityChangeBehaviour | undefined;
@@ -20,6 +25,23 @@ export type EntityChangePolicy = {
   overrides?: { [k: string]: EntityChangeBehaviour } | undefined;
 };
 
+/** @internal */
+export const EntityChangePolicy$inboundSchema: z.ZodMiniType<
+  EntityChangePolicy,
+  unknown
+> = z.pipe(
+  z.object({
+    default_behaviour: types.optional(EntityChangeBehaviour$inboundSchema),
+    overrides: types.optional(
+      z.record(z.string(), EntityChangeBehaviour$inboundSchema),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "default_behaviour": "defaultBehaviour",
+    });
+  }),
+);
 /** @internal */
 export type EntityChangePolicy$Outbound = {
   default_behaviour?: string | undefined;
@@ -49,5 +71,14 @@ export function entityChangePolicyToJSON(
 ): string {
   return JSON.stringify(
     EntityChangePolicy$outboundSchema.parse(entityChangePolicy),
+  );
+}
+export function entityChangePolicyFromJSON(
+  jsonString: string,
+): SafeParseResult<EntityChangePolicy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EntityChangePolicy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EntityChangePolicy' from JSON`,
   );
 }

@@ -34,10 +34,7 @@ import { Result } from "../types/fp.js";
  */
 export function subscriptionsListAllSubscriptionSchedules(
   client: FlexpriceCore,
-  pendingOnly?: boolean | undefined,
-  subscriptionId?: string | undefined,
-  limit?: number | undefined,
-  offset?: number | undefined,
+  request?: models.ListAllSubscriptionSchedulesRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,20 +51,14 @@ export function subscriptionsListAllSubscriptionSchedules(
 > {
   return new APIPromise($do(
     client,
-    pendingOnly,
-    subscriptionId,
-    limit,
-    offset,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  pendingOnly?: boolean | undefined,
-  subscriptionId?: string | undefined,
-  limit?: number | undefined,
-  offset?: number | undefined,
+  request?: models.ListAllSubscriptionSchedulesRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -85,15 +76,8 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.ListAllSubscriptionSchedulesRequest | undefined = {
-    pendingOnly: pendingOnly,
-    subscriptionId: subscriptionId,
-    limit: limit,
-    offset: offset,
-  };
-
   const parsed = safeParse(
-    input,
+    request,
     (value) =>
       z.parse(
         z.optional(models.ListAllSubscriptionSchedulesRequest$outboundSchema),
@@ -113,7 +97,10 @@ async function $do(
     "limit": payload?.limit,
     "offset": payload?.offset,
     "pending_only": payload?.pending_only,
+    "schedule_status": payload?.schedule_status,
+    "schedule_type": payload?.schedule_type,
     "subscription_id": payload?.subscription_id,
+    "subscription_ids": payload?.subscription_ids,
   });
 
   const headers = new Headers(compactMap({

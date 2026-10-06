@@ -19,7 +19,7 @@ import {
   InvoiceCadence,
   InvoiceCadence$inboundSchema,
 } from "./invoice-cadence.js";
-import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
+import { Meter, Meter$inboundSchema } from "./meter.js";
 import { PricePrice, PricePrice$inboundSchema } from "./price-price.js";
 import { PriceType, PriceType$inboundSchema } from "./price-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
@@ -63,7 +63,7 @@ export type SubscriptionSubscriptionLineItem = {
   id?: string | undefined;
   invoiceCadence?: InvoiceCadence | undefined;
   metadata?: { [k: string]: string } | undefined;
-  meter?: MeterMeter | undefined;
+  meter?: Meter | undefined;
   meterDisplayName?: string | undefined;
   meterId?: string | undefined;
   planDisplayName?: string | undefined;
@@ -113,7 +113,7 @@ export const SubscriptionSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     id: types.optional(types.string()),
     invoice_cadence: types.optional(InvoiceCadence$inboundSchema),
     metadata: types.optional(z.record(z.string(), types.string())),
-    meter: types.optional(MeterMeter$inboundSchema),
+    meter: types.optional(Meter$inboundSchema),
     meter_display_name: types.optional(types.string()),
     meter_id: types.optional(types.string()),
     plan_display_name: types.optional(types.string()),

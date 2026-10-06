@@ -3,26 +3,54 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetEventRequest = {
   /**
    * Event ID
    */
   id: string;
+  /**
+   * External customer ID the event was ingested with
+   */
+  externalCustomerId: string;
+  /**
+   * Start of the event timestamp window (RFC3339); defaults to 14 days before end_time
+   */
+  startTime?: string | undefined;
+  /**
+   * End of the event timestamp window (RFC3339); defaults to now
+   */
+  endTime?: string | undefined;
 };
 
 /** @internal */
 export type GetEventRequest$Outbound = {
   id: string;
+  external_customer_id: string;
+  start_time?: string | undefined;
+  end_time?: string | undefined;
 };
 
 /** @internal */
 export const GetEventRequest$outboundSchema: z.ZodMiniType<
   GetEventRequest$Outbound,
   GetEventRequest
-> = z.object({
-  id: z.string(),
-});
+> = z.pipe(
+  z.object({
+    id: z.string(),
+    externalCustomerId: z.string(),
+    startTime: z.optional(z.string()),
+    endTime: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      externalCustomerId: "external_customer_id",
+      startTime: "start_time",
+      endTime: "end_time",
+    });
+  }),
+);
 
 export function getEventRequestToJSON(
   getEventRequest: GetEventRequest,

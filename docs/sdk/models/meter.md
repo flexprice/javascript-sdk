@@ -1,11 +1,11 @@
-# MeterMeter
+# Meter
 
 ## Example Usage
 
 ```typescript
-import { MeterMeter } from "@flexprice/sdk/sdk/models";
+import { Meter } from "@flexprice/sdk/sdk/models";
 
-let value: MeterMeter = {};
+let value: Meter = {};
 ```
 
 ## Fields

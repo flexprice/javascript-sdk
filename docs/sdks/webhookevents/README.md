@@ -24,6 +24,8 @@
 * [postWebhookEventsInvoiceCommunicationTriggered](#postwebhookeventsinvoicecommunicationtriggered) - invoice.communication.triggered
 * [postWebhookEventsInvoiceCreateDrafted](#postwebhookeventsinvoicecreatedrafted) - invoice.create.drafted
 * [postWebhookEventsInvoicePaymentOverdue](#postwebhookeventsinvoicepaymentoverdue) - invoice.payment.overdue
+* [postWebhookEventsInvoiceSyncFailed](#postwebhookeventsinvoicesyncfailed) - invoice.sync.failed
+* [postWebhookEventsInvoiceSyncSuccess](#postwebhookeventsinvoicesyncsuccess) - invoice.sync.success
 * [postWebhookEventsInvoiceUpdate](#postwebhookeventsinvoiceupdate) - invoice.update
 * [postWebhookEventsInvoiceUpdateFinalized](#postwebhookeventsinvoiceupdatefinalized) - invoice.update.finalized
 * [postWebhookEventsInvoiceUpdatePayment](#postwebhookeventsinvoiceupdatepayment) - invoice.update.payment
@@ -1418,6 +1420,142 @@ run();
 ### Response
 
 **Promise\<[models.WebhookDtoInvoiceWebhookPayload](../../sdk/models/webhook-dto-invoice-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsInvoiceSyncFailed
+
+Fired once per provider when an invoice sync fails after its last retry.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/invoice.sync.failed" method="post" path="/webhook-events/invoice.sync.failed" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsInvoiceSyncFailed();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsInvoiceSyncFailed } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-invoice-sync-failed.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsInvoiceSyncFailed(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsInvoiceSyncFailed failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoInvoiceSyncWebhookPayload](../../sdk/models/webhook-dto-invoice-sync-webhook-payload.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.SDKError | 4XX, 5XX        | \*/\*           |
+
+## postWebhookEventsInvoiceSyncSuccess
+
+Fired once per provider when an invoice is synced to that provider.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="post_/webhook-events/invoice.sync.success" method="post" path="/webhook-events/invoice.sync.success" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.webhookEvents.postWebhookEventsInvoiceSyncSuccess();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { webhookEventsPostWebhookEventsInvoiceSyncSuccess } from "@flexprice/sdk/funcs/webhook-events-post-webhook-events-invoice-sync-success.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await webhookEventsPostWebhookEventsInvoiceSyncSuccess(flexprice);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("webhookEventsPostWebhookEventsInvoiceSyncSuccess failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.WebhookDtoInvoiceSyncWebhookPayload](../../sdk/models/webhook-dto-invoice-sync-webhook-payload.md)\>**
 
 ### Errors
 

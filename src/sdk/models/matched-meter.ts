@@ -7,12 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { MeterMeter, MeterMeter$inboundSchema } from "./meter-meter.js";
+import { Meter, Meter$inboundSchema } from "./meter.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type MatchedMeter = {
   eventName?: string | undefined;
-  meter?: MeterMeter | undefined;
+  meter?: Meter | undefined;
   meterId?: string | undefined;
 };
 
@@ -21,7 +21,7 @@ export const MatchedMeter$inboundSchema: z.ZodMiniType<MatchedMeter, unknown> =
   z.pipe(
     z.object({
       event_name: types.optional(types.string()),
-      meter: types.optional(MeterMeter$inboundSchema),
+      meter: types.optional(Meter$inboundSchema),
       meter_id: types.optional(types.string()),
     }),
     z.transform((v) => {

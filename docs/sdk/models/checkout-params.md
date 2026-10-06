@@ -6,7 +6,7 @@
 import { CheckoutParams } from "@flexprice/sdk/sdk/models";
 
 let value: CheckoutParams = {
-  paymentProvider: "razorpay",
+  paymentProvider: "chargebee",
 };
 ```
 

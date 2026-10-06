@@ -35,6 +35,9 @@ import { Result } from "../types/fp.js";
 export function eventsGetEvent(
   client: FlexpriceCore,
   id: string,
+  externalCustomerId: string,
+  startTime?: string | undefined,
+  endTime?: string | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,6 +56,9 @@ export function eventsGetEvent(
   return new APIPromise($do(
     client,
     id,
+    externalCustomerId,
+    startTime,
+    endTime,
     options,
   ));
 }
@@ -60,6 +66,9 @@ export function eventsGetEvent(
 async function $do(
   client: FlexpriceCore,
   id: string,
+  externalCustomerId: string,
+  startTime?: string | undefined,
+  endTime?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,6 +89,9 @@ async function $do(
 > {
   const input: models.GetEventRequest = {
     id: id,
+    externalCustomerId: externalCustomerId,
+    startTime: startTime,
+    endTime: endTime,
   };
 
   const parsed = safeParse(
@@ -96,7 +108,10 @@ async function $do(
   const path = pathToFunc("/events/lookup")();
 
   const query = encodeFormQuery({
+    "end_time": payload.end_time,
+    "external_customer_id": payload.external_customer_id,
     "id": payload.id,
+    "start_time": payload.start_time,
   });
 
   const headers = new Headers(compactMap({
@@ -167,7 +182,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, models.GetEventByIDResponse$inboundSchema),
-    M.jsonErr(404, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

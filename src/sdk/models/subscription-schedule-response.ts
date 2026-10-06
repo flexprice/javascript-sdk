@@ -8,6 +8,14 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  ConfigurationDetails,
+  ConfigurationDetails$inboundSchema,
+} from "./configuration-details.js";
+import {
+  ExecutionDetails,
+  ExecutionDetails$inboundSchema,
+} from "./execution-details.js";
+import {
   ScheduleStatus,
   ScheduleStatus$inboundSchema,
 } from "./schedule-status.js";
@@ -30,9 +38,10 @@ export type SubscriptionScheduleResponse = {
    */
   cancelledAt?: Date | undefined;
   /**
-   * configuration contains type-specific configuration (e.g., target_plan_id for plan changes)
+   * configuration is the raw type-specific configuration. Deprecated: use configuration_details.
    */
   configuration?: { [k: string]: any } | undefined;
+  configurationDetails?: ConfigurationDetails | undefined;
   /**
    * created_at timestamp
    */
@@ -49,8 +58,9 @@ export type SubscriptionScheduleResponse = {
    * executed_at is when the schedule was executed
    */
   executedAt?: Date | undefined;
+  executionDetails?: ExecutionDetails | undefined;
   /**
-   * execution_result contains type-specific execution result
+   * execution_result is the raw type-specific execution result. Deprecated: use execution_details.
    */
   executionResult?: { [k: string]: any } | undefined;
   /**
@@ -86,10 +96,12 @@ export const SubscriptionScheduleResponse$inboundSchema: z.ZodMiniType<
     can_be_cancelled: types.optional(types.boolean()),
     cancelled_at: types.optional(types.date()),
     configuration: types.optional(z.record(z.string(), z.any())),
+    configuration_details: types.optional(ConfigurationDetails$inboundSchema),
     created_at: types.optional(types.date()),
     days_until_execution: types.optional(types.number()),
     error_message: types.optional(types.string()),
     executed_at: types.optional(types.date()),
+    execution_details: types.optional(ExecutionDetails$inboundSchema),
     execution_result: types.optional(z.record(z.string(), z.any())),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
@@ -103,10 +115,12 @@ export const SubscriptionScheduleResponse$inboundSchema: z.ZodMiniType<
     return remap$(v, {
       "can_be_cancelled": "canBeCancelled",
       "cancelled_at": "cancelledAt",
+      "configuration_details": "configurationDetails",
       "created_at": "createdAt",
       "days_until_execution": "daysUntilExecution",
       "error_message": "errorMessage",
       "executed_at": "executedAt",
+      "execution_details": "executionDetails",
       "execution_result": "executionResult",
       "schedule_type": "scheduleType",
       "scheduled_at": "scheduledAt",

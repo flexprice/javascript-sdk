@@ -153,18 +153,12 @@ export class Subscriptions extends ClientSDK {
    * Use when listing or searching scheduled changes across subscriptions (e.g. admin view). Returns schedules with optional filtering.
    */
   async listAllSubscriptionSchedules(
-    pendingOnly?: boolean | undefined,
-    subscriptionId?: string | undefined,
-    limit?: number | undefined,
-    offset?: number | undefined,
+    request?: models.ListAllSubscriptionSchedulesRequest | undefined,
     options?: RequestOptions,
   ): Promise<models.GetPendingSchedulesResponse> {
     return unwrapAsync(subscriptionsListAllSubscriptionSchedules(
       this,
-      pendingOnly,
-      subscriptionId,
-      limit,
-      offset,
+      request,
       options,
     ));
   }

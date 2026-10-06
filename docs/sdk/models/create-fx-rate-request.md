@@ -1,0 +1,27 @@
+# CreateFXRateRequest
+
+## Example Usage
+
+```typescript
+import { CreateFXRateRequest } from "@flexprice/sdk/sdk/models";
+
+let value: CreateFXRateRequest = {
+  fromCurrency: "<value>",
+  scope: "tenant",
+  toCurrency: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `endDate`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `fromCurrency`                                                                                | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `metadata`                                                                                    | Record<string, *string*>                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `rate`                                                                                        | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `scope`                                                                                       | [models.FXRateScope](../../sdk/models/fx-rate-scope.md)                                       | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `scopeId`                                                                                     | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `source`                                                                                      | [models.FXRateSource](../../sdk/models/fx-rate-source.md)                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `startDate`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `toCurrency`                                                                                  | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

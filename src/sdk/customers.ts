@@ -11,6 +11,7 @@ import { customersGetCustomerUpcomingGrants } from "../funcs/customers-get-custo
 import { customersGetCustomerUsageSummary } from "../funcs/customers-get-customer-usage-summary.js";
 import { customersGetCustomer } from "../funcs/customers-get-customer.js";
 import { customersGetSubscriptionsForCustomer } from "../funcs/customers-get-subscriptions-for-customer.js";
+import { customersListCustomerPaymentMethods } from "../funcs/customers-list-customer-payment-methods.js";
 import { customersQueryCustomer } from "../funcs/customers-query-customer.js";
 import { customersUpdateCustomer } from "../funcs/customers-update-customer.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -207,6 +208,25 @@ export class Customers extends ClientSDK {
     return unwrapAsync(customersGetCustomerUpcomingGrants(
       this,
       id,
+      options,
+    ));
+  }
+
+  /**
+   * List customer payment methods
+   *
+   * @remarks
+   * Use when you need a customer's saved payment methods across every connected gateway, including whether each can be auto-charged. Only gateways that can list saved methods are included.
+   */
+  async listCustomerPaymentMethods(
+    id: string,
+    providers?: Array<string> | undefined,
+    options?: RequestOptions,
+  ): Promise<models.SavedPaymentMethodsResponse> {
+    return unwrapAsync(customersListCustomerPaymentMethods(
+      this,
+      id,
+      providers,
       options,
     ));
   }
