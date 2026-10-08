@@ -23,6 +23,7 @@ import {
   CustomerResponse,
   CustomerResponse$inboundSchema,
 } from "./customer-response.js";
+import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import {
   InvoiceLineItemResponse,
   InvoiceLineItemResponse$inboundSchema,
@@ -124,6 +125,7 @@ export type InvoiceResponse = {
    * finalized_at is the timestamp when this invoice was finalized and made ready for payment
    */
   finalizedAt?: Date | undefined;
+  fxConversion?: FxConversion | undefined;
   /**
    * id is the unique identifier for this invoice
    */
@@ -273,6 +275,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     due_date: types.optional(types.date()),
     environment_id: types.optional(types.string()),
     finalized_at: types.optional(types.date()),
+    fx_conversion: types.optional(FxConversion$inboundSchema),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
     invoice_number: types.optional(types.string()),
@@ -332,6 +335,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "due_date": "dueDate",
       "environment_id": "environmentId",
       "finalized_at": "finalizedAt",
+      "fx_conversion": "fxConversion",
       "idempotency_key": "idempotencyKey",
       "invoice_number": "invoiceNumber",
       "invoice_pdf_url": "invoicePdfUrl",

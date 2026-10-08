@@ -34,6 +34,11 @@ import {
   CreateSubscriptionLineItemRequest$outboundSchema,
 } from "./create-subscription-line-item-request.js";
 import {
+  InlineFXRate,
+  InlineFXRate$Outbound,
+  InlineFXRate$outboundSchema,
+} from "./inline-fx-rate.js";
+import {
   LineItemCommitmentConfig,
   LineItemCommitmentConfig$Outbound,
   LineItemCommitmentConfig$outboundSchema,
@@ -122,6 +127,13 @@ export type CreateSubscriptionRequest = {
   enableTrueUp?: boolean | undefined;
   endDate?: Date | undefined;
   externalCustomerId?: string | undefined;
+  /**
+   * FxRates sets subscription-scope rates to the invoicing customer's billing currency, one per
+   *
+   * @remarks
+   * non-overlapping window. Rejected when nothing needs converting or the pair has no tenant rate.
+   */
+  fxRates?: Array<InlineFXRate> | undefined;
   gatewayPaymentMethodId?: string | undefined;
   /**
    * IncludePriceIDs selects which plan prices to attach. Nil/omitted attaches matching-cadence
@@ -200,6 +212,7 @@ export type CreateSubscriptionRequest$Outbound = {
   enable_true_up?: boolean | undefined;
   end_date?: string | undefined;
   external_customer_id?: string | undefined;
+  fx_rates?: Array<InlineFXRate$Outbound> | undefined;
   gateway_payment_method_id?: string | undefined;
   include_price_ids?: Array<string> | undefined;
   inheritance?: SubscriptionInheritanceConfig$Outbound | undefined;
@@ -254,6 +267,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     enableTrueUp: z.optional(z.boolean()),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     externalCustomerId: z.optional(z.string()),
+    fxRates: z.optional(z.array(InlineFXRate$outboundSchema)),
     gatewayPaymentMethodId: z.optional(z.string()),
     includePriceIds: z.optional(z.array(z.string())),
     inheritance: z.optional(SubscriptionInheritanceConfig$outboundSchema),
@@ -303,6 +317,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       enableTrueUp: "enable_true_up",
       endDate: "end_date",
       externalCustomerId: "external_customer_id",
+      fxRates: "fx_rates",
       gatewayPaymentMethodId: "gateway_payment_method_id",
       includePriceIds: "include_price_ids",
       lineItemCommitments: "line_item_commitments",

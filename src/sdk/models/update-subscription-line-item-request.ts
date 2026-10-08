@@ -60,6 +60,14 @@ export type UpdateSubscriptionLineItemRequest = {
    * Metadata for the new line item
    */
   metadata?: { [k: string]: string } | undefined;
+  /**
+   * PriceUnitAmount is the amount for a CUSTOM price unit price (FLAT_FEE/PACKAGE billing models)
+   */
+  priceUnitAmount?: string | undefined;
+  /**
+   * PriceUnitTiers are the tiers for a CUSTOM price unit price (TIERED billing model)
+   */
+  priceUnitTiers?: Array<CreatePriceTier> | undefined;
   tierMode?: BillingTier | undefined;
   /**
    * Tiers determines the pricing tiers for this line item
@@ -83,6 +91,8 @@ export type UpdateSubscriptionLineItemRequest$Outbound = {
   commitment_windowed?: boolean | undefined;
   effective_from?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  price_unit_amount?: string | undefined;
+  price_unit_tiers?: Array<CreatePriceTier$Outbound> | undefined;
   tier_mode?: string | undefined;
   tiers?: Array<CreatePriceTier$Outbound> | undefined;
   transform_quantity?: PriceTransformQuantity$Outbound | undefined;
@@ -109,6 +119,8 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
     commitmentWindowed: z.optional(z.boolean()),
     effectiveFrom: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
+    priceUnitAmount: z.optional(z.string()),
+    priceUnitTiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
     tierMode: z.optional(BillingTier$outboundSchema),
     tiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
     transformQuantity: z.optional(PriceTransformQuantity$outboundSchema),
@@ -126,6 +138,8 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
       commitmentType: "commitment_type",
       commitmentWindowed: "commitment_windowed",
       effectiveFrom: "effective_from",
+      priceUnitAmount: "price_unit_amount",
+      priceUnitTiers: "price_unit_tiers",
       tierMode: "tier_mode",
       transformQuantity: "transform_quantity",
     });

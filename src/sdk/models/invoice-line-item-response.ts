@@ -15,6 +15,7 @@ import {
   CustomCurrencyLineItem,
   CustomCurrencyLineItem$inboundSchema,
 } from "./custom-currency-line-item.js";
+import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SourceUsageItem,
@@ -45,6 +46,7 @@ export type InvoiceLineItemResponse = {
   entityId?: string | undefined;
   entityType?: string | undefined;
   environmentId?: string | undefined;
+  fxConversion?: FxConversion | undefined;
   id?: string | undefined;
   invoiceId?: string | undefined;
   /**
@@ -115,6 +117,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
     entity_id: types.optional(types.string()),
     entity_type: types.optional(types.string()),
     environment_id: types.optional(types.string()),
+    fx_conversion: types.optional(FxConversion$inboundSchema),
     id: types.optional(types.string()),
     invoice_id: types.optional(types.string()),
     invoice_level_discount: types.optional(types.string()),
@@ -154,6 +157,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
       "entity_id": "entityId",
       "entity_type": "entityType",
       "environment_id": "environmentId",
+      "fx_conversion": "fxConversion",
       "invoice_id": "invoiceId",
       "invoice_level_discount": "invoiceLevelDiscount",
       "line_item_discount": "lineItemDiscount",

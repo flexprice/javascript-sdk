@@ -5,20 +5,20 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
-  TenantBillingDetails,
-  TenantBillingDetails$Outbound,
-  TenantBillingDetails$outboundSchema,
-} from "./tenant-billing-details.js";
+  UpdateTenantBillingDetails,
+  UpdateTenantBillingDetails$Outbound,
+  UpdateTenantBillingDetails$outboundSchema,
+} from "./update-tenant-billing-details.js";
 
 export type UpdateTenantRequest = {
-  billingDetails?: TenantBillingDetails | undefined;
+  billingDetails?: UpdateTenantBillingDetails | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
 export type UpdateTenantRequest$Outbound = {
-  billing_details?: TenantBillingDetails$Outbound | undefined;
+  billing_details?: UpdateTenantBillingDetails$Outbound | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
 };
@@ -29,7 +29,7 @@ export const UpdateTenantRequest$outboundSchema: z.ZodMiniType<
   UpdateTenantRequest
 > = z.pipe(
   z.object({
-    billingDetails: z.optional(TenantBillingDetails$outboundSchema),
+    billingDetails: z.optional(UpdateTenantBillingDetails$outboundSchema),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
   }),

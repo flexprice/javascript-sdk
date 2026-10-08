@@ -7,12 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import {
-  Address,
-  Address$inboundSchema,
-  Address$Outbound,
-  Address$outboundSchema,
-} from "./address.js";
+import { Address, Address$inboundSchema } from "./address.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type TenantBillingDetails = {
@@ -39,39 +34,7 @@ export const TenantBillingDetails$inboundSchema: z.ZodMiniType<
     });
   }),
 );
-/** @internal */
-export type TenantBillingDetails$Outbound = {
-  address?: Address$Outbound | undefined;
-  email?: string | undefined;
-  help_email?: string | undefined;
-  phone?: string | undefined;
-};
 
-/** @internal */
-export const TenantBillingDetails$outboundSchema: z.ZodMiniType<
-  TenantBillingDetails$Outbound,
-  TenantBillingDetails
-> = z.pipe(
-  z.object({
-    address: z.optional(Address$outboundSchema),
-    email: z.optional(z.string()),
-    helpEmail: z.optional(z.string()),
-    phone: z.optional(z.string()),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      helpEmail: "help_email",
-    });
-  }),
-);
-
-export function tenantBillingDetailsToJSON(
-  tenantBillingDetails: TenantBillingDetails,
-): string {
-  return JSON.stringify(
-    TenantBillingDetails$outboundSchema.parse(tenantBillingDetails),
-  );
-}
 export function tenantBillingDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<TenantBillingDetails, SDKValidationError> {

@@ -44,6 +44,10 @@ export type CustomerResponse = {
    */
   addressState?: string | undefined;
   /**
+   * BillingCurrency is the fiat currency invoices are issued in; nil means charge currency is used as-is.
+   */
+  billingCurrency?: string | undefined;
+  /**
    * Contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -100,6 +104,7 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
     address_line2: types.optional(types.string()),
     address_postal_code: types.optional(types.string()),
     address_state: types.optional(types.string()),
+    billing_currency: types.optional(types.string()),
     contact: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -127,6 +132,7 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
       "address_line2": "addressLine2",
       "address_postal_code": "addressPostalCode",
       "address_state": "addressState",
+      "billing_currency": "billingCurrency",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "environment_id": "environmentId",

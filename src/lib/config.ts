@@ -23,6 +23,10 @@ export const ServerList = [
 
 export type SDKOptions = {
   apiKeyAuth?: string | (() => Promise<string>) | undefined;
+  /** Signed-in user's JWT, sent as `Authorization: Bearer <token>`. Use instead of apiKeyAuth. */
+  bearerAuth?: string | (() => string | undefined | Promise<string | undefined>) | undefined;
+  /** Sent as `X-Environment-ID`. Needed with bearerAuth on environment-scoped endpoints. */
+  environmentId?: string | (() => string | undefined | Promise<string | undefined>) | undefined;
 
   httpClient?: HTTPClient;
   /**
@@ -65,7 +69,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0",
-  sdkVersion: "2.1.34",
-  genVersion: "2.943.0",
-  userAgent: "speakeasy-sdk/typescript 2.1.34 2.943.0 1.0 @flexprice/sdk",
+  sdkVersion: "2.1.35",
+  genVersion: "2.946.0",
+  userAgent: "speakeasy-sdk/typescript 2.1.35 2.946.0 1.0 @flexprice/sdk",
 } as const;

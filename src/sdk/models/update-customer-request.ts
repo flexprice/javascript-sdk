@@ -40,6 +40,10 @@ export type UpdateCustomerRequest = {
    */
   addressState?: string | undefined;
   /**
+   * billing_currency updates the invoicing currency; send "" to clear it back to the charge currency
+   */
+  billingCurrency?: string | undefined;
+  /**
    * contact is the updated contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -80,6 +84,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_line2?: string | undefined;
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
+  billing_currency?: string | undefined;
   contact?: string | undefined;
   email?: string | undefined;
   external_id?: string | undefined;
@@ -104,6 +109,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressLine2: z.optional(z.string()),
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
+    billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.optional(z.string()),
@@ -123,6 +129,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressLine2: "address_line2",
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
+      billingCurrency: "billing_currency",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
       taxTreatment: "tax_treatment",

@@ -45,6 +45,10 @@ export type CreateCustomerRequest = {
    */
   addressState?: string | undefined;
   /**
+   * billing_currency is the fiat currency invoices are issued in; empty means the charge currency is used as-is
+   */
+  billingCurrency?: string | undefined;
+  /**
    * contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -104,6 +108,7 @@ export type CreateCustomerRequest$Outbound = {
   address_line2?: string | undefined;
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
+  billing_currency?: string | undefined;
   contact?: string | undefined;
   email?: string | undefined;
   external_id: string;
@@ -131,6 +136,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressLine2: z.optional(z.string()),
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
+    billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
     email: z.optional(z.string()),
     externalId: z.string(),
@@ -153,6 +159,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressLine2: "address_line2",
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
+      billingCurrency: "billing_currency",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
       onboardingWorkflowName: "onboarding_workflow_name",
