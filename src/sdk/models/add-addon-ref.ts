@@ -6,6 +6,11 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
+  CouponRef,
+  CouponRef$Outbound,
+  CouponRef$outboundSchema,
+} from "./coupon-ref.js";
+import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
@@ -14,6 +19,7 @@ export type AddAddonRef = {
   addonId?: string | undefined;
   associationId?: string | undefined;
   cadence?: AddonCadence | undefined;
+  coupons?: Array<CouponRef> | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
 };
@@ -23,6 +29,7 @@ export type AddAddonRef$Outbound = {
   addon_id?: string | undefined;
   association_id?: string | undefined;
   cadence?: string | undefined;
+  coupons?: Array<CouponRef$Outbound> | undefined;
   proration_behavior?: string | undefined;
   start_date?: string | undefined;
 };
@@ -36,6 +43,7 @@ export const AddAddonRef$outboundSchema: z.ZodMiniType<
     addonId: z.optional(z.string()),
     associationId: z.optional(z.string()),
     cadence: z.optional(AddonCadence$outboundSchema),
+    coupons: z.optional(z.array(CouponRef$outboundSchema)),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),

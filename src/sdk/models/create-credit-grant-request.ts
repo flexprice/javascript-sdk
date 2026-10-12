@@ -24,6 +24,10 @@ import {
   CreditGrantScope,
   CreditGrantScope$outboundSchema,
 } from "./credit-grant-scope.js";
+import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
 
 export type CreateCreditGrantRequest = {
   addonId?: string | undefined;
@@ -48,6 +52,7 @@ export type CreateCreditGrantRequest = {
   periodCount?: number | undefined;
   planId?: string | undefined;
   priority?: number | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   scope: CreditGrantScope;
   startDate?: Date | undefined;
   subscriptionId?: string | undefined;
@@ -78,6 +83,7 @@ export type CreateCreditGrantRequest$Outbound = {
   period_count?: number | undefined;
   plan_id?: string | undefined;
   priority?: number | undefined;
+  proration_behavior?: string | undefined;
   scope: string;
   start_date?: string | undefined;
   subscription_id?: string | undefined;
@@ -106,6 +112,7 @@ export const CreateCreditGrantRequest$outboundSchema: z.ZodMiniType<
     periodCount: z.optional(z.int()),
     planId: z.optional(z.string()),
     priority: z.optional(z.int()),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     scope: CreditGrantScope$outboundSchema,
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionId: z.optional(z.string()),
@@ -121,6 +128,7 @@ export const CreateCreditGrantRequest$outboundSchema: z.ZodMiniType<
       expirationType: "expiration_type",
       periodCount: "period_count",
       planId: "plan_id",
+      prorationBehavior: "proration_behavior",
       startDate: "start_date",
       subscriptionId: "subscription_id",
       topupConversionRate: "topup_conversion_rate",

@@ -7,9 +7,14 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  ExternalTaxDetails,
+  ExternalTaxDetails$inboundSchema,
+} from "./external-tax-details.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 import { TaxBehavior, TaxBehavior$inboundSchema } from "./tax-behavior.js";
+import { TaxProvider, TaxProvider$inboundSchema } from "./tax-provider.js";
 import {
   TaxRateEntityType,
   TaxRateEntityType$inboundSchema,
@@ -18,6 +23,10 @@ import {
   TaxRateResponse,
   TaxRateResponse$inboundSchema,
 } from "./tax-rate-response.js";
+import {
+  TaxTransactionType,
+  TaxTransactionType$inboundSchema,
+} from "./tax-transaction-type.js";
 
 export type TaxAppliedResponse = {
   appliedAt?: Date | undefined;
@@ -27,15 +36,25 @@ export type TaxAppliedResponse = {
   entityId?: string | undefined;
   entityType?: TaxRateEntityType | undefined;
   environmentId?: string | undefined;
+  externalTaxDetails?: ExternalTaxDetails | undefined;
   id?: string | undefined;
   idempotencyKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  provider?: TaxProvider | undefined;
   status?: Status | undefined;
   taxAmount?: string | undefined;
   taxAssociationId?: string | undefined;
   taxBehavior?: TaxBehavior | undefined;
   taxRate?: TaxRateResponse | undefined;
+  /**
+   * Null when an external engine calculated the tax: there is no Flexprice rate to point at.
+   */
   taxRateId?: string | undefined;
+  /**
+   * TaxTransactionID is the provider transaction recording the filed tax, stamped at commit.
+   */
+  taxTransactionId?: string | undefined;
+  taxTransactionType?: TaxTransactionType | undefined;
   taxableAmount?: string | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
@@ -55,15 +74,19 @@ export const TaxAppliedResponse$inboundSchema: z.ZodMiniType<
     entity_id: types.optional(types.string()),
     entity_type: types.optional(TaxRateEntityType$inboundSchema),
     environment_id: types.optional(types.string()),
+    external_tax_details: types.optional(ExternalTaxDetails$inboundSchema),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    provider: types.optional(TaxProvider$inboundSchema),
     status: types.optional(Status$inboundSchema),
     tax_amount: types.optional(types.string()),
     tax_association_id: types.optional(types.string()),
     tax_behavior: types.optional(TaxBehavior$inboundSchema),
     tax_rate: types.optional(TaxRateResponse$inboundSchema),
     tax_rate_id: types.optional(types.string()),
+    tax_transaction_id: types.optional(types.string()),
+    tax_transaction_type: types.optional(TaxTransactionType$inboundSchema),
     taxable_amount: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
@@ -77,12 +100,15 @@ export const TaxAppliedResponse$inboundSchema: z.ZodMiniType<
       "entity_id": "entityId",
       "entity_type": "entityType",
       "environment_id": "environmentId",
+      "external_tax_details": "externalTaxDetails",
       "idempotency_key": "idempotencyKey",
       "tax_amount": "taxAmount",
       "tax_association_id": "taxAssociationId",
       "tax_behavior": "taxBehavior",
       "tax_rate": "taxRate",
       "tax_rate_id": "taxRateId",
+      "tax_transaction_id": "taxTransactionId",
+      "tax_transaction_type": "taxTransactionType",
       "taxable_amount": "taxableAmount",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",

@@ -7,7 +7,7 @@ import { CreateScheduledTaskRequest } from "@flexprice/sdk/sdk/models";
 
 let value: CreateScheduledTaskRequest = {
   connectionId: "<id>",
-  entityType: "credit_usage",
+  entityType: "wallet_debits",
   interval: "30MIN",
   jobConfig: {},
 };

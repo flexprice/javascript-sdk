@@ -11,6 +11,7 @@ import {
   CommitmentInfo,
   CommitmentInfo$inboundSchema,
 } from "./commitment-info.js";
+import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoInvoiceLineItem = {
@@ -21,6 +22,7 @@ export type WebhookDtoInvoiceLineItem = {
   displayName?: string | undefined;
   entityId?: string | undefined;
   entityType?: string | undefined;
+  fxConversion?: FxConversion | undefined;
   id?: string | undefined;
   invoiceLevelDiscount?: string | undefined;
   lineItemDiscount?: string | undefined;
@@ -52,6 +54,7 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
     display_name: types.optional(types.string()),
     entity_id: types.optional(types.string()),
     entity_type: types.optional(types.string()),
+    fx_conversion: types.optional(FxConversion$inboundSchema),
     id: types.optional(types.string()),
     invoice_level_discount: types.optional(types.string()),
     line_item_discount: types.optional(types.string()),
@@ -76,6 +79,7 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
       "display_name": "displayName",
       "entity_id": "entityId",
       "entity_type": "entityType",
+      "fx_conversion": "fxConversion",
       "invoice_level_discount": "invoiceLevelDiscount",
       "line_item_discount": "lineItemDiscount",
       "meter_display_name": "meterDisplayName",

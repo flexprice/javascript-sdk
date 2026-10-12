@@ -10,6 +10,11 @@ import {
   CheckoutParams$outboundSchema,
 } from "./checkout-params.js";
 import {
+  TopUpCoupon,
+  TopUpCoupon$Outbound,
+  TopUpCoupon$outboundSchema,
+} from "./top-up-coupon.js";
+import {
   TransactionReason,
   TransactionReason$outboundSchema,
 } from "./transaction-reason.js";
@@ -44,6 +49,7 @@ export type TopUpWalletRequest = {
    */
   bonusCreditsToAdd?: string | undefined;
   checkout?: CheckoutParams | undefined;
+  coupons?: Array<TopUpCoupon> | undefined;
   /**
    * credits_to_add is the number of credits to add to the wallet
    */
@@ -82,6 +88,7 @@ export type TopUpWalletRequest$Outbound = {
   bonus_credits_expiry_date_utc?: string | undefined;
   bonus_credits_to_add?: string | undefined;
   checkout?: CheckoutParams$Outbound | undefined;
+  coupons?: Array<TopUpCoupon$Outbound> | undefined;
   credits_to_add?: string | undefined;
   description?: string | undefined;
   expiry_date_utc?: string | undefined;
@@ -102,6 +109,7 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
     bonusCreditsExpiryDateUtc: z.optional(z.string()),
     bonusCreditsToAdd: z.optional(z.string()),
     checkout: z.optional(CheckoutParams$outboundSchema),
+    coupons: z.optional(z.array(TopUpCoupon$outboundSchema)),
     creditsToAdd: z.optional(z.string()),
     description: z.optional(z.string()),
     expiryDateUtc: z.optional(z.string()),

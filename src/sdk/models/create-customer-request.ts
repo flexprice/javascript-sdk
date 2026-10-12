@@ -10,6 +10,11 @@ import {
   CreateEntityIntegrationMappingRequest$outboundSchema,
 } from "./create-entity-integration-mapping-request.js";
 import {
+  CustomerContactPerson,
+  CustomerContactPerson$Outbound,
+  CustomerContactPerson$outboundSchema,
+} from "./customer-contact-person.js";
+import {
   TaxRateOverride,
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
@@ -52,6 +57,10 @@ export type CreateCustomerRequest = {
    * contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
+  /**
+   * contact_persons are people at the customer; at most one may be primary
+   */
+  contactPersons: Array<CustomerContactPerson>;
   /**
    * email is the customer's email address and must be a valid email format if provided
    */
@@ -110,6 +119,7 @@ export type CreateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   billing_currency?: string | undefined;
   contact?: string | undefined;
+  contact_persons: Array<CustomerContactPerson$Outbound>;
   email?: string | undefined;
   external_id: string;
   integration_entity_mapping?:
@@ -138,6 +148,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
+    contactPersons: z.array(CustomerContactPerson$outboundSchema),
     email: z.optional(z.string()),
     externalId: z.string(),
     integrationEntityMapping: z.optional(
@@ -160,6 +171,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       billingCurrency: "billing_currency",
+      contactPersons: "contact_persons",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
       onboardingWorkflowName: "onboarding_workflow_name",

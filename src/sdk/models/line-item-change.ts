@@ -4,12 +4,21 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  SubscriptionCouponInput,
+  SubscriptionCouponInput$Outbound,
+  SubscriptionCouponInput$outboundSchema,
+} from "./subscription-coupon-input.js";
 
 export type LineItemChange = {
   /**
    * Amount reprices the charge. Flat fee only for now.
    */
   amount?: string | undefined;
+  /**
+   * Coupons apply to the new line item created by this change.
+   */
+  coupons?: Array<SubscriptionCouponInput> | undefined;
   effectiveDate?: Date | undefined;
   id: string;
   quantity?: string | undefined;
@@ -18,6 +27,7 @@ export type LineItemChange = {
 /** @internal */
 export type LineItemChange$Outbound = {
   amount?: string | undefined;
+  coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   effective_date?: string | undefined;
   id: string;
   quantity?: string | undefined;
@@ -30,6 +40,7 @@ export const LineItemChange$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: z.optional(z.string()),
+    coupons: z.optional(z.array(SubscriptionCouponInput$outboundSchema)),
     effectiveDate: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),

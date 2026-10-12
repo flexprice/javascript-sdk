@@ -7,8 +7,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  ExternalTaxDetails,
+  ExternalTaxDetails$inboundSchema,
+} from "./external-tax-details.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { TaxBehavior, TaxBehavior$inboundSchema } from "./tax-behavior.js";
+import { TaxProvider, TaxProvider$inboundSchema } from "./tax-provider.js";
+import {
+  TaxTransactionType,
+  TaxTransactionType$inboundSchema,
+} from "./tax-transaction-type.js";
 import {
   WebhookDtoTaxRate,
   WebhookDtoTaxRate$inboundSchema,
@@ -17,12 +26,15 @@ import {
 export type WebhookDtoTaxApplied = {
   appliedAt?: Date | undefined;
   currency?: string | undefined;
+  externalTaxDetails?: ExternalTaxDetails | undefined;
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  provider?: TaxProvider | undefined;
   taxAmount?: string | undefined;
   taxBehavior?: TaxBehavior | undefined;
   taxRate?: WebhookDtoTaxRate | undefined;
   taxRateId?: string | undefined;
+  taxTransactionType?: TaxTransactionType | undefined;
   taxableAmount?: string | undefined;
 };
 
@@ -34,21 +46,26 @@ export const WebhookDtoTaxApplied$inboundSchema: z.ZodMiniType<
   z.object({
     applied_at: types.optional(types.date()),
     currency: types.optional(types.string()),
+    external_tax_details: types.optional(ExternalTaxDetails$inboundSchema),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    provider: types.optional(TaxProvider$inboundSchema),
     tax_amount: types.optional(types.string()),
     tax_behavior: types.optional(TaxBehavior$inboundSchema),
     tax_rate: types.optional(WebhookDtoTaxRate$inboundSchema),
     tax_rate_id: types.optional(types.string()),
+    tax_transaction_type: types.optional(TaxTransactionType$inboundSchema),
     taxable_amount: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       "applied_at": "appliedAt",
+      "external_tax_details": "externalTaxDetails",
       "tax_amount": "taxAmount",
       "tax_behavior": "taxBehavior",
       "tax_rate": "taxRate",
       "tax_rate_id": "taxRateId",
+      "tax_transaction_type": "taxTransactionType",
       "taxable_amount": "taxableAmount",
     });
   }),

@@ -7,7 +7,9 @@ Request object for updating an existing customer. All fields are optional - only
 ```typescript
 import { UpdateCustomerRequest } from "@flexprice/sdk/sdk/models";
 
-let value: UpdateCustomerRequest = {};
+let value: UpdateCustomerRequest = {
+  contactPersons: [],
+};
 ```
 
 ## Fields
@@ -22,6 +24,7 @@ let value: UpdateCustomerRequest = {};
 | `addressState`                                                                                                  | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | address_state is the updated state, province, or region name with maximum 100 characters                        |
 | `billingCurrency`                                                                                               | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | billing_currency updates the invoicing currency; send "" to clear it back to the charge currency                |
 | `contact`                                                                                                       | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | contact is the updated contact number for the customer (e.g. phone)                                             |
+| `contactPersons`                                                                                                | [models.CustomerContactPerson](../../sdk/models/customer-contact-person.md)[]                                   | :heavy_check_mark:                                                                                              | contact_persons replaces the customer's contact persons when provided; at most one may be primary               |
 | `email`                                                                                                         | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | email is the updated email address and must be a valid email format if provided                                 |
 | `externalId`                                                                                                    | *string*                                                                                                        | :heavy_minus_sign:                                                                                              | external_id is the updated external identifier for the customer                                                 |
 | `integrationEntityMapping`                                                                                      | [models.CreateEntityIntegrationMappingRequest](../../sdk/models/create-entity-integration-mapping-request.md)[] | :heavy_minus_sign:                                                                                              | integration_entity_mapping contains provider integration mappings for this customer                             |

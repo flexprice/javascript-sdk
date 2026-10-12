@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  CustomerContactPerson,
+  CustomerContactPerson$inboundSchema,
+} from "./customer-contact-person.js";
+import {
   EntityIntegrationMappingResponse,
   EntityIntegrationMappingResponse$inboundSchema,
 } from "./entity-integration-mapping-response.js";
@@ -51,6 +55,7 @@ export type CustomerResponse = {
    * Contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
+  contactPersons?: Array<CustomerContactPerson> | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
@@ -106,6 +111,9 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
     address_state: types.optional(types.string()),
     billing_currency: types.optional(types.string()),
     contact: types.optional(types.string()),
+    contact_persons: types.optional(
+      z.array(CustomerContactPerson$inboundSchema),
+    ),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     email: types.optional(types.string()),
@@ -133,6 +141,7 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
       "address_postal_code": "addressPostalCode",
       "address_state": "addressState",
       "billing_currency": "billingCurrency",
+      "contact_persons": "contactPersons",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "environment_id": "environmentId",

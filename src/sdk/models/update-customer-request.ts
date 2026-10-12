@@ -9,6 +9,11 @@ import {
   CreateEntityIntegrationMappingRequest$Outbound,
   CreateEntityIntegrationMappingRequest$outboundSchema,
 } from "./create-entity-integration-mapping-request.js";
+import {
+  CustomerContactPerson,
+  CustomerContactPerson$Outbound,
+  CustomerContactPerson$outboundSchema,
+} from "./customer-contact-person.js";
 import { TaxTreatment, TaxTreatment$outboundSchema } from "./tax-treatment.js";
 
 /**
@@ -48,6 +53,10 @@ export type UpdateCustomerRequest = {
    */
   contact?: string | undefined;
   /**
+   * contact_persons replaces the customer's contact persons when provided; at most one may be primary
+   */
+  contactPersons: Array<CustomerContactPerson>;
+  /**
    * email is the updated email address and must be a valid email format if provided
    */
   email?: string | undefined;
@@ -86,6 +95,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   billing_currency?: string | undefined;
   contact?: string | undefined;
+  contact_persons: Array<CustomerContactPerson$Outbound>;
   email?: string | undefined;
   external_id?: string | undefined;
   integration_entity_mapping?:
@@ -111,6 +121,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
+    contactPersons: z.array(CustomerContactPerson$outboundSchema),
     email: z.optional(z.string()),
     externalId: z.optional(z.string()),
     integrationEntityMapping: z.optional(
@@ -130,6 +141,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       billingCurrency: "billing_currency",
+      contactPersons: "contact_persons",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",
       taxTreatment: "tax_treatment",

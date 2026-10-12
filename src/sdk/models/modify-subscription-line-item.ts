@@ -4,9 +4,15 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  CouponRef,
+  CouponRef$Outbound,
+  CouponRef$outboundSchema,
+} from "./coupon-ref.js";
 
 export type ModifySubscriptionLineItem = {
   amount?: string | undefined;
+  coupons?: Array<CouponRef> | undefined;
   effectiveDate?: Date | undefined;
   lineItemId?: string | undefined;
   quantity?: string | undefined;
@@ -15,6 +21,7 @@ export type ModifySubscriptionLineItem = {
 /** @internal */
 export type ModifySubscriptionLineItem$Outbound = {
   amount?: string | undefined;
+  coupons?: Array<CouponRef$Outbound> | undefined;
   effective_date?: string | undefined;
   line_item_id?: string | undefined;
   quantity?: string | undefined;
@@ -27,6 +34,7 @@ export const ModifySubscriptionLineItem$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: z.optional(z.string()),
+    coupons: z.optional(z.array(CouponRef$outboundSchema)),
     effectiveDate: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),

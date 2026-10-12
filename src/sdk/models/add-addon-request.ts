@@ -25,12 +25,21 @@ import {
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import { ScheduleType, ScheduleType$outboundSchema } from "./schedule-type.js";
+import {
+  SubscriptionCouponInput,
+  SubscriptionCouponInput$Outbound,
+  SubscriptionCouponInput$outboundSchema,
+} from "./subscription-coupon-input.js";
 
 export type AddAddonRequest = {
   addonId: string;
   cadence?: AddonCadence | undefined;
   changeAt?: ScheduleType | undefined;
   checkout?: CheckoutParams | undefined;
+  /**
+   * Coupons apply to this addon's line items; price_id targets one price, omitted targets all.
+   */
+  coupons?: Array<SubscriptionCouponInput> | undefined;
   /**
    * LineItemCommitments allows setting commitment configuration per addon line item (keyed by price_id)
    */
@@ -51,6 +60,7 @@ export type AddAddonRequest$Outbound = {
   cadence?: string | undefined;
   change_at?: string | undefined;
   checkout?: CheckoutParams$Outbound | undefined;
+  coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   line_item_commitments?:
     | { [k: string]: LineItemCommitmentConfig$Outbound }
     | undefined;
@@ -71,6 +81,7 @@ export const AddAddonRequest$outboundSchema: z.ZodMiniType<
     cadence: z.optional(AddonCadence$outboundSchema),
     changeAt: z.optional(ScheduleType$outboundSchema),
     checkout: z.optional(CheckoutParams$outboundSchema),
+    coupons: z.optional(z.array(SubscriptionCouponInput$outboundSchema)),
     lineItemCommitments: z.optional(
       z.record(z.string(), LineItemCommitmentConfig$outboundSchema),
     ),

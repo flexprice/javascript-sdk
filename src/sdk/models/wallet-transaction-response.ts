@@ -31,12 +31,24 @@ import {
   WalletResponse$inboundSchema,
 } from "./wallet-response.js";
 import {
+  WalletTxConsumption,
+  WalletTxConsumption$inboundSchema,
+} from "./wallet-tx-consumption.js";
+import {
   WalletTxReferenceType,
   WalletTxReferenceType$inboundSchema,
 } from "./wallet-tx-reference-type.js";
+import {
+  WalletTxSourceType,
+  WalletTxSourceType$inboundSchema,
+} from "./wallet-tx-source-type.js";
 
 export type WalletTransactionResponse = {
   amount?: string | undefined;
+  /**
+   * ConsumptionBreakdown is set on debits: the credits drawn from each credit batch.
+   */
+  consumptionBreakdown?: Array<WalletTxConsumption> | undefined;
   /**
    * conversion_rate is the conversion rate for the transaction to the currency
    */
@@ -70,6 +82,8 @@ export type WalletTransactionResponse = {
   priority?: number | undefined;
   referenceId?: string | undefined;
   referenceType?: WalletTxReferenceType | undefined;
+  sourceId?: string | undefined;
+  sourceType?: WalletTxSourceType | undefined;
   status?: Status | undefined;
   tenantId?: string | undefined;
   /**
@@ -92,6 +106,9 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: types.optional(types.string()),
+    consumption_breakdown: types.optional(
+      z.array(WalletTxConsumption$inboundSchema),
+    ),
     conversion_rate: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -113,6 +130,8 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
     priority: types.optional(types.number()),
     reference_id: types.optional(types.string()),
     reference_type: types.optional(WalletTxReferenceType$inboundSchema),
+    source_id: types.optional(types.string()),
+    source_type: types.optional(WalletTxSourceType$inboundSchema),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
     topup_conversion_rate: types.optional(types.string()),
@@ -126,6 +145,7 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "consumption_breakdown": "consumptionBreakdown",
       "conversion_rate": "conversionRate",
       "created_at": "createdAt",
       "created_by": "createdBy",
@@ -141,6 +161,8 @@ export const WalletTransactionResponse$inboundSchema: z.ZodMiniType<
       "parent_transaction_id": "parentTransactionId",
       "reference_id": "referenceId",
       "reference_type": "referenceType",
+      "source_id": "sourceId",
+      "source_type": "sourceType",
       "tenant_id": "tenantId",
       "topup_conversion_rate": "topupConversionRate",
       "transaction_reason": "transactionReason",

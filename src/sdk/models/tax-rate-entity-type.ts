@@ -11,6 +11,7 @@ export const TaxRateEntityType = {
   Subscription: "subscription",
   Invoice: "invoice",
   Tenant: "tenant",
+  CreditNote: "credit_note",
 } as const;
 export type TaxRateEntityType = OpenEnum<typeof TaxRateEntityType>;
 

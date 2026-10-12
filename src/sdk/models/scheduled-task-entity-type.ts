@@ -10,6 +10,7 @@ export const ScheduledTaskEntityType = {
   Events: "events",
   Invoice: "invoice",
   CreditTopups: "credit_topups",
+  WalletDebits: "wallet_debits",
   CreditUsage: "credit_usage",
   UsageAnalytics: "usage_analytics",
   RevenueFacts: "revenue_facts",

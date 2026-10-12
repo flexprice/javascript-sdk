@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import {
   InvoiceStatus,
   InvoiceStatus$inboundSchema,
@@ -55,6 +56,7 @@ export type WebhookDtoInvoice = {
   dueDate?: Date | undefined;
   environmentId?: string | undefined;
   finalizedAt?: Date | undefined;
+  fxConversion?: FxConversion | undefined;
   id?: string | undefined;
   idempotencyKey?: string | undefined;
   invoiceNumber?: string | undefined;
@@ -103,6 +105,7 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
     due_date: types.optional(types.date()),
     environment_id: types.optional(types.string()),
     finalized_at: types.optional(types.date()),
+    fx_conversion: types.optional(FxConversion$inboundSchema),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
     invoice_number: types.optional(types.string()),
@@ -143,6 +146,7 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
       "due_date": "dueDate",
       "environment_id": "environmentId",
       "finalized_at": "finalizedAt",
+      "fx_conversion": "fxConversion",
       "idempotency_key": "idempotencyKey",
       "invoice_number": "invoiceNumber",
       "invoice_pdf_url": "invoicePdfUrl",

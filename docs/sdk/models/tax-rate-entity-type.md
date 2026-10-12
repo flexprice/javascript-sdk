@@ -13,5 +13,5 @@ let value: TaxRateEntityType = "subscription";
 ## Values
 
 ```typescript
-"customer" | "subscription" | "invoice" | "tenant" | Unrecognized<string>
+"customer" | "subscription" | "invoice" | "tenant" | "credit_note" | Unrecognized<string>
 ```

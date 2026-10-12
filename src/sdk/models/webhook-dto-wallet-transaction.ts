@@ -21,12 +21,21 @@ import {
   TransactionType$inboundSchema,
 } from "./transaction-type.js";
 import {
+  WalletTxConsumption,
+  WalletTxConsumption$inboundSchema,
+} from "./wallet-tx-consumption.js";
+import {
   WalletTxReferenceType,
   WalletTxReferenceType$inboundSchema,
 } from "./wallet-tx-reference-type.js";
+import {
+  WalletTxSourceType,
+  WalletTxSourceType$inboundSchema,
+} from "./wallet-tx-source-type.js";
 
 export type WebhookDtoWalletTransaction = {
   amount?: string | undefined;
+  consumptionBreakdown?: Array<WalletTxConsumption> | undefined;
   creditAmount?: string | undefined;
   creditBalanceAfter?: string | undefined;
   creditBalanceBefore?: string | undefined;
@@ -38,6 +47,8 @@ export type WebhookDtoWalletTransaction = {
   metadata?: { [k: string]: string } | undefined;
   referenceId?: string | undefined;
   referenceType?: WalletTxReferenceType | undefined;
+  sourceId?: string | undefined;
+  sourceType?: WalletTxSourceType | undefined;
   transactionReason?: TransactionReason | undefined;
   transactionStatus?: TransactionStatus | undefined;
   type?: TransactionType | undefined;
@@ -51,6 +62,9 @@ export const WebhookDtoWalletTransaction$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: types.optional(types.string()),
+    consumption_breakdown: types.optional(
+      z.array(WalletTxConsumption$inboundSchema),
+    ),
     credit_amount: types.optional(types.string()),
     credit_balance_after: types.optional(types.string()),
     credit_balance_before: types.optional(types.string()),
@@ -62,6 +76,8 @@ export const WebhookDtoWalletTransaction$inboundSchema: z.ZodMiniType<
     metadata: types.optional(z.record(z.string(), types.string())),
     reference_id: types.optional(types.string()),
     reference_type: types.optional(WalletTxReferenceType$inboundSchema),
+    source_id: types.optional(types.string()),
+    source_type: types.optional(WalletTxSourceType$inboundSchema),
     transaction_reason: types.optional(TransactionReason$inboundSchema),
     transaction_status: types.optional(TransactionStatus$inboundSchema),
     type: types.optional(TransactionType$inboundSchema),
@@ -69,6 +85,7 @@ export const WebhookDtoWalletTransaction$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "consumption_breakdown": "consumptionBreakdown",
       "credit_amount": "creditAmount",
       "credit_balance_after": "creditBalanceAfter",
       "credit_balance_before": "creditBalanceBefore",
@@ -76,6 +93,8 @@ export const WebhookDtoWalletTransaction$inboundSchema: z.ZodMiniType<
       "expiry_date": "expiryDate",
       "reference_id": "referenceId",
       "reference_type": "referenceType",
+      "source_id": "sourceId",
+      "source_type": "sourceType",
       "transaction_reason": "transactionReason",
       "transaction_status": "transactionStatus",
       "wallet_id": "walletId",

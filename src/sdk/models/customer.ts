@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  CustomerContactPerson,
+  CustomerContactPerson$inboundSchema,
+} from "./customer-contact-person.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 import { TaxTreatment, TaxTreatment$inboundSchema } from "./tax-treatment.js";
@@ -44,6 +48,7 @@ export type Customer = {
    * Contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
+  contactPersons?: Array<CustomerContactPerson> | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   /**
@@ -95,6 +100,9 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
     address_state: types.optional(types.string()),
     billing_currency: types.optional(types.string()),
     contact: types.optional(types.string()),
+    contact_persons: types.optional(
+      z.array(CustomerContactPerson$inboundSchema),
+    ),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     email: types.optional(types.string()),
@@ -119,6 +127,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
       "address_postal_code": "addressPostalCode",
       "address_state": "addressState",
       "billing_currency": "billingCurrency",
+      "contact_persons": "contactPersons",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "environment_id": "environmentId",
