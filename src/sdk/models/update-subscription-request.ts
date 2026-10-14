@@ -11,6 +11,9 @@ import {
 
 export type UpdateSubscriptionRequest = {
   cancelAt?: Date | undefined;
+  /**
+   * Pointer so omitting the field leaves the stored value unchanged; sending it sets the flag.
+   */
   cancelAtPeriodEnd?: boolean | undefined;
   /**
    * ParentSubscriptionID sets or clears the parent subscription. Omit to leave unchanged; send "" to clear.
