@@ -55,7 +55,7 @@ export type UpdateCustomerRequest = {
   /**
    * contact_persons replaces the customer's contact persons when provided; at most one may be primary
    */
-  contactPersons: Array<CustomerContactPerson>;
+  contactPersons?: Array<CustomerContactPerson> | undefined;
   /**
    * email is the updated email address and must be a valid email format if provided
    */
@@ -95,7 +95,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   billing_currency?: string | undefined;
   contact?: string | undefined;
-  contact_persons: Array<CustomerContactPerson$Outbound>;
+  contact_persons?: Array<CustomerContactPerson$Outbound> | undefined;
   email?: string | undefined;
   external_id?: string | undefined;
   integration_entity_mapping?:
@@ -121,7 +121,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
-    contactPersons: z.array(CustomerContactPerson$outboundSchema),
+    contactPersons: z.optional(z.array(CustomerContactPerson$outboundSchema)),
     email: z.optional(z.string()),
     externalId: z.optional(z.string()),
     integrationEntityMapping: z.optional(

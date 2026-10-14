@@ -7,10 +7,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.addons.createAddon({
-    lookupKey: "<value>",
-    name: "<value>",
-  });
+  const result = await flexprice.activity.listActivity({});
 
   console.log(result);
 }

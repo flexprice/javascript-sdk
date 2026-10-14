@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Activity } from "./activity.js";
 import { Addons } from "./addons.js";
 import { AlertSettings } from "./alert-settings.js";
 import { Alerts } from "./alerts.js";
@@ -43,6 +44,11 @@ import { WebhookEvents } from "./webhook-events.js";
 import { Workflows } from "./workflows.js";
 
 export class Flexprice extends ClientSDK {
+  private _activity?: Activity;
+  get activity(): Activity {
+    return (this._activity ??= new Activity(this._options));
+  }
+
   private _addons?: Addons;
   get addons(): Addons {
     return (this._addons ??= new Addons(this._options));

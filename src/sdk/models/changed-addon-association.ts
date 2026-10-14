@@ -24,6 +24,7 @@ export type ChangedAddonAssociation = {
   endDate?: Date | undefined;
   id?: string | undefined;
   startDate?: Date | undefined;
+  subscriptionId?: string | undefined;
 };
 
 /** @internal */
@@ -38,6 +39,7 @@ export const ChangedAddonAssociation$inboundSchema: z.ZodMiniType<
     end_date: types.optional(types.date()),
     id: types.optional(types.string()),
     start_date: types.optional(types.date()),
+    subscription_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -46,6 +48,7 @@ export const ChangedAddonAssociation$inboundSchema: z.ZodMiniType<
       "change_action": "changeAction",
       "end_date": "endDate",
       "start_date": "startDate",
+      "subscription_id": "subscriptionId",
     });
   }),
 );

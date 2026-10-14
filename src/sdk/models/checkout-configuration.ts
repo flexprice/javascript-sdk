@@ -31,6 +31,7 @@ import {
 } from "./wallet-topup-params.js";
 
 export type CheckoutConfiguration = {
+  addAddonBatchParams?: Array<AddAddonParams> | undefined;
   addAddonParams?: AddAddonParams | undefined;
   createSubscriptionParams?: CreateSubscriptionParams | undefined;
   modifySubscriptionParams?: ModifySubscriptionParams | undefined;
@@ -40,6 +41,7 @@ export type CheckoutConfiguration = {
 
 /** @internal */
 export type CheckoutConfiguration$Outbound = {
+  add_addon_batch_params?: Array<AddAddonParams$Outbound> | undefined;
   add_addon_params?: AddAddonParams$Outbound | undefined;
   create_subscription_params?: CreateSubscriptionParams$Outbound | undefined;
   modify_subscription_params?: ModifySubscriptionParams$Outbound | undefined;
@@ -53,6 +55,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
   CheckoutConfiguration
 > = z.pipe(
   z.object({
+    addAddonBatchParams: z.optional(z.array(AddAddonParams$outboundSchema)),
     addAddonParams: z.optional(AddAddonParams$outboundSchema),
     createSubscriptionParams: z.optional(
       CreateSubscriptionParams$outboundSchema,
@@ -65,6 +68,7 @@ export const CheckoutConfiguration$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      addAddonBatchParams: "add_addon_batch_params",
       addAddonParams: "add_addon_params",
       createSubscriptionParams: "create_subscription_params",
       modifySubscriptionParams: "modify_subscription_params",

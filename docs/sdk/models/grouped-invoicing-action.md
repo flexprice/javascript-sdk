@@ -5,11 +5,11 @@
 ```typescript
 import { GroupedInvoicingAction } from "@flexprice/sdk/sdk/models";
 
-let value: GroupedInvoicingAction = "remove";
+let value: GroupedInvoicingAction = "modify";
 ```
 
 ## Values
 
 ```typescript
-"add" | "remove"
+"add" | "remove" | "modify"
 ```

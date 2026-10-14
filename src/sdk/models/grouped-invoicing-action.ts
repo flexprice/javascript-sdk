@@ -8,6 +8,7 @@ import { ClosedEnum } from "../../types/enums.js";
 export const GroupedInvoicingAction = {
   Add: "add",
   Remove: "remove",
+  Modify: "modify",
 } as const;
 export type GroupedInvoicingAction = ClosedEnum<typeof GroupedInvoicingAction>;
 

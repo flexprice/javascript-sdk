@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  AddonPriceSyncStatusResponse,
+  AddonPriceSyncStatusResponse$inboundSchema,
+} from "./addon-price-sync-status-response.js";
+import {
   CreditGrantResponse,
   CreditGrantResponse$inboundSchema,
 } from "./credit-grant-response.js";
@@ -33,6 +37,7 @@ export type AddonResponse = {
   lookupKey?: string | undefined;
   metadata?: { [k: string]: any } | undefined;
   name?: string | undefined;
+  priceSyncStatus?: AddonPriceSyncStatusResponse | undefined;
   /**
    * Optional expanded fields
    */
@@ -61,6 +66,9 @@ export const AddonResponse$inboundSchema: z.ZodMiniType<
     lookup_key: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), z.any())),
     name: types.optional(types.string()),
+    price_sync_status: types.optional(
+      AddonPriceSyncStatusResponse$inboundSchema,
+    ),
     prices: types.optional(z.array(z.lazy(() => PriceResponse$inboundSchema))),
     status: types.optional(Status$inboundSchema),
     tenant_id: types.optional(types.string()),
@@ -74,6 +82,7 @@ export const AddonResponse$inboundSchema: z.ZodMiniType<
       "credit_grants": "creditGrants",
       "environment_id": "environmentId",
       "lookup_key": "lookupKey",
+      "price_sync_status": "priceSyncStatus",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",

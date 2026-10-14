@@ -27,7 +27,7 @@ export type CancelSubscriptionRequest = {
    * For "immediate", accepts past/current dates only; use "scheduled_date" for future dates.
    */
   cancelAt?: Date | undefined;
-  cancelImmediatelyInovicePolicy?: CancelImmediatelyInvoicePolicy | undefined;
+  cancelImmediatelyInvoicePolicy?: CancelImmediatelyInvoicePolicy | undefined;
   cancellationType: CancellationType;
   prorationBehavior?: ProrationBehavior | undefined;
   /**
@@ -39,7 +39,7 @@ export type CancelSubscriptionRequest = {
 /** @internal */
 export type CancelSubscriptionRequest$Outbound = {
   cancel_at?: string | undefined;
-  cancel_immediately_inovice_policy?: string | undefined;
+  cancel_immediately_invoice_policy?: string | undefined;
   cancellation_type: string;
   proration_behavior?: string | undefined;
   reason?: string | undefined;
@@ -52,7 +52,7 @@ export const CancelSubscriptionRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     cancelAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
-    cancelImmediatelyInovicePolicy: z.optional(
+    cancelImmediatelyInvoicePolicy: z.optional(
       CancelImmediatelyInvoicePolicy$outboundSchema,
     ),
     cancellationType: CancellationType$outboundSchema,
@@ -62,7 +62,7 @@ export const CancelSubscriptionRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       cancelAt: "cancel_at",
-      cancelImmediatelyInovicePolicy: "cancel_immediately_inovice_policy",
+      cancelImmediatelyInvoicePolicy: "cancel_immediately_invoice_policy",
       cancellationType: "cancellation_type",
       prorationBehavior: "proration_behavior",
     });

@@ -40,6 +40,13 @@ export type AddonAssociationResponse = {
   startDate?: Date | undefined;
   status?: Status | undefined;
   subscription?: SubscriptionResponse | undefined;
+  /**
+   * SyncedPriceSequence is the addon price sequence this association's line items
+   *
+   * @remarks
+   * have been reconciled up to. Written only by the addon usage-price sync.
+   */
+  syncedPriceSequence?: number | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -67,6 +74,7 @@ export const AddonAssociationResponse$inboundSchema: z.ZodMiniType<
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription: types.optional(SubscriptionResponse$inboundSchema),
+    synced_price_sequence: types.optional(types.number()),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
@@ -84,6 +92,7 @@ export const AddonAssociationResponse$inboundSchema: z.ZodMiniType<
       "entity_type": "entityType",
       "environment_id": "environmentId",
       "start_date": "startDate",
+      "synced_price_sequence": "syncedPriceSequence",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",

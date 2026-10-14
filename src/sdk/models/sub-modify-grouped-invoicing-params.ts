@@ -8,9 +8,18 @@ import {
   GroupedInvoicingAction,
   GroupedInvoicingAction$outboundSchema,
 } from "./grouped-invoicing-action.js";
+import {
+  GroupedInvoicingChange,
+  GroupedInvoicingChange$Outbound,
+  GroupedInvoicingChange$outboundSchema,
+} from "./grouped-invoicing-change.js";
 
 export type SubModifyGroupedInvoicingParams = {
   action: GroupedInvoicingAction;
+  /**
+   * Changes is required for action 'modify'; the path subscription is the parent.
+   */
+  changes?: Array<GroupedInvoicingChange> | undefined;
   childSubscriptionIds?: Array<string> | undefined;
   /**
    * ParentSubscriptionID is required for action 'add'.
@@ -21,6 +30,7 @@ export type SubModifyGroupedInvoicingParams = {
 /** @internal */
 export type SubModifyGroupedInvoicingParams$Outbound = {
   action: string;
+  changes?: Array<GroupedInvoicingChange$Outbound> | undefined;
   child_subscription_ids?: Array<string> | undefined;
   parent_subscription_id?: string | undefined;
 };
@@ -32,6 +42,7 @@ export const SubModifyGroupedInvoicingParams$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     action: GroupedInvoicingAction$outboundSchema,
+    changes: z.optional(z.array(GroupedInvoicingChange$outboundSchema)),
     childSubscriptionIds: z.optional(z.array(z.string())),
     parentSubscriptionId: z.optional(z.string()),
   }),

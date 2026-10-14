@@ -6,13 +6,7 @@
 import { UpdateCustomerRequestRequest } from "@flexprice/sdk/sdk/models";
 
 let value: UpdateCustomerRequestRequest = {
-  body: {
-    contactPersons: [
-      {
-        firstName: "Ryan",
-      },
-    ],
-  },
+  body: {},
 };
 ```
 

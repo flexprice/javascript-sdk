@@ -60,7 +60,7 @@ export type CreateCustomerRequest = {
   /**
    * contact_persons are people at the customer; at most one may be primary
    */
-  contactPersons: Array<CustomerContactPerson>;
+  contactPersons?: Array<CustomerContactPerson> | undefined;
   /**
    * email is the customer's email address and must be a valid email format if provided
    */
@@ -119,7 +119,7 @@ export type CreateCustomerRequest$Outbound = {
   address_state?: string | undefined;
   billing_currency?: string | undefined;
   contact?: string | undefined;
-  contact_persons: Array<CustomerContactPerson$Outbound>;
+  contact_persons?: Array<CustomerContactPerson$Outbound> | undefined;
   email?: string | undefined;
   external_id: string;
   integration_entity_mapping?:
@@ -148,7 +148,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
     contact: z.optional(z.string()),
-    contactPersons: z.array(CustomerContactPerson$outboundSchema),
+    contactPersons: z.optional(z.array(CustomerContactPerson$outboundSchema)),
     email: z.optional(z.string()),
     externalId: z.string(),
     integrationEntityMapping: z.optional(

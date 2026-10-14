@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @flexprice/sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx addonsCreateAddon.example.ts
+ * npm run build && npx tsx activityListActivity.example.ts
  */
 
 import { Flexprice } from "@flexprice/sdk";
@@ -18,10 +18,7 @@ const flexprice = new Flexprice({
 });
 
 async function main() {
-  const result = await flexprice.addons.createAddon({
-    lookupKey: "<value>",
-    name: "<value>",
-  });
+  const result = await flexprice.activity.listActivity({});
 
   console.log(result);
 }

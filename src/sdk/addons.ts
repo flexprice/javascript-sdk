@@ -7,6 +7,7 @@ import { addonsDeleteAddon } from "../funcs/addons-delete-addon.js";
 import { addonsGetAddonByLookupKey } from "../funcs/addons-get-addon-by-lookup-key.js";
 import { addonsGetAddon } from "../funcs/addons-get-addon.js";
 import { addonsQueryAddon } from "../funcs/addons-query-addon.js";
+import { addonsSyncAddonPrices } from "../funcs/addons-sync-addon-prices.js";
 import { addonsUpdateAddon } from "../funcs/addons-update-addon.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -111,6 +112,23 @@ export class Addons extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(addonsDeleteAddon(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Synchronize addon prices
+   *
+   * @remarks
+   * Use when you have changed an addon's usage charges and need to push them to all active subscriptions holding the addon. Returns workflow ID.
+   */
+  async syncAddonPrices(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ModelsTemporalWorkflowResult> {
+    return unwrapAsync(addonsSyncAddonPrices(
       this,
       id,
       options,

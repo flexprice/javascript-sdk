@@ -23,6 +23,7 @@ export type ChangedLineItem = {
   priceId?: string | undefined;
   quantity?: string | undefined;
   startDate?: Date | undefined;
+  subscriptionId?: string | undefined;
 };
 
 /** @internal */
@@ -37,6 +38,7 @@ export const ChangedLineItem$inboundSchema: z.ZodMiniType<
     price_id: types.optional(types.string()),
     quantity: types.optional(types.string()),
     start_date: types.optional(types.date()),
+    subscription_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -44,6 +46,7 @@ export const ChangedLineItem$inboundSchema: z.ZodMiniType<
       "end_date": "endDate",
       "price_id": "priceId",
       "start_date": "startDate",
+      "subscription_id": "subscriptionId",
     });
   }),
 );

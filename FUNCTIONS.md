@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { addonsCreateAddon } from "@flexprice/sdk/funcs/addons-create-addon.js";
+import { activityListActivity } from "@flexprice/sdk/funcs/activity-list-activity.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,15 +29,12 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await addonsCreateAddon(flexprice, {
-    lookupKey: "<value>",
-    name: "<value>",
-  });
+  const res = await activityListActivity(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("addonsCreateAddon failed:", res.error);
+    console.log("activityListActivity failed:", res.error);
   }
 }
 

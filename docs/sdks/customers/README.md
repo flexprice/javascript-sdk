@@ -32,9 +32,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.customers.updateCustomer({
-    contactPersons: [],
-  });
+  const result = await flexprice.customers.updateCustomer({});
 
   console.log(result);
 }
@@ -57,9 +55,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await customersUpdateCustomer(flexprice, {
-    contactPersons: [],
-  });
+  const res = await customersUpdateCustomer(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -110,7 +106,6 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.customers.createCustomer({
-    contactPersons: [],
     externalId: "<id>",
     name: "<value>",
   });
@@ -137,7 +132,6 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await customersCreateCustomer(flexprice, {
-    contactPersons: [],
     externalId: "<id>",
     name: "<value>",
   });

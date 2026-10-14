@@ -13,6 +13,8 @@ export const PaymentTerms = {
   SixtyNET: "60 NET",
   SeventyFiveNET: "75 NET",
   NinetyNET: "90 NET",
+  EndOfMonth: "END_OF_MONTH",
+  EndOfNextMonth: "END_OF_NEXT_MONTH",
 } as const;
 export type PaymentTerms = OpenEnum<typeof PaymentTerms>;
 
