@@ -21,12 +21,14 @@ import { subscriptionsGetSubscriptionV2 } from "../funcs/subscriptions-get-subsc
 import { subscriptionsGetSubscription } from "../funcs/subscriptions-get-subscription.js";
 import { subscriptionsListAllSubscriptionSchedules } from "../funcs/subscriptions-list-all-subscription-schedules.js";
 import { subscriptionsListSubscriptionSchedules } from "../funcs/subscriptions-list-subscription-schedules.js";
+import { subscriptionsPauseSubscription } from "../funcs/subscriptions-pause-subscription.js";
 import { subscriptionsPreviewSubscriptionChange } from "../funcs/subscriptions-preview-subscription-change.js";
 import { subscriptionsPreviewSubscriptionModify } from "../funcs/subscriptions-preview-subscription-modify.js";
 import { subscriptionsPreviewSubscriptionPlanChangeV2 } from "../funcs/subscriptions-preview-subscription-plan-change-v2.js";
 import { subscriptionsQuerySubscriptionLineItems } from "../funcs/subscriptions-query-subscription-line-items.js";
 import { subscriptionsQuerySubscription } from "../funcs/subscriptions-query-subscription.js";
 import { subscriptionsRemoveSubscriptionAddon } from "../funcs/subscriptions-remove-subscription-addon.js";
+import { subscriptionsResumeSubscription } from "../funcs/subscriptions-resume-subscription.js";
 import { subscriptionsUpdateSubscriptionLineItem } from "../funcs/subscriptions-update-subscription-line-item.js";
 import { subscriptionsUpdateSubscription } from "../funcs/subscriptions-update-subscription.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -496,6 +498,44 @@ export class Subscriptions extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.SubscriptionModifyResponse> {
     return unwrapAsync(subscriptionsPreviewSubscriptionModify(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Pause subscription
+   *
+   * @remarks
+   * Use when a customer stops temporarily. Pauses an active subscription now: usage and arrear fixed charges up to the pause are billed on a closing invoice, and every paused period after it gets a $0 skipped invoice.
+   */
+  async pauseSubscription(
+    id: string,
+    body: models.PauseSubscriptionRequest,
+    options?: RequestOptions,
+  ): Promise<models.PauseSubscriptionResponse> {
+    return unwrapAsync(subscriptionsPauseSubscription(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Resume subscription
+   *
+   * @remarks
+   * Use when a paused customer comes back. Resumes a paused subscription now on its existing billing anchor: the first period runs from the resume to the next billing date and its advance charges are invoiced at once.
+   */
+  async resumeSubscription(
+    id: string,
+    body: models.ResumeSubscriptionRequest,
+    options?: RequestOptions,
+  ): Promise<models.ResumeSubscriptionResponse> {
+    return unwrapAsync(subscriptionsResumeSubscription(
       this,
       id,
       body,
