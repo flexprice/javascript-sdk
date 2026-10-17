@@ -8,6 +8,7 @@ import { ClosedEnum } from "../../types/enums.js";
 export const ModifySubscriptionType = {
   QuantityChange: "quantity_change",
   LineItemChange: "line_item_change",
+  TrialEnd: "trial_end",
 } as const;
 export type ModifySubscriptionType = ClosedEnum<typeof ModifySubscriptionType>;
 

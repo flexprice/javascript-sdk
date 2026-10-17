@@ -29,7 +29,7 @@ async function run() {
       metrics: [
         "usage_quantity",
       ],
-      shape: "breakdown",
+      shape: "scalar",
     },
   });
 
@@ -59,7 +59,7 @@ async function run() {
       metrics: [
         "usage_quantity",
       ],
-      shape: "breakdown",
+      shape: "scalar",
     },
   });
   if (res.ok) {
@@ -187,9 +187,9 @@ async function run() {
   const result = await flexprice.analytics.createAnalyticsView({
     definition: {
       metrics: [
-        "event_count",
+        "invoice_total",
       ],
-      shape: "breakdown",
+      shape: "scalar",
     },
     name: "<value>",
   });
@@ -218,9 +218,9 @@ async function run() {
   const res = await analyticsCreateAnalyticsView(flexprice, {
     definition: {
       metrics: [
-        "event_count",
+        "invoice_total",
       ],
-      shape: "breakdown",
+      shape: "scalar",
     },
     name: "<value>",
   });

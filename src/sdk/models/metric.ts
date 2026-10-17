@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const Metric = {
   UsageQuantity: "usage_quantity",
   EventCount: "event_count",
+  InvoiceTotal: "invoice_total",
 } as const;
 export type Metric = OpenEnum<typeof Metric>;
 

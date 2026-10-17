@@ -5,7 +5,7 @@
 ```typescript
 import { Shape } from "@flexprice/sdk/sdk/models";
 
-let value: Shape = "breakdown";
+let value: Shape = "scalar";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: Shape = "breakdown";
 ## Values
 
 ```typescript
-"timeseries" | "breakdown" | Unrecognized<string>
+"timeseries" | "breakdown" | "scalar" | Unrecognized<string>
 ```

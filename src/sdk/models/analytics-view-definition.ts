@@ -31,6 +31,11 @@ import {
   AnalyticsVariable$outboundSchema,
 } from "./analytics-variable.js";
 import {
+  Family,
+  Family$inboundSchema,
+  Family$outboundSchema,
+} from "./family.js";
+import {
   Metric,
   Metric$inboundSchema,
   Metric$outboundSchema,
@@ -40,6 +45,7 @@ import { Shape, Shape$inboundSchema, Shape$outboundSchema } from "./shape.js";
 
 export type AnalyticsViewDefinition = {
   dimensions?: Array<string> | undefined;
+  family?: Family | undefined;
   filters?: Array<AnalyticsFilter> | undefined;
   limit?: number | undefined;
   metrics: Array<Metric>;
@@ -55,6 +61,7 @@ export const AnalyticsViewDefinition$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   dimensions: types.optional(z.array(types.string())),
+  family: types.optional(Family$inboundSchema),
   filters: types.optional(z.array(AnalyticsFilter$inboundSchema)),
   limit: types.optional(types.number()),
   metrics: z.array(Metric$inboundSchema),
@@ -66,6 +73,7 @@ export const AnalyticsViewDefinition$inboundSchema: z.ZodMiniType<
 /** @internal */
 export type AnalyticsViewDefinition$Outbound = {
   dimensions?: Array<string> | undefined;
+  family?: string | undefined;
   filters?: Array<AnalyticsFilter$Outbound> | undefined;
   limit?: number | undefined;
   metrics: Array<string>;
@@ -81,6 +89,7 @@ export const AnalyticsViewDefinition$outboundSchema: z.ZodMiniType<
   AnalyticsViewDefinition
 > = z.object({
   dimensions: z.optional(z.array(z.string())),
+  family: z.optional(Family$outboundSchema),
   filters: z.optional(z.array(AnalyticsFilter$outboundSchema)),
   limit: z.optional(z.int()),
   metrics: z.array(Metric$outboundSchema),

@@ -18,6 +18,10 @@ export type ModifySubscriptionParams = {
   lineItemModifications?: Array<ModifySubscriptionLineItem> | undefined;
   modifyType?: ModifySubscriptionType | undefined;
   subscriptionId?: string | undefined;
+  /**
+   * TrialEndAt is where a trial_end checkout starts the first paid period.
+   */
+  trialEndAt?: Date | undefined;
 };
 
 /** @internal */
@@ -27,6 +31,7 @@ export type ModifySubscriptionParams$Outbound = {
     | undefined;
   modify_type?: string | undefined;
   subscription_id?: string | undefined;
+  trial_end_at?: string | undefined;
 };
 
 /** @internal */
@@ -40,12 +45,14 @@ export const ModifySubscriptionParams$outboundSchema: z.ZodMiniType<
     ),
     modifyType: z.optional(ModifySubscriptionType$outboundSchema),
     subscriptionId: z.optional(z.string()),
+    trialEndAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {
       lineItemModifications: "line_item_modifications",
       modifyType: "modify_type",
       subscriptionId: "subscription_id",
+      trialEndAt: "trial_end_at",
     });
   }),
 );

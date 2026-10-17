@@ -5,7 +5,7 @@
 ```typescript
 import { Metric } from "@flexprice/sdk/sdk/models";
 
-let value: Metric = "event_count";
+let value: Metric = "invoice_total";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: Metric = "event_count";
 ## Values
 
 ```typescript
-"usage_quantity" | "event_count" | Unrecognized<string>
+"usage_quantity" | "event_count" | "invoice_total" | Unrecognized<string>
 ```

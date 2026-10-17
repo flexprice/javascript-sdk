@@ -9,6 +9,7 @@
 * [getCustomerByExternalId](#getcustomerbyexternalid) - Get customer by external ID
 * [getCustomerEntitlementsByExternalID](#getcustomerentitlementsbyexternalid) - Get customer entitlements by external ID
 * [getSubscriptionsForCustomer](#getsubscriptionsforcustomer) - Get subscriptions for customer by external ID
+* [createCustomerPortalSession](#createcustomerportalsession) - Create customer portal session
 * [queryCustomer](#querycustomer) - Query customers
 * [getCustomerUsageSummary](#getcustomerusagesummary) - Get customer usage summary
 * [getCustomer](#getcustomer) - Get customer
@@ -372,6 +373,77 @@ run();
 ### Response
 
 **Promise\<[models.ListSubscriptionsResponse](../../sdk/models/list-subscriptions-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorsErrorResponse | 400, 404                   | application/json           |
+| models.ErrorsErrorResponse | 500                        | application/json           |
+| models.SDKError            | 4XX, 5XX                   | \*/\*                      |
+
+## createCustomerPortalSession
+
+Use when sending a customer to their self-serve billing portal (invoices, usage, payment methods). Returns a short-lived URL and token scoped to that customer.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="createCustomerPortalSession" method="get" path="/customers/portal/{external_id}" -->
+```typescript
+import { Flexprice } from "@flexprice/sdk";
+
+const flexprice = new Flexprice({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const result = await flexprice.customers.createCustomerPortalSession("<id>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { FlexpriceCore } from "@flexprice/sdk/core.js";
+import { customersCreateCustomerPortalSession } from "@flexprice/sdk/funcs/customers-create-customer-portal-session.js";
+
+// Use `FlexpriceCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const flexprice = new FlexpriceCore({
+  apiKeyAuth: "<YOUR_API_KEY_HERE>",
+});
+
+async function run() {
+  const res = await customersCreateCustomerPortalSession(flexprice, "<id>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("customersCreateCustomerPortalSession failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `externalId`                                                                                                                                                                   | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | Customer external ID                                                                                                                                                           |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[models.PortalSessionResponse](../../sdk/models/portal-session-response.md)\>**
 
 ### Errors
 

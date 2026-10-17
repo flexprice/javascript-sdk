@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const Shape = {
   Timeseries: "timeseries",
   Breakdown: "breakdown",
+  Scalar: "scalar",
 } as const;
 export type Shape = OpenEnum<typeof Shape>;
 
