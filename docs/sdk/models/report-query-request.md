@@ -1,0 +1,26 @@
+# ReportQueryRequest
+
+## Example Usage
+
+```typescript
+import { ReportQueryRequest } from "@flexprice/sdk/sdk/models";
+
+let value: ReportQueryRequest = {
+  range: "2026-09-01..2026-10-01",
+  shape: "timeseries",
+};
+```
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `compare`                                                                            | [models.ReportQueryRequestCompare](../../sdk/models/report-query-request-compare.md) | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `currency`                                                                           | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `dimensions`                                                                         | *string*[]                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `filters`                                                                            | [models.ReportFilter](../../sdk/models/report-filter.md)[]                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `grain`                                                                              | [models.ReportQueryRequestGrain](../../sdk/models/report-query-request-grain.md)     | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `limit`                                                                              | *number*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
+| `range`                                                                              | *string*                                                                             | :heavy_check_mark:                                                                   | N/A                                                                                  | 2026-09-01..2026-10-01                                                               |
+| `shape`                                                                              | [models.ReportQueryRequestShape](../../sdk/models/report-query-request-shape.md)     | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
+| `sort`                                                                               | [models.ReportSort](../../sdk/models/report-sort.md)[]                               | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |

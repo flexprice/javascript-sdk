@@ -8,7 +8,7 @@ import { AnalyticsQueryRequest } from "@flexprice/sdk/sdk/models";
 let value: AnalyticsQueryRequest = {
   definition: {
     metrics: [
-      "usage_quantity",
+      "invoice_total",
     ],
     shape: "breakdown",
   },

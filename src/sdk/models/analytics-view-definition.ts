@@ -4,6 +4,8 @@
 
 import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
@@ -43,8 +45,25 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Shape, Shape$inboundSchema, Shape$outboundSchema } from "./shape.js";
 
+export const AnalyticsViewDefinitionCompare = {
+  PreviousPeriod: "previous_period",
+  PreviousYear: "previous_year",
+} as const;
+export type AnalyticsViewDefinitionCompare = OpenEnum<
+  typeof AnalyticsViewDefinitionCompare
+>;
+
+export const Display = {
+  Chart: "chart",
+  Table: "table",
+} as const;
+export type Display = OpenEnum<typeof Display>;
+
 export type AnalyticsViewDefinition = {
+  compare?: AnalyticsViewDefinitionCompare | undefined;
+  currency?: string | undefined;
   dimensions?: Array<string> | undefined;
+  display?: Display | undefined;
   family?: Family | undefined;
   filters?: Array<AnalyticsFilter> | undefined;
   limit?: number | undefined;
@@ -56,11 +75,32 @@ export type AnalyticsViewDefinition = {
 };
 
 /** @internal */
+export const AnalyticsViewDefinitionCompare$inboundSchema: z.ZodMiniType<
+  AnalyticsViewDefinitionCompare,
+  unknown
+> = openEnums.inboundSchema(AnalyticsViewDefinitionCompare);
+/** @internal */
+export const AnalyticsViewDefinitionCompare$outboundSchema: z.ZodMiniType<
+  string,
+  AnalyticsViewDefinitionCompare
+> = openEnums.outboundSchema(AnalyticsViewDefinitionCompare);
+
+/** @internal */
+export const Display$inboundSchema: z.ZodMiniType<Display, unknown> = openEnums
+  .inboundSchema(Display);
+/** @internal */
+export const Display$outboundSchema: z.ZodMiniType<string, Display> = openEnums
+  .outboundSchema(Display);
+
+/** @internal */
 export const AnalyticsViewDefinition$inboundSchema: z.ZodMiniType<
   AnalyticsViewDefinition,
   unknown
 > = z.object({
+  compare: types.optional(AnalyticsViewDefinitionCompare$inboundSchema),
+  currency: types.optional(types.string()),
   dimensions: types.optional(z.array(types.string())),
+  display: types.optional(Display$inboundSchema),
   family: types.optional(Family$inboundSchema),
   filters: types.optional(z.array(AnalyticsFilter$inboundSchema)),
   limit: types.optional(types.number()),
@@ -72,7 +112,10 @@ export const AnalyticsViewDefinition$inboundSchema: z.ZodMiniType<
 });
 /** @internal */
 export type AnalyticsViewDefinition$Outbound = {
+  compare?: string | undefined;
+  currency?: string | undefined;
   dimensions?: Array<string> | undefined;
+  display?: string | undefined;
   family?: string | undefined;
   filters?: Array<AnalyticsFilter$Outbound> | undefined;
   limit?: number | undefined;
@@ -88,7 +131,10 @@ export const AnalyticsViewDefinition$outboundSchema: z.ZodMiniType<
   AnalyticsViewDefinition$Outbound,
   AnalyticsViewDefinition
 > = z.object({
+  compare: z.optional(AnalyticsViewDefinitionCompare$outboundSchema),
+  currency: z.optional(z.string()),
   dimensions: z.optional(z.array(z.string())),
+  display: z.optional(Display$outboundSchema),
   family: z.optional(Family$outboundSchema),
   filters: z.optional(z.array(AnalyticsFilter$outboundSchema)),
   limit: z.optional(z.int()),

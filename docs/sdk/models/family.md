@@ -5,7 +5,7 @@
 ```typescript
 import { Family } from "@flexprice/sdk/sdk/models";
 
-let value: Family = "usage";
+let value: Family = "billing";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: Family = "usage";
 ## Values
 
 ```typescript
-"usage" | "billing" | Unrecognized<string>
+"usage" | "billing" | "report" | Unrecognized<string>
 ```

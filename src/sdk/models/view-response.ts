@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -13,20 +14,35 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ViewResponse = {
+  createdAt?: Date | undefined;
+  createdBy?: string | undefined;
   definition?: AnalyticsViewDefinition | undefined;
   id?: string | undefined;
   name?: string | undefined;
+  updatedAt?: Date | undefined;
   version?: number | undefined;
 };
 
 /** @internal */
 export const ViewResponse$inboundSchema: z.ZodMiniType<ViewResponse, unknown> =
-  z.object({
-    definition: types.optional(AnalyticsViewDefinition$inboundSchema),
-    id: types.optional(types.string()),
-    name: types.optional(types.string()),
-    version: types.optional(types.number()),
-  });
+  z.pipe(
+    z.object({
+      created_at: types.optional(types.date()),
+      created_by: types.optional(types.string()),
+      definition: types.optional(AnalyticsViewDefinition$inboundSchema),
+      id: types.optional(types.string()),
+      name: types.optional(types.string()),
+      updated_at: types.optional(types.date()),
+      version: types.optional(types.number()),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+        "created_by": "createdBy",
+        "updated_at": "updatedAt",
+      });
+    }),
+  );
 
 export function viewResponseFromJSON(
   jsonString: string,

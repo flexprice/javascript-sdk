@@ -32,6 +32,7 @@ import { Rbac } from "./rbac.js";
 import { Refunds } from "./refunds.js";
 import { ScheduledTasks } from "./scheduled-tasks.js";
 import { Secrets } from "./secrets.js";
+import { SelfBilling } from "./self-billing.js";
 import { Subscriptions } from "./subscriptions.js";
 import { Tasks } from "./tasks.js";
 import { TaxAssociations } from "./tax-associations.js";
@@ -162,6 +163,11 @@ export class Flexprice extends ClientSDK {
   private _plans?: Plans;
   get plans(): Plans {
     return (this._plans ??= new Plans(this._options));
+  }
+
+  private _selfBilling?: SelfBilling;
+  get selfBilling(): SelfBilling {
+    return (this._selfBilling ??= new SelfBilling(this._options));
   }
 
   private _prices?: Prices;

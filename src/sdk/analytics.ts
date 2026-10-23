@@ -3,9 +3,15 @@
  */
 
 import { analyticsCreateAnalyticsView } from "../funcs/analytics-create-analytics-view.js";
+import { analyticsDeleteAnalyticsView } from "../funcs/analytics-delete-analytics-view.js";
+import { analyticsGetAnalyticsView } from "../funcs/analytics-get-analytics-view.js";
 import { analyticsGetRevenueAnalytics } from "../funcs/analytics-get-revenue-analytics.js";
+import { analyticsListAnalyticsReports } from "../funcs/analytics-list-analytics-reports.js";
+import { analyticsListAnalyticsViews } from "../funcs/analytics-list-analytics-views.js";
 import { analyticsQueryAnalyticsView } from "../funcs/analytics-query-analytics-view.js";
 import { analyticsQueryAnalytics } from "../funcs/analytics-query-analytics.js";
+import { analyticsRunAnalyticsReport } from "../funcs/analytics-run-analytics-report.js";
+import { analyticsUpdateAnalyticsView } from "../funcs/analytics-update-analytics-view.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
 import * as models from "./models/index.js";
@@ -29,6 +35,40 @@ export class Analytics extends ClientSDK {
   }
 
   /**
+   * List financial reports
+   *
+   * @remarks
+   * Returns the catalog of reports with their allowed shapes, dimensions and grains.
+   */
+  async listAnalyticsReports(
+    options?: RequestOptions,
+  ): Promise<models.ReportCatalogResponse> {
+    return unwrapAsync(analyticsListAnalyticsReports(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Run a financial report
+   *
+   * @remarks
+   * Runs the report identified by key. range is an absolute YYYY-MM-DD..YYYY-MM-DD (end exclusive) or last_N_days. compare is previous_period or previous_year.
+   */
+  async runAnalyticsReport(
+    key: string,
+    body: models.ReportQueryRequest,
+    options?: RequestOptions,
+  ): Promise<models.AnalyticsQueryResult> {
+    return unwrapAsync(analyticsRunAnalyticsReport(
+      this,
+      key,
+      body,
+      options,
+    ));
+  }
+
+  /**
    * Query revenue analytics
    *
    * @remarks
@@ -46,6 +86,23 @@ export class Analytics extends ClientSDK {
   }
 
   /**
+   * List analytics views
+   *
+   * @remarks
+   * Lists saved views, optionally filtered by family.
+   */
+  async listAnalyticsViews(
+    family?: string | undefined,
+    options?: RequestOptions,
+  ): Promise<models.ListViewsResponse> {
+    return unwrapAsync(analyticsListAnalyticsViews(
+      this,
+      family,
+      options,
+    ));
+  }
+
+  /**
    * Create an analytics view
    *
    * @remarks
@@ -58,6 +115,59 @@ export class Analytics extends ClientSDK {
     return unwrapAsync(analyticsCreateAnalyticsView(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an analytics view
+   *
+   * @remarks
+   * Returns a saved view by ID.
+   */
+  async getAnalyticsView(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ViewResponse> {
+    return unwrapAsync(analyticsGetAnalyticsView(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Update an analytics view
+   *
+   * @remarks
+   * Replaces the name and definition of a saved view.
+   */
+  async updateAnalyticsView(
+    id: string,
+    body: models.CreateViewRequest,
+    options?: RequestOptions,
+  ): Promise<models.ViewResponse> {
+    return unwrapAsync(analyticsUpdateAnalyticsView(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an analytics view
+   *
+   * @remarks
+   * Deletes a saved view by ID.
+   */
+  async deleteAnalyticsView(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(analyticsDeleteAnalyticsView(
+      this,
+      id,
       options,
     ));
   }

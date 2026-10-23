@@ -127,6 +127,10 @@ export type InvoiceResponse = {
   finalizedAt?: Date | undefined;
   fxConversion?: FxConversion | undefined;
   /**
+   * hosted_invoice_url is the page where the customer can view, download and pay this invoice
+   */
+  hostedInvoiceUrl?: string | undefined;
+  /**
    * id is the unique identifier for this invoice
    */
   id?: string | undefined;
@@ -276,6 +280,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     environment_id: types.optional(types.string()),
     finalized_at: types.optional(types.date()),
     fx_conversion: types.optional(FxConversion$inboundSchema),
+    hosted_invoice_url: types.optional(types.string()),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
     invoice_number: types.optional(types.string()),
@@ -336,6 +341,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "environment_id": "environmentId",
       "finalized_at": "finalizedAt",
       "fx_conversion": "fxConversion",
+      "hosted_invoice_url": "hostedInvoiceUrl",
       "idempotency_key": "idempotencyKey",
       "invoice_number": "invoiceNumber",
       "invoice_pdf_url": "invoicePdfUrl",

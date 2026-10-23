@@ -10,7 +10,11 @@ import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type AnalyticsQueryMeta = {
+  from?: string | undefined;
+  prevFrom?: string | undefined;
+  prevTo?: string | undefined;
   querySource?: string | undefined;
+  to?: string | undefined;
 };
 
 /** @internal */
@@ -19,10 +23,16 @@ export const AnalyticsQueryMeta$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    from: types.optional(types.string()),
+    prev_from: types.optional(types.string()),
+    prev_to: types.optional(types.string()),
     query_source: types.optional(types.string()),
+    to: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "prev_from": "prevFrom",
+      "prev_to": "prevTo",
       "query_source": "querySource",
     });
   }),

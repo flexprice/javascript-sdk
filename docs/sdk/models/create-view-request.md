@@ -8,7 +8,7 @@ import { CreateViewRequest } from "@flexprice/sdk/sdk/models";
 let value: CreateViewRequest = {
   definition: {
     metrics: [
-      "usage_quantity",
+      "invoice_total",
     ],
     shape: "breakdown",
   },

@@ -59,6 +59,13 @@ export type TopUpWalletRequest = {
    */
   description?: string | undefined;
   /**
+   * effective_date is stored as the credit transaction's created_at.
+   *
+   * @remarks
+   * Omit to use the current time. Must not be in the future.
+   */
+  effectiveDate?: Date | undefined;
+  /**
    * expiry_date_utc is the expiry date in UTC timezone
    *
    * @remarks
@@ -91,6 +98,7 @@ export type TopUpWalletRequest$Outbound = {
   coupons?: Array<TopUpCoupon$Outbound> | undefined;
   credits_to_add?: string | undefined;
   description?: string | undefined;
+  effective_date?: string | undefined;
   expiry_date_utc?: string | undefined;
   force_sync_invoice?: boolean | undefined;
   idempotency_key?: string | undefined;
@@ -112,6 +120,9 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
     coupons: z.optional(z.array(TopUpCoupon$outboundSchema)),
     creditsToAdd: z.optional(z.string()),
     description: z.optional(z.string()),
+    effectiveDate: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     expiryDateUtc: z.optional(z.string()),
     forceSyncInvoice: z.optional(z.boolean()),
     idempotencyKey: z.optional(z.string()),
@@ -124,6 +135,7 @@ export const TopUpWalletRequest$outboundSchema: z.ZodMiniType<
       bonusCreditsExpiryDateUtc: "bonus_credits_expiry_date_utc",
       bonusCreditsToAdd: "bonus_credits_to_add",
       creditsToAdd: "credits_to_add",
+      effectiveDate: "effective_date",
       expiryDateUtc: "expiry_date_utc",
       forceSyncInvoice: "force_sync_invoice",
       idempotencyKey: "idempotency_key",

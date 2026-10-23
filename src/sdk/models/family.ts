@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const Family = {
   Usage: "usage",
   Billing: "billing",
+  Report: "report",
 } as const;
 export type Family = OpenEnum<typeof Family>;
 
