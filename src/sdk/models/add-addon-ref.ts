@@ -6,6 +6,11 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { AddonCadence, AddonCadence$outboundSchema } from "./addon-cadence.js";
 import {
+  AddonPriceOverrideRef,
+  AddonPriceOverrideRef$Outbound,
+  AddonPriceOverrideRef$outboundSchema,
+} from "./addon-price-override-ref.js";
+import {
   CouponRef,
   CouponRef$Outbound,
   CouponRef$outboundSchema,
@@ -20,6 +25,10 @@ export type AddAddonRef = {
   associationId?: string | undefined;
   cadence?: AddonCadence | undefined;
   coupons?: Array<CouponRef> | undefined;
+  /**
+   * Price overrides minted at execute time; completion repoints the line items instead of minting again.
+   */
+  priceOverrides?: Array<AddonPriceOverrideRef> | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
   startDate?: Date | undefined;
 };
@@ -30,6 +39,7 @@ export type AddAddonRef$Outbound = {
   association_id?: string | undefined;
   cadence?: string | undefined;
   coupons?: Array<CouponRef$Outbound> | undefined;
+  price_overrides?: Array<AddonPriceOverrideRef$Outbound> | undefined;
   proration_behavior?: string | undefined;
   start_date?: string | undefined;
 };
@@ -44,6 +54,7 @@ export const AddAddonRef$outboundSchema: z.ZodMiniType<
     associationId: z.optional(z.string()),
     cadence: z.optional(AddonCadence$outboundSchema),
     coupons: z.optional(z.array(CouponRef$outboundSchema)),
+    priceOverrides: z.optional(z.array(AddonPriceOverrideRef$outboundSchema)),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
@@ -51,6 +62,7 @@ export const AddAddonRef$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       addonId: "addon_id",
       associationId: "association_id",
+      priceOverrides: "price_overrides",
       prorationBehavior: "proration_behavior",
       startDate: "start_date",
     });

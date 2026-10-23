@@ -18,6 +18,7 @@ export * from "./addon-association-entity-type.js";
 export * from "./addon-association-response.js";
 export * from "./addon-cadence.js";
 export * from "./addon-filter.js";
+export * from "./addon-price-override-ref.js";
 export * from "./addon-price-sync-status-response.js";
 export * from "./addon-response.js";
 export * from "./addon-status.js";
