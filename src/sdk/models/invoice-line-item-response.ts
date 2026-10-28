@@ -36,6 +36,10 @@ export type InvoiceLineItemResponse = {
    */
   adjustedEntitlementQuantity?: string | undefined;
   amount?: string | undefined;
+  /**
+   * commitment_id links this line item to the commitment it bills.
+   */
+  commitmentId?: string | undefined;
   commitmentInfo?: CommitmentInfo | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
@@ -107,6 +111,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
   z.object({
     adjusted_entitlement_quantity: types.optional(types.string()),
     amount: types.optional(types.string()),
+    commitment_id: types.optional(types.string()),
     commitment_info: types.optional(CommitmentInfo$inboundSchema),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
@@ -148,6 +153,7 @@ export const InvoiceLineItemResponse$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "adjusted_entitlement_quantity": "adjustedEntitlementQuantity",
+      "commitment_id": "commitmentId",
       "commitment_info": "commitmentInfo",
       "created_at": "createdAt",
       "created_by": "createdBy",

@@ -48,6 +48,7 @@ export type ReportQueryRequest = {
   filters?: Array<ReportFilter> | undefined;
   grain?: ReportQueryRequestGrain | undefined;
   limit?: number | undefined;
+  offset?: number | undefined;
   range: string;
   shape: ReportQueryRequestShape;
   sort?: Array<ReportSort> | undefined;
@@ -76,6 +77,7 @@ export type ReportQueryRequest$Outbound = {
   filters?: Array<ReportFilter$Outbound> | undefined;
   grain?: string | undefined;
   limit?: number | undefined;
+  offset?: number | undefined;
   range: string;
   shape: string;
   sort?: Array<ReportSort$Outbound> | undefined;
@@ -92,6 +94,7 @@ export const ReportQueryRequest$outboundSchema: z.ZodMiniType<
   filters: z.optional(z.array(ReportFilter$outboundSchema)),
   grain: z.optional(ReportQueryRequestGrain$outboundSchema),
   limit: z.optional(z.int()),
+  offset: z.optional(z.int()),
   range: z.string(),
   shape: ReportQueryRequestShape$outboundSchema,
   sort: z.optional(z.array(ReportSort$outboundSchema)),

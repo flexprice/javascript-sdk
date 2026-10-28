@@ -1,0 +1,42 @@
+# CreateCommitmentRequest
+
+## Example Usage
+
+```typescript
+import { CreateCommitmentRequest } from "@flexprice/sdk/sdk/models";
+
+let value: CreateCommitmentRequest = {
+  endDate: new Date("2025-02-26T11:45:33.908Z"),
+  measurement: "window",
+  name: "<value>",
+  scope: {
+    entityType: "group",
+  },
+  startDate: new Date("2026-07-21T11:23:27.274Z"),
+  type: "quantity",
+};
+```
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `activeWindows`                                                                               | [models.ActiveWindow](../../sdk/models/active-window.md)[]                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `binding`                                                                                     | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | default false                                                                                 |
+| `collectionMethod`                                                                            | [models.CommitmentCollectionMethod](../../sdk/models/commitment-collection-method.md)         | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `committedPrice`                                                                              | [models.CommitmentPriceInput](../../sdk/models/commitment-price-input.md)                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `endDate`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `idempotencyKey`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `invoiceDescription`                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `invoiceLabel`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `measurement`                                                                                 | [models.CommitmentMeasurement](../../sdk/models/commitment-measurement.md)                    | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `metadata`                                                                                    | Record<string, *string*>                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `overagePrice`                                                                                | [models.CommitmentPriceInput](../../sdk/models/commitment-price-input.md)                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `priority`                                                                                    | *number*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `scope`                                                                                       | [models.CommitmentScopeInput](../../sdk/models/commitment-scope-input.md)                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `startDate`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `subscriptionId`                                                                              | *string*                                                                                      | :heavy_minus_sign:                                                                            | SubscriptionID is required on POST /commitments and set server-side on inline commitments.    |
+| `timezone`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `type`                                                                                        | [models.CommitmentType](../../sdk/models/commitment-type.md)                                  | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `value`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |

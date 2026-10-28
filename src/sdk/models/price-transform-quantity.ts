@@ -4,7 +4,15 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { RoundType, RoundType$outboundSchema } from "./round-type.js";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import {
+  RoundType,
+  RoundType$inboundSchema,
+  RoundType$outboundSchema,
+} from "./round-type.js";
+import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type PriceTransformQuantity = {
   /**
@@ -14,6 +22,21 @@ export type PriceTransformQuantity = {
   round?: RoundType | undefined;
 };
 
+/** @internal */
+export const PriceTransformQuantity$inboundSchema: z.ZodMiniType<
+  PriceTransformQuantity,
+  unknown
+> = z.pipe(
+  z.object({
+    divide_by: types.optional(types.number()),
+    round: types.optional(RoundType$inboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "divide_by": "divideBy",
+    });
+  }),
+);
 /** @internal */
 export type PriceTransformQuantity$Outbound = {
   divide_by?: number | undefined;
@@ -41,5 +64,14 @@ export function priceTransformQuantityToJSON(
 ): string {
   return JSON.stringify(
     PriceTransformQuantity$outboundSchema.parse(priceTransformQuantity),
+  );
+}
+export function priceTransformQuantityFromJSON(
+  jsonString: string,
+): SafeParseResult<PriceTransformQuantity, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PriceTransformQuantity$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PriceTransformQuantity' from JSON`,
   );
 }

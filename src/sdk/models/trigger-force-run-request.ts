@@ -6,12 +6,17 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TriggerForceRunRequest = {
+  /**
+   * Limits a wallet_ledger export to these customers; empty means every customer.
+   */
+  customerExternalIds: Array<string>;
   endTime?: Date | undefined;
   startTime?: Date | undefined;
 };
 
 /** @internal */
 export type TriggerForceRunRequest$Outbound = {
+  customer_external_ids: Array<string>;
   end_time?: string | undefined;
   start_time?: string | undefined;
 };
@@ -22,11 +27,13 @@ export const TriggerForceRunRequest$outboundSchema: z.ZodMiniType<
   TriggerForceRunRequest
 > = z.pipe(
   z.object({
+    customerExternalIds: z.array(z.string()),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
   }),
   z.transform((v) => {
     return remap$(v, {
+      customerExternalIds: "customer_external_ids",
       endTime: "end_time",
       startTime: "start_time",
     });

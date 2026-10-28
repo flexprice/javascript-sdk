@@ -50,6 +50,9 @@ export type CreateEntitlementRequest = {
   planId?: string | undefined;
   startDate?: Date | undefined;
   staticValue?: string | undefined;
+  /**
+   * Deprecated: use grant_quota; a metered usage_limit is converted to a grant on create.
+   */
   usageLimit?: number | undefined;
   usageResetPeriod?: EntitlementUsageResetPeriod | undefined;
 };
