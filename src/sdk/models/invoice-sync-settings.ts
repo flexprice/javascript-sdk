@@ -24,6 +24,10 @@ import {
   ServicePeriodCustomFields,
   ServicePeriodCustomFields$inboundSchema,
 } from "./service-period-custom-fields.js";
+import {
+  ZohoPaymentGatewaySettings,
+  ZohoPaymentGatewaySettings$inboundSchema,
+} from "./zoho-payment-gateway-settings.js";
 
 export type InvoiceSyncSettings = {
   /**
@@ -45,6 +49,7 @@ export type InvoiceSyncSettings = {
    */
   metadataCustomFields?: Array<MetadataCustomField> | undefined;
   normalizeFixedTo?: BillingPeriod | undefined;
+  paymentGateways?: ZohoPaymentGatewaySettings | undefined;
   /**
    * Zoho payment modes are merchant-editable free strings with no id, so this is passed
    *
@@ -76,6 +81,7 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
       z.array(MetadataCustomField$inboundSchema),
     ),
     normalize_fixed_to: types.optional(BillingPeriod$inboundSchema),
+    payment_gateways: types.optional(ZohoPaymentGatewaySettings$inboundSchema),
     payment_mode: types.optional(types.string()),
     service_period_custom_fields: types.optional(
       ServicePeriodCustomFields$inboundSchema,
@@ -88,6 +94,7 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
       "global_custom_fields": "globalCustomFields",
       "metadata_custom_fields": "metadataCustomFields",
       "normalize_fixed_to": "normalizeFixedTo",
+      "payment_gateways": "paymentGateways",
       "payment_mode": "paymentMode",
       "service_period_custom_fields": "servicePeriodCustomFields",
       "submit_for_approval": "submitForApproval",

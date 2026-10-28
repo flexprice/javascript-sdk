@@ -840,3 +840,6 @@ export * from "./webhook-event-name.js";
 export * from "./window-size.js";
 export * from "./workflow-execution-dto.js";
 export * from "./workflow-execution-filter.js";
+export * from "./zoho-pay-pal-payment-method.js";
+export * from "./zoho-payment-gateway-settings.js";
+export * from "./zoho-payment-gateway.js";
