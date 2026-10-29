@@ -47,6 +47,7 @@ export type PriceFilter = {
    */
   planIds?: Array<string> | undefined;
   priceIds?: Array<string> | undefined;
+  productIds?: Array<string> | undefined;
   sort?: string | undefined;
   startDateLt?: string | undefined;
   startTime?: Date | undefined;
@@ -83,6 +84,7 @@ export type PriceFilter$Outbound = {
   parent_price_id?: string | undefined;
   plan_ids?: Array<string> | undefined;
   price_ids?: Array<string> | undefined;
+  product_ids?: Array<string> | undefined;
   sort?: string | undefined;
   start_date_lt?: string | undefined;
   start_time?: string | undefined;
@@ -111,6 +113,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
     parentPriceId: z.optional(z.string()),
     planIds: z.optional(z.array(z.string())),
     priceIds: z.optional(z.array(z.string())),
+    productIds: z.optional(z.array(z.string())),
     sort: z.optional(z.string()),
     startDateLt: z.optional(z.string()),
     startTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -129,6 +132,7 @@ export const PriceFilter$outboundSchema: z.ZodMiniType<
       parentPriceId: "parent_price_id",
       planIds: "plan_ids",
       priceIds: "price_ids",
+      productIds: "product_ids",
       startDateLt: "start_date_lt",
       startTime: "start_time",
       subscriptionId: "subscription_id",

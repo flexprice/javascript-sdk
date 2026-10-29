@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { FlexpriceCore } from "@flexprice/sdk/core.js";
-import { activityListActivity } from "@flexprice/sdk/funcs/activity-list-activity.js";
+import { accountingPeriodsQueryAccountingPeriod } from "@flexprice/sdk/funcs/accounting-periods-query-accounting-period.js";
 
 // Use `FlexpriceCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,12 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await activityListActivity(flexprice, {});
+  const res = await accountingPeriodsQueryAccountingPeriod(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("activityListActivity failed:", res.error);
+    console.log("accountingPeriodsQueryAccountingPeriod failed:", res.error);
   }
 }
 

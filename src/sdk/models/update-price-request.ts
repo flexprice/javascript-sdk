@@ -53,6 +53,10 @@ export type UpdatePriceRequest = {
    * PriceUnitTiers are the price unit tiers (for CUSTOM price unit type, TIERED billing model)
    */
   priceUnitTiers?: Array<CreatePriceTier> | undefined;
+  /**
+   * ProductID sets the price's product while it has none; once set it never changes.
+   */
+  productId?: string | undefined;
   tierMode?: BillingTier | undefined;
   /**
    * Tiers determines the pricing tiers for this line item
@@ -74,6 +78,7 @@ export type UpdatePriceRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   price_unit_amount?: string | undefined;
   price_unit_tiers?: Array<CreatePriceTier$Outbound> | undefined;
+  product_id?: string | undefined;
   tier_mode?: string | undefined;
   tiers?: Array<CreatePriceTier$Outbound> | undefined;
   transform_quantity?: PriceTransformQuantity$Outbound | undefined;
@@ -96,6 +101,7 @@ export const UpdatePriceRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     priceUnitAmount: z.optional(z.string()),
     priceUnitTiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
+    productId: z.optional(z.string()),
     tierMode: z.optional(BillingTier$outboundSchema),
     tiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
     transformQuantity: z.optional(PriceTransformQuantity$outboundSchema),
@@ -110,6 +116,7 @@ export const UpdatePriceRequest$outboundSchema: z.ZodMiniType<
       lookupKey: "lookup_key",
       priceUnitAmount: "price_unit_amount",
       priceUnitTiers: "price_unit_tiers",
+      productId: "product_id",
       tierMode: "tier_mode",
       transformQuantity: "transform_quantity",
     });

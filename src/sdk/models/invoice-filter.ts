@@ -148,6 +148,10 @@ export type InvoiceFilter = {
    */
   subscriptionId?: string | undefined;
   /**
+   * updated_at_gte filters invoices updated at or after the given instant
+   */
+  updatedAtGte?: Date | undefined;
+  /**
    * voided_at_gte filters invoices voided at or after the given instant
    */
   voidedAtGte?: Date | undefined;
@@ -189,6 +193,7 @@ export type InvoiceFilter$Outbound = {
   status?: string | undefined;
   subscription_customer_id?: Array<string> | undefined;
   subscription_id?: string | undefined;
+  updated_at_gte?: string | undefined;
   voided_at_gte?: string | undefined;
 };
 
@@ -229,6 +234,9 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     status: z.optional(Status$outboundSchema),
     subscriptionCustomerId: z.optional(z.array(z.string())),
     subscriptionId: z.optional(z.string()),
+    updatedAtGte: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
     voidedAtGte: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),
@@ -256,6 +264,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
       startTime: "start_time",
       subscriptionCustomerId: "subscription_customer_id",
       subscriptionId: "subscription_id",
+      updatedAtGte: "updated_at_gte",
       voidedAtGte: "voided_at_gte",
     });
   }),

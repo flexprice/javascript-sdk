@@ -40,6 +40,10 @@ export type ListPaymentsRequest = {
   sort?: string | undefined;
   startTime?: string | undefined;
   status?: ListPaymentsStatus | undefined;
+  /**
+   * UpdatedAtGTE bounds updated_at, which every lifecycle change bumps.
+   */
+  updatedAtGte?: string | undefined;
 };
 
 /** @internal */
@@ -71,6 +75,7 @@ export type ListPaymentsRequest$Outbound = {
   sort?: string | undefined;
   start_time?: string | undefined;
   status?: string | undefined;
+  updated_at_gte?: string | undefined;
 };
 
 /** @internal */
@@ -96,6 +101,7 @@ export const ListPaymentsRequest$outboundSchema: z.ZodMiniType<
     sort: z.optional(z.string()),
     startTime: z.optional(z.string()),
     status: z.optional(ListPaymentsStatus$outboundSchema),
+    updatedAtGte: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -109,6 +115,7 @@ export const ListPaymentsRequest$outboundSchema: z.ZodMiniType<
       paymentMethodType: "payment_method_type",
       paymentStatus: "payment_status",
       startTime: "start_time",
+      updatedAtGte: "updated_at_gte",
     });
   }),
 );

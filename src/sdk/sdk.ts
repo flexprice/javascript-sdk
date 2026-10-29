@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { AccountingPeriods } from "./accounting-periods.js";
 import { Activity } from "./activity.js";
 import { Addons } from "./addons.js";
 import { AlertSettings } from "./alert-settings.js";
@@ -10,6 +11,7 @@ import { Alerts } from "./alerts.js";
 import { Analytics } from "./analytics.js";
 import { Checkout } from "./checkout.js";
 import { Commitments } from "./commitments.js";
+import { Contracts } from "./contracts.js";
 import { Costs } from "./costs.js";
 import { CouponAssociations } from "./coupon-associations.js";
 import { Coupons } from "./coupons.js";
@@ -24,13 +26,17 @@ import { FXRates } from "./fx-rates.js";
 import { Groups } from "./groups.js";
 import { Integrations } from "./integrations.js";
 import { Invoices } from "./invoices.js";
+import { JournalEntries } from "./journal-entries.js";
 import { Marketplace } from "./marketplace.js";
 import { Payments } from "./payments.js";
+import { PerformanceObligations } from "./performance-obligations.js";
 import { Plans } from "./plans.js";
 import { PriceUnits } from "./price-units.js";
 import { Prices } from "./prices.js";
+import { Products } from "./products.js";
 import { Rbac } from "./rbac.js";
 import { Refunds } from "./refunds.js";
+import { RevenueReports } from "./revenue-reports.js";
 import { ScheduledTasks } from "./scheduled-tasks.js";
 import { Secrets } from "./secrets.js";
 import { SelfBilling } from "./self-billing.js";
@@ -46,6 +52,11 @@ import { WebhookEvents } from "./webhook-events.js";
 import { Workflows } from "./workflows.js";
 
 export class Flexprice extends ClientSDK {
+  private _accountingPeriods?: AccountingPeriods;
+  get accountingPeriods(): AccountingPeriods {
+    return (this._accountingPeriods ??= new AccountingPeriods(this._options));
+  }
+
   private _activity?: Activity;
   get activity(): Activity {
     return (this._activity ??= new Activity(this._options));
@@ -89,6 +100,11 @@ export class Flexprice extends ClientSDK {
   private _commitments?: Commitments;
   get commitments(): Commitments {
     return (this._commitments ??= new Commitments(this._options));
+  }
+
+  private _contracts?: Contracts;
+  get contracts(): Contracts {
+    return (this._contracts ??= new Contracts(this._options));
   }
 
   private _costs?: Costs;
@@ -156,6 +172,11 @@ export class Flexprice extends ClientSDK {
     return (this._integrations ??= new Integrations(this._options));
   }
 
+  private _journalEntries?: JournalEntries;
+  get journalEntries(): JournalEntries {
+    return (this._journalEntries ??= new JournalEntries(this._options));
+  }
+
   private _marketplace?: Marketplace;
   get marketplace(): Marketplace {
     return (this._marketplace ??= new Marketplace(this._options));
@@ -164,6 +185,13 @@ export class Flexprice extends ClientSDK {
   private _payments?: Payments;
   get payments(): Payments {
     return (this._payments ??= new Payments(this._options));
+  }
+
+  private _performanceObligations?: PerformanceObligations;
+  get performanceObligations(): PerformanceObligations {
+    return (this._performanceObligations ??= new PerformanceObligations(
+      this._options,
+    ));
   }
 
   private _plans?: Plans;
@@ -186,6 +214,11 @@ export class Flexprice extends ClientSDK {
     return (this._priceUnits ??= new PriceUnits(this._options));
   }
 
+  private _products?: Products;
+  get products(): Products {
+    return (this._products ??= new Products(this._options));
+  }
+
   private _rbac?: Rbac;
   get rbac(): Rbac {
     return (this._rbac ??= new Rbac(this._options));
@@ -194,6 +227,11 @@ export class Flexprice extends ClientSDK {
   private _refunds?: Refunds;
   get refunds(): Refunds {
     return (this._refunds ??= new Refunds(this._options));
+  }
+
+  private _revenueReports?: RevenueReports;
+  get revenueReports(): RevenueReports {
+    return (this._revenueReports ??= new RevenueReports(this._options));
   }
 
   private _secrets?: Secrets;

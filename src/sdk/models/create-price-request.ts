@@ -67,6 +67,7 @@ export type CreatePriceRequest = {
   minQuantity?: number | undefined;
   priceUnitConfig?: PriceUnitConfig | undefined;
   priceUnitType: PriceUnitType;
+  productId?: string | undefined;
   startDate?: Date | undefined;
   tierMode?: BillingTier | undefined;
   tiers?: Array<CreatePriceTier> | undefined;
@@ -97,6 +98,7 @@ export type CreatePriceRequest$Outbound = {
   min_quantity?: number | undefined;
   price_unit_config?: PriceUnitConfig$Outbound | undefined;
   price_unit_type: string;
+  product_id?: string | undefined;
   start_date?: string | undefined;
   tier_mode?: string | undefined;
   tiers?: Array<CreatePriceTier$Outbound> | undefined;
@@ -131,6 +133,7 @@ export const CreatePriceRequest$outboundSchema: z.ZodMiniType<
     minQuantity: z.optional(z.int()),
     priceUnitConfig: z.optional(PriceUnitConfig$outboundSchema),
     priceUnitType: PriceUnitType$outboundSchema,
+    productId: z.optional(z.string()),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     tierMode: z.optional(BillingTier$outboundSchema),
     tiers: z.optional(z.array(CreatePriceTier$outboundSchema)),
@@ -156,6 +159,7 @@ export const CreatePriceRequest$outboundSchema: z.ZodMiniType<
       minQuantity: "min_quantity",
       priceUnitConfig: "price_unit_config",
       priceUnitType: "price_unit_type",
+      productId: "product_id",
       startDate: "start_date",
       tierMode: "tier_mode",
       transformQuantity: "transform_quantity",
