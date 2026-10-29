@@ -27,14 +27,13 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.commitments.createCommitment({
-    endDate: new Date("2024-12-01T13:56:43.281Z"),
     measurement: "billing_period",
     name: "<value>",
     scope: {
       entityType: "group",
     },
-    startDate: new Date("2026-08-30T15:34:29.816Z"),
-    type: "amount",
+    startDate: new Date("2025-03-05T22:53:12.661Z"),
+    type: "quantity",
   });
 
   console.log(result);
@@ -59,14 +58,13 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await commitmentsCreateCommitment(flexprice, {
-    endDate: new Date("2024-12-01T13:56:43.281Z"),
     measurement: "billing_period",
     name: "<value>",
     scope: {
       entityType: "group",
     },
-    startDate: new Date("2026-08-30T15:34:29.816Z"),
-    type: "amount",
+    startDate: new Date("2025-03-05T22:53:12.661Z"),
+    type: "quantity",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -116,13 +114,12 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.commitments.previewCommitment({
-    endDate: new Date("2025-03-29T18:57:47.888Z"),
-    measurement: "window",
+    measurement: "billing_period",
     name: "<value>",
     scope: {
-      entityType: "group",
+      entityType: "meter",
     },
-    startDate: new Date("2024-09-25T08:18:25.213Z"),
+    startDate: new Date("2024-11-23T11:41:25.905Z"),
     type: "amount",
   });
 
@@ -148,13 +145,12 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await commitmentsPreviewCommitment(flexprice, {
-    endDate: new Date("2025-03-29T18:57:47.888Z"),
-    measurement: "window",
+    measurement: "billing_period",
     name: "<value>",
     scope: {
-      entityType: "group",
+      entityType: "meter",
     },
-    startDate: new Date("2024-09-25T08:18:25.213Z"),
+    startDate: new Date("2024-11-23T11:41:25.905Z"),
     type: "amount",
   });
   if (res.ok) {
