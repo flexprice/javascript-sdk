@@ -99,10 +99,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.entitlements.createEntitlement({
-    featureId: "<id>",
-    featureType: "metered",
-  });
+  const result = await flexprice.entitlements.createEntitlement({});
 
   console.log(result);
 }
@@ -125,10 +122,7 @@ const flexprice = new FlexpriceCore({
 });
 
 async function run() {
-  const res = await entitlementsCreateEntitlement(flexprice, {
-    featureId: "<id>",
-    featureType: "metered",
-  });
+  const res = await entitlementsCreateEntitlement(flexprice, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -178,10 +172,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.entitlements.createEntitlementsBulk({
     items: [
-      {
-        featureId: "<id>",
-        featureType: "config",
-      },
+      {},
     ],
   });
 
@@ -208,10 +199,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await entitlementsCreateEntitlementsBulk(flexprice, {
     items: [
-      {
-        featureId: "<id>",
-        featureType: "config",
-      },
+      {},
     ],
   });
   if (res.ok) {

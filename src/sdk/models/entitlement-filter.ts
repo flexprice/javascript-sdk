@@ -9,6 +9,10 @@ import {
   EntitlementEntityType,
   EntitlementEntityType$outboundSchema,
 } from "./entitlement-entity-type.js";
+import {
+  EntitlementGrantScopeEntityType,
+  EntitlementGrantScopeEntityType$outboundSchema,
+} from "./entitlement-grant-scope-entity-type.js";
 import { FeatureType, FeatureType$outboundSchema } from "./feature-type.js";
 import {
   FilterCondition,
@@ -40,6 +44,13 @@ export type EntitlementFilter = {
    */
   filters?: Array<FilterCondition> | undefined;
   /**
+   * GrantScopes selects entitlements by grant scope. Empty means feature only, so
+   *
+   * @remarks
+   * subscription entitlement grants, which have no feature, never reach feature-based reads.
+   */
+  grantScopes?: Array<EntitlementGrantScopeEntityType> | undefined;
+  /**
    * HasGrantConfig filters on grant-config presence (grant_quota set or not).
    */
   hasGrantConfig?: boolean | undefined;
@@ -67,6 +78,7 @@ export type EntitlementFilter$Outbound = {
   feature_ids?: Array<string> | undefined;
   feature_type?: string | undefined;
   filters?: Array<FilterCondition$Outbound> | undefined;
+  grant_scopes?: Array<string> | undefined;
   has_grant_config?: boolean | undefined;
   is_enabled?: boolean | undefined;
   limit?: number | undefined;
@@ -91,6 +103,9 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
     featureIds: z.optional(z.array(z.string())),
     featureType: z.optional(FeatureType$outboundSchema),
     filters: z.optional(z.array(FilterCondition$outboundSchema)),
+    grantScopes: z.optional(
+      z.array(EntitlementGrantScopeEntityType$outboundSchema),
+    ),
     hasGrantConfig: z.optional(z.boolean()),
     isEnabled: z.optional(z.boolean()),
     limit: z.optional(z.int()),
@@ -108,6 +123,7 @@ export const EntitlementFilter$outboundSchema: z.ZodMiniType<
       entityType: "entity_type",
       featureIds: "feature_ids",
       featureType: "feature_type",
+      grantScopes: "grant_scopes",
       hasGrantConfig: "has_grant_config",
       isEnabled: "is_enabled",
       planIds: "plan_ids",

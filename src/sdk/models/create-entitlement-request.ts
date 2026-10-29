@@ -36,8 +36,11 @@ export type CreateEntitlementRequest = {
   endDate?: Date | undefined;
   entityId?: string | undefined;
   entityType?: EntitlementEntityType | undefined;
-  featureId: string;
-  featureType: FeatureType;
+  /**
+   * Required, except on a subscription entitlement grant (entity_type SUBSCRIPTION with grant config), which has no feature.
+   */
+  featureId?: string | undefined;
+  featureType?: FeatureType | undefined;
   grantAllocationBehavior?: EntitlementGrantAllocationBehavior | undefined;
   grantDurationUnit?: EntitlementGrantDurationUnit | undefined;
   grantDurationValue?: number | undefined;
@@ -64,8 +67,8 @@ export type CreateEntitlementRequest$Outbound = {
   end_date?: string | undefined;
   entity_id?: string | undefined;
   entity_type?: string | undefined;
-  feature_id: string;
-  feature_type: string;
+  feature_id?: string | undefined;
+  feature_type?: string | undefined;
   grant_allocation_behavior?: string | undefined;
   grant_duration_unit?: string | undefined;
   grant_duration_value?: number | undefined;
@@ -93,8 +96,8 @@ export const CreateEntitlementRequest$outboundSchema: z.ZodMiniType<
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     entityId: z.optional(z.string()),
     entityType: z.optional(EntitlementEntityType$outboundSchema),
-    featureId: z.string(),
-    featureType: FeatureType$outboundSchema,
+    featureId: z.optional(z.string()),
+    featureType: z.optional(FeatureType$outboundSchema),
     grantAllocationBehavior: z.optional(
       EntitlementGrantAllocationBehavior$outboundSchema,
     ),
