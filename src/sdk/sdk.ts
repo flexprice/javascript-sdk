@@ -9,6 +9,7 @@ import { AlertSettings } from "./alert-settings.js";
 import { Alerts } from "./alerts.js";
 import { Analytics } from "./analytics.js";
 import { Checkout } from "./checkout.js";
+import { Commitments } from "./commitments.js";
 import { Costs } from "./costs.js";
 import { CouponAssociations } from "./coupon-associations.js";
 import { Coupons } from "./coupons.js";
@@ -83,6 +84,11 @@ export class Flexprice extends ClientSDK {
   private _checkout?: Checkout;
   get checkout(): Checkout {
     return (this._checkout ??= new Checkout(this._options));
+  }
+
+  private _commitments?: Commitments;
+  get commitments(): Commitments {
+    return (this._commitments ??= new Commitments(this._options));
   }
 
   private _costs?: Costs;

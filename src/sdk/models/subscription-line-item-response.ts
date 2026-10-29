@@ -70,6 +70,10 @@ export type SubscriptionLineItemResponse = {
   meterDisplayName?: string | undefined;
   meterId?: string | undefined;
   planDisplayName?: string | undefined;
+  /**
+   * Version lineage, set by the service when a line item is replaced by a new version
+   */
+  predecessorLineItemId?: string | undefined;
   price?: PriceResponse | undefined;
   priceId?: string | undefined;
   priceType?: PriceType | undefined;
@@ -80,6 +84,7 @@ export type SubscriptionLineItemResponse = {
   status?: Status | undefined;
   subscriptionId?: string | undefined;
   subscriptionPhaseId?: string | undefined;
+  successorLineItemId?: string | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -120,6 +125,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
     meter_display_name: types.optional(types.string()),
     meter_id: types.optional(types.string()),
     plan_display_name: types.optional(types.string()),
+    predecessor_line_item_id: types.optional(types.string()),
     price: types.optional(PriceResponse$inboundSchema),
     price_id: types.optional(types.string()),
     price_type: types.optional(PriceType$inboundSchema),
@@ -130,6 +136,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
     subscription_phase_id: types.optional(types.string()),
+    successor_line_item_id: types.optional(types.string()),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
@@ -159,6 +166,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
       "meter_display_name": "meterDisplayName",
       "meter_id": "meterId",
       "plan_display_name": "planDisplayName",
+      "predecessor_line_item_id": "predecessorLineItemId",
       "price_id": "priceId",
       "price_type": "priceType",
       "price_unit": "priceUnit",
@@ -166,6 +174,7 @@ export const SubscriptionLineItemResponse$inboundSchema: z.ZodMiniType<
       "start_date": "startDate",
       "subscription_id": "subscriptionId",
       "subscription_phase_id": "subscriptionPhaseId",
+      "successor_line_item_id": "successorLineItemId",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",

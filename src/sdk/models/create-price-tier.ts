@@ -4,6 +4,11 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  PriceTransformQuantity,
+  PriceTransformQuantity$Outbound,
+  PriceTransformQuantity$outboundSchema,
+} from "./price-transform-quantity.js";
 
 export type CreatePriceTier = {
   /**
@@ -13,6 +18,7 @@ export type CreatePriceTier = {
    * Applied on top of unit_amount*quantity. Useful for cases like "2.7$ + 5c"
    */
   flatAmount?: string | undefined;
+  transformQuantity?: PriceTransformQuantity | undefined;
   /**
    * unit_amount is the amount per unit for the given tier
    */
@@ -31,6 +37,7 @@ export type CreatePriceTier = {
 /** @internal */
 export type CreatePriceTier$Outbound = {
   flat_amount?: string | undefined;
+  transform_quantity?: PriceTransformQuantity$Outbound | undefined;
   unit_amount: string;
   up_to?: number | undefined;
 };
@@ -42,12 +49,14 @@ export const CreatePriceTier$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     flatAmount: z.optional(z.string()),
+    transformQuantity: z.optional(PriceTransformQuantity$outboundSchema),
     unitAmount: z.string(),
     upTo: z.optional(z.int()),
   }),
   z.transform((v) => {
     return remap$(v, {
       flatAmount: "flat_amount",
+      transformQuantity: "transform_quantity",
       unitAmount: "unit_amount",
       upTo: "up_to",
     });

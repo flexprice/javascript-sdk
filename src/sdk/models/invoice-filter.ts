@@ -106,6 +106,10 @@ export type InvoiceFilter = {
    */
   paymentStatus?: Array<PaymentStatus> | undefined;
   /**
+   * period_end_gt filters invoices with period_end > value
+   */
+  periodEndGt?: string | undefined;
+  /**
    * period_end_gte filters invoices with period_end >= value
    */
   periodEndGte?: string | undefined;
@@ -117,6 +121,10 @@ export type InvoiceFilter = {
    * period_start_gte filters invoices with period_start >= value
    */
   periodStartGte?: string | undefined;
+  /**
+   * period_start_lt filters invoices with period_start < value
+   */
+  periodStartLt?: string | undefined;
   /**
    * period_start_lte filters invoices with period_start <= value
    */
@@ -169,9 +177,11 @@ export type InvoiceFilter$Outbound = {
   offset?: number | undefined;
   order?: string | undefined;
   payment_status?: Array<string> | undefined;
+  period_end_gt?: string | undefined;
   period_end_gte?: string | undefined;
   period_end_lte?: string | undefined;
   period_start_gte?: string | undefined;
+  period_start_lt?: string | undefined;
   period_start_lte?: string | undefined;
   skip_line_items?: boolean | undefined;
   sort?: Array<SortCondition$Outbound> | undefined;
@@ -207,9 +217,11 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     offset: z.optional(z.int()),
     order: z.optional(InvoiceFilterOrder$outboundSchema),
     paymentStatus: z.optional(z.array(PaymentStatus$outboundSchema)),
+    periodEndGt: z.optional(z.string()),
     periodEndGte: z.optional(z.string()),
     periodEndLte: z.optional(z.string()),
     periodStartGte: z.optional(z.string()),
+    periodStartLt: z.optional(z.string()),
     periodStartLte: z.optional(z.string()),
     skipLineItems: z.optional(z.boolean()),
     sort: z.optional(z.array(SortCondition$outboundSchema)),
@@ -234,9 +246,11 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
       invoiceStatus: "invoice_status",
       invoiceType: "invoice_type",
       paymentStatus: "payment_status",
+      periodEndGt: "period_end_gt",
       periodEndGte: "period_end_gte",
       periodEndLte: "period_end_lte",
       periodStartGte: "period_start_gte",
+      periodStartLt: "period_start_lt",
       periodStartLte: "period_start_lte",
       skipLineItems: "skip_line_items",
       startTime: "start_time",

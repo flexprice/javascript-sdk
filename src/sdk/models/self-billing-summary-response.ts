@@ -17,6 +17,10 @@ import {
   SelfBillingInvoice$inboundSchema,
 } from "./self-billing-invoice.js";
 import {
+  SelfBillingPlanResponse,
+  SelfBillingPlanResponse$inboundSchema,
+} from "./self-billing-plan-response.js";
+import {
   SubscriptionStatus,
   SubscriptionStatus$inboundSchema,
 } from "./subscription-status.js";
@@ -27,6 +31,7 @@ import {
 
 export type SelfBillingSummaryResponse = {
   invoices?: Array<SelfBillingInvoice> | undefined;
+  plan?: SelfBillingPlanResponse | undefined;
   status?: TenantInternalStatus | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
   trialEndsAt?: Date | undefined;
@@ -40,6 +45,7 @@ export const SelfBillingSummaryResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     invoices: types.optional(z.array(SelfBillingInvoice$inboundSchema)),
+    plan: types.optional(SelfBillingPlanResponse$inboundSchema),
     status: types.optional(TenantInternalStatus$inboundSchema),
     subscription_status: types.optional(SubscriptionStatus$inboundSchema),
     trial_ends_at: types.optional(types.date()),

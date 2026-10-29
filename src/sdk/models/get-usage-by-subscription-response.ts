@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  CommitmentUsageBreakdown,
+  CommitmentUsageBreakdown$inboundSchema,
+} from "./commitment-usage-breakdown.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionUsageByMetersResponse,
@@ -21,6 +25,10 @@ export type GetUsageBySubscriptionResponse = {
    * Amount of commitment used
    */
   commitmentUtilized?: number | undefined;
+  /**
+   * Commitments is the per-commitment usage breakdown for the window; nil when commitments v2 is off or none apply.
+   */
+  commitments?: Array<CommitmentUsageBreakdown> | undefined;
   currency?: string | undefined;
   displayAmount?: string | undefined;
   endTime?: Date | undefined;
@@ -48,6 +56,9 @@ export const GetUsageBySubscriptionResponse$inboundSchema: z.ZodMiniType<
     ),
     commitment_amount: types.optional(types.number()),
     commitment_utilized: types.optional(types.number()),
+    commitments: types.optional(
+      z.array(CommitmentUsageBreakdown$inboundSchema),
+    ),
     currency: types.optional(types.string()),
     display_amount: types.optional(types.string()),
     end_time: types.optional(types.date()),

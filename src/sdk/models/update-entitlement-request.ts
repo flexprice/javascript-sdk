@@ -37,6 +37,9 @@ export type UpdateEntitlementRequest = {
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
   staticValue?: string | undefined;
+  /**
+   * Deprecated: use grant_quota.
+   */
   usageLimit?: number | undefined;
   usageResetPeriod?: EntitlementUsageResetPeriod | undefined;
 };

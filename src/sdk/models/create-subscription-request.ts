@@ -24,6 +24,11 @@ import {
   CollectionMethod$outboundSchema,
 } from "./collection-method.js";
 import {
+  CreateCommitmentRequest,
+  CreateCommitmentRequest$Outbound,
+  CreateCommitmentRequest$outboundSchema,
+} from "./create-commitment-request.js";
+import {
   CreateCreditGrantRequest,
   CreateCreditGrantRequest$Outbound,
   CreateCreditGrantRequest$outboundSchema,
@@ -115,6 +120,13 @@ export type CreateSubscriptionRequest = {
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
+   * Commitments are created with the subscription. subscription_id, and entity_id on a subscription scope,
+   *
+   * @remarks
+   * are set server-side.
+   */
+  commitments?: Array<CreateCommitmentRequest> | undefined;
+  /**
    * Deprecated: use SubscriptionCoupons instead.
    */
   coupons?: Array<string> | undefined;
@@ -205,6 +217,7 @@ export type CreateSubscriptionRequest$Outbound = {
   collection_method?: string | undefined;
   commitment_amount?: string | undefined;
   commitment_duration?: string | undefined;
+  commitments?: Array<CreateCommitmentRequest$Outbound> | undefined;
   coupons?: Array<string> | undefined;
   credit_grants?: Array<CreateCreditGrantRequest$Outbound> | undefined;
   currency: string;
@@ -260,6 +273,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     collectionMethod: z.optional(CollectionMethod$outboundSchema),
     commitmentAmount: z.optional(z.string()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
+    commitments: z.optional(z.array(CreateCommitmentRequest$outboundSchema)),
     coupons: z.optional(z.array(z.string())),
     creditGrants: z.optional(z.array(CreateCreditGrantRequest$outboundSchema)),
     currency: z.string(),

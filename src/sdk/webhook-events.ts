@@ -6,6 +6,9 @@ import { webhookEventsPostWebhookEventsCheckoutSessionCompleted } from "../funcs
 import { webhookEventsPostWebhookEventsCheckoutSessionExpired } from "../funcs/webhook-events-post-webhook-events-checkout-session-expired.js";
 import { webhookEventsPostWebhookEventsCheckoutSessionFailed } from "../funcs/webhook-events-post-webhook-events-checkout-session-failed.js";
 import { webhookEventsPostWebhookEventsCheckoutSessionInitiated } from "../funcs/webhook-events-post-webhook-events-checkout-session-initiated.js";
+import { webhookEventsPostWebhookEventsCommitmentCreated } from "../funcs/webhook-events-post-webhook-events-commitment-created.js";
+import { webhookEventsPostWebhookEventsCommitmentTerminated } from "../funcs/webhook-events-post-webhook-events-commitment-terminated.js";
+import { webhookEventsPostWebhookEventsCommitmentUpdated } from "../funcs/webhook-events-post-webhook-events-commitment-updated.js";
 import { webhookEventsPostWebhookEventsCreditNoteCreated } from "../funcs/webhook-events-post-webhook-events-credit-note-created.js";
 import { webhookEventsPostWebhookEventsCreditNoteUpdated } from "../funcs/webhook-events-post-webhook-events-credit-note-updated.js";
 import { webhookEventsPostWebhookEventsCustomerCreated } from "../funcs/webhook-events-post-webhook-events-customer-created.js";
@@ -124,6 +127,51 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoCheckoutSessionWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsCheckoutSessionInitiated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * commitment.created
+   *
+   * @remarks
+   * Fired when a commitment is created on a subscription. Doc-only for parsing.
+   */
+  async postWebhookEventsCommitmentCreated(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoCommitmentWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsCommitmentCreated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * commitment.terminated
+   *
+   * @remarks
+   * Fired when a commitment is terminated. Doc-only for parsing.
+   */
+  async postWebhookEventsCommitmentTerminated(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoCommitmentWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsCommitmentTerminated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * commitment.updated
+   *
+   * @remarks
+   * Fired when a commitment's descriptive fields are updated. Doc-only for parsing.
+   */
+  async postWebhookEventsCommitmentUpdated(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoCommitmentWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsCommitmentUpdated(
       this,
       options,
     ));
