@@ -46,6 +46,9 @@ export type CommitmentResponse = {
   createdBy?: string | undefined;
   currency?: string | undefined;
   customerId?: string | undefined;
+  /**
+   * EndDate is exclusive; nil for an open-ended commitment, which runs until terminated.
+   */
   endDate?: Date | undefined;
   environmentId?: string | undefined;
   id?: string | undefined;
