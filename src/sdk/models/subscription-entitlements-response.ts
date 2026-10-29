@@ -12,10 +12,17 @@ import {
   AggregatedFeature$inboundSchema,
 } from "./aggregated-feature.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SubscriptionEntitlementGrantsResponse,
+  SubscriptionEntitlementGrantsResponse$inboundSchema,
+} from "./subscription-entitlement-grants-response.js";
 
 export type SubscriptionEntitlementsResponse = {
   features?: Array<AggregatedFeature> | undefined;
   planId?: string | undefined;
+  subscriptionEntitlementGrants?:
+    | SubscriptionEntitlementGrantsResponse
+    | undefined;
   subscriptionId?: string | undefined;
 };
 
@@ -27,11 +34,15 @@ export const SubscriptionEntitlementsResponse$inboundSchema: z.ZodMiniType<
   z.object({
     features: types.optional(z.array(AggregatedFeature$inboundSchema)),
     plan_id: types.optional(types.string()),
+    subscription_entitlement_grants: types.optional(
+      SubscriptionEntitlementGrantsResponse$inboundSchema,
+    ),
     subscription_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       "plan_id": "planId",
+      "subscription_entitlement_grants": "subscriptionEntitlementGrants",
       "subscription_id": "subscriptionId",
     });
   }),

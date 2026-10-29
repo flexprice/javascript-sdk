@@ -32,6 +32,10 @@ import {
   EntitlementGrantMeasure$inboundSchema,
 } from "./entitlement-grant-measure.js";
 import {
+  EntitlementGrantScopeEntityType,
+  EntitlementGrantScopeEntityType$inboundSchema,
+} from "./entitlement-grant-scope-entity-type.js";
+import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
 } from "./entitlement-usage-reset-period.js";
@@ -63,6 +67,7 @@ export type EntitlementResponse = {
   grantDurationValue?: number | undefined;
   grantMeasure?: EntitlementGrantMeasure | undefined;
   grantQuota?: string | undefined;
+  grantScope?: EntitlementGrantScopeEntityType | undefined;
   id?: string | undefined;
   isEnabled?: boolean | undefined;
   isSoftLimit?: boolean | undefined;
@@ -110,6 +115,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
     grant_duration_value: types.optional(types.number()),
     grant_measure: types.optional(EntitlementGrantMeasure$inboundSchema),
     grant_quota: types.optional(types.string()),
+    grant_scope: types.optional(EntitlementGrantScopeEntityType$inboundSchema),
     id: types.optional(types.string()),
     is_enabled: types.optional(types.boolean()),
     is_soft_limit: types.optional(types.boolean()),
@@ -145,6 +151,7 @@ export const EntitlementResponse$inboundSchema: z.ZodMiniType<
       "grant_duration_value": "grantDurationValue",
       "grant_measure": "grantMeasure",
       "grant_quota": "grantQuota",
+      "grant_scope": "grantScope",
       "is_enabled": "isEnabled",
       "is_soft_limit": "isSoftLimit",
       "parent_entitlement_id": "parentEntitlementId",

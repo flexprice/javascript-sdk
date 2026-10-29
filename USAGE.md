@@ -7,7 +7,7 @@ const flexprice = new Flexprice({
 });
 
 async function run() {
-  const result = await flexprice.activity.listActivity({});
+  const result = await flexprice.accountingPeriods.queryAccountingPeriod({});
 
   console.log(result);
 }

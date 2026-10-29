@@ -113,6 +113,7 @@ async function $do(
       "sort": payload?.sort,
       "start_time": payload?.start_time,
       "status": payload?.status,
+      "updated_at_gte": payload?.updated_at_gte,
     }),
   );
 

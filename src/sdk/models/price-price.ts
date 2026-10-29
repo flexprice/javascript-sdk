@@ -143,6 +143,7 @@ export type PricePrice = {
    */
   priceUnitTiers?: Array<PricePriceTier> | undefined;
   priceUnitType?: PriceUnitType | undefined;
+  productId?: string | undefined;
   /**
    * Sequence is the monotonic stamp bumped on every state change that
    *
@@ -208,6 +209,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
       price_unit_id: types.optional(types.string()),
       price_unit_tiers: types.optional(z.array(PricePriceTier$inboundSchema)),
       price_unit_type: types.optional(PriceUnitType$inboundSchema),
+      product_id: types.optional(types.string()),
       sequence: types.optional(types.number()),
       start_date: types.optional(types.date()),
       status: types.optional(Status$inboundSchema),
@@ -250,6 +252,7 @@ export const PricePrice$inboundSchema: z.ZodMiniType<PricePrice, unknown> = z
         "price_unit_id": "priceUnitId",
         "price_unit_tiers": "priceUnitTiers",
         "price_unit_type": "priceUnitType",
+        "product_id": "productId",
         "start_date": "startDate",
         "tenant_id": "tenantId",
         "tier_mode": "tierMode",

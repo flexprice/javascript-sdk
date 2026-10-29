@@ -34,6 +34,11 @@ import {
   CreateCreditGrantRequest$outboundSchema,
 } from "./create-credit-grant-request.js";
 import {
+  CreateSubscriptionEntitlementGrantRequest,
+  CreateSubscriptionEntitlementGrantRequest$Outbound,
+  CreateSubscriptionEntitlementGrantRequest$outboundSchema,
+} from "./create-subscription-entitlement-grant-request.js";
+import {
   CreateSubscriptionLineItemRequest,
   CreateSubscriptionLineItemRequest$Outbound,
   CreateSubscriptionLineItemRequest$outboundSchema,
@@ -196,6 +201,12 @@ export type CreateSubscriptionRequest = {
    * Accepts coupon_code; optionally targets a line item via price_id.
    */
   subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
+  /**
+   * SubscriptionEntitlementGrants are dollar entitlement grants shared by every usage line, created with the subscription.
+   */
+  subscriptionEntitlementGrants?:
+    | Array<CreateSubscriptionEntitlementGrantRequest>
+    | undefined;
   subscriptionStatus?: SubscriptionStatus | undefined;
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
   timezone?: string | undefined;
@@ -249,6 +260,9 @@ export type CreateSubscriptionRequest$Outbound = {
   proration_behavior?: string | undefined;
   start_date?: string | undefined;
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
+  subscription_entitlement_grants?:
+    | Array<CreateSubscriptionEntitlementGrantRequest$Outbound>
+    | undefined;
   subscription_status?: string | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   timezone?: string | undefined;
@@ -311,6 +325,9 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     subscriptionCoupons: z.optional(
       z.array(SubscriptionCouponInput$outboundSchema),
     ),
+    subscriptionEntitlementGrants: z.optional(
+      z.array(CreateSubscriptionEntitlementGrantRequest$outboundSchema),
+    ),
     subscriptionStatus: z.optional(SubscriptionStatus$outboundSchema),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     timezone: z.optional(z.string()),
@@ -348,6 +365,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       prorationBehavior: "proration_behavior",
       startDate: "start_date",
       subscriptionCoupons: "subscription_coupons",
+      subscriptionEntitlementGrants: "subscription_entitlement_grants",
       subscriptionStatus: "subscription_status",
       taxRateOverrides: "tax_rate_overrides",
       trialPeriodDays: "trial_period_days",

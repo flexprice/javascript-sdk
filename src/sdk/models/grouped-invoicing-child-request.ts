@@ -19,6 +19,11 @@ import {
   CreateCreditGrantRequest$outboundSchema,
 } from "./create-credit-grant-request.js";
 import {
+  CreateSubscriptionEntitlementGrantRequest,
+  CreateSubscriptionEntitlementGrantRequest$Outbound,
+  CreateSubscriptionEntitlementGrantRequest$outboundSchema,
+} from "./create-subscription-entitlement-grant-request.js";
+import {
   CreateSubscriptionLineItemRequest,
   CreateSubscriptionLineItemRequest$Outbound,
   CreateSubscriptionLineItemRequest$outboundSchema,
@@ -92,6 +97,12 @@ export type GroupedInvoicingChildRequest = {
    * Accepts coupon_code; optionally targets a line item via price_id.
    */
   subscriptionCoupons?: Array<SubscriptionCouponInput> | undefined;
+  /**
+   * SubscriptionEntitlementGrants are dollar entitlement grants shared by every usage line, created with the subscription.
+   */
+  subscriptionEntitlementGrants?:
+    | Array<CreateSubscriptionEntitlementGrantRequest>
+    | undefined;
   taxRateOverrides?: Array<TaxRateOverride> | undefined;
   /**
    * TrialPeriodDays: nil = inherit from plan prices, 0 = no trial, >0 = override in days.
@@ -121,6 +132,9 @@ export type GroupedInvoicingChildRequest$Outbound = {
   phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
+  subscription_entitlement_grants?:
+    | Array<CreateSubscriptionEntitlementGrantRequest$Outbound>
+    | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   trial_period_days?: number | undefined;
 };
@@ -157,6 +171,9 @@ export const GroupedInvoicingChildRequest$outboundSchema: z.ZodMiniType<
     subscriptionCoupons: z.optional(
       z.array(SubscriptionCouponInput$outboundSchema),
     ),
+    subscriptionEntitlementGrants: z.optional(
+      z.array(CreateSubscriptionEntitlementGrantRequest$outboundSchema),
+    ),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     trialPeriodDays: z.optional(z.int()),
   }),
@@ -175,6 +192,7 @@ export const GroupedInvoicingChildRequest$outboundSchema: z.ZodMiniType<
       overrideLineItems: "override_line_items",
       planId: "plan_id",
       subscriptionCoupons: "subscription_coupons",
+      subscriptionEntitlementGrants: "subscription_entitlement_grants",
       taxRateOverrides: "tax_rate_overrides",
       trialPeriodDays: "trial_period_days",
     });
