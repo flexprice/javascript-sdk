@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.47-dev.20",
+  "version": "2.1.47-dev.21",
   "author": "FlexPrice",
   "engines": {
     "node": ">=18"
@@ -41,7 +41,6 @@
     "build": "tsgo",
     "prepublishOnly": "npm run build"
   },
-  "peerDependencies": {},
   "devDependencies": {
     "@typescript/native-preview": "7.0.0-dev.20260302.1",
     "oxlint": "^1.60.0",
@@ -49,5 +48,6 @@
   },
   "dependencies": {
     "zod": "^3.25.65 || ^4.0.0"
-  }
+  },
+  "flexpriceCommit": "3533a2ca14f596308629c607a4fe4792593cf788"
 }
