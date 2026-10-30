@@ -6,6 +6,7 @@ import { pricesCreatePrice } from "../funcs/prices-create-price.js";
 import { pricesCreatePricesBulk } from "../funcs/prices-create-prices-bulk.js";
 import { pricesDeletePrice } from "../funcs/prices-delete-price.js";
 import { pricesGetPriceByLookupKey } from "../funcs/prices-get-price-by-lookup-key.js";
+import { pricesGetPriceHistory } from "../funcs/prices-get-price-history.js";
 import { pricesGetPrice } from "../funcs/prices-get-price.js";
 import { pricesQueryPrice } from "../funcs/prices-query-price.js";
 import { pricesUpdatePrice } from "../funcs/prices-update-price.js";
@@ -133,6 +134,23 @@ export class Prices extends ClientSDK {
       this,
       id,
       body,
+      options,
+    ));
+  }
+
+  /**
+   * Get price history
+   *
+   * @remarks
+   * Use when you need every version of a plan price, oldest first. Pass the ID of any version; the same timeline is returned.
+   */
+  async getPriceHistory(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ListPricesResponse> {
+    return unwrapAsync(pricesGetPriceHistory(
+      this,
+      id,
       options,
     ));
   }
