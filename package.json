@@ -49,5 +49,5 @@
   "dependencies": {
     "zod": "^3.25.65 || ^4.0.0"
   },
-  "flexpriceCommit": "5dbdf99da429a337582df496e0cc26921f17d52e"
+  "flexpriceCommit": "236f55bf3ec1442e7dd671bc44aba7fcd6c6cf37"
 }
