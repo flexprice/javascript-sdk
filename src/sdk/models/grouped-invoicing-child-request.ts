@@ -44,6 +44,10 @@ import {
   OverrideLineItemRequest$outboundSchema,
 } from "./override-line-item-request.js";
 import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
+import {
   SubscriptionCouponInput,
   SubscriptionCouponInput$Outbound,
   SubscriptionCouponInput$outboundSchema,
@@ -90,6 +94,7 @@ export type GroupedInvoicingChildRequest = {
   overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
+  prorationBehavior?: ProrationBehavior | undefined;
   /**
    * SubscriptionCoupons is the preferred way to attach coupons at creation.
    *
@@ -131,6 +136,7 @@ export type GroupedInvoicingChildRequest$Outbound = {
   override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
   phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
+  proration_behavior?: string | undefined;
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   subscription_entitlement_grants?:
     | Array<CreateSubscriptionEntitlementGrantRequest$Outbound>
@@ -168,6 +174,7 @@ export const GroupedInvoicingChildRequest$outboundSchema: z.ZodMiniType<
     ),
     phases: z.optional(z.array(SubscriptionPhaseCreateRequest$outboundSchema)),
     planId: z.string(),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     subscriptionCoupons: z.optional(
       z.array(SubscriptionCouponInput$outboundSchema),
     ),
@@ -191,6 +198,7 @@ export const GroupedInvoicingChildRequest$outboundSchema: z.ZodMiniType<
       overrideEntitlements: "override_entitlements",
       overrideLineItems: "override_line_items",
       planId: "plan_id",
+      prorationBehavior: "proration_behavior",
       subscriptionCoupons: "subscription_coupons",
       subscriptionEntitlementGrants: "subscription_entitlement_grants",
       taxRateOverrides: "tax_rate_overrides",

@@ -5,6 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  ProrationBehavior,
+  ProrationBehavior$outboundSchema,
+} from "./proration-behavior.js";
+import {
   SubscriptionStatus,
   SubscriptionStatus$outboundSchema,
 } from "./subscription-status.js";
@@ -19,6 +23,7 @@ export type UpdateSubscriptionRequest = {
    * ParentSubscriptionID sets or clears the parent subscription. Omit to leave unchanged; send "" to clear.
    */
   parentSubscriptionId?: string | undefined;
+  prorationBehavior?: ProrationBehavior | undefined;
   status?: SubscriptionStatus | undefined;
 };
 
@@ -27,6 +32,7 @@ export type UpdateSubscriptionRequest$Outbound = {
   cancel_at?: string | undefined;
   cancel_at_period_end?: boolean | undefined;
   parent_subscription_id?: string | undefined;
+  proration_behavior?: string | undefined;
   status?: string | undefined;
 };
 
@@ -39,6 +45,7 @@ export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     cancelAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     cancelAtPeriodEnd: z.optional(z.boolean()),
     parentSubscriptionId: z.optional(z.string()),
+    prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     status: z.optional(SubscriptionStatus$outboundSchema),
   }),
   z.transform((v) => {
@@ -46,6 +53,7 @@ export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       cancelAt: "cancel_at",
       cancelAtPeriodEnd: "cancel_at_period_end",
       parentSubscriptionId: "parent_subscription_id",
+      prorationBehavior: "proration_behavior",
     });
   }),
 );
