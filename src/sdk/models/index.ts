@@ -863,6 +863,8 @@ export * from "./webhook-dto-invoice-sync-webhook-payload.js";
 export * from "./webhook-dto-invoice-webhook-payload.js";
 export * from "./webhook-dto-invoice.js";
 export * from "./webhook-dto-meter.js";
+export * from "./webhook-dto-payment-attempt-webhook-payload.js";
+export * from "./webhook-dto-payment-attempt.js";
 export * from "./webhook-dto-payment-webhook-payload.js";
 export * from "./webhook-dto-payment.js";
 export * from "./webhook-dto-plan.js";
