@@ -19,6 +19,14 @@ export const ServerList = [
    * India Region
    */
   "https://api.cloud.flexprice.io/v1",
+  /**
+   * Canada Region
+   */
+  "https://canada.api.flexprice.io/v1",
+  /**
+   * EU Region
+   */
+  "https://eu.api.flexprice.io/v1",
 ] as const;
 
 export type SDKOptions = {
