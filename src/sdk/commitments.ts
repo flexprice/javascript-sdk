@@ -3,10 +3,15 @@
  */
 
 import { commitmentsCreateCommitment } from "../funcs/commitments-create-commitment.js";
+import { commitmentsGetCommitmentBillingTerms } from "../funcs/commitments-get-commitment-billing-terms.js";
 import { commitmentsGetCommitment } from "../funcs/commitments-get-commitment.js";
+import { commitmentsListCommitmentInstalments } from "../funcs/commitments-list-commitment-instalments.js";
+import { commitmentsPreviewCommitmentBillingTerms } from "../funcs/commitments-preview-commitment-billing-terms.js";
 import { commitmentsPreviewCommitment } from "../funcs/commitments-preview-commitment.js";
 import { commitmentsQueryCommitment } from "../funcs/commitments-query-commitment.js";
+import { commitmentsReplaceCommitmentBillingTerms } from "../funcs/commitments-replace-commitment-billing-terms.js";
 import { commitmentsTerminateCommitment } from "../funcs/commitments-terminate-commitment.js";
+import { commitmentsTriggerCommitmentInstalment } from "../funcs/commitments-trigger-commitment-instalment.js";
 import { commitmentsUpdateCommitment } from "../funcs/commitments-update-commitment.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -101,10 +106,105 @@ export class Commitments extends ClientSDK {
   }
 
   /**
+   * Get billing terms
+   *
+   * @remarks
+   * Returns the commitment's current billing terms with its scheduled and invoiced instalments in billing order. Invoiced instalments may come from terms an edit replaced. Cancelled instalments are listed by the instalments endpoint.
+   */
+  async getCommitmentBillingTerms(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.BillingTermsResponse> {
+    return unwrapAsync(commitmentsGetCommitmentBillingTerms(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Edit billing terms
+   *
+   * @remarks
+   * Replaces the whole set of billing terms of an active commitment. Its scheduled instalments are cancelled and the new terms generate instalments for what the invoiced ones leave of the commitment total; invoiced instalments and their invoices are kept. A term without bill_on or start_date starts at the billing period holding now, or at the commitment start once its term has ended. Returns the new terms with the scheduled and invoiced instalments in billing order.
+   */
+  async replaceCommitmentBillingTerms(
+    id: string,
+    body: models.ReplaceBillingTermsRequest,
+    options?: RequestOptions,
+  ): Promise<models.BillingTermsResponse> {
+    return unwrapAsync(commitmentsReplaceCommitmentBillingTerms(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * Preview billing terms edit
+   *
+   * @remarks
+   * Returns what editing the billing terms would produce, without saving anything: the new terms with the invoiced and new instalments in billing order.
+   */
+  async previewCommitmentBillingTerms(
+    id: string,
+    body: models.ReplaceBillingTermsRequest,
+    options?: RequestOptions,
+  ): Promise<models.BillingTermsResponse> {
+    return unwrapAsync(commitmentsPreviewCommitmentBillingTerms(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * List instalments
+   *
+   * @remarks
+   * Lists the instalments of the commitment in billing order. Without a status filter every instalment is listed, cancelled ones included.
+   */
+  async listCommitmentInstalments(
+    id: string,
+    status?: Array<string> | undefined,
+    options?: RequestOptions,
+  ): Promise<models.ListInstalmentsResponse> {
+    return unwrapAsync(commitmentsListCommitmentInstalments(
+      this,
+      id,
+      status,
+      options,
+    ));
+  }
+
+  /**
+   * Trigger instalment
+   *
+   * @remarks
+   * Bills a manual instalment of an active commitment on bill_on, now by default, which must fall within the commitment term. The instalment goes on the first subscription invoice at or after that date, or on its own invoice once due when the commitment's instalment_invoicing is separate_invoice. Either way it waits while the subscription is trialing or paused. Until it is triggered, a manual instalment waits at the end of the term, and bill_on can only move earlier; edit the billing terms to bill it later.
+   */
+  async triggerCommitmentInstalment(
+    id: string,
+    instalmentId: string,
+    body?: models.TriggerInstalmentRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<models.BillingtermInstalment> {
+    return unwrapAsync(commitmentsTriggerCommitmentInstalment(
+      this,
+      id,
+      instalmentId,
+      body,
+      options,
+    ));
+  }
+
+  /**
    * Terminate commitment
    *
    * @remarks
-   * Ends a commitment early, effective at the given time or now.
+   * Ends a commitment immediately. effective_at defaults to now and cannot be in the future. Under billing terms, its scheduled instalments are cancelled and any amount it earned beyond what is already invoiced is billed as a settlement. The settlement and a fixed cancellation fee, when given, are billed together on one one-off invoice.
    */
   async terminateCommitment(
     id: string,

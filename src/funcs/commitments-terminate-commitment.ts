@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Terminate commitment
  *
  * @remarks
- * Ends a commitment early, effective at the given time or now.
+ * Ends a commitment immediately. effective_at defaults to now and cannot be in the future. Under billing terms, its scheduled instalments are cancelled and any amount it earned beyond what is already invoiced is billed as a settlement. The settlement and a fixed cancellation fee, when given, are billed together on one one-off invoice.
  */
 export function commitmentsTerminateCommitment(
   client: FlexpriceCore,

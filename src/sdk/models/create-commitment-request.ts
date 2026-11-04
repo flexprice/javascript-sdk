@@ -10,6 +10,11 @@ import {
   ActiveWindow$outboundSchema,
 } from "./active-window.js";
 import {
+  BillingTermInput,
+  BillingTermInput$Outbound,
+  BillingTermInput$outboundSchema,
+} from "./billing-term-input.js";
+import {
   CommitmentCollectionMethod,
   CommitmentCollectionMethod$outboundSchema,
 } from "./commitment-collection-method.js";
@@ -31,9 +36,17 @@ import {
   CommitmentType,
   CommitmentType$outboundSchema,
 } from "./commitment-type.js";
+import {
+  InstalmentDelivery,
+  InstalmentDelivery$outboundSchema,
+} from "./instalment-delivery.js";
 
 export type CreateCommitmentRequest = {
   activeWindows?: Array<ActiveWindow> | undefined;
+  /**
+   * BillingTerms apply only to collection_method billing_terms, which requires at least one.
+   */
+  billingTerms?: Array<BillingTermInput> | undefined;
   /**
    * default false
    */
@@ -45,6 +58,7 @@ export type CreateCommitmentRequest = {
    */
   endDate?: Date | undefined;
   idempotencyKey?: string | undefined;
+  instalmentInvoicing?: InstalmentDelivery | undefined;
   invoiceDescription?: string | undefined;
   invoiceLabel?: string | undefined;
   measurement: CommitmentMeasurement;
@@ -53,6 +67,9 @@ export type CreateCommitmentRequest = {
   overagePrice?: CommitmentPriceInput | undefined;
   priority?: number | undefined;
   scope: CommitmentScopeInput;
+  /**
+   * StartDate and EndDate must be whole seconds.
+   */
   startDate: Date;
   /**
    * SubscriptionID is required on POST /commitments and set server-side on inline commitments.
@@ -66,11 +83,13 @@ export type CreateCommitmentRequest = {
 /** @internal */
 export type CreateCommitmentRequest$Outbound = {
   active_windows?: Array<ActiveWindow$Outbound> | undefined;
+  billing_terms?: Array<BillingTermInput$Outbound> | undefined;
   binding?: boolean | undefined;
   collection_method?: string | undefined;
   committed_price?: CommitmentPriceInput$Outbound | undefined;
   end_date?: string | undefined;
   idempotency_key?: string | undefined;
+  instalment_invoicing?: string | undefined;
   invoice_description?: string | undefined;
   invoice_label?: string | undefined;
   measurement: string;
@@ -93,11 +112,13 @@ export const CreateCommitmentRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     activeWindows: z.optional(z.array(ActiveWindow$outboundSchema)),
+    billingTerms: z.optional(z.array(BillingTermInput$outboundSchema)),
     binding: z.optional(z.boolean()),
     collectionMethod: z.optional(CommitmentCollectionMethod$outboundSchema),
     committedPrice: z.optional(CommitmentPriceInput$outboundSchema),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     idempotencyKey: z.optional(z.string()),
+    instalmentInvoicing: z.optional(InstalmentDelivery$outboundSchema),
     invoiceDescription: z.optional(z.string()),
     invoiceLabel: z.optional(z.string()),
     measurement: CommitmentMeasurement$outboundSchema,
@@ -115,10 +136,12 @@ export const CreateCommitmentRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       activeWindows: "active_windows",
+      billingTerms: "billing_terms",
       collectionMethod: "collection_method",
       committedPrice: "committed_price",
       endDate: "end_date",
       idempotencyKey: "idempotency_key",
+      instalmentInvoicing: "instalment_invoicing",
       invoiceDescription: "invoice_description",
       invoiceLabel: "invoice_label",
       overagePrice: "overage_price",

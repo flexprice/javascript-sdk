@@ -4,15 +4,23 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  CancellationFeeInput,
+  CancellationFeeInput$Outbound,
+  CancellationFeeInput$outboundSchema,
+} from "./cancellation-fee-input.js";
 
 export type TerminateCommitmentRequest = {
-  cancellationFee?: string | undefined;
+  cancellationFee?: CancellationFeeInput | undefined;
+  /**
+   * EffectiveAt defaults to now; a given one must be a whole second.
+   */
   effectiveAt?: Date | undefined;
 };
 
 /** @internal */
 export type TerminateCommitmentRequest$Outbound = {
-  cancellation_fee?: string | undefined;
+  cancellation_fee?: CancellationFeeInput$Outbound | undefined;
   effective_at?: string | undefined;
 };
 
@@ -22,7 +30,7 @@ export const TerminateCommitmentRequest$outboundSchema: z.ZodMiniType<
   TerminateCommitmentRequest
 > = z.pipe(
   z.object({
-    cancellationFee: z.optional(z.string()),
+    cancellationFee: z.optional(CancellationFeeInput$outboundSchema),
     effectiveAt: z.optional(
       z.pipe(z.date(), z.transform(v => v.toISOString())),
     ),

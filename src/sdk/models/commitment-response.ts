@@ -9,6 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { ActiveWindow, ActiveWindow$inboundSchema } from "./active-window.js";
 import {
+  BillingtermInstalment,
+  BillingtermInstalment$inboundSchema,
+} from "./billingterm-instalment.js";
+import {
+  BillingtermTerm,
+  BillingtermTerm$inboundSchema,
+} from "./billingterm-term.js";
+import {
   CommitmentCollectionMethod,
   CommitmentCollectionMethod$inboundSchema,
 } from "./commitment-collection-method.js";
@@ -32,11 +40,19 @@ import {
   CommitmentType,
   CommitmentType$inboundSchema,
 } from "./commitment-type.js";
+import {
+  InstalmentDelivery,
+  InstalmentDelivery$inboundSchema,
+} from "./instalment-delivery.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import { Status, Status$inboundSchema } from "./status.js";
 
 export type CommitmentResponse = {
   activeWindows?: Array<ActiveWindow> | undefined;
+  /**
+   * BillingTerms and Instalments are set by create and preview.
+   */
+  billingTerms?: Array<BillingtermTerm> | undefined;
   binding?: boolean | undefined;
   collectionMethod?: CommitmentCollectionMethod | undefined;
   commitmentStatus?: CommitmentStatus | undefined;
@@ -53,7 +69,8 @@ export type CommitmentResponse = {
   environmentId?: string | undefined;
   id?: string | undefined;
   idempotencyKey?: string | undefined;
-  instalmentInvoicing?: string | undefined;
+  instalmentInvoicing?: InstalmentDelivery | undefined;
+  instalments?: Array<BillingtermInstalment> | undefined;
   invoiceDescription?: string | undefined;
   invoiceLabel?: string | undefined;
   measurement?: CommitmentMeasurement | undefined;
@@ -85,6 +102,7 @@ export const CommitmentResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     active_windows: types.optional(z.array(ActiveWindow$inboundSchema)),
+    billing_terms: types.optional(z.array(BillingtermTerm$inboundSchema)),
     binding: types.optional(types.boolean()),
     collection_method: types.optional(CommitmentCollectionMethod$inboundSchema),
     commitment_status: types.optional(CommitmentStatus$inboundSchema),
@@ -98,7 +116,8 @@ export const CommitmentResponse$inboundSchema: z.ZodMiniType<
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
-    instalment_invoicing: types.optional(types.string()),
+    instalment_invoicing: types.optional(InstalmentDelivery$inboundSchema),
+    instalments: types.optional(z.array(BillingtermInstalment$inboundSchema)),
     invoice_description: types.optional(types.string()),
     invoice_label: types.optional(types.string()),
     measurement: types.optional(CommitmentMeasurement$inboundSchema),
@@ -127,6 +146,7 @@ export const CommitmentResponse$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "active_windows": "activeWindows",
+      "billing_terms": "billingTerms",
       "collection_method": "collectionMethod",
       "commitment_status": "commitmentStatus",
       "commitment_value": "commitmentValue",
