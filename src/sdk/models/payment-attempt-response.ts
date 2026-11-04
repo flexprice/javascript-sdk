@@ -14,6 +14,7 @@ export type PaymentAttemptResponse = {
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   errorMessage?: string | undefined;
+  gatewayAttemptId?: string | undefined;
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
   paymentId?: string | undefined;
@@ -32,6 +33,7 @@ export const PaymentAttemptResponse$inboundSchema: z.ZodMiniType<
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     error_message: types.optional(types.string()),
+    gateway_attempt_id: types.optional(types.string()),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
     payment_id: types.optional(types.string()),
@@ -45,6 +47,7 @@ export const PaymentAttemptResponse$inboundSchema: z.ZodMiniType<
       "created_at": "createdAt",
       "created_by": "createdBy",
       "error_message": "errorMessage",
+      "gateway_attempt_id": "gatewayAttemptId",
       "payment_id": "paymentId",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",

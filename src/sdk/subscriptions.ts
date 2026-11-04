@@ -14,6 +14,7 @@ import { subscriptionsExecuteSubscriptionModify } from "../funcs/subscriptions-e
 import { subscriptionsExecuteSubscriptionPlanChangeV2 } from "../funcs/subscriptions-execute-subscription-plan-change-v2.js";
 import { subscriptionsGetSubscriptionAddonAssociations } from "../funcs/subscriptions-get-subscription-addon-associations.js";
 import { subscriptionsGetSubscriptionEntitlements } from "../funcs/subscriptions-get-subscription-entitlements.js";
+import { subscriptionsGetSubscriptionLineItemHistory } from "../funcs/subscriptions-get-subscription-line-item-history.js";
 import { subscriptionsGetSubscriptionSchedule } from "../funcs/subscriptions-get-subscription-schedule.js";
 import { subscriptionsGetSubscriptionUpcomingGrants } from "../funcs/subscriptions-get-subscription-upcoming-grants.js";
 import { subscriptionsGetSubscriptionUsage } from "../funcs/subscriptions-get-subscription-usage.js";
@@ -144,6 +145,23 @@ export class Subscriptions extends ClientSDK {
       this,
       id,
       body,
+      options,
+    ));
+  }
+
+  /**
+   * Get subscription line item history
+   *
+   * @remarks
+   * Use when you need every version of a subscription line item, oldest first. Pass the ID of any version; the same timeline is returned. Versions cancelled before they started are left out unless requested directly.
+   */
+  async getSubscriptionLineItemHistory(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ListSubscriptionLineItemsResponse> {
+    return unwrapAsync(subscriptionsGetSubscriptionLineItemHistory(
+      this,
+      id,
       options,
     ));
   }

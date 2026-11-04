@@ -31,6 +31,7 @@ import { webhookEventsPostWebhookEventsInvoiceUpdateFinalized } from "../funcs/w
 import { webhookEventsPostWebhookEventsInvoiceUpdatePayment } from "../funcs/webhook-events-post-webhook-events-invoice-update-payment.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdateVoided } from "../funcs/webhook-events-post-webhook-events-invoice-update-voided.js";
 import { webhookEventsPostWebhookEventsInvoiceUpdate } from "../funcs/webhook-events-post-webhook-events-invoice-update.js";
+import { webhookEventsPostWebhookEventsPaymentAttemptFailed } from "../funcs/webhook-events-post-webhook-events-payment-attempt-failed.js";
 import { webhookEventsPostWebhookEventsPaymentCreated } from "../funcs/webhook-events-post-webhook-events-payment-created.js";
 import { webhookEventsPostWebhookEventsPaymentFailed } from "../funcs/webhook-events-post-webhook-events-payment-failed.js";
 import { webhookEventsPostWebhookEventsPaymentPending } from "../funcs/webhook-events-post-webhook-events-payment-pending.js";
@@ -504,6 +505,21 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoInvoiceWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsInvoiceUpdateVoided(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * payment.attempt.failed
+   *
+   * @remarks
+   * Fired when one charge attempt is declined and the payment stays open for retry. Doc-only for parsing.
+   */
+  async postWebhookEventsPaymentAttemptFailed(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoPaymentAttemptWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsPaymentAttemptFailed(
       this,
       options,
     ));
