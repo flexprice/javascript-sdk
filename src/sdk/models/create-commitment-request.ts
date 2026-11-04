@@ -68,7 +68,7 @@ export type CreateCommitmentRequest = {
   priority?: number | undefined;
   scope: CommitmentScopeInput;
   /**
-   * StartDate and EndDate must be whole seconds.
+   * StartDate and EndDate within a second after a billing period edge are taken as that edge.
    */
   startDate: Date;
   /**

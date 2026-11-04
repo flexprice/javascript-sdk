@@ -28,6 +28,10 @@ import {
   InstalmentBillTrigger$inboundSchema,
 } from "./instalment-bill-trigger.js";
 import {
+  InstalmentDelivery,
+  InstalmentDelivery$inboundSchema,
+} from "./instalment-delivery.js";
+import {
   InvoiceCadence,
   InvoiceCadence$inboundSchema,
 } from "./invoice-cadence.js";
@@ -42,12 +46,13 @@ export type BillingtermTerm = {
   endDate?: Date | undefined;
   environmentId?: string | undefined;
   id?: string | undefined;
+  instalmentInvoicing?: InstalmentDelivery | undefined;
   invoiceCadence?: InvoiceCadence | undefined;
   /**
    * InvoiceLabel names its instalments on the invoice, after the owner's label. It may use {n} and {of}, which number
    *
    * @remarks
-   * all of the owner's instalments together.
+   * the owner's instalments whose labels use them.
    */
   invoiceLabel?: string | undefined;
   kind?: BillingTermKind | undefined;
@@ -87,6 +92,7 @@ export const BillingtermTerm$inboundSchema: z.ZodMiniType<
     end_date: types.optional(types.date()),
     environment_id: types.optional(types.string()),
     id: types.optional(types.string()),
+    instalment_invoicing: types.optional(InstalmentDelivery$inboundSchema),
     invoice_cadence: types.optional(InvoiceCadence$inboundSchema),
     invoice_label: types.optional(types.string()),
     kind: types.optional(BillingTermKind$inboundSchema),
@@ -111,6 +117,7 @@ export const BillingtermTerm$inboundSchema: z.ZodMiniType<
       "created_by": "createdBy",
       "end_date": "endDate",
       "environment_id": "environmentId",
+      "instalment_invoicing": "instalmentInvoicing",
       "invoice_cadence": "invoiceCadence",
       "invoice_label": "invoiceLabel",
       "owner_id": "ownerId",

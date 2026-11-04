@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * billing_terms.created
  *
  * @remarks
- * Fired when billing terms are saved with a new commitment. Doc-only for parsing.
+ * Fired when billing terms are saved against an entity (like a commitment). Doc-only for parsing.
  */
 export function webhookEventsPostWebhookEventsBillingTermsCreated(
   client: FlexpriceCore,

@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * billing_instalment.created
  *
  * @remarks
- * Fired when a billing instalment is added to a commitment. Doc-only for parsing.
+ * Fired when a billing instalment is scheduled for an entity (like a commitment). Doc-only for parsing.
  */
 export function webhookEventsPostWebhookEventsBillingInstalmentCreated(
   client: FlexpriceCore,

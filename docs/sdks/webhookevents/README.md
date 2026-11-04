@@ -147,7 +147,7 @@ run();
 
 ## postWebhookEventsBillingInstalmentCreated
 
-Fired when a billing instalment is added to a commitment. Doc-only for parsing.
+Fired when a billing instalment is scheduled for an entity (like a commitment). Doc-only for parsing.
 
 ### Example Usage
 
@@ -351,7 +351,7 @@ run();
 
 ## postWebhookEventsBillingTermsCreated
 
-Fired when billing terms are saved with a new commitment. Doc-only for parsing.
+Fired when billing terms are saved against an entity (like a commitment). Doc-only for parsing.
 
 ### Example Usage
 
@@ -419,7 +419,7 @@ run();
 
 ## postWebhookEventsBillingTermsUpdated
 
-Fired when an edit replaces a commitment's billing terms. Doc-only for parsing.
+Fired when an entity's (like a commitment's) billing terms are replaced. Doc-only for parsing.
 
 ### Example Usage
 

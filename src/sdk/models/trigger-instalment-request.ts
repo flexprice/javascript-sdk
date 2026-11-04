@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TriggerInstalmentRequest = {
   /**
-   * BillOn must be a whole second.
+   * BillOn within a second after a billing period edge is taken as that edge.
    */
   billOn?: string | undefined;
 };

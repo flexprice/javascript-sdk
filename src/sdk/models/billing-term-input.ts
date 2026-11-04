@@ -21,26 +21,31 @@ import {
   InstalmentBillTrigger$outboundSchema,
 } from "./instalment-bill-trigger.js";
 import {
+  InstalmentDelivery,
+  InstalmentDelivery$outboundSchema,
+} from "./instalment-delivery.js";
+import {
   InvoiceCadence,
   InvoiceCadence$outboundSchema,
 } from "./invoice-cadence.js";
 
 export type BillingTermInput = {
   /**
-   * BillOn is a whole second, the commitment start by default. On an edit it defaults to the start of the billing
+   * BillOn defaults to the commitment start, or on an edit to the start of the billing period holding now (the
    *
    * @remarks
-   * period holding now, or to the commitment start once the term has ended.
+   * commitment start once its term has ended). A manual term omits it and waits at the commitment end.
    */
   billOn?: string | undefined;
   billTrigger?: InstalmentBillTrigger | undefined;
   endDate?: Date | undefined;
+  instalmentInvoicing?: InstalmentDelivery | undefined;
   invoiceCadence?: InvoiceCadence | undefined;
   /**
-   * InvoiceLabel names the term's instalments on the invoice, "Instalment {n} of {of}" by default. {n} and {of} are
+   * InvoiceLabel names the term's instalments, "Instalment {n} of {of}" by default. {n} and {of} count only the
    *
    * @remarks
-   * filled with each instalment's place among all of the commitment's instalments and their count.
+   * commitment's instalments whose labels use them.
    */
   invoiceLabel?: string | undefined;
   kind: BillingTermKind;
@@ -48,7 +53,10 @@ export type BillingTermInput = {
   periodCount?: number | undefined;
   split?: BillingTermSplit | undefined;
   /**
-   * StartDate defaults like BillOn; EndDate defaults to the commitment end. Both are whole seconds.
+   * StartDate and EndDate are edges of the periods the term steps on: billing periods, or anniversary ones when it is
+   *
+   * @remarks
+   * invoiced separately; by default, the period holding the commitment start (now, on an edit) to the commitment end.
    */
   startDate?: Date | undefined;
   value?: string | undefined;
@@ -63,6 +71,7 @@ export type BillingTermInput$Outbound = {
   bill_on?: string | undefined;
   bill_trigger?: string | undefined;
   end_date?: string | undefined;
+  instalment_invoicing?: string | undefined;
   invoice_cadence?: string | undefined;
   invoice_label?: string | undefined;
   kind: string;
@@ -83,6 +92,7 @@ export const BillingTermInput$outboundSchema: z.ZodMiniType<
     billOn: z.optional(z.string()),
     billTrigger: z.optional(InstalmentBillTrigger$outboundSchema),
     endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    instalmentInvoicing: z.optional(InstalmentDelivery$outboundSchema),
     invoiceCadence: z.optional(InvoiceCadence$outboundSchema),
     invoiceLabel: z.optional(z.string()),
     kind: BillingTermKind$outboundSchema,
@@ -98,6 +108,7 @@ export const BillingTermInput$outboundSchema: z.ZodMiniType<
       billOn: "bill_on",
       billTrigger: "bill_trigger",
       endDate: "end_date",
+      instalmentInvoicing: "instalment_invoicing",
       invoiceCadence: "invoice_cadence",
       invoiceLabel: "invoice_label",
       periodCount: "period_count",

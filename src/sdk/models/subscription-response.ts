@@ -25,6 +25,10 @@ import {
   CheckoutSessionResponse$inboundSchema,
 } from "./checkout-session-response.js";
 import {
+  CommitmentResponse,
+  CommitmentResponse$inboundSchema,
+} from "./commitment-response.js";
+import {
   CouponAssociationResponse,
   CouponAssociationResponse$inboundSchema,
 } from "./coupon-association-response.js";
@@ -127,6 +131,10 @@ export type SubscriptionResponse = {
    */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Commitments are the commitments created with the subscription; set on create only.
+   */
+  commitments?: Array<CommitmentResponse> | undefined;
   /**
    * CouponAssociations are the coupon associations for this subscription
    */
@@ -281,6 +289,7 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     collection_method: types.optional(types.string()),
     commitment_amount: types.optional(types.string()),
     commitment_duration: types.optional(BillingPeriod$inboundSchema),
+    commitments: types.optional(z.array(CommitmentResponse$inboundSchema)),
     coupon_associations: types.optional(
       z.array(CouponAssociationResponse$inboundSchema),
     ),

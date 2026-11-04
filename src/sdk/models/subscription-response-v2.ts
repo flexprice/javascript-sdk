@@ -17,6 +17,10 @@ import {
   BillingPeriod$inboundSchema,
 } from "./billing-period.js";
 import {
+  CommitmentResponse,
+  CommitmentResponse$inboundSchema,
+} from "./commitment-response.js";
+import {
   CouponAssociationResponse,
   CouponAssociationResponse$inboundSchema,
 } from "./coupon-association-response.js";
@@ -114,6 +118,10 @@ export type SubscriptionResponseV2 = {
    */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Commitments are included when "commitments" is in expand parameter
+   */
+  commitments?: Array<CommitmentResponse> | undefined;
   /**
    * CouponAssociations are included when "coupon_associations" is in expand parameter
    */
@@ -275,6 +283,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     collection_method: types.optional(types.string()),
     commitment_amount: types.optional(types.string()),
     commitment_duration: types.optional(BillingPeriod$inboundSchema),
+    commitments: types.optional(z.array(CommitmentResponse$inboundSchema)),
     coupon_associations: types.optional(
       z.array(CouponAssociationResponse$inboundSchema),
     ),

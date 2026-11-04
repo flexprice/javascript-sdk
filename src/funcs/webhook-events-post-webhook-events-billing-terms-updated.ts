@@ -27,7 +27,7 @@ import { Result } from "../types/fp.js";
  * billing_terms.updated
  *
  * @remarks
- * Fired when an edit replaces a commitment's billing terms. Doc-only for parsing.
+ * Fired when an entity's (like a commitment's) billing terms are replaced. Doc-only for parsing.
  */
 export function webhookEventsPostWebhookEventsBillingTermsUpdated(
   client: FlexpriceCore,

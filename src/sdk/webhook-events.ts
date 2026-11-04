@@ -98,7 +98,7 @@ export class WebhookEvents extends ClientSDK {
    * billing_instalment.created
    *
    * @remarks
-   * Fired when a billing instalment is added to a commitment. Doc-only for parsing.
+   * Fired when a billing instalment is scheduled for an entity (like a commitment). Doc-only for parsing.
    */
   async postWebhookEventsBillingInstalmentCreated(
     options?: RequestOptions,
@@ -143,7 +143,7 @@ export class WebhookEvents extends ClientSDK {
    * billing_terms.created
    *
    * @remarks
-   * Fired when billing terms are saved with a new commitment. Doc-only for parsing.
+   * Fired when billing terms are saved against an entity (like a commitment). Doc-only for parsing.
    */
   async postWebhookEventsBillingTermsCreated(
     options?: RequestOptions,
@@ -158,7 +158,7 @@ export class WebhookEvents extends ClientSDK {
    * billing_terms.updated
    *
    * @remarks
-   * Fired when an edit replaces a commitment's billing terms. Doc-only for parsing.
+   * Fired when an entity's (like a commitment's) billing terms are replaced. Doc-only for parsing.
    */
   async postWebhookEventsBillingTermsUpdated(
     options?: RequestOptions,

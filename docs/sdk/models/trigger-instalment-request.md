@@ -10,6 +10,6 @@ let value: TriggerInstalmentRequest = {};
 
 ## Fields
 
-| Field                          | Type                           | Required                       | Description                    |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `billOn`                       | *string*                       | :heavy_minus_sign:             | BillOn must be a whole second. |
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `billOn`                                                                  | *string*                                                                  | :heavy_minus_sign:                                                        | BillOn within a second after a billing period edge is taken as that edge. |

@@ -13,7 +13,7 @@ import {
 export type TerminateCommitmentRequest = {
   cancellationFee?: CancellationFeeInput | undefined;
   /**
-   * EffectiveAt defaults to now; a given one must be a whole second.
+   * EffectiveAt defaults to now; within a second after a billing period edge it is taken as that edge.
    */
   effectiveAt?: Date | undefined;
 };
