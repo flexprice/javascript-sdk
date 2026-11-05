@@ -17,6 +17,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type WebhookDtoInvoiceLineItem = {
   adjustedEntitlementQuantity?: string | undefined;
   amount?: string | undefined;
+  billingInstalmentId?: string | undefined;
   commitmentInfo?: CommitmentInfo | undefined;
   currency?: string | undefined;
   displayName?: string | undefined;
@@ -49,6 +50,7 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
   z.object({
     adjusted_entitlement_quantity: types.optional(types.string()),
     amount: types.optional(types.string()),
+    billing_instalment_id: types.optional(types.string()),
     commitment_info: types.optional(CommitmentInfo$inboundSchema),
     currency: types.optional(types.string()),
     display_name: types.optional(types.string()),
@@ -75,6 +77,7 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "adjusted_entitlement_quantity": "adjustedEntitlementQuantity",
+      "billing_instalment_id": "billingInstalmentId",
       "commitment_info": "commitmentInfo",
       "display_name": "displayName",
       "entity_id": "entityId",

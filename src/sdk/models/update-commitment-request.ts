@@ -6,6 +6,10 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateCommitmentRequest = {
+  /**
+   * EndDate can't be changed yet; terminate the commitment to end it.
+   */
+  endDate?: Date | undefined;
   invoiceDescription?: string | undefined;
   invoiceLabel?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -14,6 +18,7 @@ export type UpdateCommitmentRequest = {
 
 /** @internal */
 export type UpdateCommitmentRequest$Outbound = {
+  end_date?: string | undefined;
   invoice_description?: string | undefined;
   invoice_label?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -26,6 +31,7 @@ export const UpdateCommitmentRequest$outboundSchema: z.ZodMiniType<
   UpdateCommitmentRequest
 > = z.pipe(
   z.object({
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     invoiceDescription: z.optional(z.string()),
     invoiceLabel: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
@@ -33,6 +39,7 @@ export const UpdateCommitmentRequest$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      endDate: "end_date",
       invoiceDescription: "invoice_description",
       invoiceLabel: "invoice_label",
     });

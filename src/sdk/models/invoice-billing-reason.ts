@@ -17,6 +17,8 @@ export const InvoiceBillingReason = {
   WalletAutoTopup: "WALLET_AUTO_TOPUP",
   SubscriptionPaused: "SUBSCRIPTION_PAUSED",
   SubscriptionResume: "SUBSCRIPTION_RESUME",
+  BillingTerms: "BILLING_TERMS",
+  CommitmentTermination: "COMMITMENT_TERMINATION",
 } as const;
 export type InvoiceBillingReason = ClosedEnum<typeof InvoiceBillingReason>;
 

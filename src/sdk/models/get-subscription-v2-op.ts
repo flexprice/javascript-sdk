@@ -10,7 +10,7 @@ export type GetSubscriptionV2Request = {
    */
   id: string;
   /**
-   * Comma-separated list of fields to expand (e.g., 'subscription_line_items,prices,plan')
+   * Comma-separated list of fields to expand (e.g., 'subscription_line_items,prices,plan,commitments')
    */
   expand?: string | undefined;
 };
