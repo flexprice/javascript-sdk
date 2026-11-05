@@ -204,7 +204,7 @@ export class Commitments extends ClientSDK {
    * Terminate commitment
    *
    * @remarks
-   * Ends a commitment immediately. effective_at defaults to now and cannot be in the future. Under billing terms, its scheduled instalments are cancelled and any amount it earned beyond what is already invoiced is billed as a settlement. The settlement and a fixed cancellation fee, when given, are billed together on one one-off invoice.
+   * Ends a commitment immediately. effective_at defaults to now and cannot be in the future. Under billing terms, its scheduled instalments are cancelled, and those already due by effective_at are billed together as one settlement; later instalments are not billed and nothing is refunded. The settlement and a fixed cancellation fee, when given, are billed together on one one-off invoice.
    */
   async terminateCommitment(
     id: string,
