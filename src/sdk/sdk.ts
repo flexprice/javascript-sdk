@@ -9,6 +9,7 @@ import { Addons } from "./addons.js";
 import { AlertSettings } from "./alert-settings.js";
 import { Alerts } from "./alerts.js";
 import { Analytics } from "./analytics.js";
+import { BillingEntities } from "./billing-entities.js";
 import { Checkout } from "./checkout.js";
 import { Commitments } from "./commitments.js";
 import { Contracts } from "./contracts.js";
@@ -90,6 +91,11 @@ export class Flexprice extends ClientSDK {
   private _analytics?: Analytics;
   get analytics(): Analytics {
     return (this._analytics ??= new Analytics(this._options));
+  }
+
+  private _billingEntities?: BillingEntities;
+  get billingEntities(): BillingEntities {
+    return (this._billingEntities ??= new BillingEntities(this._options));
   }
 
   private _checkout?: Checkout;

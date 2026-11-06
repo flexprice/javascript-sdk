@@ -5,7 +5,7 @@
 ```typescript
 import { TaxRateEntityType } from "@flexprice/sdk/sdk/models";
 
-let value: TaxRateEntityType = "subscription";
+let value: TaxRateEntityType = "invoice";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: TaxRateEntityType = "subscription";
 ## Values
 
 ```typescript
-"customer" | "subscription" | "invoice" | "tenant" | "credit_note" | Unrecognized<string>
+"customer" | "subscription" | "invoice" | "tenant" | "credit_note" | "billing_entity" | Unrecognized<string>
 ```

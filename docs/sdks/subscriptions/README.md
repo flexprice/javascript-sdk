@@ -1280,7 +1280,7 @@ run();
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorsErrorResponse | 400                        | application/json           |
+| models.ErrorsErrorResponse | 400, 409                   | application/json           |
 | models.ErrorsErrorResponse | 500                        | application/json           |
 | models.SDKError            | 4XX, 5XX                   | \*/\*                      |
 

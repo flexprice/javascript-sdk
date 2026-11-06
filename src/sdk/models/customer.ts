@@ -45,6 +45,10 @@ export type Customer = {
    */
   billingCurrency?: string | undefined;
   /**
+   * BillingEntityID is the entity that bills the customer; nil while the environment has no billing entities. Never changes once set.
+   */
+  billingEntityId?: string | undefined;
+  /**
    * Contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -99,6 +103,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
     address_postal_code: types.optional(types.string()),
     address_state: types.optional(types.string()),
     billing_currency: types.optional(types.string()),
+    billing_entity_id: types.optional(types.string()),
     contact: types.optional(types.string()),
     contact_persons: types.optional(
       z.array(CustomerContactPerson$inboundSchema),
@@ -127,6 +132,7 @@ export const Customer$inboundSchema: z.ZodMiniType<Customer, unknown> = z.pipe(
       "address_postal_code": "addressPostalCode",
       "address_state": "addressState",
       "billing_currency": "billingCurrency",
+      "billing_entity_id": "billingEntityId",
       "contact_persons": "contactPersons",
       "created_at": "createdAt",
       "created_by": "createdBy",

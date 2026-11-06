@@ -16,6 +16,7 @@ export type WebhookDtoCustomer = {
   addressLine2?: string | undefined;
   addressPostalCode?: string | undefined;
   addressState?: string | undefined;
+  billingEntityId?: string | undefined;
   email?: string | undefined;
   environmentId?: string | undefined;
   externalId?: string | undefined;
@@ -37,6 +38,7 @@ export const WebhookDtoCustomer$inboundSchema: z.ZodMiniType<
     address_line2: types.optional(types.string()),
     address_postal_code: types.optional(types.string()),
     address_state: types.optional(types.string()),
+    billing_entity_id: types.optional(types.string()),
     email: types.optional(types.string()),
     environment_id: types.optional(types.string()),
     external_id: types.optional(types.string()),
@@ -53,6 +55,7 @@ export const WebhookDtoCustomer$inboundSchema: z.ZodMiniType<
       "address_line2": "addressLine2",
       "address_postal_code": "addressPostalCode",
       "address_state": "addressState",
+      "billing_entity_id": "billingEntityId",
       "environment_id": "environmentId",
       "external_id": "externalId",
     });

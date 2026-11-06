@@ -49,6 +49,10 @@ export type UpdateCustomerRequest = {
    */
   billingCurrency?: string | undefined;
   /**
+   * billing_entity_id cannot be changed; sending it is rejected
+   */
+  billingEntityId?: string | undefined;
+  /**
    * contact is the updated contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -94,6 +98,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
   billing_currency?: string | undefined;
+  billing_entity_id?: string | undefined;
   contact?: string | undefined;
   contact_persons?: Array<CustomerContactPerson$Outbound> | undefined;
   email?: string | undefined;
@@ -120,6 +125,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
+    billingEntityId: z.optional(z.string()),
     contact: z.optional(z.string()),
     contactPersons: z.optional(z.array(CustomerContactPerson$outboundSchema)),
     email: z.optional(z.string()),
@@ -141,6 +147,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       billingCurrency: "billing_currency",
+      billingEntityId: "billing_entity_id",
       contactPersons: "contact_persons",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",

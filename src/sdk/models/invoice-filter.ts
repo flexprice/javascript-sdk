@@ -51,6 +51,10 @@ export type InvoiceFilter = {
    * Useful for finding invoices that still have significant unpaid amounts
    */
   amountRemainingGt?: number | undefined;
+  /**
+   * billing_entity_id filters by the customer's billing entity
+   */
+  billingEntityId?: string | undefined;
   billingReason?: InvoiceBillingReason | undefined;
   /**
    * currency filters invoices by their currency (ISO 4217 code, e.g. "usd", "eur").
@@ -166,6 +170,7 @@ export const InvoiceFilterOrder$outboundSchema: z.ZodMiniEnum<
 export type InvoiceFilter$Outbound = {
   amount_due_gt?: number | undefined;
   amount_remaining_gt?: number | undefined;
+  billing_entity_id?: string | undefined;
   billing_reason?: string | undefined;
   currency?: string | undefined;
   customer_id?: string | undefined;
@@ -205,6 +210,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
   z.object({
     amountDueGt: z.optional(z.number()),
     amountRemainingGt: z.optional(z.number()),
+    billingEntityId: z.optional(z.string()),
     billingReason: z.optional(InvoiceBillingReason$outboundSchema),
     currency: z.optional(z.string()),
     customerId: z.optional(z.string()),
@@ -245,6 +251,7 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       amountDueGt: "amount_due_gt",
       amountRemainingGt: "amount_remaining_gt",
+      billingEntityId: "billing_entity_id",
       billingReason: "billing_reason",
       customerId: "customer_id",
       endTime: "end_time",

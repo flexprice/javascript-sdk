@@ -24,6 +24,10 @@ export const CustomerFilterOrder = {
 export type CustomerFilterOrder = ClosedEnum<typeof CustomerFilterOrder>;
 
 export type CustomerFilter = {
+  /**
+   * billing_entity_id filters by the customer's billing entity
+   */
+  billingEntityId?: string | undefined;
   customerIds?: Array<string> | undefined;
   email?: string | undefined;
   endTime?: Date | undefined;
@@ -47,6 +51,7 @@ export const CustomerFilterOrder$outboundSchema: z.ZodMiniEnum<
 
 /** @internal */
 export type CustomerFilter$Outbound = {
+  billing_entity_id?: string | undefined;
   customer_ids?: Array<string> | undefined;
   email?: string | undefined;
   end_time?: string | undefined;
@@ -69,6 +74,7 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
   CustomerFilter
 > = z.pipe(
   z.object({
+    billingEntityId: z.optional(z.string()),
     customerIds: z.optional(z.array(z.string())),
     email: z.optional(z.string()),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -86,6 +92,7 @@ export const CustomerFilter$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      billingEntityId: "billing_entity_id",
       customerIds: "customer_ids",
       endTime: "end_time",
       externalId: "external_id",

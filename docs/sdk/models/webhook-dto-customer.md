@@ -18,6 +18,7 @@ let value: WebhookDtoCustomer = {};
 | `addressLine2`           | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `addressPostalCode`      | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `addressState`           | *string*                 | :heavy_minus_sign:       | N/A                      |
+| `billingEntityId`        | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `email`                  | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `environmentId`          | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `externalId`             | *string*                 | :heavy_minus_sign:       | N/A                      |
