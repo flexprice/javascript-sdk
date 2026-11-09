@@ -844,6 +844,7 @@ export * from "./update-user-roles-request.js";
 export * from "./update-user-roles-response.js";
 export * from "./update-wallet-op.js";
 export * from "./update-wallet-request.js";
+export * from "./usage-analytic-instalment.js";
 export * from "./usage-analytic-item.js";
 export * from "./usage-analytic-point.js";
 export * from "./usage-breakdown-item.js";

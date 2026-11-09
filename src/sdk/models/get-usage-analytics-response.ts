@@ -13,6 +13,10 @@ import {
 } from "./custom-analytic-item.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
+  UsageAnalyticInstalment,
+  UsageAnalyticInstalment$inboundSchema,
+} from "./usage-analytic-instalment.js";
+import {
   UsageAnalyticItem,
   UsageAnalyticItem$inboundSchema,
 } from "./usage-analytic-item.js";
@@ -20,12 +24,23 @@ import {
 export type GetUsageAnalyticsResponse = {
   currency?: string | undefined;
   customAnalytics?: Array<CustomAnalyticItem> | undefined;
+  /**
+   * Instalments lists, with expand "instalments", the instalments of the v2 commitments the request applied that were
+   *
+   * @remarks
+   * invoiced in the range. Property and source filters apply no commitments, so they list none.
+   */
+  instalments?: Array<UsageAnalyticInstalment> | undefined;
   items?: Array<UsageAnalyticItem> | undefined;
   subtotal?: string | undefined;
   /**
    * TotalCost is the final cost after discount (Subtotal - TotalDiscount)
    */
   totalCost?: string | undefined;
+  /**
+   * TotalCostWithInstalments is TotalCost plus the amounts of Instalments, set when expand includes "instalments".
+   */
+  totalCostWithInstalments?: string | undefined;
   totalDiscount?: string | undefined;
 };
 
@@ -37,15 +52,18 @@ export const GetUsageAnalyticsResponse$inboundSchema: z.ZodMiniType<
   z.object({
     currency: types.optional(types.string()),
     custom_analytics: types.optional(z.array(CustomAnalyticItem$inboundSchema)),
+    instalments: types.optional(z.array(UsageAnalyticInstalment$inboundSchema)),
     items: types.optional(z.array(UsageAnalyticItem$inboundSchema)),
     subtotal: types.optional(types.string()),
     total_cost: types.optional(types.string()),
+    total_cost_with_instalments: types.optional(types.string()),
     total_discount: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
       "custom_analytics": "customAnalytics",
       "total_cost": "totalCost",
+      "total_cost_with_instalments": "totalCostWithInstalments",
       "total_discount": "totalDiscount",
     });
   }),

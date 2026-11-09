@@ -18,7 +18,7 @@ export type GetUsageAnalyticsRequest = {
   breakdownBucket?: boolean | undefined;
   endTime?: Date | undefined;
   /**
-   * allowed values: "price", "meter", "feature", "subscription_line_item","plan","addon"
+   * allowed values: "price", "meter", "feature", "subscription_line_item","plan","addon","source","instalments"
    */
   expand?: Array<string> | undefined;
   /**
