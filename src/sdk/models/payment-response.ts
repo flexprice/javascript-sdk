@@ -28,6 +28,10 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type PaymentResponse = {
   amount?: string | undefined;
   attempts?: Array<PaymentAttemptResponse> | undefined;
+  /**
+   * connection_id is the connection that took this payment; null when no gateway connection was used
+   */
+  connectionId?: string | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   currency?: string | undefined;
@@ -66,6 +70,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
   z.object({
     amount: types.optional(types.string()),
     attempts: types.optional(z.array(PaymentAttemptResponse$inboundSchema)),
+    connection_id: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
@@ -97,6 +102,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "connection_id": "connectionId",
       "created_at": "createdAt",
       "created_by": "createdBy",
       "destination_id": "destinationId",
