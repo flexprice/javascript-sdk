@@ -1,6 +1,6 @@
 {
   "name": "@flexprice/sdk",
-  "version": "2.1.49-dev.17",
+  "version": "2.1.49-dev.18",
   "author": "FlexPrice",
   "engines": {
     "node": ">=18"
@@ -49,5 +49,5 @@
   "dependencies": {
     "zod": "^3.25.65 || ^4.0.0"
   },
-  "flexpriceCommit": "74cbe02333bf0e1fee21ecfaf95db6a95fbd7814"
+  "flexpriceCommit": "ecb603fe88400217f781988a5e6cdb699357c52d"
 }
