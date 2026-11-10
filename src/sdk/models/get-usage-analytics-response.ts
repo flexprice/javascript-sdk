@@ -25,10 +25,10 @@ export type GetUsageAnalyticsResponse = {
   currency?: string | undefined;
   customAnalytics?: Array<CustomAnalyticItem> | undefined;
   /**
-   * Instalments lists, with expand "instalments", the instalments of the v2 commitments the request applied that were
+   * Instalments lists, with expand "instalments", the instalments invoiced in the range for the v2 commitments covering
    *
    * @remarks
-   * invoiced in the range. Property and source filters apply no commitments, so they list none.
+   * a queried meter; it is empty with property or source filters, or when no usage line runs in the range.
    */
   instalments?: Array<UsageAnalyticInstalment> | undefined;
   items?: Array<UsageAnalyticItem> | undefined;
