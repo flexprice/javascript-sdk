@@ -56,6 +56,7 @@ export const WebhookEventName = {
   InvoiceUpdateVoided: "invoice.update.voided",
   InvoiceUpdate: "invoice.update",
   InvoicePaymentOverdue: "invoice.payment.overdue",
+  InvoicePaymentFailed: "invoice.payment.failed",
   InvoiceSyncSuccess: "invoice.sync.success",
   InvoiceSyncFailed: "invoice.sync.failed",
   WalletCreditBalanceDropped: "wallet.credit_balance.dropped",
