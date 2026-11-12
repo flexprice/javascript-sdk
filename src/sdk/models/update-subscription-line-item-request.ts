@@ -39,18 +39,34 @@ export type UpdateSubscriptionLineItemRequest = {
   billingModel?: BillingModel | undefined;
   bucketSize?: WindowSize | undefined;
   /**
-   * Commitment fields
+   * Deprecated: use POST /commitments instead.
    */
   commitmentAmount?: number | undefined;
   commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentOverageFactor?: number | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentQuantity?: number | undefined;
   /**
    * Pointer so an explicit empty array can clear existing buckets (omission keeps them).
+   *
+   * @remarks
+   *
+   * Deprecated: use POST /commitments instead.
    */
   commitmentTimeBuckets?: Array<CommitmentBucketRequest> | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentTrueUpEnabled?: boolean | undefined;
   commitmentType?: CommitmentType | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentWindowed?: boolean | undefined;
   /**
    * EffectiveFrom for the existing line item (if not provided, defaults to now)

@@ -41,7 +41,7 @@ export type AddAddonRequest = {
    */
   coupons?: Array<SubscriptionCouponInput> | undefined;
   /**
-   * LineItemCommitments allows setting commitment configuration per addon line item (keyed by price_id)
+   * Deprecated: use POST /commitments instead.
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   metadata?: { [k: string]: any } | undefined;

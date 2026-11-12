@@ -122,6 +122,9 @@ export type CreateSubscriptionRequest = {
   billingPeriodCount?: number | undefined;
   checkout?: CheckoutParams | undefined;
   collectionMethod?: CollectionMethod | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
@@ -141,6 +144,9 @@ export type CreateSubscriptionRequest = {
    * CustomerID takes priority over ExternalCustomerID when both are provided.
    */
   customerId?: string | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   enableTrueUp?: boolean | undefined;
   endDate?: Date | undefined;
   externalCustomerId?: string | undefined;
@@ -168,7 +174,7 @@ export type CreateSubscriptionRequest = {
   includePriceIds?: Array<string> | undefined;
   inheritance?: SubscriptionInheritanceConfig | undefined;
   /**
-   * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
+   * Deprecated: use POST /commitments instead.
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   /**
@@ -182,6 +188,9 @@ export type CreateSubscriptionRequest = {
   lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   overageFactor?: string | undefined;
   overrideEntitlements?: Array<OverrideEntitlementRequest> | undefined;
   /**

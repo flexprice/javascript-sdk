@@ -65,6 +65,9 @@ import {
 
 export type GroupedInvoicingChildRequest = {
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
@@ -72,10 +75,13 @@ export type GroupedInvoicingChildRequest = {
    */
   coupons?: Array<string> | undefined;
   creditGrants?: Array<CreateCreditGrantRequest> | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   enableTrueUp?: boolean | undefined;
   externalCustomerId: string;
   /**
-   * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
+   * Deprecated: use POST /commitments instead.
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   /**
@@ -86,6 +92,9 @@ export type GroupedInvoicingChildRequest = {
    * LineItems are extra (non-plan) line items added at creation.
    */
   lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   overageFactor?: string | undefined;
   overrideEntitlements?: Array<OverrideEntitlementRequest> | undefined;
   /**
