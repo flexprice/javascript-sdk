@@ -27,8 +27,14 @@ export type UsageAnalyticPoint = {
    * Commitment breakdown (only populated for windowed commitments)
    */
   computedCommitmentUtilizedAmount?: string | undefined;
+  /**
+   * Usage units behind the commitment breakdown, for v2 commitments
+   */
+  computedCommitmentUtilizedQuantity?: string | undefined;
   computedOverageAmount?: string | undefined;
+  computedOverageQuantity?: string | undefined;
   computedTrueUpAmount?: string | undefined;
+  computedTrueUpQuantity?: string | undefined;
   /**
    * Cost is the final cost after discount (Subtotal - Discount)
    */
@@ -51,8 +57,11 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   z.object({
     buckets: types.optional(z.array(PointBucket$inboundSchema)),
     computed_commitment_utilized_amount: types.optional(types.string()),
+    computed_commitment_utilized_quantity: types.optional(types.string()),
     computed_overage_amount: types.optional(types.string()),
+    computed_overage_quantity: types.optional(types.string()),
     computed_true_up_amount: types.optional(types.string()),
+    computed_true_up_quantity: types.optional(types.string()),
     cost: types.optional(types.string()),
     discount: types.optional(types.string()),
     event_count: types.optional(types.number()),
@@ -63,8 +72,12 @@ export const UsageAnalyticPoint$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "computed_commitment_utilized_amount": "computedCommitmentUtilizedAmount",
+      "computed_commitment_utilized_quantity":
+        "computedCommitmentUtilizedQuantity",
       "computed_overage_amount": "computedOverageAmount",
+      "computed_overage_quantity": "computedOverageQuantity",
       "computed_true_up_amount": "computedTrueUpAmount",
+      "computed_true_up_quantity": "computedTrueUpQuantity",
       "event_count": "eventCount",
     });
   }),
