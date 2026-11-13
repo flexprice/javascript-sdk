@@ -77,6 +77,11 @@ import {
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
+import {
   SubscriptionCouponInput,
   SubscriptionCouponInput$Outbound,
   SubscriptionCouponInput$outboundSchema,
@@ -202,6 +207,7 @@ export type CreateSubscriptionRequest = {
   phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
   prorationBehavior?: ProrationBehavior | undefined;
+  settings?: SettingsOverride | undefined;
   startDate?: Date | undefined;
   /**
    * SubscriptionCoupons is the preferred way to attach coupons at creation.
@@ -267,6 +273,7 @@ export type CreateSubscriptionRequest$Outbound = {
   phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
   proration_behavior?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   start_date?: string | undefined;
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   subscription_entitlement_grants?:
@@ -330,6 +337,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     phases: z.optional(z.array(SubscriptionPhaseCreateRequest$outboundSchema)),
     planId: z.string(),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
+    settings: z.optional(SettingsOverride$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionCoupons: z.optional(
       z.array(SubscriptionCouponInput$outboundSchema),

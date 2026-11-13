@@ -15,6 +15,11 @@ import {
   CustomerContactPerson$outboundSchema,
 } from "./customer-contact-person.js";
 import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
+import {
   TaxRateOverride,
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
@@ -94,6 +99,7 @@ export type CreateCustomerRequest = {
    * onboarding_workflow_name is given if a custom onboarding workflow is to be triggered for this customer
    */
   onboardingWorkflowName?: string | undefined;
+  settings?: SettingsOverride | undefined;
   /**
    * skip_onboarding_workflow when true, prevents the customer onboarding workflow from being triggered
    *
@@ -136,6 +142,7 @@ export type CreateCustomerRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   name: string;
   onboarding_workflow_name?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   tax_treatment?: string | undefined;
@@ -166,6 +173,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.string(),
     onboardingWorkflowName: z.optional(z.string()),
+    settings: z.optional(SettingsOverride$outboundSchema),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     taxTreatment: z.optional(TaxTreatment$outboundSchema),

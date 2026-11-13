@@ -44,6 +44,10 @@ import {
   ProrationBehavior$inboundSchema,
 } from "./proration-behavior.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SettingsOverride,
+  SettingsOverride$inboundSchema,
+} from "./settings-override.js";
 import { Status, Status$inboundSchema } from "./status.js";
 import {
   SubscriptionLineItemResponse,
@@ -231,6 +235,7 @@ export type SubscriptionResponseV2 = {
    */
   planPricesOutOfSync?: boolean | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
+  settings?: SettingsOverride | undefined;
   /**
    * StartDate is the start date of the subscription
    */
@@ -320,6 +325,7 @@ export const SubscriptionResponseV2$inboundSchema: z.ZodMiniType<
     plan_id: types.optional(types.string()),
     plan_prices_out_of_sync: types.optional(types.boolean()),
     proration_behavior: types.optional(ProrationBehavior$inboundSchema),
+    settings: types.optional(SettingsOverride$inboundSchema),
     start_date: types.optional(types.date()),
     status: types.optional(Status$inboundSchema),
     subscription_status: types.optional(SubscriptionStatus$inboundSchema),

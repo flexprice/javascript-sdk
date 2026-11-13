@@ -16,6 +16,10 @@ import {
   EntityIntegrationMappingResponse$inboundSchema,
 } from "./entity-integration-mapping-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import {
+  SettingsOverride,
+  SettingsOverride$inboundSchema,
+} from "./settings-override.js";
 import { Status, Status$inboundSchema } from "./status.js";
 import { TaxTreatment, TaxTreatment$inboundSchema } from "./tax-treatment.js";
 
@@ -87,6 +91,7 @@ export type CustomerResponse = {
    * Name is the name of the customer
    */
   name?: string | undefined;
+  settings?: SettingsOverride | undefined;
   status?: Status | undefined;
   taxTreatment?: TaxTreatment | undefined;
   tenantId?: string | undefined;
@@ -130,6 +135,7 @@ export const CustomerResponse$inboundSchema: z.ZodMiniType<
     ),
     metadata: types.optional(z.record(z.string(), types.string())),
     name: types.optional(types.string()),
+    settings: types.optional(SettingsOverride$inboundSchema),
     status: types.optional(Status$inboundSchema),
     tax_treatment: types.optional(TaxTreatment$inboundSchema),
     tenant_id: types.optional(types.string()),
