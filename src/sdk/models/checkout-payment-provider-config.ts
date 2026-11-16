@@ -24,6 +24,10 @@ export type CheckoutPaymentProviderConfig = {
    */
   customerNotPresent?: boolean | undefined;
   maxMandateLimit?: string | undefined;
+  /**
+   * NotifyCustomer lets the gateway email/SMS the payment link to the customer.
+   */
+  notifyCustomer?: boolean | undefined;
   paymentMethod?: PaymentMethodType | undefined;
 };
 
@@ -32,6 +36,7 @@ export type CheckoutPaymentProviderConfig$Outbound = {
   collection_method?: string | undefined;
   customer_not_present?: boolean | undefined;
   max_mandate_limit?: string | undefined;
+  notify_customer?: boolean | undefined;
   payment_method?: string | undefined;
 };
 
@@ -44,6 +49,7 @@ export const CheckoutPaymentProviderConfig$outboundSchema: z.ZodMiniType<
     collectionMethod: z.optional(CollectionMethod$outboundSchema),
     customerNotPresent: z.optional(z.boolean()),
     maxMandateLimit: z.optional(z.string()),
+    notifyCustomer: z.optional(z.boolean()),
     paymentMethod: z.optional(PaymentMethodType$outboundSchema),
   }),
   z.transform((v) => {
@@ -51,6 +57,7 @@ export const CheckoutPaymentProviderConfig$outboundSchema: z.ZodMiniType<
       collectionMethod: "collection_method",
       customerNotPresent: "customer_not_present",
       maxMandateLimit: "max_mandate_limit",
+      notifyCustomer: "notify_customer",
       paymentMethod: "payment_method",
     });
   }),

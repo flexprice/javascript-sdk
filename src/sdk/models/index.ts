@@ -610,6 +610,7 @@ export * from "./provider-error.js";
 export * from "./provider-saved-payment-methods.js";
 export * from "./query-analytics-view-op.js";
 export * from "./query-filter.js";
+export * from "./razorpay-payment-gateway-options.js";
 export * from "./recalculate-invoice-op.js";
 export * from "./recalculate-invoice-v2-op.js";
 export * from "./recognition-method.js";
