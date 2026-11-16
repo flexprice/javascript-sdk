@@ -24,18 +24,17 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Schedule update billing period
+ * Get billing entities status
  *
  * @remarks
- * Use when you need to trigger a billing-period update workflow (e.g. to recalculate or sync billing windows).
+ * Whether billing entities are off, enabling or enabled in the environment.
  */
-export function scheduledTasksScheduleUpdateBillingPeriod(
+export function billingEntitiesGetBillingEntitiesStatus(
   client: FlexpriceCore,
-  _request: models.ScheduleUpdateBillingPeriodRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.ScheduleUpdateBillingPeriodResponse,
+    models.BillingEntityModeResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -49,19 +48,17 @@ export function scheduledTasksScheduleUpdateBillingPeriod(
 > {
   return new APIPromise($do(
     client,
-    _request,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  _request: models.ScheduleUpdateBillingPeriodRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.ScheduleUpdateBillingPeriodResponse,
+      models.BillingEntityModeResponse,
       | models.ErrorsErrorResponse
       | FlexPriceError
       | ResponseValidationError
@@ -75,10 +72,9 @@ async function $do(
     APICall,
   ]
 > {
-  const path = pathToFunc("/tasks/scheduled/schedule-update-billing-period")();
+  const path = pathToFunc("/billing-entities/status")();
 
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -89,7 +85,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "scheduleUpdateBillingPeriod",
+    operationID: "getBillingEntitiesStatus",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -103,7 +99,7 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -132,7 +128,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.ScheduleUpdateBillingPeriodResponse,
+    models.BillingEntityModeResponse,
     | models.ErrorsErrorResponse
     | FlexPriceError
     | ResponseValidationError
@@ -143,8 +139,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.ScheduleUpdateBillingPeriodResponse$inboundSchema),
-    M.jsonErr(400, models.ErrorsErrorResponse$inboundSchema),
+    M.json(200, models.BillingEntityModeResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

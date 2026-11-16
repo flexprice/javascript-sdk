@@ -14,6 +14,11 @@ import {
   CustomerContactPerson$Outbound,
   CustomerContactPerson$outboundSchema,
 } from "./customer-contact-person.js";
+import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
 import { TaxTreatment, TaxTreatment$outboundSchema } from "./tax-treatment.js";
 
 /**
@@ -49,6 +54,10 @@ export type UpdateCustomerRequest = {
    */
   billingCurrency?: string | undefined;
   /**
+   * billing_entity_id cannot be changed; sending it is rejected
+   */
+  billingEntityId?: string | undefined;
+  /**
    * contact is the updated contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -78,6 +87,7 @@ export type UpdateCustomerRequest = {
    * name is the updated name or company name for the customer
    */
   name?: string | undefined;
+  settings?: SettingsOverride | undefined;
   taxTreatment?: TaxTreatment | undefined;
   /**
    * timezone is the updated IANA timezone name for the customer (e.g. "Asia/Kolkata", "America/New_York")
@@ -94,6 +104,7 @@ export type UpdateCustomerRequest$Outbound = {
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
   billing_currency?: string | undefined;
+  billing_entity_id?: string | undefined;
   contact?: string | undefined;
   contact_persons?: Array<CustomerContactPerson$Outbound> | undefined;
   email?: string | undefined;
@@ -103,6 +114,7 @@ export type UpdateCustomerRequest$Outbound = {
     | undefined;
   metadata?: { [k: string]: string } | undefined;
   name?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   tax_treatment?: string | undefined;
   timezone?: string | undefined;
 };
@@ -120,6 +132,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
+    billingEntityId: z.optional(z.string()),
     contact: z.optional(z.string()),
     contactPersons: z.optional(z.array(CustomerContactPerson$outboundSchema)),
     email: z.optional(z.string()),
@@ -129,6 +142,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
     ),
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.optional(z.string()),
+    settings: z.optional(SettingsOverride$outboundSchema),
     taxTreatment: z.optional(TaxTreatment$outboundSchema),
     timezone: z.optional(z.string()),
   }),
@@ -141,6 +155,7 @@ export const UpdateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       billingCurrency: "billing_currency",
+      billingEntityId: "billing_entity_id",
       contactPersons: "contact_persons",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",

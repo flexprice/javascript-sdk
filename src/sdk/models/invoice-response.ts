@@ -25,6 +25,10 @@ import {
 } from "./customer-response.js";
 import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import {
+  InvoiceBillingEntity,
+  InvoiceBillingEntity$inboundSchema,
+} from "./invoice-billing-entity.js";
+import {
   InvoiceLineItemResponse,
   InvoiceLineItemResponse$inboundSchema,
 } from "./invoice-line-item-response.js";
@@ -77,6 +81,11 @@ export type InvoiceResponse = {
    * amount_remaining is the outstanding amount still owed on this invoice (calculated as amount_due minus amount_paid)
    */
   amountRemaining?: string | undefined;
+  billingEntity?: InvoiceBillingEntity | undefined;
+  /**
+   * BillingEntityID is the entity that bills the invoice; nil while the environment has no billing entities. Never changes once set.
+   */
+  billingEntityId?: string | undefined;
   /**
    * billing_period describes the billing period this invoice covers (e.g., "January 2024", "Q1 2024")
    */
@@ -262,6 +271,8 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     amount_due: types.optional(types.string()),
     amount_paid: types.optional(types.string()),
     amount_remaining: types.optional(types.string()),
+    billing_entity: types.optional(InvoiceBillingEntity$inboundSchema),
+    billing_entity_id: types.optional(types.string()),
     billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
     billing_sequence: types.optional(types.number()),
@@ -328,6 +339,8 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "amount_due": "amountDue",
       "amount_paid": "amountPaid",
       "amount_remaining": "amountRemaining",
+      "billing_entity": "billingEntity",
+      "billing_entity_id": "billingEntityId",
       "billing_period": "billingPeriod",
       "billing_reason": "billingReason",
       "billing_sequence": "billingSequence",

@@ -199,6 +199,10 @@ export type PriceResponse = {
   type?: PriceType | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
+  /**
+   * Warnings lists defaults applied on create that the caller may want to set explicitly.
+   */
+  warnings?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -258,6 +262,7 @@ export const PriceResponse$inboundSchema: z.ZodMiniType<
     type: types.optional(PriceType$inboundSchema),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
+    warnings: types.optional(z.array(types.string())),
   }),
   z.transform((v) => {
     return remap$(v, {

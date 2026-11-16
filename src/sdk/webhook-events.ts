@@ -30,6 +30,7 @@ import { webhookEventsPostWebhookEventsFeatureUpdated } from "../funcs/webhook-e
 import { webhookEventsPostWebhookEventsFeatureWalletBalanceAlert } from "../funcs/webhook-events-post-webhook-events-feature-wallet-balance-alert.js";
 import { webhookEventsPostWebhookEventsInvoiceCommunicationTriggered } from "../funcs/webhook-events-post-webhook-events-invoice-communication-triggered.js";
 import { webhookEventsPostWebhookEventsInvoiceCreateDrafted } from "../funcs/webhook-events-post-webhook-events-invoice-create-drafted.js";
+import { webhookEventsPostWebhookEventsInvoicePaymentFailed } from "../funcs/webhook-events-post-webhook-events-invoice-payment-failed.js";
 import { webhookEventsPostWebhookEventsInvoicePaymentOverdue } from "../funcs/webhook-events-post-webhook-events-invoice-payment-overdue.js";
 import { webhookEventsPostWebhookEventsInvoiceSyncFailed } from "../funcs/webhook-events-post-webhook-events-invoice-sync-failed.js";
 import { webhookEventsPostWebhookEventsInvoiceSyncSuccess } from "../funcs/webhook-events-post-webhook-events-invoice-sync-success.js";
@@ -496,6 +497,21 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoInvoiceWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsInvoiceCreateDrafted(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * invoice.payment.failed
+   *
+   * @remarks
+   * Fired when a payment of an invoice does not succeed. `reason` is `payment_method_unavailable`, `provider_error` or `declined`; `is_auto_charge_attempt` is true when Flexprice charged the saved payment method. Doc-only for parsing.
+   */
+  async postWebhookEventsInvoicePaymentFailed(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoInvoicePaymentFailedWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsInvoicePaymentFailed(
       this,
       options,
     ));

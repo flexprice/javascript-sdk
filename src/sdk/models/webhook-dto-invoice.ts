@@ -44,6 +44,7 @@ export type WebhookDtoInvoice = {
   amountDue?: string | undefined;
   amountPaid?: string | undefined;
   amountRemaining?: string | undefined;
+  billingEntityId?: string | undefined;
   billingPeriod?: string | undefined;
   billingReason?: string | undefined;
   billingSequence?: number | undefined;
@@ -91,6 +92,7 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
     amount_due: types.optional(types.string()),
     amount_paid: types.optional(types.string()),
     amount_remaining: types.optional(types.string()),
+    billing_entity_id: types.optional(types.string()),
     billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
     billing_sequence: types.optional(types.number()),
@@ -137,6 +139,7 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
       "amount_due": "amountDue",
       "amount_paid": "amountPaid",
       "amount_remaining": "amountRemaining",
+      "billing_entity_id": "billingEntityId",
       "billing_period": "billingPeriod",
       "billing_reason": "billingReason",
       "billing_sequence": "billingSequence",

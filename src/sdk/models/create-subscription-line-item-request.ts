@@ -29,15 +29,30 @@ import {
 
 export type CreateSubscriptionLineItemRequest = {
   /**
-   * Commitment fields
+   * Deprecated: use POST /commitments instead.
    */
   commitmentAmount?: number | undefined;
   commitmentDuration?: BillingPeriod | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentOverageFactor?: number | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentQuantity?: number | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentTimeBuckets?: Array<CommitmentBucketRequest> | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentTrueUpEnabled?: boolean | undefined;
   commitmentType?: CommitmentType | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentWindowed?: boolean | undefined;
   displayName?: string | undefined;
   endDate?: Date | undefined;

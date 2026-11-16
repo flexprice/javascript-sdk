@@ -77,6 +77,11 @@ import {
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
+import {
   SubscriptionCouponInput,
   SubscriptionCouponInput$Outbound,
   SubscriptionCouponInput$outboundSchema,
@@ -122,6 +127,9 @@ export type CreateSubscriptionRequest = {
   billingPeriodCount?: number | undefined;
   checkout?: CheckoutParams | undefined;
   collectionMethod?: CollectionMethod | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
@@ -141,6 +149,9 @@ export type CreateSubscriptionRequest = {
    * CustomerID takes priority over ExternalCustomerID when both are provided.
    */
   customerId?: string | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   enableTrueUp?: boolean | undefined;
   endDate?: Date | undefined;
   externalCustomerId?: string | undefined;
@@ -168,7 +179,7 @@ export type CreateSubscriptionRequest = {
   includePriceIds?: Array<string> | undefined;
   inheritance?: SubscriptionInheritanceConfig | undefined;
   /**
-   * LineItemCommitments sets per-line-item commitment config, keyed by price_id.
+   * Deprecated: use POST /commitments instead.
    */
   lineItemCommitments?: { [k: string]: LineItemCommitmentConfig } | undefined;
   /**
@@ -182,6 +193,9 @@ export type CreateSubscriptionRequest = {
   lineItems?: Array<CreateSubscriptionLineItemRequest> | undefined;
   lookupKey?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  /**
+   * Deprecated: use POST /commitments instead.
+   */
   overageFactor?: string | undefined;
   overrideEntitlements?: Array<OverrideEntitlementRequest> | undefined;
   /**
@@ -193,6 +207,7 @@ export type CreateSubscriptionRequest = {
   phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
   prorationBehavior?: ProrationBehavior | undefined;
+  settings?: SettingsOverride | undefined;
   startDate?: Date | undefined;
   /**
    * SubscriptionCoupons is the preferred way to attach coupons at creation.
@@ -258,6 +273,7 @@ export type CreateSubscriptionRequest$Outbound = {
   phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
   proration_behavior?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   start_date?: string | undefined;
   subscription_coupons?: Array<SubscriptionCouponInput$Outbound> | undefined;
   subscription_entitlement_grants?:
@@ -321,6 +337,7 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     phases: z.optional(z.array(SubscriptionPhaseCreateRequest$outboundSchema)),
     planId: z.string(),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
+    settings: z.optional(SettingsOverride$outboundSchema),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionCoupons: z.optional(
       z.array(SubscriptionCouponInput$outboundSchema),

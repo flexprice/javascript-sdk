@@ -9,6 +9,11 @@ import {
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
 import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
+import {
   SubscriptionStatus,
   SubscriptionStatus$outboundSchema,
 } from "./subscription-status.js";
@@ -24,6 +29,7 @@ export type UpdateSubscriptionRequest = {
    */
   parentSubscriptionId?: string | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
+  settings?: SettingsOverride | undefined;
   status?: SubscriptionStatus | undefined;
 };
 
@@ -33,6 +39,7 @@ export type UpdateSubscriptionRequest$Outbound = {
   cancel_at_period_end?: boolean | undefined;
   parent_subscription_id?: string | undefined;
   proration_behavior?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   status?: string | undefined;
 };
 
@@ -46,6 +53,7 @@ export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     cancelAtPeriodEnd: z.optional(z.boolean()),
     parentSubscriptionId: z.optional(z.string()),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
+    settings: z.optional(SettingsOverride$outboundSchema),
     status: z.optional(SubscriptionStatus$outboundSchema),
   }),
   z.transform((v) => {

@@ -87,7 +87,6 @@ export type CommitmentResponse = {
   tenantId?: string | undefined;
   terminatedAt?: Date | undefined;
   terminationInvoiceId?: string | undefined;
-  timezone?: string | undefined;
   totalAmount?: string | undefined;
   type?: CommitmentType | undefined;
   updatedAt?: Date | undefined;
@@ -136,7 +135,6 @@ export const CommitmentResponse$inboundSchema: z.ZodMiniType<
     tenant_id: types.optional(types.string()),
     terminated_at: types.optional(types.date()),
     termination_invoice_id: types.optional(types.string()),
-    timezone: types.optional(types.string()),
     total_amount: types.optional(types.string()),
     type: types.optional(CommitmentType$inboundSchema),
     updated_at: types.optional(types.date()),

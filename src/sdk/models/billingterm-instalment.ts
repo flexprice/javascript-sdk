@@ -45,6 +45,10 @@ export type BillingtermInstalment = {
   instalmentStatus?: InstalmentStatus | undefined;
   invoiceId?: string | undefined;
   invoiceLabel?: string | undefined;
+  /**
+   * InvoicedAt is when the invoice billing the instalment was finalized.
+   */
+  invoicedAt?: Date | undefined;
   kind?: InstalmentKind | undefined;
   metadata?: { [k: string]: string } | undefined;
   ownerId?: string | undefined;
@@ -79,6 +83,7 @@ export const BillingtermInstalment$inboundSchema: z.ZodMiniType<
     instalment_status: types.optional(InstalmentStatus$inboundSchema),
     invoice_id: types.optional(types.string()),
     invoice_label: types.optional(types.string()),
+    invoiced_at: types.optional(types.date()),
     kind: types.optional(InstalmentKind$inboundSchema),
     metadata: types.optional(z.record(z.string(), types.string())),
     owner_id: types.optional(types.string()),
@@ -104,6 +109,7 @@ export const BillingtermInstalment$inboundSchema: z.ZodMiniType<
       "instalment_status": "instalmentStatus",
       "invoice_id": "invoiceId",
       "invoice_label": "invoiceLabel",
+      "invoiced_at": "invoicedAt",
       "owner_id": "ownerId",
       "owner_type": "ownerType",
       "service_period_end": "servicePeriodEnd",

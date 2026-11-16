@@ -14,6 +14,10 @@ export type SelfBillingCheckoutRequest = {
   addressState?: string | undefined;
   email: string;
   name: string;
+  /**
+   * PlanID is the offered plan to buy; empty means the default plan, or a negotiated trial's own plan.
+   */
+  planId?: string | undefined;
   taxId?: string | undefined;
 };
 
@@ -27,6 +31,7 @@ export type SelfBillingCheckoutRequest$Outbound = {
   address_state?: string | undefined;
   email: string;
   name: string;
+  plan_id?: string | undefined;
   tax_id?: string | undefined;
 };
 
@@ -44,6 +49,7 @@ export const SelfBillingCheckoutRequest$outboundSchema: z.ZodMiniType<
     addressState: z.optional(z.string()),
     email: z.string(),
     name: z.string(),
+    planId: z.optional(z.string()),
     taxId: z.optional(z.string()),
   }),
   z.transform((v) => {
@@ -54,6 +60,7 @@ export const SelfBillingCheckoutRequest$outboundSchema: z.ZodMiniType<
       addressLine2: "address_line2",
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
+      planId: "plan_id",
       taxId: "tax_id",
     });
   }),

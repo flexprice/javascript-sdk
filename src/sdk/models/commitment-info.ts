@@ -20,13 +20,25 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CommitmentInfo = {
+  /**
+   * Amount is the commitment amount (v1), or computed_commitment_utilized_amount + computed_true_up_amount (v2).
+   */
   amount?: string | undefined;
   computedCommitmentUtilizedAmount?: string | undefined;
+  /**
+   * Usage units behind the computed amounts: usage a billing-terms commitment covers counts as utilized at no
+   *
+   * @remarks
+   * charge, and a quantity commitment's true-up counts its unused units.
+   */
+  computedCommitmentUtilizedQuantity?: string | undefined;
   computedOverageAmount?: string | undefined;
+  computedOverageQuantity?: string | undefined;
   /**
    * total_cost = computed_commitment_utilized_amount + computed_overage_amount + computed_true_up_amount
    */
   computedTrueUpAmount?: string | undefined;
+  computedTrueUpQuantity?: string | undefined;
   duration?: BillingPeriod | undefined;
   isWindowed?: boolean | undefined;
   overageFactor?: string | undefined;
@@ -46,8 +58,11 @@ export const CommitmentInfo$inboundSchema: z.ZodMiniType<
   z.object({
     amount: types.optional(types.string()),
     computed_commitment_utilized_amount: types.optional(types.string()),
+    computed_commitment_utilized_quantity: types.optional(types.string()),
     computed_overage_amount: types.optional(types.string()),
+    computed_overage_quantity: types.optional(types.string()),
     computed_true_up_amount: types.optional(types.string()),
+    computed_true_up_quantity: types.optional(types.string()),
     duration: types.optional(BillingPeriod$inboundSchema),
     is_windowed: types.optional(types.boolean()),
     overage_factor: types.optional(types.string()),
@@ -58,8 +73,12 @@ export const CommitmentInfo$inboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       "computed_commitment_utilized_amount": "computedCommitmentUtilizedAmount",
+      "computed_commitment_utilized_quantity":
+        "computedCommitmentUtilizedQuantity",
       "computed_overage_amount": "computedOverageAmount",
+      "computed_overage_quantity": "computedOverageQuantity",
       "computed_true_up_amount": "computedTrueUpAmount",
+      "computed_true_up_quantity": "computedTrueUpQuantity",
       "is_windowed": "isWindowed",
       "overage_factor": "overageFactor",
       "true_up_enabled": "trueUpEnabled",
@@ -70,8 +89,11 @@ export const CommitmentInfo$inboundSchema: z.ZodMiniType<
 export type CommitmentInfo$Outbound = {
   amount?: string | undefined;
   computed_commitment_utilized_amount?: string | undefined;
+  computed_commitment_utilized_quantity?: string | undefined;
   computed_overage_amount?: string | undefined;
+  computed_overage_quantity?: string | undefined;
   computed_true_up_amount?: string | undefined;
+  computed_true_up_quantity?: string | undefined;
   duration?: string | undefined;
   is_windowed?: boolean | undefined;
   overage_factor?: string | undefined;
@@ -88,8 +110,11 @@ export const CommitmentInfo$outboundSchema: z.ZodMiniType<
   z.object({
     amount: z.optional(z.string()),
     computedCommitmentUtilizedAmount: z.optional(z.string()),
+    computedCommitmentUtilizedQuantity: z.optional(z.string()),
     computedOverageAmount: z.optional(z.string()),
+    computedOverageQuantity: z.optional(z.string()),
     computedTrueUpAmount: z.optional(z.string()),
+    computedTrueUpQuantity: z.optional(z.string()),
     duration: z.optional(BillingPeriod$outboundSchema),
     isWindowed: z.optional(z.boolean()),
     overageFactor: z.optional(z.string()),
@@ -100,8 +125,12 @@ export const CommitmentInfo$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       computedCommitmentUtilizedAmount: "computed_commitment_utilized_amount",
+      computedCommitmentUtilizedQuantity:
+        "computed_commitment_utilized_quantity",
       computedOverageAmount: "computed_overage_amount",
+      computedOverageQuantity: "computed_overage_quantity",
       computedTrueUpAmount: "computed_true_up_amount",
+      computedTrueUpQuantity: "computed_true_up_quantity",
       isWindowed: "is_windowed",
       overageFactor: "overage_factor",
       trueUpEnabled: "true_up_enabled",

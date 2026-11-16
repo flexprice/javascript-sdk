@@ -15,6 +15,11 @@ import {
   CustomerContactPerson$outboundSchema,
 } from "./customer-contact-person.js";
 import {
+  SettingsOverride,
+  SettingsOverride$Outbound,
+  SettingsOverride$outboundSchema,
+} from "./settings-override.js";
+import {
   TaxRateOverride,
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
@@ -54,6 +59,13 @@ export type CreateCustomerRequest = {
    */
   billingCurrency?: string | undefined;
   /**
+   * billing_entity_id is the billing entity that bills this customer; defaults to the environment's
+   *
+   * @remarks
+   * default entity. Accepted only once billing entities are enabled, and never changes afterwards.
+   */
+  billingEntityId?: string | undefined;
+  /**
    * contact is an optional contact number for the customer (e.g. phone)
    */
   contact?: string | undefined;
@@ -87,6 +99,7 @@ export type CreateCustomerRequest = {
    * onboarding_workflow_name is given if a custom onboarding workflow is to be triggered for this customer
    */
   onboardingWorkflowName?: string | undefined;
+  settings?: SettingsOverride | undefined;
   /**
    * skip_onboarding_workflow when true, prevents the customer onboarding workflow from being triggered
    *
@@ -118,6 +131,7 @@ export type CreateCustomerRequest$Outbound = {
   address_postal_code?: string | undefined;
   address_state?: string | undefined;
   billing_currency?: string | undefined;
+  billing_entity_id?: string | undefined;
   contact?: string | undefined;
   contact_persons?: Array<CustomerContactPerson$Outbound> | undefined;
   email?: string | undefined;
@@ -128,6 +142,7 @@ export type CreateCustomerRequest$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   name: string;
   onboarding_workflow_name?: string | undefined;
+  settings?: SettingsOverride$Outbound | undefined;
   skip_onboarding_workflow?: boolean | undefined;
   tax_rate_overrides?: Array<TaxRateOverride$Outbound> | undefined;
   tax_treatment?: string | undefined;
@@ -147,6 +162,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     addressPostalCode: z.optional(z.string()),
     addressState: z.optional(z.string()),
     billingCurrency: z.optional(z.string()),
+    billingEntityId: z.optional(z.string()),
     contact: z.optional(z.string()),
     contactPersons: z.optional(z.array(CustomerContactPerson$outboundSchema)),
     email: z.optional(z.string()),
@@ -157,6 +173,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
     metadata: z.optional(z.record(z.string(), z.string())),
     name: z.string(),
     onboardingWorkflowName: z.optional(z.string()),
+    settings: z.optional(SettingsOverride$outboundSchema),
     skipOnboardingWorkflow: z.optional(z.boolean()),
     taxRateOverrides: z.optional(z.array(TaxRateOverride$outboundSchema)),
     taxTreatment: z.optional(TaxTreatment$outboundSchema),
@@ -171,6 +188,7 @@ export const CreateCustomerRequest$outboundSchema: z.ZodMiniType<
       addressPostalCode: "address_postal_code",
       addressState: "address_state",
       billingCurrency: "billing_currency",
+      billingEntityId: "billing_entity_id",
       contactPersons: "contact_persons",
       externalId: "external_id",
       integrationEntityMapping: "integration_entity_mapping",

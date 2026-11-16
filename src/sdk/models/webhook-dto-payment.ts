@@ -23,6 +23,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoPayment = {
   amount?: string | undefined;
+  connectionId?: string | undefined;
   currency?: string | undefined;
   destinationId?: string | undefined;
   destinationType?: PaymentDestinationType | undefined;
@@ -45,6 +46,7 @@ export const WebhookDtoPayment$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: types.optional(types.string()),
+    connection_id: types.optional(types.string()),
     currency: types.optional(types.string()),
     destination_id: types.optional(types.string()),
     destination_type: types.optional(PaymentDestinationType$inboundSchema),
@@ -61,6 +63,7 @@ export const WebhookDtoPayment$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "connection_id": "connectionId",
       "destination_id": "destinationId",
       "destination_type": "destinationType",
       "error_message": "errorMessage",
