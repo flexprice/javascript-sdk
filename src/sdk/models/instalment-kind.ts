@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const InstalmentKind = {
   Instalment: "instalment",
   Settlement: "settlement",
+  CancellationFee: "cancellation_fee",
 } as const;
 export type InstalmentKind = OpenEnum<typeof InstalmentKind>;
 

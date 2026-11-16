@@ -25,10 +25,11 @@ export type GetUsageAnalyticsResponse = {
   currency?: string | undefined;
   customAnalytics?: Array<CustomAnalyticItem> | undefined;
   /**
-   * Instalments lists, with expand "instalments", the instalments invoiced in the range for the v2 commitments covering
+   * Instalments lists, with expand "instalments", the instalments of the v2 commitments covering a queried meter that
    *
    * @remarks
-   * a queried meter; it is empty with property or source filters, or when no usage line runs in the range.
+   * were invoiced in the range, or are still scheduled with a bill_on in it; it is empty with property or source
+   * filters, or when no usage line runs in the range.
    */
   instalments?: Array<UsageAnalyticInstalment> | undefined;
   items?: Array<UsageAnalyticItem> | undefined;
@@ -38,7 +39,10 @@ export type GetUsageAnalyticsResponse = {
    */
   totalCost?: string | undefined;
   /**
-   * TotalCostWithInstalments is TotalCost plus the amounts of Instalments, set when expand includes "instalments".
+   * TotalCostWithInstalments is TotalCost plus the amounts of the invoiced Instalments, set when expand includes
+   *
+   * @remarks
+   * "instalments". Scheduled instalments are not billed yet, so they are left out.
    */
   totalCostWithInstalments?: string | undefined;
   totalDiscount?: string | undefined;
