@@ -10,9 +10,11 @@ import { invoicesGetCustomerInvoiceSummary } from "../funcs/invoices-get-custome
 import { invoicesGetInvoicePdf } from "../funcs/invoices-get-invoice-pdf.js";
 import { invoicesGetInvoicePreview } from "../funcs/invoices-get-invoice-preview.js";
 import { invoicesGetInvoice } from "../funcs/invoices-get-invoice.js";
+import { invoicesListInvoiceEmails } from "../funcs/invoices-list-invoice-emails.js";
 import { invoicesQueryInvoice } from "../funcs/invoices-query-invoice.js";
 import { invoicesRecalculateInvoiceV2 } from "../funcs/invoices-recalculate-invoice-v2.js";
 import { invoicesRecalculateInvoice } from "../funcs/invoices-recalculate-invoice.js";
+import { invoicesSendInvoiceEmail } from "../funcs/invoices-send-invoice-email.js";
 import { invoicesTriggerInvoiceCommsWebhook } from "../funcs/invoices-trigger-invoice-comms-webhook.js";
 import { invoicesUpdateInvoicePaymentStatus } from "../funcs/invoices-update-invoice-payment-status.js";
 import { invoicesUpdateInvoice } from "../funcs/invoices-update-invoice.js";
@@ -144,6 +146,42 @@ export class Invoices extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.SuccessResponse> {
     return unwrapAsync(invoicesTriggerInvoiceCommsWebhook(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * Email invoice to customer
+   *
+   * @remarks
+   * Use when you want Flexprice to email a finalized invoice to the customer, with a link to the hosted invoice and the PDF attached. Sends to the customer's email unless `to` is given. Returns the queued email; delivery happens in the background.
+   */
+  async sendInvoiceEmail(
+    id: string,
+    body?: models.SendInvoiceEmailRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<models.EmailLogResponse> {
+    return unwrapAsync(invoicesSendInvoiceEmail(
+      this,
+      id,
+      body,
+      options,
+    ));
+  }
+
+  /**
+   * List invoice emails
+   *
+   * @remarks
+   * Use when showing which emails were sent for an invoice and whether each was delivered. Newest first.
+   */
+  async listInvoiceEmails(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.ListEmailLogsResponse> {
+    return unwrapAsync(invoicesListInvoiceEmails(
       this,
       id,
       options,
