@@ -8,6 +8,7 @@ import { webhookEventsPostWebhookEventsBillingInstalmentInvoiced } from "../func
 import { webhookEventsPostWebhookEventsBillingInstalmentUpdated } from "../funcs/webhook-events-post-webhook-events-billing-instalment-updated.js";
 import { webhookEventsPostWebhookEventsBillingTermsCreated } from "../funcs/webhook-events-post-webhook-events-billing-terms-created.js";
 import { webhookEventsPostWebhookEventsBillingTermsUpdated } from "../funcs/webhook-events-post-webhook-events-billing-terms-updated.js";
+import { webhookEventsPostWebhookEventsCheckoutSessionCancelled } from "../funcs/webhook-events-post-webhook-events-checkout-session-cancelled.js";
 import { webhookEventsPostWebhookEventsCheckoutSessionCompleted } from "../funcs/webhook-events-post-webhook-events-checkout-session-completed.js";
 import { webhookEventsPostWebhookEventsCheckoutSessionExpired } from "../funcs/webhook-events-post-webhook-events-checkout-session-expired.js";
 import { webhookEventsPostWebhookEventsCheckoutSessionFailed } from "../funcs/webhook-events-post-webhook-events-checkout-session-failed.js";
@@ -165,6 +166,21 @@ export class WebhookEvents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.WebhookDtoBillingTermsWebhookPayload> {
     return unwrapAsync(webhookEventsPostWebhookEventsBillingTermsUpdated(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * checkout.session.cancelled
+   *
+   * @remarks
+   * Fired when a Checkout Session is cancelled through the API, alongside checkout.session.expired. Doc-only for parsing.
+   */
+  async postWebhookEventsCheckoutSessionCancelled(
+    options?: RequestOptions,
+  ): Promise<models.WebhookDtoCheckoutSessionWebhookPayload> {
+    return unwrapAsync(webhookEventsPostWebhookEventsCheckoutSessionCancelled(
       this,
       options,
     ));
