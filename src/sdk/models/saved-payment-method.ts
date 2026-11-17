@@ -20,6 +20,10 @@ import {
   PaymentMethodType$inboundSchema,
 } from "./payment-method-type.js";
 import {
+  SavedBankAccountDetails,
+  SavedBankAccountDetails$inboundSchema,
+} from "./saved-bank-account-details.js";
+import {
   SavedCardDetails,
   SavedCardDetails$inboundSchema,
 } from "./saved-card-details.js";
@@ -34,6 +38,7 @@ import {
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type SavedPaymentMethod = {
+  bankAccount?: SavedBankAccountDetails | undefined;
   /**
    * Capability, not permission: could this be charged with nobody present.
    *
@@ -65,6 +70,7 @@ export const SavedPaymentMethod$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    bank_account: types.optional(SavedBankAccountDetails$inboundSchema),
     can_auto_charge: types.optional(types.boolean()),
     card: types.optional(SavedCardDetails$inboundSchema),
     id: types.optional(types.string()),
@@ -78,6 +84,7 @@ export const SavedPaymentMethod$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "bank_account": "bankAccount",
       "can_auto_charge": "canAutoCharge",
       "instantly_chargeable": "instantlyChargeable",
       "is_default": "isDefault",

@@ -22,6 +22,7 @@ export type ListPaymentsStatus = ClosedEnum<typeof ListPaymentsStatus>;
 export type ListPaymentsRequest = {
   currency?: string | undefined;
   destinationId?: string | undefined;
+  destinationIds?: Array<string> | undefined;
   destinationType?: string | undefined;
   endTime?: string | undefined;
   expand?: string | undefined;
@@ -60,6 +61,7 @@ export const ListPaymentsStatus$outboundSchema: z.ZodMiniEnum<
 export type ListPaymentsRequest$Outbound = {
   currency?: string | undefined;
   destination_id?: string | undefined;
+  destination_ids?: Array<string> | undefined;
   destination_type?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
@@ -86,6 +88,7 @@ export const ListPaymentsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     currency: z.optional(z.string()),
     destinationId: z.optional(z.string()),
+    destinationIds: z.optional(z.array(z.string())),
     destinationType: z.optional(z.string()),
     endTime: z.optional(z.string()),
     expand: z.optional(z.string()),
@@ -106,6 +109,7 @@ export const ListPaymentsRequest$outboundSchema: z.ZodMiniType<
   z.transform((v) => {
     return remap$(v, {
       destinationId: "destination_id",
+      destinationIds: "destination_ids",
       destinationType: "destination_type",
       endTime: "end_time",
       gatewayPaymentId: "gateway_payment_id",

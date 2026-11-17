@@ -95,7 +95,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.integrations.linkIntegrationMapping({
     entityId: "<id>",
-    entityType: "invoice_line_item",
+    entityType: "subscription_line_item",
     providerEntityId: "<id>",
     providerType: "<value>",
   });
@@ -123,7 +123,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await integrationsLinkIntegrationMapping(flexprice, {
     entityId: "<id>",
-    entityType: "invoice_line_item",
+    entityType: "subscription_line_item",
     providerEntityId: "<id>",
     providerType: "<value>",
   });
@@ -176,7 +176,7 @@ const flexprice = new Flexprice({
 async function run() {
   const result = await flexprice.integrations.delinkIntegrationMapping({
     entityId: "<id>",
-    entityType: "price",
+    entityType: "invoice_line_item",
     providerType: "<value>",
   });
 
@@ -203,7 +203,7 @@ const flexprice = new FlexpriceCore({
 async function run() {
   const res = await integrationsDelinkIntegrationMapping(flexprice, {
     entityId: "<id>",
-    entityType: "price",
+    entityType: "invoice_line_item",
     providerType: "<value>",
   });
   if (res.ok) {

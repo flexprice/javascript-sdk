@@ -5,7 +5,7 @@
 ```typescript
 import { IntegrationEntityType } from "@flexprice/sdk/sdk/models";
 
-let value: IntegrationEntityType = "invoice_line_item";
+let value: IntegrationEntityType = "subscription_line_item";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: IntegrationEntityType = "invoice_line_item";
 ## Values
 
 ```typescript
-"customer" | "plan" | "invoice" | "subscription" | "payment" | "credit_note" | "addon" | "item" | "item_price" | "price" | "invoice_line_item" | "subscription_line_item" | Unrecognized<string>
+"customer" | "plan" | "invoice" | "subscription" | "payment" | "credit_note" | "addon" | "item" | "item_price" | "price" | "invoice_line_item" | "subscription_line_item" | "payment_method_setup" | Unrecognized<string>
 ```

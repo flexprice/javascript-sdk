@@ -7,7 +7,7 @@ import { LinkIntegrationMappingRequest } from "@flexprice/sdk/sdk/models";
 
 let value: LinkIntegrationMappingRequest = {
   entityId: "<id>",
-  entityType: "invoice_line_item",
+  entityType: "subscription_line_item",
   providerEntityId: "<id>",
   providerType: "<value>",
 };

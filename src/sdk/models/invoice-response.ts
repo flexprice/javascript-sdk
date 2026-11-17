@@ -25,6 +25,10 @@ import {
 } from "./customer-response.js";
 import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
 import {
+  InFlightCharge,
+  InFlightCharge$inboundSchema,
+} from "./in-flight-charge.js";
+import {
   InvoiceBillingEntity,
   InvoiceBillingEntity$inboundSchema,
 } from "./invoice-billing-entity.js";
@@ -147,6 +151,7 @@ export type InvoiceResponse = {
    * idempotency_key is a unique key used to prevent duplicate invoice creation when retrying API calls
    */
   idempotencyKey?: string | undefined;
+  inFlightCharge?: InFlightCharge | undefined;
   /**
    * invoice_number is the human-readable invoice number displayed to customers (e.g., INV-2024-001)
    */
@@ -294,6 +299,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     hosted_invoice_url: types.optional(types.string()),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
+    in_flight_charge: types.optional(InFlightCharge$inboundSchema),
     invoice_number: types.optional(types.string()),
     invoice_pdf_url: types.optional(types.string()),
     invoice_status: types.optional(InvoiceStatus$inboundSchema),
@@ -356,6 +362,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "fx_conversion": "fxConversion",
       "hosted_invoice_url": "hostedInvoiceUrl",
       "idempotency_key": "idempotencyKey",
+      "in_flight_charge": "inFlightCharge",
       "invoice_number": "invoiceNumber",
       "invoice_pdf_url": "invoicePdfUrl",
       "invoice_status": "invoiceStatus",
