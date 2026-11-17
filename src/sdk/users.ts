@@ -121,7 +121,7 @@ export class Users extends ClientSDK {
    * Remove user from tenant
    *
    * @remarks
-   * Remove a human user (type=user) from the current tenant. Not supported for service accounts; use DELETE /users/{id} for those.
+   * Remove a human user (type=user) from the current tenant. Also revokes every API key the user owns, in all environments. Not supported for service accounts; use DELETE /users/{id} for those.
    */
   async removeUser(
     id: string,
