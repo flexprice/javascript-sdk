@@ -10,6 +10,10 @@ export type GetCustomerUsageSummaryRequest = {
   customerLookupKey?: string | undefined;
   featureIds?: Array<string> | undefined;
   featureLookupKeys?: Array<string> | undefined;
+  /**
+   * RefreshGrants evaluates entitlement grants before returning their usage, so the read is slower.
+   */
+  refreshGrants?: boolean | undefined;
   subscriptionIds?: Array<string> | undefined;
 };
 
@@ -19,6 +23,7 @@ export type GetCustomerUsageSummaryRequest$Outbound = {
   customer_lookup_key?: string | undefined;
   feature_ids?: Array<string> | undefined;
   feature_lookup_keys?: Array<string> | undefined;
+  refresh_grants?: boolean | undefined;
   subscription_ids?: Array<string> | undefined;
 };
 
@@ -32,6 +37,7 @@ export const GetCustomerUsageSummaryRequest$outboundSchema: z.ZodMiniType<
     customerLookupKey: z.optional(z.string()),
     featureIds: z.optional(z.array(z.string())),
     featureLookupKeys: z.optional(z.array(z.string())),
+    refreshGrants: z.optional(z.boolean()),
     subscriptionIds: z.optional(z.array(z.string())),
   }),
   z.transform((v) => {
@@ -40,6 +46,7 @@ export const GetCustomerUsageSummaryRequest$outboundSchema: z.ZodMiniType<
       customerLookupKey: "customer_lookup_key",
       featureIds: "feature_ids",
       featureLookupKeys: "feature_lookup_keys",
+      refreshGrants: "refresh_grants",
       subscriptionIds: "subscription_ids",
     });
   }),

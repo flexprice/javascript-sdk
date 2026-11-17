@@ -437,12 +437,14 @@ export class Subscriptions extends ClientSDK {
   async getSubscriptionEntitlements(
     id: string,
     featureIds?: Array<string> | undefined,
+    refreshGrants?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.SubscriptionEntitlementsResponse> {
     return unwrapAsync(subscriptionsGetSubscriptionEntitlements(
       this,
       id,
       featureIds,
+      refreshGrants,
       options,
     ));
   }

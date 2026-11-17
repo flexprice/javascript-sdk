@@ -84,11 +84,13 @@ export class Customers extends ClientSDK {
    */
   async getCustomerEntitlementsByExternalID(
     externalId: string,
+    refreshGrants?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlementsByExternalID(
       this,
       externalId,
+      refreshGrants,
       options,
     ));
   }
@@ -205,11 +207,13 @@ export class Customers extends ClientSDK {
    */
   async getCustomerEntitlements(
     id: string,
+    refreshGrants?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlements(
       this,
       id,
+      refreshGrants,
       options,
     ));
   }

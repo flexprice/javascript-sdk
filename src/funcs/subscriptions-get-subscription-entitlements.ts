@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple, queryJoin } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -36,6 +36,7 @@ export function subscriptionsGetSubscriptionEntitlements(
   client: FlexpriceCore,
   id: string,
   featureIds?: Array<string> | undefined,
+  refreshGrants?: boolean | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -55,6 +56,7 @@ export function subscriptionsGetSubscriptionEntitlements(
     client,
     id,
     featureIds,
+    refreshGrants,
     options,
   ));
 }
@@ -63,6 +65,7 @@ async function $do(
   client: FlexpriceCore,
   id: string,
   featureIds?: Array<string> | undefined,
+  refreshGrants?: boolean | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -84,6 +87,7 @@ async function $do(
   const input: models.GetSubscriptionEntitlementsRequest = {
     id: id,
     featureIds: featureIds,
+    refreshGrants: refreshGrants,
   };
 
   const parsed = safeParse(
@@ -106,9 +110,14 @@ async function $do(
   };
   const path = pathToFunc("/subscriptions/{id}/entitlements")(pathParams);
 
-  const query = encodeFormQuery({
-    "feature_ids": payload.feature_ids,
-  }, { explode: false });
+  const query = queryJoin(
+    encodeFormQuery({
+      "feature_ids": payload.feature_ids,
+    }, { explode: false }),
+    encodeFormQuery({
+      "refresh_grants": payload.refresh_grants,
+    }),
+  );
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

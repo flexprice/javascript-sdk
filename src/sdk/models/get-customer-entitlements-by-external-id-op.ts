@@ -10,11 +10,16 @@ export type GetCustomerEntitlementsByExternalIDRequest = {
    * Customer External ID
    */
   externalId: string;
+  /**
+   * Evaluate entitlement grants before returning their usage (slower)
+   */
+  refreshGrants?: boolean | undefined;
 };
 
 /** @internal */
 export type GetCustomerEntitlementsByExternalIDRequest$Outbound = {
   external_id: string;
+  refresh_grants?: boolean | undefined;
 };
 
 /** @internal */
@@ -25,10 +30,12 @@ export const GetCustomerEntitlementsByExternalIDRequest$outboundSchema:
   > = z.pipe(
     z.object({
       externalId: z.string(),
+      refreshGrants: z.optional(z.boolean()),
     }),
     z.transform((v) => {
       return remap$(v, {
         externalId: "external_id",
+        refreshGrants: "refresh_grants",
       });
     }),
   );
