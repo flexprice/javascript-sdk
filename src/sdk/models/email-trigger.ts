@@ -15,3 +15,6 @@ export type EmailTrigger = OpenEnum<typeof EmailTrigger>;
 /** @internal */
 export const EmailTrigger$inboundSchema: z.ZodMiniType<EmailTrigger, unknown> =
   openEnums.inboundSchema(EmailTrigger);
+/** @internal */
+export const EmailTrigger$outboundSchema: z.ZodMiniType<string, EmailTrigger> =
+  openEnums.outboundSchema(EmailTrigger);

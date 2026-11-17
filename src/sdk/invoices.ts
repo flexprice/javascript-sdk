@@ -11,6 +11,7 @@ import { invoicesGetInvoicePdf } from "../funcs/invoices-get-invoice-pdf.js";
 import { invoicesGetInvoicePreview } from "../funcs/invoices-get-invoice-preview.js";
 import { invoicesGetInvoice } from "../funcs/invoices-get-invoice.js";
 import { invoicesListInvoiceEmails } from "../funcs/invoices-list-invoice-emails.js";
+import { invoicesQueryEmail } from "../funcs/invoices-query-email.js";
 import { invoicesQueryInvoice } from "../funcs/invoices-query-invoice.js";
 import { invoicesRecalculateInvoiceV2 } from "../funcs/invoices-recalculate-invoice-v2.js";
 import { invoicesRecalculateInvoice } from "../funcs/invoices-recalculate-invoice.js";
@@ -37,6 +38,23 @@ export class Invoices extends ClientSDK {
     return unwrapAsync(invoicesGetCustomerInvoiceSummary(
       this,
       id,
+      options,
+    ));
+  }
+
+  /**
+   * Search emails
+   *
+   * @remarks
+   * Use when reviewing emails sent to customers, for example every bounced email this month or every email to one customer. Filter by delivery status, trigger, customer, document and date. Newest first; paginated.
+   */
+  async queryEmail(
+    request: models.EmailLogFilter,
+    options?: RequestOptions,
+  ): Promise<models.ListEmailLogsResponse> {
+    return unwrapAsync(invoicesQueryEmail(
+      this,
+      request,
       options,
     ));
   }

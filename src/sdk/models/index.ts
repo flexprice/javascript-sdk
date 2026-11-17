@@ -266,6 +266,7 @@ export * from "./delink-integration-mapping-request.js";
 export * from "./download-task-export-op.js";
 export * from "./duration-unit.js";
 export * from "./email-delivery-status.js";
+export * from "./email-log-filter.js";
 export * from "./email-log-response.js";
 export * from "./email-provider.js";
 export * from "./email-template-key.js";

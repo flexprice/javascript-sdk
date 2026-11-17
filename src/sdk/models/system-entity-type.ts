@@ -32,3 +32,8 @@ export const SystemEntityType$inboundSchema: z.ZodMiniType<
   SystemEntityType,
   unknown
 > = openEnums.inboundSchema(SystemEntityType);
+/** @internal */
+export const SystemEntityType$outboundSchema: z.ZodMiniType<
+  string,
+  SystemEntityType
+> = openEnums.outboundSchema(SystemEntityType);

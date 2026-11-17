@@ -24,3 +24,8 @@ export const EmailDeliveryStatus$inboundSchema: z.ZodMiniType<
   EmailDeliveryStatus,
   unknown
 > = openEnums.inboundSchema(EmailDeliveryStatus);
+/** @internal */
+export const EmailDeliveryStatus$outboundSchema: z.ZodMiniType<
+  string,
+  EmailDeliveryStatus
+> = openEnums.outboundSchema(EmailDeliveryStatus);
