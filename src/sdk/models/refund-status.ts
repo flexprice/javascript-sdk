@@ -18,3 +18,6 @@ export type RefundStatus = OpenEnum<typeof RefundStatus>;
 /** @internal */
 export const RefundStatus$inboundSchema: z.ZodMiniType<RefundStatus, unknown> =
   openEnums.inboundSchema(RefundStatus);
+/** @internal */
+export const RefundStatus$outboundSchema: z.ZodMiniType<string, RefundStatus> =
+  openEnums.outboundSchema(RefundStatus);

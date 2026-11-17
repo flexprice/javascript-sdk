@@ -20,3 +20,8 @@ export const CommitmentEarlyTermination$inboundSchema: z.ZodMiniType<
   CommitmentEarlyTermination,
   unknown
 > = openEnums.inboundSchema(CommitmentEarlyTermination);
+/** @internal */
+export const CommitmentEarlyTermination$outboundSchema: z.ZodMiniType<
+  string,
+  CommitmentEarlyTermination
+> = openEnums.outboundSchema(CommitmentEarlyTermination);

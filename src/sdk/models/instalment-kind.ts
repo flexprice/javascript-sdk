@@ -18,3 +18,8 @@ export const InstalmentKind$inboundSchema: z.ZodMiniType<
   InstalmentKind,
   unknown
 > = openEnums.inboundSchema(InstalmentKind);
+/** @internal */
+export const InstalmentKind$outboundSchema: z.ZodMiniType<
+  string,
+  InstalmentKind
+> = openEnums.outboundSchema(InstalmentKind);

@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoCreditNote,
   WebhookDtoCreditNote$inboundSchema,
+  WebhookDtoCreditNote$Outbound,
+  WebhookDtoCreditNote$outboundSchema,
 } from "./webhook-dto-credit-note.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCreditNoteWebhookPayload = {
@@ -38,7 +41,38 @@ export const WebhookDtoCreditNoteWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCreditNoteWebhookPayload$Outbound = {
+  credit_note?: WebhookDtoCreditNote$Outbound | undefined;
+  event_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCreditNoteWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoCreditNoteWebhookPayload$Outbound,
+  WebhookDtoCreditNoteWebhookPayload
+> = z.pipe(
+  z.object({
+    creditNote: z.optional(WebhookDtoCreditNote$outboundSchema),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      creditNote: "credit_note",
+      eventType: "event_type",
+    });
+  }),
+);
+
+export function webhookDtoCreditNoteWebhookPayloadToJSON(
+  webhookDtoCreditNoteWebhookPayload: WebhookDtoCreditNoteWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoCreditNoteWebhookPayload$outboundSchema.parse(
+      webhookDtoCreditNoteWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoCreditNoteWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCreditNoteWebhookPayload, SDKValidationError> {

@@ -14,3 +14,7 @@ export type WalletTxSourceType = ClosedEnum<typeof WalletTxSourceType>;
 export const WalletTxSourceType$inboundSchema: z.ZodMiniEnum<
   typeof WalletTxSourceType
 > = z.enum(WalletTxSourceType);
+/** @internal */
+export const WalletTxSourceType$outboundSchema: z.ZodMiniEnum<
+  typeof WalletTxSourceType
+> = WalletTxSourceType$inboundSchema;

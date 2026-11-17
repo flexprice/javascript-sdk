@@ -10,8 +10,15 @@ import * as types from "../../types/primitives.js";
 import {
   CommitmentInfo,
   CommitmentInfo$inboundSchema,
+  CommitmentInfo$Outbound,
+  CommitmentInfo$outboundSchema,
 } from "./commitment-info.js";
-import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
+import {
+  FxConversion,
+  FxConversion$inboundSchema,
+  FxConversion$Outbound,
+  FxConversion$outboundSchema,
+} from "./fx-conversion.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoInvoiceLineItem = {
@@ -99,7 +106,102 @@ export const WebhookDtoInvoiceLineItem$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoInvoiceLineItem$Outbound = {
+  adjusted_entitlement_quantity?: string | undefined;
+  amount?: string | undefined;
+  billing_instalment_id?: string | undefined;
+  commitment_info?: CommitmentInfo$Outbound | undefined;
+  currency?: string | undefined;
+  display_name?: string | undefined;
+  entity_id?: string | undefined;
+  entity_type?: string | undefined;
+  fx_conversion?: FxConversion$Outbound | undefined;
+  id?: string | undefined;
+  invoice_level_discount?: string | undefined;
+  line_item_discount?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  meter_display_name?: string | undefined;
+  meter_id?: string | undefined;
+  period_end?: string | undefined;
+  period_start?: string | undefined;
+  plan_display_name?: string | undefined;
+  prepaid_credits_applied?: string | undefined;
+  price_id?: string | undefined;
+  price_type?: string | undefined;
+  price_unit?: string | undefined;
+  price_unit_amount?: string | undefined;
+  quantity?: string | undefined;
+  subscription_line_item_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoInvoiceLineItem$outboundSchema: z.ZodMiniType<
+  WebhookDtoInvoiceLineItem$Outbound,
+  WebhookDtoInvoiceLineItem
+> = z.pipe(
+  z.object({
+    adjustedEntitlementQuantity: z.optional(z.string()),
+    amount: z.optional(z.string()),
+    billingInstalmentId: z.optional(z.string()),
+    commitmentInfo: z.optional(CommitmentInfo$outboundSchema),
+    currency: z.optional(z.string()),
+    displayName: z.optional(z.string()),
+    entityId: z.optional(z.string()),
+    entityType: z.optional(z.string()),
+    fxConversion: z.optional(FxConversion$outboundSchema),
+    id: z.optional(z.string()),
+    invoiceLevelDiscount: z.optional(z.string()),
+    lineItemDiscount: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    meterDisplayName: z.optional(z.string()),
+    meterId: z.optional(z.string()),
+    periodEnd: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    periodStart: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    planDisplayName: z.optional(z.string()),
+    prepaidCreditsApplied: z.optional(z.string()),
+    priceId: z.optional(z.string()),
+    priceType: z.optional(z.string()),
+    priceUnit: z.optional(z.string()),
+    priceUnitAmount: z.optional(z.string()),
+    quantity: z.optional(z.string()),
+    subscriptionLineItemId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      adjustedEntitlementQuantity: "adjusted_entitlement_quantity",
+      billingInstalmentId: "billing_instalment_id",
+      commitmentInfo: "commitment_info",
+      displayName: "display_name",
+      entityId: "entity_id",
+      entityType: "entity_type",
+      fxConversion: "fx_conversion",
+      invoiceLevelDiscount: "invoice_level_discount",
+      lineItemDiscount: "line_item_discount",
+      meterDisplayName: "meter_display_name",
+      meterId: "meter_id",
+      periodEnd: "period_end",
+      periodStart: "period_start",
+      planDisplayName: "plan_display_name",
+      prepaidCreditsApplied: "prepaid_credits_applied",
+      priceId: "price_id",
+      priceType: "price_type",
+      priceUnit: "price_unit",
+      priceUnitAmount: "price_unit_amount",
+      subscriptionLineItemId: "subscription_line_item_id",
+    });
+  }),
+);
+
+export function webhookDtoInvoiceLineItemToJSON(
+  webhookDtoInvoiceLineItem: WebhookDtoInvoiceLineItem,
+): string {
+  return JSON.stringify(
+    WebhookDtoInvoiceLineItem$outboundSchema.parse(webhookDtoInvoiceLineItem),
+  );
+}
 export function webhookDtoInvoiceLineItemFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoInvoiceLineItem, SDKValidationError> {

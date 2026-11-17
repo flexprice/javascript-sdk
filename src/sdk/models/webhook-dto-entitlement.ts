@@ -10,12 +10,18 @@ import * as types from "../../types/primitives.js";
 import {
   EntitlementEntityType,
   EntitlementEntityType$inboundSchema,
+  EntitlementEntityType$outboundSchema,
 } from "./entitlement-entity-type.js";
 import {
   EntitlementUsageResetPeriod,
   EntitlementUsageResetPeriod$inboundSchema,
+  EntitlementUsageResetPeriod$outboundSchema,
 } from "./entitlement-usage-reset-period.js";
-import { FeatureType, FeatureType$inboundSchema } from "./feature-type.js";
+import {
+  FeatureType,
+  FeatureType$inboundSchema,
+  FeatureType$outboundSchema,
+} from "./feature-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoEntitlement = {
@@ -64,7 +70,59 @@ export const WebhookDtoEntitlement$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoEntitlement$Outbound = {
+  entity_id?: string | undefined;
+  entity_type?: string | undefined;
+  feature_id?: string | undefined;
+  feature_type?: string | undefined;
+  id?: string | undefined;
+  is_enabled?: boolean | undefined;
+  is_soft_limit?: boolean | undefined;
+  static_value?: string | undefined;
+  usage_limit?: number | undefined;
+  usage_reset_period?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoEntitlement$outboundSchema: z.ZodMiniType<
+  WebhookDtoEntitlement$Outbound,
+  WebhookDtoEntitlement
+> = z.pipe(
+  z.object({
+    entityId: z.optional(z.string()),
+    entityType: z.optional(EntitlementEntityType$outboundSchema),
+    featureId: z.optional(z.string()),
+    featureType: z.optional(FeatureType$outboundSchema),
+    id: z.optional(z.string()),
+    isEnabled: z.optional(z.boolean()),
+    isSoftLimit: z.optional(z.boolean()),
+    staticValue: z.optional(z.string()),
+    usageLimit: z.optional(z.int()),
+    usageResetPeriod: z.optional(EntitlementUsageResetPeriod$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+      entityType: "entity_type",
+      featureId: "feature_id",
+      featureType: "feature_type",
+      isEnabled: "is_enabled",
+      isSoftLimit: "is_soft_limit",
+      staticValue: "static_value",
+      usageLimit: "usage_limit",
+      usageResetPeriod: "usage_reset_period",
+    });
+  }),
+);
+
+export function webhookDtoEntitlementToJSON(
+  webhookDtoEntitlement: WebhookDtoEntitlement,
+): string {
+  return JSON.stringify(
+    WebhookDtoEntitlement$outboundSchema.parse(webhookDtoEntitlement),
+  );
+}
 export function webhookDtoEntitlementFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoEntitlement, SDKValidationError> {

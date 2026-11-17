@@ -10,15 +10,19 @@ import * as types from "../../types/primitives.js";
 import {
   BillingTermOwnerType,
   BillingTermOwnerType$inboundSchema,
+  BillingTermOwnerType$outboundSchema,
 } from "./billing-term-owner-type.js";
 import {
   BillingtermTerm,
   BillingtermTerm$inboundSchema,
+  BillingtermTerm$Outbound,
+  BillingtermTerm$outboundSchema,
 } from "./billingterm-term.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoBillingTermsWebhookPayload = {
@@ -48,7 +52,44 @@ export const WebhookDtoBillingTermsWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoBillingTermsWebhookPayload$Outbound = {
+  billing_terms?: Array<BillingtermTerm$Outbound> | undefined;
+  event_type?: string | undefined;
+  owner_id?: string | undefined;
+  owner_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoBillingTermsWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoBillingTermsWebhookPayload$Outbound,
+  WebhookDtoBillingTermsWebhookPayload
+> = z.pipe(
+  z.object({
+    billingTerms: z.optional(z.array(BillingtermTerm$outboundSchema)),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    ownerId: z.optional(z.string()),
+    ownerType: z.optional(BillingTermOwnerType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billingTerms: "billing_terms",
+      eventType: "event_type",
+      ownerId: "owner_id",
+      ownerType: "owner_type",
+    });
+  }),
+);
+
+export function webhookDtoBillingTermsWebhookPayloadToJSON(
+  webhookDtoBillingTermsWebhookPayload: WebhookDtoBillingTermsWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoBillingTermsWebhookPayload$outboundSchema.parse(
+      webhookDtoBillingTermsWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoBillingTermsWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoBillingTermsWebhookPayload, SDKValidationError> {

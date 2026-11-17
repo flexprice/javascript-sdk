@@ -35,7 +35,43 @@ export const WebhookDtoSubscriptionPhase$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoSubscriptionPhase$Outbound = {
+  end_date?: string | undefined;
+  id?: string | undefined;
+  start_date?: string | undefined;
+  subscription_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoSubscriptionPhase$outboundSchema: z.ZodMiniType<
+  WebhookDtoSubscriptionPhase$Outbound,
+  WebhookDtoSubscriptionPhase
+> = z.pipe(
+  z.object({
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    id: z.optional(z.string()),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      endDate: "end_date",
+      startDate: "start_date",
+      subscriptionId: "subscription_id",
+    });
+  }),
+);
+
+export function webhookDtoSubscriptionPhaseToJSON(
+  webhookDtoSubscriptionPhase: WebhookDtoSubscriptionPhase,
+): string {
+  return JSON.stringify(
+    WebhookDtoSubscriptionPhase$outboundSchema.parse(
+      webhookDtoSubscriptionPhase,
+    ),
+  );
+}
 export function webhookDtoSubscriptionPhaseFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoSubscriptionPhase, SDKValidationError> {

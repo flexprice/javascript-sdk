@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoCheckoutSession,
   WebhookDtoCheckoutSession$inboundSchema,
+  WebhookDtoCheckoutSession$Outbound,
+  WebhookDtoCheckoutSession$outboundSchema,
 } from "./webhook-dto-checkout-session.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCheckoutSessionWebhookPayload = {
@@ -36,7 +39,40 @@ export const WebhookDtoCheckoutSessionWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoCheckoutSessionWebhookPayload$Outbound = {
+  checkout_session?: WebhookDtoCheckoutSession$Outbound | undefined;
+  event_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCheckoutSessionWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoCheckoutSessionWebhookPayload$Outbound,
+    WebhookDtoCheckoutSessionWebhookPayload
+  > = z.pipe(
+    z.object({
+      checkoutSession: z.optional(WebhookDtoCheckoutSession$outboundSchema),
+      eventType: z.optional(WebhookEventName$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        checkoutSession: "checkout_session",
+        eventType: "event_type",
+      });
+    }),
+  );
+
+export function webhookDtoCheckoutSessionWebhookPayloadToJSON(
+  webhookDtoCheckoutSessionWebhookPayload:
+    WebhookDtoCheckoutSessionWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoCheckoutSessionWebhookPayload$outboundSchema.parse(
+      webhookDtoCheckoutSessionWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoCheckoutSessionWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<

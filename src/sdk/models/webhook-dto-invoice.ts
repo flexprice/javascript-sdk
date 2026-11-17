@@ -7,37 +7,63 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { FxConversion, FxConversion$inboundSchema } from "./fx-conversion.js";
+import {
+  FxConversion,
+  FxConversion$inboundSchema,
+  FxConversion$Outbound,
+  FxConversion$outboundSchema,
+} from "./fx-conversion.js";
 import {
   InvoiceStatus,
   InvoiceStatus$inboundSchema,
+  InvoiceStatus$outboundSchema,
 } from "./invoice-status.js";
-import { InvoiceType, InvoiceType$inboundSchema } from "./invoice-type.js";
+import {
+  InvoiceType,
+  InvoiceType$inboundSchema,
+  InvoiceType$outboundSchema,
+} from "./invoice-type.js";
 import {
   PaymentStatus,
   PaymentStatus$inboundSchema,
+  PaymentStatus$outboundSchema,
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { TaxSummary, TaxSummary$inboundSchema } from "./tax-summary.js";
+import {
+  TaxSummary,
+  TaxSummary$inboundSchema,
+  TaxSummary$Outbound,
+  TaxSummary$outboundSchema,
+} from "./tax-summary.js";
 import {
   WebhookDtoCouponApplication,
   WebhookDtoCouponApplication$inboundSchema,
+  WebhookDtoCouponApplication$Outbound,
+  WebhookDtoCouponApplication$outboundSchema,
 } from "./webhook-dto-coupon-application.js";
 import {
   WebhookDtoCustomer,
   WebhookDtoCustomer$inboundSchema,
+  WebhookDtoCustomer$Outbound,
+  WebhookDtoCustomer$outboundSchema,
 } from "./webhook-dto-customer.js";
 import {
   WebhookDtoInvoiceLineItem,
   WebhookDtoInvoiceLineItem$inboundSchema,
+  WebhookDtoInvoiceLineItem$Outbound,
+  WebhookDtoInvoiceLineItem$outboundSchema,
 } from "./webhook-dto-invoice-line-item.js";
 import {
   WebhookDtoSubscription,
   WebhookDtoSubscription$inboundSchema,
+  WebhookDtoSubscription$Outbound,
+  WebhookDtoSubscription$outboundSchema,
 } from "./webhook-dto-subscription.js";
 import {
   WebhookDtoTaxApplied,
   WebhookDtoTaxApplied$inboundSchema,
+  WebhookDtoTaxApplied$Outbound,
+  WebhookDtoTaxApplied$outboundSchema,
 } from "./webhook-dto-tax-applied.js";
 
 export type WebhookDtoInvoice = {
@@ -170,7 +196,147 @@ export const WebhookDtoInvoice$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoInvoice$Outbound = {
+  amount_due?: string | undefined;
+  amount_paid?: string | undefined;
+  amount_remaining?: string | undefined;
+  billing_entity_id?: string | undefined;
+  billing_period?: string | undefined;
+  billing_reason?: string | undefined;
+  billing_sequence?: number | undefined;
+  coupon_applications?: Array<WebhookDtoCouponApplication$Outbound> | undefined;
+  created_at?: string | undefined;
+  currency?: string | undefined;
+  customer?: WebhookDtoCustomer$Outbound | undefined;
+  customer_id?: string | undefined;
+  description?: string | undefined;
+  due_date?: string | undefined;
+  environment_id?: string | undefined;
+  finalized_at?: string | undefined;
+  fx_conversion?: FxConversion$Outbound | undefined;
+  id?: string | undefined;
+  idempotency_key?: string | undefined;
+  invoice_number?: string | undefined;
+  invoice_pdf_url?: string | undefined;
+  invoice_status?: string | undefined;
+  invoice_type?: string | undefined;
+  line_items?: Array<WebhookDtoInvoiceLineItem$Outbound> | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  paid_at?: string | undefined;
+  payment_status?: string | undefined;
+  period_end?: string | undefined;
+  period_start?: string | undefined;
+  subscription?: WebhookDtoSubscription$Outbound | undefined;
+  subscription_id?: string | undefined;
+  subtotal?: string | undefined;
+  tax_summary?: TaxSummary$Outbound | undefined;
+  taxes?: Array<WebhookDtoTaxApplied$Outbound> | undefined;
+  total?: string | undefined;
+  total_discount?: string | undefined;
+  total_prepaid_credits_applied?: string | undefined;
+  total_tax?: string | undefined;
+  updated_at?: string | undefined;
+  voided_at?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoInvoice$outboundSchema: z.ZodMiniType<
+  WebhookDtoInvoice$Outbound,
+  WebhookDtoInvoice
+> = z.pipe(
+  z.object({
+    amountDue: z.optional(z.string()),
+    amountPaid: z.optional(z.string()),
+    amountRemaining: z.optional(z.string()),
+    billingEntityId: z.optional(z.string()),
+    billingPeriod: z.optional(z.string()),
+    billingReason: z.optional(z.string()),
+    billingSequence: z.optional(z.int()),
+    couponApplications: z.optional(
+      z.array(WebhookDtoCouponApplication$outboundSchema),
+    ),
+    createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    currency: z.optional(z.string()),
+    customer: z.optional(WebhookDtoCustomer$outboundSchema),
+    customerId: z.optional(z.string()),
+    description: z.optional(z.string()),
+    dueDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    environmentId: z.optional(z.string()),
+    finalizedAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    fxConversion: z.optional(FxConversion$outboundSchema),
+    id: z.optional(z.string()),
+    idempotencyKey: z.optional(z.string()),
+    invoiceNumber: z.optional(z.string()),
+    invoicePdfUrl: z.optional(z.string()),
+    invoiceStatus: z.optional(InvoiceStatus$outboundSchema),
+    invoiceType: z.optional(InvoiceType$outboundSchema),
+    lineItems: z.optional(z.array(WebhookDtoInvoiceLineItem$outboundSchema)),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    paidAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    paymentStatus: z.optional(PaymentStatus$outboundSchema),
+    periodEnd: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    periodStart: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    subscription: z.optional(WebhookDtoSubscription$outboundSchema),
+    subscriptionId: z.optional(z.string()),
+    subtotal: z.optional(z.string()),
+    taxSummary: z.optional(TaxSummary$outboundSchema),
+    taxes: z.optional(z.array(WebhookDtoTaxApplied$outboundSchema)),
+    total: z.optional(z.string()),
+    totalDiscount: z.optional(z.string()),
+    totalPrepaidCreditsApplied: z.optional(z.string()),
+    totalTax: z.optional(z.string()),
+    updatedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    voidedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      amountDue: "amount_due",
+      amountPaid: "amount_paid",
+      amountRemaining: "amount_remaining",
+      billingEntityId: "billing_entity_id",
+      billingPeriod: "billing_period",
+      billingReason: "billing_reason",
+      billingSequence: "billing_sequence",
+      couponApplications: "coupon_applications",
+      createdAt: "created_at",
+      customerId: "customer_id",
+      dueDate: "due_date",
+      environmentId: "environment_id",
+      finalizedAt: "finalized_at",
+      fxConversion: "fx_conversion",
+      idempotencyKey: "idempotency_key",
+      invoiceNumber: "invoice_number",
+      invoicePdfUrl: "invoice_pdf_url",
+      invoiceStatus: "invoice_status",
+      invoiceType: "invoice_type",
+      lineItems: "line_items",
+      paidAt: "paid_at",
+      paymentStatus: "payment_status",
+      periodEnd: "period_end",
+      periodStart: "period_start",
+      subscriptionId: "subscription_id",
+      taxSummary: "tax_summary",
+      totalDiscount: "total_discount",
+      totalPrepaidCreditsApplied: "total_prepaid_credits_applied",
+      totalTax: "total_tax",
+      updatedAt: "updated_at",
+      voidedAt: "voided_at",
+    });
+  }),
+);
+
+export function webhookDtoInvoiceToJSON(
+  webhookDtoInvoice: WebhookDtoInvoice,
+): string {
+  return JSON.stringify(
+    WebhookDtoInvoice$outboundSchema.parse(webhookDtoInvoice),
+  );
+}
 export function webhookDtoInvoiceFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoInvoice, SDKValidationError> {

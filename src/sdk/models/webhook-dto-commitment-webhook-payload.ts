@@ -10,11 +10,14 @@ import * as types from "../../types/primitives.js";
 import {
   CommitmentResponse,
   CommitmentResponse$inboundSchema,
+  CommitmentResponse$Outbound,
+  CommitmentResponse$outboundSchema,
 } from "./commitment-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoCommitmentWebhookPayload = {
@@ -37,7 +40,37 @@ export const WebhookDtoCommitmentWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCommitmentWebhookPayload$Outbound = {
+  commitment?: CommitmentResponse$Outbound | undefined;
+  event_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCommitmentWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoCommitmentWebhookPayload$Outbound,
+  WebhookDtoCommitmentWebhookPayload
+> = z.pipe(
+  z.object({
+    commitment: z.optional(CommitmentResponse$outboundSchema),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventType: "event_type",
+    });
+  }),
+);
+
+export function webhookDtoCommitmentWebhookPayloadToJSON(
+  webhookDtoCommitmentWebhookPayload: WebhookDtoCommitmentWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoCommitmentWebhookPayload$outboundSchema.parse(
+      webhookDtoCommitmentWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoCommitmentWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCommitmentWebhookPayload, SDKValidationError> {

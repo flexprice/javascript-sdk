@@ -11,6 +11,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   TaxExemptionReasonCode,
   TaxExemptionReasonCode$inboundSchema,
+  TaxExemptionReasonCode$outboundSchema,
 } from "./tax-exemption-reason-code.js";
 
 export type TaxExemptionSummary = {
@@ -33,7 +34,35 @@ export const TaxExemptionSummary$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type TaxExemptionSummary$Outbound = {
+  reason?: string | undefined;
+  reason_code?: string | undefined;
+};
 
+/** @internal */
+export const TaxExemptionSummary$outboundSchema: z.ZodMiniType<
+  TaxExemptionSummary$Outbound,
+  TaxExemptionSummary
+> = z.pipe(
+  z.object({
+    reason: z.optional(z.string()),
+    reasonCode: z.optional(TaxExemptionReasonCode$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      reasonCode: "reason_code",
+    });
+  }),
+);
+
+export function taxExemptionSummaryToJSON(
+  taxExemptionSummary: TaxExemptionSummary,
+): string {
+  return JSON.stringify(
+    TaxExemptionSummary$outboundSchema.parse(taxExemptionSummary),
+  );
+}
 export function taxExemptionSummaryFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxExemptionSummary, SDKValidationError> {

@@ -11,14 +11,19 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoInvoice,
   WebhookDtoInvoice$inboundSchema,
+  WebhookDtoInvoice$Outbound,
+  WebhookDtoInvoice$outboundSchema,
 } from "./webhook-dto-invoice.js";
 import {
   WebhookDtoProviderDetails,
   WebhookDtoProviderDetails$inboundSchema,
+  WebhookDtoProviderDetails$Outbound,
+  WebhookDtoProviderDetails$outboundSchema,
 } from "./webhook-dto-provider-details.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoInvoiceSyncWebhookPayload = {
@@ -46,7 +51,42 @@ export const WebhookDtoInvoiceSyncWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoInvoiceSyncWebhookPayload$Outbound = {
+  error?: string | undefined;
+  event_type?: string | undefined;
+  invoice?: WebhookDtoInvoice$Outbound | undefined;
+  provider_details?: WebhookDtoProviderDetails$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoInvoiceSyncWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoInvoiceSyncWebhookPayload$Outbound,
+  WebhookDtoInvoiceSyncWebhookPayload
+> = z.pipe(
+  z.object({
+    error: z.optional(z.string()),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    invoice: z.optional(WebhookDtoInvoice$outboundSchema),
+    providerDetails: z.optional(WebhookDtoProviderDetails$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventType: "event_type",
+      providerDetails: "provider_details",
+    });
+  }),
+);
+
+export function webhookDtoInvoiceSyncWebhookPayloadToJSON(
+  webhookDtoInvoiceSyncWebhookPayload: WebhookDtoInvoiceSyncWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoInvoiceSyncWebhookPayload$outboundSchema.parse(
+      webhookDtoInvoiceSyncWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoInvoiceSyncWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoInvoiceSyncWebhookPayload, SDKValidationError> {

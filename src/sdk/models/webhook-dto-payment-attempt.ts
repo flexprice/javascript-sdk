@@ -40,7 +40,46 @@ export const WebhookDtoPaymentAttempt$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoPaymentAttempt$Outbound = {
+  attempt_number?: number | undefined;
+  created_at?: string | undefined;
+  error_message?: string | undefined;
+  gateway_attempt_id?: string | undefined;
+  id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+};
 
+/** @internal */
+export const WebhookDtoPaymentAttempt$outboundSchema: z.ZodMiniType<
+  WebhookDtoPaymentAttempt$Outbound,
+  WebhookDtoPaymentAttempt
+> = z.pipe(
+  z.object({
+    attemptNumber: z.optional(z.int()),
+    createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    errorMessage: z.optional(z.string()),
+    gatewayAttemptId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      attemptNumber: "attempt_number",
+      createdAt: "created_at",
+      errorMessage: "error_message",
+      gatewayAttemptId: "gateway_attempt_id",
+    });
+  }),
+);
+
+export function webhookDtoPaymentAttemptToJSON(
+  webhookDtoPaymentAttempt: WebhookDtoPaymentAttempt,
+): string {
+  return JSON.stringify(
+    WebhookDtoPaymentAttempt$outboundSchema.parse(webhookDtoPaymentAttempt),
+  );
+}
 export function webhookDtoPaymentAttemptFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoPaymentAttempt, SDKValidationError> {

@@ -7,12 +7,22 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
-import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
+import {
+  AlertState,
+  AlertState$inboundSchema,
+  AlertState$outboundSchema,
+} from "./alert-state.js";
+import {
+  AlertType,
+  AlertType$inboundSchema,
+  AlertType$outboundSchema,
+} from "./alert-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoSubscription,
   WebhookDtoSubscription$inboundSchema,
+  WebhookDtoSubscription$Outbound,
+  WebhookDtoSubscription$outboundSchema,
 } from "./webhook-dto-subscription.js";
 
 export type WebhookDtoSpendAlertEvent = {
@@ -52,7 +62,54 @@ export const WebhookDtoSpendAlertEvent$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoSpendAlertEvent$Outbound = {
+  alert_status?: string | undefined;
+  alert_type?: string | undefined;
+  current_spend?: string | undefined;
+  group_id?: string | undefined;
+  subscription?: WebhookDtoSubscription$Outbound | undefined;
+  subscription_line_item_id?: string | undefined;
+  threshold?: string | undefined;
+  triggered_at?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoSpendAlertEvent$outboundSchema: z.ZodMiniType<
+  WebhookDtoSpendAlertEvent$Outbound,
+  WebhookDtoSpendAlertEvent
+> = z.pipe(
+  z.object({
+    alertStatus: z.optional(AlertState$outboundSchema),
+    alertType: z.optional(AlertType$outboundSchema),
+    currentSpend: z.optional(z.string()),
+    groupId: z.optional(z.string()),
+    subscription: z.optional(WebhookDtoSubscription$outboundSchema),
+    subscriptionLineItemId: z.optional(z.string()),
+    threshold: z.optional(z.string()),
+    triggeredAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      alertStatus: "alert_status",
+      alertType: "alert_type",
+      currentSpend: "current_spend",
+      groupId: "group_id",
+      subscriptionLineItemId: "subscription_line_item_id",
+      triggeredAt: "triggered_at",
+    });
+  }),
+);
+
+export function webhookDtoSpendAlertEventToJSON(
+  webhookDtoSpendAlertEvent: WebhookDtoSpendAlertEvent,
+): string {
+  return JSON.stringify(
+    WebhookDtoSpendAlertEvent$outboundSchema.parse(webhookDtoSpendAlertEvent),
+  );
+}
 export function webhookDtoSpendAlertEventFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoSpendAlertEvent, SDKValidationError> {

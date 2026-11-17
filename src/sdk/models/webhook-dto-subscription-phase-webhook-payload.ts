@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoSubscriptionPhase,
   WebhookDtoSubscriptionPhase$inboundSchema,
+  WebhookDtoSubscriptionPhase$Outbound,
+  WebhookDtoSubscriptionPhase$outboundSchema,
 } from "./webhook-dto-subscription-phase.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoSubscriptionPhaseWebhookPayload = {
@@ -35,7 +38,39 @@ export const WebhookDtoSubscriptionPhaseWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoSubscriptionPhaseWebhookPayload$Outbound = {
+  event_type?: string | undefined;
+  phase?: WebhookDtoSubscriptionPhase$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoSubscriptionPhaseWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoSubscriptionPhaseWebhookPayload$Outbound,
+    WebhookDtoSubscriptionPhaseWebhookPayload
+  > = z.pipe(
+    z.object({
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      phase: z.optional(WebhookDtoSubscriptionPhase$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        eventType: "event_type",
+      });
+    }),
+  );
+
+export function webhookDtoSubscriptionPhaseWebhookPayloadToJSON(
+  webhookDtoSubscriptionPhaseWebhookPayload:
+    WebhookDtoSubscriptionPhaseWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoSubscriptionPhaseWebhookPayload$outboundSchema.parse(
+      webhookDtoSubscriptionPhaseWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoSubscriptionPhaseWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -18,3 +18,8 @@ export const RefundDestination$inboundSchema: z.ZodMiniType<
   RefundDestination,
   unknown
 > = openEnums.inboundSchema(RefundDestination);
+/** @internal */
+export const RefundDestination$outboundSchema: z.ZodMiniType<
+  string,
+  RefundDestination
+> = openEnums.outboundSchema(RefundDestination);

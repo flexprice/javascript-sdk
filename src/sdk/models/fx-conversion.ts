@@ -10,8 +10,14 @@ import * as types from "../../types/primitives.js";
 import {
   FxConversionSource,
   FxConversionSource$inboundSchema,
+  FxConversionSource$Outbound,
+  FxConversionSource$outboundSchema,
 } from "./fx-conversion-source.js";
-import { FXRateScope, FXRateScope$inboundSchema } from "./fx-rate-scope.js";
+import {
+  FXRateScope,
+  FXRateScope$inboundSchema,
+  FXRateScope$outboundSchema,
+} from "./fx-rate-scope.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type FxConversion = {
@@ -60,7 +66,46 @@ export const FxConversion$inboundSchema: z.ZodMiniType<FxConversion, unknown> =
       });
     }),
   );
+/** @internal */
+export type FxConversion$Outbound = {
+  billing_currency?: string | undefined;
+  charge_currency?: string | undefined;
+  converted_at?: string | undefined;
+  rate?: string | undefined;
+  rate_id?: string | undefined;
+  scope?: string | undefined;
+  source?: FxConversionSource$Outbound | undefined;
+};
 
+/** @internal */
+export const FxConversion$outboundSchema: z.ZodMiniType<
+  FxConversion$Outbound,
+  FxConversion
+> = z.pipe(
+  z.object({
+    billingCurrency: z.optional(z.string()),
+    chargeCurrency: z.optional(z.string()),
+    convertedAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    rate: z.optional(z.string()),
+    rateId: z.optional(z.string()),
+    scope: z.optional(FXRateScope$outboundSchema),
+    source: z.optional(FxConversionSource$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billingCurrency: "billing_currency",
+      chargeCurrency: "charge_currency",
+      convertedAt: "converted_at",
+      rateId: "rate_id",
+    });
+  }),
+);
+
+export function fxConversionToJSON(fxConversion: FxConversion): string {
+  return JSON.stringify(FxConversion$outboundSchema.parse(fxConversion));
+}
 export function fxConversionFromJSON(
   jsonString: string,
 ): SafeParseResult<FxConversion, SDKValidationError> {

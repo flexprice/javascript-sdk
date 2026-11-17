@@ -93,3 +93,8 @@ export const WebhookEventName$inboundSchema: z.ZodMiniType<
   WebhookEventName,
   unknown
 > = openEnums.inboundSchema(WebhookEventName);
+/** @internal */
+export const WebhookEventName$outboundSchema: z.ZodMiniType<
+  string,
+  WebhookEventName
+> = openEnums.outboundSchema(WebhookEventName);

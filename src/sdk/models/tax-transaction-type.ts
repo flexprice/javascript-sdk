@@ -17,3 +17,8 @@ export const TaxTransactionType$inboundSchema: z.ZodMiniType<
   TaxTransactionType,
   unknown
 > = openEnums.inboundSchema(TaxTransactionType);
+/** @internal */
+export const TaxTransactionType$outboundSchema: z.ZodMiniType<
+  string,
+  TaxTransactionType
+> = openEnums.outboundSchema(TaxTransactionType);

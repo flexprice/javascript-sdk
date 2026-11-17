@@ -11,6 +11,8 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoPrice,
   WebhookDtoPrice$inboundSchema,
+  WebhookDtoPrice$Outbound,
+  WebhookDtoPrice$outboundSchema,
 } from "./webhook-dto-price.js";
 
 export type WebhookDtoPlan = {
@@ -41,7 +43,39 @@ export const WebhookDtoPlan$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoPlan$Outbound = {
+  description?: string | undefined;
+  id?: string | undefined;
+  lookup_key?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
+  prices?: Array<WebhookDtoPrice$Outbound> | undefined;
+};
 
+/** @internal */
+export const WebhookDtoPlan$outboundSchema: z.ZodMiniType<
+  WebhookDtoPlan$Outbound,
+  WebhookDtoPlan
+> = z.pipe(
+  z.object({
+    description: z.optional(z.string()),
+    id: z.optional(z.string()),
+    lookupKey: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    name: z.optional(z.string()),
+    prices: z.optional(z.array(WebhookDtoPrice$outboundSchema)),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      lookupKey: "lookup_key",
+    });
+  }),
+);
+
+export function webhookDtoPlanToJSON(webhookDtoPlan: WebhookDtoPlan): string {
+  return JSON.stringify(WebhookDtoPlan$outboundSchema.parse(webhookDtoPlan));
+}
 export function webhookDtoPlanFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoPlan, SDKValidationError> {

@@ -21,3 +21,8 @@ export const TaxExemptionReasonCode$inboundSchema: z.ZodMiniType<
   TaxExemptionReasonCode,
   unknown
 > = openEnums.inboundSchema(TaxExemptionReasonCode);
+/** @internal */
+export const TaxExemptionReasonCode$outboundSchema: z.ZodMiniType<
+  string,
+  TaxExemptionReasonCode
+> = openEnums.outboundSchema(TaxExemptionReasonCode);

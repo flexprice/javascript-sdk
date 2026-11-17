@@ -17,3 +17,8 @@ export const PaymentActionType$inboundSchema: z.ZodMiniType<
   PaymentActionType,
   unknown
 > = openEnums.inboundSchema(PaymentActionType);
+/** @internal */
+export const PaymentActionType$outboundSchema: z.ZodMiniType<
+  string,
+  PaymentActionType
+> = openEnums.outboundSchema(PaymentActionType);

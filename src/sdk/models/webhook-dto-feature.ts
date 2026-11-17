@@ -7,7 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { FeatureType, FeatureType$inboundSchema } from "./feature-type.js";
+import {
+  FeatureType,
+  FeatureType$inboundSchema,
+  FeatureType$outboundSchema,
+} from "./feature-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoFeature = {
@@ -50,7 +54,55 @@ export const WebhookDtoFeature$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoFeature$Outbound = {
+  description?: string | undefined;
+  group_id?: string | undefined;
+  id?: string | undefined;
+  lookup_key?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  meter_id?: string | undefined;
+  name?: string | undefined;
+  type?: string | undefined;
+  unit_plural?: string | undefined;
+  unit_singular?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoFeature$outboundSchema: z.ZodMiniType<
+  WebhookDtoFeature$Outbound,
+  WebhookDtoFeature
+> = z.pipe(
+  z.object({
+    description: z.optional(z.string()),
+    groupId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    lookupKey: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    meterId: z.optional(z.string()),
+    name: z.optional(z.string()),
+    type: z.optional(FeatureType$outboundSchema),
+    unitPlural: z.optional(z.string()),
+    unitSingular: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      groupId: "group_id",
+      lookupKey: "lookup_key",
+      meterId: "meter_id",
+      unitPlural: "unit_plural",
+      unitSingular: "unit_singular",
+    });
+  }),
+);
+
+export function webhookDtoFeatureToJSON(
+  webhookDtoFeature: WebhookDtoFeature,
+): string {
+  return JSON.stringify(
+    WebhookDtoFeature$outboundSchema.parse(webhookDtoFeature),
+  );
+}
 export function webhookDtoFeatureFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoFeature, SDKValidationError> {

@@ -11,26 +11,33 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   TransactionReason,
   TransactionReason$inboundSchema,
+  TransactionReason$outboundSchema,
 } from "./transaction-reason.js";
 import {
   TransactionStatus,
   TransactionStatus$inboundSchema,
+  TransactionStatus$outboundSchema,
 } from "./transaction-status.js";
 import {
   TransactionType,
   TransactionType$inboundSchema,
+  TransactionType$outboundSchema,
 } from "./transaction-type.js";
 import {
   WalletTxConsumption,
   WalletTxConsumption$inboundSchema,
+  WalletTxConsumption$Outbound,
+  WalletTxConsumption$outboundSchema,
 } from "./wallet-tx-consumption.js";
 import {
   WalletTxReferenceType,
   WalletTxReferenceType$inboundSchema,
+  WalletTxReferenceType$outboundSchema,
 } from "./wallet-tx-reference-type.js";
 import {
   WalletTxSourceType,
   WalletTxSourceType$inboundSchema,
+  WalletTxSourceType$outboundSchema,
 } from "./wallet-tx-source-type.js";
 
 export type WebhookDtoWalletTransaction = {
@@ -101,7 +108,85 @@ export const WebhookDtoWalletTransaction$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoWalletTransaction$Outbound = {
+  amount?: string | undefined;
+  consumption_breakdown?: Array<WalletTxConsumption$Outbound> | undefined;
+  credit_amount?: string | undefined;
+  credit_balance_after?: string | undefined;
+  credit_balance_before?: string | undefined;
+  currency?: string | undefined;
+  customer_id?: string | undefined;
+  description?: string | undefined;
+  expiry_date?: string | undefined;
+  id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  reference_id?: string | undefined;
+  reference_type?: string | undefined;
+  source_id?: string | undefined;
+  source_type?: string | undefined;
+  transaction_reason?: string | undefined;
+  transaction_status?: string | undefined;
+  type?: string | undefined;
+  wallet_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoWalletTransaction$outboundSchema: z.ZodMiniType<
+  WebhookDtoWalletTransaction$Outbound,
+  WebhookDtoWalletTransaction
+> = z.pipe(
+  z.object({
+    amount: z.optional(z.string()),
+    consumptionBreakdown: z.optional(
+      z.array(WalletTxConsumption$outboundSchema),
+    ),
+    creditAmount: z.optional(z.string()),
+    creditBalanceAfter: z.optional(z.string()),
+    creditBalanceBefore: z.optional(z.string()),
+    currency: z.optional(z.string()),
+    customerId: z.optional(z.string()),
+    description: z.optional(z.string()),
+    expiryDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    id: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    referenceId: z.optional(z.string()),
+    referenceType: z.optional(WalletTxReferenceType$outboundSchema),
+    sourceId: z.optional(z.string()),
+    sourceType: z.optional(WalletTxSourceType$outboundSchema),
+    transactionReason: z.optional(TransactionReason$outboundSchema),
+    transactionStatus: z.optional(TransactionStatus$outboundSchema),
+    type: z.optional(TransactionType$outboundSchema),
+    walletId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      consumptionBreakdown: "consumption_breakdown",
+      creditAmount: "credit_amount",
+      creditBalanceAfter: "credit_balance_after",
+      creditBalanceBefore: "credit_balance_before",
+      customerId: "customer_id",
+      expiryDate: "expiry_date",
+      referenceId: "reference_id",
+      referenceType: "reference_type",
+      sourceId: "source_id",
+      sourceType: "source_type",
+      transactionReason: "transaction_reason",
+      transactionStatus: "transaction_status",
+      walletId: "wallet_id",
+    });
+  }),
+);
+
+export function webhookDtoWalletTransactionToJSON(
+  webhookDtoWalletTransaction: WebhookDtoWalletTransaction,
+): string {
+  return JSON.stringify(
+    WebhookDtoWalletTransaction$outboundSchema.parse(
+      webhookDtoWalletTransaction,
+    ),
+  );
+}
 export function webhookDtoWalletTransactionFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoWalletTransaction, SDKValidationError> {

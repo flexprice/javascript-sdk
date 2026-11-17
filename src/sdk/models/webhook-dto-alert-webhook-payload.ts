@@ -7,12 +7,21 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { AlertState, AlertState$inboundSchema } from "./alert-state.js";
-import { AlertType, AlertType$inboundSchema } from "./alert-type.js";
+import {
+  AlertState,
+  AlertState$inboundSchema,
+  AlertState$outboundSchema,
+} from "./alert-state.js";
+import {
+  AlertType,
+  AlertType$inboundSchema,
+  AlertType$outboundSchema,
+} from "./alert-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoAlertWebhookPayload = {
@@ -54,7 +63,56 @@ export const WebhookDtoAlertWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoAlertWebhookPayload$Outbound = {
+  alert_status?: string | undefined;
+  alert_type?: string | undefined;
+  credit_balance?: string | undefined;
+  current_balance?: string | undefined;
+  customer_id?: string | undefined;
+  event_type?: string | undefined;
+  feature_id?: string | undefined;
+  wallet_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoAlertWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoAlertWebhookPayload$Outbound,
+  WebhookDtoAlertWebhookPayload
+> = z.pipe(
+  z.object({
+    alertStatus: z.optional(AlertState$outboundSchema),
+    alertType: z.optional(AlertType$outboundSchema),
+    creditBalance: z.optional(z.string()),
+    currentBalance: z.optional(z.string()),
+    customerId: z.optional(z.string()),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    featureId: z.optional(z.string()),
+    walletId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      alertStatus: "alert_status",
+      alertType: "alert_type",
+      creditBalance: "credit_balance",
+      currentBalance: "current_balance",
+      customerId: "customer_id",
+      eventType: "event_type",
+      featureId: "feature_id",
+      walletId: "wallet_id",
+    });
+  }),
+);
+
+export function webhookDtoAlertWebhookPayloadToJSON(
+  webhookDtoAlertWebhookPayload: WebhookDtoAlertWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoAlertWebhookPayload$outboundSchema.parse(
+      webhookDtoAlertWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoAlertWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoAlertWebhookPayload, SDKValidationError> {

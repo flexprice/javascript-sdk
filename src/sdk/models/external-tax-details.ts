@@ -11,8 +11,15 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   TaxJurisdiction,
   TaxJurisdiction$inboundSchema,
+  TaxJurisdiction$Outbound,
+  TaxJurisdiction$outboundSchema,
 } from "./tax-jurisdiction.js";
-import { TaxReversal, TaxReversal$inboundSchema } from "./tax-reversal.js";
+import {
+  TaxReversal,
+  TaxReversal$inboundSchema,
+  TaxReversal$Outbound,
+  TaxReversal$outboundSchema,
+} from "./tax-reversal.js";
 
 export type ExternalTaxDetails = {
   /**
@@ -101,7 +108,60 @@ export const ExternalTaxDetails$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type ExternalTaxDetails$Outbound = {
+  calculation_expires_at?: string | undefined;
+  calculation_id?: string | undefined;
+  display_name?: string | undefined;
+  jurisdiction?: TaxJurisdiction$Outbound | undefined;
+  percentage?: string | undefined;
+  reference?: string | undefined;
+  reversal?: TaxReversal$Outbound | undefined;
+  sourcing?: string | undefined;
+  tax_code?: string | undefined;
+  tax_type?: string | undefined;
+  taxability_reason?: string | undefined;
+};
 
+/** @internal */
+export const ExternalTaxDetails$outboundSchema: z.ZodMiniType<
+  ExternalTaxDetails$Outbound,
+  ExternalTaxDetails
+> = z.pipe(
+  z.object({
+    calculationExpiresAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    calculationId: z.optional(z.string()),
+    displayName: z.optional(z.string()),
+    jurisdiction: z.optional(TaxJurisdiction$outboundSchema),
+    percentage: z.optional(z.string()),
+    reference: z.optional(z.string()),
+    reversal: z.optional(TaxReversal$outboundSchema),
+    sourcing: z.optional(z.string()),
+    taxCode: z.optional(z.string()),
+    taxType: z.optional(z.string()),
+    taxabilityReason: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      calculationExpiresAt: "calculation_expires_at",
+      calculationId: "calculation_id",
+      displayName: "display_name",
+      taxCode: "tax_code",
+      taxType: "tax_type",
+      taxabilityReason: "taxability_reason",
+    });
+  }),
+);
+
+export function externalTaxDetailsToJSON(
+  externalTaxDetails: ExternalTaxDetails,
+): string {
+  return JSON.stringify(
+    ExternalTaxDetails$outboundSchema.parse(externalTaxDetails),
+  );
+}
 export function externalTaxDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<ExternalTaxDetails, SDKValidationError> {

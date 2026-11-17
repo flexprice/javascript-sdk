@@ -10,20 +10,29 @@ import * as types from "../../types/primitives.js";
 import {
   BillingPeriod,
   BillingPeriod$inboundSchema,
+  BillingPeriod$outboundSchema,
 } from "./billing-period.js";
 import {
   InvoiceCadence,
   InvoiceCadence$inboundSchema,
+  InvoiceCadence$outboundSchema,
 } from "./invoice-cadence.js";
-import { PriceType, PriceType$inboundSchema } from "./price-type.js";
+import {
+  PriceType,
+  PriceType$inboundSchema,
+  PriceType$outboundSchema,
+} from "./price-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionLineItemEntityType,
   SubscriptionLineItemEntityType$inboundSchema,
+  SubscriptionLineItemEntityType$outboundSchema,
 } from "./subscription-line-item-entity-type.js";
 import {
   WebhookDtoPrice,
   WebhookDtoPrice$inboundSchema,
+  WebhookDtoPrice$Outbound,
+  WebhookDtoPrice$outboundSchema,
 } from "./webhook-dto-price.js";
 
 export type WebhookDtoSubscriptionLineItem = {
@@ -96,7 +105,87 @@ export const WebhookDtoSubscriptionLineItem$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoSubscriptionLineItem$Outbound = {
+  billing_period?: string | undefined;
+  billing_period_count?: number | undefined;
+  currency?: string | undefined;
+  display_name?: string | undefined;
+  end_date?: string | undefined;
+  entity_id?: string | undefined;
+  entity_type?: string | undefined;
+  id?: string | undefined;
+  invoice_cadence?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  meter_display_name?: string | undefined;
+  meter_id?: string | undefined;
+  plan_display_name?: string | undefined;
+  price?: WebhookDtoPrice$Outbound | undefined;
+  price_id?: string | undefined;
+  price_type?: string | undefined;
+  price_unit?: string | undefined;
+  quantity?: string | undefined;
+  start_date?: string | undefined;
+  subscription_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoSubscriptionLineItem$outboundSchema: z.ZodMiniType<
+  WebhookDtoSubscriptionLineItem$Outbound,
+  WebhookDtoSubscriptionLineItem
+> = z.pipe(
+  z.object({
+    billingPeriod: z.optional(BillingPeriod$outboundSchema),
+    billingPeriodCount: z.optional(z.int()),
+    currency: z.optional(z.string()),
+    displayName: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    entityId: z.optional(z.string()),
+    entityType: z.optional(SubscriptionLineItemEntityType$outboundSchema),
+    id: z.optional(z.string()),
+    invoiceCadence: z.optional(InvoiceCadence$outboundSchema),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    meterDisplayName: z.optional(z.string()),
+    meterId: z.optional(z.string()),
+    planDisplayName: z.optional(z.string()),
+    price: z.optional(WebhookDtoPrice$outboundSchema),
+    priceId: z.optional(z.string()),
+    priceType: z.optional(PriceType$outboundSchema),
+    priceUnit: z.optional(z.string()),
+    quantity: z.optional(z.string()),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billingPeriod: "billing_period",
+      billingPeriodCount: "billing_period_count",
+      displayName: "display_name",
+      endDate: "end_date",
+      entityId: "entity_id",
+      entityType: "entity_type",
+      invoiceCadence: "invoice_cadence",
+      meterDisplayName: "meter_display_name",
+      meterId: "meter_id",
+      planDisplayName: "plan_display_name",
+      priceId: "price_id",
+      priceType: "price_type",
+      priceUnit: "price_unit",
+      startDate: "start_date",
+      subscriptionId: "subscription_id",
+    });
+  }),
+);
+
+export function webhookDtoSubscriptionLineItemToJSON(
+  webhookDtoSubscriptionLineItem: WebhookDtoSubscriptionLineItem,
+): string {
+  return JSON.stringify(
+    WebhookDtoSubscriptionLineItem$outboundSchema.parse(
+      webhookDtoSubscriptionLineItem,
+    ),
+  );
+}
 export function webhookDtoSubscriptionLineItemFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoSubscriptionLineItem, SDKValidationError> {

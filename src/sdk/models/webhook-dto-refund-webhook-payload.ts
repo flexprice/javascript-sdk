@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoRefund,
   WebhookDtoRefund$inboundSchema,
+  WebhookDtoRefund$Outbound,
+  WebhookDtoRefund$outboundSchema,
 } from "./webhook-dto-refund.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoRefundWebhookPayload = {
@@ -37,7 +40,37 @@ export const WebhookDtoRefundWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoRefundWebhookPayload$Outbound = {
+  event_type?: string | undefined;
+  refund?: WebhookDtoRefund$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoRefundWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoRefundWebhookPayload$Outbound,
+  WebhookDtoRefundWebhookPayload
+> = z.pipe(
+  z.object({
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    refund: z.optional(WebhookDtoRefund$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventType: "event_type",
+    });
+  }),
+);
+
+export function webhookDtoRefundWebhookPayloadToJSON(
+  webhookDtoRefundWebhookPayload: WebhookDtoRefundWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoRefundWebhookPayload$outboundSchema.parse(
+      webhookDtoRefundWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoRefundWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoRefundWebhookPayload, SDKValidationError> {

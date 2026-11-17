@@ -10,14 +10,17 @@ import * as types from "../../types/primitives.js";
 import {
   PaymentDestinationType,
   PaymentDestinationType$inboundSchema,
+  PaymentDestinationType$outboundSchema,
 } from "./payment-destination-type.js";
 import {
   PaymentMethodType,
   PaymentMethodType$inboundSchema,
+  PaymentMethodType$outboundSchema,
 } from "./payment-method-type.js";
 import {
   PaymentStatus,
   PaymentStatus$inboundSchema,
+  PaymentStatus$outboundSchema,
 } from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -78,7 +81,74 @@ export const WebhookDtoPayment$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoPayment$Outbound = {
+  amount?: string | undefined;
+  connection_id?: string | undefined;
+  currency?: string | undefined;
+  destination_id?: string | undefined;
+  destination_type?: string | undefined;
+  error_message?: string | undefined;
+  failed_at?: string | undefined;
+  id?: string | undefined;
+  invoice_number?: string | undefined;
+  payment_gateway?: string | undefined;
+  payment_method_type?: string | undefined;
+  payment_status?: string | undefined;
+  refunded_at?: string | undefined;
+  succeeded_at?: string | undefined;
+  voided_at?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoPayment$outboundSchema: z.ZodMiniType<
+  WebhookDtoPayment$Outbound,
+  WebhookDtoPayment
+> = z.pipe(
+  z.object({
+    amount: z.optional(z.string()),
+    connectionId: z.optional(z.string()),
+    currency: z.optional(z.string()),
+    destinationId: z.optional(z.string()),
+    destinationType: z.optional(PaymentDestinationType$outboundSchema),
+    errorMessage: z.optional(z.string()),
+    failedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    id: z.optional(z.string()),
+    invoiceNumber: z.optional(z.string()),
+    paymentGateway: z.optional(z.string()),
+    paymentMethodType: z.optional(PaymentMethodType$outboundSchema),
+    paymentStatus: z.optional(PaymentStatus$outboundSchema),
+    refundedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    succeededAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    voidedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      connectionId: "connection_id",
+      destinationId: "destination_id",
+      destinationType: "destination_type",
+      errorMessage: "error_message",
+      failedAt: "failed_at",
+      invoiceNumber: "invoice_number",
+      paymentGateway: "payment_gateway",
+      paymentMethodType: "payment_method_type",
+      paymentStatus: "payment_status",
+      refundedAt: "refunded_at",
+      succeededAt: "succeeded_at",
+      voidedAt: "voided_at",
+    });
+  }),
+);
+
+export function webhookDtoPaymentToJSON(
+  webhookDtoPayment: WebhookDtoPayment,
+): string {
+  return JSON.stringify(
+    WebhookDtoPayment$outboundSchema.parse(webhookDtoPayment),
+  );
+}
 export function webhookDtoPaymentFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoPayment, SDKValidationError> {

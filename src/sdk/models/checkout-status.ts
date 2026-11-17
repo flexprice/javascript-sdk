@@ -20,3 +20,8 @@ export const CheckoutStatus$inboundSchema: z.ZodMiniType<
   CheckoutStatus,
   unknown
 > = openEnums.inboundSchema(CheckoutStatus);
+/** @internal */
+export const CheckoutStatus$outboundSchema: z.ZodMiniType<
+  string,
+  CheckoutStatus
+> = openEnums.outboundSchema(CheckoutStatus);

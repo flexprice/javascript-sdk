@@ -10,6 +10,8 @@ import * as types from "../../types/primitives.js";
 import {
   AlertSettings,
   AlertSettings$inboundSchema,
+  AlertSettings$Outbound,
+  AlertSettings$outboundSchema,
 } from "./alert-settings.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -42,7 +44,44 @@ export const WebhookDtoWalletAlertInfo$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoWalletAlertInfo$Outbound = {
+  alert_settings?: AlertSettings$Outbound | undefined;
+  alert_type?: string | undefined;
+  credit_balance?: number | undefined;
+  current_balance?: number | undefined;
+  state?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoWalletAlertInfo$outboundSchema: z.ZodMiniType<
+  WebhookDtoWalletAlertInfo$Outbound,
+  WebhookDtoWalletAlertInfo
+> = z.pipe(
+  z.object({
+    alertSettings: z.optional(AlertSettings$outboundSchema),
+    alertType: z.optional(z.string()),
+    creditBalance: z.optional(z.number()),
+    currentBalance: z.optional(z.number()),
+    state: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      alertSettings: "alert_settings",
+      alertType: "alert_type",
+      creditBalance: "credit_balance",
+      currentBalance: "current_balance",
+    });
+  }),
+);
+
+export function webhookDtoWalletAlertInfoToJSON(
+  webhookDtoWalletAlertInfo: WebhookDtoWalletAlertInfo,
+): string {
+  return JSON.stringify(
+    WebhookDtoWalletAlertInfo$outboundSchema.parse(webhookDtoWalletAlertInfo),
+  );
+}
 export function webhookDtoWalletAlertInfoFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoWalletAlertInfo, SDKValidationError> {

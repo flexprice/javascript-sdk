@@ -34,7 +34,40 @@ export const FxConversionSource$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type FxConversionSource$Outbound = {
+  net?: string | undefined;
+  subtotal?: string | undefined;
+  total_discount?: string | undefined;
+  total_prepaid_credits_applied?: string | undefined;
+};
 
+/** @internal */
+export const FxConversionSource$outboundSchema: z.ZodMiniType<
+  FxConversionSource$Outbound,
+  FxConversionSource
+> = z.pipe(
+  z.object({
+    net: z.optional(z.string()),
+    subtotal: z.optional(z.string()),
+    totalDiscount: z.optional(z.string()),
+    totalPrepaidCreditsApplied: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      totalDiscount: "total_discount",
+      totalPrepaidCreditsApplied: "total_prepaid_credits_applied",
+    });
+  }),
+);
+
+export function fxConversionSourceToJSON(
+  fxConversionSource: FxConversionSource,
+): string {
+  return JSON.stringify(
+    FxConversionSource$outboundSchema.parse(fxConversionSource),
+  );
+}
 export function fxConversionSourceFromJSON(
   jsonString: string,
 ): SafeParseResult<FxConversionSource, SDKValidationError> {

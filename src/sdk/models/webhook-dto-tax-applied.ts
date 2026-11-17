@@ -10,17 +10,30 @@ import * as types from "../../types/primitives.js";
 import {
   ExternalTaxDetails,
   ExternalTaxDetails$inboundSchema,
+  ExternalTaxDetails$Outbound,
+  ExternalTaxDetails$outboundSchema,
 } from "./external-tax-details.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { TaxBehavior, TaxBehavior$inboundSchema } from "./tax-behavior.js";
-import { TaxProvider, TaxProvider$inboundSchema } from "./tax-provider.js";
+import {
+  TaxBehavior,
+  TaxBehavior$inboundSchema,
+  TaxBehavior$outboundSchema,
+} from "./tax-behavior.js";
+import {
+  TaxProvider,
+  TaxProvider$inboundSchema,
+  TaxProvider$outboundSchema,
+} from "./tax-provider.js";
 import {
   TaxTransactionType,
   TaxTransactionType$inboundSchema,
+  TaxTransactionType$outboundSchema,
 } from "./tax-transaction-type.js";
 import {
   WebhookDtoTaxRate,
   WebhookDtoTaxRate$inboundSchema,
+  WebhookDtoTaxRate$Outbound,
+  WebhookDtoTaxRate$outboundSchema,
 } from "./webhook-dto-tax-rate.js";
 
 export type WebhookDtoTaxApplied = {
@@ -70,7 +83,62 @@ export const WebhookDtoTaxApplied$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoTaxApplied$Outbound = {
+  applied_at?: string | undefined;
+  currency?: string | undefined;
+  external_tax_details?: ExternalTaxDetails$Outbound | undefined;
+  id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  provider?: string | undefined;
+  tax_amount?: string | undefined;
+  tax_behavior?: string | undefined;
+  tax_rate?: WebhookDtoTaxRate$Outbound | undefined;
+  tax_rate_id?: string | undefined;
+  tax_transaction_type?: string | undefined;
+  taxable_amount?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoTaxApplied$outboundSchema: z.ZodMiniType<
+  WebhookDtoTaxApplied$Outbound,
+  WebhookDtoTaxApplied
+> = z.pipe(
+  z.object({
+    appliedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    currency: z.optional(z.string()),
+    externalTaxDetails: z.optional(ExternalTaxDetails$outboundSchema),
+    id: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    provider: z.optional(TaxProvider$outboundSchema),
+    taxAmount: z.optional(z.string()),
+    taxBehavior: z.optional(TaxBehavior$outboundSchema),
+    taxRate: z.optional(WebhookDtoTaxRate$outboundSchema),
+    taxRateId: z.optional(z.string()),
+    taxTransactionType: z.optional(TaxTransactionType$outboundSchema),
+    taxableAmount: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      appliedAt: "applied_at",
+      externalTaxDetails: "external_tax_details",
+      taxAmount: "tax_amount",
+      taxBehavior: "tax_behavior",
+      taxRate: "tax_rate",
+      taxRateId: "tax_rate_id",
+      taxTransactionType: "tax_transaction_type",
+      taxableAmount: "taxable_amount",
+    });
+  }),
+);
+
+export function webhookDtoTaxAppliedToJSON(
+  webhookDtoTaxApplied: WebhookDtoTaxApplied,
+): string {
+  return JSON.stringify(
+    WebhookDtoTaxApplied$outboundSchema.parse(webhookDtoTaxApplied),
+  );
+}
 export function webhookDtoTaxAppliedFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoTaxApplied, SDKValidationError> {

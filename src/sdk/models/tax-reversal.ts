@@ -11,6 +11,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   TaxReversalMode,
   TaxReversalMode$inboundSchema,
+  TaxReversalMode$outboundSchema,
 } from "./tax-reversal-mode.js";
 
 export type TaxReversal = {
@@ -31,7 +32,31 @@ export const TaxReversal$inboundSchema: z.ZodMiniType<TaxReversal, unknown> = z
       });
     }),
   );
+/** @internal */
+export type TaxReversal$Outbound = {
+  mode?: string | undefined;
+  original_transaction?: string | undefined;
+};
 
+/** @internal */
+export const TaxReversal$outboundSchema: z.ZodMiniType<
+  TaxReversal$Outbound,
+  TaxReversal
+> = z.pipe(
+  z.object({
+    mode: z.optional(TaxReversalMode$outboundSchema),
+    originalTransaction: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      originalTransaction: "original_transaction",
+    });
+  }),
+);
+
+export function taxReversalToJSON(taxReversal: TaxReversal): string {
+  return JSON.stringify(TaxReversal$outboundSchema.parse(taxReversal));
+}
 export function taxReversalFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxReversal, SDKValidationError> {

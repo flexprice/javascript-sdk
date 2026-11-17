@@ -8,7 +8,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { TaxRateType, TaxRateType$inboundSchema } from "./tax-rate-type.js";
+import {
+  TaxRateType,
+  TaxRateType$inboundSchema,
+  TaxRateType$outboundSchema,
+} from "./tax-rate-type.js";
 
 export type WebhookDtoTaxRate = {
   code?: string | undefined;
@@ -39,7 +43,44 @@ export const WebhookDtoTaxRate$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoTaxRate$Outbound = {
+  code?: string | undefined;
+  description?: string | undefined;
+  id?: string | undefined;
+  name?: string | undefined;
+  percentage_value?: string | undefined;
+  tax_rate_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoTaxRate$outboundSchema: z.ZodMiniType<
+  WebhookDtoTaxRate$Outbound,
+  WebhookDtoTaxRate
+> = z.pipe(
+  z.object({
+    code: z.optional(z.string()),
+    description: z.optional(z.string()),
+    id: z.optional(z.string()),
+    name: z.optional(z.string()),
+    percentageValue: z.optional(z.string()),
+    taxRateType: z.optional(TaxRateType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      percentageValue: "percentage_value",
+      taxRateType: "tax_rate_type",
+    });
+  }),
+);
+
+export function webhookDtoTaxRateToJSON(
+  webhookDtoTaxRate: WebhookDtoTaxRate,
+): string {
+  return JSON.stringify(
+    WebhookDtoTaxRate$outboundSchema.parse(webhookDtoTaxRate),
+  );
+}
 export function webhookDtoTaxRateFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoTaxRate, SDKValidationError> {

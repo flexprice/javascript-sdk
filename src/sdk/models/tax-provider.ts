@@ -15,3 +15,6 @@ export type TaxProvider = OpenEnum<typeof TaxProvider>;
 /** @internal */
 export const TaxProvider$inboundSchema: z.ZodMiniType<TaxProvider, unknown> =
   openEnums.inboundSchema(TaxProvider);
+/** @internal */
+export const TaxProvider$outboundSchema: z.ZodMiniType<string, TaxProvider> =
+  openEnums.outboundSchema(TaxProvider);

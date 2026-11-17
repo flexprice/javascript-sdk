@@ -10,30 +10,51 @@ import * as types from "../../types/primitives.js";
 import {
   BillingCadence,
   BillingCadence$inboundSchema,
+  BillingCadence$outboundSchema,
 } from "./billing-cadence.js";
-import { BillingModel, BillingModel$inboundSchema } from "./billing-model.js";
+import {
+  BillingModel,
+  BillingModel$inboundSchema,
+  BillingModel$outboundSchema,
+} from "./billing-model.js";
 import {
   BillingPeriod,
   BillingPeriod$inboundSchema,
+  BillingPeriod$outboundSchema,
 } from "./billing-period.js";
-import { BillingTier, BillingTier$inboundSchema } from "./billing-tier.js";
+import {
+  BillingTier,
+  BillingTier$inboundSchema,
+  BillingTier$outboundSchema,
+} from "./billing-tier.js";
 import {
   InvoiceCadence,
   InvoiceCadence$inboundSchema,
+  InvoiceCadence$outboundSchema,
 } from "./invoice-cadence.js";
 import {
   PriceJSONBTransformQuantity,
   PriceJSONBTransformQuantity$inboundSchema,
+  PriceJSONBTransformQuantity$Outbound,
+  PriceJSONBTransformQuantity$outboundSchema,
 } from "./price-jsonb-transform-quantity.js";
 import {
   PricePriceTier,
   PricePriceTier$inboundSchema,
+  PricePriceTier$Outbound,
+  PricePriceTier$outboundSchema,
 } from "./price-price-tier.js";
-import { PriceType, PriceType$inboundSchema } from "./price-type.js";
+import {
+  PriceType,
+  PriceType$inboundSchema,
+  PriceType$outboundSchema,
+} from "./price-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoMeter,
   WebhookDtoMeter$inboundSchema,
+  WebhookDtoMeter$Outbound,
+  WebhookDtoMeter$outboundSchema,
 } from "./webhook-dto-meter.js";
 
 export type WebhookDtoPrice = {
@@ -111,7 +132,86 @@ export const WebhookDtoPrice$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoPrice$Outbound = {
+  amount?: string | undefined;
+  billing_cadence?: string | undefined;
+  billing_model?: string | undefined;
+  billing_period?: string | undefined;
+  billing_period_count?: number | undefined;
+  currency?: string | undefined;
+  description?: string | undefined;
+  display_amount?: string | undefined;
+  display_name?: string | undefined;
+  display_price_unit_amount?: string | undefined;
+  id?: string | undefined;
+  invoice_cadence?: string | undefined;
+  lookup_key?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  meter?: WebhookDtoMeter$Outbound | undefined;
+  meter_id?: string | undefined;
+  price_unit?: string | undefined;
+  price_unit_amount?: string | undefined;
+  tier_mode?: string | undefined;
+  tiers?: Array<PricePriceTier$Outbound> | undefined;
+  transform_quantity?: PriceJSONBTransformQuantity$Outbound | undefined;
+  type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoPrice$outboundSchema: z.ZodMiniType<
+  WebhookDtoPrice$Outbound,
+  WebhookDtoPrice
+> = z.pipe(
+  z.object({
+    amount: z.optional(z.string()),
+    billingCadence: z.optional(BillingCadence$outboundSchema),
+    billingModel: z.optional(BillingModel$outboundSchema),
+    billingPeriod: z.optional(BillingPeriod$outboundSchema),
+    billingPeriodCount: z.optional(z.int()),
+    currency: z.optional(z.string()),
+    description: z.optional(z.string()),
+    displayAmount: z.optional(z.string()),
+    displayName: z.optional(z.string()),
+    displayPriceUnitAmount: z.optional(z.string()),
+    id: z.optional(z.string()),
+    invoiceCadence: z.optional(InvoiceCadence$outboundSchema),
+    lookupKey: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    meter: z.optional(WebhookDtoMeter$outboundSchema),
+    meterId: z.optional(z.string()),
+    priceUnit: z.optional(z.string()),
+    priceUnitAmount: z.optional(z.string()),
+    tierMode: z.optional(BillingTier$outboundSchema),
+    tiers: z.optional(z.array(PricePriceTier$outboundSchema)),
+    transformQuantity: z.optional(PriceJSONBTransformQuantity$outboundSchema),
+    type: z.optional(PriceType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billingCadence: "billing_cadence",
+      billingModel: "billing_model",
+      billingPeriod: "billing_period",
+      billingPeriodCount: "billing_period_count",
+      displayAmount: "display_amount",
+      displayName: "display_name",
+      displayPriceUnitAmount: "display_price_unit_amount",
+      invoiceCadence: "invoice_cadence",
+      lookupKey: "lookup_key",
+      meterId: "meter_id",
+      priceUnit: "price_unit",
+      priceUnitAmount: "price_unit_amount",
+      tierMode: "tier_mode",
+      transformQuantity: "transform_quantity",
+    });
+  }),
+);
+
+export function webhookDtoPriceToJSON(
+  webhookDtoPrice: WebhookDtoPrice,
+): string {
+  return JSON.stringify(WebhookDtoPrice$outboundSchema.parse(webhookDtoPrice));
+}
 export function webhookDtoPriceFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoPrice, SDKValidationError> {
