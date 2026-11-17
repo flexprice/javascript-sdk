@@ -84,6 +84,11 @@ export const WebhookEventName = {
   CheckoutSessionFailed: "checkout.session.failed",
   CheckoutSessionExpired: "checkout.session.expired",
   CheckoutSessionCancelled: "checkout.session.cancelled",
+  MandateConfirmed: "mandate.confirmed",
+  MandateRejected: "mandate.rejected",
+  MandateCancelled: "mandate.cancelled",
+  MandateSetupAttemptFailed: "mandate.setup_attempt_failed",
+  MandateSetupExpired: "mandate.setup_expired",
   EventRejected: "event.rejected",
 } as const;
 export type WebhookEventName = OpenEnum<typeof WebhookEventName>;
