@@ -28,6 +28,7 @@ export type WalletBalanceResponse = {
   alertState?: AlertState | undefined;
   autoTopup?: AutoTopup | undefined;
   balance?: string | undefined;
+  balanceAlertStatus?: AlertState | undefined;
   balanceUpdatedAt?: Date | undefined;
   config?: WalletConfig | undefined;
   /**
@@ -90,6 +91,7 @@ export const WalletBalanceResponse$inboundSchema: z.ZodMiniType<
     alert_state: types.optional(AlertState$inboundSchema),
     auto_topup: types.optional(AutoTopup$inboundSchema),
     balance: types.optional(types.string()),
+    balance_alert_status: types.optional(AlertState$inboundSchema),
     balance_updated_at: types.optional(types.date()),
     config: types.optional(WalletConfig$inboundSchema),
     conversion_rate: types.optional(types.string()),
@@ -122,6 +124,7 @@ export const WalletBalanceResponse$inboundSchema: z.ZodMiniType<
       "alert_settings": "alertSettings",
       "alert_state": "alertState",
       "auto_topup": "autoTopup",
+      "balance_alert_status": "balanceAlertStatus",
       "balance_updated_at": "balanceUpdatedAt",
       "conversion_rate": "conversionRate",
       "created_at": "createdAt",
