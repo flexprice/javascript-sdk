@@ -25,11 +25,10 @@ export type GetUsageAnalyticsResponse = {
   currency?: string | undefined;
   customAnalytics?: Array<CustomAnalyticItem> | undefined;
   /**
-   * Instalments lists, with expand "instalments", the instalments of the v2 commitments covering a queried meter that
+   * Instalments lists the commitment instalments in the range with expand "instalments": start <= bill_on < end,
    *
    * @remarks
-   * were invoiced in the range, or are still scheduled with a bill_on in it; it is empty with property or source
-   * filters, or when no usage line runs in the range.
+   * or start < bill_on <= end for an ARREAR one.
    */
   instalments?: Array<UsageAnalyticInstalment> | undefined;
   items?: Array<UsageAnalyticItem> | undefined;
