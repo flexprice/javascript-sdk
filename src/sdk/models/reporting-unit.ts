@@ -13,7 +13,7 @@ export type ReportingUnit = {
   /**
    * Multiplier: reporting_unit_value = unit_value * conversion_rate; must be > 0
    */
-  conversionRate?: number | undefined;
+  conversionRate?: string | undefined;
   /**
    * Display unit label, plural (e.g. "seconds")
    */
@@ -30,7 +30,7 @@ export const ReportingUnit$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    conversion_rate: types.optional(types.number()),
+    conversion_rate: types.optional(types.string()),
     unit_plural: types.optional(types.string()),
     unit_singular: types.optional(types.string()),
   }),
@@ -44,7 +44,7 @@ export const ReportingUnit$inboundSchema: z.ZodMiniType<
 );
 /** @internal */
 export type ReportingUnit$Outbound = {
-  conversion_rate?: number | undefined;
+  conversion_rate?: string | undefined;
   unit_plural?: string | undefined;
   unit_singular?: string | undefined;
 };
@@ -55,7 +55,7 @@ export const ReportingUnit$outboundSchema: z.ZodMiniType<
   ReportingUnit
 > = z.pipe(
   z.object({
-    conversionRate: z.optional(z.number()),
+    conversionRate: z.optional(z.string()),
     unitPlural: z.optional(z.string()),
     unitSingular: z.optional(z.string()),
   }),

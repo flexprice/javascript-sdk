@@ -18,8 +18,8 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 export type WebhookDtoWalletAlertInfo = {
   alertSettings?: AlertSettings | undefined;
   alertType?: string | undefined;
-  creditBalance?: number | undefined;
-  currentBalance?: number | undefined;
+  creditBalance?: string | undefined;
+  currentBalance?: string | undefined;
   state?: string | undefined;
 };
 
@@ -31,8 +31,8 @@ export const WebhookDtoWalletAlertInfo$inboundSchema: z.ZodMiniType<
   z.object({
     alert_settings: types.optional(AlertSettings$inboundSchema),
     alert_type: types.optional(types.string()),
-    credit_balance: types.optional(types.number()),
-    current_balance: types.optional(types.number()),
+    credit_balance: types.optional(types.string()),
+    current_balance: types.optional(types.string()),
     state: types.optional(types.string()),
   }),
   z.transform((v) => {
@@ -48,8 +48,8 @@ export const WebhookDtoWalletAlertInfo$inboundSchema: z.ZodMiniType<
 export type WebhookDtoWalletAlertInfo$Outbound = {
   alert_settings?: AlertSettings$Outbound | undefined;
   alert_type?: string | undefined;
-  credit_balance?: number | undefined;
-  current_balance?: number | undefined;
+  credit_balance?: string | undefined;
+  current_balance?: string | undefined;
   state?: string | undefined;
 };
 
@@ -61,8 +61,8 @@ export const WebhookDtoWalletAlertInfo$outboundSchema: z.ZodMiniType<
   z.object({
     alertSettings: z.optional(AlertSettings$outboundSchema),
     alertType: z.optional(z.string()),
-    creditBalance: z.optional(z.number()),
-    currentBalance: z.optional(z.number()),
+    creditBalance: z.optional(z.string()),
+    currentBalance: z.optional(z.string()),
     state: z.optional(z.string()),
   }),
   z.transform((v) => {

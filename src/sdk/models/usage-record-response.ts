@@ -15,7 +15,7 @@ import {
 } from "./usage-record-sync-entry.js";
 
 export type UsageRecordResponse = {
-  amount?: number | undefined;
+  amount?: string | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
   currency?: string | undefined;
@@ -26,7 +26,7 @@ export type UsageRecordResponse = {
   periodEnd?: Date | undefined;
   periodStart?: Date | undefined;
   planId?: string | undefined;
-  quantity?: number | undefined;
+  quantity?: string | undefined;
   status?: Status | undefined;
   subscriptionId?: string | undefined;
   synced?: boolean | undefined;
@@ -42,7 +42,7 @@ export const UsageRecordResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    amount: types.optional(types.number()),
+    amount: types.optional(types.string()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
     currency: types.optional(types.string()),
@@ -53,7 +53,7 @@ export const UsageRecordResponse$inboundSchema: z.ZodMiniType<
     period_end: types.optional(types.date()),
     period_start: types.optional(types.date()),
     plan_id: types.optional(types.string()),
-    quantity: types.optional(types.number()),
+    quantity: types.optional(types.string()),
     status: types.optional(Status$inboundSchema),
     subscription_id: types.optional(types.string()),
     synced: types.optional(types.boolean()),

@@ -19,11 +19,11 @@ export type AutoTopupDuration = {
 };
 
 export type AutoTopup = {
-  amount?: number | undefined;
+  amount?: string | undefined;
   cooldown?: AutoTopupDuration | undefined;
   enabled?: boolean | undefined;
   invoicing?: boolean | undefined;
-  threshold?: number | undefined;
+  threshold?: string | undefined;
 };
 
 /** @internal */
@@ -69,19 +69,19 @@ export function autoTopupDurationFromJSON(
 /** @internal */
 export const AutoTopup$inboundSchema: z.ZodMiniType<AutoTopup, unknown> = z
   .object({
-    amount: types.optional(types.number()),
+    amount: types.optional(types.string()),
     cooldown: types.optional(z.lazy(() => AutoTopupDuration$inboundSchema)),
     enabled: types.optional(types.boolean()),
     invoicing: types.optional(types.boolean()),
-    threshold: types.optional(types.number()),
+    threshold: types.optional(types.string()),
   });
 /** @internal */
 export type AutoTopup$Outbound = {
-  amount?: number | undefined;
+  amount?: string | undefined;
   cooldown?: AutoTopupDuration$Outbound | undefined;
   enabled?: boolean | undefined;
   invoicing?: boolean | undefined;
-  threshold?: number | undefined;
+  threshold?: string | undefined;
 };
 
 /** @internal */
@@ -89,11 +89,11 @@ export const AutoTopup$outboundSchema: z.ZodMiniType<
   AutoTopup$Outbound,
   AutoTopup
 > = z.object({
-  amount: z.optional(z.number()),
+  amount: z.optional(z.string()),
   cooldown: z.optional(z.lazy(() => AutoTopupDuration$outboundSchema)),
   enabled: z.optional(z.boolean()),
   invoicing: z.optional(z.boolean()),
-  threshold: z.optional(z.number()),
+  threshold: z.optional(z.string()),
 });
 
 export function autoTopupToJSON(autoTopup: AutoTopup): string {

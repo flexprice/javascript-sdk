@@ -19,9 +19,9 @@ import {
 } from "./commitment-type.js";
 
 export type LineItemCommitmentConfig = {
-  commitmentAmount?: number | undefined;
+  commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
-  commitmentQuantity?: number | undefined;
+  commitmentQuantity?: string | undefined;
   /**
    * CommitmentTimeBuckets scopes commitment to specific UTC-hour windows; requires IsWindowCommitment=true.
    */
@@ -38,19 +38,19 @@ export type LineItemCommitmentConfig = {
   /**
    * OverageFactor is a multiplier on usage beyond commitment; 1.0 = base rate.
    */
-  overageFactor?: number | undefined;
+  overageFactor?: string | undefined;
 };
 
 /** @internal */
 export type LineItemCommitmentConfig$Outbound = {
-  commitment_amount?: number | undefined;
+  commitment_amount?: string | undefined;
   commitment_duration?: string | undefined;
-  commitment_quantity?: number | undefined;
+  commitment_quantity?: string | undefined;
   commitment_time_buckets?: Array<CommitmentBucketRequest$Outbound> | undefined;
   commitment_type?: string | undefined;
   enable_true_up?: boolean | undefined;
   is_window_commitment?: boolean | undefined;
-  overage_factor?: number | undefined;
+  overage_factor?: string | undefined;
 };
 
 /** @internal */
@@ -59,16 +59,16 @@ export const LineItemCommitmentConfig$outboundSchema: z.ZodMiniType<
   LineItemCommitmentConfig
 > = z.pipe(
   z.object({
-    commitmentAmount: z.optional(z.number()),
+    commitmentAmount: z.optional(z.string()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
-    commitmentQuantity: z.optional(z.number()),
+    commitmentQuantity: z.optional(z.string()),
     commitmentTimeBuckets: z.optional(
       z.array(CommitmentBucketRequest$outboundSchema),
     ),
     commitmentType: z.optional(CommitmentType$outboundSchema),
     enableTrueUp: z.optional(z.boolean()),
     isWindowCommitment: z.optional(z.boolean()),
-    overageFactor: z.optional(z.number()),
+    overageFactor: z.optional(z.string()),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -43,14 +43,14 @@ export type InvoiceFilter = {
    * @remarks
    * Useful for finding invoices above a certain threshold or identifying high-value invoices
    */
-  amountDueGt?: number | undefined;
+  amountDueGt?: string | undefined;
   /**
    * amount_remaining_gt filters invoices with an outstanding balance greater than the specified value
    *
    * @remarks
    * Useful for finding invoices that still have significant unpaid amounts
    */
-  amountRemainingGt?: number | undefined;
+  amountRemainingGt?: string | undefined;
   /**
    * billing_entity_id filters by the customer's billing entity
    */
@@ -168,8 +168,8 @@ export const InvoiceFilterOrder$outboundSchema: z.ZodMiniEnum<
 
 /** @internal */
 export type InvoiceFilter$Outbound = {
-  amount_due_gt?: number | undefined;
-  amount_remaining_gt?: number | undefined;
+  amount_due_gt?: string | undefined;
+  amount_remaining_gt?: string | undefined;
   billing_entity_id?: string | undefined;
   billing_reason?: string | undefined;
   currency?: string | undefined;
@@ -208,8 +208,8 @@ export const InvoiceFilter$outboundSchema: z.ZodMiniType<
   InvoiceFilter
 > = z.pipe(
   z.object({
-    amountDueGt: z.optional(z.number()),
-    amountRemainingGt: z.optional(z.number()),
+    amountDueGt: z.optional(z.string()),
+    amountRemainingGt: z.optional(z.string()),
     billingEntityId: z.optional(z.string()),
     billingReason: z.optional(InvoiceBillingReason$outboundSchema),
     currency: z.optional(z.string()),

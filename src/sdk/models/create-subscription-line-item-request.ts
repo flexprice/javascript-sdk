@@ -31,16 +31,16 @@ export type CreateSubscriptionLineItemRequest = {
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentAmount?: number | undefined;
+  commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentOverageFactor?: number | undefined;
+  commitmentOverageFactor?: string | undefined;
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentQuantity?: number | undefined;
+  commitmentQuantity?: string | undefined;
   /**
    * Deprecated: use POST /commitments instead.
    */
@@ -63,17 +63,17 @@ export type CreateSubscriptionLineItemRequest = {
    */
   priceId?: string | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
-  quantity?: number | undefined;
+  quantity?: string | undefined;
   startDate?: Date | undefined;
   subscriptionPhaseId?: string | undefined;
 };
 
 /** @internal */
 export type CreateSubscriptionLineItemRequest$Outbound = {
-  commitment_amount?: number | undefined;
+  commitment_amount?: string | undefined;
   commitment_duration?: string | undefined;
-  commitment_overage_factor?: number | undefined;
-  commitment_quantity?: number | undefined;
+  commitment_overage_factor?: string | undefined;
+  commitment_quantity?: string | undefined;
   commitment_time_buckets?: Array<CommitmentBucketRequest$Outbound> | undefined;
   commitment_true_up_enabled?: boolean | undefined;
   commitment_type?: string | undefined;
@@ -84,7 +84,7 @@ export type CreateSubscriptionLineItemRequest$Outbound = {
   price?: SubscriptionPriceCreateRequest$Outbound | undefined;
   price_id?: string | undefined;
   proration_behavior?: string | undefined;
-  quantity?: number | undefined;
+  quantity?: string | undefined;
   start_date?: string | undefined;
   subscription_phase_id?: string | undefined;
 };
@@ -95,10 +95,10 @@ export const CreateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
   CreateSubscriptionLineItemRequest
 > = z.pipe(
   z.object({
-    commitmentAmount: z.optional(z.number()),
+    commitmentAmount: z.optional(z.string()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
-    commitmentOverageFactor: z.optional(z.number()),
-    commitmentQuantity: z.optional(z.number()),
+    commitmentOverageFactor: z.optional(z.string()),
+    commitmentQuantity: z.optional(z.string()),
     commitmentTimeBuckets: z.optional(
       z.array(CommitmentBucketRequest$outboundSchema),
     ),
@@ -111,7 +111,7 @@ export const CreateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
     price: z.optional(SubscriptionPriceCreateRequest$outboundSchema),
     priceId: z.optional(z.string()),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
-    quantity: z.optional(z.number()),
+    quantity: z.optional(z.string()),
     startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     subscriptionPhaseId: z.optional(z.string()),
   }),

@@ -41,16 +41,16 @@ export type UpdateSubscriptionLineItemRequest = {
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentAmount?: number | undefined;
+  commitmentAmount?: string | undefined;
   commitmentDuration?: BillingPeriod | undefined;
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentOverageFactor?: number | undefined;
+  commitmentOverageFactor?: string | undefined;
   /**
    * Deprecated: use POST /commitments instead.
    */
-  commitmentQuantity?: number | undefined;
+  commitmentQuantity?: string | undefined;
   /**
    * Pointer so an explicit empty array can clear existing buckets (omission keeps them).
    *
@@ -100,10 +100,10 @@ export type UpdateSubscriptionLineItemRequest$Outbound = {
   amount?: string | undefined;
   billing_model?: string | undefined;
   bucket_size?: string | undefined;
-  commitment_amount?: number | undefined;
+  commitment_amount?: string | undefined;
   commitment_duration?: string | undefined;
-  commitment_overage_factor?: number | undefined;
-  commitment_quantity?: number | undefined;
+  commitment_overage_factor?: string | undefined;
+  commitment_quantity?: string | undefined;
   commitment_time_buckets?: Array<CommitmentBucketRequest$Outbound> | undefined;
   commitment_true_up_enabled?: boolean | undefined;
   commitment_type?: string | undefined;
@@ -126,10 +126,10 @@ export const UpdateSubscriptionLineItemRequest$outboundSchema: z.ZodMiniType<
     amount: z.optional(z.string()),
     billingModel: z.optional(BillingModel$outboundSchema),
     bucketSize: z.optional(WindowSize$outboundSchema),
-    commitmentAmount: z.optional(z.number()),
+    commitmentAmount: z.optional(z.string()),
     commitmentDuration: z.optional(BillingPeriod$outboundSchema),
-    commitmentOverageFactor: z.optional(z.number()),
-    commitmentQuantity: z.optional(z.number()),
+    commitmentOverageFactor: z.optional(z.string()),
+    commitmentQuantity: z.optional(z.string()),
     commitmentTimeBuckets: z.optional(
       z.array(CommitmentBucketRequest$outboundSchema),
     ),

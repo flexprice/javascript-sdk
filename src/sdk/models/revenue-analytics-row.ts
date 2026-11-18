@@ -18,25 +18,25 @@ export type RevenueAnalyticsRow = {
    * "commitment_trueup", "overage" or "revert". Empty for plain rows.
    */
   adjustmentType?: string | undefined;
-  billableQty?: number | undefined;
+  billableQty?: string | undefined;
   /**
    * Day is set for day granularity; PeriodStart/PeriodEnd for period.
    */
   day?: string | undefined;
-  entitlementAmount?: number | undefined;
-  entitlementQty?: number | undefined;
+  entitlementAmount?: string | undefined;
+  entitlementQty?: string | undefined;
   /**
    * Group holds the requested dimensions and their values for this bucket.
    */
   group?: { [k: string]: string } | undefined;
-  invoiceDiscount?: number | undefined;
-  lineDiscount?: number | undefined;
-  netAmount?: number | undefined;
+  invoiceDiscount?: string | undefined;
+  lineDiscount?: string | undefined;
+  netAmount?: string | undefined;
   periodEnd?: Date | undefined;
   periodStart?: Date | undefined;
   status?: FactStatus | undefined;
-  tierDelta?: number | undefined;
-  usageAtListRate?: number | undefined;
+  tierDelta?: string | undefined;
+  usageAtListRate?: string | undefined;
 };
 
 /** @internal */
@@ -46,19 +46,19 @@ export const RevenueAnalyticsRow$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     adjustment_type: types.optional(types.string()),
-    billable_qty: types.optional(types.number()),
+    billable_qty: types.optional(types.string()),
     day: types.optional(types.string()),
-    entitlement_amount: types.optional(types.number()),
-    entitlement_qty: types.optional(types.number()),
+    entitlement_amount: types.optional(types.string()),
+    entitlement_qty: types.optional(types.string()),
     group: types.optional(z.record(z.string(), types.string())),
-    invoice_discount: types.optional(types.number()),
-    line_discount: types.optional(types.number()),
-    net_amount: types.optional(types.number()),
+    invoice_discount: types.optional(types.string()),
+    line_discount: types.optional(types.string()),
+    net_amount: types.optional(types.string()),
     period_end: types.optional(types.date()),
     period_start: types.optional(types.date()),
     status: types.optional(FactStatus$inboundSchema),
-    tier_delta: types.optional(types.number()),
-    usage_at_list_rate: types.optional(types.number()),
+    tier_delta: types.optional(types.string()),
+    usage_at_list_rate: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
