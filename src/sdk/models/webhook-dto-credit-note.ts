@@ -10,14 +10,17 @@ import * as types from "../../types/primitives.js";
 import {
   CreditNoteReason,
   CreditNoteReason$inboundSchema,
+  CreditNoteReason$outboundSchema,
 } from "./credit-note-reason.js";
 import {
   CreditNoteStatus,
   CreditNoteStatus$inboundSchema,
+  CreditNoteStatus$outboundSchema,
 } from "./credit-note-status.js";
 import {
   CreditNoteType,
   CreditNoteType$inboundSchema,
+  CreditNoteType$outboundSchema,
 } from "./credit-note-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -73,7 +76,69 @@ export const WebhookDtoCreditNote$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCreditNote$Outbound = {
+  credit_note_number?: string | undefined;
+  credit_note_status?: string | undefined;
+  credit_note_type?: string | undefined;
+  currency?: string | undefined;
+  customer_id?: string | undefined;
+  finalized_at?: string | undefined;
+  id?: string | undefined;
+  invoice_id?: string | undefined;
+  memo?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  reason?: string | undefined;
+  subscription_id?: string | undefined;
+  total_amount?: string | undefined;
+  voided_at?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCreditNote$outboundSchema: z.ZodMiniType<
+  WebhookDtoCreditNote$Outbound,
+  WebhookDtoCreditNote
+> = z.pipe(
+  z.object({
+    creditNoteNumber: z.optional(z.string()),
+    creditNoteStatus: z.optional(CreditNoteStatus$outboundSchema),
+    creditNoteType: z.optional(CreditNoteType$outboundSchema),
+    currency: z.optional(z.string()),
+    customerId: z.optional(z.string()),
+    finalizedAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    id: z.optional(z.string()),
+    invoiceId: z.optional(z.string()),
+    memo: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    reason: z.optional(CreditNoteReason$outboundSchema),
+    subscriptionId: z.optional(z.string()),
+    totalAmount: z.optional(z.string()),
+    voidedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      creditNoteNumber: "credit_note_number",
+      creditNoteStatus: "credit_note_status",
+      creditNoteType: "credit_note_type",
+      customerId: "customer_id",
+      finalizedAt: "finalized_at",
+      invoiceId: "invoice_id",
+      subscriptionId: "subscription_id",
+      totalAmount: "total_amount",
+      voidedAt: "voided_at",
+    });
+  }),
+);
+
+export function webhookDtoCreditNoteToJSON(
+  webhookDtoCreditNote: WebhookDtoCreditNote,
+): string {
+  return JSON.stringify(
+    WebhookDtoCreditNote$outboundSchema.parse(webhookDtoCreditNote),
+  );
+}
 export function webhookDtoCreditNoteFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCreditNote, SDKValidationError> {

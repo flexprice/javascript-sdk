@@ -19,3 +19,8 @@ export const WalletTxReferenceType$inboundSchema: z.ZodMiniType<
   WalletTxReferenceType,
   unknown
 > = openEnums.inboundSchema(WalletTxReferenceType);
+/** @internal */
+export const WalletTxReferenceType$outboundSchema: z.ZodMiniType<
+  string,
+  WalletTxReferenceType
+> = openEnums.outboundSchema(WalletTxReferenceType);

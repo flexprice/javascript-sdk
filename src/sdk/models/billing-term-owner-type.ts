@@ -14,3 +14,7 @@ export type BillingTermOwnerType = ClosedEnum<typeof BillingTermOwnerType>;
 export const BillingTermOwnerType$inboundSchema: z.ZodMiniEnum<
   typeof BillingTermOwnerType
 > = z.enum(BillingTermOwnerType);
+/** @internal */
+export const BillingTermOwnerType$outboundSchema: z.ZodMiniEnum<
+  typeof BillingTermOwnerType
+> = BillingTermOwnerType$inboundSchema;

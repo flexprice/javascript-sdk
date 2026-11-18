@@ -7,7 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { RoundType, RoundType$inboundSchema } from "./round-type.js";
+import {
+  RoundType,
+  RoundType$inboundSchema,
+  RoundType$outboundSchema,
+} from "./round-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type PriceJSONBTransformQuantity = {
@@ -33,7 +37,37 @@ export const PriceJSONBTransformQuantity$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type PriceJSONBTransformQuantity$Outbound = {
+  divide_by?: number | undefined;
+  round?: string | undefined;
+};
 
+/** @internal */
+export const PriceJSONBTransformQuantity$outboundSchema: z.ZodMiniType<
+  PriceJSONBTransformQuantity$Outbound,
+  PriceJSONBTransformQuantity
+> = z.pipe(
+  z.object({
+    divideBy: z.optional(z.int()),
+    round: z.optional(RoundType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      divideBy: "divide_by",
+    });
+  }),
+);
+
+export function priceJSONBTransformQuantityToJSON(
+  priceJSONBTransformQuantity: PriceJSONBTransformQuantity,
+): string {
+  return JSON.stringify(
+    PriceJSONBTransformQuantity$outboundSchema.parse(
+      priceJSONBTransformQuantity,
+    ),
+  );
+}
 export function priceJSONBTransformQuantityFromJSON(
   jsonString: string,
 ): SafeParseResult<PriceJSONBTransformQuantity, SDKValidationError> {

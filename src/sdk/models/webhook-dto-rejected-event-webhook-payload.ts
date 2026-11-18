@@ -10,15 +10,19 @@ import * as types from "../../types/primitives.js";
 import {
   RejectedEventReason,
   RejectedEventReason$inboundSchema,
+  RejectedEventReason$outboundSchema,
 } from "./rejected-event-reason.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoRejectedEventData,
   WebhookDtoRejectedEventData$inboundSchema,
+  WebhookDtoRejectedEventData$Outbound,
+  WebhookDtoRejectedEventData$outboundSchema,
 } from "./webhook-dto-rejected-event-data.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoRejectedEventWebhookPayload = {
@@ -43,7 +47,40 @@ export const WebhookDtoRejectedEventWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoRejectedEventWebhookPayload$Outbound = {
+  event?: WebhookDtoRejectedEventData$Outbound | undefined;
+  event_type?: string | undefined;
+  reason?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoRejectedEventWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoRejectedEventWebhookPayload$Outbound,
+    WebhookDtoRejectedEventWebhookPayload
+  > = z.pipe(
+    z.object({
+      event: z.optional(WebhookDtoRejectedEventData$outboundSchema),
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      reason: z.optional(RejectedEventReason$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        eventType: "event_type",
+      });
+    }),
+  );
+
+export function webhookDtoRejectedEventWebhookPayloadToJSON(
+  webhookDtoRejectedEventWebhookPayload: WebhookDtoRejectedEventWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoRejectedEventWebhookPayload$outboundSchema.parse(
+      webhookDtoRejectedEventWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoRejectedEventWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoRejectedEventWebhookPayload, SDKValidationError> {

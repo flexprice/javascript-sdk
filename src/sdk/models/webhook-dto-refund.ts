@@ -10,9 +10,18 @@ import * as types from "../../types/primitives.js";
 import {
   RefundDestination,
   RefundDestination$inboundSchema,
+  RefundDestination$outboundSchema,
 } from "./refund-destination.js";
-import { RefundReason, RefundReason$inboundSchema } from "./refund-reason.js";
-import { RefundStatus, RefundStatus$inboundSchema } from "./refund-status.js";
+import {
+  RefundReason,
+  RefundReason$inboundSchema,
+  RefundReason$outboundSchema,
+} from "./refund-reason.js";
+import {
+  RefundStatus,
+  RefundStatus$inboundSchema,
+  RefundStatus$outboundSchema,
+} from "./refund-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoRefund = {
@@ -79,7 +88,81 @@ export const WebhookDtoRefund$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoRefund$Outbound = {
+  amount?: string | undefined;
+  attempt?: number | undefined;
+  credit_note_id?: string | undefined;
+  currency?: string | undefined;
+  failed_at?: string | undefined;
+  failure_reason?: string | undefined;
+  gateway_refund_id?: string | undefined;
+  id?: string | undefined;
+  invoice_id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  payment_gateway?: string | undefined;
+  payment_id?: string | undefined;
+  refund_destination?: string | undefined;
+  refund_destination_id?: string | undefined;
+  refund_reason?: string | undefined;
+  refund_status?: string | undefined;
+  settled_amount?: string | undefined;
+  succeeded_at?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoRefund$outboundSchema: z.ZodMiniType<
+  WebhookDtoRefund$Outbound,
+  WebhookDtoRefund
+> = z.pipe(
+  z.object({
+    amount: z.optional(z.string()),
+    attempt: z.optional(z.int()),
+    creditNoteId: z.optional(z.string()),
+    currency: z.optional(z.string()),
+    failedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    failureReason: z.optional(z.string()),
+    gatewayRefundId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    invoiceId: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    paymentGateway: z.optional(z.string()),
+    paymentId: z.optional(z.string()),
+    refundDestination: z.optional(RefundDestination$outboundSchema),
+    refundDestinationId: z.optional(z.string()),
+    refundReason: z.optional(RefundReason$outboundSchema),
+    refundStatus: z.optional(RefundStatus$outboundSchema),
+    settledAmount: z.optional(z.string()),
+    succeededAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      creditNoteId: "credit_note_id",
+      failedAt: "failed_at",
+      failureReason: "failure_reason",
+      gatewayRefundId: "gateway_refund_id",
+      invoiceId: "invoice_id",
+      paymentGateway: "payment_gateway",
+      paymentId: "payment_id",
+      refundDestination: "refund_destination",
+      refundDestinationId: "refund_destination_id",
+      refundReason: "refund_reason",
+      refundStatus: "refund_status",
+      settledAmount: "settled_amount",
+      succeededAt: "succeeded_at",
+    });
+  }),
+);
+
+export function webhookDtoRefundToJSON(
+  webhookDtoRefund: WebhookDtoRefund,
+): string {
+  return JSON.stringify(
+    WebhookDtoRefund$outboundSchema.parse(webhookDtoRefund),
+  );
+}
 export function webhookDtoRefundFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoRefund, SDKValidationError> {

@@ -5,7 +5,7 @@
 ```typescript
 import { InstalmentKind } from "@flexprice/sdk/sdk/models";
 
-let value: InstalmentKind = "settlement";
+let value: InstalmentKind = "cancellation_fee";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: InstalmentKind = "settlement";
 ## Values
 
 ```typescript
-"instalment" | "settlement" | Unrecognized<string>
+"instalment" | "settlement" | "cancellation_fee" | Unrecognized<string>
 ```

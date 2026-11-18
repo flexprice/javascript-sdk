@@ -41,7 +41,49 @@ export const WebhookDtoRejectedEventData$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoRejectedEventData$Outbound = {
+  customer_id?: string | undefined;
+  event_name?: string | undefined;
+  external_customer_id?: string | undefined;
+  id?: string | undefined;
+  properties?: { [k: string]: any } | undefined;
+  source?: string | undefined;
+  timestamp?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoRejectedEventData$outboundSchema: z.ZodMiniType<
+  WebhookDtoRejectedEventData$Outbound,
+  WebhookDtoRejectedEventData
+> = z.pipe(
+  z.object({
+    customerId: z.optional(z.string()),
+    eventName: z.optional(z.string()),
+    externalCustomerId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    properties: z.optional(z.record(z.string(), z.any())),
+    source: z.optional(z.string()),
+    timestamp: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      customerId: "customer_id",
+      eventName: "event_name",
+      externalCustomerId: "external_customer_id",
+    });
+  }),
+);
+
+export function webhookDtoRejectedEventDataToJSON(
+  webhookDtoRejectedEventData: WebhookDtoRejectedEventData,
+): string {
+  return JSON.stringify(
+    WebhookDtoRejectedEventData$outboundSchema.parse(
+      webhookDtoRejectedEventData,
+    ),
+  );
+}
 export function webhookDtoRejectedEventDataFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoRejectedEventData, SDKValidationError> {

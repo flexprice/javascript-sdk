@@ -8,8 +8,16 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { WalletStatus, WalletStatus$inboundSchema } from "./wallet-status.js";
-import { WalletType, WalletType$inboundSchema } from "./wallet-type.js";
+import {
+  WalletStatus,
+  WalletStatus$inboundSchema,
+  WalletStatus$outboundSchema,
+} from "./wallet-status.js";
+import {
+  WalletType,
+  WalletType$inboundSchema,
+  WalletType$outboundSchema,
+} from "./wallet-type.js";
 
 export type WebhookDtoWallet = {
   balance?: string | undefined;
@@ -49,7 +57,53 @@ export const WebhookDtoWallet$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoWallet$Outbound = {
+  balance?: string | undefined;
+  conversion_rate?: string | undefined;
+  credit_balance?: string | undefined;
+  currency?: string | undefined;
+  customer_id?: string | undefined;
+  id?: string | undefined;
+  name?: string | undefined;
+  wallet_status?: string | undefined;
+  wallet_type?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoWallet$outboundSchema: z.ZodMiniType<
+  WebhookDtoWallet$Outbound,
+  WebhookDtoWallet
+> = z.pipe(
+  z.object({
+    balance: z.optional(z.string()),
+    conversionRate: z.optional(z.string()),
+    creditBalance: z.optional(z.string()),
+    currency: z.optional(z.string()),
+    customerId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    name: z.optional(z.string()),
+    walletStatus: z.optional(WalletStatus$outboundSchema),
+    walletType: z.optional(WalletType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      conversionRate: "conversion_rate",
+      creditBalance: "credit_balance",
+      customerId: "customer_id",
+      walletStatus: "wallet_status",
+      walletType: "wallet_type",
+    });
+  }),
+);
+
+export function webhookDtoWalletToJSON(
+  webhookDtoWallet: WebhookDtoWallet,
+): string {
+  return JSON.stringify(
+    WebhookDtoWallet$outboundSchema.parse(webhookDtoWallet),
+  );
+}
 export function webhookDtoWalletFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoWallet, SDKValidationError> {

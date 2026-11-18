@@ -10,8 +10,14 @@ import * as types from "../../types/primitives.js";
 import {
   MeterAggregation,
   MeterAggregation$inboundSchema,
+  MeterAggregation$Outbound,
+  MeterAggregation$outboundSchema,
 } from "./meter-aggregation.js";
-import { ResetUsage, ResetUsage$inboundSchema } from "./reset-usage.js";
+import {
+  ResetUsage,
+  ResetUsage$inboundSchema,
+  ResetUsage$outboundSchema,
+} from "./reset-usage.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoMeter = {
@@ -41,7 +47,40 @@ export const WebhookDtoMeter$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoMeter$Outbound = {
+  aggregation?: MeterAggregation$Outbound | undefined;
+  event_name?: string | undefined;
+  id?: string | undefined;
+  name?: string | undefined;
+  reset_usage?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoMeter$outboundSchema: z.ZodMiniType<
+  WebhookDtoMeter$Outbound,
+  WebhookDtoMeter
+> = z.pipe(
+  z.object({
+    aggregation: z.optional(MeterAggregation$outboundSchema),
+    eventName: z.optional(z.string()),
+    id: z.optional(z.string()),
+    name: z.optional(z.string()),
+    resetUsage: z.optional(ResetUsage$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventName: "event_name",
+      resetUsage: "reset_usage",
+    });
+  }),
+);
+
+export function webhookDtoMeterToJSON(
+  webhookDtoMeter: WebhookDtoMeter,
+): string {
+  return JSON.stringify(WebhookDtoMeter$outboundSchema.parse(webhookDtoMeter));
+}
 export function webhookDtoMeterFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoMeter, SDKValidationError> {

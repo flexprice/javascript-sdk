@@ -7,7 +7,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { CouponType, CouponType$inboundSchema } from "./coupon-type.js";
+import {
+  CouponType,
+  CouponType$inboundSchema,
+  CouponType$outboundSchema,
+} from "./coupon-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoCouponApplication = {
@@ -64,7 +68,71 @@ export const WebhookDtoCouponApplication$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCouponApplication$Outbound = {
+  applied_at?: string | undefined;
+  coupon_association_id?: string | undefined;
+  coupon_id?: string | undefined;
+  coupon_snapshot?: { [k: string]: any } | undefined;
+  currency?: string | undefined;
+  discount_percentage?: string | undefined;
+  discount_type?: string | undefined;
+  discounted_amount?: string | undefined;
+  final_price?: string | undefined;
+  id?: string | undefined;
+  invoice_line_item_id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  original_price?: string | undefined;
+  subscription_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCouponApplication$outboundSchema: z.ZodMiniType<
+  WebhookDtoCouponApplication$Outbound,
+  WebhookDtoCouponApplication
+> = z.pipe(
+  z.object({
+    appliedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    couponAssociationId: z.optional(z.string()),
+    couponId: z.optional(z.string()),
+    couponSnapshot: z.optional(z.record(z.string(), z.any())),
+    currency: z.optional(z.string()),
+    discountPercentage: z.optional(z.string()),
+    discountType: z.optional(CouponType$outboundSchema),
+    discountedAmount: z.optional(z.string()),
+    finalPrice: z.optional(z.string()),
+    id: z.optional(z.string()),
+    invoiceLineItemId: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    originalPrice: z.optional(z.string()),
+    subscriptionId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      appliedAt: "applied_at",
+      couponAssociationId: "coupon_association_id",
+      couponId: "coupon_id",
+      couponSnapshot: "coupon_snapshot",
+      discountPercentage: "discount_percentage",
+      discountType: "discount_type",
+      discountedAmount: "discounted_amount",
+      finalPrice: "final_price",
+      invoiceLineItemId: "invoice_line_item_id",
+      originalPrice: "original_price",
+      subscriptionId: "subscription_id",
+    });
+  }),
+);
+
+export function webhookDtoCouponApplicationToJSON(
+  webhookDtoCouponApplication: WebhookDtoCouponApplication,
+): string {
+  return JSON.stringify(
+    WebhookDtoCouponApplication$outboundSchema.parse(
+      webhookDtoCouponApplication,
+    ),
+  );
+}
 export function webhookDtoCouponApplicationFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCouponApplication, SDKValidationError> {

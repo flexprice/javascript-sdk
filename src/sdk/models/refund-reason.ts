@@ -19,3 +19,6 @@ export type RefundReason = OpenEnum<typeof RefundReason>;
 /** @internal */
 export const RefundReason$inboundSchema: z.ZodMiniType<RefundReason, unknown> =
   openEnums.inboundSchema(RefundReason);
+/** @internal */
+export const RefundReason$outboundSchema: z.ZodMiniType<string, RefundReason> =
+  openEnums.outboundSchema(RefundReason);

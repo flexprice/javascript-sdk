@@ -12,6 +12,7 @@ let value: GetCustomerEntitlementsByExternalIDRequest = {
 
 ## Fields
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `externalId`         | *string*             | :heavy_check_mark:   | Customer External ID |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `externalId`                                                      | *string*                                                          | :heavy_check_mark:                                                | Customer External ID                                              |
+| `refreshGrants`                                                   | *boolean*                                                         | :heavy_minus_sign:                                                | Evaluate entitlement grants before returning their usage (slower) |

@@ -61,7 +61,67 @@ export const WebhookDtoCustomer$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCustomer$Outbound = {
+  address_city?: string | undefined;
+  address_country?: string | undefined;
+  address_line1?: string | undefined;
+  address_line2?: string | undefined;
+  address_postal_code?: string | undefined;
+  address_state?: string | undefined;
+  billing_entity_id?: string | undefined;
+  email?: string | undefined;
+  environment_id?: string | undefined;
+  external_id?: string | undefined;
+  id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
+  timezone?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCustomer$outboundSchema: z.ZodMiniType<
+  WebhookDtoCustomer$Outbound,
+  WebhookDtoCustomer
+> = z.pipe(
+  z.object({
+    addressCity: z.optional(z.string()),
+    addressCountry: z.optional(z.string()),
+    addressLine1: z.optional(z.string()),
+    addressLine2: z.optional(z.string()),
+    addressPostalCode: z.optional(z.string()),
+    addressState: z.optional(z.string()),
+    billingEntityId: z.optional(z.string()),
+    email: z.optional(z.string()),
+    environmentId: z.optional(z.string()),
+    externalId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    name: z.optional(z.string()),
+    timezone: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      addressCity: "address_city",
+      addressCountry: "address_country",
+      addressLine1: "address_line1",
+      addressLine2: "address_line2",
+      addressPostalCode: "address_postal_code",
+      addressState: "address_state",
+      billingEntityId: "billing_entity_id",
+      environmentId: "environment_id",
+      externalId: "external_id",
+    });
+  }),
+);
+
+export function webhookDtoCustomerToJSON(
+  webhookDtoCustomer: WebhookDtoCustomer,
+): string {
+  return JSON.stringify(
+    WebhookDtoCustomer$outboundSchema.parse(webhookDtoCustomer),
+  );
+}
 export function webhookDtoCustomerFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCustomer, SDKValidationError> {

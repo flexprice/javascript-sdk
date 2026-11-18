@@ -11,18 +11,25 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoCheckoutSession,
   WebhookDtoCheckoutSession$inboundSchema,
+  WebhookDtoCheckoutSession$Outbound,
+  WebhookDtoCheckoutSession$outboundSchema,
 } from "./webhook-dto-checkout-session.js";
 import {
   WebhookDtoPaymentAttempt,
   WebhookDtoPaymentAttempt$inboundSchema,
+  WebhookDtoPaymentAttempt$Outbound,
+  WebhookDtoPaymentAttempt$outboundSchema,
 } from "./webhook-dto-payment-attempt.js";
 import {
   WebhookDtoPayment,
   WebhookDtoPayment$inboundSchema,
+  WebhookDtoPayment$Outbound,
+  WebhookDtoPayment$outboundSchema,
 } from "./webhook-dto-payment.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoPaymentAttemptWebhookPayload = {
@@ -48,7 +55,44 @@ export const WebhookDtoPaymentAttemptWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoPaymentAttemptWebhookPayload$Outbound = {
+  attempt?: WebhookDtoPaymentAttempt$Outbound | undefined;
+  checkout_session?: WebhookDtoCheckoutSession$Outbound | undefined;
+  event_type?: string | undefined;
+  payment?: WebhookDtoPayment$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoPaymentAttemptWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoPaymentAttemptWebhookPayload$Outbound,
+    WebhookDtoPaymentAttemptWebhookPayload
+  > = z.pipe(
+    z.object({
+      attempt: z.optional(WebhookDtoPaymentAttempt$outboundSchema),
+      checkoutSession: z.optional(WebhookDtoCheckoutSession$outboundSchema),
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      payment: z.optional(WebhookDtoPayment$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        checkoutSession: "checkout_session",
+        eventType: "event_type",
+      });
+    }),
+  );
+
+export function webhookDtoPaymentAttemptWebhookPayloadToJSON(
+  webhookDtoPaymentAttemptWebhookPayload:
+    WebhookDtoPaymentAttemptWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoPaymentAttemptWebhookPayload$outboundSchema.parse(
+      webhookDtoPaymentAttemptWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoPaymentAttemptWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoPaymentAttemptWebhookPayload, SDKValidationError> {

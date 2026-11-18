@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoWalletTransaction,
   WebhookDtoWalletTransaction$inboundSchema,
+  WebhookDtoWalletTransaction$Outbound,
+  WebhookDtoWalletTransaction$outboundSchema,
 } from "./webhook-dto-wallet-transaction.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoTransactionUpdatedWebhookPayload = {
@@ -38,7 +41,42 @@ export const WebhookDtoTransactionUpdatedWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoTransactionUpdatedWebhookPayload$Outbound = {
+  event_type?: string | undefined;
+  updated_transaction?: WebhookDtoWalletTransaction$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoTransactionUpdatedWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoTransactionUpdatedWebhookPayload$Outbound,
+    WebhookDtoTransactionUpdatedWebhookPayload
+  > = z.pipe(
+    z.object({
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      updatedTransaction: z.optional(
+        WebhookDtoWalletTransaction$outboundSchema,
+      ),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        eventType: "event_type",
+        updatedTransaction: "updated_transaction",
+      });
+    }),
+  );
+
+export function webhookDtoTransactionUpdatedWebhookPayloadToJSON(
+  webhookDtoTransactionUpdatedWebhookPayload:
+    WebhookDtoTransactionUpdatedWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoTransactionUpdatedWebhookPayload$outboundSchema.parse(
+      webhookDtoTransactionUpdatedWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoTransactionUpdatedWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<

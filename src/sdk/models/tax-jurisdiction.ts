@@ -33,7 +33,37 @@ export const TaxJurisdiction$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type TaxJurisdiction$Outbound = {
+  country?: string | undefined;
+  display_name?: string | undefined;
+  level?: string | undefined;
+  state?: string | undefined;
+};
 
+/** @internal */
+export const TaxJurisdiction$outboundSchema: z.ZodMiniType<
+  TaxJurisdiction$Outbound,
+  TaxJurisdiction
+> = z.pipe(
+  z.object({
+    country: z.optional(z.string()),
+    displayName: z.optional(z.string()),
+    level: z.optional(z.string()),
+    state: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  }),
+);
+
+export function taxJurisdictionToJSON(
+  taxJurisdiction: TaxJurisdiction,
+): string {
+  return JSON.stringify(TaxJurisdiction$outboundSchema.parse(taxJurisdiction));
+}
 export function taxJurisdictionFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxJurisdiction, SDKValidationError> {

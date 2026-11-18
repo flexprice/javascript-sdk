@@ -10,36 +10,52 @@ import * as types from "../../types/primitives.js";
 import {
   BillingCadence,
   BillingCadence$inboundSchema,
+  BillingCadence$outboundSchema,
 } from "./billing-cadence.js";
 import {
   BillingPeriod,
   BillingPeriod$inboundSchema,
+  BillingPeriod$outboundSchema,
 } from "./billing-period.js";
-import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
+import {
+  PauseStatus,
+  PauseStatus$inboundSchema,
+  PauseStatus$outboundSchema,
+} from "./pause-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SubscriptionStatus,
   SubscriptionStatus$inboundSchema,
+  SubscriptionStatus$outboundSchema,
 } from "./subscription-status.js";
 import {
   SubscriptionType,
   SubscriptionType$inboundSchema,
+  SubscriptionType$outboundSchema,
 } from "./subscription-type.js";
 import {
   WebhookDtoCouponAssociation,
   WebhookDtoCouponAssociation$inboundSchema,
+  WebhookDtoCouponAssociation$Outbound,
+  WebhookDtoCouponAssociation$outboundSchema,
 } from "./webhook-dto-coupon-association.js";
 import {
   WebhookDtoCustomer,
   WebhookDtoCustomer$inboundSchema,
+  WebhookDtoCustomer$Outbound,
+  WebhookDtoCustomer$outboundSchema,
 } from "./webhook-dto-customer.js";
 import {
   WebhookDtoPlan,
   WebhookDtoPlan$inboundSchema,
+  WebhookDtoPlan$Outbound,
+  WebhookDtoPlan$outboundSchema,
 } from "./webhook-dto-plan.js";
 import {
   WebhookDtoSubscriptionLineItem,
   WebhookDtoSubscriptionLineItem$inboundSchema,
+  WebhookDtoSubscriptionLineItem$Outbound,
+  WebhookDtoSubscriptionLineItem$outboundSchema,
 } from "./webhook-dto-subscription-line-item.js";
 
 export type WebhookDtoSubscription = {
@@ -137,7 +153,116 @@ export const WebhookDtoSubscription$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoSubscription$Outbound = {
+  billing_cadence?: string | undefined;
+  billing_period?: string | undefined;
+  billing_period_count?: number | undefined;
+  cancel_at?: string | undefined;
+  cancel_at_period_end?: boolean | undefined;
+  cancelled_at?: string | undefined;
+  coupon_associations?: Array<WebhookDtoCouponAssociation$Outbound> | undefined;
+  currency?: string | undefined;
+  current_period_end?: string | undefined;
+  current_period_start?: string | undefined;
+  customer?: WebhookDtoCustomer$Outbound | undefined;
+  customer_id?: string | undefined;
+  end_date?: string | undefined;
+  id?: string | undefined;
+  invoicing_customer_id?: string | undefined;
+  line_items?: Array<WebhookDtoSubscriptionLineItem$Outbound> | undefined;
+  lookup_key?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  parent_subscription_id?: string | undefined;
+  pause_status?: string | undefined;
+  plan?: WebhookDtoPlan$Outbound | undefined;
+  plan_id?: string | undefined;
+  start_date?: string | undefined;
+  subscription_status?: string | undefined;
+  subscription_type?: string | undefined;
+  trial_end?: string | undefined;
+  trial_start?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoSubscription$outboundSchema: z.ZodMiniType<
+  WebhookDtoSubscription$Outbound,
+  WebhookDtoSubscription
+> = z.pipe(
+  z.object({
+    billingCadence: z.optional(BillingCadence$outboundSchema),
+    billingPeriod: z.optional(BillingPeriod$outboundSchema),
+    billingPeriodCount: z.optional(z.int()),
+    cancelAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    cancelAtPeriodEnd: z.optional(z.boolean()),
+    cancelledAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    couponAssociations: z.optional(
+      z.array(WebhookDtoCouponAssociation$outboundSchema),
+    ),
+    currency: z.optional(z.string()),
+    currentPeriodEnd: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    currentPeriodStart: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    customer: z.optional(WebhookDtoCustomer$outboundSchema),
+    customerId: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    id: z.optional(z.string()),
+    invoicingCustomerId: z.optional(z.string()),
+    lineItems: z.optional(
+      z.array(WebhookDtoSubscriptionLineItem$outboundSchema),
+    ),
+    lookupKey: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    parentSubscriptionId: z.optional(z.string()),
+    pauseStatus: z.optional(PauseStatus$outboundSchema),
+    plan: z.optional(WebhookDtoPlan$outboundSchema),
+    planId: z.optional(z.string()),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionStatus: z.optional(SubscriptionStatus$outboundSchema),
+    subscriptionType: z.optional(SubscriptionType$outboundSchema),
+    trialEnd: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    trialStart: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billingCadence: "billing_cadence",
+      billingPeriod: "billing_period",
+      billingPeriodCount: "billing_period_count",
+      cancelAt: "cancel_at",
+      cancelAtPeriodEnd: "cancel_at_period_end",
+      cancelledAt: "cancelled_at",
+      couponAssociations: "coupon_associations",
+      currentPeriodEnd: "current_period_end",
+      currentPeriodStart: "current_period_start",
+      customerId: "customer_id",
+      endDate: "end_date",
+      invoicingCustomerId: "invoicing_customer_id",
+      lineItems: "line_items",
+      lookupKey: "lookup_key",
+      parentSubscriptionId: "parent_subscription_id",
+      pauseStatus: "pause_status",
+      planId: "plan_id",
+      startDate: "start_date",
+      subscriptionStatus: "subscription_status",
+      subscriptionType: "subscription_type",
+      trialEnd: "trial_end",
+      trialStart: "trial_start",
+    });
+  }),
+);
+
+export function webhookDtoSubscriptionToJSON(
+  webhookDtoSubscription: WebhookDtoSubscription,
+): string {
+  return JSON.stringify(
+    WebhookDtoSubscription$outboundSchema.parse(webhookDtoSubscription),
+  );
+}
 export function webhookDtoSubscriptionFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoSubscription, SDKValidationError> {

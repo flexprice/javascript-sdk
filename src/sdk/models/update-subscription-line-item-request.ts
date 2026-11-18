@@ -69,7 +69,10 @@ export type UpdateSubscriptionLineItemRequest = {
    */
   commitmentWindowed?: boolean | undefined;
   /**
-   * EffectiveFrom for the existing line item (if not provided, defaults to now)
+   * EffectiveFrom is when the new version starts and the current one ends (defaults to now). A date before
+   *
+   * @remarks
+   * the current version's start_date replaces it from that date instead, and price fields become optional.
    */
   effectiveFrom?: string | undefined;
   /**

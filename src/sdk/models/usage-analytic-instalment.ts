@@ -7,19 +7,33 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  InstalmentKind,
+  InstalmentKind$inboundSchema,
+} from "./instalment-kind.js";
+import {
+  InstalmentStatus,
+  InstalmentStatus$inboundSchema,
+} from "./instalment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type UsageAnalyticInstalment = {
   amount?: string | undefined;
+  /**
+   * when it becomes billable
+   */
+  billOn?: string | undefined;
   commitmentId?: string | undefined;
   currency?: string | undefined;
   id?: string | undefined;
+  instalmentStatus?: InstalmentStatus | undefined;
   invoiceId?: string | undefined;
   invoiceLabel?: string | undefined;
   /**
    * when the invoice billing it was finalized
    */
   invoicedAt?: Date | undefined;
+  kind?: InstalmentKind | undefined;
   servicePeriodEnd?: Date | undefined;
   servicePeriodStart?: Date | undefined;
   subscriptionId?: string | undefined;
@@ -32,19 +46,24 @@ export const UsageAnalyticInstalment$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     amount: types.optional(types.string()),
+    bill_on: types.optional(types.string()),
     commitment_id: types.optional(types.string()),
     currency: types.optional(types.string()),
     id: types.optional(types.string()),
+    instalment_status: types.optional(InstalmentStatus$inboundSchema),
     invoice_id: types.optional(types.string()),
     invoice_label: types.optional(types.string()),
     invoiced_at: types.optional(types.date()),
+    kind: types.optional(InstalmentKind$inboundSchema),
     service_period_end: types.optional(types.date()),
     service_period_start: types.optional(types.date()),
     subscription_id: types.optional(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      "bill_on": "billOn",
       "commitment_id": "commitmentId",
+      "instalment_status": "instalmentStatus",
       "invoice_id": "invoiceId",
       "invoice_label": "invoiceLabel",
       "invoiced_at": "invoicedAt",

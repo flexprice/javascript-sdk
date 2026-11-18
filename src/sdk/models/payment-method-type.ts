@@ -13,6 +13,7 @@ export const PaymentMethodType = {
   Credits: "CREDITS",
   PaymentLink: "PAYMENT_LINK",
   Upi: "UPI",
+  Enach: "ENACH",
 } as const;
 export type PaymentMethodType = OpenEnum<typeof PaymentMethodType>;
 

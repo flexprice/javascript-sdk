@@ -17,3 +17,8 @@ export const RejectedEventReason$inboundSchema: z.ZodMiniType<
   RejectedEventReason,
   unknown
 > = openEnums.inboundSchema(RejectedEventReason);
+/** @internal */
+export const RejectedEventReason$outboundSchema: z.ZodMiniType<
+  string,
+  RejectedEventReason
+> = openEnums.outboundSchema(RejectedEventReason);

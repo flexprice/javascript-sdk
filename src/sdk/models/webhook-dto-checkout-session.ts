@@ -10,18 +10,23 @@ import * as types from "../../types/primitives.js";
 import {
   CheckoutAction,
   CheckoutAction$inboundSchema,
+  CheckoutAction$outboundSchema,
 } from "./checkout-action.js";
 import {
   CheckoutPaymentProvider,
   CheckoutPaymentProvider$inboundSchema,
+  CheckoutPaymentProvider$outboundSchema,
 } from "./checkout-payment-provider.js";
 import {
   CheckoutStatus,
   CheckoutStatus$inboundSchema,
+  CheckoutStatus$outboundSchema,
 } from "./checkout-status.js";
 import {
   PaymentAction,
   PaymentAction$inboundSchema,
+  PaymentAction$Outbound,
+  PaymentAction$outboundSchema,
 } from "./payment-action.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -74,7 +79,68 @@ export const WebhookDtoCheckoutSession$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCheckoutSession$Outbound = {
+  action?: string | undefined;
+  cancelled_at?: string | undefined;
+  checkout_invoice_id?: string | undefined;
+  checkout_payment_id?: string | undefined;
+  checkout_status?: string | undefined;
+  completed_at?: string | undefined;
+  customer_id?: string | undefined;
+  expires_at?: string | undefined;
+  failure_reason?: string | undefined;
+  id?: string | undefined;
+  payment_action?: PaymentAction$Outbound | undefined;
+  payment_provider?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCheckoutSession$outboundSchema: z.ZodMiniType<
+  WebhookDtoCheckoutSession$Outbound,
+  WebhookDtoCheckoutSession
+> = z.pipe(
+  z.object({
+    action: z.optional(CheckoutAction$outboundSchema),
+    cancelledAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    checkoutInvoiceId: z.optional(z.string()),
+    checkoutPaymentId: z.optional(z.string()),
+    checkoutStatus: z.optional(CheckoutStatus$outboundSchema),
+    completedAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    customerId: z.optional(z.string()),
+    expiresAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    failureReason: z.optional(z.string()),
+    id: z.optional(z.string()),
+    paymentAction: z.optional(PaymentAction$outboundSchema),
+    paymentProvider: z.optional(CheckoutPaymentProvider$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      cancelledAt: "cancelled_at",
+      checkoutInvoiceId: "checkout_invoice_id",
+      checkoutPaymentId: "checkout_payment_id",
+      checkoutStatus: "checkout_status",
+      completedAt: "completed_at",
+      customerId: "customer_id",
+      expiresAt: "expires_at",
+      failureReason: "failure_reason",
+      paymentAction: "payment_action",
+      paymentProvider: "payment_provider",
+    });
+  }),
+);
+
+export function webhookDtoCheckoutSessionToJSON(
+  webhookDtoCheckoutSession: WebhookDtoCheckoutSession,
+): string {
+  return JSON.stringify(
+    WebhookDtoCheckoutSession$outboundSchema.parse(webhookDtoCheckoutSession),
+  );
+}
 export function webhookDtoCheckoutSessionFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCheckoutSession, SDKValidationError> {

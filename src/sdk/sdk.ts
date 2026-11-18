@@ -49,7 +49,6 @@ import { Tenants } from "./tenants.js";
 import { UsageRecords } from "./usage-records.js";
 import { Users } from "./users.js";
 import { Wallets } from "./wallets.js";
-import { WebhookEvents } from "./webhook-events.js";
 import { Workflows } from "./workflows.js";
 
 export class Flexprice extends ClientSDK {
@@ -66,16 +65,6 @@ export class Flexprice extends ClientSDK {
   private _addons?: Addons;
   get addons(): Addons {
     return (this._addons ??= new Addons(this._options));
-  }
-
-  private _creditGrants?: CreditGrants;
-  get creditGrants(): CreditGrants {
-    return (this._creditGrants ??= new CreditGrants(this._options));
-  }
-
-  private _entitlements?: Entitlements;
-  get entitlements(): Entitlements {
-    return (this._entitlements ??= new Entitlements(this._options));
   }
 
   private _alerts?: Alerts;
@@ -118,14 +107,19 @@ export class Flexprice extends ClientSDK {
     return (this._costs ??= new Costs(this._options));
   }
 
+  private _couponAssociations?: CouponAssociations;
+  get couponAssociations(): CouponAssociations {
+    return (this._couponAssociations ??= new CouponAssociations(this._options));
+  }
+
   private _coupons?: Coupons;
   get coupons(): Coupons {
     return (this._coupons ??= new Coupons(this._options));
   }
 
-  private _couponAssociations?: CouponAssociations;
-  get couponAssociations(): CouponAssociations {
-    return (this._couponAssociations ??= new CouponAssociations(this._options));
+  private _creditGrants?: CreditGrants;
+  get creditGrants(): CreditGrants {
+    return (this._creditGrants ??= new CreditGrants(this._options));
   }
 
   private _creditNotes?: CreditNotes;
@@ -138,14 +132,9 @@ export class Flexprice extends ClientSDK {
     return (this._customers ??= new Customers(this._options));
   }
 
-  private _wallets?: Wallets;
-  get wallets(): Wallets {
-    return (this._wallets ??= new Wallets(this._options));
-  }
-
-  private _invoices?: Invoices;
-  get invoices(): Invoices {
-    return (this._invoices ??= new Invoices(this._options));
+  private _entitlements?: Entitlements;
+  get entitlements(): Entitlements {
+    return (this._entitlements ??= new Entitlements(this._options));
   }
 
   private _environments?: Environments;
@@ -178,6 +167,11 @@ export class Flexprice extends ClientSDK {
     return (this._integrations ??= new Integrations(this._options));
   }
 
+  private _invoices?: Invoices;
+  get invoices(): Invoices {
+    return (this._invoices ??= new Invoices(this._options));
+  }
+
   private _journalEntries?: JournalEntries;
   get journalEntries(): JournalEntries {
     return (this._journalEntries ??= new JournalEntries(this._options));
@@ -205,19 +199,14 @@ export class Flexprice extends ClientSDK {
     return (this._plans ??= new Plans(this._options));
   }
 
-  private _selfBilling?: SelfBilling;
-  get selfBilling(): SelfBilling {
-    return (this._selfBilling ??= new SelfBilling(this._options));
+  private _priceUnits?: PriceUnits;
+  get priceUnits(): PriceUnits {
+    return (this._priceUnits ??= new PriceUnits(this._options));
   }
 
   private _prices?: Prices;
   get prices(): Prices {
     return (this._prices ??= new Prices(this._options));
-  }
-
-  private _priceUnits?: PriceUnits;
-  get priceUnits(): PriceUnits {
-    return (this._priceUnits ??= new PriceUnits(this._options));
   }
 
   private _products?: Products;
@@ -240,9 +229,19 @@ export class Flexprice extends ClientSDK {
     return (this._revenueReports ??= new RevenueReports(this._options));
   }
 
+  private _scheduledTasks?: ScheduledTasks;
+  get scheduledTasks(): ScheduledTasks {
+    return (this._scheduledTasks ??= new ScheduledTasks(this._options));
+  }
+
   private _secrets?: Secrets;
   get secrets(): Secrets {
     return (this._secrets ??= new Secrets(this._options));
+  }
+
+  private _selfBilling?: SelfBilling;
+  get selfBilling(): SelfBilling {
+    return (this._selfBilling ??= new SelfBilling(this._options));
   }
 
   private _subscriptions?: Subscriptions;
@@ -253,11 +252,6 @@ export class Flexprice extends ClientSDK {
   private _tasks?: Tasks;
   get tasks(): Tasks {
     return (this._tasks ??= new Tasks(this._options));
-  }
-
-  private _scheduledTasks?: ScheduledTasks;
-  get scheduledTasks(): ScheduledTasks {
-    return (this._scheduledTasks ??= new ScheduledTasks(this._options));
   }
 
   private _taxAssociations?: TaxAssociations;
@@ -285,9 +279,9 @@ export class Flexprice extends ClientSDK {
     return (this._users ??= new Users(this._options));
   }
 
-  private _webhookEvents?: WebhookEvents;
-  get webhookEvents(): WebhookEvents {
-    return (this._webhookEvents ??= new WebhookEvents(this._options));
+  private _wallets?: Wallets;
+  get wallets(): Wallets {
+    return (this._wallets ??= new Wallets(this._options));
   }
 
   private _workflows?: Workflows;

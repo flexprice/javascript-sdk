@@ -7,45 +7,65 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
-import { ActiveWindow, ActiveWindow$inboundSchema } from "./active-window.js";
+import {
+  ActiveWindow,
+  ActiveWindow$inboundSchema,
+  ActiveWindow$Outbound,
+  ActiveWindow$outboundSchema,
+} from "./active-window.js";
 import {
   BillingtermInstalment,
   BillingtermInstalment$inboundSchema,
+  BillingtermInstalment$Outbound,
+  BillingtermInstalment$outboundSchema,
 } from "./billingterm-instalment.js";
 import {
   BillingtermTerm,
   BillingtermTerm$inboundSchema,
+  BillingtermTerm$Outbound,
+  BillingtermTerm$outboundSchema,
 } from "./billingterm-term.js";
 import {
   CommitmentCollectionMethod,
   CommitmentCollectionMethod$inboundSchema,
+  CommitmentCollectionMethod$outboundSchema,
 } from "./commitment-collection-method.js";
 import {
   CommitmentEarlyTermination,
   CommitmentEarlyTermination$inboundSchema,
+  CommitmentEarlyTermination$outboundSchema,
 } from "./commitment-early-termination.js";
 import {
   CommitmentMeasurement,
   CommitmentMeasurement$inboundSchema,
+  CommitmentMeasurement$outboundSchema,
 } from "./commitment-measurement.js";
 import {
   CommitmentScopeType,
   CommitmentScopeType$inboundSchema,
+  CommitmentScopeType$outboundSchema,
 } from "./commitment-scope-type.js";
 import {
   CommitmentStatus,
   CommitmentStatus$inboundSchema,
+  CommitmentStatus$outboundSchema,
 } from "./commitment-status.js";
 import {
   CommitmentType,
   CommitmentType$inboundSchema,
+  CommitmentType$outboundSchema,
 } from "./commitment-type.js";
 import {
   InstalmentDelivery,
   InstalmentDelivery$inboundSchema,
+  InstalmentDelivery$outboundSchema,
 } from "./instalment-delivery.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Status, Status$inboundSchema } from "./status.js";
+import {
+  Status,
+  Status$inboundSchema,
+  Status$outboundSchema,
+} from "./status.js";
 
 export type CommitmentResponse = {
   activeWindows?: Array<ActiveWindow> | undefined;
@@ -173,7 +193,135 @@ export const CommitmentResponse$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type CommitmentResponse$Outbound = {
+  active_windows?: Array<ActiveWindow$Outbound> | undefined;
+  billing_terms?: Array<BillingtermTerm$Outbound> | undefined;
+  binding?: boolean | undefined;
+  collection_method?: string | undefined;
+  commitment_status?: string | undefined;
+  commitment_value?: string | undefined;
+  committed_price_id?: string | undefined;
+  created_at?: string | undefined;
+  created_by?: string | undefined;
+  currency?: string | undefined;
+  customer_id?: string | undefined;
+  end_date?: string | undefined;
+  environment_id?: string | undefined;
+  id?: string | undefined;
+  idempotency_key?: string | undefined;
+  instalment_invoicing?: string | undefined;
+  instalments?: Array<BillingtermInstalment$Outbound> | undefined;
+  invoice_description?: string | undefined;
+  invoice_label?: string | undefined;
+  measurement?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  name?: string | undefined;
+  on_early_termination?: string | undefined;
+  overage_price_id?: string | undefined;
+  priority?: number | undefined;
+  scope_entity_id?: string | undefined;
+  scope_entity_type?: string | undefined;
+  start_date?: string | undefined;
+  status?: string | undefined;
+  subscription_id?: string | undefined;
+  tenant_id?: string | undefined;
+  terminated_at?: string | undefined;
+  termination_invoice_id?: string | undefined;
+  total_amount?: string | undefined;
+  type?: string | undefined;
+  updated_at?: string | undefined;
+  updated_by?: string | undefined;
+  value?: string | undefined;
+};
 
+/** @internal */
+export const CommitmentResponse$outboundSchema: z.ZodMiniType<
+  CommitmentResponse$Outbound,
+  CommitmentResponse
+> = z.pipe(
+  z.object({
+    activeWindows: z.optional(z.array(ActiveWindow$outboundSchema)),
+    billingTerms: z.optional(z.array(BillingtermTerm$outboundSchema)),
+    binding: z.optional(z.boolean()),
+    collectionMethod: z.optional(CommitmentCollectionMethod$outboundSchema),
+    commitmentStatus: z.optional(CommitmentStatus$outboundSchema),
+    commitmentValue: z.optional(z.string()),
+    committedPriceId: z.optional(z.string()),
+    createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    createdBy: z.optional(z.string()),
+    currency: z.optional(z.string()),
+    customerId: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    environmentId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    idempotencyKey: z.optional(z.string()),
+    instalmentInvoicing: z.optional(InstalmentDelivery$outboundSchema),
+    instalments: z.optional(z.array(BillingtermInstalment$outboundSchema)),
+    invoiceDescription: z.optional(z.string()),
+    invoiceLabel: z.optional(z.string()),
+    measurement: z.optional(CommitmentMeasurement$outboundSchema),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    name: z.optional(z.string()),
+    onEarlyTermination: z.optional(CommitmentEarlyTermination$outboundSchema),
+    overagePriceId: z.optional(z.string()),
+    priority: z.optional(z.int()),
+    scopeEntityId: z.optional(z.string()),
+    scopeEntityType: z.optional(CommitmentScopeType$outboundSchema),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    status: z.optional(Status$outboundSchema),
+    subscriptionId: z.optional(z.string()),
+    tenantId: z.optional(z.string()),
+    terminatedAt: z.optional(
+      z.pipe(z.date(), z.transform(v => v.toISOString())),
+    ),
+    terminationInvoiceId: z.optional(z.string()),
+    totalAmount: z.optional(z.string()),
+    type: z.optional(CommitmentType$outboundSchema),
+    updatedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    updatedBy: z.optional(z.string()),
+    value: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      activeWindows: "active_windows",
+      billingTerms: "billing_terms",
+      collectionMethod: "collection_method",
+      commitmentStatus: "commitment_status",
+      commitmentValue: "commitment_value",
+      committedPriceId: "committed_price_id",
+      createdAt: "created_at",
+      createdBy: "created_by",
+      customerId: "customer_id",
+      endDate: "end_date",
+      environmentId: "environment_id",
+      idempotencyKey: "idempotency_key",
+      instalmentInvoicing: "instalment_invoicing",
+      invoiceDescription: "invoice_description",
+      invoiceLabel: "invoice_label",
+      onEarlyTermination: "on_early_termination",
+      overagePriceId: "overage_price_id",
+      scopeEntityId: "scope_entity_id",
+      scopeEntityType: "scope_entity_type",
+      startDate: "start_date",
+      subscriptionId: "subscription_id",
+      tenantId: "tenant_id",
+      terminatedAt: "terminated_at",
+      terminationInvoiceId: "termination_invoice_id",
+      totalAmount: "total_amount",
+      updatedAt: "updated_at",
+      updatedBy: "updated_by",
+    });
+  }),
+);
+
+export function commitmentResponseToJSON(
+  commitmentResponse: CommitmentResponse,
+): string {
+  return JSON.stringify(
+    CommitmentResponse$outboundSchema.parse(commitmentResponse),
+  );
+}
 export function commitmentResponseFromJSON(
   jsonString: string,
 ): SafeParseResult<CommitmentResponse, SDKValidationError> {

@@ -4,17 +4,24 @@
 
 import * as z from "zod/v4-mini";
 import {
+  RazorpayPaymentGatewayOptions,
+  RazorpayPaymentGatewayOptions$Outbound,
+  RazorpayPaymentGatewayOptions$outboundSchema,
+} from "./razorpay-payment-gateway-options.js";
+import {
   StripePaymentGatewayOptions,
   StripePaymentGatewayOptions$Outbound,
   StripePaymentGatewayOptions$outboundSchema,
 } from "./stripe-payment-gateway-options.js";
 
 export type PaymentGatewayOptions = {
+  razorpay?: RazorpayPaymentGatewayOptions | undefined;
   stripe?: StripePaymentGatewayOptions | undefined;
 };
 
 /** @internal */
 export type PaymentGatewayOptions$Outbound = {
+  razorpay?: RazorpayPaymentGatewayOptions$Outbound | undefined;
   stripe?: StripePaymentGatewayOptions$Outbound | undefined;
 };
 
@@ -23,6 +30,7 @@ export const PaymentGatewayOptions$outboundSchema: z.ZodMiniType<
   PaymentGatewayOptions$Outbound,
   PaymentGatewayOptions
 > = z.object({
+  razorpay: z.optional(RazorpayPaymentGatewayOptions$outboundSchema),
   stripe: z.optional(StripePaymentGatewayOptions$outboundSchema),
 });
 

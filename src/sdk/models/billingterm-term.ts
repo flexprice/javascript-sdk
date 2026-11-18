@@ -10,33 +10,44 @@ import * as types from "../../types/primitives.js";
 import {
   BillingTermKind,
   BillingTermKind$inboundSchema,
+  BillingTermKind$outboundSchema,
 } from "./billing-term-kind.js";
 import {
   BillingTermOwnerType,
   BillingTermOwnerType$inboundSchema,
+  BillingTermOwnerType$outboundSchema,
 } from "./billing-term-owner-type.js";
 import {
   BillingTermSplit,
   BillingTermSplit$inboundSchema,
+  BillingTermSplit$outboundSchema,
 } from "./billing-term-split.js";
 import {
   BillingTermValueType,
   BillingTermValueType$inboundSchema,
+  BillingTermValueType$outboundSchema,
 } from "./billing-term-value-type.js";
 import {
   InstalmentBillTrigger,
   InstalmentBillTrigger$inboundSchema,
+  InstalmentBillTrigger$outboundSchema,
 } from "./instalment-bill-trigger.js";
 import {
   InstalmentDelivery,
   InstalmentDelivery$inboundSchema,
+  InstalmentDelivery$outboundSchema,
 } from "./instalment-delivery.js";
 import {
   InvoiceCadence,
   InvoiceCadence$inboundSchema,
+  InvoiceCadence$outboundSchema,
 } from "./invoice-cadence.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
-import { Status, Status$inboundSchema } from "./status.js";
+import {
+  Status,
+  Status$inboundSchema,
+  Status$outboundSchema,
+} from "./status.js";
 
 export type BillingtermTerm = {
   billOn?: string | undefined;
@@ -131,7 +142,91 @@ export const BillingtermTerm$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type BillingtermTerm$Outbound = {
+  bill_on?: string | undefined;
+  bill_trigger?: string | undefined;
+  created_at?: string | undefined;
+  created_by?: string | undefined;
+  end_date?: string | undefined;
+  environment_id?: string | undefined;
+  id?: string | undefined;
+  instalment_invoicing?: string | undefined;
+  invoice_cadence?: string | undefined;
+  invoice_label?: string | undefined;
+  kind?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  owner_id?: string | undefined;
+  owner_type?: string | undefined;
+  period_count?: number | undefined;
+  split?: string | undefined;
+  start_date?: string | undefined;
+  status?: string | undefined;
+  tenant_id?: string | undefined;
+  updated_at?: string | undefined;
+  updated_by?: string | undefined;
+  value?: string | undefined;
+  value_type?: string | undefined;
+};
 
+/** @internal */
+export const BillingtermTerm$outboundSchema: z.ZodMiniType<
+  BillingtermTerm$Outbound,
+  BillingtermTerm
+> = z.pipe(
+  z.object({
+    billOn: z.optional(z.string()),
+    billTrigger: z.optional(InstalmentBillTrigger$outboundSchema),
+    createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    createdBy: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    environmentId: z.optional(z.string()),
+    id: z.optional(z.string()),
+    instalmentInvoicing: z.optional(InstalmentDelivery$outboundSchema),
+    invoiceCadence: z.optional(InvoiceCadence$outboundSchema),
+    invoiceLabel: z.optional(z.string()),
+    kind: z.optional(BillingTermKind$outboundSchema),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    ownerId: z.optional(z.string()),
+    ownerType: z.optional(BillingTermOwnerType$outboundSchema),
+    periodCount: z.optional(z.int()),
+    split: z.optional(BillingTermSplit$outboundSchema),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    status: z.optional(Status$outboundSchema),
+    tenantId: z.optional(z.string()),
+    updatedAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    updatedBy: z.optional(z.string()),
+    value: z.optional(z.string()),
+    valueType: z.optional(BillingTermValueType$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      billOn: "bill_on",
+      billTrigger: "bill_trigger",
+      createdAt: "created_at",
+      createdBy: "created_by",
+      endDate: "end_date",
+      environmentId: "environment_id",
+      instalmentInvoicing: "instalment_invoicing",
+      invoiceCadence: "invoice_cadence",
+      invoiceLabel: "invoice_label",
+      ownerId: "owner_id",
+      ownerType: "owner_type",
+      periodCount: "period_count",
+      startDate: "start_date",
+      tenantId: "tenant_id",
+      updatedAt: "updated_at",
+      updatedBy: "updated_by",
+      valueType: "value_type",
+    });
+  }),
+);
+
+export function billingtermTermToJSON(
+  billingtermTerm: BillingtermTerm,
+): string {
+  return JSON.stringify(BillingtermTerm$outboundSchema.parse(billingtermTerm));
+}
 export function billingtermTermFromJSON(
   jsonString: string,
 ): SafeParseResult<BillingtermTerm, SDKValidationError> {

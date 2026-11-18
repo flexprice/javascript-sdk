@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -35,6 +35,7 @@ import { Result } from "../types/fp.js";
 export function customersGetCustomerEntitlements(
   client: FlexpriceCore,
   id: string,
+  refreshGrants?: boolean | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,6 +54,7 @@ export function customersGetCustomerEntitlements(
   return new APIPromise($do(
     client,
     id,
+    refreshGrants,
     options,
   ));
 }
@@ -60,6 +62,7 @@ export function customersGetCustomerEntitlements(
 async function $do(
   client: FlexpriceCore,
   id: string,
+  refreshGrants?: boolean | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -80,6 +83,7 @@ async function $do(
 > {
   const input: models.GetCustomerEntitlementsRequest = {
     id: id,
+    refreshGrants: refreshGrants,
   };
 
   const parsed = safeParse(
@@ -101,6 +105,10 @@ async function $do(
     }),
   };
   const path = pathToFunc("/customers/{id}/entitlements")(pathParams);
+
+  const query = encodeFormQuery({
+    "refresh_grants": payload.refresh_grants,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -131,6 +139,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,

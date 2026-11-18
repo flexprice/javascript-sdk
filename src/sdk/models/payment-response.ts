@@ -54,6 +54,10 @@ export type PaymentResponse = {
   paymentUrl?: string | undefined;
   refundedAt?: Date | undefined;
   saveCardAndMakeDefault?: boolean | undefined;
+  /**
+   * SubmittedForProcessing is true while the gateway has the charge and its outcome is pending; it can't be processed again.
+   */
+  submittedForProcessing?: boolean | undefined;
   succeededAt?: Date | undefined;
   tenantId?: string | undefined;
   trackAttempts?: boolean | undefined;
@@ -93,6 +97,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
     payment_url: types.optional(types.string()),
     refunded_at: types.optional(types.date()),
     save_card_and_make_default: types.optional(types.boolean()),
+    submitted_for_processing: types.optional(types.boolean()),
     succeeded_at: types.optional(types.date()),
     tenant_id: types.optional(types.string()),
     track_attempts: types.optional(types.boolean()),
@@ -122,6 +127,7 @@ export const PaymentResponse$inboundSchema: z.ZodMiniType<
       "payment_url": "paymentUrl",
       "refunded_at": "refundedAt",
       "save_card_and_make_default": "saveCardAndMakeDefault",
+      "submitted_for_processing": "submittedForProcessing",
       "succeeded_at": "succeededAt",
       "tenant_id": "tenantId",
       "track_attempts": "trackAttempts",

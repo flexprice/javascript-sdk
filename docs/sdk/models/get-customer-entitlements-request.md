@@ -12,6 +12,7 @@ let value: GetCustomerEntitlementsRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | Customer ID        |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `id`                                                              | *string*                                                          | :heavy_check_mark:                                                | Customer ID                                                       |
+| `refreshGrants`                                                   | *boolean*                                                         | :heavy_minus_sign:                                                | Evaluate entitlement grants before returning their usage (slower) |

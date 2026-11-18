@@ -11,18 +11,25 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoCustomer,
   WebhookDtoCustomer$inboundSchema,
+  WebhookDtoCustomer$Outbound,
+  WebhookDtoCustomer$outboundSchema,
 } from "./webhook-dto-customer.js";
 import {
   WebhookDtoWalletAlertInfo,
   WebhookDtoWalletAlertInfo$inboundSchema,
+  WebhookDtoWalletAlertInfo$Outbound,
+  WebhookDtoWalletAlertInfo$outboundSchema,
 } from "./webhook-dto-wallet-alert-info.js";
 import {
   WebhookDtoWallet,
   WebhookDtoWallet$inboundSchema,
+  WebhookDtoWallet$Outbound,
+  WebhookDtoWallet$outboundSchema,
 } from "./webhook-dto-wallet.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoWalletWebhookPayload = {
@@ -49,7 +56,41 @@ export const WebhookDtoWalletWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoWalletWebhookPayload$Outbound = {
+  alert?: WebhookDtoWalletAlertInfo$Outbound | undefined;
+  customer?: WebhookDtoCustomer$Outbound | undefined;
+  event_type?: string | undefined;
+  wallet?: WebhookDtoWallet$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoWalletWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoWalletWebhookPayload$Outbound,
+  WebhookDtoWalletWebhookPayload
+> = z.pipe(
+  z.object({
+    alert: z.optional(WebhookDtoWalletAlertInfo$outboundSchema),
+    customer: z.optional(WebhookDtoCustomer$outboundSchema),
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    wallet: z.optional(WebhookDtoWallet$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventType: "event_type",
+    });
+  }),
+);
+
+export function webhookDtoWalletWebhookPayloadToJSON(
+  webhookDtoWalletWebhookPayload: WebhookDtoWalletWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoWalletWebhookPayload$outboundSchema.parse(
+      webhookDtoWalletWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoWalletWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoWalletWebhookPayload, SDKValidationError> {

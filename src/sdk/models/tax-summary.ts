@@ -11,6 +11,8 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   TaxExemptionSummary,
   TaxExemptionSummary$inboundSchema,
+  TaxExemptionSummary$Outbound,
+  TaxExemptionSummary$outboundSchema,
 } from "./tax-exemption-summary.js";
 
 export type TaxSummary = {
@@ -37,7 +39,37 @@ export const TaxSummary$inboundSchema: z.ZodMiniType<TaxSummary, unknown> = z
       });
     }),
   );
+/** @internal */
+export type TaxSummary$Outbound = {
+  exclusive_tax?: string | undefined;
+  exemption?: TaxExemptionSummary$Outbound | undefined;
+  inclusive_tax?: string | undefined;
+  total_tax?: string | undefined;
+};
 
+/** @internal */
+export const TaxSummary$outboundSchema: z.ZodMiniType<
+  TaxSummary$Outbound,
+  TaxSummary
+> = z.pipe(
+  z.object({
+    exclusiveTax: z.optional(z.string()),
+    exemption: z.optional(TaxExemptionSummary$outboundSchema),
+    inclusiveTax: z.optional(z.string()),
+    totalTax: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      exclusiveTax: "exclusive_tax",
+      inclusiveTax: "inclusive_tax",
+      totalTax: "total_tax",
+    });
+  }),
+);
+
+export function taxSummaryToJSON(taxSummary: TaxSummary): string {
+  return JSON.stringify(TaxSummary$outboundSchema.parse(taxSummary));
+}
 export function taxSummaryFromJSON(
   jsonString: string,
 ): SafeParseResult<TaxSummary, SDKValidationError> {

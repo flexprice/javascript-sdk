@@ -10,19 +10,24 @@ import * as types from "../../types/primitives.js";
 import {
   InvoicePaymentFailureReason,
   InvoicePaymentFailureReason$inboundSchema,
+  InvoicePaymentFailureReason$outboundSchema,
 } from "./invoice-payment-failure-reason.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SecretProvider,
   SecretProvider$inboundSchema,
+  SecretProvider$outboundSchema,
 } from "./secret-provider.js";
 import {
   WebhookDtoInvoice,
   WebhookDtoInvoice$inboundSchema,
+  WebhookDtoInvoice$Outbound,
+  WebhookDtoInvoice$outboundSchema,
 } from "./webhook-dto-invoice.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoInvoicePaymentFailedWebhookPayload = {
@@ -55,7 +60,51 @@ export const WebhookDtoInvoicePaymentFailedWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoInvoicePaymentFailedWebhookPayload$Outbound = {
+  error?: string | undefined;
+  event_type?: string | undefined;
+  invoice?: WebhookDtoInvoice$Outbound | undefined;
+  is_auto_charge_attempt?: boolean | undefined;
+  payment_id?: string | undefined;
+  provider?: string | undefined;
+  reason?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoInvoicePaymentFailedWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoInvoicePaymentFailedWebhookPayload$Outbound,
+    WebhookDtoInvoicePaymentFailedWebhookPayload
+  > = z.pipe(
+    z.object({
+      error: z.optional(z.string()),
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      invoice: z.optional(WebhookDtoInvoice$outboundSchema),
+      isAutoChargeAttempt: z.optional(z.boolean()),
+      paymentId: z.optional(z.string()),
+      provider: z.optional(SecretProvider$outboundSchema),
+      reason: z.optional(InvoicePaymentFailureReason$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        eventType: "event_type",
+        isAutoChargeAttempt: "is_auto_charge_attempt",
+        paymentId: "payment_id",
+      });
+    }),
+  );
+
+export function webhookDtoInvoicePaymentFailedWebhookPayloadToJSON(
+  webhookDtoInvoicePaymentFailedWebhookPayload:
+    WebhookDtoInvoicePaymentFailedWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoInvoicePaymentFailedWebhookPayload$outboundSchema.parse(
+      webhookDtoInvoicePaymentFailedWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoInvoicePaymentFailedWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<

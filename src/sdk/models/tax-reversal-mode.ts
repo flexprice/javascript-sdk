@@ -17,3 +17,8 @@ export const TaxReversalMode$inboundSchema: z.ZodMiniType<
   TaxReversalMode,
   unknown
 > = openEnums.inboundSchema(TaxReversalMode);
+/** @internal */
+export const TaxReversalMode$outboundSchema: z.ZodMiniType<
+  string,
+  TaxReversalMode
+> = openEnums.outboundSchema(TaxReversalMode);

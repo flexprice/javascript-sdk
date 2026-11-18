@@ -10,11 +10,14 @@ import * as types from "../../types/primitives.js";
 import {
   BillingtermInstalment,
   BillingtermInstalment$inboundSchema,
+  BillingtermInstalment$Outbound,
+  BillingtermInstalment$outboundSchema,
 } from "./billingterm-instalment.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoBillingInstalmentWebhookPayload = {
@@ -35,7 +38,39 @@ export const WebhookDtoBillingInstalmentWebhookPayload$inboundSchema:
       });
     }),
   );
+/** @internal */
+export type WebhookDtoBillingInstalmentWebhookPayload$Outbound = {
+  event_type?: string | undefined;
+  instalment?: BillingtermInstalment$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoBillingInstalmentWebhookPayload$outboundSchema:
+  z.ZodMiniType<
+    WebhookDtoBillingInstalmentWebhookPayload$Outbound,
+    WebhookDtoBillingInstalmentWebhookPayload
+  > = z.pipe(
+    z.object({
+      eventType: z.optional(WebhookEventName$outboundSchema),
+      instalment: z.optional(BillingtermInstalment$outboundSchema),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        eventType: "event_type",
+      });
+    }),
+  );
+
+export function webhookDtoBillingInstalmentWebhookPayloadToJSON(
+  webhookDtoBillingInstalmentWebhookPayload:
+    WebhookDtoBillingInstalmentWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoBillingInstalmentWebhookPayload$outboundSchema.parse(
+      webhookDtoBillingInstalmentWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoBillingInstalmentWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<

@@ -5,7 +5,7 @@
 ```typescript
 import { PaymentMethodType } from "@flexprice/sdk/sdk/models";
 
-let value: PaymentMethodType = "OFFLINE";
+let value: PaymentMethodType = "CREDITS";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: PaymentMethodType = "OFFLINE";
 ## Values
 
 ```typescript
-"CARD" | "ACH" | "OFFLINE" | "CREDITS" | "PAYMENT_LINK" | "UPI" | Unrecognized<string>
+"CARD" | "ACH" | "OFFLINE" | "CREDITS" | "PAYMENT_LINK" | "UPI" | "ENACH" | Unrecognized<string>
 ```

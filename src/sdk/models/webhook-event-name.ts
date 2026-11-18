@@ -83,6 +83,12 @@ export const WebhookEventName = {
   CheckoutSessionCompleted: "checkout.session.completed",
   CheckoutSessionFailed: "checkout.session.failed",
   CheckoutSessionExpired: "checkout.session.expired",
+  CheckoutSessionCancelled: "checkout.session.cancelled",
+  MandateConfirmed: "mandate.confirmed",
+  MandateRejected: "mandate.rejected",
+  MandateCancelled: "mandate.cancelled",
+  MandateSetupAttemptFailed: "mandate.setup_attempt_failed",
+  MandateSetupExpired: "mandate.setup_expired",
   EventRejected: "event.rejected",
 } as const;
 export type WebhookEventName = OpenEnum<typeof WebhookEventName>;
@@ -92,3 +98,8 @@ export const WebhookEventName$inboundSchema: z.ZodMiniType<
   WebhookEventName,
   unknown
 > = openEnums.inboundSchema(WebhookEventName);
+/** @internal */
+export const WebhookEventName$outboundSchema: z.ZodMiniType<
+  string,
+  WebhookEventName
+> = openEnums.outboundSchema(WebhookEventName);

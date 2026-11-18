@@ -12,6 +12,7 @@ import { customersGetCustomerUpcomingGrants } from "../funcs/customers-get-custo
 import { customersGetCustomerUsageSummary } from "../funcs/customers-get-customer-usage-summary.js";
 import { customersGetCustomer } from "../funcs/customers-get-customer.js";
 import { customersGetSubscriptionsForCustomer } from "../funcs/customers-get-subscriptions-for-customer.js";
+import { customersListCustomerPaymentIntegrations } from "../funcs/customers-list-customer-payment-integrations.js";
 import { customersListCustomerPaymentMethods } from "../funcs/customers-list-customer-payment-methods.js";
 import { customersQueryCustomer } from "../funcs/customers-query-customer.js";
 import { customersUpdateCustomer } from "../funcs/customers-update-customer.js";
@@ -83,11 +84,13 @@ export class Customers extends ClientSDK {
    */
   async getCustomerEntitlementsByExternalID(
     externalId: string,
+    refreshGrants?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlementsByExternalID(
       this,
       externalId,
+      refreshGrants,
       options,
     ));
   }
@@ -204,11 +207,13 @@ export class Customers extends ClientSDK {
    */
   async getCustomerEntitlements(
     id: string,
+    refreshGrants?: boolean | undefined,
     options?: RequestOptions,
   ): Promise<models.CustomerEntitlementsResponse> {
     return unwrapAsync(customersGetCustomerEntitlements(
       this,
       id,
+      refreshGrants,
       options,
     ));
   }
@@ -224,6 +229,23 @@ export class Customers extends ClientSDK {
     options?: RequestOptions,
   ): Promise<models.ListCreditGrantApplicationsResponse> {
     return unwrapAsync(customersGetCustomerUpcomingGrants(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * List customer payment integrations
+   *
+   * @remarks
+   * Use to learn which connected gateways can serve this customer and what each can do: check out, auto-charge, list methods, add a method (with the method types it sets up, e.g. enach for Razorpay), set a default.
+   */
+  async listCustomerPaymentIntegrations(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<models.IntegrationsResponse> {
+    return unwrapAsync(customersListCustomerPaymentIntegrations(
       this,
       id,
       options,

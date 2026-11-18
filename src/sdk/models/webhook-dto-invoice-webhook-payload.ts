@@ -11,10 +11,13 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   WebhookDtoInvoice,
   WebhookDtoInvoice$inboundSchema,
+  WebhookDtoInvoice$Outbound,
+  WebhookDtoInvoice$outboundSchema,
 } from "./webhook-dto-invoice.js";
 import {
   WebhookEventName,
   WebhookEventName$inboundSchema,
+  WebhookEventName$outboundSchema,
 } from "./webhook-event-name.js";
 
 export type WebhookDtoInvoiceWebhookPayload = {
@@ -37,7 +40,37 @@ export const WebhookDtoInvoiceWebhookPayload$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoInvoiceWebhookPayload$Outbound = {
+  event_type?: string | undefined;
+  invoice?: WebhookDtoInvoice$Outbound | undefined;
+};
 
+/** @internal */
+export const WebhookDtoInvoiceWebhookPayload$outboundSchema: z.ZodMiniType<
+  WebhookDtoInvoiceWebhookPayload$Outbound,
+  WebhookDtoInvoiceWebhookPayload
+> = z.pipe(
+  z.object({
+    eventType: z.optional(WebhookEventName$outboundSchema),
+    invoice: z.optional(WebhookDtoInvoice$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      eventType: "event_type",
+    });
+  }),
+);
+
+export function webhookDtoInvoiceWebhookPayloadToJSON(
+  webhookDtoInvoiceWebhookPayload: WebhookDtoInvoiceWebhookPayload,
+): string {
+  return JSON.stringify(
+    WebhookDtoInvoiceWebhookPayload$outboundSchema.parse(
+      webhookDtoInvoiceWebhookPayload,
+    ),
+  );
+}
 export function webhookDtoInvoiceWebhookPayloadFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoInvoiceWebhookPayload, SDKValidationError> {

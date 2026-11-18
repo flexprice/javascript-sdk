@@ -43,7 +43,51 @@ export const WebhookDtoCouponAssociation$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoCouponAssociation$Outbound = {
+  coupon_id?: string | undefined;
+  end_date?: string | undefined;
+  id?: string | undefined;
+  metadata?: { [k: string]: string } | undefined;
+  start_date?: string | undefined;
+  subscription_id?: string | undefined;
+  subscription_line_item_id?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoCouponAssociation$outboundSchema: z.ZodMiniType<
+  WebhookDtoCouponAssociation$Outbound,
+  WebhookDtoCouponAssociation
+> = z.pipe(
+  z.object({
+    couponId: z.optional(z.string()),
+    endDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    id: z.optional(z.string()),
+    metadata: z.optional(z.record(z.string(), z.string())),
+    startDate: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    subscriptionId: z.optional(z.string()),
+    subscriptionLineItemId: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      couponId: "coupon_id",
+      endDate: "end_date",
+      startDate: "start_date",
+      subscriptionId: "subscription_id",
+      subscriptionLineItemId: "subscription_line_item_id",
+    });
+  }),
+);
+
+export function webhookDtoCouponAssociationToJSON(
+  webhookDtoCouponAssociation: WebhookDtoCouponAssociation,
+): string {
+  return JSON.stringify(
+    WebhookDtoCouponAssociation$outboundSchema.parse(
+      webhookDtoCouponAssociation,
+    ),
+  );
+}
 export function webhookDtoCouponAssociationFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoCouponAssociation, SDKValidationError> {

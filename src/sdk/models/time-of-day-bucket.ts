@@ -25,7 +25,7 @@ export type TimeOfDayBucket = {
    * invoice breakdown and analytics responses reference this ID.
    */
   id?: string | undefined;
-  overageFactor?: number | undefined;
+  overageFactor?: string | undefined;
   /**
    * PriceID is the SUBSCRIPTION-scoped price created at bucket-creation time.
    *
@@ -47,7 +47,7 @@ export const TimeOfDayBucket$inboundSchema: z.ZodMiniType<
     commitment_value: types.optional(types.string()),
     end: types.optional(Bucket$inboundSchema),
     id: types.optional(types.string()),
-    overage_factor: types.optional(types.number()),
+    overage_factor: types.optional(types.string()),
     price_id: types.optional(types.string()),
     start: types.optional(Bucket$inboundSchema),
     true_up_enabled: types.optional(types.boolean()),

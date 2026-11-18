@@ -3,26 +3,40 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 
 export type GetCustomerEntitlementsRequest = {
   /**
    * Customer ID
    */
   id: string;
+  /**
+   * Evaluate entitlement grants before returning their usage (slower)
+   */
+  refreshGrants?: boolean | undefined;
 };
 
 /** @internal */
 export type GetCustomerEntitlementsRequest$Outbound = {
   id: string;
+  refresh_grants?: boolean | undefined;
 };
 
 /** @internal */
 export const GetCustomerEntitlementsRequest$outboundSchema: z.ZodMiniType<
   GetCustomerEntitlementsRequest$Outbound,
   GetCustomerEntitlementsRequest
-> = z.object({
-  id: z.string(),
-});
+> = z.pipe(
+  z.object({
+    id: z.string(),
+    refreshGrants: z.optional(z.boolean()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      refreshGrants: "refresh_grants",
+    });
+  }),
+);
 
 export function getCustomerEntitlementsRequestToJSON(
   getCustomerEntitlementsRequest: GetCustomerEntitlementsRequest,

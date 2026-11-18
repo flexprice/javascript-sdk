@@ -20,3 +20,8 @@ export const InvoicePaymentFailureReason$inboundSchema: z.ZodMiniType<
   InvoicePaymentFailureReason,
   unknown
 > = openEnums.inboundSchema(InvoicePaymentFailureReason);
+/** @internal */
+export const InvoicePaymentFailureReason$outboundSchema: z.ZodMiniType<
+  string,
+  InvoicePaymentFailureReason
+> = openEnums.outboundSchema(InvoicePaymentFailureReason);

@@ -9,6 +9,7 @@ import * as types from "../../types/primitives.js";
 import {
   PaymentActionType,
   PaymentActionType$inboundSchema,
+  PaymentActionType$outboundSchema,
 } from "./payment-action-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -25,7 +26,24 @@ export const PaymentAction$inboundSchema: z.ZodMiniType<
   type: types.optional(PaymentActionType$inboundSchema),
   url: types.optional(types.string()),
 });
+/** @internal */
+export type PaymentAction$Outbound = {
+  type?: string | undefined;
+  url?: string | undefined;
+};
 
+/** @internal */
+export const PaymentAction$outboundSchema: z.ZodMiniType<
+  PaymentAction$Outbound,
+  PaymentAction
+> = z.object({
+  type: z.optional(PaymentActionType$outboundSchema),
+  url: z.optional(z.string()),
+});
+
+export function paymentActionToJSON(paymentAction: PaymentAction): string {
+  return JSON.stringify(PaymentAction$outboundSchema.parse(paymentAction));
+}
 export function paymentActionFromJSON(
   jsonString: string,
 ): SafeParseResult<PaymentAction, SDKValidationError> {

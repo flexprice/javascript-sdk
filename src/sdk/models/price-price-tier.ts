@@ -10,6 +10,8 @@ import * as types from "../../types/primitives.js";
 import {
   PriceTransformQuantity,
   PriceTransformQuantity$inboundSchema,
+  PriceTransformQuantity$Outbound,
+  PriceTransformQuantity$outboundSchema,
 } from "./price-transform-quantity.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
@@ -57,7 +59,38 @@ export const PricePriceTier$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type PricePriceTier$Outbound = {
+  flat_amount?: string | undefined;
+  transform_quantity?: PriceTransformQuantity$Outbound | undefined;
+  unit_amount?: string | undefined;
+  up_to?: number | undefined;
+};
 
+/** @internal */
+export const PricePriceTier$outboundSchema: z.ZodMiniType<
+  PricePriceTier$Outbound,
+  PricePriceTier
+> = z.pipe(
+  z.object({
+    flatAmount: z.optional(z.string()),
+    transformQuantity: z.optional(PriceTransformQuantity$outboundSchema),
+    unitAmount: z.optional(z.string()),
+    upTo: z.optional(z.int()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      flatAmount: "flat_amount",
+      transformQuantity: "transform_quantity",
+      unitAmount: "unit_amount",
+      upTo: "up_to",
+    });
+  }),
+);
+
+export function pricePriceTierToJSON(pricePriceTier: PricePriceTier): string {
+  return JSON.stringify(PricePriceTier$outboundSchema.parse(pricePriceTier));
+}
 export function pricePriceTierFromJSON(
   jsonString: string,
 ): SafeParseResult<PricePriceTier, SDKValidationError> {

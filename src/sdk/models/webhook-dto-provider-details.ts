@@ -11,6 +11,7 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 import {
   SecretProvider,
   SecretProvider$inboundSchema,
+  SecretProvider$outboundSchema,
 } from "./secret-provider.js";
 
 export type WebhookDtoProviderDetails = {
@@ -36,7 +37,38 @@ export const WebhookDtoProviderDetails$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WebhookDtoProviderDetails$Outbound = {
+  hosted_invoice_url?: string | undefined;
+  invoice_id?: string | undefined;
+  provider?: string | undefined;
+};
 
+/** @internal */
+export const WebhookDtoProviderDetails$outboundSchema: z.ZodMiniType<
+  WebhookDtoProviderDetails$Outbound,
+  WebhookDtoProviderDetails
+> = z.pipe(
+  z.object({
+    hostedInvoiceUrl: z.optional(z.string()),
+    invoiceId: z.optional(z.string()),
+    provider: z.optional(SecretProvider$outboundSchema),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      hostedInvoiceUrl: "hosted_invoice_url",
+      invoiceId: "invoice_id",
+    });
+  }),
+);
+
+export function webhookDtoProviderDetailsToJSON(
+  webhookDtoProviderDetails: WebhookDtoProviderDetails,
+): string {
+  return JSON.stringify(
+    WebhookDtoProviderDetails$outboundSchema.parse(webhookDtoProviderDetails),
+  );
+}
 export function webhookDtoProviderDetailsFromJSON(
   jsonString: string,
 ): SafeParseResult<WebhookDtoProviderDetails, SDKValidationError> {

@@ -18,3 +18,8 @@ export const CreditNoteStatus$inboundSchema: z.ZodMiniType<
   CreditNoteStatus,
   unknown
 > = openEnums.inboundSchema(CreditNoteStatus);
+/** @internal */
+export const CreditNoteStatus$outboundSchema: z.ZodMiniType<
+  string,
+  CreditNoteStatus
+> = openEnums.outboundSchema(CreditNoteStatus);

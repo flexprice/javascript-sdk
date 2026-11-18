@@ -29,7 +29,35 @@ export const WalletTxConsumption$inboundSchema: z.ZodMiniType<
     });
   }),
 );
+/** @internal */
+export type WalletTxConsumption$Outbound = {
+  credit_transaction_id?: string | undefined;
+  credits?: string | undefined;
+};
 
+/** @internal */
+export const WalletTxConsumption$outboundSchema: z.ZodMiniType<
+  WalletTxConsumption$Outbound,
+  WalletTxConsumption
+> = z.pipe(
+  z.object({
+    creditTransactionId: z.optional(z.string()),
+    credits: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      creditTransactionId: "credit_transaction_id",
+    });
+  }),
+);
+
+export function walletTxConsumptionToJSON(
+  walletTxConsumption: WalletTxConsumption,
+): string {
+  return JSON.stringify(
+    WalletTxConsumption$outboundSchema.parse(walletTxConsumption),
+  );
+}
 export function walletTxConsumptionFromJSON(
   jsonString: string,
 ): SafeParseResult<WalletTxConsumption, SDKValidationError> {

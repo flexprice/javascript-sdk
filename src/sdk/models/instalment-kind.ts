@@ -9,6 +9,7 @@ import { OpenEnum } from "../../types/enums.js";
 export const InstalmentKind = {
   Instalment: "instalment",
   Settlement: "settlement",
+  CancellationFee: "cancellation_fee",
 } as const;
 export type InstalmentKind = OpenEnum<typeof InstalmentKind>;
 
@@ -17,3 +18,8 @@ export const InstalmentKind$inboundSchema: z.ZodMiniType<
   InstalmentKind,
   unknown
 > = openEnums.inboundSchema(InstalmentKind);
+/** @internal */
+export const InstalmentKind$outboundSchema: z.ZodMiniType<
+  string,
+  InstalmentKind
+> = openEnums.outboundSchema(InstalmentKind);

@@ -14,12 +14,17 @@ export type GetSubscriptionEntitlementsRequest = {
    * Feature IDs to filter by
    */
   featureIds?: Array<string> | undefined;
+  /**
+   * Evaluate entitlement grants before returning their usage (slower)
+   */
+  refreshGrants?: boolean | undefined;
 };
 
 /** @internal */
 export type GetSubscriptionEntitlementsRequest$Outbound = {
   id: string;
   feature_ids?: Array<string> | undefined;
+  refresh_grants?: boolean | undefined;
 };
 
 /** @internal */
@@ -30,10 +35,12 @@ export const GetSubscriptionEntitlementsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     id: z.string(),
     featureIds: z.optional(z.array(z.string())),
+    refreshGrants: z.optional(z.boolean()),
   }),
   z.transform((v) => {
     return remap$(v, {
       featureIds: "feature_ids",
+      refreshGrants: "refresh_grants",
     });
   }),
 );
