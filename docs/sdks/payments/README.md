@@ -100,11 +100,10 @@ const flexprice = new Flexprice({
 
 async function run() {
   const result = await flexprice.payments.createPayment({
-    amount: "883.46",
-    currency: "CFP Franc",
+    currency: "Uganda Shilling",
     destinationId: "<id>",
     destinationType: "CUSTOMER",
-    paymentMethodType: "OFFLINE",
+    paymentMethodType: "CREDITS",
   });
 
   console.log(result);
@@ -129,11 +128,10 @@ const flexprice = new FlexpriceCore({
 
 async function run() {
   const res = await paymentsCreatePayment(flexprice, {
-    amount: "883.46",
-    currency: "CFP Franc",
+    currency: "Uganda Shilling",
     destinationId: "<id>",
     destinationType: "CUSTOMER",
-    paymentMethodType: "OFFLINE",
+    paymentMethodType: "CREDITS",
   });
   if (res.ok) {
     const { value: result } = res;

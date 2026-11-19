@@ -9,6 +9,11 @@ import {
   CollectionMethod$outboundSchema,
 } from "./collection-method.js";
 import {
+  Duration,
+  Duration$Outbound,
+  Duration$outboundSchema,
+} from "./duration.js";
+import {
   PaymentMethodType,
   PaymentMethodType$outboundSchema,
 } from "./payment-method-type.js";
@@ -23,6 +28,7 @@ export type CheckoutPaymentProviderConfig = {
    * authorization link. Set true only from merchant-initiated paths (auto top-up).
    */
   customerNotPresent?: boolean | undefined;
+  linkExpiry?: Duration | undefined;
   maxMandateLimit?: string | undefined;
   /**
    * NotifyCustomer lets the gateway email/SMS the payment link to the customer.
@@ -35,6 +41,7 @@ export type CheckoutPaymentProviderConfig = {
 export type CheckoutPaymentProviderConfig$Outbound = {
   collection_method?: string | undefined;
   customer_not_present?: boolean | undefined;
+  link_expiry?: Duration$Outbound | undefined;
   max_mandate_limit?: string | undefined;
   notify_customer?: boolean | undefined;
   payment_method?: string | undefined;
@@ -48,6 +55,7 @@ export const CheckoutPaymentProviderConfig$outboundSchema: z.ZodMiniType<
   z.object({
     collectionMethod: z.optional(CollectionMethod$outboundSchema),
     customerNotPresent: z.optional(z.boolean()),
+    linkExpiry: z.optional(Duration$outboundSchema),
     maxMandateLimit: z.optional(z.string()),
     notifyCustomer: z.optional(z.boolean()),
     paymentMethod: z.optional(PaymentMethodType$outboundSchema),
@@ -56,6 +64,7 @@ export const CheckoutPaymentProviderConfig$outboundSchema: z.ZodMiniType<
     return remap$(v, {
       collectionMethod: "collection_method",
       customerNotPresent: "customer_not_present",
+      linkExpiry: "link_expiry",
       maxMandateLimit: "max_mandate_limit",
       notifyCustomer: "notify_customer",
       paymentMethod: "payment_method",
