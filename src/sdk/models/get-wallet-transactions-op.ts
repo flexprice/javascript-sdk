@@ -62,7 +62,7 @@ export type GetWalletTransactionsRequest = {
    */
   idPathParameter: string;
   createdBy?: string | undefined;
-  creditsAvailableGt?: number | undefined;
+  creditsAvailableGt?: string | undefined;
   endTime?: string | undefined;
   expand?: string | undefined;
   expiryDateAfter?: string | undefined;
@@ -110,7 +110,7 @@ export const Type$outboundSchema: z.ZodMiniEnum<typeof Type> = z.enum(Type);
 export type GetWalletTransactionsRequest$Outbound = {
   idPathParameter: string;
   created_by?: string | undefined;
-  credits_available_gt?: number | undefined;
+  credits_available_gt?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
   expiry_date_after?: string | undefined;
@@ -137,7 +137,7 @@ export const GetWalletTransactionsRequest$outboundSchema: z.ZodMiniType<
   z.object({
     idPathParameter: z.string(),
     createdBy: z.optional(z.string()),
-    creditsAvailableGt: z.optional(z.number()),
+    creditsAvailableGt: z.optional(z.string()),
     endTime: z.optional(z.string()),
     expand: z.optional(z.string()),
     expiryDateAfter: z.optional(z.string()),

@@ -15,6 +15,10 @@ import {
   InstalmentStatus,
   InstalmentStatus$inboundSchema,
 } from "./instalment-status.js";
+import {
+  InvoiceCadence,
+  InvoiceCadence$inboundSchema,
+} from "./invoice-cadence.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type UsageAnalyticInstalment = {
@@ -27,6 +31,7 @@ export type UsageAnalyticInstalment = {
   currency?: string | undefined;
   id?: string | undefined;
   instalmentStatus?: InstalmentStatus | undefined;
+  invoiceCadence?: InvoiceCadence | undefined;
   invoiceId?: string | undefined;
   invoiceLabel?: string | undefined;
   /**
@@ -51,6 +56,7 @@ export const UsageAnalyticInstalment$inboundSchema: z.ZodMiniType<
     currency: types.optional(types.string()),
     id: types.optional(types.string()),
     instalment_status: types.optional(InstalmentStatus$inboundSchema),
+    invoice_cadence: types.optional(InvoiceCadence$inboundSchema),
     invoice_id: types.optional(types.string()),
     invoice_label: types.optional(types.string()),
     invoiced_at: types.optional(types.date()),
@@ -64,6 +70,7 @@ export const UsageAnalyticInstalment$inboundSchema: z.ZodMiniType<
       "bill_on": "billOn",
       "commitment_id": "commitmentId",
       "instalment_status": "instalmentStatus",
+      "invoice_cadence": "invoiceCadence",
       "invoice_id": "invoiceId",
       "invoice_label": "invoiceLabel",
       "invoiced_at": "invoicedAt",

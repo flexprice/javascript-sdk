@@ -39,7 +39,7 @@ export type WalletTransactionFilterOrder = ClosedEnum<
 
 export type WalletTransactionFilter = {
   createdBy?: string | undefined;
-  creditsAvailableGt?: number | undefined;
+  creditsAvailableGt?: string | undefined;
   endTime?: Date | undefined;
   expand?: string | undefined;
   expiryDateAfter?: string | undefined;
@@ -71,7 +71,7 @@ export const WalletTransactionFilterOrder$outboundSchema: z.ZodMiniEnum<
 /** @internal */
 export type WalletTransactionFilter$Outbound = {
   created_by?: string | undefined;
-  credits_available_gt?: number | undefined;
+  credits_available_gt?: string | undefined;
   end_time?: string | undefined;
   expand?: string | undefined;
   expiry_date_after?: string | undefined;
@@ -99,7 +99,7 @@ export const WalletTransactionFilter$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     createdBy: z.optional(z.string()),
-    creditsAvailableGt: z.optional(z.number()),
+    creditsAvailableGt: z.optional(z.string()),
     endTime: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     expand: z.optional(z.string()),
     expiryDateAfter: z.optional(z.string()),
