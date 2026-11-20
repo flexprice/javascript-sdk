@@ -19,8 +19,6 @@ export const Metric = {
   CreditConsumption: "credit_consumption",
   CreditTopups: "credit_topups",
   NetBilling: "net_billing",
-  InvoiceTotalIssued: "invoice_total_issued",
-  NetBillingIssued: "net_billing_issued",
   ActiveCustomers: "active_customers",
 } as const;
 export type Metric = OpenEnum<typeof Metric>;

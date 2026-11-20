@@ -7,7 +7,7 @@ import { AnalyticsViewDefinition } from "@flexprice/sdk/sdk/models";
 
 let value: AnalyticsViewDefinition = {
   metrics: [
-    "arpu_paid",
+    "arpu",
   ],
   shape: "breakdown",
 };
