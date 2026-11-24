@@ -5,6 +5,8 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
@@ -49,7 +51,10 @@ import {
   LineItemGrouping$inboundSchema,
 } from "./line-item-grouping.js";
 import { PauseStatus, PauseStatus$inboundSchema } from "./pause-status.js";
-import { PaymentTerms, PaymentTerms$inboundSchema } from "./payment-terms.js";
+import {
+  PaymentTermsType,
+  PaymentTermsType$inboundSchema,
+} from "./payment-terms-type.js";
 import { PlanResponse, PlanResponse$inboundSchema } from "./plan-response.js";
 import {
   ProrationBehavior,
@@ -81,6 +86,31 @@ import {
   SubscriptionType,
   SubscriptionType$inboundSchema,
 } from "./subscription-type.js";
+
+/**
+ * Deprecated: use payment_terms_type and payment_terms_days. "<days> NET" (days 1–365), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export const SubscriptionResponsePaymentTerms = {
+  FifteenNET: "15 NET",
+  ThirtyNET: "30 NET",
+  FortyFiveNET: "45 NET",
+  SixtyNET: "60 NET",
+  SeventyFiveNET: "75 NET",
+  NinetyNET: "90 NET",
+  DueOnReceipt: "DUE_ON_RECEIPT",
+  EndOfMonth: "END_OF_MONTH",
+  EndOfNextMonth: "END_OF_NEXT_MONTH",
+} as const;
+/**
+ * Deprecated: use payment_terms_type and payment_terms_days. "<days> NET" (days 1–365), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type SubscriptionResponsePaymentTerms = OpenEnum<
+  typeof SubscriptionResponsePaymentTerms
+>;
 
 export type SubscriptionResponse = {
   /**
@@ -229,7 +259,18 @@ export type SubscriptionResponse = {
    * PaymentBehavior determines how subscription payments are handled
    */
   paymentBehavior?: string | undefined;
-  paymentTerms?: PaymentTerms | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  paymentTerms?: SubscriptionResponsePaymentTerms | undefined;
+  /**
+   * PaymentTermsDays is the days after the issue date an invoice falls due; only with DAYS.
+   */
+  paymentTermsDays?: number | undefined;
+  /**
+   * DAYS (due payment_terms_days after the issue date), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+   */
+  paymentTermsType?: PaymentTermsType | undefined;
   /**
    * Phases are the subscription phases for this subscription
    */
@@ -273,6 +314,12 @@ export type SubscriptionResponse = {
    */
   version?: number | undefined;
 };
+
+/** @internal */
+export const SubscriptionResponsePaymentTerms$inboundSchema: z.ZodMiniType<
+  SubscriptionResponsePaymentTerms,
+  unknown
+> = openEnums.inboundSchema(SubscriptionResponsePaymentTerms);
 
 /** @internal */
 export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
@@ -327,7 +374,11 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
       z.array(SubscriptionSubscriptionPause$inboundSchema),
     ),
     payment_behavior: types.optional(types.string()),
-    payment_terms: types.optional(PaymentTerms$inboundSchema),
+    payment_terms: types.optional(
+      SubscriptionResponsePaymentTerms$inboundSchema,
+    ),
+    payment_terms_days: types.optional(types.number()),
+    payment_terms_type: types.optional(PaymentTermsType$inboundSchema),
     phases: types.optional(z.array(SubscriptionPhaseResponse$inboundSchema)),
     plan: types.optional(PlanResponse$inboundSchema),
     plan_id: types.optional(types.string()),
@@ -383,6 +434,8 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
       "pause_status": "pauseStatus",
       "payment_behavior": "paymentBehavior",
       "payment_terms": "paymentTerms",
+      "payment_terms_days": "paymentTermsDays",
+      "payment_terms_type": "paymentTermsType",
       "plan_id": "planId",
       "proration_behavior": "prorationBehavior",
       "start_date": "startDate",

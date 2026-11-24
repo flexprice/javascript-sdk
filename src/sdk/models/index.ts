@@ -578,7 +578,7 @@ export * from "./payment-method-status.js";
 export * from "./payment-method-type.js";
 export * from "./payment-response.js";
 export * from "./payment-status.js";
-export * from "./payment-terms.js";
+export * from "./payment-terms-type.js";
 export * from "./performance-obligation-association-response.js";
 export * from "./performance-obligation-response.js";
 export * from "./performance-obligation-status.js";

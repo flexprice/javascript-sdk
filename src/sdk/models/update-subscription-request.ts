@@ -5,6 +5,10 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  PaymentTermsType,
+  PaymentTermsType$outboundSchema,
+} from "./payment-terms-type.js";
+import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
 } from "./proration-behavior.js";
@@ -28,6 +32,14 @@ export type UpdateSubscriptionRequest = {
    * ParentSubscriptionID sets or clears the parent subscription. Omit to leave unchanged; send "" to clear.
    */
   parentSubscriptionId?: string | undefined;
+  /**
+   * PaymentTermsDays is the days after the issue date an invoice falls due; only with DAYS.
+   */
+  paymentTermsDays?: number | undefined;
+  /**
+   * DAYS (due payment_terms_days after the issue date), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+   */
+  paymentTermsType?: PaymentTermsType | undefined;
   prorationBehavior?: ProrationBehavior | undefined;
   settings?: SettingsOverride | undefined;
   status?: SubscriptionStatus | undefined;
@@ -38,6 +50,8 @@ export type UpdateSubscriptionRequest$Outbound = {
   cancel_at?: string | undefined;
   cancel_at_period_end?: boolean | undefined;
   parent_subscription_id?: string | undefined;
+  payment_terms_days?: number | undefined;
+  payment_terms_type?: string | undefined;
   proration_behavior?: string | undefined;
   settings?: SettingsOverride$Outbound | undefined;
   status?: string | undefined;
@@ -52,6 +66,8 @@ export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
     cancelAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
     cancelAtPeriodEnd: z.optional(z.boolean()),
     parentSubscriptionId: z.optional(z.string()),
+    paymentTermsDays: z.optional(z.int()),
+    paymentTermsType: z.optional(PaymentTermsType$outboundSchema),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
     settings: z.optional(SettingsOverride$outboundSchema),
     status: z.optional(SubscriptionStatus$outboundSchema),
@@ -61,6 +77,8 @@ export const UpdateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       cancelAt: "cancel_at",
       cancelAtPeriodEnd: "cancel_at_period_end",
       parentSubscriptionId: "parent_subscription_id",
+      paymentTermsDays: "payment_terms_days",
+      paymentTermsType: "payment_terms_type",
       prorationBehavior: "proration_behavior",
     });
   }),
