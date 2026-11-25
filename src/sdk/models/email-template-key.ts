@@ -3,14 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 
 export const EmailTemplateKey = {
   InvoiceFinalized: "invoice_finalized",
+  InvoicePaymentReminder: "invoice_payment_reminder",
 } as const;
-export type EmailTemplateKey = ClosedEnum<typeof EmailTemplateKey>;
+export type EmailTemplateKey = OpenEnum<typeof EmailTemplateKey>;
 
 /** @internal */
-export const EmailTemplateKey$inboundSchema: z.ZodMiniEnum<
-  typeof EmailTemplateKey
-> = z.enum(EmailTemplateKey);
+export const EmailTemplateKey$inboundSchema: z.ZodMiniType<
+  EmailTemplateKey,
+  unknown
+> = openEnums.inboundSchema(EmailTemplateKey);

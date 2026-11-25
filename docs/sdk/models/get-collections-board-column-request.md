@@ -1,0 +1,22 @@
+# GetCollectionsBoardColumnRequest
+
+## Example Usage
+
+```typescript
+import { GetCollectionsBoardColumnRequest } from "@flexprice/sdk/sdk/models";
+
+let value: GetCollectionsBoardColumnRequest = {
+  key: "<key>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                            | Type                                                                                                                             | Required                                                                                                                         | Description                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `key`                                                                                                                            | *string*                                                                                                                         | :heavy_check_mark:                                                                                                               | Column key: not_due, overdue, chasing, held or paid_this_week                                                                    |
+| `page`                                                                                                                           | *number*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Page number, from 1 (default 1)                                                                                                  |
+| `asOf`                                                                                                                           | *string*                                                                                                                         | :heavy_minus_sign:                                                                                                               | as_of (RFC3339) of the board response; within the last 24 hours and not in the future                                            |
+| `limit`                                                                                                                          | *number*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Cards per page (1-200, default 15)                                                                                               |
+| `q`                                                                                                                              | *string*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Keep receivables whose customer name, customer email or invoice number contains this text (case-insensitive, max 100 characters) |
+| `currency`                                                                                                                       | *string*                                                                                                                         | :heavy_minus_sign:                                                                                                               | Keep receivables in this currency (case-insensitive)                                                                             |

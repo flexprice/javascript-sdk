@@ -11,6 +11,7 @@ import { Alerts } from "./alerts.js";
 import { Analytics } from "./analytics.js";
 import { BillingEntities } from "./billing-entities.js";
 import { Checkout } from "./checkout.js";
+import { Collections } from "./collections.js";
 import { Commitments } from "./commitments.js";
 import { Contracts } from "./contracts.js";
 import { Costs } from "./costs.js";
@@ -90,6 +91,11 @@ export class Flexprice extends ClientSDK {
   private _checkout?: Checkout;
   get checkout(): Checkout {
     return (this._checkout ??= new Checkout(this._options));
+  }
+
+  private _collections?: Collections;
+  get collections(): Collections {
+    return (this._collections ??= new Collections(this._options));
   }
 
   private _commitments?: Commitments;
