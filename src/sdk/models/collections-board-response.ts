@@ -11,6 +11,10 @@ import {
   CollectionsBoardColumn,
   CollectionsBoardColumn$inboundSchema,
 } from "./collections-board-column.js";
+import {
+  CollectionsRange,
+  CollectionsRange$inboundSchema,
+} from "./collections-range.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CollectionsBoardResponse = {
@@ -20,6 +24,7 @@ export type CollectionsBoardResponse = {
    */
   availableCurrencies?: Array<string> | undefined;
   columns?: Array<CollectionsBoardColumn> | undefined;
+  range?: CollectionsRange | undefined;
 };
 
 /** @internal */
@@ -31,6 +36,7 @@ export const CollectionsBoardResponse$inboundSchema: z.ZodMiniType<
     as_of: types.optional(types.string()),
     available_currencies: types.optional(z.array(types.string())),
     columns: types.optional(z.array(CollectionsBoardColumn$inboundSchema)),
+    range: types.optional(CollectionsRange$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Get a page of a collections board column
  *
  * @remarks
- * Use when you need the cards of one board column, one page at a time, after the board call. Pages are numbered from 1 and ordered stably; send the as_of of the board response with every page so the overdue boundary and the 7-day window do not move while you scroll. A row that changes between page requests can repeat or be skipped, so reset pages when the board changes. Page times limit may not exceed 5000.
+ * Use when you need the cards of one board column, one page at a time, after the board call. Pages are numbered from 1 and ordered stably (not due by due date, overdue and held by remaining balance, chasing by newest approval first, paid by newest payment first); send the as_of of the board response, and the same from and to, with every page so the overdue boundary, the date range and the 7-day window do not move while you scroll. A row that changes between page requests can repeat or be skipped, so reset pages when the board changes. Page times limit may not exceed 5000.
  */
 export function collectionsGetCollectionsBoardColumn(
   client: FlexpriceCore,
@@ -101,9 +101,11 @@ async function $do(
   const query = encodeFormQuery({
     "as_of": payload.as_of,
     "currency": payload.currency,
+    "from": payload.from,
     "limit": payload.limit,
     "page": payload.page,
     "q": payload.q,
+    "to": payload.to,
   });
 
   const headers = new Headers(compactMap({

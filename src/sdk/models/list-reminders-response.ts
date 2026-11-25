@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  CollectionsRange,
+  CollectionsRange$inboundSchema,
+} from "./collections-range.js";
+import {
   InvoiceReminderResponse,
   InvoiceReminderResponse$inboundSchema,
 } from "./invoice-reminder-response.js";
@@ -19,9 +23,14 @@ import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type ListRemindersResponse = {
   asOf?: string | undefined;
+  /**
+   * AvailableCurrencies lists the currencies of all open and recently paid invoices, before q, currency and range apply.
+   */
+  availableCurrencies?: Array<string> | undefined;
   drafts?: Array<InvoiceReminderResponse> | undefined;
   hasMore?: boolean | undefined;
   page?: number | undefined;
+  range?: CollectionsRange | undefined;
   summary?: ReminderSummary | undefined;
 };
 
@@ -32,14 +41,17 @@ export const ListRemindersResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     as_of: types.optional(types.string()),
+    available_currencies: types.optional(z.array(types.string())),
     drafts: types.optional(z.array(InvoiceReminderResponse$inboundSchema)),
     has_more: types.optional(types.boolean()),
     page: types.optional(types.number()),
+    range: types.optional(CollectionsRange$inboundSchema),
     summary: types.optional(ReminderSummary$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
       "as_of": "asOf",
+      "available_currencies": "availableCurrencies",
       "has_more": "hasMore",
     });
   }),

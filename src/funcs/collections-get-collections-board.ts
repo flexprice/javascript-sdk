@@ -30,13 +30,11 @@ import { Result } from "../types/fp.js";
  * Get collections board
  *
  * @remarks
- * Use when you need every open invoice by where it stands: sent but not due, overdue (one card per invoice, split by reminder status), and paid in the last 7 days. Counts and per-currency totals cover whole columns and follow the q and currency filters; by default no cards are returned (limit 0): each column carries count and totals, and has_more is true when the column has cards to fetch with GET /collections/board/columns/{key}. With limit above 0 the first page of cards is returned too, and has_more says more cards follow. available_currencies lists the currencies present before filtering.
+ * Use when you need every open invoice by where it stands: sent but not due, overdue (one card per invoice, split by reminder status), and paid in the last 7 days. Counts and per-currency totals cover whole columns and follow the q and currency filters; by default no cards are returned (limit 0): each column carries count and totals, and has_more is true when the column has cards to fetch with GET /collections/board/columns/{key}. With limit above 0 the first page of cards is returned too, and has_more says more cards follow. available_currencies lists the currencies of open invoices and of the invoices the Paid column can show, before q and currency apply.
  */
 export function collectionsGetCollectionsBoard(
   client: FlexpriceCore,
-  limit?: number | undefined,
-  q?: string | undefined,
-  currency?: string | undefined,
+  request?: models.GetCollectionsBoardRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,18 +52,14 @@ export function collectionsGetCollectionsBoard(
 > {
   return new APIPromise($do(
     client,
-    limit,
-    q,
-    currency,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: FlexpriceCore,
-  limit?: number | undefined,
-  q?: string | undefined,
-  currency?: string | undefined,
+  request?: models.GetCollectionsBoardRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -84,14 +78,8 @@ async function $do(
     APICall,
   ]
 > {
-  const input: models.GetCollectionsBoardRequest | undefined = {
-    limit: limit,
-    q: q,
-    currency: currency,
-  };
-
   const parsed = safeParse(
-    input,
+    request,
     (value) =>
       z.parse(
         z.optional(models.GetCollectionsBoardRequest$outboundSchema),
@@ -109,8 +97,10 @@ async function $do(
 
   const query = encodeFormQuery({
     "currency": payload?.currency,
+    "from": payload?.from,
     "limit": payload?.limit,
     "q": payload?.q,
+    "to": payload?.to,
   });
 
   const headers = new Headers(compactMap({

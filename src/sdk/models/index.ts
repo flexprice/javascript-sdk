@@ -133,6 +133,7 @@ export * from "./collections-column-key.js";
 export * from "./collections-column-page-response.js";
 export * from "./collections-currency-total.js";
 export * from "./collections-item.js";
+export * from "./collections-range.js";
 export * from "./column-role.js";
 export * from "./column-type.js";
 export * from "./commitment-bucket-request.js";

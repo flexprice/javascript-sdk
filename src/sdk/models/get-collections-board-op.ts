@@ -10,6 +10,14 @@ export type GetCollectionsBoardRequest = {
    */
   limit?: number | undefined;
   /**
+   * Start of the date range, YYYY-MM-DD (UTC, inclusive): open columns by due date, Paid by paid date. Without from and to, open columns are unbounded and Paid is the last 7 days
+   */
+  from?: string | undefined;
+  /**
+   * End of the date range, YYYY-MM-DD (UTC, inclusive); at most 5 years after from
+   */
+  to?: string | undefined;
+  /**
    * Keep receivables whose customer name, customer email or invoice number contains this text (case-insensitive, max 100 characters)
    */
   q?: string | undefined;
@@ -22,6 +30,8 @@ export type GetCollectionsBoardRequest = {
 /** @internal */
 export type GetCollectionsBoardRequest$Outbound = {
   limit?: number | undefined;
+  from?: string | undefined;
+  to?: string | undefined;
   q?: string | undefined;
   currency?: string | undefined;
 };
@@ -32,6 +42,8 @@ export const GetCollectionsBoardRequest$outboundSchema: z.ZodMiniType<
   GetCollectionsBoardRequest
 > = z.object({
   limit: z.optional(z.int()),
+  from: z.optional(z.string()),
+  to: z.optional(z.string()),
   q: z.optional(z.string()),
   currency: z.optional(z.string()),
 });

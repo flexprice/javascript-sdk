@@ -15,6 +15,10 @@ import {
   CollectionsItem,
   CollectionsItem$inboundSchema,
 } from "./collections-item.js";
+import {
+  CollectionsRange,
+  CollectionsRange$inboundSchema,
+} from "./collections-range.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CollectionsColumnPageResponse = {
@@ -23,6 +27,7 @@ export type CollectionsColumnPageResponse = {
   hasMore?: boolean | undefined;
   key?: CollectionsColumnKey | undefined;
   page?: number | undefined;
+  range?: CollectionsRange | undefined;
 };
 
 /** @internal */
@@ -36,6 +41,7 @@ export const CollectionsColumnPageResponse$inboundSchema: z.ZodMiniType<
     has_more: types.optional(types.boolean()),
     key: types.optional(CollectionsColumnKey$inboundSchema),
     page: types.optional(types.number()),
+    range: types.optional(CollectionsRange$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

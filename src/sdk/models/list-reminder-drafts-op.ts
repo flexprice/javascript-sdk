@@ -31,6 +31,14 @@ export type ListReminderDraftsRequest = {
    */
   page?: number | undefined;
   /**
+   * Start of the due date range, YYYY-MM-DD (UTC, inclusive); applies to the list and the summary
+   */
+  from?: string | undefined;
+  /**
+   * End of the due date range, YYYY-MM-DD (UTC, inclusive); at most 5 years after from
+   */
+  to?: string | undefined;
+  /**
    * as_of (RFC3339) of an earlier response; within the last 24 hours and not in the future
    */
   asOf?: string | undefined;
@@ -44,6 +52,8 @@ export type ListReminderDraftsRequest$Outbound = {
   currency?: string | undefined;
   limit?: number | undefined;
   page?: number | undefined;
+  from?: string | undefined;
+  to?: string | undefined;
   as_of?: string | undefined;
 };
 
@@ -59,6 +69,8 @@ export const ListReminderDraftsRequest$outboundSchema: z.ZodMiniType<
     currency: z.optional(z.string()),
     limit: z.optional(z.int()),
     page: z.optional(z.int()),
+    from: z.optional(z.string()),
+    to: z.optional(z.string()),
     asOf: z.optional(z.string()),
   }),
   z.transform((v) => {

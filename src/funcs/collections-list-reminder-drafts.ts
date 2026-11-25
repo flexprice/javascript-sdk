@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List reminder drafts
  *
  * @remarks
- * Use when you need the payment reminder of each overdue invoice with its tone, text and status. A reminder nobody acted on is rendered when read and stored nowhere; only edits and decisions are stored. The id of a reminder is its invoice id. The list is paged and nothing is sent.
+ * Use when you need the payment reminder of each overdue invoice with its tone, text and status. A reminder nobody acted on is rendered when read and stored nowhere; only edits and decisions are stored. The id of a reminder is its invoice id. The list is paged and nothing is sent. Order: status=approved lists the newest approval first (ties by invoice id); every other list puts the largest remaining balance first (ties by invoice id). Approvals made after as_of are left out of the list and the summary. from and to narrow the list and the summary by due date (invoices without a due date are left out when either is given); The summary (counts per status, totals per currency) follows from, to, currency and q like the board, and ignores status and customer_id so the status tabs count every status; available_currencies lists the currencies of open invoices and of invoices paid in the last 7 days, regardless of filters.
  */
 export function collectionsListReminderDrafts(
   client: FlexpriceCore,
@@ -99,10 +99,12 @@ async function $do(
     "as_of": payload?.as_of,
     "currency": payload?.currency,
     "customer_id": payload?.customer_id,
+    "from": payload?.from,
     "limit": payload?.limit,
     "page": payload?.page,
     "q": payload?.q,
     "status": payload?.status,
+    "to": payload?.to,
   });
 
   const headers = new Headers(compactMap({
