@@ -134,7 +134,10 @@ export type InvoiceFilter = {
    */
   periodStartLte?: string | undefined;
   /**
-   * SkipLineItems if true, will not include line items in the response
+   * SkipLineItems if true, will not include line items in the response.
+   *
+   * @remarks
+   * Pages that include line items are limited to MaxInvoiceListLimitWithLineItems invoices.
    */
   skipLineItems?: boolean | undefined;
   sort?: Array<SortCondition> | undefined;
