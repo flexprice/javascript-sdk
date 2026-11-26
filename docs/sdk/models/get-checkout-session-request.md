@@ -12,6 +12,7 @@ let value: GetCheckoutSessionRequest = {
 
 ## Fields
 
-| Field               | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `id`                | *string*            | :heavy_check_mark:  | Checkout session ID |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `id`                                               | *string*                                           | :heavy_check_mark:                                 | Checkout session ID                                |
+| `expand`                                           | *string*                                           | :heavy_minus_sign:                                 | Comma-separated fields to expand: invoice, payment |

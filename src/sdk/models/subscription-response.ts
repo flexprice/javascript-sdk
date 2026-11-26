@@ -337,7 +337,9 @@ export const SubscriptionResponse$inboundSchema: z.ZodMiniType<
     cancel_at: types.optional(types.date()),
     cancel_at_period_end: types.optional(types.boolean()),
     cancelled_at: types.optional(types.date()),
-    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
+    checkout_session: types.optional(
+      z.lazy(() => CheckoutSessionResponse$inboundSchema),
+    ),
     collection_method: types.optional(types.string()),
     commitment_amount: types.optional(types.string()),
     commitment_duration: types.optional(BillingPeriod$inboundSchema),

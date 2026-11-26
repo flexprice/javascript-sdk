@@ -289,7 +289,9 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
     billing_sequence: types.optional(types.number()),
-    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
+    checkout_session: types.optional(
+      z.lazy(() => CheckoutSessionResponse$inboundSchema),
+    ),
     coupon_applications: types.optional(
       z.array(CouponApplicationResponse$inboundSchema),
     ),

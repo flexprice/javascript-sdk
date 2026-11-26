@@ -43,6 +43,7 @@ export const WebhookEventName = {
   PaymentUpdated: "payment.updated",
   PaymentFailed: "payment.failed",
   PaymentAttemptFailed: "payment.attempt.failed",
+  PaymentAttemptSucceeded: "payment.attempt.succeeded",
   PaymentSuccess: "payment.success",
   PaymentPending: "payment.pending",
   RefundCreated: "refund.created",

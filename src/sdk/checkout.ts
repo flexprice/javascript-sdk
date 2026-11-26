@@ -6,6 +6,7 @@ import { checkoutCancelCheckoutSession } from "../funcs/checkout-cancel-checkout
 import { checkoutCreateCheckoutSession } from "../funcs/checkout-create-checkout-session.js";
 import { checkoutDeleteCheckoutSession } from "../funcs/checkout-delete-checkout-session.js";
 import { checkoutGetCheckoutSession } from "../funcs/checkout-get-checkout-session.js";
+import { checkoutQueryCheckoutSession } from "../funcs/checkout-query-checkout-session.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import { unwrapAsync } from "../types/fp.js";
 import * as models from "./models/index.js";
@@ -26,15 +27,34 @@ export class Checkout extends ClientSDK {
   }
 
   /**
+   * Query checkout sessions
+   *
+   * @remarks
+   * Use when listing checkout sessions, e.g. a customer's sessions. Expand is not supported here; read one session with GET /checkout/sessions/{id}?expand=invoice,payment for its invoice, payment and attempts.
+   */
+  async queryCheckoutSession(
+    request: models.CheckoutSessionFilter,
+    options?: RequestOptions,
+  ): Promise<models.ListCheckoutSessionsResponse> {
+    return unwrapAsync(checkoutQueryCheckoutSession(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Get checkout session
    */
   async getCheckoutSession(
     id: string,
+    expand?: string | undefined,
     options?: RequestOptions,
   ): Promise<models.CheckoutSessionResponse> {
     return unwrapAsync(checkoutGetCheckoutSession(
       this,
       id,
+      expand,
       options,
     ));
   }

@@ -5,7 +5,118 @@
 ```typescript
 import { CheckoutSessionResponse } from "@flexprice/sdk/sdk/models";
 
-let value: CheckoutSessionResponse = {};
+let value: CheckoutSessionResponse = {
+  invoice: {
+    subscription: {
+      couponAssociations: [
+        {
+          subscriptionLineItem: {
+            price: {
+              addon: {
+                prices: [
+                  {
+                    addon: {},
+                    meter: {
+                      createdAt: new Date("2024-03-20T15:04:05Z"),
+                      eventName: "api_request",
+                      id: "550e8400-e29b-41d4-a716-446655440000",
+                      name: "API Usage Meter",
+                      status: "published",
+                      tenantId: "tenant123",
+                      updatedAt: new Date("2024-03-20T15:04:05Z"),
+                    },
+                    plan: {},
+                  },
+                ],
+              },
+              meter: {
+                createdAt: new Date("2024-03-20T15:04:05Z"),
+                eventName: "api_request",
+                id: "550e8400-e29b-41d4-a716-446655440000",
+                name: "API Usage Meter",
+                status: "published",
+                tenantId: "tenant123",
+                updatedAt: new Date("2024-03-20T15:04:05Z"),
+              },
+              plan: {},
+            },
+          },
+        },
+      ],
+      entitlements: [
+        {
+          feature: {
+            meter: {
+              createdAt: new Date("2024-03-20T15:04:05Z"),
+              eventName: "api_request",
+              id: "550e8400-e29b-41d4-a716-446655440000",
+              name: "API Usage Meter",
+              status: "published",
+              tenantId: "tenant123",
+              updatedAt: new Date("2024-03-20T15:04:05Z"),
+            },
+          },
+        },
+      ],
+      latestInvoice: {
+        subscription: {
+          couponAssociations: [
+            {
+              subscriptionLineItem: {
+                price: {
+                  addon: {
+                    prices: [
+                      {
+                        addon: {},
+                        meter: {
+                          createdAt: new Date("2024-03-20T15:04:05Z"),
+                          eventName: "api_request",
+                          id: "550e8400-e29b-41d4-a716-446655440000",
+                          name: "API Usage Meter",
+                          status: "published",
+                          tenantId: "tenant123",
+                          updatedAt: new Date("2024-03-20T15:04:05Z"),
+                        },
+                        plan: {},
+                      },
+                    ],
+                  },
+                  meter: {
+                    createdAt: new Date("2024-03-20T15:04:05Z"),
+                    eventName: "api_request",
+                    id: "550e8400-e29b-41d4-a716-446655440000",
+                    name: "API Usage Meter",
+                    status: "published",
+                    tenantId: "tenant123",
+                    updatedAt: new Date("2024-03-20T15:04:05Z"),
+                  },
+                  plan: {},
+                },
+              },
+            },
+          ],
+          entitlements: [
+            {
+              feature: {
+                meter: {
+                  createdAt: new Date("2024-03-20T15:04:05Z"),
+                  eventName: "api_request",
+                  id: "550e8400-e29b-41d4-a716-446655440000",
+                  name: "API Usage Meter",
+                  status: "published",
+                  tenantId: "tenant123",
+                  updatedAt: new Date("2024-03-20T15:04:05Z"),
+                },
+              },
+            },
+          ],
+          plan: {},
+        },
+      },
+      plan: {},
+    },
+  },
+};
 ```
 
 ## Fields
@@ -16,6 +127,7 @@ let value: CheckoutSessionResponse = {};
 | `cancelUrl`                                                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `cancelledAt`                                                                                                                                                                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `checkoutInvoiceId`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
+| `checkoutPayment`                                                                                                                                                                                                                                           | [models.PaymentResponse](../../sdk/models/payment-response.md)                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `checkoutPaymentId`                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `checkoutStatus`                                                                                                                                                                                                                                            | [models.CheckoutStatus](../../sdk/models/checkout-status.md)                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `completedAt`                                                                                                                                                                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
@@ -27,6 +139,7 @@ let value: CheckoutSessionResponse = {};
 | `failureUrl`                                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `id`                                                                                                                                                                                                                                                        | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `idempotencyKey`                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
+| `invoice`                                                                                                                                                                                                                                                   | [models.InvoiceResponse](../../sdk/models/invoice-response.md)                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `metadata`                                                                                                                                                                                                                                                  | Record<string, *string*>                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |
 | `nextPollAfterMs`                                                                                                                                                                                                                                           | *number*                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                          | NextPollAfterMs is how long a client should wait before reading again.<br/>Zero means stop — either the session is terminal, or this response did not<br/>come from a polling read.                                                                         |
 | `payment`                                                                                                                                                                                                                                                   | [models.CheckoutPaymentBlock](../../sdk/models/checkout-payment-block.md)                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                          | N/A                                                                                                                                                                                                                                                         |

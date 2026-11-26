@@ -7,17 +7,31 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  InstrumentDetails,
+  InstrumentDetails$inboundSchema,
+} from "./instrument-details.js";
+import {
+  PaymentAttemptError,
+  PaymentAttemptError$inboundSchema,
+} from "./payment-attempt-error.js";
+import {
+  PaymentStatus,
+  PaymentStatus$inboundSchema,
+} from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type PaymentAttemptResponse = {
   attemptNumber?: number | undefined;
   createdAt?: Date | undefined;
   createdBy?: string | undefined;
+  error?: PaymentAttemptError | undefined;
   errorMessage?: string | undefined;
   gatewayAttemptId?: string | undefined;
   id?: string | undefined;
-  metadata?: { [k: string]: string } | undefined;
   paymentId?: string | undefined;
+  paymentMethod?: InstrumentDetails | undefined;
+  paymentStatus?: PaymentStatus | undefined;
   tenantId?: string | undefined;
   updatedAt?: Date | undefined;
   updatedBy?: string | undefined;
@@ -32,11 +46,13 @@ export const PaymentAttemptResponse$inboundSchema: z.ZodMiniType<
     attempt_number: types.optional(types.number()),
     created_at: types.optional(types.date()),
     created_by: types.optional(types.string()),
+    error: types.optional(PaymentAttemptError$inboundSchema),
     error_message: types.optional(types.string()),
     gateway_attempt_id: types.optional(types.string()),
     id: types.optional(types.string()),
-    metadata: types.optional(z.record(z.string(), types.string())),
     payment_id: types.optional(types.string()),
+    payment_method: types.optional(InstrumentDetails$inboundSchema),
+    payment_status: types.optional(PaymentStatus$inboundSchema),
     tenant_id: types.optional(types.string()),
     updated_at: types.optional(types.date()),
     updated_by: types.optional(types.string()),
@@ -49,6 +65,8 @@ export const PaymentAttemptResponse$inboundSchema: z.ZodMiniType<
       "error_message": "errorMessage",
       "gateway_attempt_id": "gatewayAttemptId",
       "payment_id": "paymentId",
+      "payment_method": "paymentMethod",
+      "payment_status": "paymentStatus",
       "tenant_id": "tenantId",
       "updated_at": "updatedAt",
       "updated_by": "updatedBy",
