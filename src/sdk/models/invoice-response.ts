@@ -46,6 +46,10 @@ import {
 } from "./invoice-status.js";
 import { InvoiceType, InvoiceType$inboundSchema } from "./invoice-type.js";
 import {
+  LinkedWalletTransaction,
+  LinkedWalletTransaction$inboundSchema,
+} from "./linked-wallet-transaction.js";
+import {
   PaymentStatus,
   PaymentStatus$inboundSchema,
 } from "./payment-status.js";
@@ -181,6 +185,10 @@ export type InvoiceResponse = {
    * line_items contains the individual items that make up this invoice (overrides embedded field)
    */
   lineItems?: Array<InvoiceLineItemResponse> | undefined;
+  /**
+   * linked_wallet_transactions are the wallet credits this invoice pays for; pending ones are released when it is paid
+   */
+  linkedWalletTransactions?: Array<LinkedWalletTransaction> | undefined;
   metadata?: { [k: string]: string } | undefined;
   /**
    * overpaid_amount is the amount overpaid if payment_status is OVERPAID (amount_paid - total)
@@ -281,7 +289,9 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     billing_period: types.optional(types.string()),
     billing_reason: types.optional(types.string()),
     billing_sequence: types.optional(types.number()),
-    checkout_session: types.optional(CheckoutSessionResponse$inboundSchema),
+    checkout_session: types.optional(
+      z.lazy(() => CheckoutSessionResponse$inboundSchema),
+    ),
     coupon_applications: types.optional(
       z.array(CouponApplicationResponse$inboundSchema),
     ),
@@ -308,6 +318,9 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
     issue_date: types.optional(types.date()),
     last_computed_at: types.optional(types.date()),
     line_items: types.optional(z.array(InvoiceLineItemResponse$inboundSchema)),
+    linked_wallet_transactions: types.optional(
+      z.array(LinkedWalletTransaction$inboundSchema),
+    ),
     metadata: types.optional(z.record(z.string(), types.string())),
     overpaid_amount: types.optional(types.string()),
     paid_at: types.optional(types.date()),
@@ -371,6 +384,7 @@ export const InvoiceResponse$inboundSchema: z.ZodMiniType<
       "issue_date": "issueDate",
       "last_computed_at": "lastComputedAt",
       "line_items": "lineItems",
+      "linked_wallet_transactions": "linkedWalletTransactions",
       "overpaid_amount": "overpaidAmount",
       "paid_at": "paidAt",
       "payment_status": "paymentStatus",

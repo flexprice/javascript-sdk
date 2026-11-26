@@ -7,12 +7,21 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  EmailType,
+  EmailType$inboundSchema,
+  EmailType$outboundSchema,
+} from "./email-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CustomerContactPerson = {
   department?: string | undefined;
   designation?: string | undefined;
   email?: string | undefined;
+  /**
+   * email_types are the emails this person receives in place of the customer email, e.g. ["invoice"]
+   */
+  emailTypes?: Array<EmailType> | undefined;
   firstName: string;
   id?: string | undefined;
   isPrimary?: boolean | undefined;
@@ -30,6 +39,7 @@ export const CustomerContactPerson$inboundSchema: z.ZodMiniType<
     department: types.optional(types.string()),
     designation: types.optional(types.string()),
     email: types.optional(types.string()),
+    email_types: types.optional(z.array(EmailType$inboundSchema)),
     first_name: types.string(),
     id: types.optional(types.string()),
     is_primary: types.optional(types.boolean()),
@@ -39,6 +49,7 @@ export const CustomerContactPerson$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "email_types": "emailTypes",
       "first_name": "firstName",
       "is_primary": "isPrimary",
       "last_name": "lastName",
@@ -50,6 +61,7 @@ export type CustomerContactPerson$Outbound = {
   department?: string | undefined;
   designation?: string | undefined;
   email?: string | undefined;
+  email_types?: Array<string> | undefined;
   first_name: string;
   id?: string | undefined;
   is_primary?: boolean | undefined;
@@ -67,6 +79,7 @@ export const CustomerContactPerson$outboundSchema: z.ZodMiniType<
     department: z.optional(z.string()),
     designation: z.optional(z.string()),
     email: z.optional(z.string()),
+    emailTypes: z.optional(z.array(EmailType$outboundSchema)),
     firstName: z.string(),
     id: z.optional(z.string()),
     isPrimary: z.optional(z.boolean()),
@@ -76,6 +89,7 @@ export const CustomerContactPerson$outboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      emailTypes: "email_types",
       firstName: "first_name",
       isPrimary: "is_primary",
       lastName: "last_name",

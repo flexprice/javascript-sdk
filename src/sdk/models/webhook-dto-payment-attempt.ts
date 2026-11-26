@@ -7,15 +7,35 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import {
+  InstrumentDetails,
+  InstrumentDetails$inboundSchema,
+  InstrumentDetails$Outbound,
+  InstrumentDetails$outboundSchema,
+} from "./instrument-details.js";
+import {
+  PaymentAttemptError,
+  PaymentAttemptError$inboundSchema,
+  PaymentAttemptError$Outbound,
+  PaymentAttemptError$outboundSchema,
+} from "./payment-attempt-error.js";
+import {
+  PaymentStatus,
+  PaymentStatus$inboundSchema,
+  PaymentStatus$outboundSchema,
+} from "./payment-status.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type WebhookDtoPaymentAttempt = {
   attemptNumber?: number | undefined;
   createdAt?: Date | undefined;
+  error?: PaymentAttemptError | undefined;
   errorMessage?: string | undefined;
   gatewayAttemptId?: string | undefined;
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  paymentMethod?: InstrumentDetails | undefined;
+  paymentStatus?: PaymentStatus | undefined;
 };
 
 /** @internal */
@@ -26,10 +46,13 @@ export const WebhookDtoPaymentAttempt$inboundSchema: z.ZodMiniType<
   z.object({
     attempt_number: types.optional(types.number()),
     created_at: types.optional(types.date()),
+    error: types.optional(PaymentAttemptError$inboundSchema),
     error_message: types.optional(types.string()),
     gateway_attempt_id: types.optional(types.string()),
     id: types.optional(types.string()),
     metadata: types.optional(z.record(z.string(), types.string())),
+    payment_method: types.optional(InstrumentDetails$inboundSchema),
+    payment_status: types.optional(PaymentStatus$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -37,6 +60,8 @@ export const WebhookDtoPaymentAttempt$inboundSchema: z.ZodMiniType<
       "created_at": "createdAt",
       "error_message": "errorMessage",
       "gateway_attempt_id": "gatewayAttemptId",
+      "payment_method": "paymentMethod",
+      "payment_status": "paymentStatus",
     });
   }),
 );
@@ -44,10 +69,13 @@ export const WebhookDtoPaymentAttempt$inboundSchema: z.ZodMiniType<
 export type WebhookDtoPaymentAttempt$Outbound = {
   attempt_number?: number | undefined;
   created_at?: string | undefined;
+  error?: PaymentAttemptError$Outbound | undefined;
   error_message?: string | undefined;
   gateway_attempt_id?: string | undefined;
   id?: string | undefined;
   metadata?: { [k: string]: string } | undefined;
+  payment_method?: InstrumentDetails$Outbound | undefined;
+  payment_status?: string | undefined;
 };
 
 /** @internal */
@@ -58,10 +86,13 @@ export const WebhookDtoPaymentAttempt$outboundSchema: z.ZodMiniType<
   z.object({
     attemptNumber: z.optional(z.int()),
     createdAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
+    error: z.optional(PaymentAttemptError$outboundSchema),
     errorMessage: z.optional(z.string()),
     gatewayAttemptId: z.optional(z.string()),
     id: z.optional(z.string()),
     metadata: z.optional(z.record(z.string(), z.string())),
+    paymentMethod: z.optional(InstrumentDetails$outboundSchema),
+    paymentStatus: z.optional(PaymentStatus$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -69,6 +100,8 @@ export const WebhookDtoPaymentAttempt$outboundSchema: z.ZodMiniType<
       createdAt: "created_at",
       errorMessage: "error_message",
       gatewayAttemptId: "gateway_attempt_id",
+      paymentMethod: "payment_method",
+      paymentStatus: "payment_status",
     });
   }),
 );

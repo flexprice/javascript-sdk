@@ -4,6 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import {
   AddAddonToSubscriptionRequest,
   AddAddonToSubscriptionRequest$Outbound,
@@ -71,7 +72,10 @@ import {
   PaymentBehavior,
   PaymentBehavior$outboundSchema,
 } from "./payment-behavior.js";
-import { PaymentTerms, PaymentTerms$outboundSchema } from "./payment-terms.js";
+import {
+  PaymentTermsType,
+  PaymentTermsType$outboundSchema,
+} from "./payment-terms-type.js";
 import {
   ProrationBehavior,
   ProrationBehavior$outboundSchema,
@@ -105,6 +109,31 @@ import {
   TaxRateOverride$Outbound,
   TaxRateOverride$outboundSchema,
 } from "./tax-rate-override.js";
+
+/**
+ * Deprecated: use payment_terms_type and payment_terms_days. "<days> NET" (days 1–365), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export const CreateSubscriptionRequestPaymentTerms = {
+  FifteenNET: "15 NET",
+  ThirtyNET: "30 NET",
+  FortyFiveNET: "45 NET",
+  SixtyNET: "60 NET",
+  SeventyFiveNET: "75 NET",
+  NinetyNET: "90 NET",
+  DueOnReceipt: "DUE_ON_RECEIPT",
+  EndOfMonth: "END_OF_MONTH",
+  EndOfNextMonth: "END_OF_NEXT_MONTH",
+} as const;
+/**
+ * Deprecated: use payment_terms_type and payment_terms_days. "<days> NET" (days 1–365), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type CreateSubscriptionRequestPaymentTerms = ClosedEnum<
+  typeof CreateSubscriptionRequestPaymentTerms
+>;
 
 export type CreateSubscriptionRequest = {
   addons?: Array<AddAddonToSubscriptionRequest> | undefined;
@@ -203,7 +232,18 @@ export type CreateSubscriptionRequest = {
    */
   overrideLineItems?: Array<OverrideLineItemRequest> | undefined;
   paymentBehavior?: PaymentBehavior | undefined;
-  paymentTerms?: PaymentTerms | undefined;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  paymentTerms?: CreateSubscriptionRequestPaymentTerms | undefined;
+  /**
+   * PaymentTermsDays is the days after the issue date an invoice falls due; only with DAYS.
+   */
+  paymentTermsDays?: number | undefined;
+  /**
+   * DAYS (due payment_terms_days after the issue date), DUE_ON_RECEIPT, END_OF_MONTH or END_OF_NEXT_MONTH.
+   */
+  paymentTermsType?: PaymentTermsType | undefined;
   phases?: Array<SubscriptionPhaseCreateRequest> | undefined;
   planId: string;
   prorationBehavior?: ProrationBehavior | undefined;
@@ -230,6 +270,12 @@ export type CreateSubscriptionRequest = {
    */
   trialPeriodDays?: number | undefined;
 };
+
+/** @internal */
+export const CreateSubscriptionRequestPaymentTerms$outboundSchema:
+  z.ZodMiniEnum<typeof CreateSubscriptionRequestPaymentTerms> = z.enum(
+    CreateSubscriptionRequestPaymentTerms,
+  );
 
 /** @internal */
 export type CreateSubscriptionRequest$Outbound = {
@@ -270,6 +316,8 @@ export type CreateSubscriptionRequest$Outbound = {
   override_line_items?: Array<OverrideLineItemRequest$Outbound> | undefined;
   payment_behavior?: string | undefined;
   payment_terms?: string | undefined;
+  payment_terms_days?: number | undefined;
+  payment_terms_type?: string | undefined;
   phases?: Array<SubscriptionPhaseCreateRequest$Outbound> | undefined;
   plan_id: string;
   proration_behavior?: string | undefined;
@@ -333,7 +381,11 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       z.array(OverrideLineItemRequest$outboundSchema),
     ),
     paymentBehavior: z.optional(PaymentBehavior$outboundSchema),
-    paymentTerms: z.optional(PaymentTerms$outboundSchema),
+    paymentTerms: z.optional(
+      CreateSubscriptionRequestPaymentTerms$outboundSchema,
+    ),
+    paymentTermsDays: z.optional(z.int()),
+    paymentTermsType: z.optional(PaymentTermsType$outboundSchema),
     phases: z.optional(z.array(SubscriptionPhaseCreateRequest$outboundSchema)),
     planId: z.string(),
     prorationBehavior: z.optional(ProrationBehavior$outboundSchema),
@@ -378,6 +430,8 @@ export const CreateSubscriptionRequest$outboundSchema: z.ZodMiniType<
       overrideLineItems: "override_line_items",
       paymentBehavior: "payment_behavior",
       paymentTerms: "payment_terms",
+      paymentTermsDays: "payment_terms_days",
+      paymentTermsType: "payment_terms_type",
       planId: "plan_id",
       prorationBehavior: "proration_behavior",
       startDate: "start_date",

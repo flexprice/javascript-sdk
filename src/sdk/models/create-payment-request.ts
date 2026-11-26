@@ -23,7 +23,10 @@ import {
 } from "./payment-method-type.js";
 
 export type CreatePaymentRequest = {
-  amount: string;
+  /**
+   * Amount defaults to the invoice's amount remaining for invoice payments when zero or omitted.
+   */
+  amount?: string | undefined;
   cancelUrl?: string | undefined;
   currency: string;
   destinationId: string;
@@ -41,7 +44,7 @@ export type CreatePaymentRequest = {
 
 /** @internal */
 export type CreatePaymentRequest$Outbound = {
-  amount: string;
+  amount?: string | undefined;
   cancel_url?: string | undefined;
   currency: string;
   destination_id: string;
@@ -63,7 +66,7 @@ export const CreatePaymentRequest$outboundSchema: z.ZodMiniType<
   CreatePaymentRequest
 > = z.pipe(
   z.object({
-    amount: z.string(),
+    amount: z.optional(z.string()),
     cancelUrl: z.optional(z.string()),
     currency: z.string(),
     destinationId: z.string(),

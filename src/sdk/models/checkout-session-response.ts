@@ -28,9 +28,17 @@ import {
   EntityCreationResult$inboundSchema,
 } from "./entity-creation-result.js";
 import {
+  InvoiceResponse,
+  InvoiceResponse$inboundSchema,
+} from "./invoice-response.js";
+import {
   PaymentAction,
   PaymentAction$inboundSchema,
 } from "./payment-action.js";
+import {
+  PaymentResponse,
+  PaymentResponse$inboundSchema,
+} from "./payment-response.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type CheckoutSessionResponse = {
@@ -38,6 +46,7 @@ export type CheckoutSessionResponse = {
   cancelUrl?: string | undefined;
   cancelledAt?: Date | undefined;
   checkoutInvoiceId?: string | undefined;
+  checkoutPayment?: PaymentResponse | undefined;
   checkoutPaymentId?: string | undefined;
   checkoutStatus?: CheckoutStatus | undefined;
   completedAt?: Date | undefined;
@@ -49,6 +58,7 @@ export type CheckoutSessionResponse = {
   failureUrl?: string | undefined;
   id?: string | undefined;
   idempotencyKey?: string | undefined;
+  invoice?: InvoiceResponse | undefined;
   metadata?: { [k: string]: string } | undefined;
   /**
    * NextPollAfterMs is how long a client should wait before reading again.
@@ -92,6 +102,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
     cancel_url: types.optional(types.string()),
     cancelled_at: types.optional(types.date()),
     checkout_invoice_id: types.optional(types.string()),
+    checkout_payment: types.optional(PaymentResponse$inboundSchema),
     checkout_payment_id: types.optional(types.string()),
     checkout_status: types.optional(CheckoutStatus$inboundSchema),
     completed_at: types.optional(types.date()),
@@ -103,6 +114,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
     failure_url: types.optional(types.string()),
     id: types.optional(types.string()),
     idempotency_key: types.optional(types.string()),
+    invoice: types.optional(z.lazy(() => InvoiceResponse$inboundSchema)),
     metadata: types.optional(z.record(z.string(), types.string())),
     next_poll_after_ms: types.optional(types.number()),
     payment: types.optional(CheckoutPaymentBlock$inboundSchema),
@@ -118,6 +130,7 @@ export const CheckoutSessionResponse$inboundSchema: z.ZodMiniType<
       "cancel_url": "cancelUrl",
       "cancelled_at": "cancelledAt",
       "checkout_invoice_id": "checkoutInvoiceId",
+      "checkout_payment": "checkoutPayment",
       "checkout_payment_id": "checkoutPaymentId",
       "checkout_status": "checkoutStatus",
       "completed_at": "completedAt",

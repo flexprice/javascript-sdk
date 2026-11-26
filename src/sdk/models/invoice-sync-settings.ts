@@ -31,6 +31,10 @@ import {
 
 export type InvoiceSyncSettings = {
   /**
+   * Nil lets the sync decide from the collection method and saved payment method.
+   */
+  autoAdvance?: boolean | undefined;
+  /**
    * Zoho chart-of-accounts id ("Deposit To"). Empty omits account_id, leaving Zoho's
    *
    * @remarks
@@ -57,6 +61,10 @@ export type InvoiceSyncSettings = {
    * through verbatim. Empty means DefaultZohoPaymentMode.
    */
   paymentMode?: string | undefined;
+  /**
+   * Nil sends Stripe's invoice email for send_invoice invoices.
+   */
+  sendInvoiceEmail?: boolean | undefined;
   servicePeriodCustomFields?: ServicePeriodCustomFields | undefined;
   /**
    * Zoho rejects payments on draft invoices, and merchants configure a Zoho auto-approval
@@ -73,6 +81,7 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
+    auto_advance: types.optional(types.boolean()),
     deposit_to_account_id: types.optional(types.string()),
     global_custom_fields: types.optional(
       z.array(GlobalCustomField$inboundSchema),
@@ -83,6 +92,7 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
     normalize_fixed_to: types.optional(BillingPeriod$inboundSchema),
     payment_gateways: types.optional(ZohoPaymentGatewaySettings$inboundSchema),
     payment_mode: types.optional(types.string()),
+    send_invoice_email: types.optional(types.boolean()),
     service_period_custom_fields: types.optional(
       ServicePeriodCustomFields$inboundSchema,
     ),
@@ -90,12 +100,14 @@ export const InvoiceSyncSettings$inboundSchema: z.ZodMiniType<
   }),
   z.transform((v) => {
     return remap$(v, {
+      "auto_advance": "autoAdvance",
       "deposit_to_account_id": "depositToAccountId",
       "global_custom_fields": "globalCustomFields",
       "metadata_custom_fields": "metadataCustomFields",
       "normalize_fixed_to": "normalizeFixedTo",
       "payment_gateways": "paymentGateways",
       "payment_mode": "paymentMode",
+      "send_invoice_email": "sendInvoiceEmail",
       "service_period_custom_fields": "servicePeriodCustomFields",
       "submit_for_approval": "submitForApproval",
     });

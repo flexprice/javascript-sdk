@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type StripePaymentGatewayOptions = {
   /**
+   * AllowPromotionCodes lets the customer enter a promotion code; nil keeps it on.
+   */
+  allowPromotionCodes?: boolean | undefined;
+  /**
    * TaxIDCollectionEnabled only applies to PAYMENT_LINK Checkout Sessions.
    */
   taxIdCollectionEnabled?: boolean | undefined;
@@ -14,6 +18,7 @@ export type StripePaymentGatewayOptions = {
 
 /** @internal */
 export type StripePaymentGatewayOptions$Outbound = {
+  allow_promotion_codes?: boolean | undefined;
   tax_id_collection_enabled?: boolean | undefined;
 };
 
@@ -23,10 +28,12 @@ export const StripePaymentGatewayOptions$outboundSchema: z.ZodMiniType<
   StripePaymentGatewayOptions
 > = z.pipe(
   z.object({
+    allowPromotionCodes: z.optional(z.boolean()),
     taxIdCollectionEnabled: z.optional(z.boolean()),
   }),
   z.transform((v) => {
     return remap$(v, {
+      allowPromotionCodes: "allow_promotion_codes",
       taxIdCollectionEnabled: "tax_id_collection_enabled",
     });
   }),

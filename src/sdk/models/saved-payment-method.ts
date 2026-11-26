@@ -7,6 +7,8 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { BankDetails, BankDetails$inboundSchema } from "./bank-details.js";
+import { CardDetails, CardDetails$inboundSchema } from "./card-details.js";
 import {
   PaymentGatewayType,
   PaymentGatewayType$inboundSchema,
@@ -20,25 +22,14 @@ import {
   PaymentMethodType$inboundSchema,
 } from "./payment-method-type.js";
 import {
-  SavedBankAccountDetails,
-  SavedBankAccountDetails$inboundSchema,
-} from "./saved-bank-account-details.js";
-import {
-  SavedCardDetails,
-  SavedCardDetails$inboundSchema,
-} from "./saved-card-details.js";
-import {
   SavedRecurringPaymentDetails,
   SavedRecurringPaymentDetails$inboundSchema,
 } from "./saved-recurring-payment-details.js";
-import {
-  SavedUPIDetails,
-  SavedUPIDetails$inboundSchema,
-} from "./saved-upi-details.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
+import { UPIDetails, UPIDetails$inboundSchema } from "./upi-details.js";
 
 export type SavedPaymentMethod = {
-  bankAccount?: SavedBankAccountDetails | undefined;
+  bankAccount?: BankDetails | undefined;
   /**
    * Capability, not permission: could this be charged with nobody present.
    *
@@ -47,7 +38,7 @@ export type SavedPaymentMethod = {
    * construction); false for a Razorpay token without a mandate.
    */
   canAutoCharge?: boolean | undefined;
-  card?: SavedCardDetails | undefined;
+  card?: CardDetails | undefined;
   id?: string | undefined;
   instantlyChargeable?: boolean | undefined;
   /**
@@ -61,7 +52,7 @@ export type SavedPaymentMethod = {
   recurring?: SavedRecurringPaymentDetails | undefined;
   status?: PaymentMethodStatus | undefined;
   type?: PaymentMethodType | undefined;
-  upi?: SavedUPIDetails | undefined;
+  upi?: UPIDetails | undefined;
 };
 
 /** @internal */
@@ -70,9 +61,9 @@ export const SavedPaymentMethod$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    bank_account: types.optional(SavedBankAccountDetails$inboundSchema),
+    bank_account: types.optional(BankDetails$inboundSchema),
     can_auto_charge: types.optional(types.boolean()),
-    card: types.optional(SavedCardDetails$inboundSchema),
+    card: types.optional(CardDetails$inboundSchema),
     id: types.optional(types.string()),
     instantly_chargeable: types.optional(types.boolean()),
     is_default: types.optional(types.boolean()),
@@ -80,7 +71,7 @@ export const SavedPaymentMethod$inboundSchema: z.ZodMiniType<
     recurring: types.optional(SavedRecurringPaymentDetails$inboundSchema),
     status: types.optional(PaymentMethodStatus$inboundSchema),
     type: types.optional(PaymentMethodType$inboundSchema),
-    upi: types.optional(SavedUPIDetails$inboundSchema),
+    upi: types.optional(UPIDetails$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -33,7 +33,7 @@ async function run() {
   const result = await flexprice.analytics.queryAnalytics({
     definition: {
       metrics: [
-        "events_volume",
+        "event_count",
       ],
       shape: "scalar",
     },
@@ -63,7 +63,7 @@ async function run() {
   const res = await analyticsQueryAnalytics(flexprice, {
     definition: {
       metrics: [
-        "events_volume",
+        "event_count",
       ],
       shape: "scalar",
     },
@@ -412,7 +412,7 @@ async function run() {
   const result = await flexprice.analytics.createAnalyticsView({
     definition: {
       metrics: [
-        "net_billing",
+        "credit_topups",
       ],
       shape: "scalar",
     },
@@ -443,7 +443,7 @@ async function run() {
   const res = await analyticsCreateAnalyticsView(flexprice, {
     definition: {
       metrics: [
-        "net_billing",
+        "credit_topups",
       ],
       shape: "scalar",
     },

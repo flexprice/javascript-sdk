@@ -9,11 +9,16 @@ export type GetCheckoutSessionRequest = {
    * Checkout session ID
    */
   id: string;
+  /**
+   * Comma-separated fields to expand: invoice, payment
+   */
+  expand?: string | undefined;
 };
 
 /** @internal */
 export type GetCheckoutSessionRequest$Outbound = {
   id: string;
+  expand?: string | undefined;
 };
 
 /** @internal */
@@ -22,6 +27,7 @@ export const GetCheckoutSessionRequest$outboundSchema: z.ZodMiniType<
   GetCheckoutSessionRequest
 > = z.object({
   id: z.string(),
+  expand: z.optional(z.string()),
 });
 
 export function getCheckoutSessionRequestToJSON(

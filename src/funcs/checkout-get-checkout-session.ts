@@ -4,7 +4,7 @@
 
 import * as z from "zod/v4-mini";
 import { FlexpriceCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -32,6 +32,7 @@ import { Result } from "../types/fp.js";
 export function checkoutGetCheckoutSession(
   client: FlexpriceCore,
   id: string,
+  expand?: string | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -50,6 +51,7 @@ export function checkoutGetCheckoutSession(
   return new APIPromise($do(
     client,
     id,
+    expand,
     options,
   ));
 }
@@ -57,6 +59,7 @@ export function checkoutGetCheckoutSession(
 async function $do(
   client: FlexpriceCore,
   id: string,
+  expand?: string | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,6 +80,7 @@ async function $do(
 > {
   const input: models.GetCheckoutSessionRequest = {
     id: id,
+    expand: expand,
   };
 
   const parsed = safeParse(
@@ -97,6 +101,10 @@ async function $do(
     }),
   };
   const path = pathToFunc("/checkout/sessions/{id}")(pathParams);
+
+  const query = encodeFormQuery({
+    "expand": payload.expand,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -127,6 +135,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -165,7 +174,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, models.CheckoutSessionResponse$inboundSchema),
-    M.jsonErr(404, models.ErrorsErrorResponse$inboundSchema),
+    M.jsonErr([400, 404], models.ErrorsErrorResponse$inboundSchema),
     M.jsonErr(500, models.ErrorsErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
