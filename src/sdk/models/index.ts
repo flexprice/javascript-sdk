@@ -287,6 +287,7 @@ export * from "./email-log-response.js";
 export * from "./email-provider.js";
 export * from "./email-template-key.js";
 export * from "./email-trigger.js";
+export * from "./email-type.js";
 export * from "./entitlement-aggregation-mode.js";
 export * from "./entitlement-entity-type.js";
 export * from "./entitlement-filter.js";

@@ -17,7 +17,7 @@ export type ReminderEmailStatus = {
   sentAt?: Date | undefined;
   status?: EmailDeliveryStatus | undefined;
   statusReason?: string | undefined;
-  to?: string | undefined;
+  to?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const ReminderEmailStatus$inboundSchema: z.ZodMiniType<
     sent_at: types.optional(types.date()),
     status: types.optional(EmailDeliveryStatus$inboundSchema),
     status_reason: types.optional(types.string()),
-    to: types.optional(types.string()),
+    to: types.optional(z.array(types.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
