@@ -8,6 +8,18 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import {
+  BankDetails,
+  BankDetails$inboundSchema,
+  BankDetails$Outbound,
+  BankDetails$outboundSchema,
+} from "./bank-details.js";
+import {
+  CardDetails,
+  CardDetails$inboundSchema,
+  CardDetails$Outbound,
+  CardDetails$outboundSchema,
+} from "./card-details.js";
+import {
   PaymentGatewayType,
   PaymentGatewayType$inboundSchema,
   PaymentGatewayType$outboundSchema,
@@ -19,27 +31,15 @@ import {
 } from "./payment-method-type.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 import {
-  WebhookDtoMandateBankAccount,
-  WebhookDtoMandateBankAccount$inboundSchema,
-  WebhookDtoMandateBankAccount$Outbound,
-  WebhookDtoMandateBankAccount$outboundSchema,
-} from "./webhook-dto-mandate-bank-account.js";
-import {
-  WebhookDtoMandateCard,
-  WebhookDtoMandateCard$inboundSchema,
-  WebhookDtoMandateCard$Outbound,
-  WebhookDtoMandateCard$outboundSchema,
-} from "./webhook-dto-mandate-card.js";
-import {
-  WebhookDtoMandateUPI,
-  WebhookDtoMandateUPI$inboundSchema,
-  WebhookDtoMandateUPI$Outbound,
-  WebhookDtoMandateUPI$outboundSchema,
-} from "./webhook-dto-mandate-upi.js";
+  UPIDetails,
+  UPIDetails$inboundSchema,
+  UPIDetails$Outbound,
+  UPIDetails$outboundSchema,
+} from "./upi-details.js";
 
 export type WebhookDtoMandate = {
-  bankAccount?: WebhookDtoMandateBankAccount | undefined;
-  card?: WebhookDtoMandateCard | undefined;
+  bankAccount?: BankDetails | undefined;
+  card?: CardDetails | undefined;
   currency?: string | undefined;
   customerId?: string | undefined;
   expiresAt?: Date | undefined;
@@ -51,7 +51,7 @@ export type WebhookDtoMandate = {
   setupIntentId?: string | undefined;
   status?: string | undefined;
   type?: PaymentMethodType | undefined;
-  upi?: WebhookDtoMandateUPI | undefined;
+  upi?: UPIDetails | undefined;
 };
 
 /** @internal */
@@ -60,8 +60,8 @@ export const WebhookDtoMandate$inboundSchema: z.ZodMiniType<
   unknown
 > = z.pipe(
   z.object({
-    bank_account: types.optional(WebhookDtoMandateBankAccount$inboundSchema),
-    card: types.optional(WebhookDtoMandateCard$inboundSchema),
+    bank_account: types.optional(BankDetails$inboundSchema),
+    card: types.optional(CardDetails$inboundSchema),
     currency: types.optional(types.string()),
     customer_id: types.optional(types.string()),
     expires_at: types.optional(types.date()),
@@ -73,7 +73,7 @@ export const WebhookDtoMandate$inboundSchema: z.ZodMiniType<
     setup_intent_id: types.optional(types.string()),
     status: types.optional(types.string()),
     type: types.optional(PaymentMethodType$inboundSchema),
-    upi: types.optional(WebhookDtoMandateUPI$inboundSchema),
+    upi: types.optional(UPIDetails$inboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -89,8 +89,8 @@ export const WebhookDtoMandate$inboundSchema: z.ZodMiniType<
 );
 /** @internal */
 export type WebhookDtoMandate$Outbound = {
-  bank_account?: WebhookDtoMandateBankAccount$Outbound | undefined;
-  card?: WebhookDtoMandateCard$Outbound | undefined;
+  bank_account?: BankDetails$Outbound | undefined;
+  card?: CardDetails$Outbound | undefined;
   currency?: string | undefined;
   customer_id?: string | undefined;
   expires_at?: string | undefined;
@@ -102,7 +102,7 @@ export type WebhookDtoMandate$Outbound = {
   setup_intent_id?: string | undefined;
   status?: string | undefined;
   type?: string | undefined;
-  upi?: WebhookDtoMandateUPI$Outbound | undefined;
+  upi?: UPIDetails$Outbound | undefined;
 };
 
 /** @internal */
@@ -111,8 +111,8 @@ export const WebhookDtoMandate$outboundSchema: z.ZodMiniType<
   WebhookDtoMandate
 > = z.pipe(
   z.object({
-    bankAccount: z.optional(WebhookDtoMandateBankAccount$outboundSchema),
-    card: z.optional(WebhookDtoMandateCard$outboundSchema),
+    bankAccount: z.optional(BankDetails$outboundSchema),
+    card: z.optional(CardDetails$outboundSchema),
     currency: z.optional(z.string()),
     customerId: z.optional(z.string()),
     expiresAt: z.optional(z.pipe(z.date(), z.transform(v => v.toISOString()))),
@@ -124,7 +124,7 @@ export const WebhookDtoMandate$outboundSchema: z.ZodMiniType<
     setupIntentId: z.optional(z.string()),
     status: z.optional(z.string()),
     type: z.optional(PaymentMethodType$outboundSchema),
-    upi: z.optional(WebhookDtoMandateUPI$outboundSchema),
+    upi: z.optional(UPIDetails$outboundSchema),
   }),
   z.transform((v) => {
     return remap$(v, {

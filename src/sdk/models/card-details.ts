@@ -13,6 +13,7 @@ export type CardDetails = {
   brand?: string | undefined;
   expMonth?: number | undefined;
   expYear?: number | undefined;
+  fingerprint?: string | undefined;
   /**
    * credit, debit or prepaid
    */
@@ -28,6 +29,7 @@ export const CardDetails$inboundSchema: z.ZodMiniType<CardDetails, unknown> = z
       brand: types.optional(types.string()),
       exp_month: types.optional(types.number()),
       exp_year: types.optional(types.number()),
+      fingerprint: types.optional(types.string()),
       funding: types.optional(types.string()),
       issuer: types.optional(types.string()),
       last4: types.optional(types.string()),
@@ -44,6 +46,7 @@ export type CardDetails$Outbound = {
   brand?: string | undefined;
   exp_month?: number | undefined;
   exp_year?: number | undefined;
+  fingerprint?: string | undefined;
   funding?: string | undefined;
   issuer?: string | undefined;
   last4?: string | undefined;
@@ -58,6 +61,7 @@ export const CardDetails$outboundSchema: z.ZodMiniType<
     brand: z.optional(z.string()),
     expMonth: z.optional(z.int()),
     expYear: z.optional(z.int()),
+    fingerprint: z.optional(z.string()),
     funding: z.optional(z.string()),
     issuer: z.optional(z.string()),
     last4: z.optional(z.string()),

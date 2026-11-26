@@ -1,11 +1,11 @@
-# SavedUPIDetails
+# UPIDetails
 
 ## Example Usage
 
 ```typescript
-import { SavedUPIDetails } from "@flexprice/sdk/sdk/models";
+import { UPIDetails } from "@flexprice/sdk/sdk/models";
 
-let value: SavedUPIDetails = {};
+let value: UPIDetails = {};
 ```
 
 ## Fields

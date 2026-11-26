@@ -3,32 +3,65 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "./sdk-validation-error.js";
 
 export type BankDetails = {
+  accountType?: string | undefined;
+  authType?: string | undefined;
   bank?: string | undefined;
+  ifsc?: string | undefined;
+  last4?: string | undefined;
 };
 
 /** @internal */
 export const BankDetails$inboundSchema: z.ZodMiniType<BankDetails, unknown> = z
-  .object({
-    bank: types.optional(types.string()),
-  });
+  .pipe(
+    z.object({
+      account_type: types.optional(types.string()),
+      auth_type: types.optional(types.string()),
+      bank: types.optional(types.string()),
+      ifsc: types.optional(types.string()),
+      last4: types.optional(types.string()),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        "account_type": "accountType",
+        "auth_type": "authType",
+      });
+    }),
+  );
 /** @internal */
 export type BankDetails$Outbound = {
+  account_type?: string | undefined;
+  auth_type?: string | undefined;
   bank?: string | undefined;
+  ifsc?: string | undefined;
+  last4?: string | undefined;
 };
 
 /** @internal */
 export const BankDetails$outboundSchema: z.ZodMiniType<
   BankDetails$Outbound,
   BankDetails
-> = z.object({
-  bank: z.optional(z.string()),
-});
+> = z.pipe(
+  z.object({
+    accountType: z.optional(z.string()),
+    authType: z.optional(z.string()),
+    bank: z.optional(z.string()),
+    ifsc: z.optional(z.string()),
+    last4: z.optional(z.string()),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      accountType: "account_type",
+      authType: "auth_type",
+    });
+  }),
+);
 
 export function bankDetailsToJSON(bankDetails: BankDetails): string {
   return JSON.stringify(BankDetails$outboundSchema.parse(bankDetails));

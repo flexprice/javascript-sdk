@@ -15,6 +15,7 @@ let value: CardDetails = {};
 | `brand`                  | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `expMonth`               | *number*                 | :heavy_minus_sign:       | N/A                      |
 | `expYear`                | *number*                 | :heavy_minus_sign:       | N/A                      |
+| `fingerprint`            | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `funding`                | *string*                 | :heavy_minus_sign:       | credit, debit or prepaid |
 | `issuer`                 | *string*                 | :heavy_minus_sign:       | N/A                      |
 | `last4`                  | *string*                 | :heavy_minus_sign:       | N/A                      |
