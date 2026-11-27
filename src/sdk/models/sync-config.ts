@@ -27,6 +27,7 @@ import {
 
 export type SyncConfig = {
   awsMarketplace?: AWSMarketplaceSyncConfig | undefined;
+  creditNote?: EntitySyncConfig | undefined;
   customer?: EntitySyncConfig | undefined;
   deal?: EntitySyncConfig | undefined;
   invoice?: EntitySyncConfig | undefined;
@@ -44,6 +45,7 @@ export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
   .pipe(
     z.object({
       aws_marketplace: types.optional(AWSMarketplaceSyncConfig$inboundSchema),
+      credit_note: types.optional(EntitySyncConfig$inboundSchema),
       customer: types.optional(EntitySyncConfig$inboundSchema),
       deal: types.optional(EntitySyncConfig$inboundSchema),
       invoice: types.optional(EntitySyncConfig$inboundSchema),
@@ -58,6 +60,7 @@ export const SyncConfig$inboundSchema: z.ZodMiniType<SyncConfig, unknown> = z
     z.transform((v) => {
       return remap$(v, {
         "aws_marketplace": "awsMarketplace",
+        "credit_note": "creditNote",
         "invoice_sync_settings": "invoiceSyncSettings",
       });
     }),
